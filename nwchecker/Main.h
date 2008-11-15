@@ -11,48 +11,56 @@ using namespace std;
 typedef vector<string> FileList;
 struct Test
 {
-       string testFile,judgeFile;
-       int maxTime;
-       float maxScore;      
+	string testFile, judgeFile;
+	unsigned int maxTime;
+	float maxScore;
 };
 struct Task
 {
-       string inFile,outFile,checkProgram,name,mask;
-       float wrongFormat;
-       vector<Test> tests;
-       Task(): checkProgram(""),wrongFormat(.75f),mask("*"){};
-       string inSuffix,inPrefix,testsStr,scoreStr,outSuffix,outPrefix,timeStr;
+	string inFile, outFile, checkProgram, name, mask;
+	float wrongFormat;
+	vector<Test> tests;
+	Task() :
+		checkProgram(""), wrongFormat(.75f), mask("*")
+	{
+	}
+	string inSuffix, inPrefix, testsStr, scoreStr, outSuffix, outPrefix,
+			timeStr;
 };
-struct Perferences{
-    bool participantAsDir;
-    string rundir;       
+struct Perferences
+{
+	bool participantAsDir;
+	string rundir;
 };
 struct CompilerInfo
 {
-    string extension,exeFile,inFile,outFile,name;
+	string extension, exeFile, inFile, outFile, name;
 };
 struct ParticipantTask
 {
-  string path,result;
-  int checkFileTime;
-  float score;
-  int taskNumber,compilerNumber;
-  ParticipantTask(string _path): result(""),score(0),path(_path),checkFileTime(0){};     
+	string path, result;
+	int checkFileTime;
+	float score;
+	unsigned int taskNumber, compilerNumber;
+	ParticipantTask(string _path) :
+		result(""), score(0), path(_path), checkFileTime(0)
+	{
+	}
 };
 struct SaveInformation
 {
-  string result;
-  int checkFileTime;
-  float score; 
+	string result;
+	unsigned int checkFileTime;
+	float score;
 };
 ///////////////////////////////
-unsigned long int runProgram(string,int);
-char runProgramTimer(string,int,int);
+unsigned long int runProgram(string, int);
+char runProgramTimer(string, unsigned int, int);
 int parseConfig();
 void addLog(string message);
-void addLog(string message,int);
+void addLog(string message, int);
 string to_str(float a);
 string to_str(int a);
-string to_str(unsigned long int a);
-
+string to_str(unsigned int a);
+string to_str(long unsigned int a);
 ///////////////////////////////
