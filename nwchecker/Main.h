@@ -20,12 +20,8 @@ struct Task
 	string inFile, outFile, checkProgram, name, mask;
 	float wrongFormat;
 	vector<Test> tests;
-	Task() :
-		checkProgram(""), wrongFormat(.75f), mask("*")
-	{
-	}
-	string inSuffix, inPrefix, testsStr, scoreStr, outSuffix, outPrefix,
-			timeStr;
+	Task():mask("*"), wrongFormat(.75f){}
+	string inSuffix, inPrefix, testsStr, scoreStr, outSuffix, outPrefix, timeStr;
 };
 struct Perferences
 {
@@ -42,10 +38,7 @@ struct ParticipantTask
 	int checkFileTime;
 	float score;
 	unsigned int taskNumber, compilerNumber;
-	ParticipantTask(string _path) :
-		result(""), score(0), path(_path), checkFileTime(0)
-	{
-	}
+	ParticipantTask(string _path) :	path(_path), checkFileTime(0){}
 };
 struct SaveInformation
 {
