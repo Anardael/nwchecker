@@ -3,9 +3,9 @@
 #include<fstream>
 #include<ctype.h>
 
-using namespace std;
+#include "Main.h"
 
-extern string runDir;
+using namespace std;
 
 unsigned long int runProgram(string name, int verbose=0);
 

@@ -30,7 +30,7 @@ struct Perferences
 };
 struct CompilerInfo
 {
-	string extension, exeFile, inFile, outFile, name;
+	string extension, exeFile, inFile, outFile, name, params;
 };
 struct ParticipantTask
 {
@@ -57,3 +57,16 @@ string to_str(int a);
 string to_str(unsigned int a);
 string to_str(long unsigned int a);
 ///////////////////////////////
+//external variables
+extern map<string,vector<ParticipantTask> > participants;
+extern vector<Task> tasks;
+extern string TaskLocation, runDir;
+extern vector <CompilerInfo> compilers;
+extern bool participantAsDir;
+extern bool skipCheckedPrograms;
+extern bool silentMode;
+//external functions
+string getCurrentDir();
+FileList findFiles(string dir, string filemask);
+FileList findConfigs(string dir);
+FileList findRecursive(string dir, string filemask);

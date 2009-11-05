@@ -4,20 +4,15 @@
 #include "Main.h"
 #define PARS_TASKS 1
 #define PARS_COMPILERS 2
-extern map<string,vector<ParticipantTask> > participants;
-extern vector<Task> tasks;
-extern string TaskLocation, runDir;
-extern vector <CompilerInfo> compilers;
-extern bool participantAsDir;
-extern bool skipCheckedPrograms;
+
 int parserState=0;
-string getCurrentDir();
+
 FileList findFiles(string dir, string filemask);
 FileList findConfigs(string dir);
+FileList findRecursive(string dir, string filemask);
 string currentTaskName;
 int currentTaskNumber, currentCompilerNumber;
-FileList findRecursive(string dir, string filemask);
-string currentDir;
+string mainDir;
 string trim(const string& str, const string& drop = " ")
 {
 	string s=str;
@@ -34,11 +29,31 @@ void addLog(string message, int en)
 	cout<< message;
 	if (en)
 		cout<<endl;
-	ofstream f((currentDir+"\\NWC.log").c_str(), ios::app);
+	ofstream f((mainDir+"NWC.log").c_str(), ios::app);
 	f<<message;
 	if (en)
 		f<<endl;
 	f.close();
+}
+/**
+ * Path transformation:
+ * adds current dir if no dirve letter is set
+ */
+string path_transform(string path)
+{
+	addLog("path_transform input: "+path);
+	if (path.length()<=1||path[1]!=':')
+		path = mainDir + path;
+	if (path[path.length()-1]!='\\'&&path[path.length()-1]!='/')
+		path+='\\';
+	addLog("path_transform output: "+path);
+	return path;
+}
+string file_path_transform(string path)
+{
+	if (path.length()<=1||path[1]!=':')
+		path = mainDir + path;
+	return path;
 }
 
 void addTask(string taskName)
@@ -75,14 +90,12 @@ void setValue(string lexem, string value)
 	{
 		if ("RUNDIR"==lexem)
 		{
-			runDir=value;
-			if (runDir[runDir.length()-1]!='\\')
-				runDir+='\\';
+			runDir=path_transform(value);
 			return;
 		}
 		if ("TASKLOCATION"==lexem)
 		{
-			TaskLocation=value;
+			TaskLocation=path_transform(value);
 			return;
 		}
 		if ("PARTICIPANTASDIR"==lexem)
@@ -120,13 +133,13 @@ void setValue(string lexem, string value)
 		if ("OUTPUT"==lexem)
 			tasks[currentTaskNumber].outFile=value;
 		if ("INPREFIX"==lexem)
-			tasks[currentTaskNumber].inPrefix=value;
+			tasks[currentTaskNumber].inPrefix=file_path_transform(value);
 		if ("INSUFFIX"==lexem)
 			tasks[currentTaskNumber].inSuffix=value;
 		if ("OUTSUFFIX"==lexem)
 			tasks[currentTaskNumber].outSuffix=value;
 		if ("OUTPREFIX"==lexem)
-			tasks[currentTaskNumber].outPrefix=value;
+			tasks[currentTaskNumber].outPrefix=file_path_transform(value);
 		if ("TESTS"==lexem)
 			tasks[currentTaskNumber].testsStr=value;
 		if ("SCORE"==lexem)
@@ -136,7 +149,7 @@ void setValue(string lexem, string value)
 		if ("TIME"==lexem)
 			tasks[currentTaskNumber].timeStr=value;
 		if ("CHECKPROGRAM"==lexem)
-			tasks[currentTaskNumber].checkProgram=value;
+			tasks[currentTaskNumber].checkProgram=file_path_transform(value);
 		if ("WRONGFORMAT"==lexem)
 			tasks[currentTaskNumber].wrongFormat=atof(value.c_str());
 	}
@@ -155,11 +168,13 @@ void setValue(string lexem, string value)
 			compilers[currentCompilerNumber].extension=value;
 		}
 		if ("EXEFILE"==lexem)
-			compilers[currentCompilerNumber].exeFile=value;
+			compilers[currentCompilerNumber].exeFile=file_path_transform(value);
 		if ("INFILE"==lexem)
 			compilers[currentCompilerNumber].inFile=value;
 		if ("OUTFILE"==lexem)
 			compilers[currentCompilerNumber].outFile=value;
+		if ("PARAMS"==lexem)
+			compilers[currentCompilerNumber].params=value;
 	}
 }
 
@@ -295,31 +310,36 @@ string getParticipantName(string filename, int task)
 
 int findParticipantsWorks()
 {
-	//addLog("finding participants works");
+	addLog("Locating participants' works");
 	for (unsigned int i=0; i<tasks.size(); i++)
 	{
 		FileList files;
+		addLog(tasks[i].mask);
 		if (!TaskLocation.empty())
 			files=findRecursive(TaskLocation, tasks[i].mask);
 		else
-			files=findRecursive(getCurrentDir(), tasks[i].mask);
+			files=findRecursive(getCurrentDir()+'\\', tasks[i].mask);
 		map<string,int> mySet;
 		for (unsigned int j=0; j<files.size(); j++)
 		{
-			//addLog("find file "+files[j]);
-			if (getCompiler(files[j])==-1)
+			string fileFound = files[j];
+			//addLog("Found file "+fileFound);
+			if (getCompiler(files[j])==-1) {
+				addLog("Cannot find compiler for file "+fileFound);
 				continue;
+			}
 
-			ParticipantTask userTask(files[j]);
+			ParticipantTask userTask(fileFound);
 			userTask.taskNumber=i;
-			userTask.compilerNumber=getCompiler(files[j]);
-			string participantName=getParticipantName(files[j], i);
+			userTask.compilerNumber=getCompiler(fileFound);
+			string participantName=getParticipantName(fileFound, i);
 			if (mySet[participantName])
 			{
 				addLog("Error: participant "+participantName
-						+" already have such a task: "+files[i]);
+						+" already have such a task: "+fileFound);
 				continue;
-			};
+			}
+			addLog(participantName+" found file: "+fileFound);
 			mySet[participantName]=1;
 			participants[participantName].push_back(userTask);
 		}
@@ -329,31 +349,31 @@ int findParticipantsWorks()
 
 int parseConfig()
 {
-	currentDir=getCurrentDir();
+	mainDir=getCurrentDir()+"\\";
 	skipCheckedPrograms=0;
 	FileList configs;
 	configs=findConfigs(getCurrentDir());
 	if (configs.size()==0)
 	{
-		addLog("No *.cfg file were found.");
+		addLog("No *.conf files were found.");
 		return 1;
-	};
+	}
 	string configFileName=configs[0];
-	addLog("Finding config file "+configFileName);
+	addLog("Found configuration file "+configFileName);
 	currentTaskName="";
 	currentTaskNumber=-1;
 	currentCompilerNumber=-1;
 	parserState=PARS_TASKS;
 	if (readConfigFile(configFileName))
 		return 1;
+	addLog(configFileName + " was read successfully");
 	makeTests();
 	parserState=PARS_COMPILERS;
-	//addLog("compil1");
 	if (readConfigFile("compilers.conf"))
 	{
 		addLog("File not Found: compilers.conf");
 		return 1;
-	};
-	//addLog("compil2");
+	}
+	addLog("Compiler configuration was read successfully");
 	return findParticipantsWorks();
 }

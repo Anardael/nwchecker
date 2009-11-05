@@ -5,9 +5,10 @@ map<string,SaveInformation> saving;
 vector<Task> tasks;
 vector <CompilerInfo> compilers;
 
-string TaskLocation, runDir;
+string TaskLocation, runDir;// both have trailing slash
 bool participantAsDir;
 bool skipCheckedPrograms;
+bool silentMode;
 
 ///////////////////////////////
 int fileExists(string name);
@@ -67,11 +68,10 @@ void checkProgram(ParticipantTask &task, string participantName)
 	}
 	CompilerInfo compiler=compilers[task.compilerNumber];
 	Task tsk=tasks[task.taskNumber];
-	string comp=compiler.exeFile;
 	clearDir(runDir, "");
 	CopyFile(task.path.c_str(),(runDir+compiler.inFile).c_str(),0);
 	SetCurrentDirectory(runDir.c_str());
-	runProgram(compiler.exeFile, 1);
+	runProgram(compiler.exeFile + " " + compiler.params, 1);
 	string exename=runDir+compiler.outFile;
 	if (!fileExists(exename))
 	{
@@ -208,6 +208,8 @@ void generateHTML()
 
 int main()
 {
+	addLog("===========================================================");
+	addLog("NWChecker started");
 	string curdir=getCurrentDir();
 	loadResults();
 	if (parseConfig())
@@ -216,7 +218,9 @@ int main()
 	SetCurrentDirectory(curdir.c_str());
 	generateHTML();
 	saveResults();
-	int i;
-	cin>>i;
+	if(silentMode) {
+		int i;
+		cin>>i;
+	}
 	return 0;
 }

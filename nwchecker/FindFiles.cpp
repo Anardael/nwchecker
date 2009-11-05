@@ -11,7 +11,7 @@ string getCurrentDir()
 	return res;
 
 }
-int machMask(string file, string mask)
+int matchMask(string file, string mask)
 {
 	//addLog(file+"-"+mask);
 	for (unsigned int i=0; i<file.size()&&i<mask.size(); i++)
@@ -41,7 +41,7 @@ FileList findFiles(string dir, string filemask)
 	while (p=readdir(td))
 	{
 		string dirname=p->d_name;
-		if (!isDir(dirname)&&machMask(dirname, filemask))
+		if (!isDir(dirname)&&matchMask(dirname, filemask))
 			res.push_back(dir+'\\'+dirname);
 	}
 	closedir(td);
@@ -52,22 +52,32 @@ FileList findConfigs(string dir)
 	FileList res;
 	DIR* td=opendir(dir.c_str());
 	dirent*p;
-	string filemask=".cfg";
+	string filemask=".conf";
 	if (!td)
 		return res;
+
 	while (p=readdir(td))
 	{
 		string dirname=p->d_name;
-		if (!isDir(dirname)&&dirname.find(filemask)!=string::npos)
-			res.push_back(dir+'\\'+dirname);
+		//file name should not be compilers.conf, not a dir and match the mask
+		if (dirname == "compilers.conf") continue;
+		if (isDir(dirname)) continue;
+		if (dirname.find(filemask)==string::npos) continue;
+		addLog("Found conf file: "+dirname);
+		res.push_back(dir+'\\'+dirname);
 	}
 	closedir(td);
 	return res;
 }
 
+/**
+ * Finds list of files at specified directory
+ * dir should have trailing slash
+ */
 FileList findRecursive(string dir, string filemask)
 {
 	FileList res;
+	//addLog("searching in "+dir);
 	DIR* td=opendir(dir.c_str());
 	dirent* p;
 	if (!td)
@@ -75,14 +85,16 @@ FileList findRecursive(string dir, string filemask)
 	while (p=readdir(td))
 	{
 		string dirname=p->d_name;
-		if (dirname=="."||dirname=="..")
+		if (dirname=="."||dirname==".."||dirname==".svn")
 			continue;
-		//addLog(dirname); //Debugging search
-		if (!isDir(dir+'\\'+dirname)&&machMask(dirname, filemask))
-			res.push_back(dir+'\\'+dirname);
-		else if (isDir(dir+'\\'+dirname))
+		//addLog(dir+dirname);
+		if (!isDir(dir+dirname)&&matchMask(dirname, filemask)) {
+			//addLog(dir+dirname+" matches");
+			res.push_back(dir+dirname);
+		}
+		else if (isDir(dir+dirname))
 		{
-			FileList rec=findRecursive(dir+'\\'+dirname, filemask);
+			FileList rec=findRecursive(dir+dirname+'\\', filemask);
 			for (unsigned int i=0; i<rec.size(); i++)
 				res.push_back(rec[i]);
 		}
