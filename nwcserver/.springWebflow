@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.6.2.201410090854-RELEASE]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/webflow-context.xml</file>
+			<name><![CDATA[mainFlow]]></name>
+			<beans-config><![CDATA[1:BeansModel|2:NWCServer|3:src/application-context.xml]]></beans-config>
+		</config>
+	</configs>
+</webflow-project-description>
