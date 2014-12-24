@@ -1,4 +1,4 @@
-package com.nwchecker.server;
+package com.nwchecker.server.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,5 +14,4 @@ public class MainController {
 	
 		return "main";
 	}
-
 }

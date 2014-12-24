@@ -16,7 +16,6 @@
 <title><spring:message	code="application.title" /></title>
 </head>
 <body>
-<spring:message	code="hello.caption" />
-   
+	<spring:message	code="hello.caption" />
 </body>
 </html>

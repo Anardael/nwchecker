@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+H2.form-registration-heading {
+	width: 480px;
+	text-align:center;
+     margin-right: auto;
+      margin-left: auto;
+}
+.form-horizontal {
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+.large-button {
+    width: 286px;
+}
+
+
