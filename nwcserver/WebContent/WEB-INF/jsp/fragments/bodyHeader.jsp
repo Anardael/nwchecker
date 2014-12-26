@@ -41,14 +41,23 @@
                     </c:otherwise>
                 </c:choose>
             <!-- tasks -->
+            <!-- if we are in task local need create task button clickable-->
             <c:choose>
-                <c:when test="${param.pageName=='task'}">
-                    <li class="active"><a href="/"><spring:message code="task.caption" /></a></li>
+                <c:when test="${(param.pageName=='taskLocal')||(param.pageName=='taskCreate')}">
+                    <li class="active"><a href="task.do"><spring:message code="task.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
-                    <li><a href="/" ><spring:message code="task.caption" /></a></li>
+                        <c:choose>
+                            <c:when test="${param.pageName=='task'}">
+                            <li class="active"><a><spring:message code="task.caption" /></a></li>
+                                </c:when>
+                                <c:otherwise>
+                            <li><a href="task.do"><spring:message code="task.caption" /></a></li>
+                            </c:otherwise>
+                        </c:choose>
                     </c:otherwise>
                 </c:choose>
+
 
             <!-- olympiad -->
             <c:choose>

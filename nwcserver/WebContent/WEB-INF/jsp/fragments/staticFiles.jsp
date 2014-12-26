@@ -10,4 +10,5 @@
     <link href="${resources}css/reg.css" rel="stylesheet"/>
     <link href="${resources}css/bootstrap.css" rel="stylesheet"/>
     <link href="${resources}css/styles.css" rel="stylesheet"/>
+    <link href="${resources}css/task.css" rel="stylesheet"/>
 </head>

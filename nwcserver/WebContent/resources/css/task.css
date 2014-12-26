@@ -1,0 +1,55 @@
+#taskTable{
+    margin-left: 50px;
+}
+#firstRow #title{
+    border-bottom: 2px solid black;
+    border-color: #17a7c5;
+}
+#firstRow #complexity{
+    border-bottom: 2px solid black;
+    border-color: #17a7c5;
+}
+#firstRow #tried{
+    border-bottom: 2px solid black;
+    border-color: #17a7c5;
+}
+#firstRow #success{
+    border-bottom: 2px solid black;
+    border-color: #17a7c5;
+}
+td{
+    padding: 10px;
+    text-align: center;
+}
+
+#title{
+    width:180px;
+    text-align: left;
+}
+#complexity{
+    width:90px;
+}
+#tried{
+    width:90px;
+}
+#success{
+    width:90px;
+}
+
+#taskLocal{
+    width:600px;
+    margin:auto;
+    text-align: justify;
+}
+h1{
+    text-align: center;
+}
+h4{
+    text-align: center;
+}
+#theoryLinks p{
+    margin:2px 0px;
+}
+
+
+
