@@ -1,7 +1,6 @@
 package com.nwchecker.server.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +22,22 @@ public class CreateTask extends HttpServlet {
         super();
     }
 
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Task task = new Task();
 		task.setDescription(request.getParameter("taskDescription"));
-		TaskDAO.addTask(task);
-		
-		List<Task> tasks = TaskDAO.getAllTasks();
-		for (Task currentTask : tasks) {
-			response.getWriter().println(currentTask.getDescription());
-		}
+		String imagesDomain = getImagesDomain(request);
+		int taskId = TaskDAO.addTask(task, imagesDomain);
+		String redirectAddress = request.getServletContext().getContextPath()
+								+"/ui/taskView?TaskID=" + taskId;
+		response.sendRedirect(redirectAddress);
+	}
+	
+	private String getImagesDomain(HttpServletRequest request) {
+		return request.getScheme() + "://" 
+			 + request.getServerName() + ":"
+			 + request.getServerPort() 
+			 + request.getServletContext().getContextPath()
+			 + "/ImageBuffer";
 	}
 }

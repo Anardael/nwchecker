@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TaskCreationController {
+public class TaskViewController {
 
-	@RequestMapping("/taskCreation")
-	public String taskCreation(HttpSession session,Model model) throws IllegalArgumentException{
+	@RequestMapping("/taskView")
+	public String taskView(HttpSession session,Model model) throws IllegalArgumentException{
 		
-		return "taskCreation";
+		return "taskView";
 	}
 }

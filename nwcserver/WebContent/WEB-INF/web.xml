@@ -17,6 +17,17 @@
     <servlet-name>htmlServlet</servlet-name>
     <url-pattern>/ui/*</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ImageBuffer</servlet-name>
+    <servlet-class>com.nwchecker.server.servlet.ImageBuffer</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ImageBuffer</servlet-name>
+  	<url-pattern>/imageBuffer</url-pattern>
+  </servlet-mapping>
+  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
