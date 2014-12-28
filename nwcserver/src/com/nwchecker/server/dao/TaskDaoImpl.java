@@ -6,8 +6,11 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Task;
+
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,7 +35,8 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public List<Task> getTasks() {
-        List<Task> result = sessionFactory.getCurrentSession().createQuery("from Task")
+        @SuppressWarnings("unchecked")
+		List<Task> result = sessionFactory.getCurrentSession().createQuery("from Task")
                 .list();
         return result;
     }

@@ -7,8 +7,6 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDao;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskData;
-import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
