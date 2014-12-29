@@ -16,7 +16,7 @@
             <div class="row">
                 <aside class="col-md-3">
                     <ul class="list-group submenu">
-                        <li class="list-group-item active"><a href="addTask.do">Add new Task</a></li>
+                        <li class="list-group-item active"><a href="taskCreating.do"><spring:message code="task.createTask.button" /></a></li>
                     </ul>
                 </aside>
                 <section>
@@ -37,7 +37,7 @@
                         </tr>
                         <c:forEach items="${tasks}" var="task">
                             <tr>
-                                <td id="title"><a href="getTask.do?id=${task.id}">${task.title}</a></td>
+                                <td id="title"><a href="getTaskById.do?id=${task.id}">${task.title}</a></td>
                                 <td id="complexity">${task.difficulty}</td>
                                 <td id="tried">0</td>
                                 <td id="success">0</td>

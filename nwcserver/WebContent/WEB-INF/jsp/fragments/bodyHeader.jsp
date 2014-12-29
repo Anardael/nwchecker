@@ -44,7 +44,7 @@
             <!-- if we are in task local need create task button clickable-->
             <c:choose>
                 <c:when test="${(param.pageName=='taskLocal')||(param.pageName=='taskCreate')}">
-                    <li class="active"><a href="task.do"><spring:message code="task.caption" /></a></li>
+                    <li class="active"><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
                         <c:choose>
@@ -52,7 +52,7 @@
                             <li class="active"><a><spring:message code="task.caption" /></a></li>
                                 </c:when>
                                 <c:otherwise>
-                            <li><a href="task.do"><spring:message code="task.caption" /></a></li>
+                            <li><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:otherwise>

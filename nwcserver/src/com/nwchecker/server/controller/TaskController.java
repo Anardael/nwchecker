@@ -7,7 +7,10 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,15 +25,15 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("/task")
+    @RequestMapping("/getTasks")
     public String getTasks(HttpSession session, Model model) {
         List<Task> tasks = taskService.getTasks();
         model.addAttribute("tasks", tasks);
         return "task";
     }
 
-    @RequestMapping(value = "/getTask", method = RequestMethod.GET)
-    public String getTask(@RequestParam("id") String id, HttpSession session, Model model) {
+    @RequestMapping(value = "/getTaskById", method = RequestMethod.GET)
+    public String getTaskById(@RequestParam("id") String id, HttpSession session, Model model) {
         //get index param:
         int value = Integer.parseInt(id);
         Task task = taskService.getTaskById(value);
@@ -38,9 +41,21 @@ public class TaskController {
         return "taskLocal";
     }
 
-    @RequestMapping("/addTask")
-    public String addTask(HttpSession session, Model model) {
+    @RequestMapping("/taskCreating")
+    public String taskCreating(HttpSession session, Model model) {
         System.out.println("");
+        return "taskCreate";
+    }
+
+    @RequestMapping("/addTask")
+    public String addTask(HttpSession session, HttpServletRequest request, Model model) {
+        System.out.println("--- Model data ---");
+        Map modelMap = model.asMap();
+        for (Object modelKey : modelMap.keySet()) {
+            Object modelValue = modelMap.get(modelKey);
+            System.out.println(modelKey + " -- " + modelValue);
+        }
+
         return "taskCreate";
     }
 }
