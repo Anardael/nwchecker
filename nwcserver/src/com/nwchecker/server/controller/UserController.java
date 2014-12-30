@@ -24,22 +24,22 @@ import com.nwchecker.server.service.UserService;
 public class UserController {
 
 	private final UserService	userService;
-	
+
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-	
-    @RequestMapping("/login")
-    public String loginPage(Model model) {
-        return "login";
-    }
-	
+
+	@RequestMapping("/login")
+	public String loginPage(Model model) {
+		return "login";
+	}
+
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String initRegistrationForm(Map<String, Object> model) {
 		User user = new User();
@@ -48,15 +48,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String doRegister(@Valid @ModelAttribute("userRegistrationForm") User user, BindingResult result, SessionStatus status) {
+	public String doRegister(@Valid @ModelAttribute("userRegistrationForm") User user, BindingResult result,
+			SessionStatus status) {
 		if (result.hasErrors()) {
 			return "/registration";
-		} else {
-			user.setEnabled(true);
-			user.setAccessLevel("User");
-			this.userService.addUser(user);
-			status.setComplete();
-			return "redirect:/index/" + user.getId();
+		} else if (!userService.hasUsername(user.getUsername())) {
+			if (!userService.hasEmail(user.getEmail())) {
+				user.setEnabled(true);
+				user.setAccessLevel("User");
+				this.userService.addUser(user);
+				status.setComplete();
+				return "redirect:/index/" + user.getId();
+			}
 		}
+		return "/registration";
 	}
 }

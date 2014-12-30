@@ -9,8 +9,8 @@ import com.nwchecker.server.model.User;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserDAO userDAO;
-	
+	private UserDAO	userDAO;
+
 	@Override
 	public void addUser(User user) {
 		userDAO.addUser(user);
@@ -19,5 +19,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByUsername(String username) {
 		return userDAO.getUserByUsername(username);
+	}
+
+	@Override
+	public boolean hasUsername(String username) {
+		return userDAO.hasUsername(username);
+	}
+
+	@Override
+	public boolean hasEmail(String email) {
+		return userDAO.hasEmail(email);
 	}
 }

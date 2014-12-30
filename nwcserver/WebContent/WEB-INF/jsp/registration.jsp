@@ -54,7 +54,6 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
                                                 <input type="password" name="confirmPassword" id="confirmPassword" class="form-control input-sm" placeholder="<spring:message code="reg.cpassword.caption" />">
-                                                <form:errors path="password" cssClass="error"/>
                                             </div>
                                         </div>
                                     </div>
