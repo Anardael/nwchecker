@@ -8,6 +8,7 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.TaskDao;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskTheoryLink;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,16 @@ public class TaskServiceImpl implements TaskService {
         return taskDao.getTaskById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<Task> getTasks() {
         return taskDao.getTasks();
     }
 
     @Override
-    public void addTask(Task t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional()
+    public void addTask(Task t, LinkedList<TaskData> data, LinkedList<TaskTheoryLink> theory) {
+        taskDao.addTask(t, data, theory);
     }
 
 }

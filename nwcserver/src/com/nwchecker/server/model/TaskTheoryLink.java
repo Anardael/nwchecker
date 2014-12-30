@@ -5,11 +5,14 @@
  */
 package com.nwchecker.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,11 +24,9 @@ public class TaskTheoryLink {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_task")
-    private int id_task;
-
-    @Column(name = "name")
-    private String name;
+    @ManyToOne()
+    @JoinColumn(name = "id_task")
+    private Task task;
 
     @Column(name = "link")
     private String link;
@@ -38,20 +39,12 @@ public class TaskTheoryLink {
         this.id = id;
     }
 
-    public int getId_task() {
-        return id_task;
+    public Task getTask() {
+        return task;
     }
 
-    public void setId_task(int id_task) {
-        this.id_task = id_task;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTask(Task t) {
+        this.task = t;
     }
 
     public String getLink() {
@@ -59,6 +52,13 @@ public class TaskTheoryLink {
     }
 
     public void setLink(String link) {
+        this.link = link;
+    }
+
+    public TaskTheoryLink() {
+    }
+
+    public TaskTheoryLink(String link) {
         this.link = link;
     }
 

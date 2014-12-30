@@ -6,6 +6,7 @@
 package com.nwchecker.server.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Task {
     private String inputFileName;
 
     @Column(name = "outputFileName")
-    private String outputFile;
+    private String outputFileName;
 
     @Column(name = "memoryLimit")
     private int memoryLimit;
@@ -58,14 +59,14 @@ public class Task {
     @Column(name = "forumLink")
     private String forumLink;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "TaskData", joinColumns = {
         @JoinColumn(name = "id_task")}, inverseJoinColumns = {
         @JoinColumn(name = "id")})
     private List<TaskData> inOutData;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "TaskTheoryLink", joinColumns = {
         @JoinColumn(name = "id_task")}, inverseJoinColumns = {
@@ -100,7 +101,7 @@ public class Task {
         return maxMark;
     }
 
-    public void setMaxMar(int maxMar) {
+    public void setMaxMark(int maxMar) {
         this.maxMark = maxMar;
     }
 
@@ -120,12 +121,12 @@ public class Task {
         this.inputFileName = inputFileName;
     }
 
-    public String getOutputFile() {
-        return outputFile;
+    public String getOutputFileName() {
+        return outputFileName;
     }
 
-    public void setOutputFile(String outputFile) {
-        this.outputFile = outputFile;
+    public void setOutputFileName(String outputFile) {
+        this.outputFileName = outputFile;
     }
 
     public int getMemoryLimit() {

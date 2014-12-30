@@ -7,6 +7,8 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskTheoryLink;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,5 +21,5 @@ public interface TaskService {
 
     List<Task> getTasks();
 
-    void addTask(Task t);
+    void addTask(Task t, LinkedList<TaskData> data, LinkedList<TaskTheoryLink> theory);
 }

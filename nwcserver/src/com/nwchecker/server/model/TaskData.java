@@ -5,6 +5,7 @@
  */
 package com.nwchecker.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,8 +25,9 @@ public class TaskData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_task")
-    private int id_task;
+    @ManyToOne()
+    @JoinColumn(name = "id_task")
+    private Task task;
 
     @Column(name = "inputData")
     private String inputData;
@@ -42,12 +43,12 @@ public class TaskData {
         this.id = id;
     }
 
-    public int getId_task() {
-        return id_task;
+    public Task getTask() {
+        return task;
     }
 
-    public void setId_task(int id_task) {
-        this.id_task = id_task;
+    public void setTask(Task id_task) {
+        this.task = id_task;
     }
 
     public String getInputData() {
@@ -63,6 +64,14 @@ public class TaskData {
     }
 
     public void setOutputData(String outputData) {
+        this.outputData = outputData;
+    }
+
+    public TaskData() {
+    }
+
+    public TaskData(String inputData, String outputData) {
+        this.inputData = inputData;
         this.outputData = outputData;
     }
 

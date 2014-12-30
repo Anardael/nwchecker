@@ -53,6 +53,18 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- added by R.Z for uploading files on server -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version> 
+        </dependency>
+        <!-- added by R.Z for uploading files on server -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>

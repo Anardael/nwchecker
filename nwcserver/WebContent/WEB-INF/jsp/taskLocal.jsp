@@ -29,15 +29,8 @@
                         <div id="theoryLinks">
                             <p>Посилання на інформаційні матеріали:</p>
                             <c:forEach items="${task.theoryLinks}" var="link">
-                                <c:choose>
-                                    <c:when test="${not empty link.name}">
-                                        <p><a href="${link.link}">${link.name}</a></p>
-                                        </c:when>
-                                        <c:otherwise>
-                                        <p><a href="${link.link}">Посилання</a></p>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
+                                <p><a href="${link.link}">Посилання</a></p>
+                            </c:forEach>
                         </div>
                     </c:if>
                 </div>
