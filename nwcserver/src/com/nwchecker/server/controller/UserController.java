@@ -2,9 +2,11 @@ package com.nwchecker.server.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,7 @@ import com.nwchecker.server.service.UserService;
 @SessionAttributes("user")
 public class UserController {
 
-	private final UserService	userService;
+	private final UserService userService;
 
 	@Autowired
 	public UserController(UserService userService) {
@@ -48,17 +50,22 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String doRegister(@Valid @ModelAttribute("userRegistrationForm") User user, BindingResult result,
+	public String doRegister(
+			@Valid @ModelAttribute("userRegistrationForm") User user,
+			HttpServletRequest request, BindingResult result,
 			SessionStatus status) {
 		if (result.hasErrors()) {
 			return "/registration";
 		} else if (!userService.hasUsername(user.getUsername())) {
 			if (!userService.hasEmail(user.getEmail())) {
-				user.setEnabled(true);
-				user.setAccessLevel("User");
-				this.userService.addUser(user);
-				status.setComplete();
-				return "redirect:/index/" + user.getId();
+				if (request.getParameter("confirmPassword").equals(
+						user.getPassword())) {
+					user.setEnabled(true);
+					user.setAccessLevel("User");
+					this.userService.addUser(user);
+					status.setComplete();
+					return "redirect:/index/" + user.getId();
+				}
 			}
 		}
 		return "/registration";
