@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -52,20 +53,20 @@ public class UserController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String doRegister(
 			@Valid @ModelAttribute("userRegistrationForm") User user,
-			HttpServletRequest request, BindingResult result,
+			BindingResult result,
+			@RequestParam("confirmPassword") String confirmPassword,
 			SessionStatus status) {
-		if (result.hasErrors()) {
+		if (result.hasErrors()||!user.getPassword().equals(confirmPassword)) {
 			return "/registration";
 		} else if (!userService.hasUsername(user.getUsername())) {
 			if (!userService.hasEmail(user.getEmail())) {
-				if (request.getParameter("confirmPassword").equals(
-						user.getPassword())) {
+				 
 					user.setEnabled(true);
 					user.setAccessLevel("User");
 					this.userService.addUser(user);
 					status.setComplete();
-					return "redirect:/index/" + user.getId();
-				}
+					return "/index";
+				
 			}
 		}
 		return "/registration";
