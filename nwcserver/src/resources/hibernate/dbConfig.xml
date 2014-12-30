@@ -15,9 +15,6 @@
     <!-- налаштування управління транзакцій з допомогою анотації @Transactional -->
     <tx:annotation-driven transaction-manager="transactionManager" />
         
-    
-
-        
     <!-- Менеджер транзакцій -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -41,14 +38,15 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation">
-            <value>classpath:\hibernate\hibernate.cfg.xml</value>
-        </property>
+        <property name="packagesToScan" value="com.nwchecker.server.model" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
+                <prop key="connection.characterEncoding">UTF-8</prop>
+                <prop key="hibernate.connection.Useunicode">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
     </bean>

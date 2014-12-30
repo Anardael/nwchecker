@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- set path to resources foled -->
 <spring:url value="/resources/" var="resources"/>
 <html>
     <!--including head -->
     <jsp:include page="fragments/staticFiles.jsp" />
     <!-- include special css for registration:-->
-
     <body>
         <div class="wrapper container">
             <!--including bodyHead -->
@@ -22,38 +23,44 @@
                                 <h3 class="panel-title"><spring:message code="reg.header.caption" /></h3>
                             </div>
                             <div class="panel-body">
-                                <form role="form">
+                                <form:form modelAttribute="userRegistrationForm" method="post"  role="form">
                                     <div class="row">
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" name="username" id="login" class="form-control input-sm" placeholder="<spring:message code="reg.username.caption" />">
+                                                <input type="text" name="username" id="username" class="form-control input-sm" placeholder="<spring:message code="reg.username.caption" />">
+                                                <form:errors path="username" cssClass="error"/>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" name="username" id="username" class="form-control input-sm" placeholder="<spring:message code="reg.nickname.caption" />">
+                                                <input type="text" name="displayName" id="displayName" class="form-control input-sm" placeholder="<spring:message code="reg.nickname.caption" />">
+                                                <form:errors path="displayName" cssClass="error"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="<spring:message code="reg.email.caption" />">
+                                        <input type="text" name="email" id="email" class="form-control input-sm" placeholder="<spring:message code="reg.email.caption" />">
+                                        <form:errors path="email" cssClass="error"/>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" class="form-control input-sm" placeholder="<spring:message code="reg.password.caption" />">
+                                                <form:errors path="password" cssClass="error"/>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
-                                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="<spring:message code="reg.cpassword.caption" />">
+                                                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control input-sm" placeholder="<spring:message code="reg.cpassword.caption" />">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-actions">
                                     <input type="submit" value="<spring:message code="reg.button.caption" />" class="btn btn-info btn-block">
-                                </form>
+                                    </div>
+                                </form:form>
                             </div>
                         </div>
                     </div>
