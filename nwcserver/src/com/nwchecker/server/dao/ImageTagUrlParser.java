@@ -2,7 +2,8 @@ package com.nwchecker.server.dao;
 
 class ImageTagUrlParser {
 
-	private static final String PARSE_PATTERN = "<img alt=\"\" src=\"";
+	private static final String IMG_PATTERN = "<img";
+	private static final String SRC_PATTERN = "src=\"";
 	private static final String CLOSING_SYMBOL = "\"";
 	
 	private StringBuilder string;
@@ -29,9 +30,10 @@ class ImageTagUrlParser {
 	}
 	
 	public String nextUrl() {
-		currentPosition = string.indexOf(PARSE_PATTERN, urlEnd);
+		currentPosition = string.indexOf(IMG_PATTERN, urlEnd);
 		if (currentPosition != -1) {
-			currentPosition += PARSE_PATTERN.length();
+			currentPosition = string.indexOf(SRC_PATTERN, urlEnd);
+			currentPosition += SRC_PATTERN.length();
 			urlEnd = string.indexOf(CLOSING_SYMBOL, currentPosition);
 			return string.substring(currentPosition, urlEnd);
 		}
