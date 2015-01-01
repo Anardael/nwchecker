@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,10 +11,6 @@
 
 <!-- Bootstrap core CSS -->
 <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
-<!-- WYSIWYG import -->
-<script type="text/javascript" src=<c:url value="/js/tinymce/tinymce.min.js" />></script>
-<!-- WYSIWYG initialization -->
-<script type="text/javascript" src=<c:url value="/js/tinymce.initialize.js" />></script>
 </head>
 <body>
 	<!-- TODO Add header -->
@@ -25,6 +22,8 @@
 		<button type="submit">Create task</button>
 	</form>
 	
+	<c:url value="/js/ckeditor/" var="ckeditorURL"/>
+	<ckeditor:replace replace="taskDescription" basePath='${ckeditorURL}'/>
 	<!-- TODO Add footer -->
 </body>
 </html>

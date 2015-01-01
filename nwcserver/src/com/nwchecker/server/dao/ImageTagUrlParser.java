@@ -2,7 +2,7 @@ package com.nwchecker.server.dao;
 
 class ImageTagUrlParser {
 
-	private static final String PARSE_PATTERN = "<img src=\"";
+	private static final String PARSE_PATTERN = "<img alt=\"\" src=\"";
 	private static final String CLOSING_SYMBOL = "\"";
 	
 	private StringBuilder string;
