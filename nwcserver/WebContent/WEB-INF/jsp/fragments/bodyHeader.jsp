@@ -41,29 +41,21 @@
                     </c:otherwise>
                 </c:choose>
             <!-- tasks -->
-            <!-- if we are in task local need create task button clickable-->
             <c:choose>
-                <c:when test="${(param.pageName=='taskLocal')||(param.pageName=='taskCreate')}">
+                <c:when test="${param.pageName=='task'}">
                     <li class="active"><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
-                        <c:choose>
-                            <c:when test="${param.pageName=='task'}">
-                            <li class="active"><a><spring:message code="task.caption" /></a></li>
-                                </c:when>
-                                <c:otherwise>
-                            <li><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
-                            </c:otherwise>
-                        </c:choose>
+                    <li><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- olympiad -->
             <c:choose>
-                <c:when test="${param.pageName=='olympiad'}">
-                    <li class="active"><a href="getContests.do"><spring:message code="olympiad.caption" /></a></li>
+                <c:when test="${param.pageName=='contest'}">
+                    <li class="active"><a href="getContests.do"><spring:message code="contest.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
-                    <li><a href="getContests.do"><spring:message code="olympiad.caption" /></a></li>
+                    <li><a href="getContests.do"><spring:message code="contest.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- login -->

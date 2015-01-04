@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -16,7 +16,7 @@
             <div class="row">
                 <aside class="col-md-3">
                     <ul class="list-group submenu">
-                        <li class="list-group-item active"><a href="taskCreating.do"><spring:message code="task.createTask.button" /></a></li>
+                        <li class="list-group-item active"><a href="addTask.do"><spring:message code="task.createTask.button" /></a></li>
                     </ul>
                 </aside>
                 <section>
@@ -38,7 +38,7 @@
                         <c:forEach items="${tasks}" var="task">
                             <tr>
                                 <td id="title"><a href="getTaskById.do?id=${task.id}">${task.title}</a></td>
-                                <td id="complexity">${task.complexity}</td>
+                                <td id="complexity">${task.complexity}%</td>
                                 <td id="tried">0</td>
                                 <td id="success">0</td>
                             </tr>

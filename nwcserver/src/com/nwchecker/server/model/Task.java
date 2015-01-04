@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -31,17 +33,21 @@ public class Task {
     private int id;
 
     @Column(name = "title")
+    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}")
     @NotEmpty
     @Size(max = 100)
     private String title;
 
     @Column(name = "complexity")
+    @NotNull
     @Max(100)
+    @Min(0)
     private int complexity;
 
     @Column(name = "rate")
-    @NotEmpty
+    @NotNull
     @Max(100)
+    @Min(0)
     private int rate;
 
     @Column(name = "description")
@@ -59,9 +65,11 @@ public class Task {
     @Size(max = 60)
     private String outputFileName;
 
+    @Min(0)
     @Column(name = "memoryLimit")
     private int memoryLimit;
 
+    @Min(0)
     @Column(name = "timeLimit")
     private int timeLimit;
 
@@ -69,8 +77,8 @@ public class Task {
     private String scriptForVerification;
 
     @Column(name = "forumLink")
-    @Pattern(regexp="https?://.*")
-    @Size(max=500)
+    //@Pattern(regexp="https?://.*")
+    @Size(max = 500)
     private String forumLink;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

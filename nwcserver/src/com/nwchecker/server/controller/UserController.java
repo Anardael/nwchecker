@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
+import org.springframework.validation.ObjectError;
 
 @Controller
 @SessionAttributes("user")
@@ -49,6 +50,9 @@ public class UserController {
 	public String doRegister(@Valid @ModelAttribute("userRegistrationForm") User user, BindingResult result,
 			@RequestParam("confirmPassword") String confirmPassword, SessionStatus status) {
 		if (result.hasErrors() || !user.getPassword().equals(confirmPassword)) {
+                    for(ObjectError e:result.getAllErrors()){
+                        System.out.println(e.toString());
+                    }
 			return "/registration";
 		} else if (!userService.hasUsername(user.getUsername())) {
 			if (!userService.hasEmail(user.getEmail())) {

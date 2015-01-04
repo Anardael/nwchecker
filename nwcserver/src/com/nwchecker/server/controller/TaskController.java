@@ -14,9 +14,13 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,73 +47,70 @@ public class TaskController {
         return "taskLocal";
     }
 
-    @RequestMapping(value = "/taskCreating")
-    public String taskCreating() {
+    @RequestMapping(value = "/addTask", method = RequestMethod.GET)
+    public String taskCreating(Model model) {
+        model.addAttribute("taskAddForm", new Task());
         return "taskCreate";
     }
 
     @RequestMapping(value = "/addTask", method = RequestMethod.POST)
-    public String addTask(Model model,
-            @RequestParam("title") String title,
-            @RequestParam("memoryLimit") String memoryLimit,
-            @RequestParam("timeLimit") String timeLimit,
-            @RequestParam("rate") String rate,
-            @RequestParam("complexity") String complexity,
-            @RequestParam("inputFileName") String inputFileName,
-            @RequestParam("outputFileName") String outputFileName,
-            @RequestParam("description") String description,
-            @RequestParam("verificationScript") String verificationScript,
-            @RequestParam("forumLink") String forumLink,
-            @RequestParam("theoryLinks[]") List<String> theoryLinks,
-            @RequestParam("inputFile") MultipartFile inputFile,
-            @RequestParam("outputFile") MultipartFile outputFile
-    ) {
+    public String addTask(@Valid @ModelAttribute("taskAddForm") Task taskAddForm,
+            BindingResult bindingResult,
+            @RequestParam(value = "theoryLinks") String[] theory) {
+        //check if there are errors in Task input fields:
+        if (bindingResult.hasErrors()) {
+            for (ObjectError e:bindingResult.getAllErrors()){
+                System.out.println(e);
+            }
+            return "taskCreate";
+        }
+        taskService.addTask(taskAddForm);
         List<TaskException> resultExceptions = new LinkedList<TaskException>();
         //nafig validation
-        System.out.println("asdlasdlaslsdl");
-        int intMemoryLimit = Integer.parseInt(memoryLimit);
-        int intTimeLimit = Integer.parseInt(timeLimit);
-        int intRate = Integer.parseInt(rate);
-        int intComplexity = Integer.parseInt(complexity);
 
-        Task newTask = new Task();
-        newTask.setTitle(title);
-        newTask.setMemoryLimit(intMemoryLimit);
-        newTask.setTimeLimit(intTimeLimit);
-        newTask.setRate(intRate);
-        newTask.setComplexity(intComplexity);
-        newTask.setInputFileName(inputFileName);
-        newTask.setOutputFileName(outputFileName);
-        newTask.setDescription(description);
-        newTask.setScriptForVerification(verificationScript);
-        newTask.setFoumLink(forumLink);
-        //theorys add:
-        List<TaskTheoryLink> tl = new LinkedList<TaskTheoryLink>();
-        for (String s : theoryLinks) {
-            tl.add(new TaskTheoryLink(s));
-        }
-        newTask.setTheoryLinks(tl);
+        /*int intMemoryLimit = Integer.parseInt(memoryLimit);
+         int intTimeLimit = Integer.parseInt(timeLimit);
+         int intRate = Integer.parseInt(rate);
+         int intComplexity = Integer.parseInt(complexity);
 
-        byte[] inBytes = null;
-        byte[] outBytes = null;
-        try {
-            //Get io data from uploaded files:
-            inBytes = inputFile.getBytes();
-            outBytes = outputFile.getBytes();
-            System.out.println(outBytes);
-        } catch (IOException ex) {
-            resultExceptions.add(new TaskException("Error while parsing in/out "
-                    + "file data. Check files data"));
-            model.addAttribute("error", resultExceptions);
-            return "result";
-        }
-        List<TaskData> td = new LinkedList<TaskData>();
-        td.add(new TaskData(inBytes, outBytes));
-        newTask.setInOutData(td);
-        taskService.addTask(newTask);
+         Task newTask = new Task();
+         newTask.setTitle(title);
+         newTask.setMemoryLimit(intMemoryLimit);
+         newTask.setTimeLimit(intTimeLimit);
+         newTask.setRate(intRate);
+         newTask.setComplexity(intComplexity);
+         newTask.setInputFileName(inputFileName);
+         newTask.setOutputFileName(outputFileName);
+         newTask.setDescription(description);
+         newTask.setScriptForVerification(verificationScript);
+         newTask.setFoumLink(forumLink);
+         //theorys add:
+         List<TaskTheoryLink> tl = new LinkedList<TaskTheoryLink>();
+         for (String s : theoryLinks) {
+         tl.add(new TaskTheoryLink(s));
+         }
+         newTask.setTheoryLinks(tl);
+
+         byte[] inBytes = null;
+         byte[] outBytes = null;
+         try {
+         //Get io data from uploaded files:
+         inBytes = inputFile.getBytes();
+         outBytes = outputFile.getBytes();
+         System.out.println(outBytes);
+         } catch (IOException ex) {
+         resultExceptions.add(new TaskException("Error while parsing in/out "
+         + "file data. Check files data"));
+         model.addAttribute("error", resultExceptions);
+         return "result";
+         }
+         List<TaskData> td = new LinkedList<TaskData>();
+         td.add(new TaskData(inBytes, outBytes));
+         newTask.setInOutData(td);
+         taskService.addTask(newTask);
 
 
-        /*
+         /*
          //validate parameters:
          LinkedList<Exception> result = TaskValidator.validateTask(title,
          description, timeLimit, memoryLimit, rate, complexity,

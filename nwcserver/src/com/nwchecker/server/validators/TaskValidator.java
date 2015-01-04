@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nwchecker.server.valicators;
+package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskTheoryLink;
