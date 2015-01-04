@@ -5,6 +5,14 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
+	config.language = 'en';
+	//config.uiColor = '#AADC6E';
+	config.extraPlugins = 'panel,floatpanel,menu,menubutton,language';
+//	config.toolbar_Basic =
+//	[
+//	 	[ 'Image', 'Lanquage' ]
+//	];
+//	config.toolbar = 'Basic';
+	
+	config.filebrowserImageBrowseUrl = "/NWCServer/ui/fileUpload";
 };
