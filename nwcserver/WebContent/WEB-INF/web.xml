@@ -42,4 +42,9 @@
         </init-param>
     </filter>
     
+    <filter-mapping>
+        <filter-name>charsetFilter</filter-name>
+        <servlet-name>mvc-dispatcher</servlet-name>
+    </filter-mapping>
+    
 </web-app>

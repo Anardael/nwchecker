@@ -20,10 +20,10 @@
                 </c:if>
                 <c:if test="${not empty error}">
                     <h4>Errors:</h4>
+                    <c:forEach items="${errorq}" var="er">
+                        <p>${er.message}</p>
+                    </c:forEach>
                 </c:if>
-                <c:forEach items="${error}" var="er">
-                    <p>${er.message}</p>
-                </c:forEach>
             </section>
         </div>
         <jsp:include page="fragments/footer.jsp"/>

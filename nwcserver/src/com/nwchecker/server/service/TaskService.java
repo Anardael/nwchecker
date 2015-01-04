@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Роман
+ * @author пїЅпїЅпїЅпїЅпїЅ
  */
 public interface TaskService {
 
@@ -21,5 +21,5 @@ public interface TaskService {
 
     List<Task> getTasks();
 
-    void addTask(Task t, LinkedList<TaskData> data, LinkedList<TaskTheoryLink> theory);
+    void addTask(Task t);
 }

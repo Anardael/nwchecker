@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -14,11 +15,11 @@
                 <jsp:param name="pageName" value="taskCreate"/>
             </jsp:include>
             <section>
-                <form class="form-horizontal" action="addTask.do" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                <form class="form-horizontal" action="addTask.do" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.title" />:</label>
-                            <div class="col-sm-5">
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.title" />: *</label>
+                            <div class="col-sm-7">
                                 <input class="form-control" name="title">
                             </div>
                         </div>
@@ -27,13 +28,13 @@
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="memoryLimit">
                             </div>
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.rate" />:</label>
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.rate" />: *</label>
                             <div class="col-sm-2">
-                                <input class="form-control" name="rate" >
+                                <input class="form-control" name="rate"/>
                             </div>
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputFileName" />:</label>
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputFileName" />: *</label>
                             <div class="col-sm-2">
-                                <input class="form-control" name="inputFileName">
+                                <input class="form-control" name="inputFileName"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -45,15 +46,15 @@
                             <div class="col-sm-2">
                                 <input class="form-control" name="complexity">
                             </div>
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.outputFileName" />:</label>
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.outputFileName" />: *</label>
                             <div class="col-sm-2">
-                                <input class="form-control" name="outputFileName">
+                                <input class="form-control" name="outputFileName"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.description" />:</label>
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.description" />: *</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="7" name="description"></textarea>
+                                <textarea class="form-control" rows="7" name="description"/>
                             </div>
                         </div>
                         <div class="form-group">

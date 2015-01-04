@@ -23,5 +23,11 @@
         <property name="maxUploadSize" value="100000"/>
     </bean>
     
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    
 
 </beans>

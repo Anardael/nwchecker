@@ -5,14 +5,14 @@
  */
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.exceptions.TaskException;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskTheoryLink;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.valicators.TaskValidator;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class TaskController {
     private TaskService taskService;
 
     @RequestMapping("/getTasks")
-    public String getTasks(HttpSession session, Model model) {
+    public String getTasks(Model model) {
         List<Task> tasks = taskService.getTasks();
         model.addAttribute("tasks", tasks);
         return "task";
@@ -43,131 +43,124 @@ public class TaskController {
         return "taskLocal";
     }
 
-    @RequestMapping("/taskCreating")
-    public String taskCreating(HttpSession session, Model model) {
-        System.out.println("");
+    @RequestMapping(value = "/taskCreating")
+    public String taskCreating() {
         return "taskCreate";
     }
 
     @RequestMapping(value = "/addTask", method = RequestMethod.POST)
-    public String addTask(Model model, HttpSession session, HttpServletRequest request,
-            @RequestParam("inputFile") MultipartFile inFile,
-            @RequestParam("outputFile") MultipartFile outFile) {
+    public String addTask(Model model,
+            @RequestParam("title") String title,
+            @RequestParam("memoryLimit") String memoryLimit,
+            @RequestParam("timeLimit") String timeLimit,
+            @RequestParam("rate") String rate,
+            @RequestParam("complexity") String complexity,
+            @RequestParam("inputFileName") String inputFileName,
+            @RequestParam("outputFileName") String outputFileName,
+            @RequestParam("description") String description,
+            @RequestParam("verificationScript") String verificationScript,
+            @RequestParam("forumLink") String forumLink,
+            @RequestParam("theoryLinks[]") List<String> theoryLinks,
+            @RequestParam("inputFile") MultipartFile inputFile,
+            @RequestParam("outputFile") MultipartFile outputFile
+    ) {
+        List<TaskException> resultExceptions = new LinkedList<TaskException>();
+        //nafig validation
+        System.out.println("asdlasdlaslsdl");
+        int intMemoryLimit = Integer.parseInt(memoryLimit);
+        int intTimeLimit = Integer.parseInt(timeLimit);
+        int intRate = Integer.parseInt(rate);
+        int intComplexity = Integer.parseInt(complexity);
+
+        Task newTask = new Task();
+        newTask.setTitle(title);
+        newTask.setMemoryLimit(intMemoryLimit);
+        newTask.setTimeLimit(intTimeLimit);
+        newTask.setRate(intRate);
+        newTask.setComplexity(intComplexity);
+        newTask.setInputFileName(inputFileName);
+        newTask.setOutputFileName(outputFileName);
+        newTask.setDescription(description);
+        newTask.setScriptForVerification(verificationScript);
+        newTask.setFoumLink(forumLink);
+        //theorys add:
+        List<TaskTheoryLink> tl = new LinkedList<TaskTheoryLink>();
+        for (String s : theoryLinks) {
+            tl.add(new TaskTheoryLink(s));
+        }
+        newTask.setTheoryLinks(tl);
+
+        byte[] inBytes = null;
+        byte[] outBytes = null;
         try {
-            //get parameters:
-            String title = new String(request.getParameter("title")
-                    .getBytes("iso-8859-1"), "UTF-8");
-            String memoryLimit = request.getParameter("memoryLimit");
-            String timeLimit = request.getParameter("timeLimit");
-            String rate = request.getParameter("rate");
-            String complexity = request.getParameter("complexity");
-            String inputFileName = new String(request.getParameter("inputFileName")
-                    .getBytes("iso-8859-1"), "UTF-8");
-            String outputFileName = new String(request.getParameter("outputFileName")
-                    .getBytes("iso-8859-1"), "UTF-8");
-            String description = new String(request.getParameter("description")
-                    .getBytes("iso-8859-1"), "UTF-8");
-            String verificationScript = new String(request.getParameter("verificationScript")
-                    .getBytes("iso-8859-1"), "UTF-8");
-            String forumLink = request.getParameter("forumLink");
-            //theoryLinks array:
-            LinkedList<TaskTheoryLink> theoryLinksList = new LinkedList<TaskTheoryLink>();
-            for (String link : request.getParameterValues("theoryLinks[]")) {
-                theoryLinksList.add(new TaskTheoryLink(link));
-            }
-            //in/out data list:
-            LinkedList<TaskData> ioTaskData = new LinkedList<TaskData>();
-
             //Get io data from uploaded files:
-            if (!inFile.isEmpty() || !outFile.isEmpty()) {
-                //Strings of data from uploaded files:
-                String[] inString;
-                String[] outString;
-                byte[] bytes = inFile.getBytes();
-                String inBuf = new String(bytes, "UTF-8");
-                if (inBuf.contains("\n")) {
-                    inString = inBuf.split("\n");
-                } else {
-                    inString = new String[1];
-                    inString[0] = inBuf;
-                }
-                bytes = outFile.getBytes();
-                String outBuf = new String(bytes, "UTF-8");
-                if (outBuf.contains("\n")) {
-                    outString = outBuf.split("\n");
-                } else {
-                    outString = new String[1];
-                    outString[0] = outBuf;
-                }
-                if (inString.length != outString.length) {
-                    model.addAttribute("result", "The task is not added");
-                    model.addAttribute("error", new Exception("int/out files length are different"));
-                    return "result";
-                }
-                for (int i = 0; i < inString.length; i++) {
-                    if (inString[i].contains("\r")) {
-                        inString[i] = inString[i].replaceAll("\r", "");
-                    }
-                    if (outString[i].contains("\r")) {
-                        outString[i] = outString[i].replaceAll("\r", "");
-                    }
-                    ioTaskData.add(new TaskData(inString[i], outString[i]));
-                }
-            } else {
-                model.addAttribute("result", "The task is not added");
-                model.addAttribute("error", new Exception("in/out files are empty"));
-                return "result";
-            }
-            //validate parameters:
-            LinkedList<Exception> result = TaskValidator.validateTask(title,
-                    description, timeLimit, memoryLimit, rate, complexity,
-                    inputFileName, outputFileName, verificationScript, forumLink);
-            if (result.size() != 0) {
-                model.addAttribute("result", "The task is not added");
-                model.addAttribute("error", result);
-                return "result";
-            }
-            result = TaskValidator.validateTaskData(ioTaskData);
-            if (result.size() != 0) {
-                model.addAttribute("result", "The task is not added");
-                model.addAttribute("error", result);
-                return "result";
-            }
-            result = TaskValidator.validateTheoryLinks(theoryLinksList);
-            if (result.size() != 0) {
-                model.addAttribute("result", "The task is not added");
-                model.addAttribute("error", result);
-                return "result";
-            }
-            //validation past.
-            //creating Task:
-            Task currTask = new Task();
-            currTask.setTitle(title);
-            if (memoryLimit != null) {
-                currTask.setMemoryLimit(Integer.parseInt(memoryLimit));
-            }
-            if (timeLimit != null) {
-                currTask.setTimeLimit(Integer.parseInt(timeLimit));
-            }
-            if (rate != null) {
-                currTask.setMaxMark(Integer.parseInt(rate));
-            }
-            if (complexity != null) {
-                currTask.setDifficulty(Integer.parseInt(complexity));
-            }
-            currTask.setDescription(description);
-            currTask.setInputFileName(inputFileName);
-            currTask.setOutputFileName(outputFileName);
-            currTask.setFoumLink(forumLink);
-
-            //add task:
-            taskService.addTask(currTask,ioTaskData,theoryLinksList);
-        } catch (Exception e) {
-            model.addAttribute("result", "The task is not added");
-            model.addAttribute("error", e);
+            inBytes = inputFile.getBytes();
+            outBytes = outputFile.getBytes();
+            System.out.println(outBytes);
+        } catch (IOException ex) {
+            resultExceptions.add(new TaskException("Error while parsing in/out "
+                    + "file data. Check files data"));
+            model.addAttribute("error", resultExceptions);
             return "result";
         }
-        model.addAttribute("result", "Task have been successfully added");
+        List<TaskData> td = new LinkedList<TaskData>();
+        td.add(new TaskData(inBytes, outBytes));
+        newTask.setInOutData(td);
+        taskService.addTask(newTask);
+
+
+        /*
+         //validate parameters:
+         LinkedList<Exception> result = TaskValidator.validateTask(title,
+         description, timeLimit, memoryLimit, rate, complexity,
+         inputFileName, outputFileName, verificationScript, forumLink);
+         if (result.size() != 0) {
+         model.addAttribute("result", "The task is not added");
+         model.addAttribute("error", result);
+         return "result";
+         }
+         result = TaskValidator.validateTaskData(ioTaskData);
+         if (result.size() != 0) {
+         model.addAttribute("result", "The task is not added");
+         model.addAttribute("error", result);
+         return "result";
+         }
+         result = TaskValidator.validateTheoryLinks(theoryLinksList);
+         if (result.size() != 0) {
+         model.addAttribute("result", "The task is not added");
+         model.addAttribute("error", result);
+         return "result";
+         }
+         //validation past.
+         //creating Task:
+         Task currTask = new Task();
+         currTask.setTitle(title);
+         if (memoryLimit != null) {
+         currTask.setMemoryLimit(Integer.parseInt(memoryLimit));
+         }
+         if (timeLimit != null) {
+         currTask.setTimeLimit(Integer.parseInt(timeLimit));
+         }
+         if (rate != null) {
+         currTask.setMaxMark(Integer.parseInt(rate));
+         }
+         if (complexity != null) {
+         currTask.setDifficulty(Integer.parseInt(complexity));
+         }
+         currTask.setDescription(description);
+         currTask.setInputFileName(inputFileName);
+         currTask.setOutputFileName(outputFileName);
+         currTask.setFoumLink(forumLink);
+
+         //add task:
+         taskService.addTask(currTask, ioTaskData, theoryLinksList);
+         } catch (Exception e) {
+         model.addAttribute("result", "The task is not added");
+         model.addAttribute("error", e);
+         return "result";
+         }
+         model.addAttribute("result", "Task have been successfully added");
+         return "result";*/
         return "result";
     }
 }

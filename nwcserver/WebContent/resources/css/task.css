@@ -1,19 +1,7 @@
 #taskTable{
     margin-left: 50px;
 }
-#firstRow #title{
-    border-bottom: 2px solid black;
-    border-color: #17a7c5;
-}
-#firstRow #complexity{
-    border-bottom: 2px solid black;
-    border-color: #17a7c5;
-}
-#firstRow #tried{
-    border-bottom: 2px solid black;
-    border-color: #17a7c5;
-}
-#firstRow #success{
+#firstRow {
     border-bottom: 2px solid black;
     border-color: #17a7c5;
 }

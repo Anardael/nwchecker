@@ -11,15 +11,11 @@ import com.nwchecker.server.model.TaskTheoryLink;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Роман
- */
-public interface TaskDao {
+public interface TaskDAO {
 
     Task getTaskById(int id);
     
     List<Task> getTasks();
     
-    void addTask(Task t, LinkedList<TaskData> data, LinkedList<TaskTheoryLink> theory);
+    void addTask(Task t);
 }

@@ -60,10 +60,10 @@
             <!-- olympiad -->
             <c:choose>
                 <c:when test="${param.pageName=='olympiad'}">
-                    <li class="active"><a href="/"><spring:message code="olympiad.caption" /></a></li>
+                    <li class="active"><a href="getContests.do"><spring:message code="olympiad.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
-                    <li><a href="/" ><spring:message code="olympiad.caption" /></a></li>
+                    <li><a href="getContests.do"><spring:message code="olympiad.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- login -->

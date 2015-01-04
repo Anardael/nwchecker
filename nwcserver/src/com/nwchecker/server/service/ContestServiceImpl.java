@@ -5,35 +5,39 @@
  */
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.dao.TaskDAO;
-import com.nwchecker.server.model.Task;
+import com.nwchecker.server.dao.ContestDAO;
+import com.nwchecker.server.model.Contest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ *
+ * @author Роман
+ */
 @Service
-public class TaskServiceImpl implements TaskService {
+public class ContestServiceImpl implements ContestService {
 
     @Autowired
-    private TaskDAO taskDao;
+    private ContestDAO contestDAO;
+
+    @Transactional
+    @Override
+    public void addContest(Contest c) {
+        contestDAO.addContest(c);
+    }
 
     @Transactional(readOnly = true)
     @Override
-    public Task getTaskById(int id) {
-        return taskDao.getTaskById(id);
+    public List<Contest> getContests() {
+        return contestDAO.getContests();
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public List<Task> getTasks() {
-        return taskDao.getTasks();
-    }
-
     @Override
-    @Transactional()
-    public void addTask(Task t) {
-        taskDao.addTask(t);
+    public Contest getContestByID(int id) {
+        return contestDAO.getContestByID(id);
     }
 
 }

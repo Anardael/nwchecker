@@ -5,12 +5,12 @@
  */
 package com.nwchecker.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,18 +20,17 @@ public class TaskData {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_task")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Task task;
 
     @Column(name = "inputData")
-    private String inputData;
+    private byte[] inputData;
 
     @Column(name = "outputData")
-    private String outputData;
+    private byte[] outputData;
 
     public int getId() {
         return id;
@@ -49,26 +48,26 @@ public class TaskData {
         this.task = id_task;
     }
 
-    public String getInputData() {
+    public byte[] getInputData() {
         return inputData;
     }
 
-    public void setInputData(String inputData) {
+    public void setInputData(byte[] inputData) {
         this.inputData = inputData;
     }
 
-    public String getOutputData() {
+    public byte[] getOutputData() {
         return outputData;
     }
 
-    public void setOutputData(String outputData) {
+    public void setOutputData(byte[] outputData) {
         this.outputData = outputData;
     }
 
     public TaskData() {
     }
 
-    public TaskData(String inputData, String outputData) {
+    public TaskData(byte[] inputData, byte[] outputData) {
         this.inputData = inputData;
         this.outputData = outputData;
     }

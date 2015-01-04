@@ -11,35 +11,35 @@
             <!--including bodyHead -->
             <!-- send name of current page-->
             <jsp:include page="fragments/bodyHeader.jsp">
-                <jsp:param name="pageName" value="task"/>
+                <jsp:param name="pageName" value="olympiad"/>
             </jsp:include>
             <div class="row">
                 <aside class="col-md-3">
                     <ul class="list-group submenu">
-                        <li class="list-group-item active"><a href="taskCreating.do"><spring:message code="task.createTask.button" /></a></li>
+                        <li class="list-group-item active"><a href="contestCreating.do"><spring:message code="contest.createButton.caption" /></a></li>
                     </ul>
                 </aside>
                 <section>
                     <table id="taskTable">
                         <tr id="firstRow">
                             <td id="title">
-                                <spring:message code="task.table.task" />
+                                <spring:message code="contest.table.title" />
                             </td>
-                            <td id="complexity">
-                                <spring:message code="task.table.complexity" />
+                            <td id="starts">
+                                <spring:message code="contest.table.starts" />
                             </td>
-                            <td id="tried">
-                                <spring:message code="task.table.tried" />
+                            <td id="duration">
+                                <spring:message code="contest.table.duration" />
                             </td>
-                            <td id="success">
-                                <spring:message code="task.table.success" />
+                            <td id="registered">
+                                <spring:message code="contest.table.registered" />
                             </td>
                         </tr>
-                        <c:forEach items="${tasks}" var="task">
+                        <c:forEach items="${contests}" var="contest">
                             <tr>
-                                <td id="title"><a href="getTaskById.do?id=${task.id}">${task.title}</a></td>
-                                <td id="complexity">${task.complexity}</td>
-                                <td id="tried">0</td>
+                                <td id="title"><a href="getContestByID.do?id=${contest.id}">${contest.title}</a></td>
+                                <td id="complexity">${contest.starts}</td>
+                                <td id="tried">${contest.duration}</td>
                                 <td id="success">0</td>
                             </tr>
                         </c:forEach>
