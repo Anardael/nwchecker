@@ -1,8 +1,11 @@
 package com.nwchecker.server.util;
 
-import java.io.FileInputStream;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import com.nwchecker.server.dao.ImageDAO;
 import com.nwchecker.server.model.Image;
@@ -25,19 +28,13 @@ public class ExtImagesUploader {
 		return image;
 	}
 	
-	private static byte[] readImageToByteArray(String imageUrl) throws IOException {
-		InputStream inputStream = new FileInputStream(imageUrl);
-		byte[] image = new byte[inputStream.available()];
-    	inputStream.read(image);
-    	inputStream.close();
-    	return image;
-		
-//		String imageFormat = 
-//				imageUrl.substring(imageUrl.lastIndexOf('.') + 1, imageUrl.length());
-//		BufferedImage bufferedImage = ImageIO.read(new URL(imageUrl));
-//		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-//		ImageIO.write(bufferedImage, imageFormat, outStream);
-//		outStream.close();
-//		return outStream.toByteArray();
+	private static byte[] readImageToByteArray(String imageUrl) throws IOException {		
+		String imageFormat = 
+				imageUrl.substring(imageUrl.lastIndexOf('.') + 1, imageUrl.length());
+		BufferedImage bufferedImage = ImageIO.read(new URL(imageUrl));
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, imageFormat, outStream);
+		outStream.close();
+		return outStream.toByteArray();
 	}
 }
