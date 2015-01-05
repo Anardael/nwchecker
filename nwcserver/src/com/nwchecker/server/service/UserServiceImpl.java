@@ -1,6 +1,7 @@
 package com.nwchecker.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nwchecker.server.dao.UserDAO;
@@ -13,6 +14,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUser(User user) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+		user.setAccessLevel("ROLE_USER");
+		user.setEnabled(true);
 		userDAO.addUser(user);
 	}
 

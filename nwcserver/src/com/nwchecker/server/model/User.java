@@ -6,10 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "users")
@@ -21,22 +18,17 @@ public class User {
 	private int		id;
 	// User name
 	@Column(name = "username")
-	@NotEmpty
-	@Size(min=3)
 	private String	username;
 	// Password
 	@Column(name = "password")
-	@NotEmpty
-	@Size(min=4)
 	private String	password;
+	@Transient
+	private String	confirmPassword;
 	// Display name
 	@Column(name = "display_name")
-	@NotEmpty
 	private String	displayName;
 	// User email
 	@Column(name = "email")
-	@NotEmpty
-	@Email
 	private String	email;
 	// Some university user data(probably faculty or group)
 	@Column(name = "info")
@@ -79,6 +71,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getDisplayName() {

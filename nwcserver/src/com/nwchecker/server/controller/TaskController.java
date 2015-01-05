@@ -9,11 +9,14 @@ import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskTheoryLink;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.valicators.TaskValidator;
+import com.nwchecker.server.validators.TaskValidator;
+
 import java.util.LinkedList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -43,6 +43,7 @@
             <beans:property name="paramName" value="locale" />
         </beans:bean>
     </interceptors>
-
+    
+    <beans:import resource="security.xml"/>
 
 </beans:beans>
