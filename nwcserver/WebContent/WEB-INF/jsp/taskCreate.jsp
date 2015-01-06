@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -53,7 +54,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"><spring:message code="taskCreate.description" />:</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="7" name="description"></textarea>
+                                <textarea class="form-control" rows="7" id="description" name="description"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -99,6 +100,8 @@
                         </div>
                     </fieldset>
                 </form>
+                <c:url value="/resources/js/ckeditor/" var="ckeditorURL"/>
+				<ckeditor:replace replace="description" basePath='${ckeditorURL}'/>
             </section>
         </div>
         <jsp:include page="fragments/footer.jsp"/>
