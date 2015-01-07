@@ -40,6 +40,12 @@ public class Task {
 
     @Column(name = "description")
     private String description;
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name = "TaskImages", joinColumns = {
+    	@JoinColumn(name = "id_task")}, inverseJoinColumns = {
+    	@JoinColumn(name = "id")})
+    private List<TaskImage> images;
 
     @Column(name = "inputFileName")
     private String inputFileName;
@@ -112,6 +118,14 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public List<TaskImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<TaskImage> images) {
+		this.images = images;
+	}
 
     public String getInputFileName() {
         return inputFileName;
@@ -177,5 +191,4 @@ public class Task {
     public void setTheoryLinks(List<TaskTheoryLink> theoryLinks) {
         this.theoryLinks = theoryLinks;
     }
-
 }
