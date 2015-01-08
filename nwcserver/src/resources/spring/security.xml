@@ -9,6 +9,7 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/getTasks/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/login.do" />
 		<logout logout-url="/logout.do" />
 	</http>
