@@ -5,99 +5,93 @@
  */
 package com.nwchecker.server.validators;
 
-import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskTheoryLink;
-import java.util.LinkedList;
+import com.nwchecker.server.model.Task;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-/**
- *
- * @author �����
- */
-public class TaskValidator {
+public class TaskValidator implements Validator {
 
-    public static LinkedList<Exception> validateTask(String title, String description,
-            String timeLimit, String memoryLimit, String rate,
-            String complexity, String inputFileName, String outputFileName,
-            String verificationScript, String forumLink) {
-        /*LinkedList<Exception> result = new LinkedList<Exception>();
-         //title:
-         if (!title.matches("[0-9a-zA-Z�-�����-߲�� ]{1,}") || title.length() > 100) {
-         result.add(new Exception("Wrong title name"));
-         }
-         if (description.length() > 5000) {
-         result.add(new Exception("wrong description length"));
-         }
-         if (timeLimit != null) {
-         if (!timeLimit.matches("[0-9]{1,4}")) {
-         result.add(new Exception("wrong time limit value"));
-         }
-         }
-         if (memoryLimit != null) {
-         if (!memoryLimit.matches("[0-9]{1,4}")) {
-         result.add(new Exception("wrong memory limit value"));
-         }
-         }
-         if (rate != null) {
-         if (!rate.matches("[0-9]{1,3}")) {
-         result.add(new Exception("wrong rate value"));
-         }
-         }
-         if (complexity != null) {
-         if (!complexity.matches("[0-9]{1,3}")) {
-         result.add(new Exception("wrong complexity value"));
-         } else {
-         if (Integer.parseInt(complexity) > 100) {
-         result.add(new Exception("wrong complexity value (max value=100)"));
-         }
-         }
-         }
-         if (!inputFileName.matches("[0-9a-zA-Z�-�����-߲�� ]{1,}")) {
-         result.add(new Exception("wrong input file name"));
-         }
-         if (inputFileName.length() > 60) {
-         result.add(new Exception("wrong input file name length (max value=60)"));
-         }
-         if (!outputFileName.matches("[0-9a-zA-Z�-�����-߲�� ]{1,}")) {
-         result.add(new Exception("wrong output file name"));
-         }
-         if (outputFileName.length() > 60) {
-         result.add(new Exception("wrong output file name length (max value=60)"));
-         }
-         if (verificationScript.length() > 1000) {
-         result.add(new Exception("wrong verification script length (max value=1000)"));
-         }
-         if (forumLink.length() > 500) {
-         result.add(new Exception("wrong forum Link (max length=500)"));
-         }
-         if (!forumLink.startsWith("http")) {
-         result.add(new Exception("forum link may should starts with \"http\""));
-         }
-         return result;
-         }
+    private int taskIndex;
+    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}";
 
-         public static LinkedList<Exception> validateTaskData(LinkedList<TaskData> taskData) {
-         LinkedList<Exception> result = new LinkedList<Exception>();
-         int index = 0;
-         for (TaskData tData : taskData) {
-         if (tData.getInputData().length() > 100 || tData.getOutputData().length() > 100) {
-         result.add(new Exception("wrong in/out data length (max value=100) tData index=Row" + index));
-         }
-         if (!tData.getInputData().matches("[0-9a-zA-Z�-�����-߲�� ]{1,}")) {
-         result.add(new Exception("Wrong input data format "
-         + "(can be used only [0-9a-zA-Z�-�����-߲�� ] characters) index=Row" + index));
-         }
-         if (!tData.getOutputData().matches("[0-9a-zA-Z�-�����-߲�� ]{1,}")) {
-         result.add(new Exception("Wrong output data format "
-         + "(can be used only [0-9a-zA-Z�-�����-߲�� ] characters) index=Row" + index));
-         }
-         index++;
-         }
-         return result;
-         }
-
-         public static LinkedList<Exception> validateTheoryLinks(LinkedList<TaskTheoryLink> theoryLinks) {
-         LinkedList<Exception> result = new LinkedList<Exception>();
-         */
-        return null;
+    public TaskValidator(int taskIndex) {
+        this.taskIndex = taskIndex;
     }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Task.class.equals(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        boolean failed = false;
+        Task task = (Task) target;
+        if (task.getTitle().length() == 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].title", "NotEmpty.title");
+        }
+        if (!task.getTitle().matches(titleRegex)) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].title", "Pattern.title");
+        }
+        if (task.getTitle().length() > 100) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].title", "Size.title");
+        }
+        if (task.getDescription().length() == 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].description", "NotEmpty.description");
+        }
+        if (task.getComplexity() > 100) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].complexity", "Max.complexity");
+        }
+        if (task.getComplexity() < 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].complexity", "Min.complexity");
+        }
+        if (task.getRate() > 100) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].rate", "Max.rate");
+        }
+        if (task.getRate() < 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].rate", "Min.rate");
+        }
+        if (task.getInputFileName().length() == 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].inputFileName", "NotEmpty.inputFileName");
+        }
+        if (task.getInputFileName().length() > 60) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].inputFileName", "Size.inputFileName");
+        }
+        if (task.getOutputFileName().length() == 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].outputFileName", "NotEmpty.outputFileName");
+        }
+        if (task.getOutputFileName().length() > 60) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].outputFileName", "Size.outputFileName");
+        }
+        if (task.getMemoryLimit() < 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].memoryLimit", "Min.memoryLimit");
+        }
+        if (task.getTimeLimit() < 0) {
+            failed = true;
+            errors.rejectValue("tasks[" + taskIndex + "].timeLimit", "Min.timeLimit");
+        }
+        if (task.getForumLink() != null) {
+            if (task.getForumLink().length() > 500) {
+                failed = true;
+                errors.rejectValue("tasks[" + taskIndex + "].forumLink", "Size.forumLink");
+            }
+        }
+        if (failed == true) {
+            errors.rejectValue("tasks[" + taskIndex + "]", "Task.incorrect");
+        }
+    }
+
 }

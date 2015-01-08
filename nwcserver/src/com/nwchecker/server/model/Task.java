@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -32,6 +33,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Contest contest;
+
     @Column(name = "title")
     @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}")
     @NotEmpty
@@ -39,7 +43,6 @@ public class Task {
     private String title;
 
     @Column(name = "complexity")
-    @NotNull
     @Max(100)
     @Min(0)
     private int complexity;

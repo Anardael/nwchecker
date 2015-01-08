@@ -16,13 +16,7 @@
             <section>
                 <c:set var="result" value="${result}"/>
                 <c:if test="${not empty result}">
-                    ${result}
-                </c:if>
-                <c:if test="${not empty error}">
-                    <h4>Errors:</h4>
-                    <c:forEach items="${errorq}" var="er">
-                        <p>${er.message}</p>
-                    </c:forEach>
+                    <h2>${result}</h2>
                 </c:if>
             </section>
         </div>

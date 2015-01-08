@@ -16,6 +16,8 @@ public interface ContestDAO {
 
     public void addContest(Contest c);
 
+    public void updateContest(Contest c);
+
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);

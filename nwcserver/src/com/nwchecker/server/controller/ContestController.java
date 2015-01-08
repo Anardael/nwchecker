@@ -7,17 +7,16 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.ContestService;
+import com.nwchecker.server.validators.ContestValidator;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -38,25 +37,43 @@ public class ContestController {
     }
 
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
-    public String contextCreation(Model model) {
-        //creates new Contest and forwards it to view:
-        model.addAttribute("contestAddForm", new Contest());
+    public String initAddContest(Model model) {
+        //prepare contest for view:
+        Contest contest = new Contest();
+        contest.setId(-1);
+        model.addAttribute("contestAddForm", contest);
+        return "contestCreate";
+    }
+
+    @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
+    public String initEditContest(Model model, @RequestParam("id") int id) {
+        //get Contest by id:
+        Contest editContest = contestService.getContestByID(id);
+        model.addAttribute("contestAddForm", editContest);
         return "contestCreate";
     }
 
     @RequestMapping(value = "/addContest", method = RequestMethod.POST)
-    public String checkPersonInfo(@Valid @ModelAttribute("contestAddForm") Contest contestAddForm,
+    public String addContest(Model model, @ModelAttribute("contestAddForm") Contest contestAddForm,
             BindingResult bindingResult) {
+        //manual validate:
+        new ContestValidator().validate(contestAddForm, bindingResult);
         //if there are errors in field input:
         if (bindingResult.hasErrors()) {
-            System.out.println("contest title : " + contestAddForm.getTitle());
-            for (ObjectError e : bindingResult.getAllErrors()) {
-                System.out.println(e.toString());
-            }
             return "contestCreate";
         }
-        System.out.println(contestAddForm.getDescription());
-        return "redirect:/results";
+        System.out.println(contestAddForm.getId());
+        //if contest id==-1 - its new
+        if (contestAddForm.getId() == -1) {
+            contestService.addContest(contestAddForm);
+            model.addAttribute("result", new String("Task have been successfully added"));
+        } else {
+            //if id!=0- contest already exist in DB
+            contestService.updateContest(contestAddForm);
+            model.addAttribute("result", new String("Task have been successfully edited"));
+        }
+
+        return "result";
     }
 
 }

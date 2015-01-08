@@ -107,7 +107,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2">
                             <div class="col-sm-2">
-                                <button type="submit" class="btn btn-default" value="Submit">Submit</button>
+                                <button type="submit" class="btn btn-default" value="Submit"><spring:message code="taskCreate.submitButton.caption" /></button>
                             </div>
                         </div>
                     </div>

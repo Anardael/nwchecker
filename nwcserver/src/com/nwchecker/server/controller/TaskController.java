@@ -7,10 +7,7 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.exceptions.TaskException;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskTheoryLink;
 import com.nwchecker.server.service.TaskService;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -59,7 +56,7 @@ public class TaskController {
             @RequestParam(value = "theoryLinks") String[] theory) {
         //check if there are errors in Task input fields:
         if (bindingResult.hasErrors()) {
-            for (ObjectError e:bindingResult.getAllErrors()){
+            for (ObjectError e : bindingResult.getAllErrors()) {
                 System.out.println(e);
             }
             return "taskCreate";
@@ -67,101 +64,6 @@ public class TaskController {
         taskService.addTask(taskAddForm);
         List<TaskException> resultExceptions = new LinkedList<TaskException>();
         //nafig validation
-
-        /*int intMemoryLimit = Integer.parseInt(memoryLimit);
-         int intTimeLimit = Integer.parseInt(timeLimit);
-         int intRate = Integer.parseInt(rate);
-         int intComplexity = Integer.parseInt(complexity);
-
-         Task newTask = new Task();
-         newTask.setTitle(title);
-         newTask.setMemoryLimit(intMemoryLimit);
-         newTask.setTimeLimit(intTimeLimit);
-         newTask.setRate(intRate);
-         newTask.setComplexity(intComplexity);
-         newTask.setInputFileName(inputFileName);
-         newTask.setOutputFileName(outputFileName);
-         newTask.setDescription(description);
-         newTask.setScriptForVerification(verificationScript);
-         newTask.setFoumLink(forumLink);
-         //theorys add:
-         List<TaskTheoryLink> tl = new LinkedList<TaskTheoryLink>();
-         for (String s : theoryLinks) {
-         tl.add(new TaskTheoryLink(s));
-         }
-         newTask.setTheoryLinks(tl);
-
-         byte[] inBytes = null;
-         byte[] outBytes = null;
-         try {
-         //Get io data from uploaded files:
-         inBytes = inputFile.getBytes();
-         outBytes = outputFile.getBytes();
-         System.out.println(outBytes);
-         } catch (IOException ex) {
-         resultExceptions.add(new TaskException("Error while parsing in/out "
-         + "file data. Check files data"));
-         model.addAttribute("error", resultExceptions);
-         return "result";
-         }
-         List<TaskData> td = new LinkedList<TaskData>();
-         td.add(new TaskData(inBytes, outBytes));
-         newTask.setInOutData(td);
-         taskService.addTask(newTask);
-
-
-         /*
-         //validate parameters:
-         LinkedList<Exception> result = TaskValidator.validateTask(title,
-         description, timeLimit, memoryLimit, rate, complexity,
-         inputFileName, outputFileName, verificationScript, forumLink);
-         if (result.size() != 0) {
-         model.addAttribute("result", "The task is not added");
-         model.addAttribute("error", result);
-         return "result";
-         }
-         result = TaskValidator.validateTaskData(ioTaskData);
-         if (result.size() != 0) {
-         model.addAttribute("result", "The task is not added");
-         model.addAttribute("error", result);
-         return "result";
-         }
-         result = TaskValidator.validateTheoryLinks(theoryLinksList);
-         if (result.size() != 0) {
-         model.addAttribute("result", "The task is not added");
-         model.addAttribute("error", result);
-         return "result";
-         }
-         //validation past.
-         //creating Task:
-         Task currTask = new Task();
-         currTask.setTitle(title);
-         if (memoryLimit != null) {
-         currTask.setMemoryLimit(Integer.parseInt(memoryLimit));
-         }
-         if (timeLimit != null) {
-         currTask.setTimeLimit(Integer.parseInt(timeLimit));
-         }
-         if (rate != null) {
-         currTask.setMaxMark(Integer.parseInt(rate));
-         }
-         if (complexity != null) {
-         currTask.setDifficulty(Integer.parseInt(complexity));
-         }
-         currTask.setDescription(description);
-         currTask.setInputFileName(inputFileName);
-         currTask.setOutputFileName(outputFileName);
-         currTask.setFoumLink(forumLink);
-
-         //add task:
-         taskService.addTask(currTask, ioTaskData, theoryLinksList);
-         } catch (Exception e) {
-         model.addAttribute("result", "The task is not added");
-         model.addAttribute("error", e);
-         return "result";
-         }
-         model.addAttribute("result", "Task have been successfully added");
-         return "result";*/
         return "result";
     }
 }

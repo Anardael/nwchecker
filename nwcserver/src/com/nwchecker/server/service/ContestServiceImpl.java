@@ -27,6 +27,12 @@ public class ContestServiceImpl implements ContestService {
     public void addContest(Contest c) {
         contestDAO.addContest(c);
     }
+    
+    @Transactional
+    @Override
+    public void updateContest(Contest c){
+        contestDAO.updateContest(c);
+    }
 
     @Transactional(readOnly = true)
     @Override

@@ -14,13 +14,8 @@
                 <jsp:param name="pageName" value="task"/>
             </jsp:include>
             <div class="row">
-                <aside class="col-md-3">
-                    <ul class="list-group submenu">
-                        <li class="list-group-item active"><a href="addTask.do"><spring:message code="task.createTask.button" /></a></li>
-                    </ul>
-                </aside>
                 <section>
-                    <table id="taskTable">
+                    <table id="taskTable" style="margin:auto">
                         <tr id="firstRow">
                             <td id="title">
                                 <spring:message code="task.table.task" />

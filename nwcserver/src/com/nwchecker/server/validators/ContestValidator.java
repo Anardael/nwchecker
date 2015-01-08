@@ -6,6 +6,7 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.Task;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -16,6 +17,8 @@ import org.springframework.validation.Validator;
  */
 public class ContestValidator implements Validator {
 
+    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}";
+
     @Override
     public boolean supports(Class<?> clazz) {
         return Contest.class.isAssignableFrom(clazz);
@@ -23,7 +26,30 @@ public class ContestValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "NotEmpty.contestAddForm.title");
+        Contest c = (Contest) target;
+        //Contest validation:
+        if (c.getTitle().length() == 0) {
+            errors.rejectValue("title", "NotEmpty.title");
+        }
+        if (!c.getTitle().matches(titleRegex)) {
+            errors.rejectValue("title", "Pattern.title");
+        }
+        if (c.getTitle().length() > 100) {
+            errors.rejectValue("title", "Size.title");
+        }
+        if (c.getDescription().length() == 0) {
+            errors.rejectValue("description", "NotEmpty.description");
+        }
+        //if Tasks consist: validate each Task using it own Validator:
+        if (c.getTasks() != null) {
+            if (c.getTasks().size() > 0) {
+                //Tasks validation:
+                for (int i = 0; i < c.getTasks().size(); i++) {
+                    //validate each Task:
+                    ValidationUtils.invokeValidator(new TaskValidator(i), c.getTasks().get(i), errors);
+                }
+            }
+        }
     }
 
 }
