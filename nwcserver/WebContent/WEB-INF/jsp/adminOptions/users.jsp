@@ -16,20 +16,38 @@
             <!--Including admin optionsMenu -->
             <!-- Send name of selected option-->
             <jsp:include page="optionsMenu.jsp">
-            	<jsp:param name="selectedOption" value="none"/>
+            	<jsp:param name="selectedOption" value="users"/>
             </jsp:include>
-            <div align="left">
-            	<table>
-            		<tr>
-            			<th><spring:message code="adminPanel.users.tableHeader.username"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.accessLevel"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.displayName"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.email"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.department"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.info"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.isBanned"/></th>
-            			<th><spring:message code="adminPanel.users.tableHeader.confirmed"/></th>
-            		</tr>
+            <div class="col-xs-9" style="height: 70%;">
+            	<table id="usersData" data-toggle="table" data-search="true" data-show-refresh="true">
+            		<thead>
+            			<tr>
+            				<th data-field="username" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.username"/>
+            				</th>
+            				<th data-field="accessLevel" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.accessLevel"/>
+            				</th>
+            				<th data-field="displayName" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.displayName"/>
+            				</th>
+            				<th data-field="email" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.email"/>
+            				</th>
+            				<th data-field="department" data-align="left" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.department"/>
+            				</th>
+            				<th data-field="info" data-align="left" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.info"/>
+            				</th>
+            				<th data-field="isBanned" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.isBanned"/>
+            				</th>
+            				<th data-field="confirmed" data-align="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.confirmed"/>
+            				</th>
+            			</tr>
+            		</thead>
             		<c:forEach var="user" items="${users}">
             			<tr>
             				<td><c:out value="${user.username}"></c:out></td>
@@ -67,6 +85,6 @@
             		</c:forEach>
             	</table>
             </div>
-		</div>
+    	</div>
 	</body>
 </html>

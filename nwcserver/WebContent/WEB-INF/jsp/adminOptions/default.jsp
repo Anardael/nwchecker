@@ -16,11 +16,11 @@
             <!--Including admin optionsMenu -->
             <!-- Send name of selected option-->
             <jsp:include page="optionsMenu.jsp">
-            	<jsp:param name="selectedOption" value="none"/>
+            	<jsp:param name="selectedOption" value="default"/>
             </jsp:include>
-            <div align="center">
+            <div class="col-md-9" align="center">
             	<h2><label class="label label-default"><spring:message code="adminPanel.default.selectOption"/></label></h2>
-            </div>
+			</div>
 		</div>
 	</body>
 </html>

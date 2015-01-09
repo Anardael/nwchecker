@@ -3,25 +3,35 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
-<div align="left">
-	<aside class="col-md-3">
-    	<ul class="list-group submenu">
-        	<c:choose>
-				<c:when test="${param.selectedOption == 'users'}">
-					<li class="active"><a><spring:message code="adminPanel.menu.users" /></a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="admin.do?option=users"><spring:message code="adminPanel.menu.users" /></a></li>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${param.selectedOption == 'default'}">
-					<li class="active"><a>Some option</a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="admin.do?option=default">Some option</a></li>
-				</c:otherwise>
-			</c:choose>
-        </ul>
-    </aside>
-</div>
+<aside class="col-md-3">
+	<ul class="list-group submenu">
+    	<c:choose>
+			<c:when test="${param.selectedOption == 'users'}">
+				<li class="list-group-item active">
+					<a href="admin.do?option=users">
+						<spring:message code="adminPanel.menu.users" />
+					</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="list-group-item">
+					<a href="admin.do?option=users">
+						<spring:message code="adminPanel.menu.users" />
+					</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${param.selectedOption == 'default'}">
+				<li class="list-group-item active">
+					<a href="admin.do?option=default">Default</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="list-group-item">
+					<a href="admin.do?option=default">Default</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+</aside>
