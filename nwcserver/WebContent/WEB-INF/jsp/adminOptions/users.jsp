@@ -19,71 +19,52 @@
             	<jsp:param name="selectedOption" value="users"/>
             </jsp:include>
             <div class="col-xs-9" style="height: 70%;">
-            	<table id="usersData" data-toggle="table" data-search="true" data-show-refresh="true">
+            	<c:url var="dataUrl" value="/admin/getUsers.do"/>
+            	<table id="usersData" data-toggle="table" data-url="${dataUrl}" data-method="get" data-cache="false" data-search="true">
             		<thead>
             			<tr>
-            				<th data-field="username" data-align="center" data-sortable="true">
+            				<th data-field="username" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.username"/>
             				</th>
-            				<th data-field="accessLevel" data-align="center" data-sortable="true">
+        					<th data-field="accessLevel" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.accessLevel"/>
             				</th>
-            				<th data-field="displayName" data-align="center" data-sortable="true">
+            				<th data-field="displayName" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.displayName"/>
             				</th>
-            				<th data-field="email" data-align="center" data-sortable="true">
+            				<th data-field="email" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.email"/>
             				</th>
-            				<th data-field="department" data-align="left" data-sortable="true">
+            				<th data-field="department" data-halign="left" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.department"/>
             				</th>
-            				<th data-field="info" data-align="left" data-sortable="true">
+            				<th data-field="info" data-halign="left" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.info"/>
             				</th>
-            				<th data-field="isBanned" data-align="center" data-sortable="true">
+            				<th data-field="banTime" data-halign="center" data-formatter="banTimeFormatter" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.isBanned"/>
             				</th>
-            				<th data-field="confirmed" data-align="center" data-sortable="true">
+            				<th data-field="enabled" data-halign="center" data-formatter="enabledFormatter" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.confirmed"/>
             				</th>
             			</tr>
             		</thead>
-            		<c:forEach var="user" items="${users}">
-            			<tr>
-            				<td><c:out value="${user.username}"></c:out></td>
-            				<td><c:out value="${user.accessLevel}"></c:out></td>
-            				<td><c:out value="${user.displayName}"></c:out></td>
-            				<td><c:out value="${user.email}"></c:out></td>
-            				<td><c:out value="${user.department}"></c:out></td>
-            				<td><c:out value="${user.info}"></c:out></td>
-            				<c:choose>
-            					<c:when test="${user.banTime > 0}">
-            						<td class="warning">
-            							<spring:message code="adminPanel.users.tableHeader.isBanned.yes"/>
-            							<c:out value=" (${user.banTime})"></c:out>
-            						</td>
-            					</c:when>
-            					<c:otherwise>
-            						<td class="success">
-            							<spring:message code="adminPanel.users.tableHeader.isBanned.no"/>
-            						</td>
-            					</c:otherwise>
-            				</c:choose>
-            				<c:choose>
-            					<c:when test="${user.enabled}">
-            						<td class="success">
-            							<spring:message code="adminPanel.users.tableHeader.confirmed.yes"/>
-            						</td>
-            					</c:when>
-            					<c:otherwise>
-            						<td class="warning">
-            							<spring:message code="adminPanel.users.tableHeader.confirmed.no"/>
-            						</td>
-            					</c:otherwise>
-            				</c:choose>
-            			</tr>
-            		</c:forEach>
             	</table>
+            	<!-- Including page JavaScript -->
+            	<script type="text/javascript">
+            		function banTimeFormatter(value) {
+            			if (value > 0) {
+            	    		return '<h3><label class="label label-danger"><spring:message code="adminPanel.users.tableHeader.isBanned.yes"/></label></h3>';
+            	    	}
+            	    	return '<h3><label class="label label-success"><spring:message code="adminPanel.users.tableHeader.isBanned.no"/></label></h3>';
+            		}
+            		function enabledFormatter(value) {
+            			if (value) {
+            		    	return '<h3><label class="label label-success"><spring:message code="adminPanel.users.tableHeader.confirmed.yes"/></label></h3>';
+            		    }
+            		    return '<h3><label class="label label-danger"><spring:message code="adminPanel.users.tableHeader.confirmed.no"/></label></h3>';
+            		}
+            	</script>
             </div>
     	</div>
 	</body>
