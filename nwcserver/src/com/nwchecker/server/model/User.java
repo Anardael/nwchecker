@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,36 +21,36 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userId")
-	private int		userId;
+	private int userId;
 	// User name
 	@Column(name = "username")
-	private String	username;
+	private String username;
 	// Password
 	@Column(name = "password")
-	private String	password;
+	private String password;
 	@Transient
-	private String	confirmPassword;
+	private String confirmPassword;
 	// Display name
 	@Column(name = "display_name")
-	private String	displayName;
+	private String displayName;
 	// User email
 	@Column(name = "email")
-	private String	email;
+	private String email;
 	// Some university user data(probably faculty or group)
 	@Column(name = "info")
-	private String	info;
+	private String info;
 	// User role (User,Teacher or Admin).
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Role> roles = new HashSet<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<Role> roles;
 	// Department for teacher users.
 	@Column(name = "department")
-	private String	department;
+	private String department;
 	// Ban Time - if exists 0 time while user will be inactive
 	@Column(name = "ban_time")
-	private long	banTime;
+	private long banTime;
 	// Enabled user
 	@Column(name = "enabled")
-	private boolean	enabled;
+	private boolean enabled;
 
 	public User() {
 	}
@@ -77,7 +78,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
@@ -141,21 +142,36 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	public boolean isNew() {
-	    return (this.userId == 0);
+		return (this.userId == 0);
 	}
-	
+
 	public void addRoleAdmin() {
-		roles.add(new Role(this,"ROLE_ADMIN"));
+		if (roles == null) {
+			roles = new HashSet<Role>();
+			roles.add(new Role(this, "ROLE_ADMIN"));
+		} else {
+			roles.add(new Role(this, "ROLE_ADMIN"));
+		}
 	}
-	
+
 	public void addRoleUser() {
-		roles.add(new Role(this,"ROLE_USER"));
+		if (roles == null) {
+			roles = new HashSet<Role>();
+			roles.add(new Role(this, "ROLE_USER"));
+		} else {
+			roles.add(new Role(this, "ROLE_USER"));
+		}
 	}
-	
+
 	public void addRoleTeacher() {
-		roles.add(new Role(this,"ROLE_TEACHER"));
+		if (roles==null) {
+			roles=new HashSet<Role>();
+			roles.add(new Role(this,"ROLE_TEACHER"));
+		} else {
+		roles.add(new Role(this, "ROLE_TEACHER"));
+		}
 	}
-	
+
 }
