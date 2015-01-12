@@ -9,7 +9,9 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/getTasks/**" access="hasRole('ROLE_ADMIN')" />
-		<form-login login-page="/login.do" />
+		<form-login login-page="/login.do"
+			authentication-failure-url="/login.do?error" 
+		/>
 		<logout logout-url="/logout.do" />
 	</http>
 
@@ -18,7 +20,9 @@
 			<password-encoder hash="bcrypt"></password-encoder>
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select username,password,enabled from users where username=?"
-				authorities-by-username-query="select username, access_level from users where username =?" />
+				authorities-by-username-query="SELECT U.username, R.role as roles    
+                                FROM Users U, roles R   
+                                WHERE (U.userId = R.userId) and (U.username=?)" />
 		</authentication-provider>
 	</authentication-manager>
 

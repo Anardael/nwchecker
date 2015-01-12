@@ -23,10 +23,10 @@
 		<!--including bodyHead -->
 		<!-- send name of current page-->
 		<jsp:include page="fragments/bodyHeader.jsp">
-			<jsp:param name="pageName" value="registration" />
+			<jsp:param name="pageName" value="profile" />
 		</jsp:include>
 		
-		<form:form modelAttribute="userRegistrationForm" action="registration.do" method="post" role="form"
+		<form:form modelAttribute="userProfile" action="profile.do" method="post" role="form"
 			class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-4 control-label"><spring:message code="reg.username.caption" />:</label>
@@ -52,14 +52,14 @@
 			<div class="form-group">
 				<label class="col-sm-4 control-label"><spring:message code="reg.password.caption" />:</label>
 				<div class="col-sm-4">
-					<form:input path="password" class="form-control" type="password" name="password" />
+					<input class="form-control" type="password" name="password" />
 					<form:errors path="password" Class="error"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-4 control-label"><spring:message code="reg.cpassword.caption" />:</label>
 				<div class="col-sm-4">
-					<form:input path="confirmPassword" class="form-control" type="password" name="confirmPassword" />
+					<input class="form-control" type="password" name="confirmPassword" />
 					<form:errors path="confirmPassword" Class="error"/>
 				</div>
 			</div>

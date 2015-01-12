@@ -1,10 +1,15 @@
 package com.nwchecker.server.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -14,8 +19,8 @@ public class User {
 	// User id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int		id;
+	@Column(name = "userId")
+	private int		userId;
 	// User name
 	@Column(name = "username")
 	private String	username;
@@ -33,9 +38,9 @@ public class User {
 	// Some university user data(probably faculty or group)
 	@Column(name = "info")
 	private String	info;
-	// User access level (User,Teacher or Admin).
-	@Column(name = "access_level")
-	private String	accessLevel;
+	// User role (User,Teacher or Admin).
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Role> roles = new HashSet<>();
 	// Department for teacher users.
 	@Column(name = "department")
 	private String	department;
@@ -49,12 +54,12 @@ public class User {
 	public User() {
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public Integer getId() {
-		return id;
+		return userId;
 	}
 
 	public String getUsername() {
@@ -105,12 +110,12 @@ public class User {
 		this.info = info;
 	}
 
-	public String getAccessLevel() {
-		return accessLevel;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setAccessLevel(String accessLevel) {
-		this.accessLevel = accessLevel;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public String getDepartment() {
@@ -138,6 +143,19 @@ public class User {
 	}
 	
 	public boolean isNew() {
-	        return (this.id == 0);
+	    return (this.userId == 0);
 	}
+	
+	public void addRoleAdmin() {
+		roles.add(new Role(this,"ROLE_ADMIN"));
+	}
+	
+	public void addRoleUser() {
+		roles.add(new Role(this,"ROLE_USER"));
+	}
+	
+	public void addRoleTeacher() {
+		roles.add(new Role(this,"ROLE_TEACHER"));
+	}
+	
 }

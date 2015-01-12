@@ -1,88 +1,66 @@
 package com.nwchecker.server.validators;
 
-import com.nwchecker.server.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
-public class UserValidator {
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.UserService;
+
+public class UserValidator implements Validator {
 
 	private final String	patternUsername		= "^[a-zA-Z0-9_-]{3,16}$";
 	private final String	patternDisplayName	= "^[a-zA-Z0-9_-]{3,16}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 														+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private final String	patternPassword		= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
-
-	private User			user;
-
-	public UserValidator(User user) {
-		super();
-		this.user = user;
-	}
 	
-	public boolean isUsernameEmpty() {
-		return user.getUsername().isEmpty();
-	}
+	private final UserService userService;
 	
-	public boolean isDisplayNameEmpty() {
-		return user.getDisplayName().isEmpty();
-	}
-	
-	public boolean isEmailEmpty() {
-		return user.getEmail().isEmpty();
-	}
-	
-	public boolean isPasswordEmpty() {
-		return user.getPassword().isEmpty();
-	}
-	
-	public boolean isConfirmPasswordEmpty() {
-		return user.getConfirmPassword().isEmpty();
+	@Autowired
+	public UserValidator(UserService userService) {
+		this.userService = userService;
 	}
 
-	public boolean isUsernameValid() {
-		if (user.getUsername().matches(patternUsername)) {
-			return true;
-		} else {
-			return false;
-		}
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return User.class.equals(clazz);
 	}
 
-	public boolean isDisplayNameValid() {
-		if (user.getDisplayName().matches(patternDisplayName)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	@Override
+	public void validate(Object obj, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "reg.empty.username.caption");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "displayName", "reg.empty.displayName.caption");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "reg.empty.email.caption");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.empty.password.caption");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "reg.empty.confirmPassword.caption");
 
-	public boolean isEmailValid() {
-		if (user.getEmail().matches(patternEmail)) {
-			return true;
-		} else {
-			return false;
+		User user = (User) obj;
+		boolean hasUsername = userService.hasUsername(user.getUsername());
+		boolean hasEmail = userService.hasEmail(user.getEmail());
+		
+		if (!user.getUsername().matches(patternUsername)) {
+			errors.rejectValue("username", "reg.badUsername.caption");
 		}
-	}
-
-	public boolean isPasswordValid() {
-		if (user.getPassword().matches(patternPassword)) {
-			return true;
-		} else {
-			return false;
+		if (!user.getDisplayName().matches(patternDisplayName)) {
+			errors.rejectValue("displayName", "reg.badDisplayName.caption");
 		}
-	}
-
-	public boolean isConfirmPasswordValid() {
-		if (user.getPassword().equals(user.getConfirmPassword())) {
-			return true;
-		} else {
-			return false;
+		if (!user.getEmail().matches(patternEmail)) {
+			errors.rejectValue("email", "reg.badEmail.caption");
 		}
-	}
-
-	public boolean isUserValid() {
-		if (isUsernameValid() && isEmailValid() && isDisplayNameValid() && isPasswordValid()
-				&& isConfirmPasswordValid()) {
-			return true;
-		} else {
-			return false;
+		if (!user.getPassword().matches(patternPassword)) {
+			errors.rejectValue("password", "reg.badPassword.caption");
 		}
+		if (!(user.getPassword().equals(user.getConfirmPassword()))) {
+			errors.rejectValue("confirmPassword", "reg.badConfirmPassword.caption");
+		}
+		if (hasUsername) {
+			errors.rejectValue("username", "reg.usernameNotUnique.caption");
+		}
+		if (hasEmail) {
+			errors.rejectValue("email", "reg.emailNotUnique.caption");
+		}
+		
 	}
 }

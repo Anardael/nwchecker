@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <spring:url value="/resources/" var="resources" />
-
 <header>
 	<!-- service Logo -->
 	<a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a>
@@ -82,14 +81,13 @@
 			</security:authorize>
 			<!-- logout -->
 			<security:authorize access="isAuthenticated()">
-				<c:choose>
-					<c:when test="${param.pageName=='logout'}">
-						<li class="active"><a><spring:message code="logout.caption" /></a></li>
-					</c:when>
-					<c:otherwise>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-expanded="false"><security:authentication property="principal.username" /><span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="profile.do"><spring:message code="profile.caption" /></a></li>
+						<li class="divider"></li>
 						<li><a href="logout.do"><spring:message code="logout.caption" /></a></li>
-					</c:otherwise>
-				</c:choose>
+					</ul></li>
 			</security:authorize>
 		</ul>
 	</nav>
