@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
 		user.addRoleUser();
 		userDAO.addUser(user);
 	}
+	
+	@Override
+	public void updateUser(User user) {
+		userDAO.updateUser(user);
+	}
 
 	@Override
 	public User getUserByUsername(String username) {

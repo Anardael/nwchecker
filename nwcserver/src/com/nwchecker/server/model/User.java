@@ -3,9 +3,9 @@ package com.nwchecker.server.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +39,7 @@ public class User {
 	@Column(name = "info")
 	private String	info;
 	// User role (User,Teacher or Admin).
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Role> roles = new HashSet<>();
 	// Department for teacher users.
 	@Column(name = "department")

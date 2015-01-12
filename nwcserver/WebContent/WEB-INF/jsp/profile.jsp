@@ -29,43 +29,54 @@
 		<form:form modelAttribute="userProfile" action="profile.do" method="post" role="form"
 			class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-4 control-label"><spring:message code="reg.username.caption" />:</label>
+				<label class="col-sm-4 control-label"><spring:message code="profile.username.caption" />:</label>
 				<div class="col-sm-4">
-					<form:input path="username" class="form-control" name="username"/>
-					<form:errors path="username" Class="error"/>
+					<label class="control-label">${userProfile.username}</label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-4 control-label"><spring:message code="reg.nickname.caption" />:</label>
+				<label class="col-sm-4 control-label"><spring:message code="profile.nickname.caption" />:</label>
 				<div class="col-sm-4">
 					<form:input path="displayName" class="form-control" name="displayName" />
 					<form:errors path="displayName" Class="error"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-4 control-label"><spring:message code="reg.email.caption" />:</label>
+				<label class="col-sm-4 control-label"><spring:message code="profile.email.caption" />:</label>
 				<div class="col-sm-4">
-					<form:input path="email" class="form-control" name="email" />
-					<form:errors path="email" Class="error"/>
+					<label class="control-label">${userProfile.email}</label>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-4 control-label"><spring:message code="reg.password.caption" />:</label>
+				<label class="col-sm-4 control-label"><spring:message code="profile.password.caption" />:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="password" name="password" />
 					<form:errors path="password" Class="error"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-4 control-label"><spring:message code="reg.cpassword.caption" />:</label>
+				<label class="col-sm-4 control-label"><spring:message code="profile.cpassword.caption" />:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="password" name="confirmPassword" />
 					<form:errors path="confirmPassword" Class="error"/>
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-4 control-label"><spring:message code="profile.department.caption" />:</label>
+				<div class="col-sm-4">
+					<form:input path="department" class="form-control" name="department" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label"><spring:message code="profile.info.caption" />:</label>
+				<div class="col-sm-4">
+					<form:textarea path="info" class="form-control" name="info" />
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<div class="form-actions centered">
-					<input type="submit" value="<spring:message code="reg.button.caption" />" class="btn btn-primary customButton">
+					<input type="submit" value="<spring:message code="profile.applyButton.caption" />" class="btn btn-primary customButton">
 				</div>
 			</div>
 		</form:form>

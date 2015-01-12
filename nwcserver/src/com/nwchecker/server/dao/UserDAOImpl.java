@@ -11,7 +11,6 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 
 @Repository("userDAO")
@@ -26,25 +25,16 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public void addUser(User user) {
 		getHibernateTemplate().save(user);
-		for (Role role:user.getRoles()){
-			getHibernateTemplate().save(role);
-		}
 	}
 
 	@Override
 	public void updateUser(User user) {
 		getHibernateTemplate().update(user);
-		for (Role role:user.getRoles()){
-			getHibernateTemplate().update(role);
-		}
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		getHibernateTemplate().delete(user);
-		for (Role role:user.getRoles()){
-			getHibernateTemplate().delete(role);
-		}
 	}
 
 	@Override
