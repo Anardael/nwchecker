@@ -30,6 +30,8 @@ public class AdminOptionsController {
 		switch (option) {
 			case "users":
 				return "adminOptions/users";
+			case "userEdit":
+				return "adminOptions/userEdit";
 			default:
 				return "adminOptions/default";
 		}

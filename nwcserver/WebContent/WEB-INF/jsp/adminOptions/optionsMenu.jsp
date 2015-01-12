@@ -22,14 +22,18 @@
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
-			<c:when test="${param.selectedOption == 'default'}">
+			<c:when test="${param.selectedOption == 'user edit'}">
 				<li class="list-group-item active">
-					<a href="admin.do?option=default">Default</a>
+					<a href="admin.do?option=userEdit">
+						<spring:message code="adminPanel.menu.userEdit" />
+					</a>
 				</li>
 			</c:when>
 			<c:otherwise>
 				<li class="list-group-item">
-					<a href="admin.do?option=default">Default</a>
+					<a href="admin.do?option=userEdit">
+						<spring:message code="adminPanel.menu.userEdit" />
+					</a>
 				</li>
 			</c:otherwise>
 		</c:choose>
