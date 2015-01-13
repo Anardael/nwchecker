@@ -29,7 +29,7 @@ public class RegistrationController {
 	}
 
 	@Autowired
-	@Qualifier("userValidator")
+	@Qualifier("userRegistrationValidator")
 	private Validator	validator;
 
 	@InitBinder

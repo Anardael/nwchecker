@@ -40,7 +40,8 @@
 	</interceptors>
 	
 	<!-- Validators -->
-	<beans:bean id="userValidator" class="com.nwchecker.server.validators.UserValidator" />
+	<beans:bean id="userRegistrationValidator" class="com.nwchecker.server.validators.UserRegistrationValidator" />
+	<beans:bean id="userProfileValidator" class="com.nwchecker.server.validators.UserProfileValidator" />
 
 	<beans:import resource="security.xml" />
 

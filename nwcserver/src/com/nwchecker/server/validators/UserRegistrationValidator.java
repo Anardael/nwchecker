@@ -8,10 +8,10 @@ import org.springframework.validation.Validator;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 
-public class UserValidator implements Validator {
+public class UserRegistrationValidator implements Validator {
 
-	private final String	patternUsername		= "^[a-zA-Z0-9_-]{3,16}$";
-	private final String	patternDisplayName	= "^[a-zA-Z0-9_-]{3,16}$";
+	private final String	patternUsername		= "^[a-zA-Z]+[a-zA-Z0-9_-]{2,15}$";
+	private final String	patternDisplayName	= "^[a-zA-Z]+[a-zA-Z0-9_-]{2,15}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 														+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private final String	patternPassword		= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
@@ -19,7 +19,7 @@ public class UserValidator implements Validator {
 	private final UserService userService;
 	
 	@Autowired
-	public UserValidator(UserService userService) {
+	public UserRegistrationValidator(UserService userService) {
 		this.userService = userService;
 	}
 

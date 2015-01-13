@@ -31,7 +31,7 @@ public class ProfileController {
 	}
 
 	@Autowired
-	@Qualifier("userValidator")
+	@Qualifier("userProfileValidator")
 	private Validator	validator;
 
 	@InitBinder
