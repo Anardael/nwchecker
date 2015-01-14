@@ -12,9 +12,9 @@
     <link href="${resources}css/styles.css" rel="stylesheet"/>
     <link href="${resources}css/task.css" rel="stylesheet"/>
     <link href="${resources}css/taskCreate.css" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${resources}js/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="${resources}js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="${resources}js/dropdown.js"></script>
+    <script type="text/javascript" src="${resources}js/dropdown.js"></script>
     <script type="text/javascript" src="${resources}js/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="${resources}js/taskCreateAddLink.js"></script>
     <script type="text/javascript" src="${resources}js/bootstrap.file-input.js"></script>
