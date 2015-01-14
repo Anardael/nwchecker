@@ -1,0 +1,20 @@
+.header {
+	background-color: #00BCE1;
+	color: #5E5E5E;
+	font-size: 200%;
+	text-align: left;
+}
+.username {
+	color: #FFFFFF;
+}
+.content {
+	padding-top: 20px;
+}
+.updateBtn {
+	background-color: #00BCE1;
+	color: #FFFFFF;
+}
+.deleteBtn {
+	background-color: #B80F00;
+	color: #FFFFFF;
+}
