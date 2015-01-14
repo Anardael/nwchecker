@@ -1,7 +1,5 @@
 package com.nwchecker.server.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,10 +41,6 @@ public class RegistrationController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String initRegistrationForm(Model model) {
 		model.addAttribute("userRegistrationForm", new User());
-///		List <User> users = userService.getUsersByRole("ROLE_ADMIN");
-//		for (User us:users) {
-//			System.out.println(us.getUsername());
-//		}
 		return "/registration";
 	}
 
