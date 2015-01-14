@@ -18,6 +18,8 @@ public interface UserDAO {
 
 	public List<User> getUsers();
 	
+	public List<User> getUsersByRole(String role);
+	
 	public boolean hasUsername(String username);
 	
 	public boolean hasEmail(String email);

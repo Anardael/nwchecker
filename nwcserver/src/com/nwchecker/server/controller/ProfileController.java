@@ -1,10 +1,15 @@
 package com.nwchecker.server.controller;
 
 import java.security.Principal;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -47,14 +52,50 @@ public class ProfileController {
 		model.addAttribute("userProfile", user);
 		return "/profile";
 	}
-	
+
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("userProfile") @Validated User user, BindingResult result) {
+	public String doRegister(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
+			Principal principal, Model model) {
+		String username = principal.getName(); // get logged in username
+		User logedUser = userService.getUserByUsername(username);
+		user.setRoles(logedUser.getRoles());
 		if (result.hasErrors()) {
 			return "/profile";
 		} else {
-			userService.updateUser(user);
-			return "/userCreated";
+			logedUser.setDisplayName(user.getDisplayName());
+			logedUser.setDepartment(user.getDepartment());
+			logedUser.setInfo(user.getInfo());
+			userService.updateUser(logedUser);
+			model.addAttribute("userUpdated", "true");
+			return "/profile";
 		}
+	}
+
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model, Locale loc) {
+		String patternPassword = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
+		String username = principal.getName(); // get logged in username
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		User logedUser = userService.getUserByUsername(username);
+		String oldPassword = (String) request.getParameter("oldPassword");
+		model.addAttribute("userProfile", logedUser);
+		if (encoder.matches(oldPassword, logedUser.getPassword())) {
+			String newPassword = (String) request.getParameter("newPassword");
+			String confirmPassword = (String) request.getParameter("confirmPassword");
+			if (newPassword.equals(confirmPassword)) {
+				if (newPassword.matches(patternPassword)) {
+					logedUser.setPassword(encoder.encode(newPassword));
+					userService.updateUser(logedUser);
+					model.addAttribute("passwordChanged", "true");
+				} else {
+					model.addAttribute("passwordChanged", "false");
+				}
+			} else {
+				model.addAttribute("passwordChanged","false");
+			}
+		} else {
+			model.addAttribute("passwordChanged", "false");
+		}
+		return "/profile";
 	}
 }

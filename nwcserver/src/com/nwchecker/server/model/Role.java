@@ -30,11 +30,11 @@ public class Role {
 		this.role = role;
 	}
 
-	public int getId() {
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setId(int id) {
+	public void setRoleId(int id) {
 		this.roleId = id;
 	}
 

@@ -9,6 +9,7 @@ import com.nwchecker.server.model.User;
 public class UserProfileValidator implements Validator {
 
 	private final String	patternDisplayName	= "^[a-zA-Z]+[a-zA-Z0-9_-]{2,15}$";
+	private final String	patternDepartment	= "^[a-zA-Z0-9_ -]*$";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -23,6 +24,10 @@ public class UserProfileValidator implements Validator {
 		
 		if (!user.getDisplayName().matches(patternDisplayName)) {
 			errors.rejectValue("displayName", "profile.badDisplayName.caption");
+		}
+		
+		if (!user.getDisplayName().matches(patternDepartment)) {
+			errors.rejectValue("department", "profile.badDepartment.caption");
 		}
 		
 	}

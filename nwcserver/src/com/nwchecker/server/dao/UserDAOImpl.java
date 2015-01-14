@@ -57,6 +57,13 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");
 		return list;
 	}
+	
+	@Override
+	public List<User> getUsersByRole(String role) {
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.roles roles ON user.userId = roles.userId WHERE roles.role =?", role);
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
