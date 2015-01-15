@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -20,6 +22,7 @@ public class Role {
 	@JoinColumn(name = "userId")
 	private User user;
 	@Column(name = "role")
+	@Expose
 	private String role;
 	
 	public Role() {

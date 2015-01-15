@@ -15,68 +15,60 @@
             <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="home"/>
             </jsp:include>
-            <!--Including admin optionsMenu -->
-            <!-- Send name of selected option-->
-            <jsp:include page="optionsMenu.jsp">
-            	<jsp:param name="selectedOption" value="user edit"/>
-            </jsp:include>
-            <span class="col-md-9 header">
+            
+            <!-- TODO -->
+            <!-- Username and E-mail -->
+            <span class="row header">
             	<spring:message code="adminPanel.userEdit.username" />
-            	<span class="username">Test</span>
+            	<span class="username">"${user.username}"	</span>
+            	<spring:message code="adminPanel.userEdit.email" />
+            	<span class="username">"${user.email}"</span>
            	</span>
-           	<div class="col-md-9 content">
-            	<form:form modelAttribute="" action="" method="post" role="form"
-					class="form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-4 control-label">
-							<spring:message code="adminPanel.userEdit.password" />
-						</label>
-						<div class="col-sm-4">
-							<input class="form-control" name="password" value="">
-						</div>
+           	
+           	<!-- TODO -->
+           	<form:form modelAttribute=""
+           			   class="form-horizontal" role="form"
+           			   action="" method="post">
+           		<div class="form-group">
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.displayName" />
+					</label>
+					<div class="col-sm-4">
+						<form:input path="displayName" class="form-control" name="displayName" />
+						<form:errors path="displayName" Class="error"/>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">
-							<spring:message code="adminPanel.userEdit.displayName" />
-						</label>
-						<div class="col-sm-4">
-							<input class="form-control" name="displayName" value="">
-						</div>
+				</div>
+				
+   				<!-- TODO -->
+   				
+   				<div class="form-group">
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.department" />
+					</label>
+					<div class="col-sm-4">
+						<form:input path="department" class="form-control" name="department" />
+						<form:errors path="department" Class="error"/>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">
-							<spring:message code="adminPanel.userEdit.email" />
-						</label>
-						<div class="col-sm-4">
-							<input class="form-control" name="email" value="">
-						</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.info" />
+					</label>
+					<div class="col-sm-4">
+						<form:textarea path="info" class="form-control" name="info" rows="4" />
+						<form:errors path="info" Class="error"/>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">
-							<spring:message code="adminPanel.userEdit.department" />
-						</label>
-						<div class="col-sm-4">
-							<input class="form-control" name="department" value="">
-						</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-4" align="right">
+						<input type="submit" class="btn updateBtn"
+							value=<spring:message code="adminPanel.userEdit.updateBtn" />>
+						<input type="submit" class="btn deleteBtn"
+							value=<spring:message code="adminPanel.userEdit.deleteBtn" />>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">
-							<spring:message code="adminPanel.userEdit.info" />
-						</label>
-						<div class="col-sm-4">
-							<textarea class="form-control" name="info" rows="4"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-4" align="right">
-							<input type="submit" class="btn updateBtn"
-								value=<spring:message code="adminPanel.userEdit.updateBtn" />>
-							<input type="submit" class="btn deleteBtn"
-								value=<spring:message code="adminPanel.userEdit.deleteBtn" />>
-						</div>
-					</div>
-				</form:form>
-            </div>
+				</div>
+           	</form:form>
     	</div>
+    	<jsp:include page="../fragments/footer.jsp" />
 	</body>
 </html>

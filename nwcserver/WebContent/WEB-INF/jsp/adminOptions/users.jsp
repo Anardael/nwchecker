@@ -7,8 +7,7 @@
 	<!--Including head -->
     <jsp:include page="../fragments/staticFiles.jsp" />
     <!-- Including users table formatters -->
-	<jsp:include page="usersFormatters.jsp" />
-	<script type="text/javascript" src="${resources}js/usersEvents.js" ></script>
+	<script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
 	<body>
 		<div class="wrapper container">
 			<!--Including bodyHead -->
@@ -16,25 +15,22 @@
             <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="home"/>
             </jsp:include>
-            <!--Including admin optionsMenu -->
-            <!-- Send name of selected option-->
-            <jsp:include page="optionsMenu.jsp">
-            	<jsp:param name="selectedOption" value="users"/>
-            </jsp:include>
-            <div class="col-xs-9" style="height: 70%;">
+            <div class="row" style="height: 47.3%;">
             	<c:url var="dataUrl" value="/admin/getUsers.do"/>
-            	<table id="usersData" data-toggle="table" data-url="${dataUrl}" data-method="get" 
-            			data-cache="false" data-search="true">
+            	<table id="usersData" data-toggle="table" data-striped="true"
+            			data-url="${dataUrl}" data-method="get" data-cache="false"
+            			data-sort-name="username" data-sort-order="asc"
+            			data-pagination="true" data-search="true">
             		<thead>
             			<tr>
-            				<th data-field="username" data-halign="center" data-sortable="true">
+            				<th data-field="username" data-halign="center" data-formatter="usernameFormatter" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.username"/>
-            				</th>
-        					<th data-field="accessLevel" data-halign="center" data-sortable="true">
-            					<spring:message code="adminPanel.users.tableHeader.accessLevel"/>
             				</th>
             				<th data-field="displayName" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.displayName"/>
+            				</th>
+            				<th data-field="roles" data-halign="center" data-formatter="rolesFormatter" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.roles"/>
             				</th>
             				<th data-field="email" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.email"/>
@@ -42,16 +38,14 @@
             				<th data-field="department" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.department"/>
             				</th>
-            				<th data-field="banTime" data-halign="center" data-formatter="banTimeFormatter" data-sortable="true">
-            					<spring:message code="adminPanel.users.tableHeader.isBanned"/>
-            				</th>
-            				<th data-field="enabled" data-halign="center" data-formatter="enabledFormatter" data-sortable="true">
-            					<spring:message code="adminPanel.users.tableHeader.confirmed"/>
+            				<th data-field="info" data-halign="center" data-sortable="true">
+            					<spring:message code="adminPanel.users.tableHeader.info"/>
             				</th>
             			</tr>
             		</thead>
             	</table>
             </div>
     	</div>
+    	<jsp:include page="../fragments/footer.jsp" />
 	</body>
 </html>

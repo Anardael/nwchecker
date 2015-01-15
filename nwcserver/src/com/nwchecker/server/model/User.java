@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,6 +26,7 @@ public class User {
 	private int userId;
 	// User name
 	@Column(name = "username")
+	@Expose
 	private String username;
 	// Password
 	@Column(name = "password")
@@ -32,18 +35,23 @@ public class User {
 	private String confirmPassword;
 	// Display name
 	@Column(name = "display_name")
+	@Expose
 	private String displayName;
 	// User email
 	@Column(name = "email")
+	@Expose
 	private String email;
 	// Some university user data(probably faculty or group)
 	@Column(name = "info")
+	@Expose
 	private String info;
 	// User role (User,Teacher or Admin).
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	@Expose
 	private Set<Role> roles;
 	// Department for teacher users.
 	@Column(name = "department")
+	@Expose
 	private String department;
 	// Ban Time - if exists 0 time while user will be inactive
 	@Column(name = "ban_time")
