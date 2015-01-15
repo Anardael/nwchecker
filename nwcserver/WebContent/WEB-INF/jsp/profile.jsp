@@ -7,6 +7,8 @@
 <html>
 <!--including head -->
 <jsp:include page="fragments/staticFiles.jsp" />
+<script type="text/javascript" src="${resources}js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${resources}js/validators/userProfileValidator_${pageContext.response.locale}.js"></script>
 <!-- include special css for registration:-->
 <style>
 .centered {
@@ -20,6 +22,12 @@
 .error {
 	color: #FF0000;
 }
+#changePassword label.error {
+        color: red;
+}
+#changePassword input.error {
+        border: 1px solid red;
+}
 </style>
 <body>
 	<div class="wrapper container">
@@ -28,7 +36,6 @@
 		<jsp:include page="fragments/bodyHeader.jsp">
 			<jsp:param name="pageName" value="profile" />
 		</jsp:include>
-
 		<form:form modelAttribute="userProfile" action="profile.do" method="post" role="form" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-4 control-label"><spring:message code="profile.username.caption" />:</label>
@@ -108,7 +115,7 @@
 		</form:form>
 
 		<!-- Modal -->
-		<form action="changePassword.do" method="post" role="form" class="form-horizontal">
+		<form action="changePassword.do" method="post" role="form" class="form-horizontal" id="changePassword">
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -127,18 +134,16 @@
 									<input type="password" class="form-control" id="oldPassword" name="oldPassword" />
 								</div>
 							</div>
-
 							<div class="form-group">
 								<label class="col-sm-4 control-label"><spring:message code="profile.newPassword.caption" />:</label>
 								<div class="col-sm-6">
-									<input type="password" class="form-control" id="newPassword" name="newPassword" />
+									<input type="password" class="form-control" id="newPassword" name="newPassword"/>
 								</div>
 							</div>
-
 							<div class="form-group">
 								<label class="col-sm-4 control-label"><spring:message code="profile.confirmPassword.caption" />:</label>
 								<div class="col-sm-6">
-									<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" />
+									<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
 								</div>
 							</div>
 							<div class="modal-footer">

@@ -1,12 +1,12 @@
 package com.nwchecker.server.controller;
 
 import java.security.Principal;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,17 +44,19 @@ public class ProfileController {
 		dataBinder.setDisallowedFields("id");
 		dataBinder.setValidator(validator);
 	}
-
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String initRegistrationForm(ModelMap model, Principal principal) {
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = {"/profile", "/changePassword"}, method = RequestMethod.GET)
+	public String initProfileForm(ModelMap model, Principal principal) {
 		String username = principal.getName(); // get logged in username
 		User user = userService.getUserByUsername(username);
 		model.addAttribute("userProfile", user);
 		return "/profile";
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
+	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
 			Principal principal, Model model) {
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
@@ -70,9 +72,10 @@ public class ProfileController {
 			return "/profile";
 		}
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model, Locale loc) {
+	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model) {
 		String patternPassword = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
 		String username = principal.getName(); // get logged in username
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

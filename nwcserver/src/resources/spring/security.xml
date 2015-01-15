@@ -8,7 +8,8 @@
 	<global-method-security pre-post-annotations="enabled" />
 	<http use-expressions="true">
 		<intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/getTasks/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/profile**" access="isAuthenticated()" />
+		<intercept-url pattern="/changePassword**" access="isAuthenticated()" />
 		<form-login login-page="/login.do"
 			authentication-failure-url="/login.do?error" 
 		/>
