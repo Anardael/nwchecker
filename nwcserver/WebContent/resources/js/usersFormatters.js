@@ -1,5 +1,5 @@
 function usernameFormatter(value) {
-	return '<a href="admin/user.do?Username=' + value + '">' + value + '</a>';
+	return '<a href="userEdit.do?Username=' + value + '">' + value + '</a>';
 }
 function rolesFormatter(value) {
 	value.sort();
@@ -9,4 +9,10 @@ function rolesFormatter(value) {
 		roles += value[i]['role'];
 	}
 	return roles;
+}
+function infoFormatter(value) {
+	if (value == null) {
+		return "";
+	}
+	return value;
 }

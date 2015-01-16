@@ -1,34 +1,55 @@
 package com.nwchecker.server.controller;
 
+import java.awt.Checkbox;
 import java.util.List;
+import java.util.Set;
+
+import javax.jws.WebParam.Mode;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminOptionsController {
 
 	@Autowired
 	private UserService userService;
 	
-	// "/admin.do"
-	@RequestMapping(method = RequestMethod.GET)
+	@Autowired
+	@Qualifier("userEditValidator")
+	private Validator	validator;
+	
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
+		dataBinder.setValidator(validator);
+	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
 		return "adminOptions/users";
 	}
 	
-	// "/admin/getUsers.do" - return JSON data
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
 	public @ResponseBody String getUsers() {
 		List<User> users = userService.getUsers();
@@ -37,12 +58,49 @@ public class AdminOptionsController {
 		return gson.toJson(users.toArray());
 	}
 	
-	// "/admin/user.do?Username=..." - return user in Model
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ModelAndView user(@RequestParam("Username") String username) {
-		ModelAndView modelAndView = new ModelAndView("adminOptions/userEdit");
+	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
+	public String user(HttpServletRequest request, Model model) {
+		String username = request.getParameter("Username");
+		if (username == null) {
+			return "redirect:admin.do";
+		}
 		User user = userService.getUserByUsername(username);
-		modelAndView.addObject("user", user);
-		return modelAndView;
+		user.setPassword("");
+		model.addAttribute("userData", user);
+		return "adminOptions/userEdit";
+	}
+	
+	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
+	public String changeUser(@ModelAttribute("userData") @Validated User userData, BindingResult result, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			return "/adminOptions/userEdit";
+		}
+		User user = userService.getUserByUsername(userData.getUsername());
+		user = changeUserPassword(user, userData.getPassword());
+		user.setDisplayName(userData.getDisplayName());
+		user.setEmail(userData.getEmail());
+		//user = setUserRoles(user, request);
+		user.setDepartment(userData.getDepartment());
+		user.setInfo(userData.getInfo());
+		userService.updateUser(user);
+		return "redirect:admin.do";
+	}
+	
+	private User changeUserPassword(User user, String newPassword) {
+		if (!newPassword.isEmpty()) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			user.setPassword(encoder.encode(newPassword));
+		}
+		return user;
+	}
+	
+//	private User setUserRoles(User user, HttpServletRequest request) {
+//		
+//	}
+	
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+	public String deleteUser(@RequestParam("username") String username) {
+		userService.deleteUserByName(username);
+		return "redirect:admin.do";
 	}
 }

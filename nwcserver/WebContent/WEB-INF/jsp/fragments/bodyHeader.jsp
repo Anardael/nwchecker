@@ -84,6 +84,10 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 					aria-expanded="false"><security:authentication property="principal.username" /><span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
+						<security:authorize access="hasRole('ROLE_ADMIN')">
+							<li><a href="admin.do"><spring:message code="admin.caption" /></a></li>
+							<li class="divider"></li>
+						</security:authorize>
 						<li><a href="profile.do"><spring:message code="profile.caption" /></a></li>
 						<li class="divider"></li>
 						<li><a href="logout.do"><spring:message code="logout.caption" /></a></li>

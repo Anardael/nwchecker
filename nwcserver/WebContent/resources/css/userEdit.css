@@ -4,17 +4,27 @@
 	font-size: 200%;
 	text-align: left;
 }
-.username {
+.header-username {
+	color: #FFFFFF;
+	font-style: normal;
+}
+.field-label {
+	font-size: 130%;
+	text-align: left;
+	padding-left: 5px;
+}
+.marked {
+	background-color: #BBBBBB;
 	color: #FFFFFF;
 }
-.content {
-	padding-top: 20px;
-}
-.updateBtn {
+.button-update {
 	background-color: #00BCE1;
 	color: #FFFFFF;
 }
-.deleteBtn {
+.button-delete {
 	background-color: #B80F00;
 	color: #FFFFFF;
+}
+.error {
+	color: #FF0000;
 }

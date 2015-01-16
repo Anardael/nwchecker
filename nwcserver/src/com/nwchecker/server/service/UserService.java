@@ -9,6 +9,8 @@ public interface UserService {
 	public void addUser(User user);
 
 	public void updateUser(User user);
+	
+	public void deleteUserByName(String username);
 
 	public User getUserByUsername(String username);
 	

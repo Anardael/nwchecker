@@ -13,10 +13,10 @@
 			<!--Including bodyHead -->
 			<!-- Send name of current page-->
             <jsp:include page="../fragments/bodyHeader.jsp">
-                <jsp:param name="pageName" value="home"/>
+                <jsp:param name="pageName" value="admin"/>
             </jsp:include>
             <div class="row" style="height: 47.3%;">
-            	<c:url var="dataUrl" value="/admin/getUsers.do"/>
+            	<c:url var="dataUrl" value="/getUsers.do"/>
             	<table id="usersData" data-toggle="table" data-striped="true"
             			data-url="${dataUrl}" data-method="get" data-cache="false"
             			data-sort-name="username" data-sort-order="asc"
@@ -35,10 +35,10 @@
             				<th data-field="email" data-halign="center" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.email"/>
             				</th>
-            				<th data-field="department" data-halign="center" data-sortable="true">
+            				<th data-field="department" data-halign="center" data-formatter="infoFormatter" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.department"/>
             				</th>
-            				<th data-field="info" data-halign="center" data-sortable="true">
+            				<th data-field="info" data-halign="center" data-formatter="infoFormatter" data-sortable="true">
             					<spring:message code="adminPanel.users.tableHeader.info"/>
             				</th>
             			</tr>
