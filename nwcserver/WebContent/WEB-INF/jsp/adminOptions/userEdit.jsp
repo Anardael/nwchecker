@@ -18,93 +18,84 @@
                        	
            	<form:form modelAttribute="userData" class="form-horizontal" role="form" method="post">
            		<div class="form-group">
-           			<span class="col-sm-offset-4 col-sm-5 header">
-            			<spring:message code="adminPanel.userEdit.username.caption" />
-            			<span class="header-username">${userData.username}</span>
-            			<form:hidden path="username"/>
-           			</span>
-           		</div>
-				<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label marked">
-						<spring:message code="adminPanel.userEdit.password.caption" />
-					</span>
-					<div class="col-sm-3">
-						<form:input path="password" class="form-control" type="password" name="password" />
-						<form:errors path="password" Class="error"/>
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.username.caption" />
+					</label>
+					<div class="col-sm-4">
+						<label class="control-label">${userData.username}</label> 
+						<input type="hidden" name="username" value="${userData.username}" />
 					</div>
 				</div>
 				<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label">
-						<spring:message code="adminPanel.userEdit.confirmPass.caption" />
-					</span>
-					<div class="col-sm-3">
-						<form:input path="confirmPassword" class="form-control" type="password" name="confirmPassword" />
-						<form:errors path="confirmPassword" Class="error"/>
-					</div>
-				</div>
-           		<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label marked">
+					<label class="col-sm-4 control-label">
 						<spring:message code="adminPanel.userEdit.displayName.caption" />
-					</span>
-					<div class="col-sm-3">
+					</label>
+					<div class="col-sm-4">
 						<form:input path="displayName" class="form-control" name="displayName" />
-						<form:errors path="displayName" Class="error"/>
+						<form:errors path="displayName" Class="error" />
 					</div>
 				</div>
 				<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label marked">
+					<label class="col-sm-4 control-label">
 						<spring:message code="adminPanel.userEdit.email.caption" />
-					</span>
-					<div class="col-sm-3">
+					</label>
+					<div class="col-sm-4">
 						<form:input path="email" class="form-control" name="email" />
-						<form:errors path="email" Class="error"/>
+						<form:errors path="email" Class="error" />
 					</div>
 				</div>
 				<div class="form-group">
-           			<span class="col-sm-offset-4 col-sm-2 field-label marked">
-						<spring:message code="adminPanel.userEdit.roles.caption" />
-					</span>
-					<div class="col-sm-2">
-           				<input type="checkbox" name="admin" id="admin" />
-           				<label for="admin" class="field-label">
-           					<spring:message code="adminPanel.userEdit.role.admin" />
-           				</label>
-           			</div>
-           		</div>
-           		<div class="form-group">
-           			<div class="col-sm-offset-6 col-sm-2">
-           				<input type="checkbox" name="teacher" id="teacher" />
-           				<label for="teacher" class="field-label">
-           					<spring:message code="adminPanel.userEdit.role.teacher" />
-           				</label>
-           			</div>
-           		</div>
-           		<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label marked">
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.password.caption" />
+					</label>
+					<div class="col-sm-4">
+						<form:input path="password" class="form-control" name="password" />
+						<form:errors path="password" Class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.confirmPass.caption" />
+					</label>
+					<div class="col-sm-4">
+						<form:input path="confirmPassword" class="form-control" name="confirmPassword" />
+						<form:errors path="confirmPassword" Class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">
 						<spring:message code="adminPanel.userEdit.department.caption" />
-					</span>
-					<div class="col-sm-3">
+					</label>
+					<div class="col-sm-4">
 						<form:input path="department" class="form-control" name="department" />
-						<form:errors path="department" Class="error"/>
+						<form:errors path="department" Class="error" />
 					</div>
 				</div>
-           		<div class="form-group">
-					<span class="col-sm-offset-4 col-sm-2 field-label marked">
-						<spring:message code="adminPanel.userEdit.info.caption" />
-					</span>
-					<div class="col-sm-3">
-						<form:input path="info" class="form-control" name="info" />
-						<form:errors path="info" Class="error"/>
-					</div>
-				</div>  				
 				<div class="form-group">
-					<div class="col-sm-offset-5 col-sm-4" align="right">
-						<input type="submit" class="btn button-update" formaction="changeUser.do"
-							value=<spring:message code="adminPanel.userEdit.update.button" />>
-						<input type="submit" class="btn button-delete" formaction="deleteUser.do"
-							value=<spring:message code="adminPanel.userEdit.delete.button" />>
+					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.info.caption" />
+					</label>
+					<div class="col-sm-4">
+						<form:input path="info" class="form-control" name="info" />
+						<form:errors path="info" Class="error" />
 					</div>
 				</div>
+				
+           		
+				
+				
+           		
+           		
+           		 				
+				<div class="form-group">
+					<div class="col-sm-offset-4">
+						<input type="submit" class="col-sm-2 btn" formaction="changeUser.do"
+							   value=<spring:message code="adminPanel.userEdit.update.button" />>
+						<input type="submit" class="col-sm-4 btn" formaction="deleteUser.do"
+							   value=<spring:message code="adminPanel.userEdit.delete.button" />>
+					</div>
+				</div>
+
            	</form:form>
     	</div>
     	<jsp:include page="../fragments/footer.jsp" />
