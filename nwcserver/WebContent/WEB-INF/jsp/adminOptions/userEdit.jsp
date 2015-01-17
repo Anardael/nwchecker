@@ -7,7 +7,6 @@
 <html>
 <!--Including head -->
     <jsp:include page="../fragments/staticFiles.jsp" />
-    <link href="${resources}css/userEdit.css" rel="stylesheet"/>
 	<body>
 		<div class="wrapper container">
 			<!--Including bodyHead -->
@@ -16,14 +15,15 @@
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
                        	
-           	<form:form modelAttribute="userData" class="form-horizontal" role="form" method="post">
+           	<form:form modelAttribute="userData" method="post" class="form-horizontal" role="form"
+           			   onsubmit="saveRoles()">
            		<div class="form-group">
 					<label class="col-sm-4 control-label">
 						<spring:message code="adminPanel.userEdit.username.caption" />
 					</label>
 					<div class="col-sm-4">
 						<label class="control-label">${userData.username}</label> 
-						<input type="hidden" name="username" value="${userData.username}" />
+						<form:hidden path="username" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -64,6 +64,17 @@
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">
+						<spring:message code="adminPanel.userEdit.info.caption" />
+					</label>
+					<div class="col-sm-4">
+						<c:forEach items="${userData.roles}" var="role">
+							<label class="control-label">${role.role}</label>
+							<br>
+						</c:forEach>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">
 						<spring:message code="adminPanel.userEdit.department.caption" />
 					</label>
 					<div class="col-sm-4">
@@ -76,26 +87,18 @@
 						<spring:message code="adminPanel.userEdit.info.caption" />
 					</label>
 					<div class="col-sm-4">
-						<form:input path="info" class="form-control" name="info" />
+						<form:textarea path="info" class="form-control" rows="4" name="info" />
 						<form:errors path="info" Class="error" />
 					</div>
-				</div>
-				
-           		
-				
-				
-           		
-           		
-           		 				
+				</div>		
 				<div class="form-group">
-					<div class="col-sm-offset-4">
-						<input type="submit" class="col-sm-2 btn" formaction="changeUser.do"
+					<div class="col-sm-offset-4" align="right">
+						<input type="submit" class="col-sm-3 btn btn-info" formaction="changeUser.do"
 							   value=<spring:message code="adminPanel.userEdit.update.button" />>
-						<input type="submit" class="col-sm-4 btn" formaction="deleteUser.do"
+						<input type="submit" class="col-sm-3 btn btn-danger" formaction="deleteUser.do"
 							   value=<spring:message code="adminPanel.userEdit.delete.button" />>
 					</div>
 				</div>
-
            	</form:form>
     	</div>
     	<jsp:include page="../fragments/footer.jsp" />

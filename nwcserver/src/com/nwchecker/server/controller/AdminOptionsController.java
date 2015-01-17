@@ -71,32 +71,27 @@ public class AdminOptionsController {
 	}
 	
 	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
-	public String changeUser(@ModelAttribute("userData") @Validated User userData, BindingResult result, HttpServletRequest request) {
+	public String changeUser(@ModelAttribute("userData") @Validated User userData, BindingResult result) {
 		if (result.hasErrors()) {
 			return "/adminOptions/userEdit";
 		}
 		User user = userService.getUserByUsername(userData.getUsername());
-		user = changeUserPassword(user, userData.getPassword());
+		user.setPassword(getEncryptedPassword(userData.getPassword()));
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
-		//user = setUserRoles(user, request);
 		user.setDepartment(userData.getDepartment());
 		user.setInfo(userData.getInfo());
 		userService.updateUser(user);
 		return "redirect:admin.do";
 	}
 	
-	private User changeUserPassword(User user, String newPassword) {
-		if (!newPassword.isEmpty()) {
+	private String getEncryptedPassword(String password) {
+		if (!password.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			user.setPassword(encoder.encode(newPassword));
+			password = encoder.encode(password);
 		}
-		return user;
+		return password;
 	}
-	
-//	private User setUserRoles(User user, HttpServletRequest request) {
-//		
-//	}
 	
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(@RequestParam("username") String username) {
