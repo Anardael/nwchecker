@@ -4,7 +4,7 @@
 <spring:url value="/resources/" var="resources"/>
 <html>
     <!--including head -->
-    <jsp:include page="fragments/staticFiles.jsp" />
+    <head>    <jsp:include page="fragments/staticFiles.jsp" />    </head>
     <!-- include special css for registration:-->
 
     <body>

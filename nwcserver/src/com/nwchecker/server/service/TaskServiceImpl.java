@@ -26,6 +26,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Task> getTasksByContestId(int id) {
+        return taskDao.getTasksByContestId(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Task> getTasks() {
         return taskDao.getTasks();
     }
@@ -34,6 +40,18 @@ public class TaskServiceImpl implements TaskService {
     @Transactional()
     public void addTask(Task t) {
         taskDao.addTask(t);
+    }
+
+    @Override
+    @Transactional()
+    public void updateTask(Task t) {
+        taskDao.updateTask(t);
+    }
+
+    @Override
+    @Transactional()
+    public void deleteTaskById(int id) {
+        taskDao.deleteTaskById(id);
     }
 
 }

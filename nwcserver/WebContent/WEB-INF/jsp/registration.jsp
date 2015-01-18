@@ -6,7 +6,7 @@
 <spring:url value="/resources/" var="resources"/>
 <html>
     <!--including head -->
-    <jsp:include page="fragments/staticFiles.jsp" />
+    <head>    <jsp:include page="fragments/staticFiles.jsp" />    </head>
     <!-- include special css for registration:-->
     <body>
         <div class="wrapper container">
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                    <input type="submit" value="<spring:message code="reg.button.caption" />" class="btn btn-info btn-block">
+                                        <input type="submit" value="<spring:message code="reg.button.caption" />" class="btn btn-info btn-block">
                                     </div>
                                 </form:form>
                             </div>

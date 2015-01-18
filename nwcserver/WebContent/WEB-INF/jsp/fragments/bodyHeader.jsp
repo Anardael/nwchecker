@@ -7,8 +7,14 @@
     <a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a>
     <!-- choose language -->
     <div class="languageChoose">
-        <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=ua"><img src= "${resources}images/ukraineFlag.png" width="36" height="36"  alt="ua"></a>
-        <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"  alt="en"></a>
+        <c:if test="${not empty param['id']}">
+            <a href="?id=${param['id']}&locale=ua"><img src= "${resources}images/ukraineFlag.png" width="36" height="36"  alt="ua"></a>
+            <a href="?id=${param['id']}&locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"  alt="en"></a>
+            </c:if>
+            <c:if test="${empty param['id']}">
+            <a href="?locale=ua"><img src= "${resources}images/ukraineFlag.png" width="36" height="36"  alt="ua"></a>
+            <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"  alt="en"></a>
+            </c:if>
     </div>
     <!-- navigating toolbar -->
     <nav class="navbar navbar-default">
@@ -31,24 +37,6 @@
                     <li><a href="/" ><spring:message code="news.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
-            <!-- rating -->
-            <c:choose>
-                <c:when test="${param.pageName=='rating'}">
-                    <li class="active"><a href="/"><spring:message code="rating.caption" /></a></li>
-                    </c:when>
-                    <c:otherwise>
-                    <li><a href="/" ><spring:message code="rating.caption" /></a></li>
-                    </c:otherwise>
-                </c:choose>
-            <!-- tasks -->
-            <c:choose>
-                <c:when test="${param.pageName=='task'}">
-                    <li class="active"><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
-                    </c:when>
-                    <c:otherwise>
-                    <li><a href="getTasks.do"><spring:message code="task.caption" /></a></li>
-                    </c:otherwise>
-                </c:choose>
             <!-- olympiad -->
             <c:choose>
                 <c:when test="${param.pageName=='contest'}">
@@ -56,6 +44,15 @@
                     </c:when>
                     <c:otherwise>
                     <li><a href="getContests.do"><spring:message code="contest.caption" /></a></li>
+                    </c:otherwise>
+                </c:choose>
+            <!-- rating -->
+            <c:choose>
+                <c:when test="${param.pageName=='rating'}">
+                    <li class="active"><a href="/"><spring:message code="rating.caption" /></a></li>
+                    </c:when>
+                    <c:otherwise>
+                    <li><a href="/" ><spring:message code="rating.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- login -->

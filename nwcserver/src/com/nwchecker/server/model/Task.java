@@ -33,7 +33,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
+    @JoinColumn(name = "contest_id")
     private Contest contest;
 
     @Column(name = "title")
@@ -98,6 +99,14 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
     }
 
     public String getTitle() {

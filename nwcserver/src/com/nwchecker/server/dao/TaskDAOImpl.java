@@ -22,8 +22,14 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 
     @Override
     public Task getTaskById(int id) {
-        List<Task> t = (List<Task>) getHibernateTemplate().find("From Task where id=?", id);
-        return t.get(0);
+        Task t = (Task) getHibernateTemplate().get(Task.class, id);
+        return t;
+    }
+
+    @Override
+    public List<Task> getTasksByContestId(int id) {
+        List<Task> t = (List<Task>) getHibernateTemplate().find("From Task where contest_id=?", id);
+        return t;
     }
 
     @Override
@@ -34,7 +40,17 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 
     @Override
     public void addTask(Task t) {
-        getHibernateTemplate().save(t);
+        getHibernateTemplate().saveOrUpdate(t);
+    }
+
+    @Override
+    public void updateTask(Task t) {
+        getHibernateTemplate().update(t);
+    }
+
+    @Override
+    public void deleteTaskById(int id) {
+        getHibernateTemplate().delete(getHibernateTemplate().get(Task.class, id));
     }
 
 }

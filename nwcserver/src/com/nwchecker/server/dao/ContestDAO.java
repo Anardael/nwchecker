@@ -21,4 +21,5 @@ public interface ContestDAO {
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);
+    
 }

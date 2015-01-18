@@ -13,6 +13,8 @@ public interface UserDAO {
 	public void deleteUser(User user);
 
 	public User getUserById(int id);
+        
+        public List<User> getTeachersByContestId(int id);
 
 	public User getUserByUsername(String username);
 

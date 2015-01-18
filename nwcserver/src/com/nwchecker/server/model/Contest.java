@@ -15,9 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -43,17 +44,28 @@ public class Contest {
     @Size(max = 1000)
     private String description;
 
-    @DateTimeFormat(pattern = "dd/mm/yyyy hh:mm")
     @Column(name = "starts")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date starts;
 
-    @Min(0)
     @Column(name = "duration")
-    private int duration;
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date duration;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_contest")
+    @OneToMany(mappedBy = "contest", orphanRemoval = true,
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Task> tasks;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "contest_users",
+            joinColumns = {
+                @JoinColumn(name = "contest_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id")})
+    private List<User> users;
+
+    @Column(name = "expired")
+    private boolean expired;
 
     public List<Task> getTasks() {
         return tasks;
@@ -95,12 +107,33 @@ public class Contest {
         this.starts = starts;
     }
 
-    public int getDuration() {
+    public Date getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Date duration) {
         this.duration = duration;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    @Override
+    public boolean equals(Object c) {
+        return (c != null && c instanceof Contest && ((Contest) c).getId() == this.id);
     }
 
 }

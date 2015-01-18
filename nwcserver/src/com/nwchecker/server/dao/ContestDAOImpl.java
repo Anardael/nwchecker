@@ -18,32 +18,32 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("ContestDAO")
 public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
-    
+
     @Autowired
     public void init(SessionFactory sessionFactory) {
         setSessionFactory(sessionFactory);
     }
-    
+
     @Override
     public void addContest(Contest c) {
         getHibernateTemplate().save(c);
     }
-    
+
     @Override
     public void updateContest(Contest c) {
-        getHibernateTemplate().update(c);
+        getHibernateTemplate().saveOrUpdate(c);
     }
-    
+
     @Override
     public List<Contest> getContests() {
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest");
         return result;
     }
-    
+
     @Override
     public Contest getContestByID(int id) {
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where id=?", id);
         return result.get(0);
     }
-    
+
 }

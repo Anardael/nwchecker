@@ -40,16 +40,24 @@ public class ContestValidator implements Validator {
         if (c.getDescription().length() == 0) {
             errors.rejectValue("description", "NotEmpty.description");
         }
-        //if Tasks consist: validate each Task using it own Validator:
-        if (c.getTasks() != null) {
-            if (c.getTasks().size() > 0) {
-                //Tasks validation:
-                for (int i = 0; i < c.getTasks().size(); i++) {
-                    //validate each Task:
-                    ValidationUtils.invokeValidator(new TaskValidator(i), c.getTasks().get(i), errors);
-                }
-            }
+        //starts validation:
+        if (errors.hasFieldErrors("starts")) {
+            errors.rejectValue("starts", "Pattern.starts");
         }
+        if (errors.hasFieldErrors("duration")) {
+            errors.rejectValue("duration", "Pattern.duration");
+        }
+
+        //if Tasks consist: validate each Task using it own Validator:
+        /*if (c.getTasks() != null) {
+         if (c.getTasks().size() > 0) {
+         //Tasks validation:
+         for (int i = 0; i < c.getTasks().size(); i++) {
+         //validate each Task:
+         ValidationUtils.invokeValidator(new TaskValidator(), c.getTasks().get(i), errors);
+         }
+         }
+         }*/
     }
 
 }

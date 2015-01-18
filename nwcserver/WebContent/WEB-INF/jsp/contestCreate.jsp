@@ -3,60 +3,83 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ckeditor" uri="http://ckeditor.com"%>
+<%@ taglib prefix="contest" uri="/tlds/ContestTags" %> 
 <!-- set path to resources folder -->
-                    <spring:url value="/resources/" var="resources"/> <html>
-    <style>
-        /*make red style in error forms*/
-        .error{
-            color: #ff0000;
-        }
-    </style>
-            <!--including head -->
-            <jsp:include page="fragments/staticFiles.jsp" />
-    <body>
-            <script type="text/javascript">
-                    var TaskListSize = ${fn:length(contestAddForm.tasks)}; function showModal(index) {                         $('#taskModal_' + index).modal('toggle'); }
-                    function addNewTask() {
-            //get Modal pattern example:
-                    var patternModal = $("#patternMod"); ////crete new Modal clone:
-                    var newCloneModal = patternModal.clone();
-                    //set unique id for Modal:
-                    newCloneModal.attr("id", "taskModal_" + TaskListSize);
-                    //paste new Modal clone to document:
-                    $('.taskList').append(newCloneModal);
-                    ////set disable=false for input & set name accordingly to Id:                         
-                    $('#taskModal_' + TaskListSize).find('input').each(function() {
-            this.name = "tasks[" + TaskListSize + this.name.substring(7);
-                    this.disabled = false;
-            });
-                    //for all textareas set disabled=false:
-                    $('#taskModal_' + TaskListSize).find('textarea').each(function() {
-            this.name = "tasks[" + TaskListSize + this.name.substring(7);
-                    this.disabled = false;
-            });
-                    //add taskModalButton:
-                    var taskModalButton = document.createElement('div');
-                    taskModalButton.id = 'taskModalButton_' + TaskListSize;
-                    taskModalButton.className = 'col-sm-6 taskModalButton form-group';
-                    taskModalButton.innerHTML =
-                    '<!-- view title-->\n\
-                        <a href="#" onclick="showModal(' + TaskListSize + ');">Edit</a>\n\
-                            ' + TaskListSize + '. New Task';
-                $('.taskModalButtons').append(taskModalButton);
+<spring:url value="/resources/" var="resources"/> 
+<!-- initializing CKEditor: -->
 
-                //increment TaskListSize:
-                TaskListSize++;
-            }
-            function deleteModal(index){
-                $('#taskModal_' + index).find('input').each(function() {
-                    this.disabled = true;
+<%--<ckeditor:replace replace="description" basePath='${resources}/js/ckeditor'/> --%>
+<html>
+    <!--including head -->
+    <head>    
+        <jsp:include page="fragments/staticFiles.jsp" />  
+        <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
+        <link href="${resources}css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+        <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
+        <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+
+        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="${resources}js/maskInput.js"></script>
+        <script type="text/javascript" src="${resources}js/moment.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrap-datetimepicker.min.js"></script>
+
+
+        <script type="text/javascript" src="${resources}js/taskCreateAddLink.js"></script>
+        <script type="text/javascript" src="${resources}js/taskEditing.js"></script>
+        <script type="text/javascript" src="${resources}js/taskAjax.js"></script>
+        <script type="text/javascript" src="${resources}js/contestAjax.js"></script>
+        <script type="text/javascript" src="${resources}js/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="${resources}js/ckeditor/adapters/jquery.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="${resources}js/contestInit.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            //length of recieved contest.tasks List:
+            var TaskListSize = ${fn:length(contestModelForm.tasks)};
+            //bind sendTaskJsonButton in modal:
+            $('body').on("click", ".sendTaskJsonButton", function() {
+                //get id of Modal
+                var id = $(this).attr("data-modalId");
+                var idInt = parseInt(id);
+                //call doPostJson method from taskEditing.js:
+                doPostJson(idInt);
+            });
+
+            //bind deleteButtonEvent:
+            $('body').on("click", ".buttonDeleteTask", function() {
+                //get index of Deleting task:
+                var taskId = $(this).attr("data-taskId");
+                var idInt = parseInt(taskId);
+                //call deleteTask method from taskEditing.js:
+                prepareDeleteTask(idInt);
+            });
+
+            //add New Task:
+            $('body').on("click", "#addnewTaskButton", function() {
+                console.log(TaskListSize);
+                tryToAddTask();
+                console.log(TaskListSize);
+            });
+            $('body').on('click', "#submitContest", function() {
+                submitContest();
+            });
+            jQuery(function($) {
+                $('.ckEdit').each(function() {
+                    CKEDITOR.replace($(this).attr('id'));
                 });
-                $('#taskModal_' + index).find('textarea').each(function() {
-                    this.disabled = true;
-                });
-                //delete buttons view for modal:
-                $('#taskModalButton_'+index).remove();
-            }
+            });
+            $('body').on("click", "#showUserList", function() {
+                $('#userListModal').modal();
+            });
+
+            $('body').on("click", "#submitUserListButton", function() {
+                sendContestUsers();
+            });
+            $(function() {
+                setMask();
+            });
         </script>
 
         <div class="wrapper container">
@@ -66,159 +89,110 @@
                 <jsp:param name="pageName" value="contest"/>
             </jsp:include>
             <section>
-                <form:form modelAttribute="contestAddForm" class="form-horizontal" 
-                           action="addContest.do" method="post" role="form">
+                <!-- add usersList Modal -->
+                <contest:usersList/>
+                <form:form id ="contestForm" modelAttribute="contestModelForm" class="form-horizontal" 
+                           action="addContest.do" method="post">
                     <form:hidden  path="id" />
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"><spring:message code="contestCreate.title" />: *</label>
-                        <div class="col-sm-10">
-                            <form:input path="title" class="form-control"/>
-                            <form:errors path="title" Class="error"/>
-                        </div>
+                        <spring:message code="contestCreate.title" var="contestTitle" />
+                        <contest:taskModalFormInput element="title" inputDivClass="col-sm-10" label="${contestTitle}: *"/>
                     </div>
-                    <div class="form-group">
+                    <div class="field description form-group">
                         <label class="col-sm-2 control-label"><spring:message code="contestCreate.description" />: *</label>
                         <div class="col-sm-10">
-                            <form:textarea style="resize:none" path="description" class="form-control" rows="7"></form:textarea>
-                            <form:errors path="description" Class="error"/>
+                            <form:textarea style="resize:none" path="description" class="form-control ckEdit" rows="7"></form:textarea>
+                            <form:errors path="description" cssClass="error"/>
+                            <span class="help-inline control-label"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"><spring:message code="contestCreate.starts" />:</label>
-                        <div class="col-sm-2">
-                            <form:input path="starts" class="form-control" name="starts"/>
-                            <form:errors path="starts" Class="error"/>
-                        </div>
-                        <label class="col-sm-2 control-label"><spring:message code="contestCreate.duration" />:</label>
-                        <div class="col-sm-2">
-                            <form:input path="duration" class="form-control"/>
-                            <form:errors path="duration" Class="error"/>
-                        </div>
-                    </div>
-                    <div class="taskList" >
-                        <!-- patternMod using for creating new Tasks-->
-                        <div id="patternMod" class="taskModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" style="width: 80%">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Task editing</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.title" />:*</label>
-                                            <div class="col-sm-10">
-                                                <input name="tasks[0].title" class="roman form-control" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.memoryLimit" />:</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].memoryLimit" class="roman form-control" value="0" disabled/>
-                                            </div>
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.rate" />:*</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].rate" class="form-control" value="0" disabled/>
-                                            </div>
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputFileName" />:*</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].inputFileName" class="form-control" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.timeLimit" />:</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].timeLimit" class="form-control" value="0" disabled/>
-                                            </div>
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.complexity" />:</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].complexity" class="form-control" value="0" disabled/>
-                                            </div>
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.outputFileName" />:*</label>
-                                            <div class="col-sm-2">
-                                                <input name="tasks[0].outputFileName" class="form-control" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.description" />:*</label>
-                                            <div class="col-sm-10">
-                                                <textarea style="resize:none" name="tasks[0].description" class="form-control" rows="7" disabled></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.verificationScript" />:</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="tasks[0].scriptForVerification" style="resize:none" class="form-control" rows="7" disabled></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputData" />:</label>
-                                            <div class="col-sm-2">
-                                                <input type="file" name="inputFile" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.outputData" />:</label>
-                                            <div class="col-sm-2">
-                                                <input type="file" name="outputFile" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.forumLink" />:</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control" name="forumLink" disabled/>
-                                            </div>
-                                        </div>
-                                        <div class="theoryAdd">
-                                            <!-- Task have theory links already??? -->
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteModal(1);">Remove</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                        <div class="field starts">
+                            <spring:message code="contestCreate.starts" var="contestStarts" />
+                            <label class="col-sm-2 control-label">${contestStarts}:</label>
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <div class='input-group date' id='datetimepicker1'><%-- --%>
+                                        <form:input path="starts" type='text' class="form-control" data-date-format="YYYY-MM-DD HH:mm"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                     </div>
                                 </div>
+                                <span class="help-inline control-label"></span>
                             </div>
                         </div>
-                        <!-- go throw all avaible tasks in contest:-->
-                        <!-- include taskModal; send argument with ID-->
-                        <c:forEach items="${contestAddForm.tasks}" var="task"
-                                   varStatus="gridRow">
-                            <jsp:include page="fragments/contestAddTaskModal.jsp">
-                                <jsp:param name="index" value="${gridRow.index}"/>
-                            </jsp:include>
-                        </c:forEach>
-                    </div>
-
-                    <div class="form-group" >
-                        <label class="col-sm-2 control-label"><spring:message code="contestCreate.tasks.caption" />:</label>
-                        <!-- go throw all avaible tasks in contest:-->
-                        <div class="taskModalButtons col-sm-10">
-                            <c:forEach items="${contestAddForm.tasks}" var="task"
-                                       varStatus="gridRow">
-                                <div id="taskModalButton_${gridRow.index}" class="col-sm-6 taskModalButton form-group">
-                                    <a href="#" onclick="showModal(${gridRow.index});">Edit</a>
-                                    ${gridRow.index}. ${task.title} 
-                                    <form:errors path="tasks[${gridRow.index}]" Class="error"/>
+                        <div class="field duration">
+                            <spring:message code="contestCreate.duration" var="contestDuration" />
+                            <label class="col-sm-2 control-label">${contestDuration}:</label>
+                            <div class='col-sm-3'>
+                                <div class='input-group date' id='datetimepicker4'>
+                                    <form:input path="duration" type='text' class="form-control" />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                    </span>
                                 </div>
-                            </c:forEach>
-                        </div>
-                        <div>
-                            <label class="col-sm-2 control-label"></label>
-                            <div class="col-sm-10">
-                                <!-- add task script -->
-                                <a href="#" onclick="addNewTask();"><spring:message code="contestCreate.addNewTask" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2">
-                            <div class="col-sm-2">
-                                <button type="submit" class="btn btn-default" value="Submit"><spring:message code="contestCreate.submitButton.caption" /></button>
+                                <span class="help-inline control-label"></span>
                             </div>
                         </div>
                     </div>
                 </form:form>
+                <div class="taskList">
+                    <c:forEach items="${contestModelForm.tasks}" var="task"
+                               varStatus="gridRow">
+                        <contest:taskModalForm taskModelName="contestModelForm.tasks[${gridRow.index}]" taskId="${gridRow.index}" formUrl="/NWCServer/newTaskJson.do"/>
+                    </c:forEach>
+                </div>
+                <div id="liTaskViewPattern" hidden="true">
+                    <a class="list-group-item">
+                        <span class="viewTitle">
+                        </span>
+                        <span class="pull-right">
+                            <button class="btnEdit btn btn-xs btn-info" data-toggle="modal" 
+                                    data-target="#taskModal_0">Edit</button>
+                            <button class="buttonDeleteTask btn btn-xs btn-warning" 
+                                    data-taskId="0">Delete</button>
+                        </span>
+                    </a>
+                </div>
+                <div class="tasksControls form-horizontal">
+                    <div class="form-group">
+                        <ul class="col-sm-offset-4 col-sm-6">
+                            <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center"><spring:message code="contestCreate.tasks.caption" /></li>
+                            <!-- go throw all avaible tasks in contest:-->
+                            <c:forEach items="${contestModelForm.tasks}" var="task" varStatus="gridRow">
+                                <a class="list-group-item" id="taskView_${gridRow.index}">
+                                    <span class="viewTitle">
+                                        ${task.title}
+                                    </span>
+                                    <span class="pull-right">
+                                        <button class="btnEdit btn btn-xs btn-info" data-toggle="modal" 
+                                                data-target="#taskModal_${gridRow.index}">Edit</button>
+                                        <button class="buttonDeleteTask btn btn-xs btn-warning" 
+                                                data-taskId="${gridRow.index}">Delete</button>
+                                    </span>
+                                </a>
+                            </c:forEach>
+                        </ul>
+                        <button id="addnewTaskButton" class="col-sm-offset-6 col-sm-2 
+                                btn btn-primary btn-sm"><spring:message code="contestCreate.addNewTask" />
+                        </button>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2">
+                            <div class="col-sm-2">
+                                <button id="submitContest" type="submit" class="btn btn-primary btn-sm" value="Submit">Save</button>
+                            </div>
+                        </div>
+                        <div class="accessList">
+                            <div class="col-sm-1">
+                                <div class="pull-right">
+                                    <button id="showUserList" class="btn btn-primary btn-sm" type="button">User access list</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
         <jsp:include page="fragments/footer.jsp"/>
