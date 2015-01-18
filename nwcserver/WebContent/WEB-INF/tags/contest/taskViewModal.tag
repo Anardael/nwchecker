@@ -75,7 +75,7 @@
                 </div>
                 <div class="modal-footer ">
                     <div class="buttons col-sm-12 ">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
             <section>
                 <div id="accordion" class="form-group col-sm-12" style="margin:auto">
                     <ul class="col-sm-offset-2 col-sm-8 ">
-                        <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center">Contests</li>
+                        <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center"><spring:message code="contest.caption" /></li>
                             <c:forEach items="${contests}" var="contest" varStatus="row">
                             <a class="list-group-item " data-toggle="collapse" data-parent="#accordion" href="#collapse${row.index}">
                                 <span>${contest.title}</span>
@@ -31,7 +31,7 @@
                                         <div class="edit col-sm-12">
                                             <span class="pull-right">
                                                 <button class="btnEditContest btn btn-sm btn-info form-group" 
-                                                        onclick="location.href = 'editContest.do?id=${contest.id}';">Edit</button>
+                                                        onclick="location.href = 'editContest.do?id=${contest.id}';"><spring:message code="btn.edit" /></button>
                                             </span>
                                         </div>
                                         <div class="description col-sm-12">
@@ -51,7 +51,7 @@
                                             </span>
                                         </div>
                                         <div class="tasks form-group">
-                                            <label class="col-sm-2 control-label">Task list:</label>
+                                            <label class="col-sm-2 control-label"><spring:message code="contest.taskList" />:</label>
                                             <ul class="col-sm-8 ">
                                                 <c:forEach items="${contest.tasks}" var="task" varStatus="taskRow">
                                                     <contest:taskView taskId="${taskRow.index}" 

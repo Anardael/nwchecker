@@ -58,9 +58,7 @@
 
             //add New Task:
             $('body').on("click", "#addnewTaskButton", function() {
-                console.log(TaskListSize);
                 tryToAddTask();
-                console.log(TaskListSize);
             });
             $('body').on('click', "#submitContest", function() {
                 submitContest();
@@ -147,9 +145,9 @@
                         </span>
                         <span class="pull-right">
                             <button class="btnEdit btn btn-xs btn-info" data-toggle="modal" 
-                                    data-target="#taskModal_0">Edit</button>
+                                    data-target="#taskModal_0"><spring:message code="btn.edit"/></button>
                             <button class="buttonDeleteTask btn btn-xs btn-warning" 
-                                    data-taskId="0">Delete</button>
+                                    data-taskId="0"><spring:message code="btn.delete"/></button>
                         </span>
                     </a>
                 </div>
@@ -165,9 +163,9 @@
                                     </span>
                                     <span class="pull-right">
                                         <button class="btnEdit btn btn-xs btn-info" data-toggle="modal" 
-                                                data-target="#taskModal_${gridRow.index}">Edit</button>
+                                                data-target="#taskModal_${gridRow.index}"><spring:message code="btn.edit"/></button>
                                         <button class="buttonDeleteTask btn btn-xs btn-warning" 
-                                                data-taskId="${gridRow.index}">Delete</button>
+                                                data-taskId="${gridRow.index}"><spring:message code="btn.delete"/></button>
                                     </span>
                                 </a>
                             </c:forEach>
@@ -181,14 +179,10 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2">
                             <div class="col-sm-2">
-                                <button id="submitContest" type="submit" class="btn btn-primary btn-sm" value="Submit">Save</button>
+                                <button id="submitContest" type="submit" class="btn btn-primary btn-sm" value="Submit"><spring:message code="btn.save"/></button>
                             </div>
-                        </div>
-                        <div class="accessList">
-                            <div class="col-sm-1">
-                                <div class="pull-right">
-                                    <button id="showUserList" class="btn btn-primary btn-sm" type="button">User access list</button>
-                                </div>
+                            <div class="accessList">
+                                <button id="showUserList" class="btn btn-primary btn-sm" type="button"><spring:message code="btn.userAccessList"/></button>
                             </div>
                         </div>
                     </div>

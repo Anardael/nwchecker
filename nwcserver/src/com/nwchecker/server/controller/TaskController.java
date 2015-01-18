@@ -5,7 +5,6 @@
  */
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.exceptions.TaskException;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.ContestService;
@@ -14,10 +13,7 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.validators.TaskValidator;
 import com.nwchecker.server.json.ValidationResponse;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

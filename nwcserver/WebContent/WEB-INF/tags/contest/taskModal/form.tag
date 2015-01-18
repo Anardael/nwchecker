@@ -18,7 +18,7 @@
             <div class="modal-content ">
                 <div class="modal-header modal-header-info">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Task editing</h4>
+                    <h4 class="modal-title" id="myModalLabel"><spring:message code="taskCreate.header"/></h4>
                 </div>
                 <div  class="modal-body">
                     <fieldset>
@@ -73,7 +73,7 @@
                                 <span class="help-inline control-label"></span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <%--<div class="form-group">
                             <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputData" />:</label>
                             <div class="col-sm-2">
                                 <span class="btn btn-default btn-file">
@@ -88,14 +88,12 @@
                                     Browse <input type="file" name="outputFile">
                                 </span>
                             </div>
-                        </div>
+                        </div>--%>
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-default">submit</button>
-                    <button type="button" class="btn btn-default" id="atata">asd</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button  type="button" class="btn btn-primary sendTaskJsonButton" data-modalId="${taskId}">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
+                    <button  type="button" class="btn btn-primary sendTaskJsonButton" data-modalId="${taskId}"><spring:message code="btn.save" /></button>
                 </div>
             </div>
         </div>
