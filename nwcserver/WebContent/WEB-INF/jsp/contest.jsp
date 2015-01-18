@@ -68,10 +68,8 @@
                             </div>
                         </c:forEach>
                     </ul>
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <form action="addContest.do" style="text-align: center; margin-top: 20px">
-                            <button type="submit" class="btn btn-primary btn-sm" value="Submit"><spring:message code="contest.createButton.caption" /></button>
-                        </form>
+                    <div class="col-sm-6 col-sm-offset-3"  style="text-align: center; margin-top: 20px">
+                        <button class="btn btn-primary btn-sm" onclick="window.location.href='addContest.do'"><spring:message code="contest.createButton.caption" /></button>
                     </div>
                 </div>
             </section>

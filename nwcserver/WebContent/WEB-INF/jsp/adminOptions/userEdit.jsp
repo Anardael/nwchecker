@@ -8,6 +8,8 @@
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
+        <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="${resources}js/bootstrap-table.min.js"></script>
     <head>
     <body>
         <div class="wrapper container">
