@@ -5,99 +5,84 @@
  */
 package com.nwchecker.server.validators;
 
-import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskTheoryLink;
-import java.util.LinkedList;
+import com.nwchecker.server.model.Task;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-/**
- *
- * @author –ÓÏ‡Ì
- */
-public class TaskValidator {
+public class TaskValidator implements Validator {
 
-    public static LinkedList<Exception> validateTask(String title, String description,
-            String timeLimit, String memoryLimit, String rate,
-            String complexity, String inputFileName, String outputFileName,
-            String verificationScript, String forumLink) {
-        LinkedList<Exception> result = new LinkedList<Exception>();
-        //title:
-        if (!title.matches("[0-9a-zA-Z‡-ˇ≥ø∫¿-ﬂ≤Ø™ ]{1,}") || title.length() > 100) {
-            result.add(new Exception("Wrong title name"));
-        }
-        if (description.length() > 5000) {
-            result.add(new Exception("wrong description length"));
-        }
-        if (timeLimit != null) {
-            if (!timeLimit.matches("[0-9]{1,4}")) {
-                result.add(new Exception("wrong time limit value"));
-            }
-        }
-        if (memoryLimit != null) {
-            if (!memoryLimit.matches("[0-9]{1,4}")) {
-                result.add(new Exception("wrong memory limit value"));
-            }
-        }
-        if (rate != null) {
-            if (!rate.matches("[0-9]{1,3}")) {
-                result.add(new Exception("wrong rate value"));
-            }
-        }
-        if (complexity != null) {
-            if (!complexity.matches("[0-9]{1,3}")) {
-                result.add(new Exception("wrong complexity value"));
-            } else {
-                if (Integer.parseInt(complexity) > 100) {
-                    result.add(new Exception("wrong complexity value (max value=100)"));
-                }
-            }
-        }
-        if (!inputFileName.matches("[0-9a-zA-Z‡-ˇ≥ø∫¿-ﬂ≤Ø™ ]{1,}")) {
-            result.add(new Exception("wrong input file name"));
-        }
-        if (inputFileName.length() > 60) {
-            result.add(new Exception("wrong input file name length (max value=60)"));
-        }
-        if (!outputFileName.matches("[0-9a-zA-Z‡-ˇ≥ø∫¿-ﬂ≤Ø™ ]{1,}")) {
-            result.add(new Exception("wrong output file name"));
-        }
-        if (outputFileName.length() > 60) {
-            result.add(new Exception("wrong output file name length (max value=60)"));
-        }
-        if (verificationScript.length() > 1000) {
-            result.add(new Exception("wrong verification script length (max value=1000)"));
-        }
-        if (forumLink.length() > 500) {
-            result.add(new Exception("wrong forum Link (max length=500)"));
-        }
-        if (!forumLink.startsWith("http")) {
-            result.add(new Exception("forum link may should starts with \"http\""));
-        }
-        return result;
+    private String titleRegex = "[0-9a-zA-Z–∞-—è—ñ—ó—î–ê-–Ø–Ü–á–Ñ ]{0,}";
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Task.class.equals(clazz);
     }
 
-    public static LinkedList<Exception> validateTaskData(LinkedList<TaskData> taskData) {
-        LinkedList<Exception> result = new LinkedList<Exception>();
-        int index = 0;
-        for (TaskData tData : taskData) {
-            if (tData.getInputData().length() > 100 || tData.getOutputData().length() > 100) {
-                result.add(new Exception("wrong in/out data length (max value=100) tData index=Row" + index));
-            }
-            if (!tData.getInputData().matches("[0-9a-zA-Z‡-ˇ≥∫ø¿-ﬂ≤™Ø ]{1,}")) {
-                result.add(new Exception("Wrong input data format "
-                        + "(can be used only [0-9a-zA-Z‡-ˇ≥∫ø¿-ﬂ≤™Ø ] characters) index=Row" + index));
-            }
-            if (!tData.getOutputData().matches("[0-9a-zA-Z‡-ˇ≥∫ø¿-ﬂ≤™Ø ]{1,}")) {
-                result.add(new Exception("Wrong output data format "
-                        + "(can be used only [0-9a-zA-Z‡-ˇ≥∫ø¿-ﬂ≤™Ø ] characters) index=Row" + index));
-            }
-            index++;
+    @Override
+    public void validate(Object target, Errors errors) {
+        Task task = (Task) target;
+        if (task.getTitle().length() == 0) {
+
+            errors.rejectValue("title", "NotEmpty.title");
         }
-        return result;
+        if (!task.getTitle().matches(titleRegex)) {
+
+            errors.rejectValue("title", "Pattern.title");
+        }
+        if (task.getTitle().length() > 100) {
+
+            errors.rejectValue("title", "Size.title");
+        }
+        if (task.getDescription().length() == 0) {
+
+            errors.rejectValue("description", "NotEmpty.description");
+        }
+        if (task.getComplexity() > 100) {
+
+            errors.rejectValue("complexity", "Max.complexity");
+        }
+        if (task.getComplexity() < 0) {
+
+            errors.rejectValue("complexity", "Min.complexity");
+        }
+        if (task.getRate() > 100) {
+
+            errors.rejectValue("rate", "Max.rate");
+        }
+        if (task.getRate() < 0) {
+
+            errors.rejectValue("rate", "Min.rate");
+        }
+        if (task.getInputFileName().length() == 0) {
+
+            errors.rejectValue("inputFileName", "NotEmpty.inputFileName");
+        }
+        if (task.getInputFileName().length() > 60) {
+
+            errors.rejectValue("inputFileName", "Size.inputFileName");
+        }
+        if (task.getOutputFileName().length() == 0) {
+
+            errors.rejectValue("outputFileName", "NotEmpty.outputFileName");
+        }
+        if (task.getOutputFileName().length() > 60) {
+
+            errors.rejectValue("outputFileName", "Size.outputFileName");
+        }
+        if (task.getMemoryLimit() < 0) {
+
+            errors.rejectValue("memoryLimit", "Min.memoryLimit");
+        }
+        if (task.getTimeLimit() < 0) {
+
+            errors.rejectValue("timeLimit", "Min.timeLimit");
+        }
+        if (task.getForumLink() != null) {
+            if (task.getForumLink().length() > 500) {
+
+                errors.rejectValue("forumLink", "Size.forumLink");
+            }
+        }
     }
 
-    public static LinkedList<Exception> validateTheoryLinks(LinkedList<TaskTheoryLink> theoryLinks) {
-        LinkedList<Exception> result = new LinkedList<Exception>();
-
-        return result;
-    }
 }

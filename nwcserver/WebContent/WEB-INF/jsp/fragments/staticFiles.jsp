@@ -1,21 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:url value="/resources/" var="resources"/>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title><spring:message code="application.title" /></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title><spring:message code="application.title" /></title>
 
-    <spring:url value="/resources/" var="resources"/>
-    <link href="${resources}css/bootstrap.css" rel="stylesheet"/>
-    <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="${resources}css/styles.css" rel="stylesheet"/>
-    <link href="${resources}css/task.css" rel="stylesheet"/>
-    <link href="${resources}css/taskCreate.css" rel="stylesheet"/>
-    <script type="text/javascript" src="${resources}js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="${resources}js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${resources}js/dropdown.js"></script>
-    <script type="text/javascript" src="${resources}js/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="${resources}js/taskCreateAddLink.js"></script>
-    <script type="text/javascript" src="${resources}js/bootstrap.file-input.js"></script>
-</head>
+
+<link href="${resources}css/bootstrap.css" rel="stylesheet"/>
+<link href="${resources}css/styles.css" rel="stylesheet"/>
+
+
+<script type="text/javascript" src="${resources}js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="${resources}js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${resources}js/dropdown.js"></script>
+
+
+
+

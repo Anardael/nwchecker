@@ -290,6 +290,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<properties>
-		<project.build.sourceEncoding>windows-1251</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 </project>

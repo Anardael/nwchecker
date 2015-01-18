@@ -9,16 +9,20 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Table;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Task")
@@ -26,36 +30,50 @@ public class Task {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne()
+    @JoinColumn(name = "contest_id")
+    private Contest contest;
+
     @Column(name = "title")
+    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}")
+    @NotEmpty
+    @Size(max = 100)
     private String title;
 
-    @Column(name = "difficulty")
-    private int difficulty;
+    @Column(name = "complexity")
+    @Max(100)
+    @Min(0)
+    private int complexity;
 
-    @Column(name = "maxMark")
-    private int maxMark;
+    @Column(name = "rate")
+    @NotNull
+    @Max(100)
+    @Min(0)
+    private int rate;
 
     @Column(name = "description")
+    @NotEmpty
+    @Size(max = 5000)
     private String description;
-    
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name = "TaskImages", joinColumns = {
-    	@JoinColumn(name = "id_task")}, inverseJoinColumns = {
-    	@JoinColumn(name = "id")})
-    private List<TaskImage> images;
 
     @Column(name = "inputFileName")
+    @NotEmpty
+    @Size(max = 60)
     private String inputFileName;
 
     @Column(name = "outputFileName")
+    @NotEmpty
+    @Size(max = 60)
     private String outputFileName;
 
+    @Min(0)
     @Column(name = "memoryLimit")
     private int memoryLimit;
 
+    @Min(0)
     @Column(name = "timeLimit")
     private int timeLimit;
 
@@ -63,20 +81,16 @@ public class Task {
     private String scriptForVerification;
 
     @Column(name = "forumLink")
+    //@Pattern(regexp="https?://.*")
+    @Size(max = 500)
     private String forumLink;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(name = "TaskData", joinColumns = {
-        @JoinColumn(name = "id_task")}, inverseJoinColumns = {
-        @JoinColumn(name = "id")})
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_id")
     private List<TaskData> inOutData;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(name = "TaskTheoryLink", joinColumns = {
-        @JoinColumn(name = "id_task")}, inverseJoinColumns = {
-        @JoinColumn(name = "id")})
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
 
     public int getId() {
@@ -87,6 +101,14 @@ public class Task {
         this.id = id;
     }
 
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -95,20 +117,20 @@ public class Task {
         this.title = title;
     }
 
-    public int getDifficulty() {
-        return difficulty;
+    public int getComplexity() {
+        return complexity;
     }
 
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
+    public void setComplexity(int difficulty) {
+        this.complexity = difficulty;
     }
 
-    public int getMaxMark() {
-        return maxMark;
+    public int getRate() {
+        return rate;
     }
 
-    public void setMaxMark(int maxMar) {
-        this.maxMark = maxMar;
+    public void setRate(int maxMar) {
+        this.rate = maxMar;
     }
 
     public String getDescription() {
@@ -118,14 +140,6 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    public List<TaskImage> getImages() {
-		return images;
-	}
-
-	public void setImages(List<TaskImage> images) {
-		this.images = images;
-	}
 
     public String getInputFileName() {
         return inputFileName;
@@ -168,7 +182,6 @@ public class Task {
     }
 
     public List<TaskData> getInOutData() {
-
         return inOutData;
     }
 
@@ -191,4 +204,5 @@ public class Task {
     public void setTheoryLinks(List<TaskTheoryLink> theoryLinks) {
         this.theoryLinks = theoryLinks;
     }
+
 }

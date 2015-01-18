@@ -5,6 +5,7 @@
  */
 package com.nwchecker.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +21,10 @@ public class TaskTheoryLink {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_task")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Task task;
 
     @Column(name = "link")

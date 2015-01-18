@@ -5,11 +5,8 @@
  */
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.dao.TaskDao;
+import com.nwchecker.server.dao.TaskDAO;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskTheoryLink;
-import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-    private TaskDao taskDao;
+    private TaskDAO taskDao;
 
     @Transactional(readOnly = true)
     @Override
     public Task getTaskById(int id) {
         return taskDao.getTaskById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Task> getTasksByContestId(int id) {
+        return taskDao.getTasksByContestId(id);
     }
 
     @Override
@@ -35,8 +38,20 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional()
-    public void addTask(Task t, LinkedList<TaskData> data, LinkedList<TaskTheoryLink> theory) {
-        taskDao.addTask(t, data, theory);
+    public void addTask(Task t) {
+        taskDao.addTask(t);
+    }
+
+    @Override
+    @Transactional()
+    public void updateTask(Task t) {
+        taskDao.updateTask(t);
+    }
+
+    @Override
+    @Transactional()
+    public void deleteTaskById(int id) {
+        taskDao.deleteTaskById(id);
     }
 
 }

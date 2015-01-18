@@ -4,7 +4,9 @@
 <spring:url value="/resources/" var="resources"/>
 <html>
     <!--including head -->
-    <jsp:include page="fragments/staticFiles.jsp" />
+    <head>
+        <jsp:include page="fragments/staticFiles.jsp" />
+    </head>
     <body>
         <div class="wrapper container">
             <!--including bodyHead -->

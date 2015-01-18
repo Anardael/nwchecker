@@ -11,51 +11,57 @@ import com.nwchecker.server.model.User;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
-	@Autowired
-	private UserDAO	userDAO;
 
-	@Override
-	public void addUser(User user) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setPassword(encoder.encode(user.getPassword()));
-		user.setEnabled(true);
-		user.addRoleUser();
-		userDAO.addUser(user);
-	}
-	
-	@Override
-	public void updateUser(User user) {
-		userDAO.updateUser(user);
-	}
-	
-	@Override
-	public void deleteUserByName(String username) {
-		User user = userDAO.getUserByUsername(username);
-		userDAO.deleteUser(user);
-	}
+    @Autowired
+    private UserDAO userDAO;
 
-	@Override
-	public User getUserByUsername(String username) {
-		return userDAO.getUserByUsername(username);
-	}
-	
-	@Override
-	public List<User> getUsers() {
-		return userDAO.getUsers();
-	}
-	
-	@Override
-	public List<User> getUsersByRole(String role) {
-		return userDAO.getUsersByRole(role);
-	}
+    @Override
+    public void addUser(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setEnabled(true);
+        user.addRoleUser();
+        userDAO.addUser(user);
+    }
 
-	@Override
-	public boolean hasUsername(String username) {
-		return userDAO.hasUsername(username);
-	}
+    @Override
+    public void updateUser(User user) {
+        userDAO.updateUser(user);
+    }
 
-	@Override
-	public boolean hasEmail(String email) {
-		return userDAO.hasEmail(email);
-	}
+    @Override
+    public void deleteUserByName(String username) {
+        User user = userDAO.getUserByUsername(username);
+        userDAO.deleteUser(user);
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userDAO.getUserById(id);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userDAO.getUsers();
+    }
+
+    @Override
+    public List<User> getUsersByRole(String role) {
+        return userDAO.getUsersByRole(role);
+    }
+
+    @Override
+    public boolean hasUsername(String username) {
+        return userDAO.hasUsername(username);
+    }
+
+    @Override
+    public boolean hasEmail(String email) {
+        return userDAO.hasEmail(email);
+    }
 }

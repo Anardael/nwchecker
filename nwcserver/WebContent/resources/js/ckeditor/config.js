@@ -3,16 +3,21 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
-CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
-	config.language = 'en';
-	//config.uiColor = '#AADC6E';
-	config.extraPlugins = 'panel,floatpanel,menu,menubutton,language';
-//	config.toolbar_Basic =
-//	[
-//	 	[ 'Image', 'Lanquage' ]
-//	];
-//	config.toolbar = 'Basic';
-	
-	config.filebrowserImageBrowseUrl = "/NWCServer/ui/fileUpload";
+CKEDITOR.editorConfig = function(config) {
+    // Temporary English only
+    config.language = 'en';
+
+    config.uiColor = '#1772A3';
+
+    // Custom toolbar
+    config.toolbar_Full =
+            [
+                {name: 'fontStyles', items: ['Font', 'FontSize']},
+                {name: 'lists', items: ['NumberedList', 'BulletedList']},
+                {name: 'basicStyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']},
+                {name: 'colors', items: ['TextColor', 'BGColor']},
+                {name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+                {name: 'other', items: ['Maximize']}
+            ];
+    config.toolbar = 'Full';
 };
