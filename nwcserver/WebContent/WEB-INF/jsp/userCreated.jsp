@@ -31,7 +31,7 @@
                 <jsp:param name="pageName" value="userCreated" />
             </jsp:include>
 
-            <form:form modelAttribute="userRegistrationForm" action="login.do" method="get" role="form" class="form-horizontal">
+            <form:form modelAttribute="userRegistrationForm" action="login.do" method="get" role="form" class="form-horizontal centered">
                 <div class="form-group">
                     <h1>
                         <spring:message code="userCreated.username.caption" />
