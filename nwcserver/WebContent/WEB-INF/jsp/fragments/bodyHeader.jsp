@@ -34,7 +34,7 @@
                     <li class="active"><a><spring:message code="news.caption" /></a></li>
                         </c:when>
                         <c:otherwise>
-                    <li><a href="/" ><spring:message code="news.caption" /></a></li>
+                    <li><a href="news.do" ><spring:message code="news.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- olympiad -->
@@ -49,10 +49,10 @@
             <!-- rating -->
             <c:choose>
                 <c:when test="${param.pageName=='rating'}">
-                    <li class="active"><a href="/"><spring:message code="rating.caption" /></a></li>
+                    <li class="active"><a href="rating.do"><spring:message code="rating.caption" /></a></li>
                     </c:when>
                     <c:otherwise>
-                    <li><a href="/" ><spring:message code="rating.caption" /></a></li>
+                    <li><a href="rating.do" ><spring:message code="rating.caption" /></a></li>
                     </c:otherwise>
                 </c:choose>
             <!-- login -->
