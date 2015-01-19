@@ -13,19 +13,15 @@
             <!--including bodyHead -->
             <!-- send name of current page-->
             <jsp:include page="fragments/bodyHeader.jsp">
-                <jsp:param name="pageName" value="result"/>
+                <jsp:param name="pageName" value="error"/>
             </jsp:include>
             <section>
                 <c:set var="result" value="${result}"/>
                 <c:if test="${not empty result}">
-                    ${result}
+                    <c:if test="${result=='access denied'}">
+                        <h4><spring:message code="accessDenied"/></h4>
+                    </c:if>
                 </c:if>
-                <c:if test="${not empty error}">
-                    <h4>Errors:</h4>
-                </c:if>
-                <c:forEach items="${error}" var="er">
-                    <p>${er.message}</p>
-                </c:forEach>
             </section>
         </div>
         <jsp:include page="fragments/footer.jsp"/>

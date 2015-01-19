@@ -69,7 +69,7 @@
                             <spring:message code="taskCreate.verificationScript" var="verificationScript"/>
                             <label class="col-sm-2 control-label">${verificationScript}:</label>
                             <div class="col-sm-10">
-                                <textarea name="scriptForVerification" style="resize:none" class="form-control" rows="7"></textarea>
+                                <form:textarea path="scriptForVerification" style="resize:none" class="form-control" rows="7"/>
                                 <span class="help-inline control-label"></span>
                             </div>
                         </div>

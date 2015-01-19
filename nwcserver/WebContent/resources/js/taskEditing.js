@@ -2,7 +2,7 @@ function tryToAddTask() {
     if ($('#id').val() == '0') {
         sendJsonContest().success(function(data) {
             if (data.status == "FAIL") {
-                contestAjaxFailed("You can't add Tasks until you complete required contest fields", data);
+                contestAjaxFailed(errorCaption, emptyContest, data);
             }
             if (data.status == "SUCCESS") {
                 $('#id').val(data.result);
@@ -64,15 +64,15 @@ function prepareDeleteTask(index) {
     taskActualId = $('#taskModal_' + index + ' .idTask input').val();
     BootstrapDialog.show({
         type: BootstrapDialog.TYPE_WARNING,
-        title: 'Task deleting',
-        message: 'Are you sure want to delete Task?',
+        title: taskDeleteHeader,
+        message: taskDeleteQuestion,
         buttons: [{
-                label: 'No',
+                label: btnClose,
                 action: function(dialogItself) {
                     dialogItself.close();
                 }
             }, {
-                label: 'Yes',
+                label: btnSubmit,
                 cssClass: 'btn-primary',
                 action: function(dialogItself) {
                     deleteTask(index);
@@ -87,9 +87,9 @@ function sendAjaxDeleteTask(index) {
     $.get('/NWCServer/deleteTaskJson.do?taskId=' + index, 0, function(response) {
         if (response.status == "SUCCESS") {
             BootstrapDialog.show({
-                title: 'Task deleting',
+                title: taskDeleteHeader,
                 type: BootstrapDialog.TYPE_SUCCESS,
-                message: 'Task have been sucessfully deleted.',
+                message: taskDeleteSuccess,
             });
         }
     });

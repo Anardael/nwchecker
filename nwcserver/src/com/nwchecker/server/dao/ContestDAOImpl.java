@@ -35,6 +35,11 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @Override
+    public void mergeContest(Contest c) {
+        getHibernateTemplate().merge(c);
+    }
+
+    @Override
     public List<Contest> getContests() {
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest");
         return result;

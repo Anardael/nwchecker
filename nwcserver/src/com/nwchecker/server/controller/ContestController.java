@@ -16,12 +16,18 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,31 +59,85 @@ public class ContestController {
     private MessageSource messageSource;
 
     @RequestMapping("/getContests")
-    public String getContests(Model model) {
-        //get all expired contests:
-        /*List<Contest> result = new LinkedList<Contest>();
-         List<Contest> all = contestService.getContests();
-         //get list of expired contests:
-         for (Contest c : all) {
-         if (c.isExpired()) {
-         result.add(c);
-         }
-         }*/
-        model.addAttribute("contests", contestService.getContests());
+    public String getContests(Model model, Principal principal) {
+        List<Integer> editableContestIndexes = new LinkedList<Integer>();
+        //get all avaible  сontests from DB:
+        List<Contest> all = contestService.getContests();
+        //forward all all avaible contests to view:
+        model.addAttribute("contests", all);
+        //if principal consist:
+        if (principal != null) {
+            //get user:
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            //if user has teacher Role:
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                //get User entity from db:
+                User teacher = userService.getUserByUsername(currentUser.getUsername());
+                //getContests for this teacher:
+                if (teacher.getContest() != null) {
+                    if (teacher.getContest().size() > 0) {
+                        for (Contest c : teacher.getContest()) {
+                            //set inexes of Contest which Teacher can edit:
+                            editableContestIndexes.add(c.getId());
+                        }
+                        model.addAttribute("editContestIndexes", editableContestIndexes);
+                    }
+                }
+            }
+        }
         return "contest";
     }
 
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
-    public String initAddContest(Model model) {
+    public String initAddContest(Model model, Principal principal) {
+        boolean accessed = false;
+        //check if teacher:
+        if (principal != null) {
+            //get user:
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            //if user has teacher Role:
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                accessed = true;
+            }
+        }
+        if (accessed == false) {
+            model.addAttribute("result", "access denied");
+            return "result";
+        }
         //Create new Contest and forward it to contestCreate.jsp
         model.addAttribute("contestModelForm", new Contest());
         return "contestCreate";
     }
 
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
-    public String initEditContest(Model model, @RequestParam("id") int id) {
-        //get Contest by id:
+    public String initEditContest(Model model, @RequestParam("id") int id, Principal principal) {
+        //security:
+        //get user:
+        boolean accessed = false;
+        if (principal != null) {
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            //if user has teacher Role:
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                //get User entity from db:
+                User teacher = userService.getUserByUsername(currentUser.getUsername());
+                if (teacher.getContest() != null) {
+                    if (teacher.getContest().size() > 0) {
+                        for (Contest c : teacher.getContest()) {
+                            if (c.getId() == id) {
+                                accessed = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //user doesn't passed valdiation-forward to access denied.
+        if (accessed == false) {
+            model.addAttribute("result", "access denied");
+            return "result";
+        }
 
+        //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
         model.addAttribute("contestModelForm", editContest);
         return "contestCreate";
@@ -86,7 +146,8 @@ public class ContestController {
     @RequestMapping(value = "/addContest", method = RequestMethod.POST)
     public @ResponseBody
     ValidationResponse addContest(@ModelAttribute("contestModelForm") Contest contestAddForm,
-            BindingResult result) {
+            Principal principal, BindingResult result
+    ) {
         //Json response object:
         ValidationResponse res = new ValidationResponse();
         //validation :
@@ -103,6 +164,17 @@ public class ContestController {
             res.setErrorMessageList(errorMesages);
         } else {
             res.setStatus("SUCCESS");
+            //set users:
+            if (contestAddForm.getId() != 0) {
+                Contest exist = contestService.getContestByID(contestAddForm.getId());
+                contestAddForm.setUsers(exist.getUsers());
+            } else {
+                //set author:
+                User author = userService.getUserByUsername(principal.getName());
+                List<User> list = new LinkedList<User>();
+                list.add(author);
+                contestAddForm.setUsers(list);
+            }
             //update contest:
             contestService.updateContest(contestAddForm);
             //set generated id to JSON response:
@@ -129,24 +201,42 @@ public class ContestController {
 
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public @ResponseBody
-    LinkedList<UserJson> getusers(@RequestParam("contestId") int contestId) {
+    LinkedList<UserJson> getusers(@RequestParam("contestId") int contestId, Principal principal
+    ) {
         //create UserJson result list:
         LinkedList<UserJson> result = new LinkedList<UserJson>();
         //get ContestId Model:
-        Contest c = contestService.getContestByID(contestId);
+        Contest c = null;
+        String author = null;
+        if (contestId != 0) {
+            c = contestService.getContestByID(contestId);
+        } else {
+            //set author:
+            author = principal.getName();
+        }
         //get List of all Teacher users
-        List<User> teachers = userService.getUsers();
+        List<User> teachers = userService.getUsersByRole("ROLE_TEACHER");
         for (User u : teachers) {
             UserJson newUser = new UserJson();
             newUser.setId(u.getUserId());
             newUser.setName(u.getDisplayName());
-            if (c.getUsers().contains(u)) {
-                newUser.setChoosed(true);
+            if (c != null) {
+                if (c.getUsers().contains(u)) {
+                    newUser.setChoosed(true);
+                } else {
+                    newUser.setChoosed(false);
+                }
             } else {
-                newUser.setChoosed(false);
+                if (author.equals(u.getUsername())) {
+                    newUser.setChoosed(true);
+                } else {
+                    newUser.setChoosed(false);
+                }
             }
             result.add(newUser);
         }
+        author = null;
+        c = null;
         return result;
     }
 
@@ -167,7 +257,7 @@ public class ContestController {
         //set lsit of users to contest:
         c.setUsers(usersList);
         //update db:
-        contestService.updateContest(c);
+        contestService.mergeContest(c);
         //return SUCCESS status:
         result.setStatus("SUCCESS");
         return result;

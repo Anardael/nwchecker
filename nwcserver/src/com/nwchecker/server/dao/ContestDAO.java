@@ -18,8 +18,10 @@ public interface ContestDAO {
 
     public void updateContest(Contest c);
 
+    public void mergeContest(Contest c);
+
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);
-    
+
 }

@@ -17,6 +17,8 @@ public interface ContestService {
     public void addContest(Contest c);
 
     public void updateContest(Contest c);
+    
+    public void mergeContest(Contest c);
 
     public List<Contest> getContests();
 

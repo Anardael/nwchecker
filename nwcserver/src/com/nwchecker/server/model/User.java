@@ -15,171 +15,197 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.google.gson.annotations.Expose;
+import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name = "users")
 public class User {
-	// User id
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userId")
-	private int userId;
-	// User name
-	@Column(name = "username")
-	@Expose
-	private String username;
-	// Password
-	@Column(name = "password")
-	private String password;
-	@Transient
-	private String confirmPassword;
-	// Display name
-	@Column(name = "display_name")
-	@Expose
-	private String displayName;
-	// User email
-	@Column(name = "email")
-	@Expose
-	private String email;
-	// Some university user data(probably faculty or group)
-	@Column(name = "info")
-	@Expose
-	private String info;
-	// User role (User,Teacher or Admin).
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-	@Expose
-	private Set<Role> roles;
-	// Department for teacher users.
-	@Column(name = "department")
-	@Expose
-	private String department;
-	// Ban Time - if exists 0 time while user will be inactive
-	@Column(name = "ban_time")
-	private long banTime;
-	// Enabled user
-	@Column(name = "enabled")
-	private boolean enabled;
 
-	public User() {
-	}
+    // User id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
+    private int userId;
+    // User name
+    @Column(name = "username")
+    @Expose
+    private String username;
+    // Password
+    @Column(name = "password")
+    private String password;
+    @Transient
+    private String confirmPassword;
+    // Display name
+    @Column(name = "display_name")
+    @Expose
+    private String displayName;
+    // User email
+    @Column(name = "email")
+    @Expose
+    private String email;
+    // Some university user data(probably faculty or group)
+    @Column(name = "info")
+    @Expose
+    private String info;
+    // User role (User,Teacher or Admin).
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @Expose
+    private Set<Role> roles;
+    // Department for teacher users.
+    @Column(name = "department")
+    @Expose
+    private String department;
+    // Ban Time - if exists 0 time while user will be inactive
+    @Column(name = "ban_time")
+    private long banTime;
+    // Enabled user
+    @Column(name = "enabled")
+    private boolean enabled;
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "contest_users",
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "contest_id")})
+    private List<Contest> contest;
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public User() {
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-	public String getInfo() {
-		return info;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setInfo(String info) {
-		this.info = info;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
+    public String getInfo() {
+        return info;
+    }
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
-	public String getDepartment() {
-		return department;
-	}
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-	public void setDepartment(String department) {
-		this.department = department;
-	}
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
-	public long getBanTime() {
-		return banTime;
-	}
+    public String getDepartment() {
+        return department;
+    }
 
-	public void setBanTime(long banTime) {
-		this.banTime = banTime;
-	}
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
-	public boolean getEnabled() {
-		return enabled;
-	}
+    public long getBanTime() {
+        return banTime;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setBanTime(long banTime) {
+        this.banTime = banTime;
+    }
 
-	public boolean isNew() {
-		return (this.userId == 0);
-	}
+    public boolean getEnabled() {
+        return enabled;
+    }
 
-	public void addRoleAdmin() {
-		if (roles == null) {
-			roles = new HashSet<Role>();
-			roles.add(new Role(this, "ROLE_ADMIN"));
-		} else {
-			roles.add(new Role(this, "ROLE_ADMIN"));
-		}
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	public void addRoleUser() {
-		if (roles == null) {
-			roles = new HashSet<Role>();
-			roles.add(new Role(this, "ROLE_USER"));
-		} else {
-			roles.add(new Role(this, "ROLE_USER"));
-		}
-	}
+    public boolean isNew() {
+        return (this.userId == 0);
+    }
 
-	public void addRoleTeacher() {
-		if (roles==null) {
-			roles=new HashSet<Role>();
-			roles.add(new Role(this,"ROLE_TEACHER"));
-		} else {
-		roles.add(new Role(this, "ROLE_TEACHER"));
-		}
-	}
+    public void addRoleAdmin() {
+        if (roles == null) {
+            roles = new HashSet<Role>();
+            roles.add(new Role(this, "ROLE_ADMIN"));
+        } else {
+            roles.add(new Role(this, "ROLE_ADMIN"));
+        }
+    }
+
+    public void addRoleUser() {
+        if (roles == null) {
+            roles = new HashSet<Role>();
+            roles.add(new Role(this, "ROLE_USER"));
+        } else {
+            roles.add(new Role(this, "ROLE_USER"));
+        }
+    }
+
+    public void addRoleTeacher() {
+        if (roles == null) {
+            roles = new HashSet<Role>();
+            roles.add(new Role(this, "ROLE_TEACHER"));
+        } else {
+            roles.add(new Role(this, "ROLE_TEACHER"));
+        }
+    }
+
+    public List<Contest> getContest() {
+        return contest;
+    }
+
+    public void setContest(List<Contest> contest) {
+        this.contest = contest;
+    }
+
+    @Override
+    public boolean equals(Object u) {
+        return (u != null && u instanceof User && ((User) u).getUserId() == this.userId);
+    }
 
 }

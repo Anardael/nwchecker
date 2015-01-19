@@ -36,6 +36,21 @@
     </head>
     <body>
         <script type="text/javascript">
+            //variables for dynamically created Modal forms:
+            //task successfully added modal:
+            var taskEditResultHeader = "<spring:message code="taskCreate.header"/>";
+            var taskEditResultSuccess = "<spring:message code="taskCreate.result.success"/>";
+            //Can't add task modal:
+            var errorCaption = "<spring:message code="error.caption"/>";
+            var emptyContest = "<spring:message code="contest.EmptyFields.caption"/>";
+            var emptyContestUsers = "<spring:message code="contest.EmptyFields.Users.caption"/>";
+            //delete task:
+            var taskDeleteHeader = "<spring:message code="task.delete.header"/>"
+            var taskDeleteQuestion = "<spring:message code="task.delete.question"/>"
+            var taskDeleteSuccess = "<spring:message code="task.delete.successful"/>"
+            //buttons:
+            var btnSubmit = "<spring:message code="btn.submit"/>"
+            var btnClose = "<spring:message code="btn.close"/>"
             //length of recieved contest.tasks List:
             var TaskListSize = ${fn:length(contestModelForm.tasks)};
             //bind sendTaskJsonButton in modal:
@@ -69,7 +84,7 @@
                 });
             });
             $('body').on("click", "#showUserList", function() {
-                $('#userListModal').modal();
+                tryToShowUserList();
             });
 
             $('body').on("click", "#submitUserListButton", function() {
@@ -88,7 +103,7 @@
             </jsp:include>
             <section>
                 <!-- add usersList Modal -->
-                <contest:usersList/>
+                <contest:usersList contestId="${contestModelForm.id}"/>
                 <form:form id ="contestForm" modelAttribute="contestModelForm" class="form-horizontal" 
                            action="addContest.do" method="post">
                     <form:hidden  path="id" />

@@ -44,10 +44,9 @@ function doPostJson(index) {
             $('#taskModal_' + index).modal('hide');
             //show success message:
             BootstrapDialog.show({
-                title: 'Task editing',
+                title: taskEditResultHeader,
                 type: BootstrapDialog.TYPE_SUCCESS,
-                message: 'Task have been sucessfully saved.',
-                description: 'This is a Bootstrap Dialog'
+                message: taskEditResultSuccess
             });
             $form.unbind('submit');
             $form.submit();

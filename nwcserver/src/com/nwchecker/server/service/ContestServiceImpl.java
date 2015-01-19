@@ -18,32 +18,38 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ContestServiceImpl implements ContestService {
-
+    
     @Autowired
     private ContestDAO contestDAO;
-
+    
     @Transactional
     @Override
     public void addContest(Contest c) {
         contestDAO.addContest(c);
     }
-
+    
     @Transactional
     @Override
     public void updateContest(Contest c) {
         contestDAO.updateContest(c);
     }
-
+    
+    @Transactional
+    @Override
+    public void mergeContest(Contest c) {
+        contestDAO.mergeContest(c);
+    }
+    
     @Transactional(readOnly = true)
     @Override
     public List<Contest> getContests() {
         return contestDAO.getContests();
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Contest getContestByID(int id) {
         return contestDAO.getContestByID(id);
     }
-
+    
 }

@@ -53,7 +53,7 @@ public class Contest {
     private Date duration;
 
     @OneToMany(mappedBy = "contest", orphanRemoval = true,
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+            cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Task> tasks;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

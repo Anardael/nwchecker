@@ -14,10 +14,10 @@ function sendJsonContest() {
     });
 }
 
-function contestAjaxFailed(modalMessage, data) {
+function contestAjaxFailed(title, modalMessage, data) {
     //show modal:
     BootstrapDialog.show({
-        title: 'Error',
+        title: title,
         type: BootstrapDialog.TYPE_DANGER,
         message: modalMessage
     });

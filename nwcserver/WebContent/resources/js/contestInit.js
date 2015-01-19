@@ -75,3 +75,19 @@ function submitContest() {
         $('#id').val(data.result);
     });
 }
+
+function tryToShowUserList() {
+    if ($('#id').val() == '0') {
+        sendJsonContest().success(function(data) {
+            if (data.status == "FAIL") {
+                contestAjaxFailed(errorCaption, emptyContestUsers, data);
+            }
+            if (data.status == "SUCCESS") {
+                $('#id').val(data.result);
+                $('#userListModal').modal();
+            }
+        });
+    } else {
+        $('#userListModal').modal();
+    }
+}
