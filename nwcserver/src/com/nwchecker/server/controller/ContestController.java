@@ -16,12 +16,10 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -100,6 +98,7 @@ public class ContestController {
                 accessed = true;
             }
         }
+        //if user haven't acces to contest creation:
         if (accessed == false) {
             model.addAttribute("result", "access denied");
             return "result";

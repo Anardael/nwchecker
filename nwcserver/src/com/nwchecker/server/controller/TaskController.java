@@ -37,14 +37,6 @@ public class TaskController {
     @Autowired
     private MessageSource messageSource;
 
-    @RequestMapping("/getTasks")
-    public String getTasks(Model model) {
-        List<Task> tasks = taskService.getTasks();
-        model.addAttribute("tasks", tasks);
-        return "task";
-    }
-
-//------------------------------------------TEST
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)
     public @ResponseBody
     ValidationResponse processTaskJson(@ModelAttribute(value = "task") Task task,

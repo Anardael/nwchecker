@@ -42,15 +42,20 @@
             var taskEditResultSuccess = "<spring:message code="taskCreate.result.success"/>";
             //Can't add task modal:
             var errorCaption = "<spring:message code="error.caption"/>";
+            var successCaption = "<spring:message code="success.caption"/>";
             var emptyContest = "<spring:message code="contest.EmptyFields.caption"/>";
             var emptyContestUsers = "<spring:message code="contest.EmptyFields.Users.caption"/>";
+            var emptyContestfields = "<spring:message code="contest.emptyFields.submit"/>";
             //delete task:
-            var taskDeleteHeader = "<spring:message code="task.delete.header"/>"
-            var taskDeleteQuestion = "<spring:message code="task.delete.question"/>"
-            var taskDeleteSuccess = "<spring:message code="task.delete.successful"/>"
+            var taskDeleteHeader = "<spring:message code="task.delete.header"/>";
+            var taskDeleteQuestion = "<spring:message code="task.delete.question"/>";
+            var taskDeleteSuccess = "<spring:message code="task.delete.successful"/>";
             //buttons:
-            var btnSubmit = "<spring:message code="btn.submit"/>"
-            var btnClose = "<spring:message code="btn.close"/>"
+            var btnSubmit = "<spring:message code="btn.submit"/>";
+            var btnClose = "<spring:message code="btn.close"/>";
+            //success modal:
+            var successContestSave = "<spring:message code="contest.successSave"/>";
+            var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
             //length of recieved contest.tasks List:
             var TaskListSize = ${fn:length(contestModelForm.tasks)};
             //bind sendTaskJsonButton in modal:
@@ -61,7 +66,6 @@
                 //call doPostJson method from taskEditing.js:
                 doPostJson(idInt);
             });
-
             //bind deleteButtonEvent:
             $('body').on("click", ".buttonDeleteTask", function() {
                 //get index of Deleting task:
@@ -70,7 +74,6 @@
                 //call deleteTask method from taskEditing.js:
                 prepareDeleteTask(idInt);
             });
-
             //add New Task:
             $('body').on("click", "#addnewTaskButton", function() {
                 tryToAddTask();
@@ -86,7 +89,6 @@
             $('body').on("click", "#showUserList", function() {
                 tryToShowUserList();
             });
-
             $('body').on("click", "#submitUserListButton", function() {
                 sendContestUsers();
             });
@@ -139,7 +141,7 @@
                             <label class="col-sm-2 control-label">${contestDuration}:</label>
                             <div class='col-sm-3'>
                                 <div class='input-group date' id='datetimepicker4'>
-                                    <form:input path="duration" type='text' class="form-control" />
+                                    <form:input path="duration" type='text' class="form-control"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
                                     </span>
                                 </div>

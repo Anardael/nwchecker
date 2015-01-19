@@ -6,6 +6,7 @@ function setMask() {
         pickDate: false,
         language: 'uk'
     });
+    $("#datetimepicker4").val("00:00");
     $("#starts").mask("9999-99-99 99:99");
     $("#duration").mask("99:99");
 
@@ -35,9 +36,9 @@ function sendContestUsers() {
             if (response.status == "SUCCESS") {
                 $('#userListModal').modal('hide');
                 BootstrapDialog.show({
-                    title: 'Successfully updated',
+                    title: successCaption,
                     type: BootstrapDialog.TYPE_SUCCESS,
-                    message: 'Contest teacher access lsit have been successfuly updated',
+                    message: contestUserListSuccess,
                 });
             }
         }
@@ -62,17 +63,19 @@ function collectUserListData(fields) {
 function submitContest() {
     sendJsonContest().success(function(data) {
         if (data.status == "FAIL") {
-            contestAjaxFailed("Please eneter all required fields", data);
+            contestAjaxFailed(errorCaption, emptyContestfields, data);
         }
         if (data.status == "SUCCESS") {
             BootstrapDialog.show({
-                title: 'Contest',
+                title: successCaption,
                 type: BootstrapDialog.TYPE_SUCCESS,
-                message: 'Contest have been sucessfully saved.'
+                message: successContestSave
             });
         }
         //set recieved id:
-        $('#id').val(data.result);
+        if (data.result != null) {
+            $('#id').val(data.result);
+        }
     });
 }
 

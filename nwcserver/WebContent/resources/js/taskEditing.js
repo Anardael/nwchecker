@@ -104,7 +104,6 @@ function deleteTask(index) {
     var i = index + 1;
     if (i != TaskListSize) {
         for (i; i < TaskListSize; i++) {
-            alert('1');
             var iDecremented = i - 1;
             //find form:
             var form = $('#taskModalForm_' + i);
