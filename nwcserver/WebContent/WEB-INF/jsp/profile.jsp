@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"><spring:message code="profile.info.caption" />:</label>
                     <div class="col-sm-4">
-                        <form:textarea path="info" class="form-control" name="info" />
+                        <form:textarea path="info" class="form-control" name="info" style="resize:none"/>
                         <form:errors path="info" Class="error" />
                     </div>
                 </div>

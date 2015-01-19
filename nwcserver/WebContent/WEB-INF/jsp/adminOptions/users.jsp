@@ -24,7 +24,7 @@
                 <table id="usersData" data-toggle="table" data-striped="true"
                        data-url="${dataUrl}" data-method="get" data-cache="false"
                        data-sort-name="username" data-sort-order="asc"
-                       data-pagination="true" data-search="true">
+                       >
                     <thead>
                         <tr>
                             <th data-field="username" data-halign="center" data-formatter="usernameFormatter" data-sortable="true">

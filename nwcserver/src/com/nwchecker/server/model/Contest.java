@@ -41,7 +41,6 @@ public class Contest {
 
     @Column(name = "description")
     @NotEmpty
-    @Size(max = 1000)
     private String description;
 
     @Column(name = "starts")

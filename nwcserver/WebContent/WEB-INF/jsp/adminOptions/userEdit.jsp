@@ -91,16 +91,18 @@
                         <spring:message code="adminPanel.userEdit.info.caption" />
                     </label>
                     <div class="col-sm-4">
-                        <form:textarea path="info" class="form-control" rows="4" name="info" />
+                        <form:textarea path="info" class="form-control" rows="4" name="info" style="resize:none"/>
                         <form:errors path="info" Class="error" />
                     </div>
                 </div>		
                 <div class="form-group">
-                    <div class="col-sm-offset-4" align="right">
-                        <input type="submit" class="col-sm-3 btn btn-info" formaction="changeUser.do"
-                               value=<spring:message code="adminPanel.userEdit.update.button" />>
-                        <input type="submit" class="col-sm-3 btn btn-danger" formaction="deleteUser.do"
-                               value=<spring:message code="adminPanel.userEdit.delete.button" />>
+                    <div class="col-sm-offset-4 ">
+                        <div  class="col-sm-offset-2">
+                            <input type="submit" class=" btn btn-info" formaction="changeUser.do"
+                                   value=<spring:message code="adminPanel.userEdit.update.button" />>
+                            <input type="submit" class=" btn btn-warning" formaction="deleteUser.do"
+                                   value=<spring:message code="adminPanel.userEdit.delete.button" />>
+                        </div>
                     </div>
                 </div>
             </form:form>

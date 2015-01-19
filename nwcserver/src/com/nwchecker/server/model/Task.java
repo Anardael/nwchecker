@@ -56,7 +56,6 @@ public class Task {
 
     @Column(name = "description")
     @NotEmpty
-    @Size(max = 5000)
     private String description;
 
     @Column(name = "inputFileName")
