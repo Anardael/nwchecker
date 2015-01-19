@@ -110,7 +110,8 @@
                 <div class="form-group">
                     <div class="form-actions centered">
                         <input type="submit" value="<spring:message code="profile.applyButton.caption" />"
-                               class="btn btn-primary customButton" /> <input type="button" data-toggle="modal" data-target="#myModal"
+                               class="btn btn-primary customButton" /> 
+                        <input type="button" data-toggle="modal" data-target="#myModal"
                                value="<spring:message code="profile.changePasswordButton.caption" />" class="btn btn-primary customButton" />
                     </div>
                 </div>
