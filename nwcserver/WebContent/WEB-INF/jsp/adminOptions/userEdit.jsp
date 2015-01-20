@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
-        <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
-        <script type="text/javascript" src="${resources}js/bootstrap-table.min.js"></script>
     <head>
     <body>
         <div class="wrapper container">
@@ -19,8 +18,7 @@
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
 
-            <form:form modelAttribute="userData" method="post" class="form-horizontal" role="form"
-                       onsubmit="saveRoles()">
+            <form:form modelAttribute="userData" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.username.caption" />
@@ -53,7 +51,7 @@
                         <spring:message code="adminPanel.userEdit.password.caption" />
                     </label>
                     <div class="col-sm-4">
-                        <form:input path="password" class="form-control" name="password" />
+                        <form:input path="password" type="password" class="form-control" name="password" />
                         <form:errors path="password" Class="error" />
                     </div>
                 </div>
@@ -62,7 +60,7 @@
                         <spring:message code="adminPanel.userEdit.confirmPass.caption" />
                     </label>
                     <div class="col-sm-4">
-                        <form:input path="confirmPassword" class="form-control" name="confirmPassword" />
+                        <form:input path="confirmPassword" type="password" class="form-control" name="confirmPassword" />
                         <form:errors path="confirmPassword" Class="error" />
                     </div>
                 </div>
@@ -97,11 +95,16 @@
                 </div>		
                 <div class="form-group">
                     <div class="col-sm-offset-4 ">
-                        <div  class="col-sm-offset-2">
-                            <input type="submit" class=" btn btn-info" formaction="changeUser.do"
+                        <div  class="col-sm-3">
+                            <input type="submit" class="btn btn-info btn-block" formaction="changeUser.do"
                                    value=<spring:message code="adminPanel.userEdit.update.button" />>
-                            <input type="submit" class=" btn btn-warning" formaction="deleteUser.do"
-                                   value=<spring:message code="adminPanel.userEdit.delete.button" />>
+                        </div>
+                        <div class="col-sm-3">
+                        	<security:authentication var="currentUser" property="principal.username" />
+                        	<c:if test="${userData.username != currentUser}">
+                            	<input type="submit" class="btn btn-warning btn-block" formaction="deleteUser.do"
+                                	   value=<spring:message code="adminPanel.userEdit.delete.button" />>
+                            </c:if>
                         </div>
                     </div>
                 </div>

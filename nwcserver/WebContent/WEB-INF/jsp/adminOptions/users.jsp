@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -24,7 +24,7 @@
                 <table id="usersData" data-toggle="table" data-striped="true"
                        data-url="${dataUrl}" data-method="get" data-cache="false"
                        data-sort-name="username" data-sort-order="asc"
-                       >
+                       data-pagination="true" data-search="true">
                     <thead>
                         <tr>
                             <th data-field="username" data-halign="center" data-formatter="usernameFormatter" data-sortable="true">

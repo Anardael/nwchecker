@@ -10,11 +10,11 @@
 		<intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/profile**" access="isAuthenticated()" />
 		<intercept-url pattern="/changePassword**" access="isAuthenticated()" />
-		<intercept-url pattern="/admin**" access="isAuthenticated() AND hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/getUsers**" access="isAuthenticated() AND hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/userEdit**" access="isAuthenticated() AND hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/changeUser**" access="isAuthenticated() AND hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/deleteUser**" access="isAuthenticated() AND hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/getUsers**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/userEdit**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/changeUser**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/deleteUser**" access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/login.do"
 			authentication-failure-url="/login.do?error" 
 		/>

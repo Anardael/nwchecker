@@ -1,14 +1,13 @@
 package com.nwchecker.server.controller;
 
-import java.awt.Checkbox;
+import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
-import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 
@@ -45,11 +43,13 @@ public class AdminOptionsController {
 		dataBinder.setValidator(validator);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
 		return "adminOptions/users";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
 	public @ResponseBody String getUsers() {
 		List<User> users = userService.getUsers();
@@ -58,6 +58,7 @@ public class AdminOptionsController {
 		return gson.toJson(users.toArray());
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
 	public String user(HttpServletRequest request, Model model) {
 		String username = request.getParameter("Username");
@@ -70,13 +71,14 @@ public class AdminOptionsController {
 		return "adminOptions/userEdit";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
 	public String changeUser(@ModelAttribute("userData") @Validated User userData, BindingResult result) {
 		if (result.hasErrors()) {
 			return "/adminOptions/userEdit";
 		}
 		User user = userService.getUserByUsername(userData.getUsername());
-		user.setPassword(getEncryptedPassword(userData.getPassword()));
+		user.setPassword(getPasswordHash(userData.getPassword()));
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
 		user.setDepartment(userData.getDepartment());
@@ -85,7 +87,7 @@ public class AdminOptionsController {
 		return "redirect:admin.do";
 	}
 	
-	private String getEncryptedPassword(String password) {
+	private String getPasswordHash(String password) {
 		if (!password.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			password = encoder.encode(password);
@@ -93,9 +95,12 @@ public class AdminOptionsController {
 		return password;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-	public String deleteUser(@RequestParam("username") String username) {
-		userService.deleteUserByName(username);
+	public String deleteUser(@RequestParam("username") String username, Principal principal) {
+		if (!principal.getName().equals(username)) {
+			userService.deleteUserByName(username);
+		}
 		return "redirect:admin.do";
 	}
 }

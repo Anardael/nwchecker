@@ -3,13 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ckeditor" uri="http://ckeditor.com"%>
 <%@ taglib prefix="contest" uri="/tlds/ContestTags" %> 
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/> 
-<!-- initializing CKEditor: -->
-
-<%--<ckeditor:replace replace="description" basePath='${resources}/js/ckeditor'/> --%>
 <html>
     <!--including head -->
     <head>    
@@ -30,7 +26,7 @@
         <script type="text/javascript" src="${resources}js/taskAjax.js"></script>
         <script type="text/javascript" src="${resources}js/contestAjax.js"></script>
         <script type="text/javascript" src="${resources}js/ckeditor/ckeditor.js"></script>
-        <script type="text/javascript" src="${resources}js/ckeditor/adapters/jquery.js"></script>
+        <script type="text/javascript" src="${resources}js/ckeditorInit.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
         <script type="text/javascript" src="${resources}js/contestInit.js"></script>
     </head>
@@ -58,6 +54,10 @@
             var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
             //length of recieved contest.tasks List:
             var TaskListSize = ${fn:length(contestModelForm.tasks)};
+            // CKEditor initialization
+            $('body').ready(function() {
+            	initializeCKEdior('description', '${param.locale}');
+            });
             //bind sendTaskJsonButton in modal:
             $('body').on("click", ".sendTaskJsonButton", function() {
                 //get id of Modal
@@ -76,7 +76,7 @@
             });
             //add New Task:
             $('body').on("click", "#addnewTaskButton", function() {
-                tryToAddTask();
+                tryToAddTask('${param.locale}');
             });
             $('body').on('click', "#submitContest", function() {
                 submitContest();

@@ -1,4 +1,4 @@
-function tryToAddTask() {
+function tryToAddTask(locale) {
     if ($('#id').val() == '0') {
         sendJsonContest().success(function(data) {
             if (data.status == "FAIL") {
@@ -6,15 +6,15 @@ function tryToAddTask() {
             }
             if (data.status == "SUCCESS") {
                 $('#id').val(data.result);
-                createNewTask();
+                createNewTask(locale);
             }
         });
     } else {
-        createNewTask();
+        createNewTask(locale);
     }
 }
 
-function createNewTask() {
+function createNewTask(locale) {
     //get taskModalForm pattern:
     //get parameter "taskId" indicates index of current "newTask".
     //TaskListSize is declared in contestCreate.jsp
@@ -42,7 +42,7 @@ function createNewTask() {
 
         //set CK:
         $('#taskModal_' + TaskListSize + ' .ckEdit').each(function() {
-            CKEDITOR.replace($(this).attr('id'));
+        	initializeCKEdior($(this).attr('id'), locale);
         });
 
         //set digits only:
