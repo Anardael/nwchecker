@@ -84,11 +84,11 @@ public class Task {
     @Size(max = 500)
     private String forumLink;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskData> inOutData;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
 

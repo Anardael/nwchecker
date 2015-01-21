@@ -1,24 +1,11 @@
 package com.nwchecker.server.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.google.gson.annotations.Expose;
+
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -51,9 +38,9 @@ public class User {
     @Expose
     private String info;
     // User role (User,Teacher or Admin).
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Expose
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<Role>();
     // Department for teacher users.
     @Column(name = "department")
     @Expose
@@ -65,12 +52,12 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
-                @JoinColumn(name = "user_id")},
+                    @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "contest_id")})
+                    @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
 
     public User() {
@@ -169,30 +156,15 @@ public class User {
     }
 
     public void addRoleAdmin() {
-        if (roles == null) {
-            roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_ADMIN"));
-        } else {
-            roles.add(new Role(this, "ROLE_ADMIN"));
-        }
+        roles.add(new Role(this, "ROLE_ADMIN"));
     }
 
     public void addRoleUser() {
-        if (roles == null) {
-            roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_USER"));
-        } else {
-            roles.add(new Role(this, "ROLE_USER"));
-        }
+        roles.add(new Role(this, "ROLE_USER"));
     }
 
     public void addRoleTeacher() {
-        if (roles == null) {
-            roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_TEACHER"));
-        } else {
-            roles.add(new Role(this, "ROLE_TEACHER"));
-        }
+        roles.add(new Role(this, "ROLE_TEACHER"));
     }
 
     public List<Contest> getContest() {
