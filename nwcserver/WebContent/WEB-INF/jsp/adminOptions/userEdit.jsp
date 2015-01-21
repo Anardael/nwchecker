@@ -5,12 +5,28 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
+<security:authentication var="currentUser" property="principal.username" />
 <html>
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
+        <script type="text/javascript" src="${resources}js/userEdit.js"></script>
     <head>
     <body>
+    	<script type="text/javascript">
+    		$('body').ready(function() {
+    			showUserRoles([
+    				<c:forEach var="role" items="${userData.roles}">
+    			    	"${role.role}",
+    			    </c:forEach>
+    			]);
+    			if ('${currentUser}' == '${userData.username}') {
+    				disableDeleteBtn();
+    			}
+    			resetRolesDesc();
+    		});
+    	</script>
+    
         <div class="wrapper container">
             <!--Including bodyHead -->
             <!-- Send name of current page-->
@@ -18,7 +34,8 @@
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
 
-            <form:form modelAttribute="userData" method="post" class="form-horizontal" role="form">
+            <form:form modelAttribute="userData" method="post"
+            	class="form-horizontal" role="form" id="userEditForm">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.username.caption" />
@@ -66,13 +83,24 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
-                        <spring:message code="adminPanel.userEdit.info.caption" />
+                        <spring:message code="adminPanel.userEdit.roles.caption" />
                     </label>
+                    <form:hidden path="rolesDesc"/>
                     <div class="col-sm-4">
-                        <c:forEach items="${userData.roles}" var="role">
-                            <label class="control-label">${role.role}</label>
-                            <br>
-                        </c:forEach>
+                    	<input type="checkbox" id="admin" onclick="resetRolesDesc()" />
+                    	<label for="admin">
+                    		<spring:message code="adminPanel.userEdit.role.admin.caption" />
+                    	</label>
+                    	<br/>
+                    	<input type="checkbox" id="teacher" onclick="resetRolesDesc()" />
+                    	<label for="teacher">
+                    		<spring:message code="adminPanel.userEdit.role.teacher.caption" />
+                    	</label>
+                    	<br/>
+                    	<input type="checkbox" id="user" onclick="resetRolesDesc()" />
+                    	<label for="user">
+                    		<spring:message code="adminPanel.userEdit.role.user.caption" />
+                    	</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -96,15 +124,14 @@
                 <div class="form-group">
                     <div class="col-sm-offset-4 ">
                         <div  class="col-sm-3">
-                            <input type="submit" class="btn btn-info btn-block" formaction="changeUser.do"
-                                   value=<spring:message code="adminPanel.userEdit.update.button" />>
+                            <button class="btn btn-info btn-block" id="updateBtn" formaction="changeUser.do">
+                            	<spring:message code="adminPanel.userEdit.update.button" />
+                            </button>
                         </div>
                         <div class="col-sm-3">
-                        	<security:authentication var="currentUser" property="principal.username" />
-                        	<c:if test="${userData.username != currentUser}">
-                            	<input type="submit" class="btn btn-warning btn-block" formaction="deleteUser.do"
-                                	   value=<spring:message code="adminPanel.userEdit.delete.button" />>
-                            </c:if>
+                            <button class="btn btn-warning btn-block" id="deleteBtn" formaction="deleteUser.do">
+                            	<spring:message code="adminPanel.userEdit.delete.button" />
+                            </button>
                         </div>
                     </div>
                 </div>

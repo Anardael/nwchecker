@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nwchecker.server.dao.UserDAO;
+import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 
 @Service("UserService")
@@ -34,7 +35,13 @@ public class UserServiceImpl implements UserService {
         User user = userDAO.getUserByUsername(username);
         userDAO.deleteUser(user);
     }
-
+    
+    @Override
+	public void deleteUserRoles(User user) {
+		List<Role> roles = userDAO.getUserRoles(user);
+		userDAO.deleteRoles(roles);
+	}
+    
     @Override
     public User getUserById(int id) {
         return userDAO.getUserById(id);
@@ -49,7 +56,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userDAO.getUsers();
     }
-
+    
     @Override
     public List<User> getUsersByRole(String role) {
         return userDAO.getUsersByRole(role);

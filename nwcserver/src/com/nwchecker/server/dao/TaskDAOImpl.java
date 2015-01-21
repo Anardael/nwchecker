@@ -6,7 +6,9 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Task;
+
 import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -28,12 +30,14 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 
     @Override
     public List<Task> getTasksByContestId(int id) {
+    	@SuppressWarnings("unchecked")
         List<Task> t = (List<Task>) getHibernateTemplate().find("From Task where contest_id=?", id);
         return t;
     }
 
     @Override
     public List<Task> getTasks() {
+    	@SuppressWarnings("unchecked")
         List<Task> result = (List<Task>) getHibernateTemplate().find("from Task");
         return result;
     }

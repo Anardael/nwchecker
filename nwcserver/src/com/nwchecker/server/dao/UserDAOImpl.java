@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 
 @Repository("userDAO")
@@ -36,6 +37,11 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public void deleteUser(User user) {
 		getHibernateTemplate().delete(user);
 	}
+	
+	@Override
+	public void deleteRoles(List<Role> roles) {	
+		getHibernateTemplate().deleteAll(roles);
+	}
 
 	@Override
 	public User getUserById(int id) {
@@ -55,6 +61,13 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public List<User> getUsers() {
 		@SuppressWarnings("unchecked")
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");
+		return list;
+	}
+	
+	@Override
+	public List<Role> getUserRoles(User user) {
+		@SuppressWarnings("unchecked")
+		List<Role> list = (List<Role>) getHibernateTemplate().find("SELECT role FROM Role role INNER JOIN role.user user WITH user.userId =?", user.getUserId());
 		return list;
 	}
 	

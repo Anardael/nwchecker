@@ -78,11 +78,13 @@ public class AdminOptionsController {
 			return "/adminOptions/userEdit";
 		}
 		User user = userService.getUserByUsername(userData.getUsername());
+		userService.deleteUserRoles(user);
 		user.setPassword(getPasswordHash(userData.getPassword()));
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
+		user = setUserRoles(user, userData.getRolesDesc());
 		user.setDepartment(userData.getDepartment());
-		user.setInfo(userData.getInfo());
+		user.setInfo(userData.getInfo());		
 		userService.updateUser(user);
 		return "redirect:admin.do";
 	}
@@ -93,6 +95,26 @@ public class AdminOptionsController {
 			password = encoder.encode(password);
 		}
 		return password;
+	}
+	
+	private User setUserRoles(User user, String rolesDesc) {
+		user.setRoles(null);
+		while (!rolesDesc.isEmpty()) {
+			String role = rolesDesc.substring(0, rolesDesc.indexOf(';'));
+			switch (role) {
+				case "ROLE_ADMIN":
+					user.addRoleAdmin();
+					break;
+				case "ROLE_TEACHER":
+					user.addRoleTeacher();
+					break;
+				case "ROLE_USER":
+					user.addRoleUser();
+					break;
+			}
+			rolesDesc = rolesDesc.substring(role.length() + 1, rolesDesc.length());
+		}
+		return user;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
