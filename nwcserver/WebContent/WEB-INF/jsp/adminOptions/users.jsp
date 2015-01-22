@@ -13,13 +13,21 @@
         <!-- Including users table formatters -->
         <script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
     <body>
+    	<script type="text/javascript">
+    		$('body').ready(function() {
+    			ROLE_ADMIN   = '<spring:message code="adminPanel.users.table.role.admin" />';
+    			ROLE_TEACHER = '<spring:message code="adminPanel.users.table.role.teacher" />';
+    			ROLE_USER    = '<spring:message code="adminPanel.users.table.role.user" />';
+    			UNDEFINED    = '<spring:message code="adminPanel.users.table.role.undefined" />';
+    		});
+    	</script>
         <div class="wrapper container">
             <!--Including bodyHead -->
             <!-- Send name of current page-->
             <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
-            <div class="row" style="height: 47.3%;">
+            <div class="row" style="height: 60%;">
                 <c:url var="dataUrl" value="/getUsers.do"/>
                 <table id="usersData" data-toggle="table" data-striped="true"
                        data-url="${dataUrl}" data-method="get" data-cache="false"
@@ -27,16 +35,16 @@
                        data-pagination="true" data-search="true">
                     <thead>
                         <tr>
-                            <th data-field="username" data-halign="center" data-formatter="usernameFormatter" data-sortable="true">
+                            <th data-field="username" data-align="center" data-formatter="usernameFormatter" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.username"/>
                             </th>
-                            <th data-field="displayName" data-halign="center" data-sortable="true">
+                            <th data-field="displayName" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.displayName"/>
                             </th>
-                            <th data-field="roles" data-halign="center" data-formatter="rolesFormatter" data-sortable="true">
+                            <th data-field="roles" data-align="center" data-formatter="rolesFormatter" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.roles"/>
                             </th>
-                            <th data-field="email" data-halign="center" data-sortable="true">
+                            <th data-field="email" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.email"/>
                             </th>
                             <th data-field="department" data-halign="center" data-formatter="infoFormatter" data-sortable="true">

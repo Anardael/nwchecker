@@ -21,7 +21,7 @@
     			    </c:forEach>
     			]);
     			if ('${currentUser}' == '${userData.username}') {
-    				disableDeleteBtn();
+    				disableDangerousOptions();
     			}
     			resetRolesDesc();
     		});
@@ -85,7 +85,7 @@
                     <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.roles.caption" />
                     </label>
-                    <form:hidden path="rolesDesc"/>
+                    <form:hidden path="rolesDesc" />
                     <div class="col-sm-4">
                     	<input type="checkbox" id="admin" onclick="resetRolesDesc()" />
                     	<label for="admin">

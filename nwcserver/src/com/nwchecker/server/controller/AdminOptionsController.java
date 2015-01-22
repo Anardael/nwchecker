@@ -78,8 +78,10 @@ public class AdminOptionsController {
 			return "/adminOptions/userEdit";
 		}
 		User user = userService.getUserByUsername(userData.getUsername());
-		userService.deleteUserRoles(user);
-		user.setPassword(getPasswordHash(userData.getPassword()));
+		if (!user.getRoles().isEmpty()) {
+			userService.deleteUserRoles(user);
+		}
+		user = setUserPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
 		user = setUserRoles(user, userData.getRolesDesc());
@@ -89,30 +91,28 @@ public class AdminOptionsController {
 		return "redirect:admin.do";
 	}
 	
-	private String getPasswordHash(String password) {
+	private User setUserPassword(User user, String password) {
 		if (!password.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			password = encoder.encode(password);
+			user.setPassword(password);
 		}
-		return password;
+		return user;
 	}
 	
 	private User setUserRoles(User user, String rolesDesc) {
 		user.setRoles(null);
-		while (!rolesDesc.isEmpty()) {
-			String role = rolesDesc.substring(0, rolesDesc.indexOf(';'));
-			switch (role) {
-				case "ROLE_ADMIN":
-					user.addRoleAdmin();
-					break;
-				case "ROLE_TEACHER":
-					user.addRoleTeacher();
-					break;
-				case "ROLE_USER":
-					user.addRoleUser();
-					break;
-			}
-			rolesDesc = rolesDesc.substring(role.length() + 1, rolesDesc.length());
+		if (rolesDesc.contains("ROLE_ADMIN")) {
+			user.addRoleAdmin();
+		}
+		if (rolesDesc.contains("ROLE_TEACHER")) {
+			user.addRoleTeacher();
+		}
+		if (rolesDesc.contains("ROLE_USER")) {
+			user.addRoleUser();
+		}
+		if (user.getRoles() == null) {
+			user.addRoleUser();
 		}
 		return user;
 	}

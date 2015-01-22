@@ -13,16 +13,17 @@ function showUserRoles(roles) {
     	}
     }
 }
-function disableDeleteBtn() {
+function disableDangerousOptions() {
 	$('#deleteBtn').prop('disabled', true);
+	$('#admin').prop('disabled', true);
 }
 function resetRolesDesc() {
 	var desc = "";
 	if ($('#admin').prop('checked')) {
-		desc += "ROLE_ADMIN;";
+		desc += "ROLE_ADMIN";
 	}
 	if ($('#teacher').prop('checked')) {
-		desc += "ROLE_TEACHER;";
+		desc += "ROLE_TEACHER";
 	}
 	if (!($('#admin').prop('checked')) && !($('#teacher').prop('checked'))) {
 		$('#user').prop('checked', true);
