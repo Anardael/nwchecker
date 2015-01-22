@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("UserService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired

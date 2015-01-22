@@ -54,10 +54,6 @@
             var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
             //length of recieved contest.tasks List:
             var TaskListSize = ${fn:length(contestModelForm.tasks)};
-            // CKEditor initialization
-            $('body').ready(function() {
-            	initializeCKEdior('description', '${param.locale}');
-            });
             //bind sendTaskJsonButton in modal:
             $('body').on("click", ".sendTaskJsonButton", function() {
                 //get id of Modal
@@ -76,14 +72,15 @@
             });
             //add New Task:
             $('body').on("click", "#addnewTaskButton", function() {
-                tryToAddTask('${param.locale}');
+                tryToAddTask('${pageContext.response.locale}');
             });
             $('body').on('click', "#submitContest", function() {
                 submitContest();
             });
             jQuery(function($) {
+            	// CKEditor initialization
                 $('.ckEdit').each(function() {
-                    CKEDITOR.replace($(this).attr('id'));
+                    initializeCKEdior($(this).attr('id'), '${pageContext.response.locale}');
                 });
             });
             $('body').on("click", "#showUserList", function() {
