@@ -79,6 +79,7 @@ public class AdminOptionsController {
 		}
 		User user = userService.getUserByUsername(userData.getUsername());
 		if (!user.getRoles().isEmpty()) {
+			user.setRoles(null);
 			userService.deleteUserRoles(user);
 		}
 		user = setUserPassword(user, userData.getPassword());

@@ -51,7 +51,7 @@ public class User {
     @Expose
     private String info;
     // User role (User,Teacher or Admin).
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Expose
     private Set<Role> roles;
     @Transient
