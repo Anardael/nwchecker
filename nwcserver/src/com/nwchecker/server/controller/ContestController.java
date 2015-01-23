@@ -20,6 +20,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -43,6 +44,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class ContestController {
+
+    private static final Logger LOG
+            = Logger.getLogger(ContestController.class);
 
     @Autowired
     private ContestService contestService;
@@ -88,14 +92,21 @@ public class ContestController {
 
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
+
         boolean accessed = false;
         //check if teacher:
         if (principal != null) {
             //get user:
             UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            //log it:
+            LOG.info(currentUser.getUsername() + " try to add contest");
             //if user has teacher Role:
             if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
                 accessed = true;
+                LOG.info(currentUser.getUsername() + " passed verification for contest adding. Contest creation started.");
+            } else {
+                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
+                LOG.info(currentUser.getUsername() + " haven't passed verification for contest adding. Access denied.");
             }
         }
         //if user haven't acces to contest creation:
@@ -115,6 +126,8 @@ public class ContestController {
         boolean accessed = false;
         if (principal != null) {
             UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            LOG.info(currentUser.getUsername() + " tries to edit contest id=" + id);
+
             //if user has teacher Role:
             if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
                 //get User entity from db:
@@ -123,11 +136,17 @@ public class ContestController {
                     if (teacher.getContest().size() > 0) {
                         for (Contest c : teacher.getContest()) {
                             if (c.getId() == id) {
+                                LOG.info(currentUser.getUsername() + " passed verification for contest editing");
                                 accessed = true;
                             }
                         }
                     }
                 }
+            } else {
+                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
+            }
+            if (accessed == false) {
+                LOG.info(currentUser.getUsername() + " haven't passed verification for contest editing. Access denied.");
             }
         }
         //user doesn't passed valdiation-forward to access denied.
@@ -149,10 +168,27 @@ public class ContestController {
     ) {
         //Json response object:
         ValidationResponse res = new ValidationResponse();
+        boolean accessed = false;
+        if (principal != null) {
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            LOG.info(currentUser.getUsername() + " tries to " + (contestAddForm.getId() == 0 ? "create new" : "edit an existing") + " contest");
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                accessed = true;
+                LOG.info(currentUser.getUsername() + " passed verification for contest saving.");
+            } else {
+                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
+                LOG.info(currentUser + " haven't passed verification for contest saving. Access denied.");
+            }
+        }
+        if (accessed == false) {
+            res.setResult("FAIL");
+            return res;
+        }
         //validation :
         new ContestValidator().validate(contestAddForm, result);
         //if there are errors in field input:
         if (result.hasErrors()) {
+            LOG.info("Contest validation failed.");
             res.setStatus("FAIL");
             List<FieldError> allErrors = result.getFieldErrors();
             List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
@@ -162,6 +198,7 @@ public class ContestController {
             //set all errrors:
             res.setErrorMessageList(errorMesages);
         } else {
+            LOG.info("Contest validation passed.");
             res.setStatus("SUCCESS");
             //set users:
             if (contestAddForm.getId() != 0) {
@@ -176,6 +213,7 @@ public class ContestController {
             }
             //update contest:
             contestService.updateContest(contestAddForm);
+            LOG.info("Contest successfully saved to DB.");
             //set generated id to JSON response:
             res.setResult(String.valueOf(contestAddForm.getId()));
         }
@@ -202,6 +240,21 @@ public class ContestController {
     public @ResponseBody
     LinkedList<UserJson> getusers(@RequestParam("contestId") int contestId, Principal principal
     ) {
+        boolean accessed = false;
+        if (principal != null) {
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            LOG.info(currentUser.getUsername() + " tries to get user access List for contestId=" + contestId);
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                accessed = true;
+                LOG.info(currentUser.getUsername() + " passed verification for getting user Access list.");
+            } else {
+                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
+                LOG.info(currentUser.getUsername() + " haven't passed verification for getting user Access list. Access denied.");
+            }
+        }
+        if (accessed == false) {
+            return null;
+        }
         //create UserJson result list:
         LinkedList<UserJson> result = new LinkedList<UserJson>();
         //get ContestId Model:
@@ -241,8 +294,23 @@ public class ContestController {
 
     @RequestMapping(value = "/setContestUsers.do", method = RequestMethod.POST)
     public @ResponseBody
-    ValidationResponse setContestUsers(@RequestBody ContestUserRecieve users
+    ValidationResponse setContestUsers(@RequestBody ContestUserRecieve users, Principal principal
     ) {
+        boolean accessed = false;
+        if (principal != null) {
+            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            LOG.info(currentUser.getUsername() + " tries to ser user access List for contestId=" + users.getContestId());
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+                accessed = true;
+                LOG.info(currentUser.getUsername() + " passed verification for setting user Access list.");
+            } else {
+                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
+                LOG.info(currentUser.getUsername() + " haven't passed verification for setting user Access list. Access denied.");
+            }
+        }
+        if (accessed == false) {
+            return null;
+        }
         //JSON response class:
         ValidationResponse result = new ValidationResponse();
         //0. get Contest:

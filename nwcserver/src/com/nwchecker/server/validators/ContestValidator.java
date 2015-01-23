@@ -6,9 +6,7 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
