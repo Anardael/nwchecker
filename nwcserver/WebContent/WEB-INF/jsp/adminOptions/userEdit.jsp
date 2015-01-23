@@ -10,11 +10,20 @@
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
+        
+        <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
+        
+        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="${resources}js/userEdit.js"></script>
     <head>
     <body>
     	<script type="text/javascript">
-    		$('body').ready(function() {
+    		DELETE_DIALOG_TITLE   = '<spring:message code="adminPanel.userEdit.deleteDialog.title"/>';
+			DELETE_DIALOG_MESSAGE = '<spring:message code="adminPanel.userEdit.deleteDialog.message"/>';
+			CANCEL_BUTTON         = '<spring:message code="adminPanel.userEdit.deleteDialog.cancelButton"/>';
+			CONFIRM_BUTTON        = '<spring:message code="adminPanel.userEdit.deleteDialog.confirmButton"/>';
+    	
+    		$('body').ready(function() {	
     			showUserRoles([
     				<c:forEach var="role" items="${userData.roles}">
     			    	"${role.role}",
@@ -24,6 +33,12 @@
     				disableDangerousOptions();
     			}
     			resetRolesDesc();
+    		});
+    		$('body').on('click', '#updateBtn', function() {
+    			$('#formUdpateBtn').click();
+    		});
+    		$('body').on('click', '#deleteBtn', function() {
+    			showDeleteDialog();
     		});
     	</script>
     
@@ -121,21 +136,21 @@
                         <form:errors path="info" Class="error" />
                     </div>
                 </div>		
-                <div class="form-group">
-                    <div class="col-sm-offset-4 ">
-                        <div  class="col-sm-3">
-                            <button class="btn btn-info btn-block" id="updateBtn" formaction="changeUser.do">
-                            	<spring:message code="adminPanel.userEdit.update.button" />
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button class="btn btn-warning btn-block" id="deleteBtn" formaction="deleteUser.do">
-                            	<spring:message code="adminPanel.userEdit.delete.button" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <input type="submit" id="formUdpateBtn" formaction="changeUser.do" hidden="true"/>
+                <input type="submit" id="formDeleteBtn" formaction="deleteUser.do" hidden="true"/>
             </form:form>
+            <div class="col-sm-offset-4 ">
+            	<div  class="col-sm-3">
+                	<button class="btn btn-info btn-block" id="updateBtn">
+                    	<spring:message code="adminPanel.userEdit.update.button" />
+                    </button>
+                </div>
+                <div class="col-sm-3">
+                  	<button class="btn btn-warning btn-block" id="deleteBtn">
+                      	<spring:message code="adminPanel.userEdit.delete.button" />
+                    </button>
+                </div>
+            </div>
         </div>
         <jsp:include page="../fragments/footer.jsp" />
     </body>

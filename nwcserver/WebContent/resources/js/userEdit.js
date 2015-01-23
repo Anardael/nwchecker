@@ -1,3 +1,8 @@
+var DELETE_DIALOG_TITLE;
+var DELETE_DIALOG_MESSAGE;
+var CANCEL_BUTTON;
+var CONFIRM_BUTTON;
+
 function showUserRoles(roles) {
     for (var i = 0; i < roles.length; i++) {
     	switch (roles[i]) {
@@ -16,6 +21,27 @@ function showUserRoles(roles) {
 function disableDangerousOptions() {
 	$('#deleteBtn').prop('disabled', true);
 	$('#admin').prop('disabled', true);
+}
+function showDeleteDialog() {
+	BootstrapDialog.show({
+		type:    BootstrapDialog.TYPE_DANGER,
+		title:   DELETE_DIALOG_TITLE,
+		message: DELETE_DIALOG_MESSAGE,
+		buttons: [{
+			icon:   'glyphicon glyphicon-ban-circle',
+			label:  CANCEL_BUTTON,
+			action: function(dialogItself){
+				dialogItself.close();
+			}
+		}, {
+			icon:     'glyphicon glyphicon-trash',
+			label:    CONFIRM_BUTTON,
+			cssClass: 'btn-danger',
+			action:   function(dialogItself){
+				$('#formDeleteBtn').click();
+			}
+		}]
+	});
 }
 function resetRolesDesc() {
 	var desc = "";
