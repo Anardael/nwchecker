@@ -18,10 +18,10 @@
     </appender> 
     
     <!-- all info from controllers appended to file-->
-    <logger name="com.nwchecker.server.controller">
+    <category name="com.nwchecker.server.controller">
         <priority value ="all" /> 
         <appender-ref ref="file" />
-    </logger>
+    </category>
 
     <!-- debug mode appended to console-->
     <root> 
