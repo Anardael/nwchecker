@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,7 +63,7 @@ public class ContestController {
 
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
-        List<Integer> editableContestIndexes = new LinkedList<Integer>();
+        List<String> editableContestIndexes = new LinkedList<String>();
         //get all avaible  сontests from DB:
         List<Contest> all = contestService.getContests();
         //forward all all avaible contests to view:
@@ -80,7 +81,7 @@ public class ContestController {
                     if (teacher.getContest().size() > 0) {
                         for (Contest c : teacher.getContest()) {
                             //set inexes of Contest which Teacher can edit:
-                            editableContestIndexes.add(c.getId());
+                            editableContestIndexes.add("index" + c.getId() + "index");
                         }
                         model.addAttribute("editContestIndexes", editableContestIndexes);
                     }
@@ -90,77 +91,44 @@ public class ContestController {
         return "contest";
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
-
-        boolean accessed = false;
-        //check if teacher:
-        if (principal != null) {
-            //get user:
-            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-            //log it:
-            LOG.info(currentUser.getUsername() + " try to add contest");
-            //if user has teacher Role:
-            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-                accessed = true;
-                LOG.info(currentUser.getUsername() + " passed verification for contest adding. Contest creation started.");
-            } else {
-                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
-                LOG.info(currentUser.getUsername() + " haven't passed verification for contest adding. Access denied.");
-            }
-        }
-        //if user haven't acces to contest creation:
-        if (accessed == false) {
-            model.addAttribute("result", "access denied");
-            return "result";
-        }
+        //get UserDetails:
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        //log it:
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " starts contest creation.");
         //Create new Contest and forward it to contestCreate.jsp
         model.addAttribute("contestModelForm", new Contest());
         return "contestCreate";
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(Model model, @RequestParam("id") int id, Principal principal) {
-        //security:
-        //get user:
         boolean accessed = false;
-        if (principal != null) {
-            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-            LOG.info(currentUser.getUsername() + " tries to edit contest id=" + id);
-
-            //if user has teacher Role:
-            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-                //get User entity from db:
-                User teacher = userService.getUserByUsername(currentUser.getUsername());
-                if (teacher.getContest() != null) {
-                    if (teacher.getContest().size() > 0) {
-                        for (Contest c : teacher.getContest()) {
-                            if (c.getId() == id) {
-                                LOG.info(currentUser.getUsername() + " passed verification for contest editing");
-                                accessed = true;
-                            }
-                        }
-                    }
-                }
-            } else {
-                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
-            }
-            if (accessed == false) {
-                LOG.info(currentUser.getUsername() + " haven't passed verification for contest editing. Access denied.");
-            }
-        }
-        //user doesn't passed valdiation-forward to access denied.
-        if (accessed == false) {
+        //get UserDetails:
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " tries to edit contest id=" + id);
+        //get User entity from db:
+        //check if current User have access to this Contest:
+        boolean haveAccess = contestService.checkIfUserHaveAccessToContest(principal.getName(), id);
+        if (haveAccess == true) {
+            LOG.info("\"" + currentUser.getUsername() + "\"" + " passed verification for contest editing");
+        } else {
+            //user doesn't passed valdiation-forward to access denied.
+            LOG.info("\"" + currentUser.getUsername() + "\"" + " haven't passed verification for contest editing.");
             model.addAttribute("result", "access denied");
             return "result";
         }
-
+        //user passed varification, so:
         //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
         model.addAttribute("contestModelForm", editContest);
         return "contestCreate";
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.POST)
     public @ResponseBody
     ValidationResponse addContest(@ModelAttribute("contestModelForm") Contest contestAddForm,
@@ -168,22 +136,10 @@ public class ContestController {
     ) {
         //Json response object:
         ValidationResponse res = new ValidationResponse();
-        boolean accessed = false;
-        if (principal != null) {
-            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-            LOG.info(currentUser.getUsername() + " tries to " + (contestAddForm.getId() == 0 ? "create new" : "edit an existing") + " contest");
-            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-                accessed = true;
-                LOG.info(currentUser.getUsername() + " passed verification for contest saving.");
-            } else {
-                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
-                LOG.info(currentUser + " haven't passed verification for contest saving. Access denied.");
-            }
-        }
-        if (accessed == false) {
-            res.setResult("FAIL");
-            return res;
-        }
+        //get UserDetails:
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        //add logger info:
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " tries to " + (contestAddForm.getId() == 0 ? "create new" : "edit an existing") + " contest");
         //validation :
         new ContestValidator().validate(contestAddForm, result);
         //if there are errors in field input:
@@ -220,50 +176,25 @@ public class ContestController {
         return res;
     }
 
-    //get taskModalForm by Json request:
-    @RequestMapping(value = "/newTaskForm.do", method = RequestMethod.GET)
-    public String newTaskFormJson(Model model, @RequestParam("taskId") int taskId
-    ) {
-        Contest c = new Contest();
-        List<Task> tasks = new LinkedList<Task>();
-        Task t = new Task();
-        t.setInputFileName("in");
-        t.setOutputFileName("out");
-        tasks.add(t);
-        c.setTasks(tasks);
-        model.addAttribute("taskIndex", taskId);
-        model.addAttribute("contest", c);
-        return "fragments/createNewTaskForm";
-    }
-
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public @ResponseBody
     LinkedList<UserJson> getusers(@RequestParam("contestId") int contestId, Principal principal
     ) {
-        boolean accessed = false;
-        if (principal != null) {
-            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-            LOG.info(currentUser.getUsername() + " tries to get user access List for contestId=" + contestId);
-            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-                accessed = true;
-                LOG.info(currentUser.getUsername() + " passed verification for getting user Access list.");
-            } else {
-                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
-                LOG.info(currentUser.getUsername() + " haven't passed verification for getting user Access list. Access denied.");
-            }
-        }
-        if (accessed == false) {
-            return null;
-        }
+        //get UserDetails:
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        //Log it:
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " gets user access List for contestId=" + contestId);
         //create UserJson result list:
         LinkedList<UserJson> result = new LinkedList<UserJson>();
         //get ContestId Model:
         Contest c = null;
         String author = null;
+        //if it is not new Contest- get Users for this Contest:
         if (contestId != 0) {
             c = contestService.getContestByID(contestId);
         } else {
-            //set author:
+            //else - set author:
             author = principal.getName();
         }
         //get List of all Teacher users
@@ -292,23 +223,29 @@ public class ContestController {
         return result;
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/setContestUsers.do", method = RequestMethod.POST)
     public @ResponseBody
     ValidationResponse setContestUsers(@RequestBody ContestUserRecieve users, Principal principal
     ) {
         boolean accessed = false;
-        if (principal != null) {
-            UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-            LOG.info(currentUser.getUsername() + " tries to ser user access List for contestId=" + users.getContestId());
-            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-                accessed = true;
-                LOG.info(currentUser.getUsername() + " passed verification for setting user Access list.");
-            } else {
-                LOG.warn("Only teachers may have acces to this Method. Please check your Spring security properties.");
-                LOG.info(currentUser.getUsername() + " haven't passed verification for setting user Access list. Access denied.");
+        //get UserDetails:
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " tries to set user access List for contest (id=" + users.getContestId() + ")");
+        //check if current User have access to this Contest:
+        User teacher = userService.getUserByUsername(currentUser.getUsername());
+        if (teacher.getContest() != null) {
+            if (teacher.getContest().size() > 0) {
+                for (Contest c : teacher.getContest()) {
+                    if (c.getId() == users.getContestId()) {
+                        LOG.info("\"" + currentUser.getUsername() + "\"" + " passed verification for editing contest (id=" + users.getContestId() + ")");
+                        accessed = true;
+                    }
+                }
             }
         }
         if (accessed == false) {
+            LOG.info("\"" + currentUser.getUsername() + "\"" + " haven't passed verification for editing contest (id=" + users.getContestId() + ")");
             return null;
         }
         //JSON response class:
@@ -325,6 +262,7 @@ public class ContestController {
         c.setUsers(usersList);
         //update db:
         contestService.mergeContest(c);
+        LOG.info("\"" + currentUser.getUsername() + "\"" + " successfully saved user access list for contest (id=" + users.getContestId() + ")");
         //return SUCCESS status:
         result.setStatus("SUCCESS");
         return result;

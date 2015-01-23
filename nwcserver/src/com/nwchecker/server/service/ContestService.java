@@ -23,5 +23,7 @@ public interface ContestService {
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);
+    
+    public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
 
 }

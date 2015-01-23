@@ -32,7 +32,8 @@
                                     <div class="panel-body">
                                         <div class="edit col-sm-12">
                                             <span class="pull-right">
-                                                <c:if test="${fn:contains(editContestIndexes,contest.id)}">
+                                                <c:set value="index${contest.id}index" var="contestIndex"/>
+                                                <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
                                                     <button class="btnEditContest btn btn-sm btn-info form-group" 
                                                             onclick="location.href = 'editContest.do?id=${contest.id}';"><spring:message code="btn.edit" /></button>
                                                 </c:if>
