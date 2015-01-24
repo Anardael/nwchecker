@@ -54,8 +54,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Expose
     private Set<Role> roles;
-    @Transient
-    private String rolesDesc;
     // Department for teacher users.
     @Column(name = "department")
     @Expose
@@ -141,14 +139,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    
-    public String getRolesDesc() {
-		return rolesDesc;
-	}
-
-	public void setRolesDesc(String rolesDesc) {
-		this.rolesDesc = rolesDesc;
-	}
 
     public String getDepartment() {
         return department;
