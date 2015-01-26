@@ -28,6 +28,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
+    @Expose
     private int userId;
     // User name
     @Column(name = "username")
@@ -72,6 +73,10 @@ public class User {
             inverseJoinColumns = {
                 @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
+
+    @Expose
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserRequest> requests = new HashSet<>();
 
     public User() {
     }
@@ -201,6 +206,14 @@ public class User {
 
     public void setContest(List<Contest> contest) {
         this.contest = contest;
+    }
+
+    public Set<UserRequest> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<UserRequest> requests) {
+        this.requests = requests;
     }
 
     @Override

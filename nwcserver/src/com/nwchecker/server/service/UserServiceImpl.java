@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import java.util.List;
 
+import com.nwchecker.server.model.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,18 @@ public class UserServiceImpl implements UserService {
 		List<Role> roles = userDAO.getUserRoles(user);
 		userDAO.deleteRoles(roles);
 	}
-    
+
+    @Override
+    public void deleteRequest(User user, UserRequest userRequest) {
+        userDAO.deleteRequest(user,userRequest);
+    }
+
+    @Override
+    public void deleteUserRequests(User user) {
+        List<UserRequest> requests = userDAO.getUserRequests(user);
+        userDAO.deleteRequests(requests);
+    }
+
     @Override
     public User getUserById(int id) {
         return userDAO.getUserById(id);
@@ -72,5 +84,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean hasEmail(String email) {
         return userDAO.hasEmail(email);
+    }
+
+    @Override
+    public List<UserRequest> getUserRequests(User user) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUsersWithRequests() {
+        return userDAO.getUsersWithRequests();
     }
 }

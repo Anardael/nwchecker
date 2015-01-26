@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nwchecker.server.model.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.nwchecker.server.model.User;
@@ -56,18 +58,21 @@ public class ProfileController {
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
-			Principal principal, Model model) {
+	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, @RequestParam("userRequest") String userRequest, BindingResult result,
+								  Principal principal, Model model) {
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
 		user.setRoles(logedUser.getRoles());
+		user.setRequests(logedUser.getRequests());
 		if (result.hasErrors()) {
 			return "/profile";
 		} else {
 			logedUser.setDisplayName(user.getDisplayName());
 			logedUser.setDepartment(user.getDepartment());
 			logedUser.setInfo(user.getInfo());
+			setUserRequest(logedUser,userRequest);
 			userService.updateUser(logedUser);
+			user.setRequests(logedUser.getRequests());
 			model.addAttribute("userUpdated", "true");
 			return "/profile";
 		}
@@ -100,5 +105,19 @@ public class ProfileController {
 			model.addAttribute("passwordChanged", "false");
 		}
 		return "/profile";
+	}
+
+	private User setUserRequest(User user, String userRequest) {
+		final UserRequest wantRoleTeacher = new UserRequest(user,"WANT_ROLE_TEACHER");
+		if (user.getRequests().contains(wantRoleTeacher) && !userRequest.contains("WANT_ROLE_TEACHER"))  {
+			for (UserRequest request : user.getRequests()) {
+				if (request.equals(wantRoleTeacher)) {
+					userService.deleteRequest(user,request);
+				}
+			}
+		} else if (!user.getRequests().contains(wantRoleTeacher) && userRequest.contains("WANT_ROLE_TEACHER"))  {
+			user.getRequests().add(wantRoleTeacher);
+		}
+		return user;
 	}
 }

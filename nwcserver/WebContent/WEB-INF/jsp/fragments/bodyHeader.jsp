@@ -74,13 +74,17 @@
                         <security:authorize access="hasRole('ROLE_ADMIN')">
                             <li><a href="admin.do"><spring:message code="admin.caption" /></a></li>
                             <li class="divider"></li>
+                            <li><a href="userRequests.do"><spring:message code="userRequests.caption"/></a></li>
+                            <li class="divider"></li>
                             </security:authorize>
                         <li><a href="profile.do"><spring:message code="profile.caption" /></a></li>
                         <li class="divider"></li>
                         <li><a href="logout.do"><spring:message code="logout.caption" /></a></li>
-                    </ul></li>
-                </security:authorize>
+                    </ul>
+                </li>
+            </security:authorize>
         </ul>
+
     </nav>
     <div class="heading">
         <h1>

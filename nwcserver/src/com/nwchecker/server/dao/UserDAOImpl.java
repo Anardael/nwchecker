@@ -5,6 +5,7 @@ package com.nwchecker.server.dao;
 
 import java.util.List;
 
+import com.nwchecker.server.model.UserRequest;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -41,6 +42,17 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public void deleteRoles(List<Role> roles) {	
 		getHibernateTemplate().deleteAll(roles);
+	}
+
+	@Override
+	public void deleteRequest(User user, UserRequest userRequest) {
+		user.getRequests().remove(userRequest);
+		getHibernateTemplate().delete(userRequest);
+	}
+
+	@Override
+	public void deleteRequests(List<UserRequest> requests) {
+		getHibernateTemplate().deleteAll(requests);
 	}
 
 	@Override
@@ -96,5 +108,19 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<UserRequest> getUserRequests(User user) {
+		@SuppressWarnings("unchecked")
+		List<UserRequest> list = (List<UserRequest>) getHibernateTemplate().find("SELECT requests FROM UserRequest requests INNER JOIN requests.user user WITH user.userId =?", user.getUserId());
+		return list;
+	}
+
+	@Override
+	public List<User> getUsersWithRequests() {
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.requests");
+		return list;
 	}
 }
