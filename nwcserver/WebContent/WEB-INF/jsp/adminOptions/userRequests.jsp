@@ -48,7 +48,6 @@
             <tr>
                 <th data-field="action" data-checkbox="true"></th>
                 <th data-field="userId" data-align="center" data-sortable="true" data-switchable="false">
-                    <spring:message code="userRequests.users.tableHeader.username"/>
                 </th>
                 <th data-field="username" data-align="center" data-sortable="true" data-switchable="false">
                     <spring:message code="userRequests.users.tableHeader.username"/>
@@ -77,8 +76,8 @@
         <div class="form-group ">
             <div class="form-actions pull-centered">
                 <a class="btn btn-primary customButton" type="button" href="acceptUserRequests.do"><spring:message code="userRequests.buttonAccept.caption"/></a>
-                <input type="button" value="<spring:message code="profile.changePasswordButton.caption" />"
-                       class="btn btn-primary customButton" onclick="acceptedUserRequests()"/>
+                <input type="button" value="<spring:message code="userRequests.buttonDecline.caption" />"
+                       class="btn btn-primary customButton" onclick="getids()"/>
             </div>
         </div>
     </div>
