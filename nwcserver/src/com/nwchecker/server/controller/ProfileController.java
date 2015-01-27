@@ -4,7 +4,9 @@ import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nwchecker.server.model.Request;
 import com.nwchecker.server.model.UserRequest;
+import com.nwchecker.server.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,10 +33,13 @@ import com.nwchecker.server.service.UserService;
 public class ProfileController {
 
 	private final UserService	userService;
+	private final RequestService requestService;
+
 
 	@Autowired
-	public ProfileController(UserService userService) {
+	public ProfileController(UserService userService, RequestService requestService) {
 		this.userService = userService;
+		this.requestService = requestService;
 	}
 
 	@Autowired
@@ -53,29 +58,37 @@ public class ProfileController {
 		String username = principal.getName(); // get logged in username
 		User user = userService.getUserByUsername(username);
 		model.addAttribute("userProfile", user);
+		if (!user.getRoles().contains("ROLE_TEACHER") && !requestService.hasObjectRequestWithType(user.getUserId(), "ADD_ROLE_TEACHER")) {
+			model.addAttribute("showRequestTeacher","true");
+		}
 		return "/profile";
 	}
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, @RequestParam("userRequest") String userRequest, BindingResult result,
+	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
 								  Principal principal, Model model) {
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
-		user.setRoles(logedUser.getRoles());
-		user.setRequests(logedUser.getRequests());
 		if (result.hasErrors()) {
 			return "/profile";
 		} else {
 			logedUser.setDisplayName(user.getDisplayName());
 			logedUser.setDepartment(user.getDepartment());
 			logedUser.setInfo(user.getInfo());
-			setUserRequest(logedUser,userRequest);
 			userService.updateUser(logedUser);
-			user.setRequests(logedUser.getRequests());
 			model.addAttribute("userUpdated", "true");
 			return "/profile";
 		}
+	}
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/sendRequestTeacherRole", method = RequestMethod.POST)
+	public String sendRequestTeacherRole(@ModelAttribute("userProfile") User user, BindingResult result,
+								  Principal principal, Model model) {
+			Request request = new Request(user.getUserId(),"ADD_ROLE_TEACHER");
+			requestService.addRequest(request);
+			model.addAttribute("userUpdated", "true");
+			return "/profile";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -105,19 +118,5 @@ public class ProfileController {
 			model.addAttribute("passwordChanged", "false");
 		}
 		return "/profile";
-	}
-
-	private User setUserRequest(User user, String userRequest) {
-		final UserRequest wantRoleTeacher = new UserRequest(user,"WANT_ROLE_TEACHER");
-		if (user.getRequests().contains(wantRoleTeacher) && !userRequest.contains("WANT_ROLE_TEACHER"))  {
-			for (UserRequest request : user.getRequests()) {
-				if (request.equals(wantRoleTeacher)) {
-					userService.deleteRequest(user,request);
-				}
-			}
-		} else if (!user.getRequests().contains(wantRoleTeacher) && userRequest.contains("WANT_ROLE_TEACHER"))  {
-			user.getRequests().add(wantRoleTeacher);
-		}
-		return user;
 	}
 }

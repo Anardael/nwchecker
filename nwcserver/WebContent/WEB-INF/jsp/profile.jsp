@@ -37,24 +37,6 @@
     }
 
 </style>
-<body>
-<script type="text/javascript">
-    $('body').ready(function () {
-        showUserRoles([
-            <c:forEach var="role" items="${userProfile.roles}">
-            "${role.role}",
-            </c:forEach>
-        ]);
-    });
-    $('body').ready(function () {
-        showUserRequests([
-            <c:forEach var="request" items="${userProfile.requests}">
-            "${request.request}",
-            </c:forEach>
-        ]);
-        setRequests();
-    });
-</script>
 <div class="wrapper container">
     <!--including bodyHead -->
     <!-- send name of current page-->
@@ -102,37 +84,14 @@
                 <form:errors path="info" Class="error"/>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label">
-                <spring:message code="profile.roles.caption"/>
-            </label>
-            <input type="text" id="rolesDesc" name="rolesDesc" hidden="true"/>
-
-            <div class="col-sm-4">
-                <input type="checkbox" id="admin" onclick="return false"/>
-                <label for="admin">
-                    <spring:message code="profile.roles.role.admin.caption"/>
-                </label>
-                <br/>
-                <input type="checkbox" id="teacher" onclick="return false"/>
-                <label for="teacher">
-                    <spring:message code="profile.roles.role.teacher.caption"/>
-                </label>
-                <br/>
-                <input type="checkbox" id="user" onclick="return false"/>
-                <label for="user">
-                    <spring:message code="profile.roles.role.user.caption"/>
-                </label>
-                <security:authorize access="!hasRole('ROLE_TEACHER')">
-                    <hr>
-                    <input type="checkbox" id="userRequestTeacher" onclick="setRequests()"/>
-                    <label for="userRequestTeacher">
-                        <spring:message code="profile.roles.role.request.caption"/>
-                    </label>
-                    <input type="text" id="userRequest" name="userRequest" hidden="true"/>
-                </security:authorize>
+        <c:if test="${showRequestTeacher == 'true'}">
+            <div class="form-group">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <a class="col-lg-12 btn btn-primary" type="button" href="sendRequestTeacherRole.do"><spring:message code="profile.roles.role.request.caption"/></a>
+                </div>
             </div>
-        </div>
+        </c:if>
         <c:if test="${userUpdated == 'true'}">
             <div class="form-group">
                 <label class="col-sm-4 control-label"></label>

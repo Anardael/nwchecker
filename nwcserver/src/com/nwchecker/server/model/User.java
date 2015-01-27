@@ -85,7 +85,7 @@ public class User {
         this.userId = userId;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
