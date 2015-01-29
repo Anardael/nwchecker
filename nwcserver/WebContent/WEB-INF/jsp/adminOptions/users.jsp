@@ -28,11 +28,13 @@
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
             <div class="row" style="height: 60%;">
+            	<!-- TABLE -->
                 <c:url var="dataUrl" value="/getUsers.do"/>
                 <table id="usersData" data-toggle="table" data-striped="true"
                        data-url="${dataUrl}" data-method="get" data-cache="false"
                        data-sort-name="username" data-sort-order="asc"
-                       data-pagination="true" data-search="true">
+                       data-pagination="true" data-search="true"
+                       data-show-columns="true" data-minimum-count-columns="2">
                     <thead>
                         <tr>
                             <th data-field="username" data-align="center" data-formatter="usernameFormatter" data-sortable="true">
