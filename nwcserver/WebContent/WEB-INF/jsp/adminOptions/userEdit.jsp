@@ -15,7 +15,7 @@
         
         <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="${resources}js/userEdit.js"></script>
-    <head>
+    </head>
     <body>
     	<script type="text/javascript">
     		DELETE_DIALOG_TITLE   = '<spring:message code="adminPanel.userEdit.deleteDialog.title"/>';
