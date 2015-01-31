@@ -7,7 +7,7 @@
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
-        <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
+        <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
     	<script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>

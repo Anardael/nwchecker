@@ -6,7 +6,7 @@
 <html>
 <head>
     <jsp:include page="../fragments/staticFiles.jsp" />
-    <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
     <script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
@@ -33,6 +33,7 @@
                data-sort-name="username" data-sort-order="asc"
                data-pagination="true" data-show-pagination-switch="true"
                data-search="true" data-clear-search="true"
+               data-show-columns="true" data-minimum-count-columns="2"
                data-click-to-select="true">
             <thead>
             <tr>
