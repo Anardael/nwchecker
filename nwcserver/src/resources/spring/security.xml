@@ -15,6 +15,9 @@
 		<intercept-url pattern="/userEdit**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/changeUser**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/deleteUser**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/userRequests**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/getUsersWithRequests**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/acceptUserRequests**" access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/login.do"
 			authentication-failure-url="/login.do?error" 
 		/>

@@ -8,6 +8,7 @@
 
 
 <link href="${resources}css/bootstrap.css" rel="stylesheet"/>
+<link href="${resources}css/bootstrap-submenu.css" rel="stylesheet"/>
 <link href="${resources}css/styles.css" rel="stylesheet"/>
 
 

@@ -11,11 +11,6 @@
     <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
     <script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
     <script type="text/javascript" src="${resources}js/userRequests.js" ></script>
-    <style>
-        .customButton {
-            width: 150px;
-        }
-    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -36,8 +31,9 @@
         <table id="usersData" data-toggle="table" data-striped="true"
                data-url="${dataUrl}" data-method="get" data-cache="false"
                data-sort-name="username" data-sort-order="asc"
-               data-show-columns="true"
-               data-pagination="true" data-search="true" data-click-to-select="true">
+               data-pagination="true" data-show-pagination-switch="true"
+               data-search="true" data-clear-search="true"
+               data-click-to-select="true">
             <thead>
             <tr>
                 <th data-field="action" data-checkbox="true"></th>
@@ -67,13 +63,18 @@
             </tr>
             </thead>
         </table>
-        <div class="form-group ">
-            <div class="form-actions pull-centered">
-                <a class="btn btn-primary customButton" type="button" href="acceptUserRequests.do"><spring:message code="userRequests.buttonAccept.caption"/></a>
-                <input type="button" value="<spring:message code="userRequests.buttonDecline.caption" />"
-                       class="btn btn-primary customButton" onclick="getids()"/>
-            </div>
+        <div class="col-sm-2">
+           	<button type="button" class="btn btn-primary btn-block" onclick="acceptUserRequests()">
+           		<spring:message code="userRequests.buttonAccept.caption"/>
+           	</button>
         </div>
+        <form>
+            <div class="col-sm-2">
+            	<button type="submit" class="btn btn-warning btn-block" formaction="userRequests.do" formmethod="get">
+            		<spring:message code="userRequests.buttonDecline.caption" />
+            	</button>
+            </div>
+        </form>
     </div>
 
 </div>

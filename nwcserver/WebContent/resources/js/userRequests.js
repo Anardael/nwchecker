@@ -2,6 +2,11 @@
  * Created by ReaktorDTR on 26.01.2015.
  */
 
+function acceptUserRequests() {
+	//getids();
+	alert('Do something with data');
+}
+
 function getids() {
 	var indexes = {};
 	var index = 0;

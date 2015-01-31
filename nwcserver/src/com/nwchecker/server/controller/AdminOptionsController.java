@@ -47,8 +47,8 @@ public class AdminOptionsController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Principal principal) {
-		LOG.info("\"" + principal.getName() + "\" tries to access administrator page.");
-		LOG.info("\"" + principal.getName() + "\" have access to administrator page.");
+		LOG.info("\"" + principal.getName() + "\" tries to access administrator page(users view).");
+		LOG.info("\"" + principal.getName() + "\" have access to administrator page(users view).");
 		return "adminOptions/users";
 	}
 	
@@ -57,8 +57,7 @@ public class AdminOptionsController {
 	public @ResponseBody String getUsers(Principal principal) {
 		LOG.info("\"" + principal.getName() + "\" tries to access users list.");
 		List<User> users = userService.getUsers();
-		Gson gson = 
-				new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String jsonData = gson.toJson(users.toArray());
 		LOG.info("\"" + principal.getName() + "\" received users list.");
 		return jsonData;
@@ -66,8 +65,11 @@ public class AdminOptionsController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
-	public String user(@RequestParam("Username") String username, 
+	public String user(@RequestParam(value = "Username", required = false) String username, 
 						Model model, Principal principal) {
+		if (username == null) {
+			username = principal.getName();
+		}
 		LOG.info("\"" + principal.getName() + "\" tries to edit user \"" + username + "\".");
 		User user = userService.getUserByUsername(username);
 		user.setPassword("");
