@@ -5,17 +5,15 @@
 function acceptUserRequests() {
 	var users = getids();
 	$.ajax({
-		url:"/NWCServer/acceptUserRequests.do",
+		url:"acceptUserRequests.do",
 		type:"POST",
 		data: {arrayUsersUsername:users},
 		success:function(data){
-			alert(data);
-			$("#output").append( data );
+			$('#usersData').bootstrapTable('refresh');
 		},
 		error: function() {
-			console.log('fail');   // doesn't print....
-			console.log(typeof data); // prints 'undefined'
-			$("#output").append('fail');
+			console.log('fail'); 
+			console.log(typeof data); 
 		}
 	});
 }
@@ -23,17 +21,15 @@ function acceptUserRequests() {
 function declineUserRequests() {
 	var users = getids();
 	$.ajax({
-		url:"/NWCServer/declineUserRequests.do",
+		url:"declineUserRequests.do",
 		type:"POST",
 		data: {arrayUsersUsername:users},
 		success:function(data){
-			alert(data);
-			$("#output").append( data );
+			$('#usersData').bootstrapTable('refresh');
 		},
 		error: function() {
-			console.log('fail');   // doesn't print....
-			console.log(typeof data); // prints 'undefined'
-			$("#output").append('fail');
+			console.log('fail');   
+			console.log(typeof data);
 		}
 	});
 }
