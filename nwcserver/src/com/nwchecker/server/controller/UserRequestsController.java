@@ -1,10 +1,9 @@
 package com.nwchecker.server.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.nwchecker.server.json.UserRequestsJson;
 import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,10 +14,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.security.Principal;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -53,20 +54,53 @@ public class UserRequestsController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/getUsersWithRequests", method = RequestMethod.GET)
-    public @ResponseBody String getUsersWithRequests(Principal principal) {
-    	LOG.info("\"" + principal.getName() + "\" tries to access users requests list.");
-    	List<User> users = userService.getUsersWithRequests();
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        String jsonData = gson.toJson(users.toArray());
+       @RequestMapping(value = "/getUsersWithRequests", method = RequestMethod.GET)
+       @ResponseBody
+       public List<UserRequestsJson> getUsersWithRequests(Principal principal) {
+        LOG.info("\"" + principal.getName() + "\" tries to access users requests list.");
+        List<User> users = userService.getUsersWithRequests();
+        LinkedList<UserRequestsJson> userRequestsJson = new LinkedList<>();
+        for (User user : users) {
+            UserRequestsJson ur = new UserRequestsJson(user);
+            userRequestsJson.add(ur);
+        }
         LOG.info("\"" + principal.getName() + "\" received users requests list.");
-        return jsonData;
+        return userRequestsJson;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/acceptUserRequests", method = RequestMethod.POST)
-    public String acceptUserRequests() {
-    	LOG.info("Accessed \"/acceptUserRequests.do\"");
+    public String acceptUserRequests(@RequestParam("arrayUsersUsername[]") String[] usersUsername) {
+        LOG.info("Accessed \"/acceptUserRequests.do\"");
+
+        for (String username : usersUsername) {
+            User user = userService.getUserByUsername(username);
+            UserRequest wantRoleTeacher = new UserRequest(user,"WANT_ROLE_TEACHER");
+            for (UserRequest request : user.getRequests()) {
+                if (request.equals(wantRoleTeacher)) {
+                    userService.deleteRequest(user,request);
+                    user.addRoleTeacher();
+                }
+            }
+            userService.updateUser(user);
+        }
+        return "success";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping(value = "/declineUserRequests", method = RequestMethod.POST)
+    public String declineUserRequests(@RequestParam("arrayUsersUsername[]") String[] usersUsername) {
+
+        for (String username : usersUsername) {
+            User user = userService.getUserByUsername(username);
+            UserRequest wantRoleTeacher = new UserRequest(user,"WANT_ROLE_TEACHER");
+            for (UserRequest request : user.getRequests()) {
+                if (request.equals(wantRoleTeacher)) {
+                    userService.deleteRequest(user,request);
+                }
+            }
+            userService.updateUser(user);
+        }
         return "adminOptions/userRequests";
     }
 }

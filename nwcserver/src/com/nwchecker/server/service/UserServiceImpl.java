@@ -1,16 +1,15 @@
 package com.nwchecker.server.service;
 
-import java.util.List;
-
+import com.nwchecker.server.dao.UserDAO;
+import com.nwchecker.server.model.Role;
+import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.nwchecker.server.dao.UserDAO;
-import com.nwchecker.server.model.Role;
-import com.nwchecker.server.model.User;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("UserService")
 @Transactional
@@ -51,12 +50,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserRequests(User user) {
-        List<UserRequest> requests = userDAO.getUserRequests(user);
-        userDAO.deleteRequests(requests);
-    }
-
-    @Override
     public User getUserById(int id) {
         return userDAO.getUserById(id);
     }
@@ -87,8 +80,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserRequest> getUserRequests(User user) {
-        return null;
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override

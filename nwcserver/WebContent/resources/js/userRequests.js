@@ -3,12 +3,43 @@
  */
 
 function acceptUserRequests() {
-	//getids();
-	alert('Do something with data');
+	var users = getids();
+	$.ajax({
+		url:"/NWCServer/acceptUserRequests.do",
+		type:"POST",
+		data: {arrayUsersUsername:users},
+		success:function(data){
+			alert(data);
+			$("#output").append( data );
+		},
+		error: function() {
+			console.log('fail');   // doesn't print....
+			console.log(typeof data); // prints 'undefined'
+			$("#output").append('fail');
+		}
+	});
+}
+
+function declineUserRequests() {
+	var users = getids();
+	$.ajax({
+		url:"/NWCServer/declineUserRequests.do",
+		type:"POST",
+		data: {arrayUsersUsername:users},
+		success:function(data){
+			alert(data);
+			$("#output").append( data );
+		},
+		error: function() {
+			console.log('fail');   // doesn't print....
+			console.log(typeof data); // prints 'undefined'
+			$("#output").append('fail');
+		}
+	});
 }
 
 function getids() {
-	var indexes = {};
+	var indexes = [];
 	var index = 0;
 	var table = $('#usersData');
 	table.find('tbody tr.selected').each(function() {
@@ -17,4 +48,6 @@ function getids() {
 		index++;
 	});
 	console.log(indexes);
+	return indexes;
+
 }

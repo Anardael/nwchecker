@@ -1,23 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
 <head>
-    <jsp:include page="../fragments/staticFiles.jsp" />
+    <jsp:include page="../fragments/staticFiles.jsp"/>
     <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
-    <script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
-    <script type="text/javascript" src="${resources}js/userRequests.js" ></script>
+    <script type="text/javascript"
+            src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
+    <script type="text/javascript" src="${resources}js/usersFormatters.js"></script>
+    <script type="text/javascript" src="${resources}js/userRequests.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-    ROLE_ADMIN   = '<spring:message code="userRequests.users.table.role.admin" />';
+    ROLE_ADMIN = '<spring:message code="userRequests.users.table.role.admin" />';
     ROLE_TEACHER = '<spring:message code="userRequests.users.table.role.teacher" />';
-    ROLE_USER    = '<spring:message code="userRequests.users.table.role.user" />';
-    UNDEFINED    = '<spring:message code="userRequests.users.table.role.undefined" />';
+    ROLE_USER = '<spring:message code="userRequests.users.table.role.user" />';
+    UNDEFINED = '<spring:message code="userRequests.users.table.role.undefined" />';
 </script>
 <div class="wrapper container">
     <!--Including bodyHead -->
@@ -37,9 +38,7 @@
                data-click-to-select="true">
             <thead>
             <tr>
-                <th data-field="action" data-checkbox="true"></th>
-                <th data-field="userId" data-align="center" data-sortable="true" data-switchable="false">
-                </th>
+                <th data-field="checked" data-checkbox="true"></th>
                 <th data-field="username" data-align="center" data-sortable="true" data-switchable="false">
                     <spring:message code="userRequests.users.tableHeader.username"/>
                 </th>
@@ -58,27 +57,27 @@
                 <th data-field="info" data-visible="false" data-align="center" data-sortable="true">
                     <spring:message code="userRequests.users.tableHeader.info"/>
                 </th>
-                <th data-field="requests" data-align="center" data-sortable="true" data-formatter="requestsFormatter" data-switchable="false">
-                <spring:message code="userRequests.users.tableHeader.requests"/>
+                <th data-field="requests" data-align="center" data-sortable="true" data-formatter="requestsFormatter"
+                    data-switchable="false">
+                    <spring:message code="userRequests.users.tableHeader.requests"/>
                 </th>
             </tr>
             </thead>
         </table>
-        <div class="col-sm-2">
-           	<button type="button" class="btn btn-primary btn-block" onclick="acceptUserRequests()">
-           		<spring:message code="userRequests.buttonAccept.caption"/>
-           	</button>
-        </div>
-        <form>
+        <div>
             <div class="col-sm-2">
-            	<button type="submit" class="btn btn-warning btn-block" formaction="userRequests.do" formmethod="get">
-            		<spring:message code="userRequests.buttonDecline.caption" />
-            	</button>
+                <button type="button" class="btn btn-primary btn-block" onclick="acceptUserRequests()">
+                    <spring:message code="userRequests.buttonAccept.caption"/>
+                </button>
             </div>
-        </form>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-warning btn-block" onclick="declineUserRequests()">
+                    <spring:message code="userRequests.buttonDecline.caption"/>
+                </button>
+            </div>
+        </div>
     </div>
-
 </div>
-<jsp:include page="../fragments/footer.jsp" />
+<jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

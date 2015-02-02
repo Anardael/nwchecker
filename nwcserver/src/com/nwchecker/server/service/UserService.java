@@ -1,9 +1,10 @@
 package com.nwchecker.server.service;
 
-import java.util.List;
-
+import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -16,8 +17,6 @@ public interface UserService {
 	public void deleteUserRoles(User user);
 
 	public void deleteRequest(User user, UserRequest userRequest);
-
-	public void deleteUserRequests(User user);
         
     public User getUserById(int id);
 
@@ -27,12 +26,12 @@ public interface UserService {
 	
 	public List<User> getUsersByRole(String role);
 
-	public List<UserRequest> getUserRequests(User user);
-
 	public List<User> getUsersWithRequests();
 
 	public boolean hasUsername(String username);
 
 	public boolean hasEmail(String email);
+
+	public void setUserDAO(UserDAO userDAO);
 
 }
