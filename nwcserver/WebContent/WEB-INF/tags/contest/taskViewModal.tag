@@ -6,17 +6,19 @@
 <%@ attribute name="contestId" required="true"%>
 <%@ attribute name="taskId" required="true"%>
 
-<form:form  modelAttribute="${task}" class="form-horizontal">
-    <div id="taskView_${contestId}_${taskId}" class="modal fade col-sm-12"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header modal-header-info col-sm-12">
+<form:form  id="taskViewForm_${contestId}_${taskId}" modelAttribute="${task}" action="nothing" class="form-horizontal">
+    <div id="taskView_${contestId}_${taskId}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " style="width: 85%">
+            <div class="modal-content ">
+                <div class="modal-header modal-header-info">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">${task.title}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="taskDescription col-sm-12" >
-                        ${task.description}
+                    <div class="row">
+                        <div class="taskDescription col-sm-12" >
+                            ${task.description}
+                        </div>
                     </div>
                     <div class="form-group col-sm-12">
                         <spring:message code="taskCreate.memoryLimit" var="memoryLimit"/>
@@ -71,6 +73,8 @@
                         <div class="col-sm-2">
                             <label class="control-label">${task.outputFileName}</label>
                         </div>
+                    </div>
+                    <div class="row">
                     </div>
                 </div>
                 <div class="modal-footer ">

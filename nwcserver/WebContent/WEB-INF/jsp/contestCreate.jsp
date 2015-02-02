@@ -7,6 +7,11 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/> 
 <html>
+    <style>
+        label.btn-primary{
+            width: 120px;
+        }
+    </style>
     <!--including head -->
     <head>    
         <jsp:include page="fragments/staticFiles.jsp" />  
@@ -19,6 +24,7 @@
         <script type="text/javascript" src="${resources}js/maskInput.js"></script>
         <script type="text/javascript" src="${resources}js/moment.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="${resources}js/includedJS/bootstrap-filestyle.min.js"></script>
 
 
         <script type="text/javascript" src="${resources}js/taskCreateAddLink.js"></script>
@@ -29,6 +35,7 @@
         <script type="text/javascript" src="${resources}js/ckeditorInit.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
         <script type="text/javascript" src="${resources}js/contestInit.js"></script>
+        <script type="text/javascript" src="${resources}js/contestUsers.js"></script>
     </head>
     <body>
         <script type="text/javascript">
@@ -52,6 +59,18 @@
             //success modal:
             var successContestSave = "<spring:message code="contest.successSave"/>";
             var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
+
+            //contestUserAccessListWarning:
+            var emptyUserListHeader = "<spring:message code="contest.userList.EmptyListHeader"/>";
+            var emptyUserListBody = "<spring:message code="contest.userList.EmptyListBody"/>";
+            var uploadTestFileButton = "<spring:message code="taskCreate.uploadFileButton"/>";
+            //taskTestAddButton:
+            var newTest = "<spring:message code="taskCreate.newTest" />";
+            var taskAddTestButton = "<spring:message code="task.tests.header"/>";
+            //task test files deleting:
+            var testDeletedHeader = "<spring:message code="taskCreate.testDeleteHeader"/>";
+            var testDeletedBody = "<spring:message code="taskCreate.testDeleteBody"/>";
+            var testDeleteQuestion = "<spring:message code="taskCreate.testDeleteQuestion" />";
             //length of recieved contest.tasks List:
             var TaskListSize = ${fn:length(contestModelForm.tasks)};
             //bind sendTaskJsonButton in modal:
@@ -60,7 +79,7 @@
                 var id = $(this).attr("data-modalId");
                 var idInt = parseInt(id);
                 //call doPostJson method from taskEditing.js:
-                doPostJson(idInt);
+                preparePostTaskJson(idInt);
             });
             //bind deleteButtonEvent:
             $('body').on("click", ".buttonDeleteTask", function() {
@@ -78,7 +97,7 @@
                 submitContest();
             });
             jQuery(function($) {
-            	// CKEditor initialization
+                // CKEditor initialization
                 $('.ckEdit').each(function() {
                     initializeCKEdior($(this).attr('id'), '${pageContext.response.locale}');
                 });

@@ -38,7 +38,7 @@ public class Task {
     private Contest contest;
 
     @Column(name = "title")
-    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}")
+    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
     private String title;
@@ -84,11 +84,11 @@ public class Task {
     @Size(max = 500)
     private String forumLink;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskData> inOutData;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
 
@@ -204,4 +204,8 @@ public class Task {
         this.theoryLinks = theoryLinks;
     }
 
+    @Override
+    public boolean equals(Object c) {
+        return (c != null && c instanceof Task && ((Task) c).getId() == this.id);
+    }
 }

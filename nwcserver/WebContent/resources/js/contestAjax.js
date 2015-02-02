@@ -1,4 +1,3 @@
-
 function sendJsonContest() {
     //update CKEditors content for accessability of textarea data:
     updateCKEditors();
@@ -8,7 +7,7 @@ function sendJsonContest() {
     form.find('.help-inline').empty();
     //posting ContestForm to server:
     return $.ajax({
-        url: "/NWCServer/addContest.do",
+        url: "addContest.do",
         type: 'POST',
         data: $('#contestForm').serialize()
     });
@@ -30,12 +29,6 @@ function contestAjaxFailed(title, modalMessage, data) {
     }
 }
 
-function saveContestFields() {
-    var form = $('#contestForm');
-    contestTitle = form.find('#title').val();
-    contestStarts = form.find('#starts').val();
-    contestDuration = form.find('#duration').val();
-}
 function updateCKEditors() {
     $('.ckEdit').each(function() {
         var $textarea = $(this);

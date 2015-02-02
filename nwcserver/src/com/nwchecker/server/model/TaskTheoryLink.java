@@ -24,7 +24,7 @@ public class TaskTheoryLink {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Task task;
 
     @Column(name = "link")

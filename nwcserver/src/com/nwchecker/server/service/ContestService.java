@@ -5,6 +5,7 @@
  */
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import java.util.List;
 
@@ -14,16 +15,20 @@ import java.util.List;
  */
 public interface ContestService {
 
+    public void setContestDAO(ContestDAO dao);
+
+    public void setUserService(UserService userService);
+
     public void addContest(Contest c);
 
     public void updateContest(Contest c);
-    
+
     public void mergeContest(Contest c);
 
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);
-    
+
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
 
 }

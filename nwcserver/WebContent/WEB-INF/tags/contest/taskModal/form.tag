@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="contest" uri="/tlds/ContestTags"%>
@@ -5,15 +7,14 @@
 <%@ tag description="TaskModalForm" pageEncoding="UTF-8"%>
 <spring:url value="/resources/" var="resources"/> 
 <%-- The list of normal or fragment attributes can be specified here: --%>
-
-<%@ attribute name="taskModelName" required="true"%>
+<%@ attribute name="taskModelName" required="true" %>
 <%@ attribute name="taskId" required="true"%>
 <%@ attribute name="formUrl" required="true" %>
 <spring:url value="${formUrl}" var="processedFormUrl" />
 
 <%-- any content can be specified here e.g.: --%>
 <form:form id="taskModalForm_${taskId}" modelAttribute="${taskModelName}" action="${processedFormUrl}" class="form-horizontal">
-    <div id="taskModal_${taskId}" class="modal fade "  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="taskModal_${taskId}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " style="width: 85%">
             <div class="modal-content ">
                 <div class="modal-header modal-header-info">
@@ -73,27 +74,35 @@
                                 <span class="help-inline control-label"></span>
                             </div>
                         </div>
-                        <%--<div class="form-group">
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.inputData" />:</label>
-                            <div class="col-sm-2">
-                                <span class="btn btn-default btn-file">
-                                    Browse <input type="file" name="inputFile">
-                                </span>
+                        <div class="form-group fileHeaders">
+                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.verificationData"/>:</label>
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <label class="control-label">
+                                    <spring:message code="taskCreate.inputData" />
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    <spring:message code="taskCreate.outputData" />
+                                </label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><spring:message code="taskCreate.outputData" />:</label>
-                            <div class="col-sm-2">
-                                <span class="btn btn-default btn-file">
-                                    Browse <input type="file" name="outputFile">
-                                </span>
-                            </div>
-                        </div>--%>
+                        <div class="tests" avaible="${fn:length(contestModelForm.tasks[taskId].inOutData)}">
+                            <%-- pattern for future files: --%>
+                            <contest:taskTestFiles taskId="${taskId}" row="pattern" hidden="hidden=\"true\""/>
+                            <%-- go through all current taskData in task --%>
+                            <c:forEach items="${contestModelForm.tasks[taskId].inOutData}" var="data" varStatus="row">
+                                <contest:downloadTaskTestFiles taskId="${taskId}" row="${row.index}" contestId="2" testId="${data.id}"/>
+                            </c:forEach>
+                        </div>
+                        <div class="col-sm-offset-2"  style="text-align: center; margin-bottom: 20px; ">
+                            <button type="button" class="btn btn-primary" style="margin-right: 30px" onclick="addNewTestCouple(${taskId})" ><spring:message code="task.tests.addButton"/></button>
+                        </div>
                     </fieldset>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
-                    <button  type="button" class="btn btn-primary sendTaskJsonButton" data-modalId="${taskId}"><spring:message code="btn.save" /></button>
+                    <button type="button" class="btn btn-primary sendTaskJsonButton" data-modalId="${taskId}"><spring:message code="btn.save" /></button>
                 </div>
             </div>
         </div>

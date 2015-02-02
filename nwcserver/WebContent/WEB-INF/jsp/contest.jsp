@@ -9,8 +9,9 @@
 <html>
     <!--including head -->
     <head>
-        <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
         <jsp:include page="fragments/staticFiles.jsp" />    
+        <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
+        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
     </head>
     <body>
         <div class="wrapper container">
@@ -21,6 +22,13 @@
             </jsp:include>
             <section>
                 <div id="accordion" class="form-group col-sm-12" style="margin:auto">
+                    <security:authorize access="hasRole('ROLE_TEACHER')">
+                        <c:if test="${fn:length(contests) gt 8}">
+                            <div class="col-sm-6 col-sm-offset-3"  style="text-align: center; margin-bottom: 20px">
+                                <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'"><spring:message code="contest.createButton.caption" /></button>
+                            </div>
+                        </c:if> 
+                    </security:authorize>
                     <ul class="col-sm-offset-2 col-sm-8 ">
                         <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center"><spring:message code="contest.caption" /></li>
                             <c:forEach items="${contests}" var="contest" varStatus="row">

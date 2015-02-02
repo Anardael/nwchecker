@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<spring:url value="/resources/" var="resources"/> 
 <%@ tag description="TaskModalFormInput" pageEncoding="UTF-8"%>
 <%@ attribute name="element" required="true"%>
 <%@ attribute name="label" required="true"%>

@@ -59,16 +59,28 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
         User teacher = userService.getUserByUsername(username);
-        if (teacher.getContest() != null) {
-            if (teacher.getContest().size() > 0) {
-                for (Contest c : teacher.getContest()) {
-                    if (c.getId() == ContestId) {
-                        return true;
-                    }
+        if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
+            for (Contest c : teacher.getContest()) {
+                if (c.getId() == ContestId) {
+                    return true;
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public void setContestDAO(ContestDAO dao) {
+        contestDAO = dao;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    @Override
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 }

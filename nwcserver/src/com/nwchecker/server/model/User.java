@@ -51,7 +51,7 @@ public class User {
     @Expose
     private String info;
     // User role (User,Teacher or Admin).
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     @Expose
     private Set<Role> roles;
     // Department for teacher users.
@@ -65,7 +65,7 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
                 @JoinColumn(name = "user_id")},

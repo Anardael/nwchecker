@@ -19,8 +19,8 @@
     </appender> 
     
     <!-- all info from controllers appended to file-->
-    <logger name="com.nwchecker.server.controller">
-        <priority value ="all" /> 
+    <logger name="com.nwchecker.server.controller" additivity="false">
+        <level value ="all" /> 
         <appender-ref ref="file" />
     </logger>
 

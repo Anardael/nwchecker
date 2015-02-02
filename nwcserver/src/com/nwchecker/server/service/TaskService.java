@@ -5,6 +5,7 @@
  */
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.dao.TaskDAO;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskTheoryLink;
@@ -17,15 +18,21 @@ import java.util.List;
  */
 public interface TaskService {
 
+    void setDAO(TaskDAO dao);
+
     Task getTaskById(int id);
-    
+
     List<Task> getTasksByContestId(int id);
 
     List<Task> getTasks();
 
     void addTask(Task t);
-    
+
     void updateTask(Task t);
-    
+
     void deleteTaskById(int id);
+
+    TaskData getTaskData(int id);
+
+    void deleteTaskData(int id);
 }

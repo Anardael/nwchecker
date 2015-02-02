@@ -6,12 +6,14 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Task;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@Component
 public class TaskValidator implements Validator {
 
-    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}";
+    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}";
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <table data-toggle="table"
-                       data-url="/NWCServer/getContestUsersList.do?contestId=${contestId}"
+                       data-url="getContestUsersList.do?contestId=${contestId}"
                        data-classes="table table-hover"
                        data-click-to-select="true"
                        >

@@ -18,7 +18,7 @@ function createNewTask(locale) {
     //get taskModalForm pattern:
     //get parameter "taskId" indicates index of current "newTask".
     //TaskListSize is declared in contestCreate.jsp
-    $.get("/NWCServer/newTaskForm.do?taskId=" + TaskListSize, 0, function(newMod) {
+    $.get("newTaskForm.do?taskId=" + TaskListSize, 0, function(newMod) {
         //append TaskModalForm.html in taskList div:
         $('.taskList').append(newMod);
         //set in/out:
@@ -42,7 +42,7 @@ function createNewTask(locale) {
 
         //set CK:
         $('#taskModal_' + TaskListSize + ' .ckEdit').each(function() {
-        	initializeCKEdior($(this).attr('id'), locale);
+            initializeCKEdior($(this).attr('id'), locale);
         });
 
         //set digits only:
@@ -53,6 +53,8 @@ function createNewTask(locale) {
                 return false;
             }
         });
+        //set upload buttons:
+        $('#taskModal_' + TaskListSize + ' :file').filestyle({input: false, buttonText: uploadTestFileButton});
         //increment TaskListSize:
         TaskListSize++;
     });
@@ -84,7 +86,8 @@ function prepareDeleteTask(index) {
     });
 }
 function sendAjaxDeleteTask(index) {
-    $.get('/NWCServer/deleteTaskJson.do?taskId=' + index, 0, function(response) {
+    var contId = $('#id').val();
+    $.get('deleteTaskJson.do?taskId=' + index + "&contestId=" + contId, 0, function(response) {
         if (response.status == "SUCCESS") {
             BootstrapDialog.show({
                 title: taskDeleteHeader,
@@ -136,4 +139,99 @@ function deleteTask(index) {
         }
     }
     TaskListSize--;
+}
+function addNewTestCouple(taskId) {
+    //get pattern clone:
+    var clone = $('#test_0_pattern').clone();
+    //get last test files couple:
+    var last = $('#taskModalForm_' + taskId + ' .tests .test').last();
+    //get last index:
+    var lastId = last.attr('id');
+    var newId;
+    if (lastId.indexOf('pattern') != -1) {
+        newId = 0;
+    } else {
+        lastId = lastId.substring(lastId.indexOf('_') + 1, lastId.length);
+        lastId = lastId.substring(lastId.indexOf('_') + 1, lastId.length);
+        newId = parseInt(lastId);
+        //set new Id:
+        newId++;
+    }
+    //change fields:
+    clone.attr('id', 'test_' + taskId + '_' + newId);
+    clone.removeAttr('hidden');
+    clone.find('[id^=input]').attr('id', 'input_' + taskId + '_' + newId);
+    clone.find('[for^=input]').attr('for', 'input_' + taskId + '_' + newId);
+    clone.find('[id^=output]').attr('id', 'output_' + taskId + '_' + newId);
+    clone.find('[for^=output]').attr('for', 'output_' + taskId + '_' + newId);
+    //set label:
+    clone.find('.testTitle').html(newTest + ':');
+    //append to Tests:
+    clone.appendTo('#taskModalForm_' + taskId + ' .tests');
+    //set buttons js:
+    $('#test_' + taskId + '_' + newId + ' :file').filestyle({input: false, icon: false, buttonName: "btn-primary", buttonText: uploadTestFileButton});
+}
+function replaceTaskTestFiles(contestId, taskId, localTaskId) {
+//get current tst files from server:
+    $.ajax({
+        url: 'getAvaibleTests.do?contestId=' + contestId + "&taskId=" + taskId + "&localTaskId=" + localTaskId,
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        success: function(response) {
+            $('#taskModal_' + localTaskId + ' .tests').replaceWith(response);
+            //set filestyle:
+            $('.newTest:not([hidden]) :file').filestyle({input: false, icon: false, buttonName: "btn-primary", buttonText: uploadTestFileButton});
+        }
+    });
+}
+
+function deleteNewTest(button) {
+    var parent = button.parentNode.parentNode;
+    document.getElementById(parent.id).remove();
+}
+
+function deleteAvaibleTest(button, testCurrentId) {
+    //first of all: ajax to server:
+    var contestId = $('#id').val();
+    $.ajax({
+        url: 'deleteTaskTestFile.do?contestId=' + contestId + "&taskTestId=" + testCurrentId,
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        success: function(response) {
+            if (response.status == "SUCCESS") {
+                BootstrapDialog.show({
+                    title: testDeletedHeader,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    message: testDeletedBody,
+                });
+            }
+        }
+    });
+    //now remove div:
+    var parent = button.parentNode.parentNode;
+    document.getElementById(parent.id).remove();
+}
+
+function prepateDeleteAvaibleTest(button, testCurrentId) {
+    BootstrapDialog.show({
+        type: BootstrapDialog.TYPE_WARNING,
+        title: testDeletedHeader,
+        message: testDeleteQuestion,
+        buttons: [{
+                label: btnClose,
+                action: function(dialogItself) {
+                    dialogItself.close();
+                }
+            }, {
+                label: btnSubmit,
+                cssClass: 'btn-primary',
+                action: function(dialogItself) {
+                    dialogItself.close();
+                    deleteAvaibleTest(button, testCurrentId);
+                }
+            }
+        ]
+    });
 }

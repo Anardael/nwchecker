@@ -6,18 +6,18 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
  *
  * @author Роман
  */
+@Component
 public class ContestValidator implements Validator {
 
-    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}";
+    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}";
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -47,17 +47,6 @@ public class ContestValidator implements Validator {
         if (errors.hasFieldErrors("duration")) {
             errors.rejectValue("duration", "Pattern.duration");
         }
-
-        //if Tasks consist: validate each Task using it own Validator:
-        /*if (c.getTasks() != null) {
-         if (c.getTasks().size() > 0) {
-         //Tasks validation:
-         for (int i = 0; i < c.getTasks().size(); i++) {
-         //validate each Task:
-         ValidationUtils.invokeValidator(new TaskValidator(), c.getTasks().get(i), errors);
-         }
-         }
-         }*/
     }
 
 }

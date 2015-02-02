@@ -34,7 +34,7 @@ public class Contest {
     private int id;
 
     @Column(name = "title")
-    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ]{0,}")
+    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
     private String title;
@@ -52,10 +52,10 @@ public class Contest {
     private Date duration;
 
     @OneToMany(mappedBy = "contest", orphanRemoval = true,
-            cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+            cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Task> tasks;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
                 @JoinColumn(name = "contest_id")},
