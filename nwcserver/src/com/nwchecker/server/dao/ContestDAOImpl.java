@@ -41,13 +41,15 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @Override
     public List<Contest> getContests() {
+    	@SuppressWarnings("unchecked")
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest");
         return result;
     }
 
     @Override
     public Contest getContestByID(int id) {
-        List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where id=?", id);
+    	@SuppressWarnings("unchecked")
+    	List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where id=?", id);
         return result.get(0);
     }
 

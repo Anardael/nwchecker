@@ -3,15 +3,16 @@
  */
 package com.nwchecker.server.dao;
 
-import java.util.List;
-
+import com.nwchecker.server.model.Role;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.UserRequest;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nwchecker.server.model.User;
+import java.util.List;
 
 @Repository("userDAO")
 @Transactional
@@ -35,6 +36,17 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public void deleteUser(User user) {
 		getHibernateTemplate().delete(user);
+	}
+	
+	@Override
+	public void deleteRole(Role role) {	
+		getHibernateTemplate().delete(role);
+	}
+
+	@Override
+	public void deleteRequest(User user, UserRequest userRequest) {
+		user.getRequests().remove(userRequest);
+		getHibernateTemplate().delete(userRequest);
 	}
 
 	@Override
@@ -83,5 +95,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<User> getUsersWithRequests() {
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.requests");
+		return list;
 	}
 }

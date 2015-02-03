@@ -16,11 +16,11 @@
         <layout class="org.apache.log4j.PatternLayout"> 
             <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss:sss} %-5p %c{1}:%M - %m%n"/> 
         </layout> 
-    </appender> 
+    </appender>  
     
     <!-- all info from controllers appended to file-->
-    <logger name="com.nwchecker.server.controller" additivity="false">
-        <level value ="all" /> 
+    <logger name="com.nwchecker.server.controller">
+        <level value ="all" />
         <appender-ref ref="file" />
     </logger>
 

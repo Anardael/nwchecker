@@ -68,19 +68,31 @@
                 </security:authorize>
             <!-- logout -->
             <security:authorize access="isAuthenticated()">
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                        aria-expanded="false"><security:authentication property="principal.username" /><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                <li class="dropdown">
+                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                		<security:authentication property="principal.username" />
+                		<span class="caret"></span>
+                	</a>
+                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                         <security:authorize access="hasRole('ROLE_ADMIN')">
-                            <li><a href="admin.do"><spring:message code="admin.caption" /></a></li>
+                            <li class="dropdown-submenu pull-left">
+                            	<a tabindex="-1" href="#"><spring:message code="admin.caption" /></a>
+                            	<ul class="dropdown-menu">
+                            		<li><a href="admin.do"><spring:message code="adminPanel.users.caption" /></a></li>
+                            		<li class="divider"></li>
+                            		<li><a href="userRequests.do"><spring:message code="userRequests.caption"/></a></li>
+                            	</ul>
+                            </li>
                             <li class="divider"></li>
-                            </security:authorize>
+                        </security:authorize>
                         <li><a href="profile.do"><spring:message code="profile.caption" /></a></li>
                         <li class="divider"></li>
                         <li><a href="logout.do"><spring:message code="logout.caption" /></a></li>
-                    </ul></li>
-                </security:authorize>
+                    </ul>
+                </li>
+            </security:authorize>
         </ul>
+
     </nav>
     <div class="heading">
         <h1>

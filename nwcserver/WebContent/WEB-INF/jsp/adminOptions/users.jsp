@@ -7,36 +7,46 @@
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
-        <link href="${resources}css/bootstrap-table.min.css" rel="stylesheet"/>
-        <script type="text/javascript" src="${resources}js/bootstrap-table.min.js"></script>
-    <head>
-        <!-- Including users table formatters -->
-        <script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
+        <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
+    	<script type="text/javascript" src="${resources}js/usersFormatters.js" ></script>
+    </head>
     <body>
+    	<script type="text/javascript">
+    		ROLE_ADMIN   = '<spring:message code="adminPanel.users.table.role.admin" />';
+			ROLE_TEACHER = '<spring:message code="adminPanel.users.table.role.teacher" />';
+			ROLE_USER    = '<spring:message code="adminPanel.users.table.role.user" />';
+			UNDEFINED    = '<spring:message code="adminPanel.users.table.role.undefined" />';
+    	</script>
+    	<!-- BODY -->
         <div class="wrapper container">
             <!--Including bodyHead -->
             <!-- Send name of current page-->
             <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
-            <div class="row" style="height: 47.3%;">
+            <div class="row" style="height: 60%;">
+            	<!-- TABLE -->
                 <c:url var="dataUrl" value="/getUsers.do"/>
                 <table id="usersData" data-toggle="table" data-striped="true"
                        data-url="${dataUrl}" data-method="get" data-cache="false"
                        data-sort-name="username" data-sort-order="asc"
-                       data-pagination="true" data-search="true">
+                       data-pagination="true" data-show-pagination-switch="true"
+                       data-search="true" data-clear-search="true"
+                       data-show-columns="true" data-minimum-count-columns="2">
                     <thead>
                         <tr>
-                            <th data-field="username" data-halign="center" data-formatter="usernameFormatter" data-sortable="true">
+                            <th data-field="username" data-align="center" data-formatter="usernameFormatter" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.username"/>
                             </th>
-                            <th data-field="displayName" data-halign="center" data-sortable="true">
+                            <th data-field="displayName" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.displayName"/>
                             </th>
-                            <th data-field="roles" data-halign="center" data-formatter="rolesFormatter" data-sortable="true">
+                            <th data-field="roles" data-align="center" data-formatter="rolesFormatter" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.roles"/>
                             </th>
-                            <th data-field="email" data-halign="center" data-sortable="true">
+                            <th data-field="email" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.email"/>
                             </th>
                             <th data-field="department" data-halign="center" data-formatter="infoFormatter" data-sortable="true">
@@ -49,7 +59,7 @@
                     </thead>
                 </table>
             </div>
-        </div>
+		</div>
         <jsp:include page="../fragments/footer.jsp" />
     </body>
 </html>

@@ -1,9 +1,9 @@
 package com.nwchecker.server.controller;
 
-import java.security.Principal;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.nwchecker.server.json.ValidationResponse;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.UserRequest;
+import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes("user")
@@ -57,10 +59,11 @@ public class ProfileController {
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
-			Principal principal, Model model) {
+								  Principal principal, Model model) {
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
 		user.setRoles(logedUser.getRoles());
+		user.setRequests(logedUser.getRequests());
 		if (result.hasErrors()) {
 			return "/profile";
 		} else {
@@ -101,4 +104,19 @@ public class ProfileController {
 		}
 		return "/profile";
 	}
+
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/addUserRequest", method = RequestMethod.POST)
+	public @ResponseBody
+	ValidationResponse addUserRequest(@RequestParam(value = "request") String request,  Principal principal) {
+		String username = principal.getName(); // get logged in username
+		User user = userService.getUserByUsername(username);
+		UserRequest newUserRequest = new UserRequest(user,request);
+		user.getRequests().add(newUserRequest);
+		userService.updateUser(user);
+		ValidationResponse result = new ValidationResponse();
+		result.setStatus("Success");
+		return result;
+	}
+
 }

@@ -28,6 +28,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
+    @Expose
     private int userId;
     // User name
     @Column(name = "username")
@@ -51,7 +52,7 @@ public class User {
     @Expose
     private String info;
     // User role (User,Teacher or Admin).
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Expose
     private Set<Role> roles;
     // Department for teacher users.
@@ -72,6 +73,10 @@ public class User {
             inverseJoinColumns = {
                 @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
+
+    @Expose
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserRequest> requests = new HashSet<>();
 
     public User() {
     }
@@ -168,6 +173,20 @@ public class User {
         return (this.userId == 0);
     }
 
+    public boolean hasRole(String role) {
+    	return (getRoleObject(role) != null);
+    }
+    
+    public Role getRoleObject(String role) {
+    	Role[] rolesArray = roles.toArray(new Role[roles.size()]);
+    	for (int i = 0; i < rolesArray.length; i++) {
+    		if (rolesArray[i].getRole().equals(role)) {
+    			return rolesArray[i];
+    		}
+    	}
+    	return null;
+    }
+    
     public void addRoleAdmin() {
         if (roles == null) {
             roles = new HashSet<Role>();
@@ -201,6 +220,14 @@ public class User {
 
     public void setContest(List<Contest> contest) {
         this.contest = contest;
+    }
+
+    public Set<UserRequest> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<UserRequest> requests) {
+        this.requests = requests;
     }
 
     @Override
