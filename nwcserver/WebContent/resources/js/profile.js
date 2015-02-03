@@ -13,20 +13,19 @@ function showUserRoles(roles) {
         }
     }
 }
-function showUserRequests(requests) {
-    for (var i = 0; i < requests.length; i++) {
-        switch (requests[i]) {
-            case "WANT_ROLE_TEACHER":
-                $('#userRequestTeacher').prop('checked', true);
-                break;
-        }
-    }
-}
 
-function setRequests(){
-    var request = "";
-    if ($('#userRequestTeacher').prop('checked')) {
-        request += "WANT_ROLE_TEACHER";
-    }
-    $('#userRequest').val(request);
+function setRequestsWantRoleTeacher(){
+    var request = "WANT_ROLE_TEACHER";
+    $.ajax({
+        url:"addUserRequest.do",
+        type:"POST",
+        data: {request:request},
+        success:function(data){
+            $('#userRequestTeacher').hide();
+        },
+        error: function() {
+            console.log('fail');
+            console.log(typeof data);
+        }
+    });
 }

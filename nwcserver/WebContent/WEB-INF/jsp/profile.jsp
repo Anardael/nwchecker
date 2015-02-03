@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- set path to resources foled -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -45,14 +46,6 @@
             "${role.role}",
             </c:forEach>
         ]);
-    });
-    $('body').ready(function () {
-        showUserRequests([
-            <c:forEach var="request" items="${userProfile.requests}">
-            "${request.request}",
-            </c:forEach>
-        ]);
-        setRequests();
     });
 </script>
 <div class="wrapper container">
@@ -123,14 +116,21 @@
                 <label for="user">
                     <spring:message code="profile.roles.role.user.caption"/>
                 </label>
-                <security:authorize access="!hasRole('ROLE_TEACHER')">
-                    <hr>
-                    <input type="checkbox" id="userRequestTeacher" onclick="setRequests()"/>
-                    <label for="userRequestTeacher">
-                        <spring:message code="profile.roles.role.request.caption"/>
-                    </label>
-                    <input type="text" id="userRequest" name="userRequest" hidden="true"/>
-                </security:authorize>
+                <c:set var="contains" value="false"/>
+                <c:forEach var="item" items="${userProfile.roles}">
+                    <c:if test="${item.role eq 'ROLE_TEACHER'}">
+                        <c:set var="contains" value="true"/>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${fn:length(userProfile.requests) == 0 && contains eq 'false'}">
+                    <div class="col-sm-12" id="userRequestTeacher">
+                        <hr>
+                        <button type="button" class="btn btn-primary btn-block" onclick="setRequestsWantRoleTeacher()">
+                            <spring:message code="profile.roles.role.request.caption"/>
+                        </button>
+                        <hr>
+                    </div>
+                </c:if>
             </div>
         </div>
         <c:if test="${userUpdated == 'true'}">

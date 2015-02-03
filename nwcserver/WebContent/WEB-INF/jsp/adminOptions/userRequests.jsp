@@ -64,6 +64,7 @@
             </tr>
             </thead>
         </table>
+        <br>
         <div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary btn-block" onclick="acceptUserRequests()">
@@ -78,6 +79,7 @@
         </div>
     </div>
 </div>
+
 <jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

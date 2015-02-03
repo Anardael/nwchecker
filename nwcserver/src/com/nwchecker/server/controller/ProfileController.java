@@ -1,10 +1,9 @@
 package com.nwchecker.server.controller;
 
-import java.security.Principal;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.nwchecker.server.json.ValidationResponse;
+import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
+import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,10 +20,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes("user")
@@ -58,7 +58,7 @@ public class ProfileController {
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, @RequestParam("userRequest") String userRequest, BindingResult result,
+	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
 								  Principal principal, Model model) {
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
@@ -70,9 +70,7 @@ public class ProfileController {
 			logedUser.setDisplayName(user.getDisplayName());
 			logedUser.setDepartment(user.getDepartment());
 			logedUser.setInfo(user.getInfo());
-			setUserRequest(logedUser,userRequest);
 			userService.updateUser(logedUser);
-			user.setRequests(logedUser.getRequests());
 			model.addAttribute("userUpdated", "true");
 			return "/profile";
 		}
@@ -107,17 +105,18 @@ public class ProfileController {
 		return "/profile";
 	}
 
-	private User setUserRequest(User user, String userRequest) {
-		final UserRequest wantRoleTeacher = new UserRequest(user,"WANT_ROLE_TEACHER");
-		if (user.getRequests().contains(wantRoleTeacher) && !userRequest.contains("WANT_ROLE_TEACHER"))  {
-			for (UserRequest request : user.getRequests()) {
-				if (request.equals(wantRoleTeacher)) {
-					userService.deleteRequest(user,request);
-				}
-			}
-		} else if (!user.getRequests().contains(wantRoleTeacher) && userRequest.contains("WANT_ROLE_TEACHER"))  {
-			user.getRequests().add(wantRoleTeacher);
-		}
-		return user;
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/addUserRequest", method = RequestMethod.POST)
+	public @ResponseBody
+	ValidationResponse addUserRequest(@RequestParam(value = "request") String request,  Principal principal) {
+		String username = principal.getName(); // get logged in username
+		User user = userService.getUserByUsername(username);
+		UserRequest newUserRequest = new UserRequest(user,request);
+		user.getRequests().add(newUserRequest);
+		userService.updateUser(user);
+		ValidationResponse result = new ValidationResponse();
+		result.setStatus("Success");
+		return result;
 	}
+
 }
