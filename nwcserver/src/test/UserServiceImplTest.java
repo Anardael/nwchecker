@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -105,11 +104,11 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void testDeleteUserRoles() throws Exception {
-        userServiceImpl.deleteUserRoles(userList.get(0));
-        verify((userDAO), times(1)).getUserRoles(userList.get(0));
-        verify((userDAO), times(1)).deleteRoles(anyList());
-        verifyNoMoreInteractions(userDAO);
+    public void testDeleteUserRole() throws Exception {
+    	userServiceImpl.deleteUserRole(userList.get(1), "ROLE_USER");
+        assertEquals(userList.get(1).getRoleObject("ROLE_USER"), null);
+        //verify((userDAO), times(1)).deleteRole(userList.get(1).getRoleObject("ROLE_USER"));
+        //verifyNoMoreInteractions(userDAO);
     }
 
     @Test
@@ -155,7 +154,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUsersWithRequests() throws Exception {
-        LinkedList<User> users = (LinkedList<User>) userServiceImpl.getUsersWithRequests();
+    	LinkedList<User> users = (LinkedList<User>) userServiceImpl.getUsersWithRequests();
         verify((userDAO), times(1)).getUsersWithRequests();
         verifyNoMoreInteractions(userDAO);
     }

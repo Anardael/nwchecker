@@ -4,6 +4,7 @@ import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,10 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-	public void deleteUserRoles(User user) {
-		List<Role> roles = userDAO.getUserRoles(user);
-		userDAO.deleteRoles(roles);
+    public void deleteUserRole(User user, String role) {
+    	Role roleObject = user.getRoleObject(role);
+    	user.getRoles().remove(roleObject);
+    	userDAO.deleteRole(roleObject);
 	}
 
     @Override

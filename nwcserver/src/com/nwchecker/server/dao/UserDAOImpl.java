@@ -39,8 +39,8 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 	
 	@Override
-	public void deleteRoles(List<Role> roles) {	
-		getHibernateTemplate().deleteAll(roles);
+	public void deleteRole(Role role) {	
+		getHibernateTemplate().delete(role);
 	}
 
 	@Override
@@ -67,13 +67,6 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public List<User> getUsers() {
 		@SuppressWarnings("unchecked")
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");
-		return list;
-	}
-	
-	@Override
-	public List<Role> getUserRoles(User user) {
-		@SuppressWarnings("unchecked")
-		List<Role> list = (List<Role>) getHibernateTemplate().find("SELECT role FROM Role role INNER JOIN role.user user WITH user.userId =?", user.getUserId());
 		return list;
 	}
 	

@@ -14,7 +14,7 @@ public interface UserService {
 	
 	public void deleteUserByName(String username);
 	
-	public void deleteUserRoles(User user);
+	public void deleteUserRole(User user, String role);
 
 	public void deleteRequest(User user, UserRequest userRequest);
         

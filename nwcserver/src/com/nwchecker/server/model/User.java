@@ -173,6 +173,20 @@ public class User {
         return (this.userId == 0);
     }
 
+    public boolean hasRole(String role) {
+    	return (getRoleObject(role) != null);
+    }
+    
+    public Role getRoleObject(String role) {
+    	Role[] rolesArray = roles.toArray(new Role[roles.size()]);
+    	for (int i = 0; i < rolesArray.length; i++) {
+    		if (rolesArray[i].getRole().equals(role)) {
+    			return rolesArray[i];
+    		}
+    	}
+    	return null;
+    }
+    
     public void addRoleAdmin() {
         if (roles == null) {
             roles = new HashSet<Role>();

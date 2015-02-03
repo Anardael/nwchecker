@@ -1,6 +1,7 @@
 package com.nwchecker.server.controller;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 
@@ -90,14 +92,10 @@ public class AdminOptionsController {
 		}
 		LOG.info("User \"" + userData.getUsername() + "\" data validation passed.");
 		User user = userService.getUserByUsername(userData.getUsername());
-		if (!user.getRoles().isEmpty()) {
-			user.setRoles(null);
-			userService.deleteUserRoles(user);
-		}
-		user = setUserPassword(user, userData.getPassword());
+		setNewUserPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
-		user = setUserRoles(user, rolesDesc);
+		setNewUserRoles(user, rolesDesc);
 		user.setDepartment(userData.getDepartment());
 		user.setInfo(userData.getInfo());		
 		userService.updateUser(user);
@@ -106,34 +104,50 @@ public class AdminOptionsController {
 		return "redirect:admin.do";
 	}
 	
-	private User setUserPassword(User user, String password) {
+	private void setNewUserPassword(User user, String password) {
 		if (!password.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			password = encoder.encode(password);
 			user.setPassword(password);
 			LOG.info("User \"" + user.getUsername() + "\" password changed.");
 		}
-		return user;
 	}
 	
-	private User setUserRoles(User user, String rolesDesc) {
-		user.setRoles(null);
-		if (rolesDesc.contains("ROLE_ADMIN")) {
+	private void setNewUserRoles(User user, String rolesDesc) {	
+		if (user.getRoles() == null) {
+			user.setRoles(new HashSet<Role>());
+		}
+		
+		if ((user.hasRole("ROLE_ADMIN")) && (!rolesDesc.contains("ROLE_ADMIN"))) {
+			userService.deleteUserRole(user, "ROLE_ADMIN");
+			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
+		}
+		if ((user.hasRole("ROLE_TEACHER")) && (!rolesDesc.contains("ROLE_TEACHER"))) {
+			userService.deleteUserRole(user, "ROLE_TEACHER");
+			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
+		}
+		if ((user.hasRole("ROLE_USER")) && (!rolesDesc.contains("ROLE_USER"))) {
+			userService.deleteUserRole(user, "ROLE_USER");
+			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
+		}
+
+		if ((!user.hasRole("ROLE_ADMIN")) && (rolesDesc.contains("ROLE_ADMIN"))) {
 			user.addRoleAdmin();
 			LOG.info("User \"" + user.getUsername() + "\" acquired ADMIN rights.");
 		}
-		if (rolesDesc.contains("ROLE_TEACHER")) {
+		if ((!user.hasRole("ROLE_TEACHER")) && (rolesDesc.contains("ROLE_TEACHER"))) {
 			user.addRoleTeacher();
 			LOG.info("User \"" + user.getUsername() + "\" acquired TEACHER rights.");
 		}
-		if (rolesDesc.contains("ROLE_USER")) {
+		if ((!user.hasRole("ROLE_USER")) && (rolesDesc.contains("ROLE_USER"))) {
 			user.addRoleUser();
 			LOG.info("User \"" + user.getUsername() + "\" acquired USER rights.");
 		}
-		if (user.getRoles() == null) {
+		if (user.getRoles().isEmpty()) {
 			user.addRoleUser();
+			LOG.warn("User \"" + user.getUsername() + "\" don't has any role!");
+			LOG.info("User \"" + user.getUsername() + "\" acquired USER rights.");
 		}
-		return user;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -14,7 +14,7 @@ public interface UserDAO {
 
 	public void deleteUser(User user);
 
-	public void deleteRoles(List<Role> roles);
+	public void deleteRole(Role role);
 
 	public void deleteRequest(User user, UserRequest userRequest);
 
@@ -23,8 +23,6 @@ public interface UserDAO {
 	public User getUserByUsername(String username);
 
 	public List<User> getUsers();
-	
-	public List<Role> getUserRoles(User user);
 	
 	public List<User> getUsersByRole(String role);
 	
