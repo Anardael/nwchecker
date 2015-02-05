@@ -28,7 +28,7 @@
     <!-- create bean for size: -->
     <bean id="myMaxUploadSize" class="java.lang.Integer">
         <!-- 20971520 == 20MB -->
-        <constructor-arg value="209781520" />
+        <constructor-arg value="20978152" />
     </bean>
     
     <bean id="multipartResolver"

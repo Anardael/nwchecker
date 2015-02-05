@@ -21,7 +21,8 @@
                 <jsp:param name="pageName" value="result"/>
             </jsp:include>
             <section>
-                access denied
+                <h3 style="text-align: center; color: red"><spring:message code="contest.accessDeniedHeader"/></h3>
+                <h4 style="text-align: center; color: red"><spring:message code="contest.accessDenied" />.</h4>
             </section>
         </div>
     </body>
