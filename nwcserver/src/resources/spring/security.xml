@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
-	<global-method-security pre-post-annotations="enabled" />
-	<http use-expressions="true">
-		<intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/profile**" access="isAuthenticated()" />
-		<intercept-url pattern="/changePassword**" access="isAuthenticated()" />
-		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/getUsers**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/userEdit**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/changeUser**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/deleteUser**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/userRequests**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/getUsersWithRequests**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/acceptUserRequests**" access="hasRole('ROLE_ADMIN')" />
-		<form-login login-page="/login.do"
-			authentication-failure-url="/login.do?error" 
-		/>
-		<logout logout-url="/logout.do" />
-	</http>
+    <global-method-security pre-post-annotations="enabled" />
+    <http use-expressions="true">
+        <!--<access-denied-handler error-page="/403" /> -->
+        <intercept-url pattern="/getTasks**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/profile**" access="isAuthenticated()" />
+        <intercept-url pattern="/changePassword**" access="isAuthenticated()" />
+        <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/getUsers**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/userEdit**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/changeUser**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/deleteUser**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/userRequests**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/getUsersWithRequests**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/acceptUserRequests**" access="hasRole('ROLE_ADMIN')" />
+        <form-login login-page="/login.do"
+                    authentication-failure-url="/login.do?error" 
+        />
+        <logout logout-url="/logout.do" />
+    </http>
 
-	<authentication-manager>
-		<authentication-provider>
-			<password-encoder hash="bcrypt"></password-encoder>
-			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select username,password,enabled from users where username=?"
-				authorities-by-username-query="SELECT U.username, R.role as roles    
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="bcrypt"></password-encoder>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="select username,password,enabled from users where username=?"
+                               authorities-by-username-query="SELECT U.username, R.role as roles    
                                 FROM Users U, roles R   
                                 WHERE (U.userId = R.userId) and (U.username=?)" />
-		</authentication-provider>
-	</authentication-manager>
+        </authentication-provider>
+    </authentication-manager>
 
 </beans:beans>
