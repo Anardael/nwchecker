@@ -6,17 +6,18 @@
 package com.nwchecker.server.aspect;
 
 import com.nwchecker.server.controller.ContestController;
+import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.service.ContestService;
 import java.lang.reflect.Method;
 import java.security.Principal;
+import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 
 /**
  *
@@ -67,6 +68,10 @@ public class CheckTeacherAccessAspect {
                     //controller return JSON, so set FAILES status:
                     ValidationResponse jsonResult = new ValidationResponse();
                     jsonResult.setStatus("FAIL");
+                    LinkedList<ErrorMessage> linkedList = new LinkedList<ErrorMessage>();
+                    ErrorMessage errorMessage = new ErrorMessage("denied", "You have no permissions for this acction.");
+                    linkedList.add(errorMessage);
+                    jsonResult.setErrorMessageList(linkedList);
                     return jsonResult;
                 }
             }

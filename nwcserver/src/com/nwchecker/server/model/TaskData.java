@@ -11,8 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 
 @Entity
 @Table(name = "TaskData")
@@ -27,10 +30,12 @@ public class TaskData {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @Column(name = "inputData")
+    @Lob
+    @Column(name = "inputData", length = 20971520)
     private byte[] inputData;
 
-    @Column(name = "outputData")
+    @Lob
+    @Column(name = "outputData", length = 20971520)
     private byte[] outputData;
 
     public int getId() {

@@ -182,7 +182,7 @@ public class TaskController {
         }
 
         response.setContentType("application/txt");
-        response.setHeader("Content-Disposition", "attachment; filename=" + (type.equals("io") ? "io" : "out") + "_id" + testId + ".txt");
+        response.setHeader("Content-Disposition", "attachment; filename=" + (type.equals("in") ? "in" : "out") + "_id" + testId + ".txt");
         org.apache.commons.io.IOUtils.copy(stream, response.getOutputStream());
         response.flushBuffer();
     }

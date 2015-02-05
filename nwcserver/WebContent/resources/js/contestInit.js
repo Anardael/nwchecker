@@ -22,7 +22,11 @@ function setMask() {
 function submitContest() {
     sendJsonContest().success(function(data) {
         if (data.status == "FAIL") {
+                if (data.errorMessageList[0].fieldName == "denied") {
+                    showAccessDeniedModal();
+                }else{
             contestAjaxFailed(errorCaption, emptyContestfields, data);
+                }
         }
         if (data.status == "SUCCESS") {
             BootstrapDialog.show({

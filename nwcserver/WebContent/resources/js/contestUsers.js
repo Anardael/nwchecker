@@ -28,7 +28,7 @@ function checkUserList(data) {
                     label: btnSubmit,
                     cssClass: 'btn-primary',
                     action: function(dialogItself) {
-                        data["userIds[]"]="-1";
+                        data["userIds[]"] = "-1";
                         ajaxUserList(data);
                         dialogItself.close();
                         window.location.href = "index.do";
@@ -66,7 +66,20 @@ function ajaxUserList(data) {
                     message: contestUserListSuccess,
                 });
             }
+            if (response.status == "FAIL") {
+                if (response.errorMessageList[0].fieldName == "denied") {
+                    showAccessDeniedModal();
+                }
+            }
         }
+    });
+}
+
+function showAccessDeniedModal() {
+    BootstrapDialog.show({
+        title: errorLabel,
+        type: BootstrapDialog.TYPE_DANGER,
+        message: contestAccessDenied+".",
     });
 }
 

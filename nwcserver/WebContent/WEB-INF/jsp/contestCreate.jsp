@@ -41,6 +41,9 @@
         <script type="text/javascript">
             //variables for dynamically created Modal forms:
             //task successfully added modal:
+            var contestAccessDenied = "<spring:message code="contest.accessDenied" />";
+            var errorLabel = "<spring:message code="error.caption" />";
+            var uploadSize = "<spring:message code="task.wrongUploadSize" />";
             var taskEditResultHeader = "<spring:message code="taskCreate.header"/>";
             var taskEditResultSuccess = "<spring:message code="taskCreate.result.success"/>";
             //Can't add task modal:

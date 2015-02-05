@@ -39,7 +39,7 @@ public class Contest {
     @Size(max = 100)
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition = "TEXT")
     @NotEmpty
     private String description;
 

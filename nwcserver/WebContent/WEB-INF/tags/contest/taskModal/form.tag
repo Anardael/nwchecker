@@ -13,7 +13,7 @@
 <spring:url value="${formUrl}" var="processedFormUrl" />
 
 <%-- any content can be specified here e.g.: --%>
-<form:form id="taskModalForm_${taskId}" modelAttribute="${taskModelName}" action="${processedFormUrl}" class="form-horizontal">
+<form:form id="taskModalForm_${taskId}" modelAttribute="${taskModelName}" action="${processedFormUrl}" class="form-horizontal" enctype="multipart/form-data" acceptcharset="UTF-8">
     <div id="taskModal_${taskId}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg " style="width: 85%">
             <div class="modal-content ">

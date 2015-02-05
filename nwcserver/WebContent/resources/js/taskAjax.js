@@ -79,7 +79,27 @@ function doPostJson(index) {
             //prepare:
             cleanTaskFieldsFromErrors(index);
             if (response.status == 'FAIL') {
-                taskAjaxFail(response, index);
+                var va=0;
+                if (response.errorMessageList[0].fieldName == "denied") {
+                    va=1;
+                }    
+                if (response.errorMessageList[0].fieldName == "uploadSize") {
+                    va=2;
+                }
+                if(va==1){
+                    showAccessDeniedModal();
+                }
+                if(va==2){
+                     BootstrapDialog.show({
+                        title: errorLabel,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        message: uploadSize,
+                    });
+                }
+                if(va==0){
+                    taskAjaxFail(response, index);
+                    
+                }
             } else {
                 //hide modal:
                 $('#taskModal_' + index).modal('hide');

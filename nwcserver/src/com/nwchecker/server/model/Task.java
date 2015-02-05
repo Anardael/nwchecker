@@ -54,7 +54,7 @@ public class Task {
     @Min(0)
     private int rate;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     @NotEmpty
     private String description;
 
@@ -76,7 +76,7 @@ public class Task {
     @Column(name = "timeLimit")
     private int timeLimit;
 
-    @Column(name = "scriptForVerification")
+    @Column(name = "scriptForVerification", columnDefinition = "TEXT")
     private String scriptForVerification;
 
     @Column(name = "forumLink")

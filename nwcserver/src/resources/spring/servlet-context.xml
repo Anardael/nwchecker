@@ -24,9 +24,19 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     
+    
+    <!-- create bean for size: -->
+    <bean id="myMaxUploadSize" class="java.lang.Integer">
+        <!-- 20971520 == 20MB -->
+        <constructor-arg value="209781520" />
+    </bean>
+    
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="100000"/>
+        <property name="maxUploadSize">
+            <ref bean="myMaxUploadSize"/>
+        </property> 
     </bean>
+    
 
 </beans>

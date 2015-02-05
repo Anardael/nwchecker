@@ -54,7 +54,7 @@ function createNewTask(locale) {
             }
         });
         //set upload buttons:
-        $('#taskModal_' + TaskListSize + ' :file').filestyle({input: false, buttonText: uploadTestFileButton});
+        $('#taskModal_' + TaskListSize + ' .newTest:not([hidden=true])').filestyle({input: false, buttonText: uploadTestFileButton});
         //increment TaskListSize:
         TaskListSize++;
     });
@@ -77,23 +77,29 @@ function prepareDeleteTask(index) {
                 label: btnSubmit,
                 cssClass: 'btn-primary',
                 action: function(dialogItself) {
-                    deleteTask(index);
                     dialogItself.close();
-                    sendAjaxDeleteTask(taskActualId);
+                    sendAjaxDeleteTask(index,taskActualId);
                 }
             }
         ]
     });
 }
-function sendAjaxDeleteTask(index) {
+function sendAjaxDeleteTask(view,index) {
     var contId = $('#id').val();
     $.get('deleteTaskJson.do?taskId=' + index + "&contestId=" + contId, 0, function(response) {
         if (response.status == "SUCCESS") {
+            deleteTask(view);
             BootstrapDialog.show({
                 title: taskDeleteHeader,
                 type: BootstrapDialog.TYPE_SUCCESS,
                 message: taskDeleteSuccess,
             });
+            
+        }
+        if (response.status=="FAIL"){
+            if (response.errorMessageList[0].fieldName == "denied") {
+                showAccessDeniedModal();
+            }
         }
     });
 }
@@ -206,12 +212,19 @@ function deleteAvaibleTest(button, testCurrentId) {
                     type: BootstrapDialog.TYPE_SUCCESS,
                     message: testDeletedBody,
                 });
+                //now remove div:
+                var parent = button.parentNode.parentNode;
+                document.getElementById(parent.id).remove();
             }
+            if (response.status=="FAIL"){
+                if (response.errorMessageList[0].fieldName == "denied") {
+                    showAccessDeniedModal();
+                }
+            }
+
         }
     });
-    //now remove div:
-    var parent = button.parentNode.parentNode;
-    document.getElementById(parent.id).remove();
+    
 }
 
 function prepateDeleteAvaibleTest(button, testCurrentId) {

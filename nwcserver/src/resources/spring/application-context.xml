@@ -18,6 +18,7 @@
     <context:component-scan base-package="com.nwchecker.server.dao" />
     <context:component-scan base-package="com.nwchecker.server.service" />
     <context:component-scan base-package="com.nwchecker.server.validators" />
+    <context:component-scan base-package="com.nwchecker.server.handlers" />
 
     <beans:import resource="classpath:\hibernate\dbConfig.xml" />
 

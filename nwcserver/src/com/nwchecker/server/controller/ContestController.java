@@ -96,9 +96,8 @@ public class ContestController {
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
         //get UserDetails:
-        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
         //log it:
-        LOG.info("\"" + currentUser.getUsername() + "\"" + " starts contest creation.");
+        LOG.info("\"" + principal.getName() + "\"" + " starts contest creation.");
         //Create new Contest and forward it to contestCreate.jsp
         model.addAttribute("contestModelForm", new Contest());
         return "contestCreate";
@@ -114,6 +113,19 @@ public class ContestController {
         ValidationResponse res = new ValidationResponse();
         //add logger info:
         LOG.info("\"" + principal.getName() + "\"" + " tries to " + (contestAddForm.getId() == 0 ? "create new" : "edit an existing") + " contest");
+
+        //if Contest has id- check if user has access to modify it:
+        if (contestAddForm.getId() != 0) {
+            if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestAddForm.getId())) {
+                res.setStatus("FAIL");
+                LinkedList<ErrorMessage> linkedList = new LinkedList<ErrorMessage>();
+                linkedList.add(new ErrorMessage("denied", null));
+                res.setErrorMessageList(linkedList);
+                LOG.info("\"" + principal.getName() + "\"" + " have no access to edit an existing contest");
+                return res;
+            }
+        }
+
         //validation :
         contestValidator.validate(contestAddForm, result);
         //if there are errors in field input:
@@ -133,16 +145,20 @@ public class ContestController {
             //set users:
             if (contestAddForm.getId() != 0) {
                 Contest exist = contestService.getContestByID(contestAddForm.getId());
+                //set users:
                 contestAddForm.setUsers(exist.getUsers());
+                //set tasks:
+                contestAddForm.setTasks(exist.getTasks());
+                //update contest:
+                contestService.mergeContest(contestAddForm);
             } else {
                 //set author:
                 User author = userService.getUserByUsername(principal.getName());
                 List<User> list = new LinkedList<User>();
                 list.add(author);
                 contestAddForm.setUsers(list);
+                contestService.addContest(contestAddForm);
             }
-            //update contest:
-            contestService.updateContest(contestAddForm);
             LOG.info("Contest successfully saved to DB.");
             //set generated id to JSON response:
             res.setResult(String.valueOf(contestAddForm.getId()));

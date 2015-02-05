@@ -6,6 +6,9 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Task;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -23,6 +26,12 @@ public class TaskValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Task task = (Task) target;
+        try {
+            task.setTitle(new String(task.getTitle().getBytes("iso-8859-1"), "UTF-8"));
+            task.setDescription(new String(task.getDescription().getBytes("iso-8859-1"), "UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TaskValidator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (task.getTitle().length() == 0) {
 
             errors.rejectValue("title", "NotEmpty.title");
