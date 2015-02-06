@@ -20,22 +20,22 @@
         <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
         <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
 
-        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="${resources}js/maskInput.js"></script>
         <script type="text/javascript" src="${resources}js/moment.js"></script>
-        <script type="text/javascript" src="${resources}js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="${resources}js/includedJS/bootstrap-filestyle.min.js"></script>
 
 
-        <script type="text/javascript" src="${resources}js/taskCreateAddLink.js"></script>
-        <script type="text/javascript" src="${resources}js/taskEditing.js"></script>
-        <script type="text/javascript" src="${resources}js/taskAjax.js"></script>
-        <script type="text/javascript" src="${resources}js/contestAjax.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/tasks/taskCreateAddLink.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/tasks/taskEditing.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/tasks/taskAjax.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/contestAjax.js"></script>
         <script type="text/javascript" src="${resources}js/ckeditor/ckeditor.js"></script>
-        <script type="text/javascript" src="${resources}js/ckeditorInit.js"></script>
+        <script type="text/javascript" src="${resources}js/ckeditor/ckeditorInit.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
-        <script type="text/javascript" src="${resources}js/contestInit.js"></script>
-        <script type="text/javascript" src="${resources}js/contestUsers.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/contestInit.js"></script>
+        <script type="text/javascript" src="${resources}js/contests/contestUsers.js"></script>
     </head>
     <body>
         <script type="text/javascript">

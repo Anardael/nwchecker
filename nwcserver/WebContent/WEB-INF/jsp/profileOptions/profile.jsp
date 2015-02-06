@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${resources}js/jquery.validate.min.js"></script>
 <script type="text/javascript"
         src="${resources}js/validators/userProfileValidator_${pageContext.response.locale}.js"></script>
-<script type="text/javascript" src="${resources}js/profile.js"></script>
+<script type="text/javascript" src="${resources}js/profileOptions/profile.js"></script>
 <!-- include special css for profile:-->
 <style>
     .centered {

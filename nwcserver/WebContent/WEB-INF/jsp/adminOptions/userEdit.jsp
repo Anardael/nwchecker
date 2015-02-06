@@ -13,8 +13,8 @@
         
         <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
         
-        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
-        <script type="text/javascript" src="${resources}js/userEdit.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="${resources}js/adminOptions/userEdit.js"></script>
     </head>
     <body>
     	<script type="text/javascript">

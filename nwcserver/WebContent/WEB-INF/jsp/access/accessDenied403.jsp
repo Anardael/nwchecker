@@ -11,7 +11,7 @@
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />    
         <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
-        <script type="text/javascript" src="${resources}js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
     </head>
     <body>
         <div class="wrapper container">
