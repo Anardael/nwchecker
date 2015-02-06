@@ -9,7 +9,7 @@
 <html>
 <!--including head -->
 <head>
-    <jsp:include page="fragments/staticFiles.jsp"/>
+    <jsp:include page="../fragments/staticFiles.jsp"/>
 </head>
 <script type="text/javascript" src="${resources}js/jquery.validate.min.js"></script>
 <script type="text/javascript"
@@ -51,7 +51,7 @@
 <div class="wrapper container">
     <!--including bodyHead -->
     <!-- send name of current page-->
-    <jsp:include page="fragments/bodyHeader.jsp">
+    <jsp:include page="../fragments/bodyHeader.jsp">
         <jsp:param name="pageName" value="profile"/>
     </jsp:include>
     <form:form modelAttribute="userProfile" action="profile.do" method="post" role="form" class="form-horizontal">
@@ -227,6 +227,6 @@
         </div>
     </form>
 </div>
-<jsp:include page="fragments/footer.jsp"/>
+<jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

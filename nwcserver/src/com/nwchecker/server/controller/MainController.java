@@ -16,6 +16,6 @@ public class MainController {
 
     @RequestMapping({"/inDevelopment", "/donec", "/vestibulum", "/etiam", "/phasellus", "/news", "/rating"})
     public String willBeCreated(HttpSession session, Model model) throws IllegalArgumentException {
-        return "/inDevelopment";
+        return "access/inDevelopment";
     }
 }

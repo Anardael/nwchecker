@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 
 @Entity
 @Table(name = "TaskData")

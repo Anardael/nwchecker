@@ -9,19 +9,19 @@
     <uri>/tlds/ContestTags</uri>
     <tag-file>
         <name>taskModalForm</name>
-        <path>/WEB-INF/tags/contest/taskModal/form.tag</path>
+        <path>/WEB-INF/tags/contest/taskCreate/form.tag</path>
     </tag-file>
     <tag-file>
         <name>taskTestFiles</name>
-        <path>/WEB-INF/tags/contest/taskModal/testFiles.tag</path>
+        <path>/WEB-INF/tags/contest/taskCreate/testFiles.tag</path>
     </tag-file>
     <tag-file>
         <name>downloadTaskTestFiles</name>
-        <path>/WEB-INF/tags/contest/taskModal/downloadTestFiles.tag</path>
+        <path>/WEB-INF/tags/contest/taskCreate/downloadTestFiles.tag</path>
     </tag-file>
     <tag-file>
         <name>taskModalFormInput</name>
-        <path>/WEB-INF/tags/contest/taskModal/inputField.tag</path>
+        <path>/WEB-INF/tags/contest/taskCreate/inputField.tag</path>
     </tag-file>
     <tag-file>
         <name>usersList</name>
@@ -29,6 +29,6 @@
     </tag-file>
     <tag-file>
         <name>taskView</name>
-        <path>/WEB-INF/tags/contest/taskViewModal.tag</path>
+        <path>/WEB-INF/tags/contest/taskView/taskViewModal.tag</path>
     </tag-file>
 </taglib>

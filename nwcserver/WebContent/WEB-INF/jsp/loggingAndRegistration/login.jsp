@@ -7,7 +7,7 @@
 <html>
     <!--including head -->
     <head>
-        <jsp:include page="fragments/staticFiles.jsp" />
+        <jsp:include page="../fragments/staticFiles.jsp" />
     </head>
     <!-- include special css for registration:-->
     <style>
@@ -27,7 +27,7 @@
         <div class="wrapper container">
             <!--including bodyHead -->
             <!-- send name of current page-->
-            <jsp:include page="fragments/bodyHeader.jsp">
+            <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="login" />
             </jsp:include>
 
@@ -64,6 +64,6 @@
                 </div>
             </form>
         </div>
-        <jsp:include page="fragments/footer.jsp" />
+        <jsp:include page="../fragments/footer.jsp" />
     </body>
 </html>

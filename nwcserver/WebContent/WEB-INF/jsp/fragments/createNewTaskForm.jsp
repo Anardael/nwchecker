@@ -2,4 +2,3 @@
 <%@ taglib prefix="contest" uri="/tlds/ContestTags" %> 
 <contest:taskModalForm taskModelName="contest.tasks[${taskIndex}]" 
                        taskId="${taskIndex}" formUrl="${formJsonUrl}"/>
-

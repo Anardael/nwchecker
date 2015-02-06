@@ -4,15 +4,15 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.validators.UserProfileValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.security.Principal;
 
 @Controller
@@ -38,13 +39,12 @@ public class ProfileController {
 	}
 
 	@Autowired
-	@Qualifier("userProfileValidator")
-	private Validator	validator;
+	private UserProfileValidator userProfileValidator;
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
-		dataBinder.setValidator(validator);
+		dataBinder.setValidator(userProfileValidator);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -53,7 +53,7 @@ public class ProfileController {
 		String username = principal.getName(); // get logged in username
 		User user = userService.getUserByUsername(username);
 		model.addAttribute("userProfile", user);
-		return "/profile";
+		return "profileOptions/profile";
 	}
 
 	@PreAuthorize("isAuthenticated()")
@@ -65,14 +65,14 @@ public class ProfileController {
 		user.setRoles(logedUser.getRoles());
 		user.setRequests(logedUser.getRequests());
 		if (result.hasErrors()) {
-			return "/profile";
+			return "profileOptions/profile";
 		} else {
 			logedUser.setDisplayName(user.getDisplayName());
 			logedUser.setDepartment(user.getDepartment());
 			logedUser.setInfo(user.getInfo());
 			userService.updateUser(logedUser);
 			model.addAttribute("userUpdated", "true");
-			return "/profile";
+			return "profileOptions/profile";
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class ProfileController {
 		} else {
 			model.addAttribute("passwordChanged", "false");
 		}
-		return "/profile";
+		return "profileOptions/profile";
 	}
 
 	@PreAuthorize("isAuthenticated()")

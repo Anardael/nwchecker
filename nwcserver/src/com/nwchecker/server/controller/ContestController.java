@@ -10,7 +10,6 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
@@ -33,7 +32,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,7 +87,7 @@ public class ContestController {
                 }
             }
         }
-        return "contest";
+        return "contests/contest";
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
@@ -100,7 +98,7 @@ public class ContestController {
         LOG.info("\"" + principal.getName() + "\"" + " starts contest creation.");
         //Create new Contest and forward it to contestCreate.jsp
         model.addAttribute("contestModelForm", new Contest());
-        return "contestCreate";
+        return "contests/contestCreate";
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
@@ -174,7 +172,7 @@ public class ContestController {
         Contest editContest = contestService.getContestByID(id);
         //add contest to view and forward it:
         model.addAttribute("contestModelForm", editContest);
-        return "contestCreate";
+        return "contests/contestCreate";
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")

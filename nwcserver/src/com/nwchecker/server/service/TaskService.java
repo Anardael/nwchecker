@@ -8,8 +8,6 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.TaskDAO;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskTheoryLink;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

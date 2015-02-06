@@ -1,11 +1,13 @@
 package com.nwchecker.server.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.nwchecker.server.model.User;
 
+@Component
 public class UserProfileValidator implements Validator {
 
 	private final String	patternDisplayName	= "^[a-zA-Z]+[a-zA-Z0-9_-]{2,15}$";

@@ -62,7 +62,7 @@ public class CheckTeacherAccessAspect {
             if (method.getReturnType().equals(String.class)) {
                 //if controller return string- so it's JSP:
                 //return 403:
-                return "accessDenied403";
+                return "access/accessDenied403";
             } else {
                 if (method.getReturnType().equals(ValidationResponse.class)) {
                     //controller return JSON, so set FAILES status:

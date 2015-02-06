@@ -42,11 +42,6 @@
             <beans:property name="paramName" value="locale" />
         </beans:bean>
     </interceptors>
-	
-    <!-- Validators -->
-    <beans:bean id="userRegistrationValidator" class="com.nwchecker.server.validators.UserRegistrationValidator" />
-    <beans:bean id="userProfileValidator" class="com.nwchecker.server.validators.UserProfileValidator" />
-    <beans:bean id="userEditValidator" class="com.nwchecker.server.validators.UserEditValidator" />
 
     <beans:import resource="security.xml" />
 

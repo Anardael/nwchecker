@@ -147,13 +147,15 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUsersByRole() throws Exception {
-        LinkedList<User> users = (LinkedList<User>) userServiceImpl.getUsersByRole("ROLE_USER");
+    	@SuppressWarnings("unused")
+    	LinkedList<User> users = (LinkedList<User>) userServiceImpl.getUsersByRole("ROLE_USER");
         verify((userDAO), times(1)).getUsersByRole("ROLE_USER");
         verifyNoMoreInteractions(userDAO);
     }
 
     @Test
     public void testGetUsersWithRequests() throws Exception {
+    	@SuppressWarnings("unused")
     	LinkedList<User> users = (LinkedList<User>) userServiceImpl.getUsersWithRequests();
         verify((userDAO), times(1)).getUsersWithRequests();
         verifyNoMoreInteractions(userDAO);

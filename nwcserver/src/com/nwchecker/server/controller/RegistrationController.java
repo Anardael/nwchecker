@@ -41,16 +41,16 @@ public class RegistrationController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String initRegistrationForm(Model model) {
 		model.addAttribute("userRegistrationForm", new User());
-		return "/registration";
+		return "loggingAndRegistration/registration";
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result) {
 		if (result.hasErrors()) {
-			return "/registration";
+			return "loggingAndRegistration/registration";
 		} else {
 			userService.addUser(user);
-			return "/userCreated";
+			return "loggingAndRegistration/userCreated";
 		}
 	}
 }

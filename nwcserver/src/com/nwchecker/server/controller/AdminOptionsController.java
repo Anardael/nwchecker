@@ -6,13 +6,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -27,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.validators.UserEditValidator;
 
 @Controller
 public class AdminOptionsController {
@@ -37,13 +36,12 @@ public class AdminOptionsController {
 	private UserService userService;
 	
 	@Autowired
-	@Qualifier("userEditValidator")
-	private Validator	validator;
+	private UserEditValidator userEditValidator;
 	
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
-		dataBinder.setValidator(validator);
+		dataBinder.setValidator(userEditValidator);
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -88,7 +86,7 @@ public class AdminOptionsController {
 		LOG.info("Received new account data for user \"" + userData.getUsername() + "\".");
 		if (result.hasErrors()) {
 			LOG.warn("User \"" + userData.getUsername() + "\" data validation failed!");
-			return "/adminOptions/userEdit";
+			return "adminOptions/userEdit";
 		}
 		LOG.info("User \"" + userData.getUsername() + "\" data validation passed.");
 		User user = userService.getUserByUsername(userData.getUsername());
@@ -104,15 +102,15 @@ public class AdminOptionsController {
 		return "redirect:admin.do";
 	}
 	
-	private void setNewUserPassword(User user, String password) {
-		if (!password.isEmpty()) {
+	private void setNewUserPassword(User user, String newPassword) {
+		if (!newPassword.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			password = encoder.encode(password);
-			user.setPassword(password);
+			newPassword = encoder.encode(newPassword);
+			user.setPassword(newPassword);
 			LOG.info("User \"" + user.getUsername() + "\" password changed.");
 		}
 	}
-	
+	//TODO
 	private void setNewUserRoles(User user, String rolesDesc) {	
 		if (user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());

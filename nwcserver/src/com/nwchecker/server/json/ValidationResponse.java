@@ -5,7 +5,6 @@
  */
 package com.nwchecker.server.json;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class ValidationResponse {

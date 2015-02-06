@@ -11,7 +11,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
-	  ModelAndView model = new ModelAndView();
+	  ModelAndView model = new ModelAndView("loggingAndRegistration/login");
 	  if (error != null) {
 		model.addObject("error", "Invalid username and password!");
 	  }
