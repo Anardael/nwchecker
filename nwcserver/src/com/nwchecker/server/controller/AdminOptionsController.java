@@ -11,9 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +22,13 @@ import com.google.gson.GsonBuilder;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.validators.RolesDescriptionValidator;
 import com.nwchecker.server.validators.UserEditValidator;
 
+/**
+*
+* @author Станіслав
+*/
 @Controller
 public class AdminOptionsController {
 
@@ -38,11 +40,8 @@ public class AdminOptionsController {
 	@Autowired
 	private UserEditValidator userEditValidator;
 	
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-		dataBinder.setValidator(userEditValidator);
-	}
+	@Autowired
+	private RolesDescriptionValidator rolesDescriptionValidator;
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -68,7 +67,7 @@ public class AdminOptionsController {
 	public String user(@RequestParam(value = "Username", required = false) String username, 
 						Model model, Principal principal) {
 		if (username == null) {
-			username = principal.getName();
+			return "adminOptions/users";
 		}
 		LOG.info("\"" + principal.getName() + "\" tries to edit user \"" + username + "\".");
 		User user = userService.getUserByUsername(username);
@@ -80,16 +79,21 @@ public class AdminOptionsController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
-	public String changeUser(@ModelAttribute("userData") @Validated User userData, 
+	public String changeUser(@ModelAttribute("userData") User userData, 
 							 @RequestParam("rolesDesc") String rolesDesc,
-							 BindingResult result, Principal principal) {
+							 BindingResult result, Model model, Principal principal) {
 		LOG.info("Received new account data for user \"" + userData.getUsername() + "\".");
+		User user = userService.getUserByUsername(userData.getUsername());
+		
+		userEditValidator.validate(userData, result);
+		rolesDescriptionValidator.validate(rolesDesc, result);
 		if (result.hasErrors()) {
 			LOG.warn("User \"" + userData.getUsername() + "\" data validation failed!");
+			model.addAttribute("roles", user.getRoles());
 			return "adminOptions/userEdit";
 		}
 		LOG.info("User \"" + userData.getUsername() + "\" data validation passed.");
-		User user = userService.getUserByUsername(userData.getUsername());
+		
 		setNewUserPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());

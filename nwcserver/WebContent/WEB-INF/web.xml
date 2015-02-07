@@ -63,9 +63,8 @@
     <!-- URL Session -->
     <filter>
         <filter-name>URLSessionFilter</filter-name>
-        <filter-class>com.nwchecker.server.controller.URLFilter</filter-class>
+        <filter-class>com.nwchecker.server.filters.URLFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>URLSessionFilter</filter-name>
         <url-pattern>/*</url-pattern>
