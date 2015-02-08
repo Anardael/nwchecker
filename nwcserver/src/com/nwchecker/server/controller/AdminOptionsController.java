@@ -94,10 +94,10 @@ public class AdminOptionsController {
 		}
 		LOG.info("User \"" + userData.getUsername() + "\" data validation passed.");
 		
-		setNewUserPassword(user, userData.getPassword());
+		setNewPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
-		setNewUserRoles(user, rolesDesc);
+		setNewRoles(user, rolesDesc);
 		user.setDepartment(userData.getDepartment());
 		user.setInfo(userData.getInfo());		
 		userService.updateUser(user);
@@ -106,7 +106,7 @@ public class AdminOptionsController {
 		return "redirect:admin.do";
 	}
 	
-	private void setNewUserPassword(User user, String newPassword) {
+	private void setNewPassword(User user, String newPassword) {
 		if (!newPassword.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			newPassword = encoder.encode(newPassword);
@@ -114,39 +114,31 @@ public class AdminOptionsController {
 			LOG.info("User \"" + user.getUsername() + "\" password changed.");
 		}
 	}
-	//TODO
-	private void setNewUserRoles(User user, String rolesDesc) {	
+	
+	private void setNewRoles(User user, String rolesDesc) {	
 		if (user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());
 		}
 		
-		if ((user.hasRole("ROLE_ADMIN")) && (!rolesDesc.contains("ROLE_ADMIN"))) {
-			userService.deleteUserRole(user, "ROLE_ADMIN");
-			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
+		Role[] userRoles = 
+				user.getRoles().toArray(new Role[user.getRoles().size()]);
+		for (Role role : userRoles) {
+			if (!rolesDesc.contains(role.getRole())) {
+				userService.deleteUserRole(user, role.getRole());
+				LOG.info("User \"" + user.getUsername() + "\" lost " + role.getRole().substring(5) + " rights.");
+			}
 		}
-		if ((user.hasRole("ROLE_TEACHER")) && (!rolesDesc.contains("ROLE_TEACHER"))) {
-			userService.deleteUserRole(user, "ROLE_TEACHER");
-			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
+		
+		String[] roles = { "ROLE_ADMIN", "ROLE_TEACHER", "ROLE_USER" };
+		for (String role : roles) {
+			if ((!user.hasRole(role)) && (rolesDesc.contains(role))) {
+				user.addRole(role);
+				LOG.info("User \"" + user.getUsername() + "\" acquired " + role.substring(5) + " rights.");
+			}
 		}
-		if ((user.hasRole("ROLE_USER")) && (!rolesDesc.contains("ROLE_USER"))) {
-			userService.deleteUserRole(user, "ROLE_USER");
-			LOG.info("User \"" + user.getUsername() + "\" lost ADMIN rights.");
-		}
-
-		if ((!user.hasRole("ROLE_ADMIN")) && (rolesDesc.contains("ROLE_ADMIN"))) {
-			user.addRoleAdmin();
-			LOG.info("User \"" + user.getUsername() + "\" acquired ADMIN rights.");
-		}
-		if ((!user.hasRole("ROLE_TEACHER")) && (rolesDesc.contains("ROLE_TEACHER"))) {
-			user.addRoleTeacher();
-			LOG.info("User \"" + user.getUsername() + "\" acquired TEACHER rights.");
-		}
-		if ((!user.hasRole("ROLE_USER")) && (rolesDesc.contains("ROLE_USER"))) {
-			user.addRoleUser();
-			LOG.info("User \"" + user.getUsername() + "\" acquired USER rights.");
-		}
+		
 		if (user.getRoles().isEmpty()) {
-			user.addRoleUser();
+			user.addRole("ROLE_USER");
 			LOG.warn("User \"" + user.getUsername() + "\" don't has any role!");
 			LOG.info("User \"" + user.getUsername() + "\" acquired USER rights.");
 		}
