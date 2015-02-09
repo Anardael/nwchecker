@@ -7,16 +7,12 @@ $(document).ready(function () {
         var contestId = $(this).find('td:nth-child(1)').html();
         var id = document.getElementById("id");
         id.value = contestId;
-        $('#userListModal').removeData();
-
+        $('#ContestUserTable').bootstrapTable('destroy');
         $.get('getContestUsersList.do?contestId=' + contestId, function(data) {
-            $('#userListModal').bootstrapTable({
+            $('#ContestUserTable').bootstrapTable({
                 data: data
             });
         });
-        $('#fixed-table-container').hide();
         tryToShowUserList();
-
     });
 });
-

@@ -12,7 +12,7 @@
                 <h4 class="modal-title"><spring:message code="contest.userList.header"/></h4>
             </div>
             <div class="modal-body">
-                <table data-toggle="table"
+                <table id="ContestUserTable" data-toggle="table"
                        data-url="getContestUsersList.do?contestId=${contestId}"
                        data-classes="table table-hover"
                        data-click-to-select="true"
