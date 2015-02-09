@@ -7,26 +7,20 @@ package com.nwchecker.server.model;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "contest")
 public class Contest {
+
+    public static enum Status {
+        ARCHIEVE, PREPARING, RELEASE, GOING
+    }
 
     @Id
     @Column(name = "id")
@@ -39,7 +33,7 @@ public class Contest {
     @Size(max = 100)
     private String title;
 
-    @Column(name = "description",columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     @NotEmpty
     private String description;
 
@@ -58,13 +52,17 @@ public class Contest {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
-                @JoinColumn(name = "contest_id")},
+                    @JoinColumn(name = "contest_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "user_id")})
+                    @JoinColumn(name = "user_id")})
     private List<User> users;
 
-    @Column(name = "expired")
-    private boolean expired;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
+
+    @Column(name = "hidden")
+    private boolean hidden;
 
     public List<Task> getTasks() {
         return tasks;
@@ -122,12 +120,20 @@ public class Contest {
         this.users = users;
     }
 
-    public boolean isExpired() {
-        return expired;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setExpired(boolean expired) {
-        this.expired = expired;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
     @Override

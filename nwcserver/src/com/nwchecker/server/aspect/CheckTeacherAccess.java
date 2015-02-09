@@ -14,7 +14,7 @@ public @interface CheckTeacherAccess {
      *teacher have access to edit contest. 
      *
      *Contract for using this annotation is:
-     *Method shoul receive: 
+     *Method should receive:
      *first argument: int contestId;
      *second argument: Principal.
      */

@@ -18,8 +18,8 @@
         </layout> 
     </appender>  
     
-    <!-- all info from controllers appended to file-->
-    <logger name="com.nwchecker.server.controller">
+    <!-- all info from all custom classes: appended to file-->
+    <logger name="com.nwchecker.server">
         <level value ="all" />
         <appender-ref ref="file" />
     </logger>

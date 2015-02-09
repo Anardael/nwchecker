@@ -115,7 +115,6 @@ public class TaskServiceImplTest {
 
         List<Task> result = taskServiceImpl.getTasksByContestId(contestId);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**

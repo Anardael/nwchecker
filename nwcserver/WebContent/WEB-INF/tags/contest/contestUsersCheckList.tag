@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ tag description="userListt" pageEncoding="UTF-8"%>
+<%@attribute name="contest" %>
 <%@attribute name="contestId" %>
 <div id="userListModal" class="modal fade">
     <div class="modal-dialog "style="height: 50%">

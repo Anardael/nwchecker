@@ -10,6 +10,7 @@
 <%@ attribute name="taskModelName" required="true" %>
 <%@ attribute name="taskId" required="true"%>
 <%@ attribute name="formUrl" required="true" %>
+<%@ attribute name="contestId" required="true" %>
 <spring:url value="${formUrl}" var="processedFormUrl" />
 
 <%-- any content can be specified here e.g.: --%>
@@ -92,7 +93,7 @@
                             <contest:taskTestFiles taskId="${taskId}" row="pattern" hidden="hidden=\"true\""/>
                             <%-- go through all current taskData in task --%>
                             <c:forEach items="${contestModelForm.tasks[taskId].inOutData}" var="data" varStatus="row">
-                                <contest:downloadTaskTestFiles taskId="${taskId}" row="${row.index}" contestId="2" testId="${data.id}"/>
+                                <contest:downloadTaskTestFiles taskId="${taskId}" row="${row.index}" contestId="${contestId}" testId="${data.id}"/>
                             </c:forEach>
                         </div>
                         <div class="col-sm-offset-2"  style="text-align: center; margin-bottom: 20px; ">
@@ -102,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
-                    <button type="button" class="btn btn-primary sendTaskJsonButton" data-modalId="${taskId}"><spring:message code="btn.save" /></button>
+                    <button id="taskSubmitButton" type="button" class="btn btn-primary sendTaskJsonButton ladda-button" data-style="expand-right" data-modalId="${taskId}"><span class="ladda-label"><spring:message code="btn.save" /></span></button>
                 </div>
             </div>
         </div>

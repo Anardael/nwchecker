@@ -18,7 +18,7 @@ function createNewTask(locale) {
     //get taskModalForm pattern:
     //get parameter "taskId" indicates index of current "newTask".
     //TaskListSize is declared in contestCreate.jsp
-    $.get("newTaskForm.do?taskId=" + TaskListSize, 0, function(newMod) {
+    $.get("newTaskForm.do?taskId=" + TaskListSize+"&contestId="+$('#id').val(), 0, function(newMod) {
         //append TaskModalForm.html in taskList div:
         $('.taskList').append(newMod);
         //set in/out:
@@ -53,6 +53,8 @@ function createNewTask(locale) {
                 return false;
             }
         });
+        //set ladda:
+        Ladda.bind( '.ladda-button' );
         //set upload buttons:
         $('#taskModal_' + TaskListSize + ' .newTest:not([hidden=true])').filestyle({input: false, buttonText: uploadTestFileButton});
         //increment TaskListSize:

@@ -33,6 +33,9 @@
                         <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center"><spring:message code="contest.caption" /></li>
                             <c:forEach items="${contests}" var="contest" varStatus="row">
                             <a class="list-group-item " data-toggle="collapse" data-parent="#accordion" href="#collapse${row.index}">
+                                <c:if test="${contest.status=='GOING'}">
+                                    <label class="label label-success" style="margin-right: 10px"><spring:message code="contest.going.label"/></label>
+                                </c:if>
                                 <span>${contest.title}</span>
                             </a>
                             <div id="collapse${row.index}" class="panel-collapse collapse">
@@ -41,10 +44,14 @@
                                         <div class="edit col-sm-12">
                                             <span class="pull-right">
                                                 <c:set value="index${contest.id}index" var="contestIndex"/>
+                                                <c:if test="${contest.hidden==true}">
+                                                    <label class="label label-default"><spring:message code="contest.hidden.label"/></label>
+                                                </c:if>
                                                 <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
                                                     <button class="btnEditContest btn btn-sm btn-info form-group" 
                                                             onclick="location.href = 'editContest.do?id=${contest.id}';"><spring:message code="btn.edit" /></button>
                                                 </c:if>
+
                                             </span>
                                         </div>
                                         <div class="description col-sm-12">

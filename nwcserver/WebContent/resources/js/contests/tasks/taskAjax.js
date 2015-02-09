@@ -76,6 +76,7 @@ function doPostJson(index) {
         contentType: false,
         type: 'POST',
         success: function(response) {
+            Ladda.stopAll();
             //prepare:
             cleanTaskFieldsFromErrors(index);
             if (response.status == 'FAIL') {

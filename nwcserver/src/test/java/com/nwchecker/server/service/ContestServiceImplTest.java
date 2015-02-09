@@ -73,7 +73,6 @@ public class ContestServiceImplTest {
         contestService.addContest(c);
         verify(contestDAO, times(1)).addContest(c);
         verifyNoMoreInteractions(contestDAO);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
