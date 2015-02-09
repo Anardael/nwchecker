@@ -81,6 +81,8 @@
                             		<li><a href="admin.do"><spring:message code="adminPanel.users.caption" /></a></li>
                             		<li class="divider"></li>
                             		<li><a href="userRequests.do"><spring:message code="userRequests.caption"/></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="listContests.do"><spring:message code="listContests.caption"/></a></li>
                             	</ul>
                             </li>
                             <li class="divider"></li>
