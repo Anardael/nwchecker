@@ -87,7 +87,7 @@ public class UserRequestsController {
 			for (UserRequest request : user.getRequests()) {
 				if (request.equals(wantRoleTeacher)) {
 					userService.deleteRequest(user, request);
-					user.addRoleTeacher();
+					user.addRole("ROLE_TEACHER");
 				}
 			}
 			userService.updateUser(user);

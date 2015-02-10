@@ -13,7 +13,7 @@
                 <h4 class="modal-title"><spring:message code="contest.userList.header"/></h4>
             </div>
             <div class="modal-body">
-                <table data-toggle="table"
+                <table id="ContestUserTable" data-toggle="table"
                        data-url="getContestUsersList.do?contestId=${contestId}"
                        data-classes="table table-hover"
                        data-click-to-select="true"
@@ -23,7 +23,7 @@
                             <th data-field="choosed" data-checkbox="true" ></th>
                             <th data-field="id" data-sortable="true" class="idField">id</th>
                             <th data-field="name" data-sortable="true"><spring:message code="contest.userList.displayName"/></th>
-                            <th data-field="" data-sortable="true"><spring:message code="contest.userList.fullName"/></th>
+                            <th data-field="department" data-sortable="true"><spring:message code="contest.userList.department"/></th>
                         </tr>
                     </thead>
                 </table>

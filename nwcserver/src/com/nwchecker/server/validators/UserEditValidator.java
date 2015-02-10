@@ -4,18 +4,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
 import com.nwchecker.server.model.User;
 
+/**
+*
+* @author Станіслав
+*/
 @Component
 public class UserEditValidator implements Validator {
 
 	private final String	patternPassword		= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
-	private final String	patternDisplayName	= "^[a-zA-Z]+[a-zA-Z0-9_-]{2,15}$";
+	private final String	patternDisplayName	= "^[а-яА-Яa-zA-Z]{1}[а-яА-Яa-zA-Z0-9_-]{1,14}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 												+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private final String	patternDepartment	= "^[a-zA-Z0-9_ -]*$";
-	private final String	patternInfo	= "^[a-zA-Z0-9_ -]*$";
+	private final String	patternDepartment	= "^[а-яА-Яa-zA-Z0-9'\" -]*$";
+	private final String	patternInfo			= "^[а-яА-Яa-zA-Z0-9:.;,!?'\")( -]*$";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -47,5 +50,25 @@ public class UserEditValidator implements Validator {
 		if (!user.getInfo().matches(patternInfo)) {
 			errors.rejectValue("info", "adminPanel.userEdit.info.error");
 		}
+	}
+	
+	public String getPatternPassword() {
+		return patternPassword;
+	}
+	
+	public String getPatternDisplayName() {
+		return patternDisplayName;
+	}
+	
+	public String getPatternEmail() {
+		return patternEmail;
+	}
+	
+	public String getPatternDepartment() {
+		return patternDepartment;
+	}
+	
+	public String getPatternInfo() {
+		return patternInfo;
 	}
 }

@@ -8,10 +8,11 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  *
@@ -59,6 +60,9 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
         User teacher = userService.getUserByUsername(username);
+        if (teacher.hasRole("ROLE_ADMIN")) {
+            return true;
+        }
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
                 if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.PREPARING)) {

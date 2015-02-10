@@ -17,6 +17,9 @@
         <script type="text/javascript" src="${resources}js/adminOptions/userEdit.js"></script>
     </head>
     <body>
+    	<c:if test="${roles == null}">
+    		<c:set var="roles" value="${userData.roles}"/>
+    	</c:if>
     	<script type="text/javascript">
     		DELETE_DIALOG_TITLE   = '<spring:message code="adminPanel.userEdit.deleteDialog.title"/>';
 			DELETE_DIALOG_MESSAGE = '<spring:message code="adminPanel.userEdit.deleteDialog.message"/>';
@@ -25,7 +28,7 @@
     	
     		$('body').ready(function() {	
     			showUserRoles([
-    				<c:forEach var="role" items="${userData.roles}">
+    				<c:forEach var="role" items="${roles}">
     			    	"${role.role}",
     			    </c:forEach>
     			]);
@@ -49,8 +52,9 @@
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
 
-            <form:form modelAttribute="userData" method="post"
-            	class="form-horizontal" role="form" id="userEditForm">
+            <form:form id="userEditForm" accept-charset="UTF-8"
+            	 modelAttribute="userData" method="post"
+            	 class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.username.caption" />
@@ -66,7 +70,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:input path="displayName" class="form-control" name="displayName" />
-                        <form:errors path="displayName" Class="error" />
+                        <form:errors path="displayName" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +79,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:input path="email" class="form-control" name="email" />
-                        <form:errors path="email" Class="error" />
+                        <form:errors path="email" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -84,7 +88,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:input path="password" type="password" class="form-control" name="password" />
-                        <form:errors path="password" Class="error" />
+                        <form:errors path="password" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -93,7 +97,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:input path="confirmPassword" type="password" class="form-control" name="confirmPassword" />
-                        <form:errors path="confirmPassword" Class="error" />
+                        <form:errors path="confirmPassword" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -116,6 +120,8 @@
                     	<label for="user">
                     		<spring:message code="adminPanel.userEdit.role.user.caption" />
                     	</label>
+                    	<br/>
+                    	<form:errors path="roles" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -124,7 +130,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:input path="department" class="form-control" name="department" />
-                        <form:errors path="department" Class="error" />
+                        <form:errors path="department" class="text-danger" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,7 +139,7 @@
                     </label>
                     <div class="col-sm-4">
                         <form:textarea path="info" class="form-control" rows="4" name="info" style="resize:none"/>
-                        <form:errors path="info" Class="error" />
+                        <form:errors path="info" class="text-danger" />
                     </div>
                 </div>		
                 <input type="submit" id="formUdpateBtn" formaction="changeUser.do" hidden="true"/>

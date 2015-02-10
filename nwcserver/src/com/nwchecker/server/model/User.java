@@ -174,43 +174,26 @@ public class User {
     }
 
     public boolean hasRole(String role) {
-    	return (getRoleObject(role) != null);
+    	Role roleObj = getRoleObject(role);
+    	return this.roles.contains(roleObj);
     }
     
     public Role getRoleObject(String role) {
     	Role[] rolesArray = roles.toArray(new Role[roles.size()]);
-    	for (int i = 0; i < rolesArray.length; i++) {
-    		if (rolesArray[i].getRole().equals(role)) {
-    			return rolesArray[i];
+    	for (Role roleObj : rolesArray) {
+    		if (roleObj.getRole().equals(role)) {
+    			return roleObj;
     		}
     	}
     	return null;
     }
     
-    public void addRoleAdmin() {
-        if (roles == null) {
+    public void addRole(String role) {
+    	if (roles == null) {
             roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_ADMIN"));
+            roles.add(new Role(this, role));
         } else {
-            roles.add(new Role(this, "ROLE_ADMIN"));
-        }
-    }
-
-    public void addRoleUser() {
-        if (roles == null) {
-            roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_USER"));
-        } else {
-            roles.add(new Role(this, "ROLE_USER"));
-        }
-    }
-
-    public void addRoleTeacher() {
-        if (roles == null) {
-            roles = new HashSet<Role>();
-            roles.add(new Role(this, "ROLE_TEACHER"));
-        } else {
-            roles.add(new Role(this, "ROLE_TEACHER"));
+            roles.add(new Role(this, role));
         }
     }
 

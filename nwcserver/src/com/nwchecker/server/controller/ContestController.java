@@ -16,12 +16,6 @@ import com.nwchecker.server.service.ScheduleService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.ContestValidator;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -39,6 +33,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Роман
@@ -198,7 +202,7 @@ public class ContestController {
         return "contests/contestCreate";
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -222,6 +226,7 @@ public class ContestController {
             UserJson newUser = new UserJson();
             newUser.setId(u.getUserId());
             newUser.setName(u.getDisplayName());
+            newUser.setDepartment(u.getDepartment());
             if (c != null) {
                 if (c.getUsers().contains(u)) {
                     newUser.setChoosed(true);
@@ -240,7 +245,7 @@ public class ContestController {
         return result;
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @CheckTeacherAccess
     @RequestMapping(value = "/setContestUsers.do", method = RequestMethod.POST)
     public

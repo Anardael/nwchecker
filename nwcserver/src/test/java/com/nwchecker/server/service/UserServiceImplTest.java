@@ -107,8 +107,6 @@ public class UserServiceImplTest {
     public void testDeleteUserRole() throws Exception {
     	userServiceImpl.deleteUserRole(userList.get(1), "ROLE_USER");
         assertEquals(userList.get(1).getRoleObject("ROLE_USER"), null);
-        //verify((userDAO), times(1)).deleteRole(userList.get(1).getRoleObject("ROLE_USER"));
-        //verifyNoMoreInteractions(userDAO);
     }
 
     @Test
