@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ tag description="userListt" pageEncoding="UTF-8"%>
+<%@ tag description="userList" pageEncoding="UTF-8"%>
 <%@attribute name="contestId" %>
 <div id="userListModal" class="modal fade">
     <div class="modal-dialog "style="height: 50%">
@@ -22,7 +22,7 @@
                             <th data-field="choosed" data-checkbox="true" ></th>
                             <th data-field="id" data-sortable="true" class="idField">id</th>
                             <th data-field="name" data-sortable="true"><spring:message code="contest.userList.displayName"/></th>
-                            <th data-field="" data-sortable="true"><spring:message code="contest.userList.fullName"/></th>
+                            <th data-field="department" data-sortable="true"><spring:message code="contest.userList.department"/></th>
                         </tr>
                     </thead>
                 </table>

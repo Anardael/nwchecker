@@ -7,10 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -54,11 +52,4 @@ public class ListContests {
                 + "\" received list of contests.");
         return listContestsJsons;
     }
-
-    @RequestMapping(value = "/listTeachersModal", method = RequestMethod.GET)
-    public String listTeachersModal(@RequestParam("contestId") String contestId, Model model) {
-        model.addAttribute("contestId", contestId);
-        return "adminOptions/listTeachersModal";
-    }
-
 }
