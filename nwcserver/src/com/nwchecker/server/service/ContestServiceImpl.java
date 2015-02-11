@@ -60,9 +60,6 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
         User teacher = userService.getUserByUsername(username);
-        if (teacher.hasRole("ROLE_ADMIN")) {
-            return true;
-        }
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
                 if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.PREPARING)) {
