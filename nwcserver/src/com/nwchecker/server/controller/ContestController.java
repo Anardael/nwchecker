@@ -12,7 +12,7 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.ScheduleService;
+import com.nwchecker.server.service.ScheduleServiceImpl;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.ContestValidator;
@@ -65,7 +65,7 @@ public class ContestController {
     private ContestValidator contestValidator;
 
     @Autowired
-    private ScheduleService scheduleService;
+    private ScheduleServiceImpl scheduleService;
 
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {

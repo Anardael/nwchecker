@@ -58,7 +58,6 @@ public class TaskController {
     @Autowired
     private TaskValidator taskValidator;
 
-    //Creating Task for Contest(contestId)
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @CheckTeacherAccess
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)

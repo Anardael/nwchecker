@@ -75,6 +75,9 @@ function sendFinishContest() {
             }
         }
         if (data.status == "SUCCESS") {
+            if (data.result != null) {
+                $('#id').val(data.result);
+            }
             //if contest successfully saved- send ajax to finish contest preparing:
             $.ajax({
                 url: "stopContestPrepare.do",
