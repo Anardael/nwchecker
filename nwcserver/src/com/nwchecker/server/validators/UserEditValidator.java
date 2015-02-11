@@ -13,8 +13,8 @@ import com.nwchecker.server.model.User;
 @Component
 public class UserEditValidator implements Validator {
 
-	private final String	patternPassword		= "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
-	private final String	patternDisplayName	= "^[а-яА-Яa-zA-Z]{1}[а-яА-Яa-zA-Z0-9_-]{1,14}$";
+	private final String	patternPassword		= "^(?=.{6,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?!.*[А-я]).*";
+	private final String	patternDisplayName	= "^[а-яА-Яa-zA-Z]{1}[а-яА-Яa-zA-Z0-9_-]{2,15}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 												+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private final String	patternDepartment	= "^[а-яА-Яa-zA-Z0-9'\" -]*$";

@@ -1,11 +1,11 @@
 package test.java.com.nwchecker.server.validators;
 
-import static org.junit.Assert.*;
-
+import com.nwchecker.server.validators.UserRegistrationValidator;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.nwchecker.server.validators.UserRegistrationValidator;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UserRegistrationValidatorPatternsTest {
 
@@ -32,9 +32,9 @@ public class UserRegistrationValidatorPatternsTest {
 	@Test
 	public void testUsernameLength() {
 		assertFalse(("u").matches(patternUsername));
-		assertTrue(("us").matches(patternUsername));
-		assertTrue(("usernameusernam").matches(patternUsername));
-		assertFalse(("usernameusername").matches(patternUsername));
+		assertTrue(("usd").matches(patternUsername));
+		assertTrue(("usernameusername").matches(patternUsername));
+		assertFalse(("usernameusernameu").matches(patternUsername));
 	}
 	
 	@Test
@@ -60,8 +60,8 @@ public class UserRegistrationValidatorPatternsTest {
 		assertFalse(("a").matches(patternDisplayName));
 		assertFalse(("A").matches(patternDisplayName));
 		assertTrue(("tSs").matches(patternDisplayName));
-		assertTrue(("TestTestTestTes").matches(patternDisplayName));
-		assertFalse(("TestTestTestTest").matches(patternDisplayName));
+		assertTrue(("TestTestTestTest").matches(patternDisplayName));
+		assertFalse(("TestTestTestTestT").matches(patternDisplayName));
 	}
 	
 	@Test
@@ -94,9 +94,9 @@ public class UserRegistrationValidatorPatternsTest {
 	
 	@Test
 	public void testEmailIncorrect() {
-		assertFalse(("_test@test.ts.ts").matches(patternEmail));
+		assertFalse(("_/test@test.ts.ts").matches(patternEmail));
 		assertFalse((".test@test.ts").matches(patternEmail));
-		assertFalse(("1test@test.ts.ts").matches(patternEmail));
+		assertFalse(("1_*test@test.ts.ts").matches(patternEmail));
 		assertFalse(("test.test.ts").matches(patternEmail));
 	}
 	

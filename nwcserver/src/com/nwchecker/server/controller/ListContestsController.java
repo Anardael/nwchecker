@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @SessionAttributes("user")
-public class ListContests {
+public class ListContestsController {
     private static final Logger LOG = Logger
             .getLogger(AdminOptionsController.class);
 

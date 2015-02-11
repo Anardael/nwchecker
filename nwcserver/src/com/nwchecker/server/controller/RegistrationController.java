@@ -2,6 +2,7 @@ package com.nwchecker.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,12 +39,14 @@ public class RegistrationController {
 		dataBinder.setValidator(validator);
 	}
 
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String initRegistrationForm(Model model) {
 		model.addAttribute("userRegistrationForm", new User());
 		return "loggingAndRegistration/registration";
 	}
 
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result) {
 		if (result.hasErrors()) {

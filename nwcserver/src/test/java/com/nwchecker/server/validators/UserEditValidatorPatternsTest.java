@@ -1,11 +1,11 @@
 package test.java.com.nwchecker.server.validators;
 
-import static org.junit.Assert.*;
-
+import com.nwchecker.server.validators.UserEditValidator;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.nwchecker.server.validators.UserEditValidator;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UserEditValidatorPatternsTest {
 
@@ -67,8 +67,8 @@ public class UserEditValidatorPatternsTest {
 		assertFalse(("a").matches(patternDisplayName));
 		assertFalse(("A").matches(patternDisplayName));
 		assertTrue(("tSs").matches(patternDisplayName));
-		assertTrue(("TestTestTestTes").matches(patternDisplayName));
-		assertFalse(("TestTestTestTest").matches(patternDisplayName));
+		assertTrue(("TestTestTestTest").matches(patternDisplayName));
+		assertFalse(("TestTestTestTestT").matches(patternDisplayName));
 	}
 	
 	@Test
@@ -101,9 +101,9 @@ public class UserEditValidatorPatternsTest {
 	
 	@Test
 	public void testEmailIncorrect() {
-		assertFalse(("_test@test.ts.ts").matches(patternEmail));
+		assertFalse(("_/test@test.ts.ts").matches(patternEmail));
 		assertFalse((".test@test.ts").matches(patternEmail));
-		assertFalse(("1test@test.ts.ts").matches(patternEmail));
+		assertFalse(("1_*test@test.ts.ts").matches(patternEmail));
 		assertFalse(("test.test.ts").matches(patternEmail));
 	}
 	

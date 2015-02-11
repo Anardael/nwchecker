@@ -1,11 +1,11 @@
 package test.java.com.nwchecker.server.validators;
 
-import static org.junit.Assert.*;
-
+import com.nwchecker.server.validators.UserProfileValidator;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.nwchecker.server.validators.UserProfileValidator;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UserProfileValidatorPatternsTest {
 
@@ -31,8 +31,8 @@ public class UserProfileValidatorPatternsTest {
 		assertFalse(("a").matches(patternDisplayName));
 		assertFalse(("A").matches(patternDisplayName));
 		assertTrue(("tSs").matches(patternDisplayName));
-		assertTrue(("TestTestTestTes").matches(patternDisplayName));
-		assertFalse(("TestTestTestTest").matches(patternDisplayName));
+		assertTrue(("TestTestTestTest").matches(patternDisplayName));
+		assertFalse(("TestTestTestTestT").matches(patternDisplayName));
 	}
 	
 	@Test

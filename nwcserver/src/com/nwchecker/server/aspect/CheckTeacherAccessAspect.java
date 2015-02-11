@@ -9,22 +9,19 @@ import com.nwchecker.server.controller.ContestController;
 import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.service.ContestService;
-
-import java.lang.reflect.Method;
-import java.security.Principal;
-import java.util.LinkedList;
-
+import com.nwchecker.server.service.UserService;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
+import java.lang.reflect.Method;
+import java.security.Principal;
+import java.util.LinkedList;
 
 /**
- *
  * @author Роман
  */
 @Aspect
@@ -32,6 +29,10 @@ public class CheckTeacherAccessAspect {
 
     @Autowired
     private ContestService contestService;
+
+    @Autowired
+    private UserService userService;
+
 
     private static final Logger LOG
             = Logger.getLogger(ContestController.class);
@@ -54,14 +55,16 @@ public class CheckTeacherAccessAspect {
         //write to log:
         LOG.info("\"" + principal.getName() + "\" tries to edit contest (id=" + contestId + ")");
 
-        boolean haveAccess=false;
+        boolean haveAccess = false;
         //check if its set user list method and user is Admin:
-        if (method.getName().equals("setContestUsers") && 
-        		((UserDetails)principal).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-        	haveAccess=true;
-        }else{
-        	//check if teacher have access to edit contest:
-        	haveAccess = contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId);
+
+        if (method.getName().equals("setContestUsers") &&
+                userService.getUserByUsername(principal.getName()).hasRole("ROLE_ADMIN")
+                ) {
+            haveAccess = true;
+        } else {
+            //check if teacher have access to edit contest:
+            haveAccess = contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId);
         }
         if (haveAccess == true) {
             LOG.info("\"" + principal.getName() + "\" passed verification for contest editing (id=" + contestId + ")");

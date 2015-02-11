@@ -39,6 +39,21 @@ function twoDigitsDateTime(value) {
     return value;
 }
 
+function usersSorter(a, b) {
+    if (a=='' && b=='') {
+        return -1;
+    }
+    if (a=='') {
+        return 1;
+    }
+    if (b=='') {
+        return -1;
+    }
+    if (a>b) return -1;
+    if (a<b) return 1;
+    return 0;
+}
+
 function dateSorter(a, b) {
     if (!a && !b) {
         return -1;

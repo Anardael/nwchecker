@@ -14,8 +14,8 @@
     <script type="text/javascript"
             src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
     <script type="text/javascript" src="${resources}js/adminOptions/listContestsFormatters.js"></script>
-    <script type="text/javascript" src="${resources}js/adminOptions/listContests.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestUsers.js"></script>
+    <script type="text/javascript" src="${resources}js/adminOptions/listContests.js"></script>
 </head>
 
 <body>
@@ -54,7 +54,8 @@
                 <th data-field="title" data-align="center" data-sortable="true">
                     <spring:message code="listContests.contests.tableHeader.title"/>
                 </th>
-                <th data-field="users" data-align="center" data-formatter="usersFormatter" data-switchable="false">
+                <th data-field="users" data-align="center" data-formatter="usersFormatter" data-sortable="true"
+                    data-sorter="usersSorter" data-switchable="false">
                     <spring:message code="listContests.contests.tableHeader.users"/>
                 </th>
                 <th data-field="starts" data-align="center" data-sortable="true" data-sorter="dateSorter"
