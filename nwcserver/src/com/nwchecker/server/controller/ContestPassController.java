@@ -7,9 +7,11 @@ import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +42,8 @@ public class ContestPassController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public
     @ResponseBody
-    String signUpOnContest(Principal principal, @RequestParam(value = "id") int contestId) {
+    String signUpForContest(Principal principal, 
+    						@RequestParam(value = "id") int contestId) {
         User user = userService.getUserByUsername(principal.getName());
         //user already has contest?
         for (Contest c : user.getContest()) {
@@ -57,6 +60,23 @@ public class ContestPassController {
         } else {
             return "wrongContest";
         }
+    }
+    
+    @RequestMapping(value = "/passContest")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getStartedContest(Principal principal, Model model,
+    								@RequestParam("contestId") int contestId,
+    								@RequestParam("selectedTask") int selectedTask) {
+    	User user = userService.getUserByUsername(principal.getName());
+        for (Contest c : user.getContest()) {
+            if (c.getId() == contestId) {
+                Contest contest = contestService.getContestByID(contestId);
+                model.addAttribute("contest", contest);
+                model.addAttribute("selectedTask", selectedTask);
+            	return "contests/contestPass";
+            }
+        }
+        return "redirect:/index.do";
     }
 
     @RequestMapping(value = "/submitTask", method = RequestMethod.POST)
