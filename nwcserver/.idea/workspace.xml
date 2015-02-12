@@ -26,22 +26,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ContestController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+      <file leaf-file-name="TaskController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4116" max-vertical-offset="4675">
-              <caret line="290" column="9" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
-              <folding />
+            <state vertical-scroll-proportion="0.61513156" vertical-offset="255" max-vertical-offset="1241">
+              <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+              <folding>
+                <element signature="method#newTaskJson#0;class#TaskController#0" expanded="false" />
+                <element signature="e#5644#5684#0" expanded="false" />
+                <element signature="method#processDeleteTaskJson#0;class#TaskController#0" expanded="false" />
+                <element signature="e#6494#6534#0" expanded="false" />
+                <element signature="method#newTaskFormJson#0;class#TaskController#0" expanded="false" />
+                <element signature="e#7210#7250#0" expanded="false" />
+                <element signature="method#getFile#0;class#TaskController#0" expanded="false" />
+                <element signature="e#8320#8360#0" expanded="false" />
+                <element signature="method#getTestFiles#0;class#TaskController#0" expanded="false" />
+                <element signature="e#8947#8987#0" expanded="false" />
+                <element signature="method#deleteTestFile#0;class#TaskController#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contestInit.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestInit.js">
+      <file leaf-file-name="ContestController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58044165" vertical-offset="1159" max-vertical-offset="2006">
-              <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="835" max-vertical-offset="1190">
+              <caret line="283" column="100" selection-start-line="283" selection-start-column="100" selection-end-line="283" selection-end-column="100" />
+              <folding>
+                <element signature="docComment;class#ContestController#0" expanded="false" />
+                <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
+                <element signature="e#4396#4436#0" expanded="false" />
+                <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
+                <element signature="e#4872#4912#0" expanded="false" />
+                <element signature="method#addContest#0;class#ContestController#0" expanded="false" />
+                <element signature="e#7877#7917#0" expanded="false" />
+                <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
+                <element signature="e#8380#8420#0" expanded="false" />
+                <element signature="method#getusers#0;class#ContestController#0" expanded="false" />
+                <element signature="e#9884#9924#0" expanded="false" />
+                <element signature="method#setContestUsers#0;class#ContestController#0" expanded="false" />
+                <element signature="e#11428#11468#0" expanded="false" />
+                <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,13 +112,13 @@
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/ContestPass.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/User.java" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerService.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
       </list>
     </option>
   </component>
@@ -143,8 +170,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -213,34 +238,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NWCServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nwcserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -613,7 +618,12 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="NWCServer:war exploded" />
+        </option>
+      </method>
     </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.MyConf" />
@@ -638,12 +648,13 @@
       <workItem from="1423560683051" duration="22000" />
       <workItem from="1423566943669" duration="236000" />
       <workItem from="1423586734685" duration="1304000" />
-      <workItem from="1423640254311" duration="10742000" />
+      <workItem from="1423640254311" duration="13693000" />
+      <workItem from="1423730243485" duration="1020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49076000" />
+    <option name="totallyTimeSpent" value="53047000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -667,39 +678,39 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25718608" sideWeight="0.69193155" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718608" sideWeight="0.30806845" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25718608" sideWeight="0.69193155" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718608" sideWeight="0.30806845" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718608" sideWeight="0.30806845" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -723,7 +734,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java</url>
-          <line>69</line>
+          <line>75</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
@@ -839,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.93700784" vertical-offset="0" max-vertical-offset="646">
           <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -951,7 +961,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="1819">
           <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -959,7 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="102" max-vertical-offset="714">
           <caret line="6" column="26" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -967,10 +975,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="765">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1423395902426" expanded="true" signature="-1:-1" placeholder="select usern..users..." />
-            <marker date="1423395902426" expanded="true" signature="-1:-1" placeholder="SELECT U.use..Users..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -990,23 +995,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62460566" vertical-offset="91" max-vertical-offset="578">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="822" max-vertical-offset="3077">
           <caret line="235" column="41" selection-start-line="235" selection-start-column="41" selection-end-line="235" selection-end-column="41" />
-          <folding>
-            <element signature="e#5703#5704#0" expanded="false" />
-            <element signature="e#5759#5760#0" expanded="false" />
-            <element signature="e#5799#5800#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,18 +1030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1519" max-vertical-offset="1904">
-          <caret line="140" column="87" selection-start-line="139" selection-start-column="35" selection-end-line="140" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#3248#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,17 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.14784946" vertical-offset="497" max-vertical-offset="3060">
-          <caret line="66" column="70" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="70" />
-          <folding>
-            <element signature="e#6616#6622#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1085,15 +1054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51428574" vertical-offset="754" max-vertical-offset="1411">
           <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
-          <folding>
-            <element signature="e#1390#1391#0" expanded="true" />
-            <element signature="e#1438#1439#0" expanded="true" />
-            <element signature="e#1480#1481#0" expanded="true" />
-            <element signature="e#1515#1516#0" expanded="true" />
-            <element signature="e#1548#1549#0" expanded="true" />
-            <element signature="e#1598#1599#0" expanded="true" />
-            <element signature="e#1642#1643#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1105,10 +1065,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestInit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1159" max-vertical-offset="2006">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5362776" vertical-offset="0" max-vertical-offset="1751">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding>
+            <element signature="e#3149#3150#0" expanded="true" />
+            <element signature="e#3243#3244#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3564669" vertical-offset="771" max-vertical-offset="1190">
+          <caret line="71" column="31" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8233439" vertical-offset="720" max-vertical-offset="1037">
+          <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="40" max-vertical-offset="578">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0536277" vertical-offset="159" max-vertical-offset="629">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5709779" vertical-offset="210" max-vertical-offset="629">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#457#473#0" expanded="true" />
@@ -1116,40 +1120,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1037">
-          <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8391167" vertical-offset="941" max-vertical-offset="1513">
-          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2685#2701#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4116" max-vertical-offset="4675">
-          <caret line="290" column="9" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="835" max-vertical-offset="1190">
+          <caret line="283" column="100" selection-start-line="283" selection-start-column="100" selection-end-line="283" selection-end-column="100" />
+          <folding>
+            <element signature="docComment;class#ContestController#0" expanded="false" />
+            <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
+            <element signature="e#4396#4436#0" expanded="false" />
+            <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
+            <element signature="e#4872#4912#0" expanded="false" />
+            <element signature="method#addContest#0;class#ContestController#0" expanded="false" />
+            <element signature="e#7877#7917#0" expanded="false" />
+            <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
+            <element signature="e#8380#8420#0" expanded="false" />
+            <element signature="method#getusers#0;class#ContestController#0" expanded="false" />
+            <element signature="e#9884#9924#0" expanded="false" />
+            <element signature="method#setContestUsers#0;class#ContestController#0" expanded="false" />
+            <element signature="e#11428#11468#0" expanded="false" />
+            <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestInit.js">
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58044165" vertical-offset="1159" max-vertical-offset="2006">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-          <folding />
+        <state vertical-scroll-proportion="0.61513156" vertical-offset="255" max-vertical-offset="1241">
+          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+          <folding>
+            <element signature="method#newTaskJson#0;class#TaskController#0" expanded="false" />
+            <element signature="e#5644#5684#0" expanded="false" />
+            <element signature="method#processDeleteTaskJson#0;class#TaskController#0" expanded="false" />
+            <element signature="e#6494#6534#0" expanded="false" />
+            <element signature="method#newTaskFormJson#0;class#TaskController#0" expanded="false" />
+            <element signature="e#7210#7250#0" expanded="false" />
+            <element signature="method#getFile#0;class#TaskController#0" expanded="false" />
+            <element signature="e#8320#8360#0" expanded="false" />
+            <element signature="method#getTestFiles#0;class#TaskController#0" expanded="false" />
+            <element signature="e#8947#8987#0" expanded="false" />
+            <element signature="method#deleteTestFile#0;class#TaskController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
