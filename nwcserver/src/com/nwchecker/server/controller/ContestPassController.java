@@ -82,7 +82,7 @@ public class ContestPassController {
     @RequestMapping(value = "/submitTask", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public
-    @ResponseBody
+    @ResponseBody // Why MAP<,>? Maybe String?
     Map<String, Object> submitTask(Principal principal, @RequestParam(value = "taskId") int taskId,
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
