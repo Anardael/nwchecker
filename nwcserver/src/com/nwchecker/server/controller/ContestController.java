@@ -16,12 +16,6 @@ import com.nwchecker.server.service.ScheduleServiceImpl;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.ContestValidator;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,11 +28,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.File;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Роман
@@ -79,17 +75,21 @@ public class ContestController {
             }
         }
         UserDetails currentUser = null;
-        //if user is unauthorize- get userDetails:
+        //check if user is unauthorize- get userDetails:
         if (principal != null) {
             currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-        }
-        //for unauthorize users and users with user role:
-        if (principal == null || (principal != null &&
-                currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")))) {
+        } else {
             //return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
             return "contests/contest";
         }
+
+        User user = userService.getUserByUsername(currentUser.getUsername());
+        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+        }
+        //chapter 2:
+
+
         //list of Contest indexes which User can edit:
         List<String> editableContestIndexes = new LinkedList<String>();
         //get User entity from db:
@@ -106,9 +106,10 @@ public class ContestController {
                     }
                 }
             }
-            model.addAttribute("contests", unhidden);
+
             model.addAttribute("editContestIndexes", editableContestIndexes);
         }
+        model.addAttribute("contests", unhidden);
         return "contests/contest";
     }
 

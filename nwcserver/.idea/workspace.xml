@@ -14,6 +14,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="Commander">
+    <leftPanel />
+    <rightPanel />
+    <splitter proportion="0.5" />
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -26,49 +31,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TaskController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java">
+      <file leaf-file-name="ContestController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61513156" vertical-offset="255" max-vertical-offset="1241">
-              <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.33333334" vertical-offset="607" max-vertical-offset="4760">
+              <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskPass.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="771" max-vertical-offset="1513">
+              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
               <folding>
-                <element signature="method#newTaskJson#0;class#TaskController#0" expanded="false" />
-                <element signature="e#5644#5684#0" expanded="false" />
-                <element signature="method#processDeleteTaskJson#0;class#TaskController#0" expanded="false" />
-                <element signature="e#6494#6534#0" expanded="false" />
-                <element signature="method#newTaskFormJson#0;class#TaskController#0" expanded="false" />
-                <element signature="e#7210#7250#0" expanded="false" />
-                <element signature="method#getFile#0;class#TaskController#0" expanded="false" />
-                <element signature="e#8320#8360#0" expanded="false" />
-                <element signature="method#getTestFiles#0;class#TaskController#0" expanded="false" />
-                <element signature="e#8947#8987#0" expanded="false" />
-                <element signature="method#deleteTestFile#0;class#TaskController#0" expanded="false" />
+                <element signature="e#774#775#0" expanded="false" />
+                <element signature="e#799#800#0" expanded="false" />
+                <element signature="e#832#833#0" expanded="false" />
+                <element signature="e#860#861#0" expanded="false" />
+                <element signature="e#889#890#0" expanded="false" />
+                <element signature="e#916#917#0" expanded="false" />
+                <element signature="e#954#955#0" expanded="false" />
+                <element signature="e#986#987#0" expanded="false" />
+                <element signature="e#1015#1016#0" expanded="false" />
+                <element signature="e#1042#1043#0" expanded="false" />
+                <element signature="e#1080#1081#0" expanded="false" />
+                <element signature="e#1112#1113#0" expanded="false" />
+                <element signature="e#1145#1146#0" expanded="false" />
+                <element signature="e#1174#1175#0" expanded="false" />
+                <element signature="e#1219#1220#0" expanded="false" />
+                <element signature="e#1255#1256#0" expanded="false" />
+                <element signature="e#1470#1471#0" expanded="false" />
+                <element signature="e#1503#1504#0" expanded="false" />
+                <element signature="e#1553#1554#0" expanded="false" />
+                <element signature="e#1597#1598#0" expanded="false" />
+                <element signature="e#1628#1629#0" expanded="false" />
+                <element signature="e#1655#1656#0" expanded="false" />
+                <element signature="e#1695#1696#0" expanded="false" />
+                <element signature="e#1727#1728#0" expanded="false" />
+                <element signature="e#1869#1870#0" expanded="false" />
+                <element signature="e#1923#1924#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContestController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+      <file leaf-file-name="TaskPassServiceIMpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="835" max-vertical-offset="1190">
-              <caret line="283" column="100" selection-start-line="283" selection-start-column="100" selection-end-line="283" selection-end-column="100" />
-              <folding>
-                <element signature="docComment;class#ContestController#0" expanded="false" />
-                <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
-                <element signature="e#4396#4436#0" expanded="false" />
-                <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
-                <element signature="e#4872#4912#0" expanded="false" />
-                <element signature="method#addContest#0;class#ContestController#0" expanded="false" />
-                <element signature="e#7877#7917#0" expanded="false" />
-                <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
-                <element signature="e#8380#8420#0" expanded="false" />
-                <element signature="method#getusers#0;class#ContestController#0" expanded="false" />
-                <element signature="e#9884#9924#0" expanded="false" />
-                <element signature="method#setContestUsers#0;class#ContestController#0" expanded="false" />
-                <element signature="e#11428#11468#0" expanded="false" />
-                <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="663">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,7 +115,6 @@
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/aspect/CheckTeacherAccessAspect.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestCreate.jsp" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/fragments/createNewTaskForm.jsp" />
         <option value="$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskEditing.js" />
         <option value="$PROJECT_DIR$/WebContent/resources/js/contests/contestInit.js" />
@@ -112,13 +126,14 @@
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/ContestPass.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/User.java" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerService.java" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerService.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
       </list>
     </option>
   </component>
@@ -170,6 +185,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,14 +254,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,7 +275,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="ContestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Check&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/CheckerServiceImpl.java&#10;ContestDAO&#9;PSI&#9;JAVA://com.nwchecker.server.dao.ContestDAOImpl&#10;tasj&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;header&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;message&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;contestI&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contests&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/ContestServiceImpl.java&#10;ContestC&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestController.java&#10;tasked&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Contest&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;contestIni&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contestCre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;messa&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;ContestVa&#9;PSI&#9;JAVA://com.nwchecker.server.validators.ContestValidator&#10;taskAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;TaskCo&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;app&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/application-context.xml&#10;contestCrea&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskEd&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;contestInit&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Cont&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;TaskDa&#9;PSI&#9;JAVA://com.nwchecker.server.model.TaskData&#10;Hand&#9;PSI&#9;JAVA://com.nwchecker.server.handlers.GlobalExceptionsHandler&#10;servlet-c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/servlet-context.xml&#10;taskE&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Tas&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;taskA&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js" />
+    <property name="SearchEverywhereHistoryKey" value="taskda&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskData.java&#10;TaskPass&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskPass.java&#10;ContestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Check&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/CheckerServiceImpl.java&#10;ContestDAO&#9;PSI&#9;JAVA://com.nwchecker.server.dao.ContestDAOImpl&#10;tasj&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;header&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;message&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;contestI&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contests&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/ContestServiceImpl.java&#10;ContestC&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestController.java&#10;tasked&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Contest&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;contestIni&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contestCre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;messa&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;ContestVa&#9;PSI&#9;JAVA://com.nwchecker.server.validators.ContestValidator&#10;taskAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;TaskCo&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;app&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/application-context.xml&#10;contestCrea&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskEd&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;contestInit&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Cont&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;TaskDa&#9;PSI&#9;JAVA://com.nwchecker.server.model.TaskData&#10;Hand&#9;PSI&#9;JAVA://com.nwchecker.server.handlers.GlobalExceptionsHandler&#10;servlet-c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/servlet-context.xml&#10;taskE&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Tas&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;taskA&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="options.lastSelected" value="File.Encoding" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -650,11 +665,13 @@
       <workItem from="1423586734685" duration="1304000" />
       <workItem from="1423640254311" duration="13693000" />
       <workItem from="1423730243485" duration="1020000" />
+      <workItem from="1423735012510" duration="6016000" />
+      <workItem from="1423820528754" duration="1291000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53047000" />
+    <option name="totallyTimeSpent" value="60354000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -677,8 +694,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -687,7 +704,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32626426" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -706,7 +723,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43719414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43719414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -773,13 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41919193" vertical-offset="38" max-vertical-offset="527">
           <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6439394" vertical-offset="153" max-vertical-offset="969">
-          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -991,14 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5362776" vertical-offset="0" max-vertical-offset="317">
           <caret line="10" column="53" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="822" max-vertical-offset="3077">
-          <caret line="235" column="41" selection-start-line="235" selection-start-column="41" selection-end-line="235" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1022,7 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44155845" vertical-offset="51" max-vertical-offset="1122">
           <caret line="23" column="36" selection-start-line="22" selection-start-column="3" selection-end-line="23" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,31 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35324675" vertical-offset="0" max-vertical-offset="385">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51428574" vertical-offset="754" max-vertical-offset="1411">
-          <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <caret line="9" column="75" selection-start-line="9" selection-start-column="75" selection-end-line="9" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestInit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1159" max-vertical-offset="2006">
@@ -1077,76 +1053,24 @@
         <state vertical-scroll-proportion="0.5362776" vertical-offset="0" max-vertical-offset="1751">
           <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
           <folding>
-            <element signature="e#3149#3150#0" expanded="true" />
-            <element signature="e#3243#3244#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3564669" vertical-offset="771" max-vertical-offset="1190">
-          <caret line="71" column="31" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8233439" vertical-offset="720" max-vertical-offset="1037">
-          <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3149#3150#0" expanded="false" />
+            <element signature="e#3243#3244#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="40" max-vertical-offset="578">
+        <state vertical-scroll-proportion="0.4637224" vertical-offset="142" max-vertical-offset="578">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5709779" vertical-offset="210" max-vertical-offset="629">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#457#473#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="835" max-vertical-offset="1190">
-          <caret line="283" column="100" selection-start-line="283" selection-start-column="100" selection-end-line="283" selection-end-column="100" />
-          <folding>
-            <element signature="docComment;class#ContestController#0" expanded="false" />
-            <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
-            <element signature="e#4396#4436#0" expanded="false" />
-            <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
-            <element signature="e#4872#4912#0" expanded="false" />
-            <element signature="method#addContest#0;class#ContestController#0" expanded="false" />
-            <element signature="e#7877#7917#0" expanded="false" />
-            <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
-            <element signature="e#8380#8420#0" expanded="false" />
-            <element signature="method#getusers#0;class#ContestController#0" expanded="false" />
-            <element signature="e#9884#9924#0" expanded="false" />
-            <element signature="method#setContestUsers#0;class#ContestController#0" expanded="false" />
-            <element signature="e#11428#11468#0" expanded="false" />
-            <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61513156" vertical-offset="255" max-vertical-offset="1241">
-          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="937" max-vertical-offset="1241">
+          <caret line="59" column="66" selection-start-line="59" selection-start-column="66" selection-end-line="59" selection-end-column="66" />
           <folding>
             <element signature="method#newTaskJson#0;class#TaskController#0" expanded="false" />
             <element signature="e#5644#5684#0" expanded="false" />
@@ -1160,6 +1084,114 @@
             <element signature="e#8947#8987#0" expanded="false" />
             <element signature="method#deleteTestFile#0;class#TaskController#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41009465" vertical-offset="941" max-vertical-offset="3043">
+          <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+          <folding>
+            <element signature="e#5672#5673#0" expanded="true" />
+            <element signature="e#5703#5704#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32176656" vertical-offset="0" max-vertical-offset="317">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="323">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48264983" vertical-offset="153" max-vertical-offset="969">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7318612" vertical-offset="261" max-vertical-offset="680">
+          <caret line="32" column="91" selection-start-line="32" selection-start-column="91" selection-end-line="32" selection-end-column="91" />
+          <folding>
+            <element signature="e#593#609#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0" vertical-offset="567" max-vertical-offset="1139">
+          <caret line="71" column="21" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+          <folding>
+            <element signature="e#2685#2701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="771" max-vertical-offset="1513">
+          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+          <folding>
+            <element signature="e#774#775#0" expanded="false" />
+            <element signature="e#799#800#0" expanded="false" />
+            <element signature="e#832#833#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#889#890#0" expanded="false" />
+            <element signature="e#916#917#0" expanded="false" />
+            <element signature="e#954#955#0" expanded="false" />
+            <element signature="e#986#987#0" expanded="false" />
+            <element signature="e#1015#1016#0" expanded="false" />
+            <element signature="e#1042#1043#0" expanded="false" />
+            <element signature="e#1080#1081#0" expanded="false" />
+            <element signature="e#1112#1113#0" expanded="false" />
+            <element signature="e#1145#1146#0" expanded="false" />
+            <element signature="e#1174#1175#0" expanded="false" />
+            <element signature="e#1219#1220#0" expanded="false" />
+            <element signature="e#1255#1256#0" expanded="false" />
+            <element signature="e#1470#1471#0" expanded="false" />
+            <element signature="e#1503#1504#0" expanded="false" />
+            <element signature="e#1553#1554#0" expanded="false" />
+            <element signature="e#1597#1598#0" expanded="false" />
+            <element signature="e#1628#1629#0" expanded="false" />
+            <element signature="e#1655#1656#0" expanded="false" />
+            <element signature="e#1695#1696#0" expanded="false" />
+            <element signature="e#1727#1728#0" expanded="false" />
+            <element signature="e#1869#1870#0" expanded="false" />
+            <element signature="e#1923#1924#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="663">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="607" max-vertical-offset="4760">
+          <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,5 +1,7 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.model.Task;
+
 import java.util.Map;
 
 /**
@@ -7,5 +9,5 @@ import java.util.Map;
  */
 public interface CheckerService {
 
-    Map<String, Object> checkTask(int taskId, byte[] file, int compilerId);
+    Map<String, Object> checkTask(Task task, byte[] file, int compilerId);
 }

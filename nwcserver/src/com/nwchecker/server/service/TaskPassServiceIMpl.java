@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,36 +21,19 @@ public class TaskPassServiceIMpl implements TaskPassService {
     private CheckerService checkerService;
 
     @Override
-    public boolean checkTask(User user, int taskId, int compilerId, byte[] file) {
-
-        TaskPass currentTaskPass = null;
-        //if user has already TaskPass for this task:
-        for (TaskPass taskPass : user.getTaskPass()) {
-            if (taskPass.getTask().getId() == taskId) {
-                currentTaskPass = taskPass;
-                user.getTaskPass().remove(taskPass);
-                break;
-            }
-        }
-        //if user has no TaskPass for this task- create new TaskPass:
-        if (currentTaskPass == null) {
-            currentTaskPass = new TaskPass();
-            currentTaskPass.setUser(user);
-            currentTaskPass.setTask(taskService.getTaskById(taskId));
-        }
+    public Map<String, Object> checkTask(User user, Task task, int compilerId, byte[] file) {
+        TaskPass taskPass = new TaskPass();
+        taskPass.setUser(user);
+        taskPass.setTask(task);
         //send File and compiler to checker:
-        Map<String, Object> checkResult = checkerService.checkTask(taskId, file, compilerId);
-        if ((boolean) checkResult.get("passed") == true) {
-            currentTaskPass.setPassed(true);
-            currentTaskPass.setTimeSpent((int) checkResult.get("time"));
-            currentTaskPass.setMemoryUsed((int) checkResult.get("memory"));
-        } else {
-            currentTaskPass.setFailTimes(currentTaskPass.getFailTimes() + 1);
-        }
+        Map<String, Object> checkResult = checkerService.checkTask(task, file, compilerId);
+        taskPass.setPassed((boolean) checkResult.get("passed"));
+        taskPass.setExecutionTime((int) checkResult.get("time"));
+        taskPass.setMemoryUsed((int) checkResult.get("memory"));
+        taskPass.setCompilerMessage(checkResult.get("message") == null ? null : (String) checkResult.get("message"));
         //save to db:
-        user.getTaskPass().add(currentTaskPass);
+        user.getTaskPass().add(taskPass);
         userService.updateUser(user);
-        //return passed or no:
-        return (boolean) checkResult.get("passed");
+        return checkResult;
     }
 }

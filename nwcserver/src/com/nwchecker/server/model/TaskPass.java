@@ -22,17 +22,21 @@ public class TaskPass {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @Column(name = "failTimes")
-    private int failTimes;
-
     @Column(name = "passed")
     private boolean passed;
 
-    @Column(name = "timeSpent")
-    private long timeSpent;
+    @Column(name = "executionTime")
+    private long executionTime;
 
     @Column(name = "memoryUsed")
     private long memoryUsed;
+
+    @Lob
+    @Column(name = "file")
+    private byte[] file;
+
+    @Column(name = "compilerMessage")
+    private String compilerMessage;
 
     public int getId() {
         return id;
@@ -58,14 +62,6 @@ public class TaskPass {
         this.task = task;
     }
 
-    public int getFailTimes() {
-        return failTimes;
-    }
-
-    public void setFailTimes(int failTimes) {
-        this.failTimes = failTimes;
-    }
-
     public boolean isPassed() {
         return passed;
     }
@@ -74,12 +70,12 @@ public class TaskPass {
         this.passed = passed;
     }
 
-    public long getTimeSpent() {
-        return timeSpent;
+    public long getExecutionTime() {
+        return executionTime;
     }
 
-    public void setTimeSpent(long timeSpent) {
-        this.timeSpent = timeSpent;
+    public void setExecutionTime(long executionTime) {
+        this.executionTime = executionTime;
     }
 
     public long getMemoryUsed() {
@@ -88,6 +84,22 @@ public class TaskPass {
 
     public void setMemoryUsed(long memoryUsed) {
         this.memoryUsed = memoryUsed;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getCompilerMessage() {
+        return compilerMessage;
+    }
+
+    public void setCompilerMessage(String compilerMessage) {
+        this.compilerMessage = compilerMessage;
     }
 
     @Override

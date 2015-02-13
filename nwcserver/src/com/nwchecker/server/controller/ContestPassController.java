@@ -67,17 +67,14 @@ public class ContestPassController {
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
         Map<String, Object> result = new LinkedHashMap<String, Object>();
-        //TODO: create Aspect for check Access & should we use cache?
-        //get Task:
         Task task = taskService.getTaskById(taskId);
         User user = userService.getUserByUsername(principal.getName());
+        //check access:
         if (!user.getContest().contains(task.getContest())) {
             result.put("accessDenied", true);
             return result;
-        } else {
-            boolean correct = taskPassService.checkTask(user, taskId, compilerId, file.getBytes());
-            result.put("passed", correct);
-            return result;
         }
+        result = taskPassService.checkTask(user, task, compilerId, file.getBytes());
+        return result;
     }
 }
