@@ -2,12 +2,12 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -38,12 +38,12 @@ public class ContestPassController {
     @Autowired
     private TaskPassService taskPassService;
 
-    @RequestMapping(value = "/contestSignUp")
+    @RequestMapping(value = "/contestSignUp.do")
     @PreAuthorize("hasRole('ROLE_USER')")
     public
     @ResponseBody
-    String signUpForContest(Principal principal, 
-    						@RequestParam(value = "id") int contestId) {
+    String signUpForContest(Principal principal,
+                            @RequestParam(value = "id") int contestId) {
         User user = userService.getUserByUsername(principal.getName());
         //user already has contest?
         for (Contest c : user.getContest()) {
@@ -56,37 +56,50 @@ public class ContestPassController {
         if (requiredContest != null && (requiredContest.getStatus() == Contest.Status.RELEASE ||
                 requiredContest.getStatus() == Contest.Status.GOING)) {
             user.getContest().add(requiredContest);
+            userService.updateUser(user);
             return "success";
         } else {
             return "wrongContest";
         }
     }
-    
-    @RequestMapping(value = "/passContest")
+
+
     @PreAuthorize("hasRole('ROLE_USER')")
-    public String getStartedContest(Principal principal, Model model,
-    								@RequestParam("contestId") int contestId,
-    								@RequestParam("selectedTask") int selectedTask) {
-    	User user = userService.getUserByUsername(principal.getName());
-        for (Contest c : user.getContest()) {
-            if (c.getId() == contestId) {
-                Contest contest = contestService.getContestByID(contestId);
-                model.addAttribute("contest", contest);
-                model.addAttribute("selectedTask", selectedTask);
-            	return "contests/contestPass";
+    @RequestMapping(value = "/passTask.do", method = RequestMethod.GET)
+    public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
+                                 Model model) {
+        Task task = taskService.getTaskById(taskId);
+        User user = userService.getUserByUsername(pricnipal.getName());
+        //if user has no access to task contest of if task contest status is not GOING:
+        if ((!user.getContest().contains(task.getContest())) || (task.getContest().getStatus() != Contest.Status.GOING)) {
+            return "access/accessDenied403";
+        }
+        model.addAttribute("task", task);
+        //get list of passed/failed tasks, and forward it to UI:
+        Map<Integer, Boolean> userResult = new LinkedHashMap<>();
+        for (TaskPass tp : user.getTaskPass()) {
+            //if not contains:
+            if (!userResult.containsKey(tp.getId())) {
+                userResult.put(tp.getId(), tp.isPassed());
+                continue;
+            }
+            //if contains and new result if success:
+            if ((!userResult.get(tp.getId())) && tp.isPassed()) {
+                userResult.put(tp.getId(), tp.isPassed());
             }
         }
-        return "redirect:/index.do";
+        return "contests/contestPass";
     }
 
     @RequestMapping(value = "/submitTask", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public
-    @ResponseBody // Why MAP<,>? Maybe String?
+    @ResponseBody
+        // Why MAP<,>? Maybe String?
     Map<String, Object> submitTask(Principal principal, @RequestParam(value = "taskId") int taskId,
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
-        Map<String, Object> result = new LinkedHashMap<String, Object>();
+        Map<String, Object> result = new LinkedHashMap<>();
         Task task = taskService.getTaskById(taskId);
         User user = userService.getUserByUsername(principal.getName());
         //check access:

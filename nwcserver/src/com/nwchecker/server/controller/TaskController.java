@@ -52,18 +52,6 @@ public class TaskController {
     @Autowired
     private TaskValidator taskValidator;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/getTask.do", method = RequestMethod.GET)
-    public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
-                                 Model model) {
-        //TODO:validate if user has access for this task (R.Z.)
-        //TODO: validate if contest has status GOING (User aspects) (R.Z.)
-        Task task = taskService.getTaskById(taskId);
-        model.addAttribute("task", task);
-        return "NameOfYourTaskViewJSP";
-    }
-
-
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @CheckTeacherAccess
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)

@@ -30,7 +30,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -86,27 +85,28 @@ public class ContestController {
 
         User user = userService.getUserByUsername(currentUser.getUsername());
         if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+            List<String> userContests = new LinkedList<String>();
+            for (Contest c : user.getContest()) {
+                //using index_index for correct execution in "fn:contains" jstl function
+                userContests.add("index" + c.getId() + "index");
+                model.addAttribute("userContests", userContests);
+            }
         }
-        //chapter 2:
-
-
-        //list of Contest indexes which User can edit:
-        List<String> editableContestIndexes = new LinkedList<String>();
-        //get User entity from db:
-        User teacher = userService.getUserByUsername(currentUser.getUsername());
-        //getContests which user can edit::
-        if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
-            for (Contest c : teacher.getContest()) {
-                if (c.getStatus().equals(Contest.Status.PREPARING)) {
-                    //set index for view
-                    editableContestIndexes.add("index" + c.getId() + "index");
-                    //add Contest to unhidden list:
-                    if (c.isHidden()) {
-                        unhidden.add(c);
+        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+            List<String> editableContestIndexes = new LinkedList<String>();
+            //getContests which user can edit:
+            if ((user.getContest() != null) && (user.getContest().size() > 0)) {
+                for (Contest c : user.getContest()) {
+                    if (c.getStatus().equals(Contest.Status.PREPARING)) {
+                        //set index for view
+                        editableContestIndexes.add("index" + c.getId() + "index");
+                        //add Contest to unhidden list:
+                        if (c.isHidden()) {
+                            unhidden.add(c);
+                        }
                     }
                 }
             }
-
             model.addAttribute("editContestIndexes", editableContestIndexes);
         }
         model.addAttribute("contests", unhidden);
@@ -295,6 +295,7 @@ public class ContestController {
             result.setStatus("FAIL_STARTS");
             return result;
         } else {
+            contest.setHidden(false);
             contest.setStatus(Contest.Status.RELEASE);
             contestService.updateContest(contest);
             scheduleService.registerStartContestSchedule(contest);
