@@ -1,0 +1,78 @@
+/* Tasks navigation list */
+#tasks {
+	padding: 35px 0px 0px 0px;
+}
+#tasks>div {
+	margin: 1px 1px 1px 1px;
+	border: 1px solid white;
+	text-align: center;
+	font-size: 150%;
+	padding: 0px 0px 0px 0px;
+}
+#tasks>div>a, #tasks>div>a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+#tasks>div.active-tab, div.col-md-3>div.active-tab:hover {
+	background-color: #29C5E6;
+	color: #FFFFFF;
+}
+#tasks>div.default-tab {
+	background-color: white;
+	border-color: #DDE9E6;
+}
+#tasks>div.default-tab:hover {
+	background-color: #D0D0D0;
+	border-color: #DDE9E6;
+}
+#tasks>div.success-tab {
+	background-color: #DEF0D8;
+}
+#tasks>div.success-tab:hover {
+	background-color: #C4D4BE;
+}
+#tasks>div.fail-tab {
+	background-color: #F2DEDF;
+}
+#tasks>div.fail-tab:hover {
+	background-color: #DFCDCE;
+}
+
+/* Current task information */
+.descr-default {
+	background-color: #F9F0C5;
+}
+.descr-success {
+	background-color: #DEF0D8;
+}
+.descr-fail {
+	background-color: #F2DEDF;
+	text-align: justify;
+}
+.descr-default>p, .descr-success>p, .descr-fail>p {
+	text-align: justify;
+	padding: 1px 20px 1px 20px;
+}
+
+/*  */
+.btn-file {
+	position: relative;
+	overflow: hidden;
+	background-color: white;
+	border: 1px solid #9D8F9D;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	cursor: inherit;
+	display: block;
+}

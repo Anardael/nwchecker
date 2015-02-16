@@ -8,6 +8,7 @@ import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -68,26 +71,34 @@ public class ContestPassController {
     @RequestMapping(value = "/passTask.do", method = RequestMethod.GET)
     public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
                                  Model model) {
-        Task task = taskService.getTaskById(taskId);
+        Task currentTask = taskService.getTaskById(taskId);
         User user = userService.getUserByUsername(pricnipal.getName());
         //if user has no access to task contest of if task contest status is not GOING:
-        if ((!user.getContest().contains(task.getContest())) || (task.getContest().getStatus() != Contest.Status.GOING)) {
+        if ((!user.getContest().contains(currentTask.getContest())) || (currentTask.getContest().getStatus() != Contest.Status.GOING)) {
             return "access/accessDenied403";
         }
-        model.addAttribute("task", task);
+        model.addAttribute("currentTask", currentTask);
+        //get list of contest tasks id
+        List<Task> contestTasks = currentTask.getContest().getTasks();
+        List<Integer> tasksIdList = new ArrayList<>();
+        for (Task task : contestTasks) {
+        	tasksIdList.add(task.getId());
+        }
+        model.addAttribute("tasksIdList", tasksIdList);
         //get list of passed/failed tasks, and forward it to UI:
-        Map<Integer, Boolean> userResult = new LinkedHashMap<>();
-        for (TaskPass tp : user.getTaskPass()) {
+        Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
+        for (TaskPass taskPass : user.getTaskPass()) {
             //if not contains:
-            if (!userResult.containsKey(tp.getId())) {
-                userResult.put(tp.getId(), tp.isPassed());
+            if (!taskResults.containsKey(taskPass.getId())) {
+                taskResults.put(taskPass.getId(), taskPass.isPassed());
                 continue;
             }
             //if contains and new result if success:
-            if ((!userResult.get(tp.getId())) && tp.isPassed()) {
-                userResult.put(tp.getId(), tp.isPassed());
+            if ((!taskResults.get(taskPass.getId())) && taskPass.isPassed()) {
+                taskResults.put(taskPass.getId(), taskPass.isPassed());
             }
         }
+        model.addAttribute("taskResults", taskResults);
         return "contests/contestPass";
     }
 
