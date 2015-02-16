@@ -107,7 +107,7 @@ public class ContestPassController {
     public
     @ResponseBody
         // Why MAP<,>? Maybe String?
-    Map<String, Object> submitTask(Principal principal, @RequestParam(value = "taskId") int taskId,
+    Map<String, Object> submitTask(Principal principal, @RequestParam(value = "id") int taskId,
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
         Map<String, Object> result = new LinkedHashMap<>();

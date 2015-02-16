@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6fd8fe96-3e50-4606-8547-94bd37e77dfa" name="Default" comment="Contest statuses, Contest passing controllers, Task statuses for user (passed/failed) etc.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebContent/resources/js/contests/contestSignUp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
+    <list default="true" id="6fd8fe96-3e50-4606-8547-94bd37e77dfa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nwchecker/server/service/UserService.java" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contest.jsp" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contest.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" afterPath="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/internationalization/messages_en.properties" afterPath="$PROJECT_DIR$/src/resources/internationalization/messages_en.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties" afterPath="$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NWCServer.iws" />
@@ -44,96 +36,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ContestController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+      <file leaf-file-name="contestPass.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="1355" max-vertical-offset="2142">
-              <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
-              <folding>
-                <element signature="docComment;class#ContestController#0" expanded="false" />
-                <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
-                <element signature="e#4447#4487#0" expanded="false" />
-                <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
-                <element signature="e#4923#4963#0" expanded="false" />
-                <element signature="e#5840#5854#0" expanded="true" />
-                <element signature="e#7928#7968#0" expanded="false" />
-                <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
-                <element signature="e#8431#8471#0" expanded="false" />
-                <element signature="method#getusers#0;class#ContestController#0" expanded="false" />
-                <element signature="e#9935#9975#0" expanded="false" />
-                <element signature="method#setContestUsers#0;class#ContestController#0" expanded="false" />
-                <element signature="e#11479#11519#0" expanded="false" />
-                <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contest.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contest.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.423077" vertical-offset="599" max-vertical-offset="2890">
-              <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+            <state vertical-scroll-proportion="-6.8846154" vertical-offset="1079" max-vertical-offset="1887">
+              <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="messages_en.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_en.properties">
+      <file leaf-file-name="contestCreate.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestCreate.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8" vertical-offset="1824" max-vertical-offset="4641">
-              <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="messages_ua.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.133333" vertical-offset="3314" max-vertical-offset="4641">
-              <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jdbc.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/hibernate/jdbc.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.4615386" vertical-offset="2460" max-vertical-offset="4590">
+              <caret line="150" column="51" selection-start-line="150" selection-start-column="36" selection-end-line="150" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contestSignUp.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestSignUp.js">
+      <file leaf-file-name="contestPass.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/resources/css/contests/contestPass.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="707" max-vertical-offset="1411">
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContestPassController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ContestPassController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="909" max-vertical-offset="1343">
-              <caret line="101" column="55" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
-              <folding>
-                <element signature="method#signUpForContest#0;class#ContestPassController#0" expanded="false" />
-                <element signature="e#3657#3724#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.46153846" vertical-offset="1427" max-vertical-offset="1802">
+              <caret line="115" column="23" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -185,7 +123,6 @@
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceIMpl.java" />
-        <option value="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/TaskController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/UserService.java" />
@@ -194,7 +131,9 @@
         <option value="$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contest.jsp" />
         <option value="$PROJECT_DIR$/WebContent/resources/js/contests/contestSignUp.js" />
+        <option value="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp" />
       </list>
     </option>
   </component>
@@ -246,6 +185,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -261,6 +202,86 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="nwcserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NWCServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nwcserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NWCServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nwcserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NWCServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nwcserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NWCServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nwcserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="contests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -320,8 +341,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,11 +351,11 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="messa&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_ua.properties&#10;mes&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;heade&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;stat&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/staticFiles.jsp&#10;contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;TaskPass&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskPass.java&#10;userSer&#9;PSI&#9;JAVA://com.nwchecker.server.service.UserService&#10;Contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestPassController.java&#10;message&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;ContestP&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestPassController.java&#10;taskA&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contestcre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contesta&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;task&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;TaskCon&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;taskda&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskData.java&#10;ContestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Check&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/CheckerServiceImpl.java&#10;ContestDAO&#9;PSI&#9;JAVA://com.nwchecker.server.dao.ContestDAOImpl&#10;tasj&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;header&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;contestI&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contests&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/ContestServiceImpl.java&#10;ContestC&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestController.java&#10;tasked&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestIni&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contestCre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;ContestVa&#9;PSI&#9;JAVA://com.nwchecker.server.validators.ContestValidator&#10;contestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;TaskCo&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;app&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/application-context.xml&#10;contestCrea&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskEd&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;contestInit&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Cont&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;TaskDa&#9;PSI&#9;JAVA://com.nwchecker.server.model.TaskData&#10;Hand&#9;PSI&#9;JAVA://com.nwchecker.server.handlers.GlobalExceptionsHandler&#10;servlet-c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/servlet-context.xml&#10;taskE&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Tas&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java" />
+    <property name="SearchEverywhereHistoryKey" value="Contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;ContestPa&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestPass.jsp&#10;messa&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_ua.properties&#10;mes&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;heade&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;stat&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/staticFiles.jsp&#10;contest&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;TaskPass&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskPass.java&#10;userSer&#9;PSI&#9;JAVA://com.nwchecker.server.service.UserService&#10;message&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/internationalization/messages_en.properties&#10;ContestP&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestPassController.java&#10;taskA&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contestcre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;contesta&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;task&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskAjax.js&#10;c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contest.jsp&#10;TaskCon&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;taskda&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/model/TaskData.java&#10;ContestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Check&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/CheckerServiceImpl.java&#10;ContestDAO&#9;PSI&#9;JAVA://com.nwchecker.server.dao.ContestDAOImpl&#10;tasj&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;header&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/fragments/bodyHeader.jsp&#10;contestI&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contests&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/service/ContestServiceImpl.java&#10;ContestC&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/ContestController.java&#10;tasked&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestIni&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;contestCre&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;ContestVa&#9;PSI&#9;JAVA://com.nwchecker.server.validators.ContestValidator&#10;contestIn&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;TaskCo&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java&#10;app&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/application-context.xml&#10;contestCrea&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/WEB-INF/jsp/contests/contestCreate.jsp&#10;taskEd&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;contestAja&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestAjax.js&#10;contestInit&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/contestInit.js&#10;Cont&#9;PSI&#9;JAVA://com.nwchecker.server.model.Contest&#10;TaskDa&#9;PSI&#9;JAVA://com.nwchecker.server.model.TaskData&#10;Hand&#9;PSI&#9;JAVA://com.nwchecker.server.handlers.GlobalExceptionsHandler&#10;servlet-c&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/resources/spring/servlet-context.xml&#10;taskE&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/WebContent/resources/js/contests/tasks/taskEditing.js&#10;Tas&#9;FILE&#9;file://D:/Data/Study/SoftServe/MasterSources/nwcserver/src/com/nwchecker/server/controller/TaskController.java" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="options.lastSelected" value="vcs.Git" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -641,7 +660,6 @@
     <configuration default="false" name="MyConf" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.17" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="NWCServer:war exploded">
           <settings>
@@ -711,12 +729,7 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="NWCServer:war exploded" />
-        </option>
-      </method>
+      <method />
     </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.MyConf" />
@@ -747,12 +760,20 @@
       <workItem from="1423820528754" duration="1291000" />
       <workItem from="1423833050425" duration="40000" />
       <workItem from="1423837554549" duration="1171000" />
-      <workItem from="1423905319962" duration="15541000" />
+      <workItem from="1423905319962" duration="15790000" />
+      <workItem from="1424098706572" duration="2619000" />
     </task>
+    <task id="LOCAL-00001" summary="Contest statuses, Contest passing controllers, Task statuses for user (passed/failed) etc.">
+      <created>1423925122717</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1423925122717</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77106000" />
+    <option name="totallyTimeSpent" value="79974000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -781,7 +802,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32626426" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5089723" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -789,7 +810,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44045678" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5089723" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -834,12 +855,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java</url>
-          <line>70</line>
+          <line>80</line>
           <properties />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java</url>
+          <line>112</line>
+          <properties />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="46" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -848,13 +875,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/form.tag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="1972">
-          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/spring/application-context.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6467391" vertical-offset="102" max-vertical-offset="901">
@@ -1075,15 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48264983" vertical-offset="153" max-vertical-offset="969">
           <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0" vertical-offset="1936" max-vertical-offset="2601">
-          <caret line="131" column="39" selection-start-line="131" selection-start-column="39" selection-end-line="131" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1092,7 +1103,7 @@
         <state vertical-scroll-proportion="0.65299684" vertical-offset="337" max-vertical-offset="680">
           <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
           <folding>
-            <element signature="e#593#609#0" expanded="true" />
+            <element signature="e#593#609#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1101,20 +1112,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2516556" vertical-offset="701" max-vertical-offset="1003">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#1988#2028#0" expanded="false" />
-            <element signature="method#newTaskJson#0;class#TaskController#0" expanded="false" />
-            <element signature="e#5115#5155#0" expanded="false" />
-            <element signature="method#processDeleteTaskJson#0;class#TaskController#0" expanded="false" />
-            <element signature="e#5965#6005#0" expanded="false" />
-            <element signature="method#newTaskFormJson#0;class#TaskController#0" expanded="false" />
-            <element signature="e#6681#6721#0" expanded="false" />
-            <element signature="method#getFile#0;class#TaskController#0" expanded="false" />
-            <element signature="e#7791#7831#0" expanded="false" />
-            <element signature="method#getTestFiles#0;class#TaskController#0" expanded="false" />
-            <element signature="e#8418#8458#0" expanded="false" />
-            <element signature="method#deleteTestFile#0;class#TaskController#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1122,7 +1119,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
           <caret line="11" column="43" selection-start-line="8" selection-start-column="11" selection-end-line="11" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,15 +1126,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1061" max-vertical-offset="3009">
           <caret line="76" column="21" selection-start-line="71" selection-start-column="8" selection-end-line="76" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestCreate.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8" vertical-offset="777" max-vertical-offset="4590">
-          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,7 +1133,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,7 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.784127" vertical-offset="280" max-vertical-offset="663">
           <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1170,9 +1155,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.75555557" vertical-offset="714" max-vertical-offset="1445">
           <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
-          <folding>
-            <element signature="e#1329#1330#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1180,7 +1162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37777779" vertical-offset="0" max-vertical-offset="315">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,25 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.133333" vertical-offset="3314" max-vertical-offset="4641">
-          <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/hibernate/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/contestSignUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
@@ -1227,31 +1189,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="909" max-vertical-offset="1343">
-          <caret line="101" column="55" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
-          <folding>
-            <element signature="method#signUpForContest#0;class#ContestPassController#0" expanded="false" />
-            <element signature="e#3657#3724#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_en.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8" vertical-offset="1824" max-vertical-offset="4641">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1938" max-vertical-offset="4641">
           <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contest.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.423077" vertical-offset="599" max-vertical-offset="2890">
+        <state vertical-scroll-proportion="0.0" vertical-offset="599" max-vertical-offset="2890">
           <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
           <folding />
         </state>
@@ -1259,15 +1210,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1355" max-vertical-offset="2142">
-          <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1355" max-vertical-offset="2142">
+          <caret line="177" column="30" selection-start-line="177" selection-start-column="30" selection-end-line="177" selection-end-column="30" />
           <folding>
             <element signature="docComment;class#ContestController#0" expanded="false" />
             <element signature="method#getContests#0;class#ContestController#0" expanded="false" />
             <element signature="e#4447#4487#0" expanded="false" />
             <element signature="method#initAddContest#0;class#ContestController#0" expanded="false" />
             <element signature="e#4923#4963#0" expanded="false" />
-            <element signature="e#5840#5854#0" expanded="true" />
             <element signature="e#7928#7968#0" expanded="false" />
             <element signature="method#initEditContest#0;class#ContestController#0" expanded="false" />
             <element signature="e#8431#8471#0" expanded="false" />
@@ -1277,6 +1227,57 @@
             <element signature="e#11479#11519#0" expanded="false" />
             <element signature="method#stopContestPreparing#0;class#ContestController#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/hibernate/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21587302" vertical-offset="0" max-vertical-offset="315">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5" vertical-offset="3468" max-vertical-offset="4641">
+          <caret line="212" column="49" selection-start-line="212" selection-start-column="49" selection-end-line="212" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/css/contests/contestPass.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="707" max-vertical-offset="1411">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestCreate.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4615386" vertical-offset="2460" max-vertical-offset="4590">
+          <caret line="150" column="51" selection-start-line="150" selection-start-column="36" selection-end-line="150" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/contestPass.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.8846154" vertical-offset="1079" max-vertical-offset="1887">
+          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46153846" vertical-offset="1427" max-vertical-offset="1802">
+          <caret line="115" column="23" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
