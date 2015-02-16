@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +89,7 @@ public class ContestPassController {
         //get list of passed/failed tasks, and forward it to UI:
         Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
         for (TaskPass taskPass : user.getTaskPass()) {
-            //if not contains:
+        	//if not contains:
             if (!taskResults.containsKey(taskPass.getId())) {
                 taskResults.put(taskPass.getId(), taskPass.isPassed());
                 continue;
@@ -99,6 +100,13 @@ public class ContestPassController {
             }
         }
         model.addAttribute("taskResults", taskResults);
+        //get contest tasks titles
+        Map<Integer, String> taskTitles = new HashMap<>();
+        for (Task task : currentTask.getContest().getTasks()) {
+        	taskTitles.put(task.getId(), task.getTitle());
+        }
+        model.addAttribute("taskTitles", taskTitles);
+        
         return "contests/contestPass";
     }
 
@@ -106,7 +114,6 @@ public class ContestPassController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public
     @ResponseBody
-        // Why MAP<,>? Maybe String?
     Map<String, Object> submitTask(Principal principal, @RequestParam(value = "id") int taskId,
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
