@@ -8,30 +8,30 @@ import java.util.List;
 
 public interface UserService {
 
-	public void addUser(User user);
+    public void addUser(User user);
 
-	public void updateUser(User user);
-	
-	public void deleteUserByName(String username);
-	
-	public void deleteUserRole(User user, String role);
+    public void updateUser(User user);
 
-	public void deleteRequest(User user, UserRequest userRequest);
-        
+    public void deleteUserByName(String username);
+
+    public void deleteUserRole(User user, String role);
+
+    public void deleteRequest(User user, UserRequest userRequest);
+
     public User getUserById(int id);
 
-	public User getUserByUsername(String username);
-	
-	public List<User> getUsers();
-	
-	public List<User> getUsersByRole(String role);
+    public User getUserByUsername(String username);
 
-	public List<User> getUsersWithRequests();
+    public List<User> getUsers();
 
-	public boolean hasUsername(String username);
+    public List<User> getUsersByRole(String role);
 
-	public boolean hasEmail(String email);
+    public List<User> getUsersWithRequests();
 
-	public void setUserDAO(UserDAO userDAO);
+    public boolean hasUsername(String username);
+
+    public boolean hasEmail(String email);
+
+    public void setUserDAO(UserDAO userDAO);
 
 }

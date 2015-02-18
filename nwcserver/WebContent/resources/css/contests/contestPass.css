@@ -1,0 +1,74 @@
+/* Tasks navigation list */
+#tasks {
+	height: 72%;
+	overflow: scroll;
+}
+.nav-pills > li > a {
+	border: 1px solid white;
+	font-size: 110%;
+}
+.nav-pills > li > a, .nav-pills > li > a:hover {
+	color: inherit;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover {
+	background-color: #5BC0DE;
+	color: #FFFFFF;
+}
+.nav-pills > li.default > a {
+	background-color: white;
+	border-color: #DDE9E6;
+}
+.nav-pills > li.default > a:hover {
+	background-color: #D0D0D0;
+	border-color: #DDE9E6;
+}
+.nav-pills > li.success > a {
+	background-color: #DEF0D8;
+}
+.nav-pills > li.success > a:hover {
+	background-color: #C4D4BE;
+}
+.nav-pills > li.fail > a {
+	background-color: #F2DEDF;
+}
+.nav-pills > li.fail > a:hover {
+	background-color: #DFCDCE;
+}
+
+/* Current task information */
+.descr-default {
+	background-color: #F9F0C5;
+}
+.descr-success {
+	background-color: #DEF0D8;
+}
+.descr-fail {
+	background-color: #F2DEDF;
+	text-align: justify;
+}
+.descr-default>p, .descr-success>p, .descr-fail>p {
+	text-align: justify;
+	padding: 1px 20px 1px 20px;
+}
+
+/* Upload source file button */
+.btn-file {
+	position: relative;
+	overflow: hidden;
+	background-color: white;
+	border: 1px solid #9D8F9D;
+}
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	cursor: inherit;
+	display: block;
+}

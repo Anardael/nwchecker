@@ -14,17 +14,6 @@ import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.validators.TaskValidator;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,14 +23,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class TaskController {
@@ -58,7 +52,6 @@ public class TaskController {
     @Autowired
     private TaskValidator taskValidator;
 
-    //Creating Task for Contest(contestId)
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @CheckTeacherAccess
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)

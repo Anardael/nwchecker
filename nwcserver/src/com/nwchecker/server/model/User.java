@@ -78,6 +78,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRequest> requests = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
+    private List<TaskPass> taskPass;
+
     public User() {
     }
 
@@ -211,6 +214,14 @@ public class User {
 
     public void setRequests(Set<UserRequest> requests) {
         this.requests = requests;
+    }
+
+    public List<TaskPass> getTaskPass() {
+        return taskPass;
+    }
+
+    public void setTaskPass(List<TaskPass> taskPass) {
+        this.taskPass = taskPass;
     }
 
     @Override
