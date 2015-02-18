@@ -46,7 +46,7 @@
 	background-color: #F2DEDF;
 	text-align: justify;
 }
-.descr-default>p, .descr-success>p, .descr-fail>p {
+.descr-default > p, .descr-success > p, .descr-fail > p {
 	text-align: justify;
 	padding: 1px 20px 1px 20px;
 }
