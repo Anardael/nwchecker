@@ -90,13 +90,13 @@ public class ContestPassController {
         Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
         for (TaskPass taskPass : user.getTaskPass()) {
         	//if not contains:
-            if (!taskResults.containsKey(taskPass.getId())) {
-                taskResults.put(taskPass.getId(), taskPass.isPassed());
+            if (!taskResults.containsKey(taskPass.getTask().getId())) {
+                taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
                 continue;
             }
             //if contains and new result if success:
-            if ((!taskResults.get(taskPass.getId())) && taskPass.isPassed()) {
-                taskResults.put(taskPass.getId(), taskPass.isPassed());
+            if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
+                taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
             }
         }
         model.addAttribute("taskResults", taskResults);

@@ -8,11 +8,36 @@
 <!--including head -->
 <head>
 <jsp:include page="../fragments/staticFiles.jsp" />
+
 <link rel="stylesheet" href="${resources}css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="${resources}css/bootstrap-dialog.css"/>
 <link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
+
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+<script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
 </head>
 <body>
+	<script type="text/javascript">
+		FILE_NOT_SELECTED_TITLE = '<spring:message code="contest.passing.fileNotSelectedDialog.title"/>';
+		FILE_NOT_SELECTED_MESSAGE = '<spring:message code="contest.passing.fileNotSelectedDialog.message"/>';
+		
+		TASK_SUBMIT_ERROR_TITLE = '<spring:message code="contest.passing.taskSubmitErrorDialog.title"/>';
+		TASK_SUBMIT_ERROR_MESSAGE = '<spring:message code="contest.passing.taskSubmitErrorDialog.message"/>';
+		
+		ACCESS_DENIED_TITLE = '<spring:message code="contest.passing.accessDeniedDialog.title"/>';
+		ACCESS_DENIED_MESSAGE = '<spring:message code="contest.passing.accessDeniedDialog.message"/>';
+		
+		RESULT_SUCCESS_TITLE = '<spring:message code="contest.passing.resultSuccessDialog.title"/>';
+		RESULT_SUCCESS_MESSAGE = '<spring:message code="contest.passing.resultSuccessDialog.message"/>';
+
+		RESULT_FAIL_TITLE = '<spring:message code="contest.passing.resultFailDialog.title"/>';
+		
+		RESULT_TIME = '<spring:message code="contest.passing.resultDialog.time"/>';
+		RESULT_MEMORY = '<spring:message code="contest.passing.resultDialog.memory"/>';
+		RESULT_ERROR_MESSAGE = '<spring:message code="contest.passing.resultDialog.message"/>';
+	</script>
+
 	<div class="wrapper container">
 		<!--including bodyHead -->
 		<!-- send name of current page-->
@@ -34,28 +59,28 @@
 						<c:when test="${taskId eq currentTask.id}">
 							<li class="active">
 								<a href="${taskURL}${taskId}">
-									${count}. ${taskTitle}
+									<c:out value="${count}. ${taskTitle}"/>
 								</a>
 							</li>
 						</c:when>
 						<c:when test="${taskResult == null}">
 							<li class="default">
 								<a href="${taskURL}${taskId}">
-									${count}. ${taskTitle}
+									<c:out value="${count}. ${taskTitle}"/>
 								</a>
 							</li>
 						</c:when>
 						<c:when test="${taskResult == true}">
 							<li class="success">
 								<a href="${taskURL}${taskId}">
-									${count}. ${taskTitle]}
+									<c:out value="${count}. ${taskTitle}"/>
 								</a>
 							</li>
 						</c:when>
 						<c:when test="${taskResult == false}">
 							<li class="fail">
 								<a href="${taskURL}${taskId}">
-									${count}. ${taskTitle}
+									<c:out value="${count}. ${taskTitle}"/>
 								</a>
 							</li>
 						</c:when>
@@ -118,9 +143,8 @@
 			<br/><br/>
 			<!-- Send answer form -->
 			<div class="row">
-				<form:form class="form-horizontal" modelAttribute="currentTask"
-					method="post" enctype="multipart/form-data" role="form"
-					action="submitTask.do">
+				<form:form id="task" class="form-horizontal"
+					modelAttribute="currentTask" role="form">
 					<form:hidden path="id" />
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-4">
@@ -139,14 +163,12 @@
 							</span>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-4">
-							<button type="submit" class="btn btn-info btn-block">
-								<spring:message code="contest.passing.submitButton.caption" />
-							</button>
-						</div>
-					</div>
 				</form:form>
+				<div class="col-sm-offset-4 col-sm-4">
+					<button class="btn btn-info btn-block" onclick="submitTask()">
+						<spring:message code="contest.passing.submitButton.caption" />
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
