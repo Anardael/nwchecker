@@ -17,12 +17,6 @@ public class RolesDescriptionValidatorPatternTest {
 		pattern = new RolesDescriptionValidator().getRolesDescPattern();
 	}
 	
-	@Ignore
-	@Test
-	public void testEmpty() {
-		assertFalse(("").matches(pattern));
-	}
-
 	@Test
 	public void testDataIncorrect() {
 		assertFalse(("Incorrect data").matches(pattern));

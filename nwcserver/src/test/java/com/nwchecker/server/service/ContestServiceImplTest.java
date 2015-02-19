@@ -46,6 +46,7 @@ public class ContestServiceImplTest {
         contestService.setUserService(userService);
         //create test Contest:
         Contest contest1 = new Contest();
+        contest1.setStatus(Contest.Status.PREPARING);
         contest1.setId(11);
         contestList.add(contest1);
         //create teacher:
@@ -68,7 +69,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testAddContest() {
-        System.out.println("addContest");
         Contest c = new Contest();
         contestService.addContest(c);
         verify(contestDAO, times(1)).addContest(c);
@@ -80,7 +80,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testUpdateContest() {
-        System.out.println("updateContest");
         Contest c = new Contest();
         contestService.updateContest(c);
         verify(contestDAO, times(1)).updateContest(c);
@@ -92,7 +91,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testMergeContest() {
-        System.out.println("mergeContest");
         Contest c = new Contest();
         contestService.mergeContest(c);
         verify(contestDAO, times(1)).mergeContest(c);
@@ -104,7 +102,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testGetContests() {
-        System.out.println("getContests");
         when(contestDAO.getContests()).thenReturn(contestList);
         List<Contest> expResult = contestList;
         List<Contest> result = contestService.getContests();
@@ -117,7 +114,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testGetContestByID() {
-        System.out.println("getContestByID");
         int id = 11;
         when(contestDAO.getContestByID(id)).thenReturn(contestList.get(0));
 
@@ -133,7 +129,6 @@ public class ContestServiceImplTest {
      */
     @Test
     public void testCheckIfUserHaveAccessToContest() {
-        System.out.println("checkIfUserHaveAccessToContest");
         when(userService.getUserByUsername("TeacherUser1")).thenReturn(userList.get(0));
 
         String username = "TeacherUser1";

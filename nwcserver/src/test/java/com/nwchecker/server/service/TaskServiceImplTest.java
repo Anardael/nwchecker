@@ -92,8 +92,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testGetTaskById() {
-        System.out.println("getTaskById");
-
         when(taskDAO.getTaskById(21)).thenReturn(taskList.get(0));
 
         Task expResult = taskList.get(0);
@@ -107,7 +105,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testGetTasksByContestId() {
-        System.out.println("getTasksByContestId");
         int contestId = 11;
 
         when(taskDAO.getTasksByContestId(contestId)).thenReturn(taskList);
@@ -122,8 +119,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testGetTasks() {
-        System.out.println("getTasks");
-
         when(taskDAO.getTasks()).thenReturn(taskList);
         List<Task> expResult = taskList;
 
@@ -137,7 +132,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testAddTask() {
-        System.out.println("addTask");
         Task t = taskList.get(0);
         taskServiceImpl.addTask(t);
         verify(taskDAO, times(1)).addTask(t);
@@ -150,7 +144,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testUpdateTask() {
-        System.out.println("updateTask");
         Task t = taskList.get(0);
         taskServiceImpl.updateTask(t);
         verify(taskDAO, times(1)).updateTask(t);
@@ -162,7 +155,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testDeleteTaskById() {
-        System.out.println("deleteTaskById");
         taskServiceImpl.deleteTaskById(0);
         verify(taskDAO, times(1)).deleteTaskById(0);
         verifyNoMoreInteractions(taskDAO);
@@ -173,7 +165,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testGetTaskData() {
-        System.out.println("getTaskData");
         when(taskDAO.getTaskData(0)).thenReturn(taskData);
 
         TaskData result = taskServiceImpl.getTaskData(0);
@@ -186,7 +177,6 @@ public class TaskServiceImplTest {
      */
     @Test
     public void testDeleteTaskData() {
-        System.out.println("deleteTaskData");
         taskServiceImpl.deleteTaskData(0);
         verify(taskDAO, times(1)).deleteTaskData(0);
         verifyNoMoreInteractions(taskDAO);

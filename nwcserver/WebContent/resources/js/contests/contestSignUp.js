@@ -9,7 +9,7 @@ function contestSignUp(collapseIndex, index) {
             //add label:
             var collapse = $('#collapse' + collapseIndex + ' .edit .pull-right');
             collapse.find('button').remove();
-            collapse.append('<h4><label class="label label-info label">' + alreadySignUp + '</label></h4>');
+            collapse.append('<h4><label class="label label-info label contestsStatus">' + alreadySignUp + '</label></h4>');
         }
     });
 }

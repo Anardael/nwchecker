@@ -1,7 +1,7 @@
 /* Tasks navigation list */
 #tasks {
 	height: 72%;
-	overflow: scroll;
+	overflow: auto;
 }
 .nav-pills > li > a {
 	border: 1px solid white;
