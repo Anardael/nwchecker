@@ -30,6 +30,7 @@ public class TaskPassServiceIMpl implements TaskPassService {
         taskPass.setPassed((boolean) checkResult.get("passed"));
         taskPass.setExecutionTime((int) checkResult.get("time"));
         taskPass.setMemoryUsed((int) checkResult.get("memory"));
+        taskPass.setFile(file);
         taskPass.setCompilerMessage(checkResult.get("message") == null ? null : (String) checkResult.get("message"));
         //save to db:
         user.getTaskPass().add(taskPass);

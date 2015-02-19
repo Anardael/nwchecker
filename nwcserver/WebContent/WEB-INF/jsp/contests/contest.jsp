@@ -17,8 +17,8 @@
     <style>
         .contestsStatus {
             margin-right: 10px;
-            padding: 2px 5px 5px 5px;
-            font-size: 15px;
+            padding: 1px 3px 3px 3px;
+            font-size: 12px;
             font-weight: normal;
         }
     </style>

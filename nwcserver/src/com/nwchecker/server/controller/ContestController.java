@@ -34,17 +34,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @author Роман
  */
@@ -56,9 +45,6 @@ public class ContestController {
 
     @Autowired
     private ContestService contestService;
-
-    @Autowired
-    private TaskService taskService;
 
     @Autowired
     private UserService userService;
