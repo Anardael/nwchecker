@@ -14,6 +14,14 @@
     <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
     <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestSignUp.js"></script>
+    <style>
+        .contestsStatus {
+            margin-right: 10px;
+            padding: 2px 5px 5px 5px;
+            font-size: 15px;
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -44,21 +52,21 @@
                     <a class="list-group-item " data-toggle="collapse" data-parent="#accordion"
                        href="#collapse${row.index}">
                         <c:if test="${contest.status=='GOING'}">
-                            <label class="label label-success" style="margin-right: 10px"><spring:message
-                                    code="contest.going.label"/></label>
+                            <label class="label label-success contestsStatus">
+                                <spring:message code="contest.going.label"/></label>
                         </c:if>
                         <c:if test="${contest.status=='PREPARING'}">
-                            <label class="label label-info" style="margin-right: 10px">
+                            <label class="label label-info contestsStatus">
                                 <spring:message code="contest.preparing.label"/>
                             </label>
                         </c:if>
                         <c:if test="${contest.status=='RELEASE'}">
-                            <label class="label label-info" style="margin-right: 10px">
+                            <label class="label label-info contestsStatus">
                                 <spring:message code="contest.release.label"/>
                             </label>
                         </c:if>
                         <c:if test="${contest.hidden==true}">
-                            <label class="label label-default"><spring:message
+                            <label class="label label-default contestsStatus"><spring:message
                                     code="contest.hidden.label"/></label>
                         </c:if>
                         <span>${contest.title}</span>
@@ -81,25 +89,25 @@
                                                     <c:set value="index${contest.id}index" var="contestIndex"/>
                                                     <c:if test="${(contest.status=='RELEASE') && (fn:contains(userContests,contestIndex))}">
                                                         <h4>
-                                                            <label class="label label-info label">
+                                                            <label class="label-info label contestsStatus">
                                                                 <spring:message code="contest.alreadySubscribed"/>
                                                             </label>
                                                         </h4>
                                                     </c:if>
                                                     <c:if test="${(contest.status=='RELEASE') && (!fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group"
+                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
                                                                 onclick="contestSignUp(${row.index},${contest.id});">
                                                             <spring:message code="contest.signUpButton"/>
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${(contest.status=='GOING') && (!fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group"
+                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
                                                                 onclick="contestSignUpAndStart(${contest.id},${contest.tasks[0].id});">
                                                             <spring:message code="contest.startButton"/>
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${(contest.status=='GOING') && (fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group"
+                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
                                                                 onclick="contestStart(${contest.id},${contest.tasks[0].id});">
                                                             <spring:message code="contest.startButton"/>
                                                         </button>
