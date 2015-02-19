@@ -82,7 +82,7 @@ function sendFinishContest() {
             $.ajax({
                 url: "stopContestPrepare.do",
                 type: 'GET',
-                data: "id="+($('#id').val())
+                data: "id=" + ($('#id').val())
             }).success(function (data) {
                 if (data.status == "FAIL_STARTS") {
                     BootstrapDialog.show({
@@ -96,6 +96,13 @@ function sendFinishContest() {
                         title: errorCaption,
                         type: BootstrapDialog.TYPE_DANGER,
                         message: emptyStart
+                    });
+                }
+                if (data.status == "TASK_SIZE") {
+                    BootstrapDialog.show({
+                        title: errorCaption,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        message: emptyTask
                     });
                 }
 

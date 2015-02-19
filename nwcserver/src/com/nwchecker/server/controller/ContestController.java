@@ -13,7 +13,6 @@ import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleServiceImpl;
-import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.ContestValidator;
 import org.apache.log4j.Logger;
@@ -34,6 +33,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
  * @author Роман
  */
@@ -93,9 +93,11 @@ public class ContestController {
             //getContests which user can edit:
             if ((user.getContest() != null) && (user.getContest().size() > 0)) {
                 for (Contest c : user.getContest()) {
-                    if (c.getStatus().equals(Contest.Status.PREPARING)) {
+                    if (c.getStatus().equals(Contest.Status.PREPARING) || c.getStatus().equals(Contest.Status.ARCHIEVE)) {
                         //set index for view
-                        editableContestIndexes.add("index" + c.getId() + "index");
+                        if (c.getStatus().equals(Contest.Status.PREPARING)) {
+                            editableContestIndexes.add("index" + c.getId() + "index");
+                        }
                         //add Contest to unhidden list:
                         if (c.isHidden()) {
                             unhidden.add(c);
@@ -282,6 +284,11 @@ public class ContestController {
     ValidationResponse stopContestPreparing(@RequestParam("id") int contestId, Principal principal) {
         ValidationResponse result = new ValidationResponse();
         Contest contest = contestService.getContestByID(contestId);
+        //validate task size:
+        if (contest.getTasks() == null || contest.getTasks().size() == 0) {
+            result.setStatus("TASK_SIZE");
+            return result;
+        }
         //validate Contest start date:
         if (contest.getStarts() == null || contest.getDuration() == null) {
             result.setStatus("FAIL_EMPTY");

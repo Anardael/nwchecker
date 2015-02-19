@@ -71,11 +71,12 @@
     var successContestSave = "<spring:message code="contest.successSave"/>";
     var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
     //contest submit finish form:
-    var contestFinishHeader="<spring:message code="contest.submit.header"/>";
-    var contestFinishBody="<spring:message code="contest.submit.body"/>";
-    var contestReleaset="<spring:message code="contest.release.body"/>";
-    var contestReleaseFailDueDate="<spring:message code="contest.failReleaseDueDate"/>";
-    var emptyStart="<spring:message code="contest.startDateEmpty"/>";
+    var contestFinishHeader = "<spring:message code="contest.submit.header"/>";
+    var contestFinishBody = "<spring:message code="contest.submit.body"/>";
+    var contestReleaset = "<spring:message code="contest.release.body"/>";
+    var contestReleaseFailDueDate = "<spring:message code="contest.failReleaseDueDate"/>";
+    var emptyStart = "<spring:message code="contest.startDateEmpty"/>";
+    var emptyTask = "<spring:message code="contest.release.taskEmpty"/>";
     //contestUserAccessListWarning:
     var emptyUserListHeader = "<spring:message code="contest.userList.EmptyListHeader"/>";
     var emptyUserListBody = "<spring:message code="contest.userList.EmptyListBody"/>";
