@@ -3,11 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>NWCServer</groupId>
 	<artifactId>NWCServer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>NWChecker server program</name>
 	<description>https://code.google.com/p/nwchecker/w/list</description>
 	<build>
+        <finalName>${artifactId}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
