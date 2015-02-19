@@ -64,11 +64,8 @@ public class AdminOptionsController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
-	public String user(@RequestParam(value = "Username", required = false) String username, 
+	public String user(@RequestParam(value = "Username") String username,
 						Model model, Principal principal) {
-		if (username == null) {
-			return "adminOptions/users";
-		}
 		LOG.info("\"" + principal.getName() + "\" tries to edit user \"" + username + "\".");
 		User user = userService.getUserByUsername(username);
 		user.setPassword("");

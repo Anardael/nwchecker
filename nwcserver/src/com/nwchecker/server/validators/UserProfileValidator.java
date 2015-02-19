@@ -10,9 +10,9 @@ import com.nwchecker.server.model.User;
 @Component
 public class UserProfileValidator implements Validator {
 
-	private final String	patternDisplayName	= "^[а-яА-Яa-zA-Z]{1}[а-яА-Яa-zA-Z0-9_-]{2,15}$";
-	private final String	patternDepartment	= "^[а-яА-Яa-zA-Z0-9'\" -]*$";
-	private final String	patternInfo			= "^[а-яА-Яa-zA-Z0-9:.;,!?'\")( -]*$";
+	private final String	patternDisplayName	= "^[а-яіїєА-ЯІЇЄa-zA-Z]{1}[а-яіїєА-ЯІЇЄa-zA-Z0-9_-]{2,15}$";
+	private final String	patternDepartment	= "^[а-яіїєА-ЯІЇЄa-zA-Z0-9'\" -]*$";
+	private final String	patternInfo			= "^[а-яіїєА-ЯІЇЄa-zA-Z0-9:.;,!?'\")( -]*$";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
