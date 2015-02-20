@@ -23,7 +23,9 @@ public class ListContestsJson {
         this.id = contest.getId();
         this.title = contest.getTitle();
         for (User user : contest.getUsers()) {
-            this.users.add(user.getDisplayName());
+            if (user.hasRole("ROLE_TEACHER")) {
+                this.users.add(user.getDisplayName());
+            }
         }
         this.starts = contest.getStarts();
     }
