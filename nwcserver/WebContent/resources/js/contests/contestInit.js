@@ -35,9 +35,12 @@ function submitContest() {
                 message: successContestSave
             });
         }
-        //set recieved id:
-        if (data.result != null) {
+        //if contest was new and now received id:
+        if ($('#id').val() == 0 && data.result != null) {
+            //set recieved id:
             $('#id').val(data.result);
+            //start polling for this contest id:
+            contestLongPolling();
         }
     });
 }
@@ -114,6 +117,15 @@ function sendFinishContest() {
                     });
                 }
             });
+        }
+    });
+}
+
+function contestLongPolling() {
+    var id = $("#id").val();
+    $.get("editingContest.do?id=" + id).success(function (data) {
+        if (data == "timeOut") {
+            contestLongPolling();
         }
     });
 }

@@ -11,8 +11,11 @@ import com.nwchecker.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.async.DeferredResult;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Роман
@@ -25,6 +28,7 @@ public class ContestServiceImpl implements ContestService {
 
     @Autowired
     private ContestDAO contestDAO;
+
 
     @Override
     public void setContestDAO(ContestDAO dao) {
@@ -87,4 +91,6 @@ public class ContestServiceImpl implements ContestService {
     public List<Contest> getContestByStatus(Contest.Status status) {
         return contestDAO.getContestByStatus(status);
     }
+
+
 }

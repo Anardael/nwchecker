@@ -134,6 +134,13 @@
     $(function () {
         setMask();
     });
+
+    //start long polling:
+    $(function () {
+        if ($('#id') != 0) {
+            contestLongPolling();
+        }
+    });
 </script>
 
 <div class="wrapper container">

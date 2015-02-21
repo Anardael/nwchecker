@@ -14,6 +14,7 @@
     <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
     <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestSignUp.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestListView.js"></script>
     <style>
         .contestsStatus {
             margin-right: 10px;
@@ -28,6 +29,10 @@
     var successCaption = "<spring:message code="success.caption"/>";
     var successSignUpContest = "<spring:message code="contest.signUpBody"/>";
     var alreadySignUp = "<spring:message code="contest.alreadySubscribed"/>";
+    var errorLabel = "<spring:message code="error.caption" />";
+    var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
+    var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
+
 </script>
 <div class="wrapper container">
     <!--including bodyHead -->
@@ -78,10 +83,17 @@
                                 <div class="edit col-sm-12">
                                             <span class="pull-right">
                                                 <security:authorize access="hasRole('ROLE_TEACHER')">
+                                                    <c:set var="user" value="${nowContestEdits[contest.id]}"/>
+                                                    <c:if test="${not empty user}">
+                                                        <label class="label label-warning contestsStatus">
+                                                            <spring:message
+                                                                    code="contest.editing.now.label"/>: ${user}</label>
+                                                    </c:if>
+
                                                     <c:set value="index${contest.id}index" var="contestIndex"/>
                                                     <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
                                                         <button class="btnEditContest btn btn-sm btn-info form-group"
-                                                                onclick="location.href = 'editContest.do?id=${contest.id}';">
+                                                                onclick="edited(${contest.id})">
                                                             <spring:message code="btn.edit"/></button>
                                                     </c:if>
                                                 </security:authorize>

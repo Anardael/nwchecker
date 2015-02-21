@@ -11,6 +11,7 @@ import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.ContestEditWatcherService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleServiceImpl;
 import com.nwchecker.server.service.UserService;
@@ -57,6 +58,10 @@ public class ContestController {
     @Autowired
     private ScheduleServiceImpl scheduleService;
 
+    @Autowired
+    private ContestEditWatcherService contestEditWatcherService;
+
+
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
         //get all avaible  сontests from DB:
@@ -95,6 +100,8 @@ public class ContestController {
                 }
             }
             model.addAttribute("editContestIndexes", editableContestIndexes);
+            //set usernames for editing contests:
+            model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
         }
         model.addAttribute("contests", unhidden);
         return "contests/contest";
@@ -239,7 +246,7 @@ public class ContestController {
                                        @RequestParam("userIds[]") int[] userIds
     ) {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
-            throw new ContestAccessDenied(principal.getName()+" tried to edit Contest. Access denied.");
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
         //JSON response class:
         ValidationResponse result = new ValidationResponse();
@@ -275,7 +282,7 @@ public class ContestController {
     @ResponseBody
     ValidationResponse stopContestPreparing(@RequestParam("id") int contestId, Principal principal) {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
-            throw new ContestAccessDenied(principal.getName()+" tried to edit Contest. Access denied.");
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
 
         ValidationResponse result = new ValidationResponse();

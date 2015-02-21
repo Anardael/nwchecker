@@ -83,7 +83,7 @@ function doPostJson(index) {
                 var va=0;
                 if (response.errorMessageList[0].fieldName == "denied") {
                     va=1;
-                }    
+                }
                 if (response.errorMessageList[0].fieldName == "uploadSize") {
                     va=2;
                 }
@@ -94,12 +94,12 @@ function doPostJson(index) {
                      BootstrapDialog.show({
                         title: errorLabel,
                         type: BootstrapDialog.TYPE_DANGER,
-                        message: uploadSize,
+                        message: uploadSize
                     });
                 }
                 if(va==0){
                     taskAjaxFail(response, index);
-                    
+
                 }
             } else {
                 //hide modal:
