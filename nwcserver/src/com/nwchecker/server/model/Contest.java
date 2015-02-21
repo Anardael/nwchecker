@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Contest {
 
     public static enum Status {
-        ARCHIEVE, PREPARING, RELEASE, GOING
+        ARCHIVE, PREPARING, RELEASE, GOING
     }
 
     @Id

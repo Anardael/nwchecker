@@ -6,14 +6,14 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Contest;
-import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
- *
  * @author Роман
  */
 @Repository("ContestDAO")
@@ -41,16 +41,21 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @Override
     public List<Contest> getContests() {
-    	@SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest");
         return result;
     }
 
     @Override
     public Contest getContestByID(int id) {
-    	@SuppressWarnings("unchecked")
-    	List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where id=?", id);
+        @SuppressWarnings("unchecked")
+        List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where id=?", id);
         return result.get(0);
     }
 
+    @Override
+    public List<Contest> getContestByStatus(Contest.Status status) {
+        List<Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where status=?", status);
+        return result;
+    }
 }

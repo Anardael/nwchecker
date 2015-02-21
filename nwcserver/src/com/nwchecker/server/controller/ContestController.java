@@ -5,7 +5,7 @@
  */
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.aspect.CheckTeacherAccess;
+import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
@@ -20,9 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,31 +68,21 @@ public class ContestController {
                 unhidden.add(c);
             }
         }
-        UserDetails currentUser = null;
-        //check if user is unauthorize- get userDetails:
-        if (principal != null) {
-            currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
-        } else {
+        if (principal == null) {
             //return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
             return "contests/contest";
         }
 
-        User user = userService.getUserByUsername(currentUser.getUsername());
-        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-            List<String> userContests = new LinkedList<String>();
-            for (Contest c : user.getContest()) {
-                //using index_index for correct execution in "fn:contains" jstl function
-                userContests.add("index" + c.getId() + "index");
-                model.addAttribute("userContests", userContests);
-            }
-        }
-        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
+        User user = userService.getUserByUsername(principal.getName());
+
+        if (((UsernamePasswordAuthenticationToken) principal).getAuthorities()
+                .contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
             List<String> editableContestIndexes = new LinkedList<String>();
             //getContests which user can edit:
             if ((user.getContest() != null) && (user.getContest().size() > 0)) {
                 for (Contest c : user.getContest()) {
-                    if (c.getStatus().equals(Contest.Status.PREPARING) || c.getStatus().equals(Contest.Status.ARCHIEVE)) {
+                    if (c.getStatus().equals(Contest.Status.PREPARING) || c.getStatus().equals(Contest.Status.ARCHIVE)) {
                         //set index for view
                         if (c.getStatus().equals(Contest.Status.PREPARING)) {
                             editableContestIndexes.add("index" + c.getId() + "index");
@@ -187,9 +176,11 @@ public class ContestController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
+            return "access/accessDenied403";
+        }
         //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
         //add contest to view and forward it:
@@ -241,13 +232,15 @@ public class ContestController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/setContestUsers.do", method = RequestMethod.POST)
     public
     @ResponseBody
     ValidationResponse setContestUsers(@RequestParam("contestId") int contestId, Principal principal,
                                        @RequestParam("userIds[]") int[] userIds
     ) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName()+" tried to edit Contest. Access denied.");
+        }
         //JSON response class:
         ValidationResponse result = new ValidationResponse();
         //get Contest:
@@ -277,11 +270,14 @@ public class ContestController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/stopContestPrepare.do", method = RequestMethod.GET)
     public
     @ResponseBody
     ValidationResponse stopContestPreparing(@RequestParam("id") int contestId, Principal principal) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName()+" tried to edit Contest. Access denied.");
+        }
+
         ValidationResponse result = new ValidationResponse();
         Contest contest = contestService.getContestByID(contestId);
         //validate task size:

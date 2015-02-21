@@ -24,4 +24,6 @@ public interface ContestDAO {
 
     public Contest getContestByID(int id);
 
+    public List<Contest> getContestByStatus(Contest.Status status);
+
 }

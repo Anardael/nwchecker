@@ -7,10 +7,10 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
+
 import java.util.List;
 
 /**
- *
  * @author Роман
  */
 public interface ContestService {
@@ -28,6 +28,8 @@ public interface ContestService {
     public List<Contest> getContests();
 
     public Contest getContestByID(int id);
+
+    public List<Contest> getContestByStatus(Contest.Status status);
 
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
 

@@ -5,7 +5,7 @@
  */
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.aspect.CheckTeacherAccess;
+import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
@@ -53,13 +53,15 @@ public class TaskController {
     private TaskValidator taskValidator;
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)
     public
     @ResponseBody
     ValidationResponse newTaskJson(@RequestParam("contestId") int contestId, Principal principal,
                                    MultipartHttpServletRequest request, @ModelAttribute(value = "task") Task task,
                                    BindingResult result) throws MaxUploadSizeExceededException, IOException {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        }
         //Json response object:
         ValidationResponse res = new ValidationResponse();
         //validation in new TaskValdiator:
@@ -120,11 +122,13 @@ public class TaskController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/deleteTaskJson.do", method = RequestMethod.GET)
     public
     @ResponseBody
     ValidationResponse processDeleteTaskJson(@RequestParam("contestId") int contestId, Principal principal, @RequestParam("taskId") int taskId) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        }
         ValidationResponse result = new ValidationResponse();
         Contest c = contestService.getContestByID(contestId);
         for (int i = 0; i < c.getTasks().size(); i++) {
@@ -158,11 +162,13 @@ public class TaskController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/getTaskTestData", method = RequestMethod.GET)
     public void getFile(@RequestParam("contestId") int contestId, Principal principal,
                         @RequestParam("testId") int testId, @RequestParam("type") String type,
                         HttpServletResponse response) throws IOException {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        }
         //first of all: find test file:
         TaskData data = taskService.getTaskData(testId);
         ByteArrayInputStream stream = null;
@@ -180,10 +186,12 @@ public class TaskController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/getAvaibleTests", method = RequestMethod.GET)
     public String getTestFiles(@RequestParam("contestId") int contestId, Principal principal,
                                @RequestParam("taskId") int taskId, @RequestParam("localTaskId") int localTaskId, Model model) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        }
         Task t = taskService.getTaskById(taskId);
         model.addAttribute("taskData", t.getInOutData());
         model.addAttribute("taskId", localTaskId);
@@ -193,12 +201,14 @@ public class TaskController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @CheckTeacherAccess
     @RequestMapping(value = "/deleteTaskTestFile", method = RequestMethod.GET)
     public
     @ResponseBody
     ValidationResponse deleteTestFile(@RequestParam("contestId") int contestId, Principal principal,
                                       @RequestParam("taskTestId") int testId) {
+        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        }
         ValidationResponse validationResponse = new ValidationResponse();
         //delete taskData:
         taskService.deleteTaskData(testId);

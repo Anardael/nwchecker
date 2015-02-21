@@ -1,14 +1,10 @@
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.*;
+import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,10 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,32 +34,7 @@ public class ContestPassController {
     @Autowired
     private TaskService taskService;
     @Autowired
-    private TaskPassService taskPassService;
-
-    @RequestMapping(value = "/contestSignUp.do")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public
-    @ResponseBody
-    String signUpForContest(Principal principal,
-                            @RequestParam(value = "id") int contestId) {
-        User user = userService.getUserByUsername(principal.getName());
-        //user already has contest?
-        for (Contest c : user.getContest()) {
-            if (c.getId() == contestId) {
-                return "hasContest";
-            }
-        }
-        //if user hasn't contest:
-        Contest requiredContest = contestService.getContestByID(contestId);
-        if (requiredContest != null && (requiredContest.getStatus() == Contest.Status.RELEASE ||
-                requiredContest.getStatus() == Contest.Status.GOING)) {
-            user.getContest().add(requiredContest);
-            userService.updateUser(user);
-            return "success";
-        } else {
-            return "wrongContest";
-        }
-    }
+    private ContestPassService contestPassService;
 
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -73,40 +42,57 @@ public class ContestPassController {
     public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
                                  Model model) {
         Task currentTask = taskService.getTaskById(taskId);
+        model.addAttribute("currentTask", currentTask);
         User user = userService.getUserByUsername(pricnipal.getName());
-        //if user has no access to task contest of if task contest status is not GOING:
-        if ((!user.getContest().contains(currentTask.getContest())) || (currentTask.getContest().getStatus() != Contest.Status.GOING)) {
+        //check if contest status provide passing:
+        if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||
+                currentTask.getContest().getStatus() == Contest.Status.ARCHIVE)) {
             return "access/accessDenied403";
         }
-        model.addAttribute("currentTask", currentTask);
-        //get list of contest tasks id
-        List<Task> contestTasks = currentTask.getContest().getTasks();
-        List<Integer> tasksIdList = new ArrayList<>();
-        for (Task task : contestTasks) {
-        	tasksIdList.add(task.getId());
-        }
-        model.addAttribute("tasksIdList", tasksIdList);
-        //get list of passed/failed tasks, and forward it to UI:
-        Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
-        for (TaskPass taskPass : user.getTaskPass()) {
-        	//if not contains:
-            if (!taskResults.containsKey(taskPass.getTask().getId())) {
-                taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
-                continue;
+        //if contest is going:
+        boolean goingContest = false;
+        ContestPass currentContestPass = null;
+        if (currentTask.getContest().getStatus() == Contest.Status.GOING) {
+            goingContest = true;
+            //check if user has contestPass for this contest:
+            boolean contains = false;
+            for (ContestPass c : user.getContestPassList()) {
+                if (c.getContest().equals(currentTask.getContest())) {
+                    contains = true;
+                    currentContestPass = c;
+                    break;
+                }
             }
-            //if contains and new result if success:
-            if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
-                taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+            if (!contains) {
+                ContestPass contestPass = new ContestPass();
+                contestPass.setContest(currentTask.getContest());
+                contestPass.setUser(user);
+                contestPassService.saveContestPass(contestPass);
             }
         }
-        model.addAttribute("taskResults", taskResults);
         //get contest tasks titles
         Map<Integer, String> taskTitles = new HashMap<>();
         for (Task task : currentTask.getContest().getTasks()) {
-        	taskTitles.put(task.getId(), task.getTitle());
+            taskTitles.put(task.getId(), task.getTitle());
         }
         model.addAttribute("taskTitles", taskTitles);
-        
+
+        //get list of passed/failed tasks, and forward it to UI:
+        if (currentContestPass != null) {
+            Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
+            for (TaskPass taskPass : currentContestPass.getTaskPassList()) {
+                //if not contains:
+                if (!taskResults.containsKey(taskPass.getTask().getId())) {
+                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+                    continue;
+                }
+                //if contains and new result if success:
+                if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
+                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+                }
+            }
+            model.addAttribute("taskResults", taskResults);
+        }
         return "contests/contestPass";
     }
 
@@ -121,11 +107,23 @@ public class ContestPassController {
         Task task = taskService.getTaskById(taskId);
         User user = userService.getUserByUsername(principal.getName());
         //check access:
-        if (!user.getContest().contains(task.getContest())) {
-            result.put("accessDenied", true);
-            return result;
+        ContestPass contestPass = null;
+        if (task.getContest().getStatus() == Contest.Status.GOING) {
+            //check if user contains contestPass:
+            for (ContestPass c : user.getContestPassList()) {
+                if (c.getContest().equals(task.getContest())) {
+                    contestPass = c;
+                }
+            }
         }
-        result = taskPassService.checkTask(user, task, compilerId, file.getBytes());
+        if (task.getContest().getStatus() == Contest.Status.GOING && contestPass != null) {
+            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes());
+        } else if (task.getContest().getStatus() == Contest.Status.ARCHIVE) {
+            //archive:
+            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes());
+        } else {
+            result.put("accessDenied", true);
+        }
         return result;
     }
 }

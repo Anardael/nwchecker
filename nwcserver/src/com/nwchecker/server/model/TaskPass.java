@@ -15,8 +15,8 @@ public class TaskPass {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "contestPass")
+    private ContestPass contestPass;
 
     @ManyToOne()
     @JoinColumn(name = "task_id")
@@ -46,12 +46,12 @@ public class TaskPass {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public ContestPass getContestPass() {
+        return contestPass;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setContestPass(ContestPass contestPass) {
+        this.contestPass = contestPass;
     }
 
     public Task getTask() {

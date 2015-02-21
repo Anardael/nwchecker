@@ -86,28 +86,16 @@
                                                     </c:if>
                                                 </security:authorize>
                                                 <security:authorize access="hasRole('ROLE_USER')">
-                                                    <c:set value="index${contest.id}index" var="contestIndex"/>
-                                                    <c:if test="${(contest.status=='RELEASE') && (fn:contains(userContests,contestIndex))}">
-                                                        <h4>
-                                                            <label class="label-info label contestsStatus">
-                                                                <spring:message code="contest.alreadySubscribed"/>
-                                                            </label>
-                                                        </h4>
-                                                    </c:if>
-                                                    <c:if test="${(contest.status=='RELEASE') && (!fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
-                                                                onclick="contestSignUp(${row.index},${contest.id});">
-                                                            <spring:message code="contest.signUpButton"/>
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${(contest.status=='GOING') && (!fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
-                                                                onclick="contestSignUpAndStart(${contest.id},${contest.tasks[0].id});">
+                                                    <c:if test="${(contest.status=='GOING')}">
+                                                        <button class="btn btn-sm btn-info form-group"
+                                                                style="font-weight: 600"
+                                                                onclick="contestStart(${contest.id},${contest.tasks[0].id});">
                                                             <spring:message code="contest.startButton"/>
                                                         </button>
                                                     </c:if>
-                                                    <c:if test="${(contest.status=='GOING') && (fn:contains(userContests,contestIndex))}">
-                                                        <button class="btn btn-sm btn-info form-group" style="font-weight: 600"
+                                                    <c:if test="${(contest.status=='ARCHIVE')}">
+                                                        <button class="btn btn-sm btn-info form-group"
+                                                                style="font-weight: 600"
                                                                 onclick="contestStart(${contest.id},${contest.tasks[0].id});">
                                                             <spring:message code="contest.startButton"/>
                                                         </button>

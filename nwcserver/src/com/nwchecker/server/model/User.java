@@ -1,24 +1,11 @@
 package com.nwchecker.server.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.google.gson.annotations.Expose;
+
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -69,17 +56,17 @@ public class User {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
-                @JoinColumn(name = "user_id")},
+                    @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "contest_id")})
+                    @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
 
     @Expose
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRequest> requests = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
-    private List<TaskPass> taskPass;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<ContestPass> contestPassList;
 
     public User() {
     }
@@ -177,22 +164,22 @@ public class User {
     }
 
     public boolean hasRole(String role) {
-    	Role roleObj = getRoleObject(role);
-    	return this.roles.contains(roleObj);
+        Role roleObj = getRoleObject(role);
+        return this.roles.contains(roleObj);
     }
-    
+
     public Role getRoleObject(String role) {
-    	Role[] rolesArray = roles.toArray(new Role[roles.size()]);
-    	for (Role roleObj : rolesArray) {
-    		if (roleObj.getRole().equals(role)) {
-    			return roleObj;
-    		}
-    	}
-    	return null;
+        Role[] rolesArray = roles.toArray(new Role[roles.size()]);
+        for (Role roleObj : rolesArray) {
+            if (roleObj.getRole().equals(role)) {
+                return roleObj;
+            }
+        }
+        return null;
     }
-    
+
     public void addRole(String role) {
-    	if (roles == null) {
+        if (roles == null) {
             roles = new HashSet<Role>();
             roles.add(new Role(this, role));
         } else {
@@ -216,12 +203,12 @@ public class User {
         this.requests = requests;
     }
 
-    public List<TaskPass> getTaskPass() {
-        return taskPass;
+    public List<ContestPass> getContestPassList() {
+        return contestPassList;
     }
 
-    public void setTaskPass(List<TaskPass> taskPass) {
-        this.taskPass = taskPass;
+    public void setContestPassList(List<ContestPass> contestPassList) {
+        this.contestPassList = contestPassList;
     }
 
     @Override

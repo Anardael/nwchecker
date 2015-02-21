@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- *
  * @author Роман
  */
 @Service
@@ -26,6 +25,20 @@ public class ContestServiceImpl implements ContestService {
 
     @Autowired
     private ContestDAO contestDAO;
+
+    @Override
+    public void setContestDAO(ContestDAO dao) {
+        contestDAO = dao;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    @Override
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Transactional
     @Override
@@ -71,17 +84,7 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public void setContestDAO(ContestDAO dao) {
-        contestDAO = dao;
+    public List<Contest> getContestByStatus(Contest.Status status) {
+        return contestDAO.getContestByStatus(status);
     }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    @Override
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
 }

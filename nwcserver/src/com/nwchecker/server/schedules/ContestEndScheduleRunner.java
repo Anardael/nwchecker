@@ -23,9 +23,9 @@ public class ContestEndScheduleRunner extends TimerTask{
 
     @Override
     public void run() {
-        contest.setStatus(Contest.Status.ARCHIEVE);
+        contest.setStatus(Contest.Status.ARCHIVE);
         contest.setHidden(true);
         contestService.updateContest(contest);
-        LOG.info("Contest (id="+contest.getId()+") changed status to ARCHIEVE");
+        LOG.info("Contest (id="+contest.getId()+") changed status to ARCHIVE");
     }
 }
