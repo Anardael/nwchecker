@@ -16,6 +16,14 @@ var RESULT_TIME;
 var RESULT_MEMORY;
 var RESULT_ERROR_MESSAGE;
 
+function changeFileInputColor() {
+    if ($('#file').val() != "") {
+        $('.btn-file')[0].style.backgroundColor = '#D0D0D0';
+    } else {
+        $('.btn-file')[0].style.backgroundColor = 'white';
+    }
+}
+
 function submitTask() {
 	var formData = new FormData();
 	formData.append("id", $('#id').val());
@@ -45,12 +53,19 @@ function submitTaskAjax(formData) {
 		processData: false,
 		contentType: false,
 		type: 'POST',
+        beforeSend: function() {
+            var animatedBtn = Ladda.create(document.getElementsByClassName('ladda-button')[0]);
+            animatedBtn.start();
+        },
 		success: function(result) {
 			showSubmitResult(result);
 		},
 		error: function() {
 			showErrorDialog(TASK_SUBMIT_ERROR_TITLE, TASK_SUBMIT_ERROR_MESSAGE);
-		}
+		},
+        complete: function() {
+            animatedBtn.stop();
+        }
 	});
 }
 
