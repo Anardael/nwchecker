@@ -43,7 +43,7 @@
                             <th data-field="displayName" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.displayName"/>
                             </th>
-                            <th data-field="roles" data-align="center" data-formatter="rolesFormatter" data-sortable="true">
+                            <th data-field="roles" data-align="center" data-formatter="rolesFormatter">
                                 <spring:message code="adminPanel.users.tableHeader.roles"/>
                             </th>
                             <th data-field="email" data-align="center" data-sortable="true">

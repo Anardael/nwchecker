@@ -1,6 +1,11 @@
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.model.*;
+import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.ContestPass;
+import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskPass;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.CompilerService;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
@@ -17,9 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Роман on 11.02.2015.
@@ -35,6 +40,8 @@ public class ContestPassController {
     private TaskService taskService;
     @Autowired
     private ContestPassService contestPassService;
+    @Autowired
+    private CompilerService compilerService;
 
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -71,7 +78,7 @@ public class ContestPassController {
             }
         }
         //get contest tasks titles
-        Map<Integer, String> taskTitles = new HashMap<>();
+        Map<Integer, String> taskTitles = new TreeMap<>();
         for (Task task : currentTask.getContest().getTasks()) {
             taskTitles.put(task.getId(), task.getTitle());
         }
@@ -93,6 +100,9 @@ public class ContestPassController {
             }
             model.addAttribute("taskResults", taskResults);
         }
+
+        model.addAttribute("compilers", compilerService.getAllCompilers());
+
         return "contests/contestPass";
     }
 
