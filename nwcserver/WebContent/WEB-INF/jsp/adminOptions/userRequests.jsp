@@ -45,7 +45,8 @@
                 <th data-field="displayName" data-align="center" data-sortable="true">
                     <spring:message code="userRequests.users.tableHeader.displayName"/>
                 </th>
-                <th data-field="roles" data-align="center" data-formatter="rolesFormatter">
+                <th data-field="roles" data-align="center" data-formatter="rolesFormatter" data-sortable="true"
+                    data-sorter="usersSorter">
                     <spring:message code="userRequests.users.tableHeader.roles"/>
                 </th>
                 <th data-field="email" data-align="center" data-sortable="true">
