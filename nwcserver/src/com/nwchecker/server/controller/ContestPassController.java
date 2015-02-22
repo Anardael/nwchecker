@@ -1,11 +1,11 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.CompilerService;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
@@ -41,7 +41,7 @@ public class ContestPassController {
     @Autowired
     private ContestPassService contestPassService;
     @Autowired
-    private CompilerService compilerService;
+    private CompilerDAO compilerService;
 
 
     @PreAuthorize("hasRole('ROLE_USER')")
