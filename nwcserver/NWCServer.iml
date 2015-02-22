@@ -13,7 +13,15 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
+          <file>file://$MODULE_DIR$/src/resources/spring/application-context.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/forTests/context.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/hibernate/dbConfig.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/spring/security.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/spring/servlet-context.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">

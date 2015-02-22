@@ -6,6 +6,7 @@ import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.UserProfileValidator;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +33,8 @@ import java.security.Principal;
 public class ProfileController {
 
 	private final UserService	userService;
+    private static final Logger LOG = Logger
+            .getLogger(AdminOptionsController.class);
 
 	@Autowired
 	public ProfileController(UserService userService) {
@@ -53,6 +56,7 @@ public class ProfileController {
 		String username = principal.getName(); // get logged in username
 		User user = userService.getUserByUsername(username);
 		model.addAttribute("userProfile", user);
+        LOG.info("\"" + principal.getName() + "\" initialized profile page.");
 		return "profileOptions/profile";
 	}
 
@@ -60,11 +64,13 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
 								  Principal principal, Model model) {
+        LOG.info("\"" + principal.getName() + "\" trying update profile.");
 		String username = principal.getName(); // get logged in username
 		User logedUser = userService.getUserByUsername(username);
 		user.setRoles(logedUser.getRoles());
 		user.setRequests(logedUser.getRequests());
 		if (result.hasErrors()) {
+            LOG.info("\"" + principal.getName() + "\" inputted bad data to profile.");
 			return "profileOptions/profile";
 		} else {
 			logedUser.setDisplayName(user.getDisplayName());
@@ -72,6 +78,7 @@ public class ProfileController {
 			logedUser.setInfo(user.getInfo());
 			userService.updateUser(logedUser);
 			model.addAttribute("userUpdated", "true");
+            LOG.info("\"" + principal.getName() + "\" updated his profile.");
 			return "profileOptions/profile";
 		}
 	}
@@ -79,6 +86,7 @@ public class ProfileController {
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model) {
+        LOG.info("\"" + principal.getName() + "\" trying change password.");
 		String patternPassword = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
 		String username = principal.getName(); // get logged in username
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -93,13 +101,17 @@ public class ProfileController {
 					logedUser.setPassword(encoder.encode(newPassword));
 					userService.updateUser(logedUser);
 					model.addAttribute("passwordChanged", "true");
+                    LOG.info("\"" + principal.getName() + "\" changed password.");
 				} else {
+                    LOG.info("\"" + principal.getName() + "\" inputted bad password.");
 					model.addAttribute("passwordChanged", "false");
 				}
 			} else {
+                LOG.info("\"" + principal.getName() + "\" inputted bad confirm password.");
 				model.addAttribute("passwordChanged","false");
 			}
 		} else {
+            LOG.info("\"" + principal.getName() + "\" inputted bad old password.");
 			model.addAttribute("passwordChanged", "false");
 		}
 		return "profileOptions/profile";
@@ -109,6 +121,7 @@ public class ProfileController {
 	@RequestMapping(value = "/addUserRequest", method = RequestMethod.POST)
 	public @ResponseBody
 	ValidationResponse addUserRequest(@RequestParam(value = "request") String request,  Principal principal) {
+        LOG.info("\"" + principal.getName() + "\" trying make request for role \"Teacher\".");
 		String username = principal.getName(); // get logged in username
 		User user = userService.getUserByUsername(username);
 		UserRequest newUserRequest = new UserRequest(user,request);
@@ -116,6 +129,7 @@ public class ProfileController {
 		userService.updateUser(user);
 		ValidationResponse result = new ValidationResponse();
 		result.setStatus("Success");
+        LOG.info("\"" + principal.getName() + "\" made request for role \"Teacher\".");
 		return result;
 	}
 

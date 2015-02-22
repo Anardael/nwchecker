@@ -31,8 +31,7 @@ public class ListContestsController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/listContests", method = RequestMethod.GET)
     public String userRequests(Principal principal) {
-        LOG.info("\"" + principal.getName()
-                + "\" entered to administrator page \"List of contests\".");
+        LOG.info("\"" + principal.getName() + "\" entered to administrator page \"List of contests\".");
         return "adminOptions/listContests";
     }
 
@@ -40,16 +39,14 @@ public class ListContestsController {
     @RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
     @ResponseBody
     public List<ListContestsJson> getListOfContests(Principal principal) {
-        LOG.info("\"" + principal.getName()
-                + "\" tries to receive list of contests.");
+        LOG.info("\"" + principal.getName() + "\" tries to receive list of contests.");
         List<Contest> contests = contestService.getContests();
         LinkedList<ListContestsJson> listContestsJsons = new LinkedList<>();
         for (Contest contest : contests) {
             ListContestsJson lc = new ListContestsJson(contest);
             listContestsJsons.add(lc);
         }
-        LOG.info("\"" + principal.getName()
-                + "\" received list of contests.");
+        LOG.info("\"" + principal.getName() + "\" received list of contests.");
         return listContestsJsons;
     }
 }

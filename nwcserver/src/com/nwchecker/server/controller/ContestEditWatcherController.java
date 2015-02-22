@@ -15,7 +15,7 @@ import java.security.Principal;
 /**
  * Created by Роман on 21.02.2015.
  */
-@Controller("Contes0EditWatchertController")
+@Controller("ContestEditWatcherController")
 public class ContestEditWatcherController {
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
