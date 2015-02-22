@@ -23,7 +23,7 @@ public class ContestEditWatcherController {
     @Autowired
     private ContestService contestService;
 
-    private static final long CONTEST_EDIT_TIME_OUT_POLLING = 10000;
+    private static final long CONTEST_EDIT_TIME_OUT_POLLING = 30000;
 
     private static final long REQUEST_CONTEST_STILL_EDIT_TIME_OUT = 1500;
 
@@ -38,7 +38,7 @@ public class ContestEditWatcherController {
         }
         String result = contestEditWatcherService.isEditing(id);
         //if nobody currently edit contest, or current user is editing contest:
-        if ((result == null) || (result != null && result == principal.getName())) {
+        if ((result == null) || (result != null && result.equals(principal.getName()))) {
             deferredResult.setResult("OK");
             return deferredResult;
         } else {
@@ -55,28 +55,34 @@ public class ContestEditWatcherController {
     @RequestMapping("/editingContest")
     @ResponseBody
     public DeferredResult<String> editingContest(Principal principal, @RequestParam(value = "id") final int id) {
-        //asynchronous response object:
-        final DeferredResult<String> deferredResult = new DeferredResult<>(CONTEST_EDIT_TIME_OUT_POLLING, "timeOut");
         //check if user has access:
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
-        //check if contest is currently editing:
-        String username = contestEditWatcherService.isEditing(id);
-        if (username != null) {
-            deferredResult.setResult(username);
-            return deferredResult;
-        }
-
-        //of time out- delete "currentlyEditing" from contestService map:
+        //create asynchronous response object:
+        final DeferredResult<String> deferredResult = new DeferredResult<>(CONTEST_EDIT_TIME_OUT_POLLING, "timeOut");
+        //on time out- delete "currentlyEditing" from contestService map:
         deferredResult.onCompletion(new Runnable() {
             @Override
             public void run() {
                 contestEditWatcherService.removeContestEditingUser(id);
             }
         });
-        //add "currentlyEditing" to contestService map:
-        contestEditWatcherService.addContestEditingUser(id, principal.getName(), deferredResult);
+        //check if contest is currently editing:
+        String username = contestEditWatcherService.isEditing(id);
+        //if editing by current user:
+        if (username != null && username.equals(principal.getName())) {
+            //remove old request:
+            contestEditWatcherService.removeContestEditingUser(id);
+            //add new:
+            contestEditWatcherService.addContestEditingUser(id, principal.getName(), deferredResult);
+        } else if (username != null && !username.equals(principal.getName())) {
+            deferredResult.setResult(username);
+            return deferredResult;
+        } else if (username == null) {
+            //if nobody is editing- then set that current user is editing:
+            contestEditWatcherService.addContestEditingUser(id, principal.getName(), deferredResult);
+        }
         return deferredResult;
     }
 }
