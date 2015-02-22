@@ -27,7 +27,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -245,8 +249,10 @@ public class ContestController {
     ValidationResponse setContestUsers(@RequestParam("contestId") int contestId, Principal principal,
                                        @RequestParam("userIds[]") int[] userIds
     ) {
-        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
-            throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+        if (!((UsernamePasswordAuthenticationToken) principal).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
+                throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
+            }
         }
         //JSON response class:
         ValidationResponse result = new ValidationResponse();
