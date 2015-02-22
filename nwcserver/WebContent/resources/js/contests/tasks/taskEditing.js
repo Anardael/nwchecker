@@ -1,12 +1,13 @@
 function tryToAddTask(locale) {
     if ($('#id').val() == '0') {
-        sendJsonContest().success(function(data) {
+        sendJsonContest().success(function (data) {
             if (data.status == "FAIL") {
                 contestAjaxFailed(errorCaption, emptyContest, data);
             }
             if (data.status == "SUCCESS") {
                 $('#id').val(data.result);
                 createNewTask(locale);
+                contestLongPolling();
             }
         });
     } else {
@@ -18,7 +19,7 @@ function createNewTask(locale) {
     //get taskModalForm pattern:
     //get parameter "taskId" indicates index of current "newTask".
     //TaskListSize is declared in contestCreate.jsp
-    $.get("newTaskForm.do?taskId=" + TaskListSize+"&contestId="+$('#id').val(), 0, function(newMod) {
+    $.get("newTaskForm.do?taskId=" + TaskListSize + "&contestId=" + $('#id').val(), 0, function (newMod) {
         //append TaskModalForm.html in taskList div:
         $('.taskList').append(newMod);
         //set in/out:
@@ -41,12 +42,12 @@ function createNewTask(locale) {
         $('#taskModal_' + TaskListSize).modal();
 
         //set CK:
-        $('#taskModal_' + TaskListSize + ' .ckEdit').each(function() {
+        $('#taskModal_' + TaskListSize + ' .ckEdit').each(function () {
             initializeCKEdior($(this).attr('id'), locale);
         });
 
         //set digits only:
-        $('#taskModal_' + TaskListSize + ' .digits').keypress(function(e) {
+        $('#taskModal_' + TaskListSize + ' .digits').keypress(function (e) {
             //if the letter is not digit then display error and don't type anything
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
                 //display error message
@@ -54,9 +55,12 @@ function createNewTask(locale) {
             }
         });
         //set ladda:
-        Ladda.bind( '.ladda-button' );
+        Ladda.bind('.ladda-button');
         //set upload buttons:
-        $('#taskModal_' + TaskListSize + ' .newTest:not([hidden=true])').filestyle({input: false, buttonText: uploadTestFileButton});
+        $('#taskModal_' + TaskListSize + ' .newTest:not([hidden=true])').filestyle({
+            input: false,
+            buttonText: uploadTestFileButton
+        });
         //increment TaskListSize:
         TaskListSize++;
     });
@@ -71,24 +75,24 @@ function prepareDeleteTask(index) {
         title: taskDeleteHeader,
         message: taskDeleteQuestion,
         buttons: [{
-                label: btnClose,
-                action: function(dialogItself) {
-                    dialogItself.close();
-                }
-            }, {
-                label: btnSubmit,
-                cssClass: 'btn-primary',
-                action: function(dialogItself) {
-                    dialogItself.close();
-                    sendAjaxDeleteTask(index,taskActualId);
-                }
+            label: btnClose,
+            action: function (dialogItself) {
+                dialogItself.close();
             }
+        }, {
+            label: btnSubmit,
+            cssClass: 'btn-primary',
+            action: function (dialogItself) {
+                dialogItself.close();
+                sendAjaxDeleteTask(index, taskActualId);
+            }
+        }
         ]
     });
 }
-function sendAjaxDeleteTask(view,index) {
+function sendAjaxDeleteTask(view, index) {
     var contId = $('#id').val();
-    $.get('deleteTaskJson.do?taskId=' + index + "&contestId=" + contId, 0, function(response) {
+    $.get('deleteTaskJson.do?taskId=' + index + "&contestId=" + contId, 0, function (response) {
         if (response.status == "SUCCESS") {
             deleteTask(view);
             BootstrapDialog.show({
@@ -96,9 +100,9 @@ function sendAjaxDeleteTask(view,index) {
                 type: BootstrapDialog.TYPE_SUCCESS,
                 message: taskDeleteSuccess,
             });
-            
+
         }
-        if (response.status=="FAIL"){
+        if (response.status == "FAIL") {
             if (response.errorMessageList[0].fieldName == "denied") {
                 showAccessDeniedModal();
             }
@@ -123,12 +127,12 @@ function deleteTask(index) {
             //change div modal id:
             form.find('#taskModal_' + i).attr('id', 'taskModal_' + iDecremented);
             //change all input elements id and name:
-            form.find('input').each(function() {
+            form.find('input').each(function () {
                 this.id = "tasks" + iDecremented + this.id.substring(this.id.indexOf("."));
                 this.name = "tasks[" + iDecremented + "]" + this.name.substring(this.name.indexOf("."));
             });
             //change all textarea elements id & name:
-            form.find('textarea').each(function() {
+            form.find('textarea').each(function () {
                 this.id = "tasks" + iDecremented + this.id.substring(this.id.indexOf("."));
                 this.name = "tasks[" + iDecremented + "]" + this.name.substring(this.name.indexOf("."));
             });
@@ -177,7 +181,12 @@ function addNewTestCouple(taskId) {
     //append to Tests:
     clone.appendTo('#taskModalForm_' + taskId + ' .tests');
     //set buttons js:
-    $('#test_' + taskId + '_' + newId + ' :file').filestyle({input: false, icon: false, buttonName: "btn-primary", buttonText: uploadTestFileButton});
+    $('#test_' + taskId + '_' + newId + ' :file').filestyle({
+        input: false,
+        icon: false,
+        buttonName: "btn-primary",
+        buttonText: uploadTestFileButton
+    });
 }
 function replaceTaskTestFiles(contestId, taskId, localTaskId) {
 //get current tst files from server:
@@ -186,10 +195,15 @@ function replaceTaskTestFiles(contestId, taskId, localTaskId) {
         processData: false,
         contentType: false,
         type: 'GET',
-        success: function(response) {
+        success: function (response) {
             $('#taskModal_' + localTaskId + ' .tests').replaceWith(response);
             //set filestyle:
-            $('.newTest:not([hidden]) :file').filestyle({input: false, icon: false, buttonName: "btn-primary", buttonText: uploadTestFileButton});
+            $('.newTest:not([hidden]) :file').filestyle({
+                input: false,
+                icon: false,
+                buttonName: "btn-primary",
+                buttonText: uploadTestFileButton
+            });
         }
     });
 }
@@ -207,7 +221,7 @@ function deleteAvaibleTest(button, testCurrentId) {
         processData: false,
         contentType: false,
         type: 'GET',
-        success: function(response) {
+        success: function (response) {
             if (response.status == "SUCCESS") {
                 BootstrapDialog.show({
                     title: testDeletedHeader,
@@ -218,7 +232,7 @@ function deleteAvaibleTest(button, testCurrentId) {
                 var parent = button.parentNode.parentNode;
                 document.getElementById(parent.id).remove();
             }
-            if (response.status=="FAIL"){
+            if (response.status == "FAIL") {
                 if (response.errorMessageList[0].fieldName == "denied") {
                     showAccessDeniedModal();
                 }
@@ -226,7 +240,7 @@ function deleteAvaibleTest(button, testCurrentId) {
 
         }
     });
-    
+
 }
 
 function prepateDeleteAvaibleTest(button, testCurrentId) {
@@ -235,18 +249,18 @@ function prepateDeleteAvaibleTest(button, testCurrentId) {
         title: testDeletedHeader,
         message: testDeleteQuestion,
         buttons: [{
-                label: btnClose,
-                action: function(dialogItself) {
-                    dialogItself.close();
-                }
-            }, {
-                label: btnSubmit,
-                cssClass: 'btn-primary',
-                action: function(dialogItself) {
-                    dialogItself.close();
-                    deleteAvaibleTest(button, testCurrentId);
-                }
+            label: btnClose,
+            action: function (dialogItself) {
+                dialogItself.close();
             }
+        }, {
+            label: btnSubmit,
+            cssClass: 'btn-primary',
+            action: function (dialogItself) {
+                dialogItself.close();
+                deleteAvaibleTest(button, testCurrentId);
+            }
+        }
         ]
     });
 }
