@@ -3,6 +3,7 @@ package com.nwchecker.server.controller;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.service.ContestEditWatcherService;
 import com.nwchecker.server.service.ContestService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,25 +18,38 @@ import java.security.Principal;
  */
 @Controller("ContestEditWatcherController")
 public class ContestEditWatcherController {
+
+    private static final Logger LOG
+            = Logger.getLogger(ContestEditWatcherController.class);
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
 
     @Autowired
     private ContestService contestService;
 
-    private static final long CONTEST_EDIT_TIME_OUT_POLLING = 30000;
+    private static final long CONTEST_EDIT_TIME_OUT_POLLING = 10000;
 
     private static final long REQUEST_CONTEST_STILL_EDIT_TIME_OUT = 1500;
 
     //method for indicate if Contest is currently editing by someone:
     @RequestMapping("/checkContestEdit")
     @ResponseBody
-    public DeferredResult<String> checkIfContestEditing(Principal principal, @RequestParam(value = "id") int id) {
-        final DeferredResult<String> deferredResult = new DeferredResult<>(REQUEST_CONTEST_STILL_EDIT_TIME_OUT, "OK");
+    public DeferredResult<String> checkIfContestEditing(Principal principal, @RequestParam(value = "id") final int id) {
         //check if user has access:
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
+        //create asynchronous response:
+        final DeferredResult<String> deferredResult = new DeferredResult<>(REQUEST_CONTEST_STILL_EDIT_TIME_OUT, "OK");
+        deferredResult.onCompletion(new Runnable() {
+            @Override
+            public void run() {
+                //on execute delete himself from map:
+                contestEditWatcherService.removeRequestStillContestEditing(id);
+            }
+        });
+
+        //who is currently editing contest:
         String result = contestEditWatcherService.isEditing(id);
         //if nobody currently edit contest, or current user is editing contest:
         if ((result == null) || (result != null && result.equals(principal.getName()))) {
@@ -43,6 +57,9 @@ public class ContestEditWatcherController {
             return deferredResult;
         } else {
             //if somebody other is editing contest:
+            //write to log:
+            LOG.debug("User(" + principal.getName() + ") tries to check if Contest(id=" + id +
+                    ") is still editing by User(" + result + ")");
             //send him timeOut and check if he will reconnect:
             contestEditWatcherService.setDeferredResult(id, "timeOut");
             //put assycnhronous response to request map:

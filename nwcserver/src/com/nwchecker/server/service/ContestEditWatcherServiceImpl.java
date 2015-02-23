@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 
@@ -12,6 +13,8 @@ import java.util.Map;
 
 @Service(value = "ContestEditWatcher")
 public class ContestEditWatcherServiceImpl implements ContestEditWatcherService {
+    private static final Logger LOG
+            = Logger.getLogger(ContestEditWatcherServiceImpl.class);
 
     //User editing long polling:
     private static Map<Integer, Map<String, Object>> CURRENTLY_EDITING_CONTESTS = new LinkedHashMap<>();
@@ -24,10 +27,16 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     }
 
     @Override
+    public void removeRequestStillContestEditing(int contestId) {
+        REQUEST_CONTEST_STILL_EDITING.remove(contestId);
+    }
+
+
+    @Override
     public Map<Integer, String> getNowEditsMap() {
         Map<Integer, String> result = new LinkedHashMap<>();
         for (Integer i : CURRENTLY_EDITING_CONTESTS.keySet()) {
-             Map<String, Object> info = CURRENTLY_EDITING_CONTESTS.get(i);
+            Map<String, Object> info = CURRENTLY_EDITING_CONTESTS.get(i);
             result.put(i, (String) info.get("username"));
         }
         return result;
@@ -39,15 +48,21 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
         requestinfo.put("username", username);
         requestinfo.put("deferredResult", deferredResult);
         CURRENTLY_EDITING_CONTESTS.put(contestId, requestinfo);
+        //write to log:
+        LOG.debug("User(" + username + ") starts edit contest (id=" + contestId + ")");
+
         //if somebody checks if contest is currently editing:
         if (REQUEST_CONTEST_STILL_EDITING.containsKey(contestId)) {
             REQUEST_CONTEST_STILL_EDITING.get(contestId).setResult(username);
+            //set to log:
+            LOG.debug("User(" + username + ") approve to other users that Contest(id=" + contestId + ") is still editing");
         }
-
     }
 
     @Override
     public void removeContestEditingUser(int contestId) {
+        LOG.debug("User(" + CURRENTLY_EDITING_CONTESTS.get(contestId).get("username") + ") " +
+                "ends edit contest(id=" + contestId + ") reason- timeOut");
         CURRENTLY_EDITING_CONTESTS.remove(contestId);
     }
 

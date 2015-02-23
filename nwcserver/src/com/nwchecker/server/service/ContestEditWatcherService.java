@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public interface ContestEditWatcherService {
 
-    Map<Integer,String> getNowEditsMap();
+    Map<Integer, String> getNowEditsMap();
 
     void addContestEditingUser(int contestId, String username, DeferredResult<String> deferredResult);
 
@@ -21,4 +21,6 @@ public interface ContestEditWatcherService {
     String isEditing(int contestId);
 
     void addRequestStillContestEditing(int contestId, DeferredResult<String> deferredResult);
+
+    void removeRequestStillContestEditing(int contestId);
 }
