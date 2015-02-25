@@ -15,6 +15,7 @@ public class ListContestsJson {
     private String title;
     private List<String> users = new LinkedList<>();
     private Date starts;
+    private Contest.Status status;
 
     public ListContestsJson() {
     }
@@ -26,6 +27,7 @@ public class ListContestsJson {
             this.users.add(user.getDisplayName());
         }
         this.starts = contest.getStarts();
+        this.status = contest.getStatus();
     }
 
     public int getId() {
@@ -58,5 +60,13 @@ public class ListContestsJson {
 
     public void setStarts(Date starts) {
         this.starts = starts;
+    }
+
+    public Contest.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Contest.Status status) {
+        this.status = status;
     }
 }

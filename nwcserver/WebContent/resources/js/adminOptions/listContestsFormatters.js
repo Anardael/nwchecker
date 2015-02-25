@@ -17,6 +17,23 @@ function usersFormatter(value) {
     return result;
 }
 
+function statusFormatter(value) {
+    var result = "";
+    if (value == "GOING") {
+        result = "<label style='font-size:90%;color:#5cb85c'>" + GOING + "</label><br/>";
+    }
+    if (value == "PREPARING") {
+        result = "<label style='font-size:90%;color:#5bc0de'>" + PREPARING + "</label><br/>";
+    }
+    if (value == "RELEASE") {
+        result = "<label style='font-size:90%;color:#5bc0de'>" + RELEASE + "</label><br/>";
+    }
+    if (value == "ARCHIVE") {
+        result = "<label style='font-size:90%;color:#5bc0de'>" + ARCHIVE + "</label><br/>";
+    }
+    return result;
+}
+
 function dateFormatter(value) {
     var date = new Date(value);
     var result = "";
