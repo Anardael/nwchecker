@@ -70,27 +70,31 @@ function sendContestData(data) {
         'data': data,
         success: function (response) {
             if (response.status == "SUCCESS") {
-                $.ajax({
-                    'type': 'POST',
-                    'url': 'setContestUsers.do',
-                    'data': data,
-                    success: function (response) {
-                        if (response.status == "SUCCESS") {
-                            $('#userListModal').modal('hide');
-                            BootstrapDialog.show({
-                                title: successCaption,
-                                type: BootstrapDialog.TYPE_SUCCESS,
-                                message: contestUserListSuccess,
-                                onhidden: function (dialogRef) {
-                                    $('#contestsData').bootstrapTable('refresh');
-                                }
-                            });
-                        }
-                        if (response.status == "FAIL") {
-                            if (response.errorMessageList[0].fieldName == "denied") {
-                                showAccessDeniedModal();
-                            }
-                        }
+                sendContestUsers(data);
+            }
+            if (response.status == "FAIL") {
+                if (response.errorMessageList[0].fieldName == "denied") {
+                    showAccessDeniedModal();
+                }
+            }
+        }
+    });
+}
+
+function sendContestUsers(data) {
+    $.ajax({
+        'type': 'POST',
+        'url': 'setContestUsers.do',
+        'data': data,
+        success: function (response) {
+            if (response.status == "SUCCESS") {
+                $('#userListModal').modal('hide');
+                BootstrapDialog.show({
+                    title: successCaption,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    message: contestUserListSuccess,
+                    onhidden: function (dialogRef) {
+                        $('#contestsData').bootstrapTable('refresh');
                     }
                 });
             }
