@@ -41,8 +41,7 @@
 		RESULT_MEMORY = '<spring:message code="contest.passing.resultDialog.memory"/>';
 		RESULT_ERROR_MESSAGE = '<spring:message code="contest.passing.resultDialog.message"/>';
 
-        END_TIME_MILLISECONDS = ${contestEndTime.timeInMillis};
-        SERVER_TIME_ZONE = ${contestEndTime.timeZone.rawOffset} / 3600000;
+        END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
         $(document).ready(function() {
             startTimer();
         });

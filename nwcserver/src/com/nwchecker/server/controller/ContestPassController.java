@@ -91,7 +91,8 @@ public class ContestPassController {
         endDate.add(Calendar.HOUR, duration.get(Calendar.HOUR));
         endDate.add(Calendar.MINUTE, duration.get(Calendar.MINUTE));
         endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
-        model.addAttribute("contestEndTime", endDate);
+        long gtmMillis = (long) endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
+        model.addAttribute("contestEndTimeGTM", gtmMillis);
 
         //get list of passed/failed tasks, and forward it to UI:
         if (currentContestPass != null) {

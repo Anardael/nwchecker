@@ -2,12 +2,11 @@
  * Created by Станіслав on 26.02.2015.
  */
 
-var END_TIME_MILLISECONDS;
-var SERVER_TIME_ZONE; // example: GTM +2 = 2
+var END_TIME_GTM_MILLISECONDS;
 
 function startTimer() {
-    var duration = END_TIME_MILLISECONDS - new Date().getTime();
-    duration = new Date(duration - SERVER_TIME_ZONE * 3600000);
+    var duration = new Date();
+    duration.setTime(END_TIME_GTM_MILLISECONDS - duration.getTime());
     var hours = duration.getHours();
     var minutes = duration.getMinutes();
     var seconds = duration.getSeconds();
