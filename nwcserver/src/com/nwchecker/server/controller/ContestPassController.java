@@ -22,9 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Роман on 11.02.2015.
@@ -79,10 +77,21 @@ public class ContestPassController {
         }
         //get contest tasks titles
         Map<Integer, String> taskTitles = new TreeMap<>();
-        for (Task task : currentTask.getContest().getTasks()) {
+        Contest currentContest = currentTask.getContest();
+        for (Task task : currentContest.getTasks()) {
             taskTitles.put(task.getId(), task.getTitle());
         }
         model.addAttribute("taskTitles", taskTitles);
+
+        // get contest ending time in GMT
+        Calendar endDate = Calendar.getInstance();
+        Calendar duration = Calendar.getInstance();
+        endDate.setTime(currentContest.getStarts());
+        duration.setTime(currentContest.getDuration());
+        endDate.add(Calendar.HOUR, duration.get(Calendar.HOUR));
+        endDate.add(Calendar.MINUTE, duration.get(Calendar.MINUTE));
+        endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
+        model.addAttribute("contestEndTime", endDate);
 
         //get list of passed/failed tasks, and forward it to UI:
         if (currentContestPass != null) {

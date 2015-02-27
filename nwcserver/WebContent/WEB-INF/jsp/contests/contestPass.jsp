@@ -16,6 +16,7 @@
 
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+<script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
 <script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
 <script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
 <script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
@@ -39,6 +40,12 @@
 		RESULT_TIME = '<spring:message code="contest.passing.resultDialog.time"/>';
 		RESULT_MEMORY = '<spring:message code="contest.passing.resultDialog.memory"/>';
 		RESULT_ERROR_MESSAGE = '<spring:message code="contest.passing.resultDialog.message"/>';
+
+        END_TIME_MILLISECONDS = ${contestEndTime.timeInMillis};
+        SERVER_TIME_ZONE = ${contestEndTime.timeZone.rawOffset} / 3600000;
+        $(document).ready(function() {
+            startTimer();
+        });
 	</script>
 
 	<div class="wrapper container">
@@ -100,6 +107,7 @@
 					<small> 
 						(<spring:message code="contest.passing.rate.caption"/>
 						<b>${currentTask.rate}</b>)
+                        <label id="timer" class="pull-right"></label>
 					</small>
 				</h2>
 			</div>
