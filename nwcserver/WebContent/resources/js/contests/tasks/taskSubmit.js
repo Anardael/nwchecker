@@ -46,27 +46,25 @@ function showErrorDialog(dialogTitle, dialogMessage) {
 }
 
 function submitTaskAjax(formData) {
-	$.ajax({
+    var animatedBtn = Ladda.create(document.getElementsByClassName('ladda-button')[0]);
+    animatedBtn.start();
+    $.ajax({
 		url: "submitTask.do",
 		data: formData,
 		dataType: 'JSON',
 		processData: false,
 		contentType: false,
 		type: 'POST',
-        beforeSend: function() {
-            var animatedBtn = Ladda.create(document.getElementsByClassName('ladda-button')[0]);
-            animatedBtn.start();
-        },
 		success: function(result) {
 			showSubmitResult(result);
 		},
 		error: function() {
 			showErrorDialog(TASK_SUBMIT_ERROR_TITLE, TASK_SUBMIT_ERROR_MESSAGE);
-		},
-        complete: function() {
+		}
+	})
+        .always(function() {
             animatedBtn.stop();
-        }
-	});
+        });
 }
 
 function showSubmitResult(result) {

@@ -16,6 +16,7 @@
 
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+<script type="text/javascript" src="${resources}js/contests/contestPass.js"></script>
 <script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
 <script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
 <script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
@@ -41,8 +42,20 @@
 		RESULT_MEMORY = '<spring:message code="contest.passing.resultDialog.memory"/>';
 		RESULT_ERROR_MESSAGE = '<spring:message code="contest.passing.resultDialog.message"/>';
 
+        TIME_END_TITLE = '<spring:message code="contest.passing.timeIsOverDialog.title"/>';
+        TIME_END_MESSAGE = '<spring:message code="contest.passing.timeIsOverDialog.message"/>';
+
+        ALL_COMPLETE_TITLE = '<spring:message code="contest.passing.allCompleteDialog.title"/>';
+        ALL_COMPLETE_MESSAGE = '<spring:message code="contest.passing.allCompleteDialog.message"/>';
+
+        <c:if test="${not empty taskResults[currentTask.id]}">
+            CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
+        </c:if>
         END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
         $(document).ready(function() {
+            if (allTasksComplete())
+                endContest();
+            disableDangerousOptions();
             startTimer();
         });
 	</script>

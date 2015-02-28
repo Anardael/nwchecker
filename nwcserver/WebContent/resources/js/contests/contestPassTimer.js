@@ -2,6 +2,9 @@
  * Created by Станіслав on 26.02.2015.
  */
 
+var TIME_END_TITLE;
+var TIME_END_MESSAGE;
+
 var END_TIME_GTM_MILLISECONDS;
 
 function startTimer() {
@@ -25,6 +28,14 @@ function startTimer() {
 }
 
 function timeEnd() {
-    //TODO
-    alert('Time END!');
+    BootstrapDialog.show({
+        type:    BootstrapDialog.TYPE_WARNING,
+        title:   TIME_END_TITLE,
+        message: TIME_END_MESSAGE,
+        onhide: function() {
+            var newUrl = location.href.substring(0, location.href.lastIndexOf('/'));
+            newUrl += "/getContests.do";
+            location.href = newUrl;
+        }
+    });
 }
