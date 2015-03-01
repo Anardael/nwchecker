@@ -52,11 +52,13 @@
             CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
         </c:if>
         END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
+        var isArchive = ${isArchive};
         $(document).ready(function() {
             if (allTasksComplete())
                 endContest();
             disableDangerousOptions();
-            startTimer();
+            if (!isArchive)
+                startTimer();
         });
 	</script>
 

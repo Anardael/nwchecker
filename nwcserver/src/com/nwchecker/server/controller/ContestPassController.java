@@ -86,6 +86,7 @@ public class ContestPassController {
                 contestPassService.saveContestPass(contestPass);
             }
         }
+        model.addAttribute("isArchive", (currentTask.getContest().getStatus() == Contest.Status.ARCHIVE));
         //get contest tasks titles
         Map<Integer, String> taskTitles = new TreeMap<>();
         Contest currentContest = currentTask.getContest();
