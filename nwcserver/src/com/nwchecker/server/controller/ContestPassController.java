@@ -1,7 +1,12 @@
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.model.*;
+import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.ContestPass;
+import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskPass;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
@@ -21,6 +26,7 @@ import java.util.*;
 
 /**
  * Created by Роман on 11.02.2015.
+ * Modified by Станіслав many times :-) (12.02.2015 - 1.03.2015)
  */
 @Controller("contestPassController")
 public class ContestPassController {
@@ -36,7 +42,7 @@ public class ContestPassController {
 
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/passTask.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
                                  Model model) {
         Task currentTask = taskService.getTaskById(taskId);
@@ -141,12 +147,21 @@ public class ContestPassController {
     }
 
 
-    @RequestMapping(value = "results")
+    @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
+        // TODO output some global data about contest
+        model.addAttribute("contestId", id);
+        return "contests/contestResults";
+    }
+
+    @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
+    public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int id) {
         List<ContestPass> contestPasses = contestPassService.getContestPasses(id);
         Collections.sort(contestPasses);
-        model.addAttribute("results", contestPasses);
-        //TODO ceate page with results
-        return "yourResultPage";
+        List<ContestPassJson> jsonData = new ArrayList<>();
+        for (ContestPass contestPass : contestPasses) {
+            jsonData.add(ContestPassJson.createContestPassJson(contestPass));
+        }
+        return jsonData;
     }
 }
