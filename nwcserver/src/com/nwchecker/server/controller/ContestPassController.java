@@ -8,6 +8,7 @@ import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.service.ContestPassService;
+import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Роман on 11.02.2015.
@@ -33,6 +43,8 @@ public class ContestPassController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ContestService contestService;
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -149,8 +161,16 @@ public class ContestPassController {
 
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
-        // TODO output some global data about contest
         model.addAttribute("contestId", id);
+        Contest contest = contestService.getContestByID(id);
+        model.addAttribute("contestTitle", contest.getTitle());
+        SimpleDateFormat formatStart = new SimpleDateFormat("dd.MM.yy HH:mm");
+        model.addAttribute("contestStart", formatStart.format(contest.getStarts()));
+        SimpleDateFormat formatDurHours = new SimpleDateFormat("H");
+        SimpleDateFormat formatDurMinutes = new SimpleDateFormat("m");
+        String contestDuration = formatDurHours.format(contest.getDuration()) + "h";
+        contestDuration += formatDurMinutes.format(contest.getDuration()) + "m";
+        model.addAttribute("contestDuration", contestDuration);
         return "contests/contestResults";
     }
 

@@ -20,6 +20,7 @@
 <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
 <script type="text/javascript"
         src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
+<script type="text/javascript" src="${resources}js/contests/contestResultsFormatter.js"></script>
 </head>
 <body>
     <div class="wrapper container">
@@ -28,14 +29,29 @@
         <jsp:include page="../fragments/bodyHeader.jsp">
             <jsp:param name="pageName" value="contest"/>
         </jsp:include>
+        <!-- Contest info -->
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>
+                    ${contestTitle}
+                    <small class="pull-right">
+                        ${contestStart} (${contestDuration})
+                    </small>
+                   </h2>
+                </h2>
+            </div>
+        </div>
         <!-- Statistic table -->
-        <div class="row" style="height:70%">
+        <div class="col-md-12" style="height:70%">
             <c:url var="dataUrl" value="/resultsList.do?id=${contestId}"/>
-            <table id="competitorsList" data-toggle="table" data-striped="true"
-                   data-url="${dataUrl}" data-method="get" data-cache="false">
+            <table id="competitorsList" data-toggle="table"
+                   data-url="${dataUrl}" data-method="get" data-cache="false"
+                   data-pagination="true" data-show-pagination-switch="true">
                 <thead>
                     <tr>
-                        <!-- TODO -->
+                        <th data-align="center" data-formatter="positionFormatter">
+                            <spring:message code="contest.results.tableHeader.place"/>
+                        </th>
                         <th data-field="username" data-align="center">
                             <spring:message code="contest.results.tableHeader.username"/>
                         </th>
