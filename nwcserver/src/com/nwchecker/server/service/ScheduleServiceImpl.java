@@ -17,6 +17,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private ContestService contestService;
 
+    @Autowired
+    private ScoreCalculationService scoreCalculationService;
+
     private static final Logger LOG
             = Logger.getLogger(ScheduleServiceImpl.class);
 
@@ -49,7 +52,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Date expiredDate = new Date(expiredTime);
 
         Timer t = new Timer();
-        t.schedule(new ContestEndScheduleRunner(contestService, contest), expiredDate);
+        t.schedule(new ContestEndScheduleRunner(contestService, scoreCalculationService, contest), expiredDate);
 
         LOG.info("Registered stop schedule for contest id=" + contest.getId());
     }

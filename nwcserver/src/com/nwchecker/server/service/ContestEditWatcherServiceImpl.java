@@ -6,6 +6,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Роман on 21.02.2015.
@@ -17,33 +18,39 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
             = Logger.getLogger(ContestEditWatcherServiceImpl.class);
 
     //User editing long polling:
-    private static Map<Integer, Map<String, Object>> CURRENTLY_EDITING_CONTESTS = new LinkedHashMap<>();
+    private static Map<Integer, Map<String, Object>> CURRENTLY_EDITING_CONTESTS = new ConcurrentHashMap<>();
     //Requests for check if user is still editing contest
-    private static Map<Integer, DeferredResult<String>> REQUEST_CONTEST_STILL_EDITING = new LinkedHashMap<>();
+    private static Map<Integer, DeferredResult<String>> REQUEST_CONTEST_STILL_EDITING = new ConcurrentHashMap<>();
 
     @Override
     public void addRequestStillContestEditing(int contestId, DeferredResult<String> deferredResult) {
-        REQUEST_CONTEST_STILL_EDITING.put(contestId, deferredResult);
+        synchronized (REQUEST_CONTEST_STILL_EDITING) {
+            REQUEST_CONTEST_STILL_EDITING.put(contestId, deferredResult);
+        }
     }
 
     @Override
     public void removeRequestStillContestEditing(int contestId) {
-        REQUEST_CONTEST_STILL_EDITING.remove(contestId);
+        synchronized (REQUEST_CONTEST_STILL_EDITING) {
+            REQUEST_CONTEST_STILL_EDITING.remove(contestId);
+        }
     }
 
 
     @Override
     public Map<Integer, String> getNowEditsMap() {
-        Map<Integer, String> result = new LinkedHashMap<>();
-        for (Integer i : CURRENTLY_EDITING_CONTESTS.keySet()) {
-            Map<String, Object> info = CURRENTLY_EDITING_CONTESTS.get(i);
-            result.put(i, (String) info.get("username"));
+        synchronized (CURRENTLY_EDITING_CONTESTS) {
+            Map<Integer, String> result = new LinkedHashMap<>();
+            for (Integer i : CURRENTLY_EDITING_CONTESTS.keySet()) {
+                Map<String, Object> info = CURRENTLY_EDITING_CONTESTS.get(i);
+                result.put(i, (String) info.get("username"));
+            }
+            return result;
         }
-        return result;
     }
 
     @Override
-    public void addContestEditingUser(int contestId, String username, DeferredResult<String> deferredResult) {
+    public synchronized void addContestEditingUser(int contestId, String username, DeferredResult<String> deferredResult) {
         Map<String, Object> requestinfo = new LinkedHashMap<>();
         requestinfo.put("username", username);
         requestinfo.put("deferredResult", deferredResult);
@@ -61,24 +68,30 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
 
     @Override
     public void removeContestEditingUser(int contestId) {
-        LOG.debug("User(" + CURRENTLY_EDITING_CONTESTS.get(contestId).get("username") + ") " +
-                "ends edit contest(id=" + contestId + ") reason- timeOut");
-        CURRENTLY_EDITING_CONTESTS.remove(contestId);
+        synchronized (CURRENTLY_EDITING_CONTESTS) {
+            LOG.debug("User(" + CURRENTLY_EDITING_CONTESTS.get(contestId).get("username") + ") " +
+                    "ends edit contest(id=" + contestId + ") reason- timeOut");
+            CURRENTLY_EDITING_CONTESTS.remove(contestId);
+        }
     }
 
     @Override
     public void setDeferredResult(int requestId, String result) {
-        if (CURRENTLY_EDITING_CONTESTS.containsKey(requestId)) {
-            ((DeferredResult<String>) CURRENTLY_EDITING_CONTESTS.get(requestId).get("deferredResult")).setResult(result);
+        synchronized (CURRENTLY_EDITING_CONTESTS) {
+            if (CURRENTLY_EDITING_CONTESTS.containsKey(requestId)) {
+                ((DeferredResult<String>) CURRENTLY_EDITING_CONTESTS.get(requestId).get("deferredResult")).setResult(result);
+            }
         }
     }
 
     @Override
     public String isEditing(int contestId) {
-        if (CURRENTLY_EDITING_CONTESTS.containsKey(contestId)) {
-            return (String) CURRENTLY_EDITING_CONTESTS.get(contestId).get("username");
-        } else {
-            return null;
+        synchronized (CURRENTLY_EDITING_CONTESTS) {
+            if (CURRENTLY_EDITING_CONTESTS.containsKey(contestId)) {
+                return (String) CURRENTLY_EDITING_CONTESTS.get(contestId).get("username");
+            } else {
+                return null;
+            }
         }
     }
 
