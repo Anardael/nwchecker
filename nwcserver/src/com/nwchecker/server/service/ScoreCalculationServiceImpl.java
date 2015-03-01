@@ -6,7 +6,9 @@ import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.TaskPass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,12 +27,9 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
     private ContestPassDAO contestPassDAO;
 
     @Override
+    @Transactional
     public void calculateScore(int ContestId) {
         Contest contest = contestService.getContestByID(ContestId);
-        if (!contest.getStatus().equals(Contest.Status.ARCHIVE)) {
-            throw new RuntimeException();
-        }
-
         //get all user ContestPasses for this contest:
         List<ContestPass> allContestPasses = contestPassService.getContestPasses(ContestId);
 
@@ -55,6 +54,13 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
                     contestPassDAO.updateContestPass(contestPass);
                 }
             }
+        }
+        Collections.sort(allContestPasses);
+        int i = 1;
+        for (ContestPass c : allContestPasses) {
+            c.setRank(i);
+            contestPassDAO.updateContestPass(c);
+            i++;
         }
     }
 }

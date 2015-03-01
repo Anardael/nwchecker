@@ -43,6 +43,9 @@ public class ContestPass implements Comparable<ContestPass> {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contestPass")
     private List<TaskPass> taskPassList;
 
+    @Column(name = "rank")
+    private int rank;
+
     public int getId() {
         return id;
     }
@@ -115,6 +118,14 @@ public class ContestPass implements Comparable<ContestPass> {
 
     public void setTimePenalty(int timePenalty) {
         this.timePenalty = timePenalty;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override
