@@ -1,6 +1,7 @@
 package com.nwchecker.server.model;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ContestPass")
-public class ContestPass {
+public class ContestPass implements Comparable<ContestPass> {
 
     public static enum ContestStatus {
         ARCHIVE, GOING
@@ -32,6 +33,12 @@ public class ContestPass {
 
     @Column(name = "passing")
     private boolean passing;
+
+    @Column(name = "passed")
+    private int passedCount;
+
+    @Column(name = "timePenalty")
+    private int timePenalty;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contestPass")
     private List<TaskPass> taskPassList;
@@ -72,6 +79,16 @@ public class ContestPass {
         return taskPassList;
     }
 
+    public List<TaskPass> getFailedTaskPasses(int taskId) {
+        List<TaskPass> result = new LinkedList<>();
+        for (TaskPass taskPass : getTaskPassList()) {
+            if (taskPass.getTask().getId() == taskId && !taskPass.isPassed()) {
+                result.add(taskPass);
+            }
+        }
+        return result;
+    }
+
     public void setTaskPassList(List<TaskPass> taskPassList) {
         this.taskPassList = taskPassList;
     }
@@ -82,5 +99,39 @@ public class ContestPass {
 
     public void setPassing(boolean passing) {
         this.passing = passing;
+    }
+
+    public int getPassedCount() {
+        return passedCount;
+    }
+
+    public void setPassedCount(int passedCount) {
+        this.passedCount = passedCount;
+    }
+
+    public int getTimePenalty() {
+        return timePenalty;
+    }
+
+    public void setTimePenalty(int timePenalty) {
+        this.timePenalty = timePenalty;
+    }
+
+    @Override
+    public int compareTo(ContestPass o) {
+        if (this.passedCount < o.getPassedCount()) {
+            return +1;
+        } else if (this.passedCount > o.getPassedCount()) {
+            return -1;
+        } else {
+            //if passed count equals- check penalty time:
+            if (this.timePenalty > o.getTimePenalty()) {
+                return +1;
+            } else if (this.timePenalty < o.getTimePenalty()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
     }
 }

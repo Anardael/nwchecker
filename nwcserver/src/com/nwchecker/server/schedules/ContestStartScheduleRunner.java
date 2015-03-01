@@ -25,6 +25,6 @@ public class ContestStartScheduleRunner extends TimerTask {
     public void run() {
         contest.setStatus(Contest.Status.GOING);
         contestService.updateContest(contest);
-        LOG.info("Contest (id="+contest.getId()+") changed status to GOING");
+        LOG.info("Contest (id=" + contest.getId() + ") changed status to GOING");
     }
 }

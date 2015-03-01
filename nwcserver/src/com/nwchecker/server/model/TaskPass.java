@@ -26,10 +26,10 @@ public class TaskPass {
     private boolean passed;
 
     @Column(name = "executionTime")
-    private long executionTime;
+    private int executionTime;
 
     @Column(name = "memoryUsed")
-    private long memoryUsed;
+    private int memoryUsed;
 
     @Lob
     @Column(name = "file")
@@ -37,6 +37,10 @@ public class TaskPass {
 
     @Column(name = "compilerMessage")
     private String compilerMessage;
+
+    @Column(name = "passedMinute")
+    private int passedMinute;
+
 
     public int getId() {
         return id;
@@ -70,19 +74,19 @@ public class TaskPass {
         this.passed = passed;
     }
 
-    public long getExecutionTime() {
+    public int getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(int executionTime) {
         this.executionTime = executionTime;
     }
 
-    public long getMemoryUsed() {
+    public int getMemoryUsed() {
         return memoryUsed;
     }
 
-    public void setMemoryUsed(long memoryUsed) {
+    public void setMemoryUsed(int memoryUsed) {
         this.memoryUsed = memoryUsed;
     }
 
@@ -100,6 +104,14 @@ public class TaskPass {
 
     public void setCompilerMessage(String compilerMessage) {
         this.compilerMessage = compilerMessage;
+    }
+
+    public int getPassedMinute() {
+        return passedMinute;
+    }
+
+    public void setPassedMinute(int passedMinute) {
+        this.passedMinute = passedMinute;
     }
 
     @Override
