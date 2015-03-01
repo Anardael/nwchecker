@@ -1,13 +1,8 @@
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.*;
 import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Роман on 11.02.2015.
@@ -34,8 +27,6 @@ public class ContestPassController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ContestService contestService;
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -135,5 +126,15 @@ public class ContestPassController {
             result.put("accessDenied", true);
         }
         return result;
+    }
+
+
+    @RequestMapping(value = "results")
+    public String getResults(Model model, @RequestParam(value = "id") int id) {
+        List<ContestPass> contestPasses = contestPassService.getContestPasses(id);
+        Collections.sort(contestPasses);
+        model.addAttribute("results", contestPasses);
+        //TODO ceate page with results
+        return "yourResultPage";
     }
 }
