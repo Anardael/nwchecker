@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="ReaktorDTR">
+        <comment>
+            Insert Users to DB
+        </comment>
+        <sql>
+            #create Admin
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('1', 'admin', 'Admin', 'admin@ua.ua', '$2a$10$5uHAIiMg8TmCrsG8pLGNH.grGCujfeUK/YeMEqExkWHc//BTt7dwq', 'Administrators', 'Info about Admin', '0', 1);
+
+            #create 2 teachers and 3 teachers with requests to role "Teacher"
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('2', 'teacher1', 'Teacher1', 'Teacher1@ua.ua', '$2a$10$vEKi2nDhEZVthsCbZDFgN.gwYomwexzaD9hKbfjPjGthuemV2fyk6', 'Mathematics', 'Info about Teacher1', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('3', 'teacher2', 'Teacher2', 'Teacher2@ua.ua', '$2a$10$rlwAd/.KJcsdIT.IYhNj9OBC3p9gVmoFc61GJak8HGPKvs1vCjUf6', 'Computer science', 'Info about Teacher2', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('4', 'teacher3', 'Teacher3', 'Teacher3@ua.ua', '$2a$10$xYzwYxth//WXSFxThk4p5.xNWdjLr9lv81H5dndNoErUOyZS/xi7i', 'Computer science', 'Info about Teacher3', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('5', 'teacher4', 'Teacher4', 'Teacher4@ua.ua', '$2a$10$2Gjo9o1LfLzSIXsEYlD.Duau92FBarbw9WX5rAkJMPaTKpylw9wZK', 'Computer science', 'Info about Teacher4', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('6', 'teacher5', 'Teacher5', 'Teacher5@ua.ua', '$2a$10$jiB0zPkSBMOtgId/SmuUweCW6j8WdxrTQxjpm.XvtOELa2SuHroty', 'Mathematics', 'Info about Teacher5', '0', 1);
+
+            #create 5 users
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('7', 'user1', 'User1', 'User1@ua.ua', '$2a$10$2B8iOyGDQFupeR6UYmfC3OCyL6//u8Ce4t6fCu0DPVqthwA9VGMui', '', 'Info about User1', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('8', 'user2', 'User2', 'User2@ua.ua', '$$2a$10$nn2DKdcpyvyFmbU1jYIz0.rurMhf9GLNRVT.5DplLvYzdgKtOi9bO', '', 'Info about User2', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('9', 'user3', 'User3', 'User3@ua.ua', '$2a$10$MgXJlCSLiRRbss.UJsPd/emuJd5wkux3Jf6bkA89IpUvAhz.rdDsy', '', 'Info about User3', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('10', 'user4', 'User4', 'User4@ua.ua', '$2a$10$7Wz.kkKH9c.rQJXNVFbr6OjzedzpmfmEYJrkJWEoOQPrgGKEoyLCu', '', 'Info about User4', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('11', 'user5', 'User5', 'User5@ua.ua', '$2a$10$/Rp3skF43HIw2mjEanwV4.98yjcpEcs5La3L7q/6lrgWHmSzyyTLe', '', 'Info about User5', '0', 1);
+
+            #set Admin rights
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('1', 'ROLE_ADMIN', '1');
+
+            #set Teachers rights
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('2', 'ROLE_TEACHER', '2');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('3', 'ROLE_TEACHER', '3');
+
+            #set User rights
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('4', 'ROLE_USER', '4');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('5', 'ROLE_USER', '5');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('6', 'ROLE_USER', '6');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('7', 'ROLE_USER', '7');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('8', 'ROLE_USER', '8');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('9', 'ROLE_USER', '9');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('10', 'ROLE_USER', '10');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('11', 'ROLE_USER', '11');
+
+            #set user request to role "Teacher"
+            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('1', 'WANT_ROLE_TEACHER', '4');
+            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('2', 'WANT_ROLE_TEACHER', '5');
+            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('3', 'WANT_ROLE_TEACHER', '6');
+            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('4', 'WANT_ROLE_TEACHER', '8');
+            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('5', 'WANT_ROLE_TEACHER', '10');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

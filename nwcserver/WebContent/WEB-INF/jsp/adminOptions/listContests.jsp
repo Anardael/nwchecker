@@ -16,18 +16,41 @@
     <script type="text/javascript" src="${resources}js/adminOptions/listContestsFormatters.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestUsers.js"></script>
     <script type="text/javascript" src="${resources}js/adminOptions/listContests.js"></script>
+    <style>
+        .radio-label {
+            display: inline-block;
+            margin-right: 5%;
+            vertical-align: -3px;
+        }
+
+        .radio-input {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .groupRadioStatus {
+            margin: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 <script type="text/javascript">
     var successCaption = "<spring:message code="success.caption"/>";
-    var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
+    var contestUserListSuccess = "<spring:message code="listContests.contestInfo.success.save"/>";
     var errorCaption = "<spring:message code="error.caption"/>";
     var contestAccessDenied = "<spring:message code="contest.accessDenied" />";
     var emptyUserListHeader = "<spring:message code="contest.userList.EmptyListHeader"/>";
     var emptyUserListBody = "<spring:message code="contest.userList.EmptyListBody"/>";
     var btnSubmit = "<spring:message code="btn.submit"/>";
     var btnClose = "<spring:message code="btn.close"/>";
+    var GOING = "<spring:message code="listContests.status.going" />";
+    var PREPARING = "<spring:message code="listContests.status.preparing" />";
+    var RELEASE = "<spring:message code="listContests.status.release" />";
+    var ARCHIVE = "<spring:message code="listContests.status.archive" />";
 </script>
 
 <div class="wrapper container">
@@ -45,18 +68,21 @@
                data-sort-name="title" data-sort-order="asc"
                data-pagination="true" data-show-pagination-switch="true"
                data-search="true" data-clear-search="true"
-               data-show-columns="true" data-minimum-count-columns="2">
+               data-show-columns="true" data-minimum-count-columns="0">
             <thead>
             <tr>
                 <th data-field="id" data-align="center" data-sortable="true" data-switchable="false">
                     <spring:message code="listContests.contests.tableHeader.id"/>
                 </th>
-                <th data-field="title" data-align="center" data-sortable="true">
+                <th data-field="title" data-align="center" data-sortable="true" data-switchable="false">
                     <spring:message code="listContests.contests.tableHeader.title"/>
                 </th>
                 <th data-field="users" data-align="center" data-formatter="usersFormatter" data-sortable="true"
-                    data-sorter="usersSorter" data-switchable="false">
+                    data-sorter="usersSorter">
                     <spring:message code="listContests.contests.tableHeader.users"/>
+                </th>
+                <th data-field="status" data-align="center" data-formatter="statusFormatter" data-sortable="true">
+                    <spring:message code="listContests.contests.tableHeader.status"/>
                 </th>
                 <th data-field="starts" data-align="center" data-sortable="true" data-sorter="dateSorter"
                     data-formatter="dateFormatter">
@@ -75,9 +101,25 @@
             <div class="modal-header modal-header-info">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><spring:message code="contest.userList.header"/></h4>
+                <h4><spring:message code="listContests.contestInfo.header"/></h4>
             </div>
             <div class="modal-body">
+                <h3 class="text-center"><spring:message code="listContests.contestInfo.contestStatus.label"/></h3>
+
+                <div class="groupRadioStatus">
+                    <input type="radio" class="radio-input" name="radioStatus" id="rbGoing" value="GOING"/>
+                    <label class="radio-label" for="rbGoing"><spring:message code="listContests.status.going"/></label>
+                    <input type="radio" class="radio-input" name="radioStatus" id="rbPreparing" value="PREPARING"/>
+                    <label class="radio-label" for="rbPreparing"><spring:message
+                            code="listContests.status.preparing"/></label>
+                    <input type="radio" class="radio-input" name="radioStatus" id="rbRelease" value="RELEASE"/>
+                    <label class="radio-label" for="rbRelease"><spring:message
+                            code="listContests.status.release"/></label>
+                    <input type="radio" class="radio-input" name="radioStatus" id="rbArchive" value="ARCHIVE"/>
+                    <label class="radio-label" for="rbArchive"><spring:message
+                            code="listContests.status.archive"/></label>
+                </div>
+                <h3 class="text-center"><spring:message code="listContests.contestInfo.userList.label"/></h3>
                 <table id="ContestUserTable" data-toggle="table"
                        data-url=""
                        data-classes="table table-hover"
