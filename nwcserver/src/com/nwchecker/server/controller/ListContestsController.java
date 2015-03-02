@@ -43,13 +43,13 @@ public class ListContestsController {
     public List<ListContestsJson> getListOfContests(Principal principal) {
         LOG.info("\"" + principal.getName() + "\" tries to receive list of contests.");
         List<Contest> contests = contestService.getContests();
-        LinkedList<ListContestsJson> listContestsJsons = new LinkedList<>();
+        LinkedList<ListContestsJson> listContestsJson = new LinkedList<>();
         for (Contest contest : contests) {
             ListContestsJson lc = new ListContestsJson(contest);
-            listContestsJsons.add(lc);
+            listContestsJson.add(lc);
         }
         LOG.info("\"" + principal.getName() + "\" received list of contests.");
-        return listContestsJsons;
+        return listContestsJson;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

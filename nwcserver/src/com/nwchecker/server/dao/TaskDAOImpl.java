@@ -25,8 +25,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
     
     @Override
     public Task getTaskById(int id) {
-        Task t = (Task) getHibernateTemplate().get(Task.class, id);
-        return t;
+        return getHibernateTemplate().get(Task.class, id);
     }
     
     @Override

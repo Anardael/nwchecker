@@ -64,7 +64,7 @@ public class TaskController {
         }
         //Json response object:
         ValidationResponse res = new ValidationResponse();
-        //validation in new TaskValdiator:
+        //validation in new TaskValidator:
         taskValidator.validate(task, result);
         //if there are errors:
         if (result.hasErrors()) {
@@ -72,12 +72,12 @@ public class TaskController {
             //set json status FAIL:
             res.setStatus("FAIL");
             List<FieldError> allErrors = result.getFieldErrors();
-            List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
+            List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
             for (FieldError objectError : allErrors) {
-                errorMesages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
+                errorMessages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
             }
-            //set all errrors:
-            res.setErrorMessageList(errorMesages);
+            //set all errors:
+            res.setErrorMessageList(errorMessages);
         } else {
             LOG.info("Task validation passed.");
             //if validation passed:
@@ -87,14 +87,14 @@ public class TaskController {
             LinkedList<TaskData> data = new LinkedList<TaskData>();
             while (itr.hasNext()) {
                 MultipartFile mpf = request.getFile(itr.next());
-                TaskData newd = new TaskData();
-                newd.setInputData(mpf.getBytes());
+                TaskData newDate = new TaskData();
+                newDate.setInputData(mpf.getBytes());
                 mpf = request.getFile(itr.next());
-                newd.setOutputData(mpf.getBytes());
-                newd.setTask(task);
-                data.add(newd);
+                newDate.setOutputData(mpf.getBytes());
+                newDate.setTask(task);
+                data.add(newDate);
                 //check if size is less than 20mb:
-                if (newd.getInputData().length > 20971520 || newd.getOutputData().length > 20971520) {
+                if (newDate.getInputData().length > 20971520 || newDate.getOutputData().length > 20971520) {
                     throw new MaxUploadSizeExceededException(1);
                 }
             }
@@ -109,9 +109,9 @@ public class TaskController {
                 //set contest for task(set foreign key for Contest):
                 taskService.addTask(task);
             } else {
-                //get task data files avaible:
-                List<TaskData> avaibleData = taskService.getTaskById(task.getId()).getInOutData();
-                task.getInOutData().addAll(avaibleData);
+                //get task data files available:
+                List<TaskData> availableData = taskService.getTaskById(task.getId()).getInOutData();
+                task.getInOutData().addAll(availableData);
                 task.setContest(c);
                 taskService.updateTask(task);
             }
@@ -137,7 +137,7 @@ public class TaskController {
             }
         }
         contestService.updateContest(c);
-        LOG.info("Task (id=" + taskId + ") have been successfylly deleted.");
+        LOG.info("Task (id=" + taskId + ") have been successfully deleted.");
         result.setStatus("SUCCESS");
         return result;
     }
@@ -186,7 +186,7 @@ public class TaskController {
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @RequestMapping(value = "/getAvaibleTests", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAvailableTests", method = RequestMethod.GET)
     public String getTestFiles(@RequestParam("contestId") int contestId, Principal principal,
                                @RequestParam("taskId") int taskId, @RequestParam("localTaskId") int localTaskId, Model model) {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {

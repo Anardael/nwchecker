@@ -72,6 +72,8 @@ public class UserRequest {
         return true;
     }
 
+
+
     @Override
     public int hashCode() {
         int result = user != null ? user.hashCode() : 0;

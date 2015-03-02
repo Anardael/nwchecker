@@ -47,7 +47,7 @@ public class GlobalExceptionsHandler {
         ValidationResponse jsonResult = new ValidationResponse();
         jsonResult.setStatus("FAIL");
         LinkedList<ErrorMessage> linkedList = new LinkedList<ErrorMessage>();
-        ErrorMessage errorMessage = new ErrorMessage("denied", "You have no permissions for this acction.");
+        ErrorMessage errorMessage = new ErrorMessage("denied", "You have no permissions for this action.");
         linkedList.add(errorMessage);
         jsonResult.setErrorMessageList(linkedList);
         return jsonResult;

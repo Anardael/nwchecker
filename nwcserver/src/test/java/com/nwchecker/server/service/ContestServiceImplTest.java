@@ -124,7 +124,7 @@ public class ContestServiceImplTest {
     }
 
     /**
-     * Test of checkIfUserHavseAccessToContest method, of class
+     * Test of checkIfUserHavesAccessToContest method, of class
      * ContestServiceImpl.
      */
     @Test

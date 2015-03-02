@@ -56,7 +56,7 @@ public class ContestPassServiceIMpl implements ContestPassService {
         long millis = System.currentTimeMillis() - taskPass.getTask().getContest().getStarts().getTime();
         long minute = millis / 1000 / 60;
         taskPass.setPassedMinute((int) minute);
-        if (save == true) {
+        if (save) {
             contestPass.getTaskPassList().add(taskPass);
             updateContestPass(contestPass);
         }

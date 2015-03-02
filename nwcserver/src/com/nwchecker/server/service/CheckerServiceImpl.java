@@ -11,7 +11,7 @@ import java.util.*;
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
 
-    private static List<String> compillerErrors = Arrays.asList("NullPointerException", "Compiler error",
+    private static List<String> compilerErrors = Arrays.asList("NullPointerException", "Compiler error",
             "RunTimeException", "IOException");
 
     @Override
@@ -30,7 +30,7 @@ public class CheckerServiceImpl implements CheckerService {
             result.put("passed", false);
             result.put("time", 1000 + rd.nextInt(3000));
             result.put("memory", 1000 + rd.nextInt(3000));
-            result.put("message", compillerErrors.get(rd.nextInt(compillerErrors.size())));
+            result.put("message", compilerErrors.get(rd.nextInt(compilerErrors.size())));
             return result;
         }
     }

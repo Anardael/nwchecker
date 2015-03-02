@@ -70,7 +70,7 @@ public class UserProfileValidatorPatternsTest {
 	@Test
 	public void testDepartmentCyrillic() {
 		assertTrue(("Це тест").matches(patternDepartment));
-		assertTrue(("М'ятний тест").matches(patternDepartment));
+		assertTrue(("М\'ятний тест").matches(patternDepartment));
 	}
 	
 	@Test

@@ -53,11 +53,11 @@ public class ContestPassController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
-    public String getTaskForPass(Principal pricnipal, @RequestParam("id") int taskId,
+    public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
-        User user = userService.getUserByUsername(pricnipal.getName());
+        User user = userService.getUserByUsername(principal.getName());
         //check if contest status provide passing:
         if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||
                 currentTask.getContest().getStatus() == Contest.Status.ARCHIVE)) {
@@ -101,7 +101,7 @@ public class ContestPassController {
         endDate.add(Calendar.HOUR, duration.get(Calendar.HOUR));
         endDate.add(Calendar.MINUTE, duration.get(Calendar.MINUTE));
         endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
-        long gtmMillis = (long) endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
+        long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
         model.addAttribute("contestEndTimeGTM", gtmMillis);
 
         //get list of passed/failed tasks, and forward it to UI:

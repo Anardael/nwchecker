@@ -18,9 +18,9 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
             = Logger.getLogger(ContestEditWatcherServiceImpl.class);
 
     //User editing long polling:
-    private static Map<Integer, Map<String, Object>> CURRENTLY_EDITING_CONTESTS = new ConcurrentHashMap<>();
+    private final static Map<Integer, Map<String, Object>> CURRENTLY_EDITING_CONTESTS = new ConcurrentHashMap<>();
     //Requests for check if user is still editing contest
-    private static Map<Integer, DeferredResult<String>> REQUEST_CONTEST_STILL_EDITING = new ConcurrentHashMap<>();
+    private final static Map<Integer, DeferredResult<String>> REQUEST_CONTEST_STILL_EDITING = new ConcurrentHashMap<>();
 
     @Override
     public void addRequestStillContestEditing(int contestId, DeferredResult<String> deferredResult) {
@@ -51,10 +51,10 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
 
     @Override
     public synchronized void addContestEditingUser(int contestId, String username, DeferredResult<String> deferredResult) {
-        Map<String, Object> requestinfo = new LinkedHashMap<>();
-        requestinfo.put("username", username);
-        requestinfo.put("deferredResult", deferredResult);
-        CURRENTLY_EDITING_CONTESTS.put(contestId, requestinfo);
+        Map<String, Object> requestInfo = new LinkedHashMap<>();
+        requestInfo.put("username", username);
+        requestInfo.put("deferredResult", deferredResult);
+        CURRENTLY_EDITING_CONTESTS.put(contestId, requestInfo);
         //write to log:
         LOG.debug("User(" + username + ") starts edit contest (id=" + contestId + ")");
 

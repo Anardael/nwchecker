@@ -14,13 +14,13 @@ public class UserJson {
     private String id;
     private String name;
     private String department;
-    private boolean choosed;
+    private boolean chose;
 
-    public UserJson(int id, String name, String department, boolean choosed) {
+    public UserJson(int id, String name, String department, boolean chose) {
         this.id = String.valueOf(id);
         this.name = name;
         this.department = department;
-        this.choosed = choosed;
+        this.chose = chose;
     }
 
     public UserJson() {
@@ -50,12 +50,12 @@ public class UserJson {
         this.department = department;
     }
 
-    public boolean isChoosed() {
-        return choosed;
+    public boolean isChose() {
+        return chose;
     }
 
-    public void setChoosed(boolean choosed) {
-        this.choosed = choosed;
+    public void setChose(boolean chose) {
+        this.chose = chose;
     }
 
 }

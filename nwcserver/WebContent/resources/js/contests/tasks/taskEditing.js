@@ -191,7 +191,7 @@ function addNewTestCouple(taskId) {
 function replaceTaskTestFiles(contestId, taskId, localTaskId) {
 //get current tst files from server:
     $.ajax({
-        url: 'getAvaibleTests.do?contestId=' + contestId + "&taskId=" + taskId + "&localTaskId=" + localTaskId,
+        url: 'getAvailableTests.do?contestId=' + contestId + "&taskId=" + taskId + "&localTaskId=" + localTaskId,
         processData: false,
         contentType: false,
         type: 'GET',

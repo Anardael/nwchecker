@@ -66,17 +66,17 @@ public class ProfileController {
 								  Principal principal, Model model) {
         LOG.info("\"" + principal.getName() + "\" trying update profile.");
 		String username = principal.getName(); // get logged in username
-		User logedUser = userService.getUserByUsername(username);
-		user.setRoles(logedUser.getRoles());
-		user.setRequests(logedUser.getRequests());
+		User loggedUser = userService.getUserByUsername(username);
+		user.setRoles(loggedUser.getRoles());
+		user.setRequests(loggedUser.getRequests());
 		if (result.hasErrors()) {
             LOG.info("\"" + principal.getName() + "\" inputted bad data to profile.");
 			return "profileOptions/profile";
 		} else {
-			logedUser.setDisplayName(user.getDisplayName());
-			logedUser.setDepartment(user.getDepartment());
-			logedUser.setInfo(user.getInfo());
-			userService.updateUser(logedUser);
+			loggedUser.setDisplayName(user.getDisplayName());
+			loggedUser.setDepartment(user.getDepartment());
+			loggedUser.setInfo(user.getInfo());
+			userService.updateUser(loggedUser);
 			model.addAttribute("userUpdated", "true");
             LOG.info("\"" + principal.getName() + "\" updated his profile.");
 			return "profileOptions/profile";
@@ -90,16 +90,16 @@ public class ProfileController {
 		String patternPassword = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,32})";
 		String username = principal.getName(); // get logged in username
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		User logedUser = userService.getUserByUsername(username);
-		String oldPassword = (String) request.getParameter("oldPassword");
-		model.addAttribute("userProfile", logedUser);
-		if (encoder.matches(oldPassword, logedUser.getPassword())) {
-			String newPassword = (String) request.getParameter("newPassword");
-			String confirmPassword = (String) request.getParameter("confirmPassword");
+		User loggedUser = userService.getUserByUsername(username);
+		String oldPassword = request.getParameter("oldPassword");
+		model.addAttribute("userProfile", loggedUser);
+		if (encoder.matches(oldPassword, loggedUser.getPassword())) {
+			String newPassword = request.getParameter("newPassword");
+			String confirmPassword = request.getParameter("confirmPassword");
 			if (newPassword.equals(confirmPassword)) {
 				if (newPassword.matches(patternPassword)) {
-					logedUser.setPassword(encoder.encode(newPassword));
-					userService.updateUser(logedUser);
+					loggedUser.setPassword(encoder.encode(newPassword));
+					userService.updateUser(loggedUser);
 					model.addAttribute("passwordChanged", "true");
                     LOG.info("\"" + principal.getName() + "\" changed password.");
 				} else {

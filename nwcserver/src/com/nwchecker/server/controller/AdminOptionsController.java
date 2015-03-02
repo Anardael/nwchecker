@@ -150,7 +150,7 @@ public class AdminOptionsController {
 			LOG.info("User \"" + username + "\" successfully deleted from DB.");
 			LOG.info("User \"" + username + "\" deleted by \"" + principal.getName() + "\".");
 		} else {
-			LOG.warn("User cann't delete themself!");
+			LOG.warn("User can't delete them self!");
 		}
 		return "redirect:admin.do";
 	}

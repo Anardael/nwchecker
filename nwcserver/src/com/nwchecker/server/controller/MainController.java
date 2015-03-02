@@ -1,7 +1,5 @@
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.service.ScoreCalculationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +27,6 @@ public class MainController {
     @ResponseBody
     public String getServerTime() throws IllegalArgumentException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd yyyy HH:mm:ss");
-        String serverTime = simpleDateFormat.format(new Date());
-        return serverTime;
+        return simpleDateFormat.format(new Date());
     }
 }

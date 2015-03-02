@@ -68,7 +68,7 @@ public class ContestController {
 
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
-        //get all avaible  сontests from DB:
+        //get all available сontests from DB:
         List<Contest> allContests = contestService.getContests();
         //get unhidden contests:
         List<Contest> unhidden = new LinkedList<Contest>();
@@ -153,12 +153,12 @@ public class ContestController {
             LOG.info("Contest validation failed.");
             res.setStatus("FAIL");
             List<FieldError> allErrors = result.getFieldErrors();
-            List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
+            List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
             for (FieldError objectError : allErrors) {
-                errorMesages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
+                errorMessages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
             }
-            //set all errrors:
-            res.setErrorMessageList(errorMesages);
+            //set all errors:
+            res.setErrorMessageList(errorMessages);
         } else {
             LOG.info("Contest validation passed.");
             res.setStatus("SUCCESS");
@@ -203,7 +203,7 @@ public class ContestController {
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public
     @ResponseBody
-    LinkedList<UserJson> getusers(@RequestParam("contestId") int contestId, Principal principal
+    LinkedList<UserJson> getUsers(@RequestParam("contestId") int contestId, Principal principal
     ) {
         //create UserJson result list:
         LinkedList<UserJson> result = new LinkedList<UserJson>();
@@ -226,15 +226,15 @@ public class ContestController {
             newUser.setDepartment(u.getDepartment());
             if (c != null) {
                 if (c.getUsers().contains(u)) {
-                    newUser.setChoosed(true);
+                    newUser.setChose(true);
                 } else {
-                    newUser.setChoosed(false);
+                    newUser.setChose(false);
                 }
             } else {
                 if (author.equals(u.getUsername())) {
-                    newUser.setChoosed(true);
+                    newUser.setChose(true);
                 } else {
-                    newUser.setChoosed(false);
+                    newUser.setChose(false);
                 }
             }
             result.add(newUser);
@@ -266,7 +266,7 @@ public class ContestController {
                 //get user from DB:
                 usersList.add(userService.getUserById(id));
             }
-            //set lsit of users to contest:
+            //set list of users to contest:
             c.setUsers(usersList);
             //update db:
             contestService.mergeContest(c);

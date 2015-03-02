@@ -62,7 +62,7 @@ public class ContestEditWatcherController {
                     ") is still editing by User(" + result + ")");
             //send him timeOut and check if he will reconnect:
             contestEditWatcherService.setDeferredResult(id, "timeOut");
-            //put assycnhronous response to request map:
+            //put asynchronous response to request map:
             contestEditWatcherService.addRequestStillContestEditing(id, deferredResult);
             return deferredResult;
         }

@@ -192,8 +192,8 @@ public class Task {
         return forumLink;
     }
 
-    public void setFoumLink(String foumLink) {
-        this.forumLink = foumLink;
+    public void setForumLink(String forumLink) {
+        this.forumLink = forumLink;
     }
 
     public List<TaskTheoryLink> getTheoryLinks() {

@@ -17,7 +17,7 @@ import org.springframework.validation.Validator;
 @Component
 public class ContestValidator implements Validator {
 
-    private String titleRegex = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}";
+    private static final String TITLE_REGEX = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}";
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -31,7 +31,7 @@ public class ContestValidator implements Validator {
         if (c.getTitle().length() == 0) {
             errors.rejectValue("title", "NotEmpty.title");
         }
-        if (!c.getTitle().matches(titleRegex)) {
+        if (!c.getTitle().matches(TITLE_REGEX)) {
             errors.rejectValue("title", "Pattern.title");
         }
         if (c.getTitle().length() > 100) {
