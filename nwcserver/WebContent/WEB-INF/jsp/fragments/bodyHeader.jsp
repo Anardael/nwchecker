@@ -2,30 +2,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <spring:url value="/resources/" var="resources"/>
+<style>
+    .languageChoose {
+        display: inline;
+    }
+    .logo {
+        width: 100px;
+        display: inline;
+    }
+    .serverTime {
+        position: relative;
+        margin-left: 59%;
+        display: inline;
+    }
+</style>
 <header>
     <!-- service Logo -->
-    <a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a>
-    <!-- choose language -->
-    <div class="languageChoose">
-        <c:if test="${not empty param['id']}">
-            <a href="?id=${param['id']}&locale=ua"><img src="${resources}images/ukraineFlag.png" width="36" height="36"
-                                                        alt="ua"></a>
-            <a href="?id=${param['id']}&locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"
-                                                        alt="en"></a>
-        </c:if>
-        <c:if test="${not empty param['Username']}">
-            <a href="?Username=${param['Username']}&locale=ua"><img src="${resources}images/ukraineFlag.png" width="36" height="36"
-                                                        alt="ua"></a>
-            <a href="?Username=${param['Username']}&locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"
-                                                        alt="en"></a>
-        </c:if>
+    <div class="blockContainer">
+        <div class="logo"><a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a></div>
+        <!-- choose language -->
+        <div class="languageChoose">
+            <c:if test="${not empty param['id']}">
+                <a href="?id=${param['id']}&locale=ua"><img src="${resources}images/ukraineFlag.png" width="36"
+                                                            height="36"
+                                                            alt="ua"></a>
+                <a href="?id=${param['id']}&locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"
+                                                            alt="en"></a>
+            </c:if>
 
-        <c:if test="${(empty param['id']) && (empty param['Username'])}">
-            <a href="?locale=ua"><img src="${resources}images/ukraineFlag.png" width="36" height="36" alt="ua"></a>
-            <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img
-                    src="${resources}images/ukFlag.png" width="36" height="36" alt="en"></a>
-        </c:if>
+            <c:if test="${not empty param['Username']}">
+                <a href="?Username=${param['Username']}&locale=ua"><img src="${resources}images/ukraineFlag.png"
+                                                                        width="36" height="36"
+                                                                        alt="ua"></a>
+                <a href="?Username=${param['Username']}&locale=en"><img src="${resources}images/ukFlag.png" width="36"
+                                                                        height="36"
+                                                                        alt="en"></a>
+            </c:if>
+
+            <c:if test="${(empty param['id']) && (empty param['Username'])}">
+                <a href="?locale=ua"><img src="${resources}images/ukraineFlag.png" width="36" height="36" alt="ua"></a>
+                <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img
+                        src="${resources}images/ukFlag.png" width="36" height="36" alt="en"></a>
+            </c:if>
+        </div>
+        <div class="serverTime">
+            <label><spring:message code="home.serverTime"/></label>
+            <jsp:include page="/getServerTime.do"/>
+        </div>
     </div>
+
     <!-- navigating toolbar -->
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">

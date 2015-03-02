@@ -50,4 +50,9 @@
             </props>
         </property>
     </bean>
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource" />
+        <property name="changeLog" value="classpath:liquibase/changelog-master.xml" />
+    </bean>
 </beans>
