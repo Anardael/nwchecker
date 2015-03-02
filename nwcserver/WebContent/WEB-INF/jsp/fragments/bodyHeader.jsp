@@ -6,10 +6,12 @@
     .languageChoose {
         display: inline;
     }
+
     .logo {
         width: 100px;
         display: inline;
     }
+
     .serverTime {
         position: relative;
         margin-left: 59%;
@@ -18,6 +20,7 @@
 </style>
 <header>
     <!-- service Logo -->
+    <script type="text/javascript" src="${resources}js/serverTime.js"></script>
     <div class="blockContainer">
         <div class="logo"><a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a></div>
         <!-- choose language -->
@@ -47,7 +50,7 @@
         </div>
         <div class="serverTime">
             <label><spring:message code="home.serverTime"/></label>
-            <jsp:include page="/getServerTime.do"/>
+            <label id="currentTime"></label>
         </div>
     </div>
 

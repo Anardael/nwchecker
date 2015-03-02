@@ -4,21 +4,24 @@
 var incomingTime;
 var offset;
 
-function setIncomingTime() {
-    incomingTime = new Date(document.getElementById('incomingServerTime').value);
-    document.getElementById('labelServerTime').innerHTML = incomingTime.toLocaleTimeString();
+$.get("getServerTime.do", function (data) {
+    setIncomingTime(data);
+});
+
+function setIncomingTime(data) {
+    incomingTime = new Date(data);
+    $('#currentTime').html(incomingTime.toLocaleTimeString());
+    //document.getElementById('currentTime').innerHTML = incomingTime.toLocaleTimeString();
     offset = new Date() - incomingTime;
 }
 
-var myVar = setInterval(function () {
+setInterval(function () {
     myTimer()
 }, 1000);
 
 function myTimer() {
     var clientTime = new Date();
     var serverTime = new Date(clientTime - offset);
-    document.getElementById('labelServerTime').innerHTML = serverTime.toLocaleTimeString();
+    $('#currentTime').html(serverTime.toLocaleTimeString());
 }
-
-
 
