@@ -311,8 +311,7 @@ public class ContestController {
             contest.setHidden(false);
             contest.setStatus(Contest.Status.RELEASE);
             contestService.updateContest(contest);
-            scheduleService.registerStartContestSchedule(contest);
-            scheduleService.registerEndContestSchedule(contest);
+            scheduleService.refresh();
             result.setStatus("SUCCESS");
             LOG.info("Contest (id=" + contest.getId() + ") changed status to RELEASE");
         }
