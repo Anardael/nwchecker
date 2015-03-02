@@ -1,12 +1,12 @@
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.dao.CompilerDAO;
+import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
@@ -23,9 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
