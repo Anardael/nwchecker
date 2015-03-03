@@ -7,10 +7,8 @@ import com.nwchecker.server.model.ContestPass;
  */
 public class ContestPassJson {
 
-    private String username;
     private String displayName;
-    private int tasksCount;
-    private int passedCount;
+    private String tasksPassedCount;
     private int timePenalty;
 
     private ContestPassJson() {
@@ -18,20 +16,11 @@ public class ContestPassJson {
 
     public static ContestPassJson createContestPassJson(ContestPass contestPass) {
         ContestPassJson contestPassJson = new ContestPassJson();
-        contestPassJson.username = contestPass.getUser().getUsername();
         contestPassJson.displayName = contestPass.getUser().getDisplayName();
-        contestPassJson.tasksCount = contestPass.getContest().getTasks().size();
-        contestPassJson.passedCount = contestPass.getPassedCount();
+        contestPassJson.tasksPassedCount = contestPass.getPassedCount()
+                                         + "/" + contestPass.getContest().getTasks().size();
         contestPassJson.timePenalty = contestPass.getTimePenalty();
         return contestPassJson;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getDisplayName() {
@@ -42,20 +31,12 @@ public class ContestPassJson {
         this.displayName = displayName;
     }
 
-    public int getTasksCount() {
-        return tasksCount;
+    public String getTasksPassedCount() {
+        return tasksPassedCount;
     }
 
-    public void setTasksCount(int tasksCount) {
-        this.tasksCount = tasksCount;
-    }
-
-    public int getPassedCount() {
-        return passedCount;
-    }
-
-    public void setPassedCount(int passedCount) {
-        this.passedCount = passedCount;
+    public void setTasksPassedCount(String tasksPassedCount) {
+        this.tasksPassedCount = tasksPassedCount;
     }
 
     public int getTimePenalty() {
