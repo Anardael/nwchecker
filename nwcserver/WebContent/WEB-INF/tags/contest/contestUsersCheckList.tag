@@ -29,8 +29,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button  type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close"/></button>
                 <button id="submitUserListButton" type="button" class="btn btn-primary"><spring:message code="btn.save"/></button>
+                <button  type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close"/></button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

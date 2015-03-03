@@ -75,18 +75,19 @@ function prepareDeleteTask(index) {
         title: taskDeleteHeader,
         message: taskDeleteQuestion,
         buttons: [{
-            label: btnClose,
-            action: function (dialogItself) {
-                dialogItself.close();
-            }
-        }, {
             label: btnSubmit,
             cssClass: 'btn-primary',
             action: function (dialogItself) {
                 dialogItself.close();
                 sendAjaxDeleteTask(index, taskActualId);
             }
-        }
+        },
+            {
+                label: btnClose,
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+            }
         ]
     });
 }
@@ -249,16 +250,16 @@ function prepateDeleteAvaibleTest(button, testCurrentId) {
         title: testDeletedHeader,
         message: testDeleteQuestion,
         buttons: [{
-            label: btnClose,
-            action: function (dialogItself) {
-                dialogItself.close();
-            }
-        }, {
             label: btnSubmit,
             cssClass: 'btn-primary',
             action: function (dialogItself) {
                 dialogItself.close();
                 deleteAvaibleTest(button, testCurrentId);
+            }
+        }, {
+            label: btnClose,
+            action: function (dialogItself) {
+                dialogItself.close();
             }
         }
         ]
