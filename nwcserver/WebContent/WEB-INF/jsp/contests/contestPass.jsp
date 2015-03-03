@@ -7,20 +7,20 @@
 <html>
 <!--including head -->
 <head>
-<jsp:include page="../fragments/staticFiles.jsp" />
+    <jsp:include page="../fragments/staticFiles.jsp"/>
 
-<link rel="stylesheet" href="${resources}css/bootstrap-select.min.css" />
-<link rel="stylesheet" href="${resources}css/bootstrap-dialog.css"/>
-<link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
-<link rel="stylesheet" href="${resources}js/laddaBtnLoad/ladda-themeless.min.css"/>
+    <link rel="stylesheet" href="${resources}css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="${resources}css/bootstrap-dialog.css"/>
+    <link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
+    <link rel="stylesheet" href="${resources}js/laddaBtnLoad/ladda-themeless.min.css"/>
 
-<script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
-<script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
-<script type="text/javascript" src="${resources}js/contests/contestPass.js"></script>
-<script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
-<script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
-<script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
-<script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
+    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestPass.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
+    <script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
+    <script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
 </head>
 <body>
 	<script type="text/javascript">
@@ -47,6 +47,8 @@
 
         ALL_COMPLETE_TITLE = '<spring:message code="contest.passing.allCompleteDialog.title"/>';
         ALL_COMPLETE_MESSAGE = '<spring:message code="contest.passing.allCompleteDialog.message"/>';
+
+        UPLOAD_FILE = '<spring:message code="contest.passing.uploadSourceFile.button"/>';
 
         <c:if test="${not empty taskResults[currentTask.id]}">
             CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
@@ -173,7 +175,12 @@
 					modelAttribute="currentTask" role="form">
 					<form:hidden path="id" />
 					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-4">
+						<div class="col-sm-4">
+                            <h4 class="pull-right">
+                                <b><spring:message code="contest.passing.compilerSelect.caption" /></b>
+                            </h4>
+                        </div>
+                        <div class="col-sm-4">
 							<select id="compilerId" name="compilerId" class="selectpicker">
 								<c:forEach var="compiler" items="${compilers}">
                                     <option value="${compiler.id}">${compiler.name}</option>
@@ -182,9 +189,16 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-4">
-							<span class="btn btn-block btn-file"> <spring:message
-									code="contest.passing.uploadSourceFile.caption" />
+                        <div class="col-sm-4">
+                            <h4 class="pull-right">
+                                <b><spring:message code="contest.passing.uploadSourceFile.caption" /></b>
+                            </h4>
+                        </div>
+                        <div class="col-sm-4">
+							<span class="btn btn-block btn-file">
+                                <span id="fileCaption">
+                                        <spring:message code="contest.passing.uploadSourceFile.button" />
+                                </span>
                                 <input type="file" id="file" name="file" onchange="changeFileInputColor()">
 							</span>
 						</div>
