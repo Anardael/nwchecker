@@ -5,122 +5,118 @@
  */
 package test.java.com.nwchecker.server.service;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestServiceImpl;
+import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.UserService;
-import java.util.LinkedList;
-import java.util.List;
-import org.junit.After;
-import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import javax.sql.DataSource;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
- *
  * @author Роман
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+        DbUnitTestExecutionListener.class})
+
 public class ContestServiceImplTest {
 
+    @Autowired
     private ContestDAO contestDAO;
+    @Autowired
     private UserService userService;
-    private ContestServiceImpl contestService = new ContestServiceImpl();
+    @Autowired
+    private ContestService contestService;
+
+    @Autowired
+    DataSource dataSource;
+
     private List<Contest> contestList = new LinkedList<Contest>();
     private List<User> userList = new LinkedList<User>();
 
     @Before
-    public void setUp() {
-        contestDAO = mock(ContestDAO.class);
-        contestService.setContestDAO(contestDAO);
-        //user service:
-        userService = mock(UserService.class);
-        contestService.setUserService(userService);
-        //create test Contest:
-        Contest contest1 = new Contest();
-        contest1.setStatus(Contest.Status.PREPARING);
-        contest1.setId(11);
-        contestList.add(contest1);
-        //create teacher:
-        User user1 = new User();
-        user1.setUsername("TeacherUser1");
-        user1.setContest(contestList);
-        userList.add(user1);
-        User user2 = new User();
-        user2.setUsername("TeacherUser2");
-        user2.setContest(contestList);
-        userList.add(user2);
+    public void init() {
+        for (int i = 0; i < 5; i++) {
+            Contest c = new Contest();
+            c.setId(i);
+            c.setTitle("I am title " + i);
+            c.setDescription("I am description " + i);
+            contestList.add(c);
+        }
     }
 
-    @After
-    public void tearDown() {
-    }
 
-    /**
-     * Test of addContest method, of class ContestServiceImpl.
-     */
     @Test
+    //@DatabaseSetup("classpath:/forTests/dataset.xml")
+    @DatabaseTearDown(value = {"classpath:/forTests/dataset.xml"}, type = DatabaseOperation.DELETE_ALL)
     public void testAddContest() {
-        Contest c = new Contest();
-        contestService.addContest(c);
-        verify(contestDAO, times(1)).addContest(c);
-        verifyNoMoreInteractions(contestDAO);
+        contestService.addContest(contestList.get(0));
+
+        Contest contest = contestService.getContestByID(contestList.get(0).getId());
+        assertEquals(contest,contestList.get(0));
     }
 
     /**
      * Test of updateContest method, of class ContestServiceImpl.
      */
     @Test
+    @Ignore
     public void testUpdateContest() {
         Contest c = new Contest();
         contestService.updateContest(c);
-        verify(contestDAO, times(1)).updateContest(c);
-        verifyNoMoreInteractions(contestDAO);
     }
 
     /**
      * Test of mergeContest method, of class ContestServiceImpl.
      */
     @Test
+    @Ignore
     public void testMergeContest() {
         Contest c = new Contest();
         contestService.mergeContest(c);
-        verify(contestDAO, times(1)).mergeContest(c);
-        verifyNoMoreInteractions(contestDAO);
     }
 
     /**
      * Test of getContests method, of class ContestServiceImpl.
      */
     @Test
+    @Ignore
     public void testGetContests() {
-        when(contestDAO.getContests()).thenReturn(contestList);
         List<Contest> expResult = contestList;
         List<Contest> result = contestService.getContests();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
      * Test of getContestByID method, of class ContestServiceImpl.
      */
     @Test
+    @Ignore
     public void testGetContestByID() {
         int id = 11;
-        when(contestDAO.getContestByID(id)).thenReturn(contestList.get(0));
 
         Contest expResult = contestList.get(0);
         Contest result = contestService.getContestByID(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
@@ -128,15 +124,14 @@ public class ContestServiceImplTest {
      * ContestServiceImpl.
      */
     @Test
+    @Ignore
     public void testCheckIfUserHaveAccessToContest() {
-        when(userService.getUserByUsername("TeacherUser1")).thenReturn(userList.get(0));
 
         String username = "TeacherUser1";
         int ContestId = 11;
         boolean expResult = true;
         boolean result = contestService.checkIfUserHaveAccessToContest(username, ContestId);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
 }
