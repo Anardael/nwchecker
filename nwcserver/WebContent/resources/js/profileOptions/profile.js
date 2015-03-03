@@ -2,13 +2,13 @@ function showUserRoles(roles) {
     for (var i = 0; i < roles.length; i++) {
         switch (roles[i]) {
             case "ROLE_ADMIN":
-                $('#admin').prop('checked', true);
+                $('#admin').show();
                 break;
             case "ROLE_TEACHER":
-                $('#teacher').prop('checked', true);
+                $('#teacher').show();
                 break;
             case "ROLE_USER":
-                $('#user').prop('checked', true);
+                $('#user').show();
                 break;
         }
     }

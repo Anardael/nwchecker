@@ -37,6 +37,12 @@
         border: 1px solid red;
     }
 
+    .group-info {
+        margin-top: 11px;
+    }
+    .group-roles {
+        margin-top: 7px;
+    }
 </style>
 <body>
 <script type="text/javascript">
@@ -90,32 +96,17 @@
         <div class="form-group">
             <label class="col-sm-4 control-label"><spring:message code="profile.info.caption"/>:</label>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4 group-info">
                 <form:textarea path="info" class="form-control" name="info" style="resize:none"/>
                 <form:errors path="info" Class="error"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">
-                <spring:message code="profile.roles.caption"/>
-            </label>
-            <input type="text" id="rolesDesc" name="rolesDesc" hidden="true"/>
-
-            <div class="col-sm-4">
-                <input type="checkbox" id="admin" onclick="return false"/>
-                <label for="admin">
-                    <spring:message code="profile.roles.role.admin.caption"/>
-                </label>
-                <br/>
-                <input type="checkbox" id="teacher" onclick="return false"/>
-                <label for="teacher">
-                    <spring:message code="profile.roles.role.teacher.caption"/>
-                </label>
-                <br/>
-                <input type="checkbox" id="user" onclick="return false"/>
-                <label for="user">
-                    <spring:message code="profile.roles.role.user.caption"/>
-                </label>
+            <label class="col-sm-4 control-label"><spring:message code="profile.roles.caption"/>:</label>
+            <div class="col-sm-4 group-roles">
+                <div id=admin hidden="true"><label><spring:message code="profile.roles.role.admin.caption"/></label><br></div>
+                <div id=teacher hidden="true"><label><spring:message code="profile.roles.role.teacher.caption"/></label><br></div>
+                <div id=user hidden="true"><label><spring:message code="profile.roles.role.user.caption"/></label></div>
                 <c:set var="contains" value="false"/>
                 <c:forEach var="item" items="${userProfile.roles}">
                     <c:if test="${item.role eq 'ROLE_TEACHER'}">

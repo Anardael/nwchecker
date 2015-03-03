@@ -17,6 +17,11 @@
         margin-left: 59%;
         display: inline;
     }
+
+    .admin-subMenu {
+        margin-top: 3px;
+        margin-bottom: 8px;
+    }
 </style>
 <header>
     <!-- service Logo -->
@@ -113,8 +118,8 @@
                     </a>
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                         <security:authorize access="hasRole('ROLE_ADMIN')">
-                            <li class="dropdown-submenu pull-left">
-                                <a tabindex="-1" href="#"><spring:message code="admin.caption"/></a>
+                            <li class="dropdown-submenu pull-left admin-subMenu">
+                               <a tabindex="-1" href="#"><spring:message code="admin.caption"/></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="admin.do"><spring:message code="adminPanel.users.caption"/></a></li>
                                     <li class="divider"></li>
