@@ -48,14 +48,15 @@
             </div>
         </div>
         <!-- Statistic table -->
-        <div class="col-md-12" style="height:60%">
+        <div class="col-md-12" style="height:50%">
             <c:url var="dataUrl" value="/resultsList.do?id=${contestId}"/>
             <table id="competitorsList" data-toggle="table"
                    data-url="${dataUrl}" data-method="get" data-cache="false"
+                   data-search="true" data-clear-search="true"
                    data-pagination="true" data-show-pagination-switch="true">
                 <thead>
                     <tr>
-                        <th data-align="center" data-formatter="positionFormatter">
+                        <th data-field="rank" data-align="center" data-formatter="positionFormatter">
                             <spring:message code="contest.results.tableHeader.place"/>
                         </th>
                         <th data-field="displayName" data-align="center" data-formatter="displayNameFormatter">

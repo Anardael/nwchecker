@@ -146,13 +146,13 @@
 
             #Create 3 ARCHIVE contests
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('6', 'Passed Contest 1', 'This competition has already passed.',
+                   VALUES ('6', 'Old Contest 1', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 11:00:00', '1970-01-01 01:00:00', 0);
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('7', 'Passed Contest 2', 'This competition has already passed.',
+                   VALUES ('7', 'Old Contest 2', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 12:00:00', '1970-01-01 01:30:00', 1);
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('8', 'Passed Contest 3', 'This competition has already passed.',
+                   VALUES ('8', 'Old Contest 3', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 13:00:00', '1970-01-01 02:00:00', 0);
 
             #Add teachers to contest
