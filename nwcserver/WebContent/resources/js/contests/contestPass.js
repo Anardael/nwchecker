@@ -7,6 +7,8 @@ var CURRENT_TASK_SUCCESS;
 var ALL_COMPLETE_TITLE;
 var ALL_COMPLETE_MESSAGE;
 
+var UPLOAD_FILE;
+
 function disableDangerousOptions() {
     document.getElementsByClassName('ladda-button')[0].disabled = CURRENT_TASK_SUCCESS;
 }
@@ -29,4 +31,19 @@ function endContest() {
             location.href = newUrl;
         }
     });
+}
+
+function changeFileInputColor() {
+    if ($('#file').val() != "") {
+        var fileName = $('#file').val();
+        if (fileName.lastIndexOf('\\') != -1)
+            fileName = fileName.substring(fileName.lastIndexOf('\\') + 1); // Windows separator
+        else
+            fileName = fileName.substring(fileName.lastIndexOf('/')); // UNIX, LINUX separator
+        $('#fileCaption').html(fileName);
+        $('.btn-file')[0].style.backgroundColor = '#DEF0D8';
+    } else {
+        $('#fileCaption').html(UPLOAD_FILE);
+        $('.btn-file')[0].style.backgroundColor = 'white';
+    }
 }

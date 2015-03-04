@@ -42,16 +42,16 @@ function checkUserList(data) {
             title: emptyUserListHeader,
             message: emptyUserListBody,
             buttons: [{
-                label: btnClose,
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-            }, {
                 label: btnSubmit,
                 cssClass: 'btn-primary',
                 action: function (dialogItself) {
                     data["userIds[]"] = "-1";
                     sendContestData(data);
+                    dialogItself.close();
+                }
+            }, {
+                label: btnClose,
+                action: function (dialogItself) {
                     dialogItself.close();
                 }
             }

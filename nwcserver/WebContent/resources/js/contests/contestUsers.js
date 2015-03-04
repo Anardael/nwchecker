@@ -4,7 +4,7 @@ function collectUserListData(fields) {
     //set contest Id:
     data["contestId"] = $('#id').val();
     //get data from tbody:
-    $('tbody tr').each(function() {
+    $('tbody tr').each(function () {
         if ($(this).hasClass('selected')) {
             data1.push($(this).find('.idField').html());
         }
@@ -20,20 +20,20 @@ function checkUserList(data) {
             title: emptyUserListHeader,
             message: emptyUserListBody,
             buttons: [{
-                    label: btnClose,
-                    action: function(dialogItself) {
-                        dialogItself.close();
-                    }
-                }, {
-                    label: btnSubmit,
-                    cssClass: 'btn-primary',
-                    action: function(dialogItself) {
-                        data["userIds[]"] = "-1";
-                        ajaxUserList(data);
-                        dialogItself.close();
-                        window.location.href = "index.do";
-                    }
+                label: btnSubmit,
+                cssClass: 'btn-primary',
+                action: function (dialogItself) {
+                    data["userIds[]"] = "-1";
+                    ajaxUserList(data);
+                    dialogItself.close();
+                    window.location.href = "index.do";
                 }
+            }, {
+                label: btnClose,
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+            }
             ]
         });
         return false;
@@ -57,7 +57,7 @@ function ajaxUserList(data) {
         'type': 'POST',
         'url': 'setContestUsers.do',
         'data': data,
-        success: function(response) {
+        success: function (response) {
             if (response.status == "SUCCESS") {
                 $('#userListModal').modal('hide');
                 BootstrapDialog.show({
@@ -79,13 +79,13 @@ function showAccessDeniedModal() {
     BootstrapDialog.show({
         title: errorLabel,
         type: BootstrapDialog.TYPE_DANGER,
-        message: contestAccessDenied+".",
+        message: contestAccessDenied + ".",
     });
 }
 
 function tryToShowUserList() {
     if ($('#id').val() == '0') {
-        sendJsonContest().success(function(data) {
+        sendJsonContest().success(function (data) {
             if (data.status == "FAIL") {
                 contestAjaxFailed(errorCaption, emptyContestUsers, data);
             }

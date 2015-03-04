@@ -27,7 +27,7 @@
         <!--including bodyHead -->
         <!-- send name of current page-->
         <jsp:include page="../fragments/bodyHeader.jsp">
-            <jsp:param name="pageName" value="contest"/>
+            <jsp:param name="pageName" value="rating"/>
         </jsp:include>
         <!-- Contest info -->
         <div class="col-md-12">
@@ -35,14 +35,20 @@
                 <h2>
                     ${contestTitle}
                     <small class="pull-right">
-                        ${contestStart} (${contestDuration})
+                        <spring:message code="contest.results.started.caption"/>
+                        <b>${contestStart}</b>
+                        (<spring:message code="contest.results.continued.caption"/>
+                        <b>${contestDurationHours}
+                        <spring:message code="contest.results.hours.description"/>
+                        ${contestDurationMinutes}
+                        <spring:message code="contest.results.minutes.description"/></b>)
                     </small>
                    </h2>
                 </h2>
             </div>
         </div>
         <!-- Statistic table -->
-        <div class="col-md-12" style="height:70%">
+        <div class="col-md-12" style="height:60%">
             <c:url var="dataUrl" value="/resultsList.do?id=${contestId}"/>
             <table id="competitorsList" data-toggle="table"
                    data-url="${dataUrl}" data-method="get" data-cache="false"
@@ -52,19 +58,13 @@
                         <th data-align="center" data-formatter="positionFormatter">
                             <spring:message code="contest.results.tableHeader.place"/>
                         </th>
-                        <th data-field="username" data-align="center">
-                            <spring:message code="contest.results.tableHeader.username"/>
-                        </th>
-                        <th data-field="displayName" data-align="center">
+                        <th data-field="displayName" data-align="center" data-formatter="displayNameFormatter">
                             <spring:message code="contest.results.tableHeader.displayName"/>
                         </th>
-                        <th data-field="tasksCount" data-align="center">
-                            <spring:message code="contest.results.tableHeader.tasksCount"/>
+                        <th data-field="tasksPassedCount" data-align="center" data-formatter="tasksPassedCountFormatter">
+                            <spring:message code="contest.results.tableHeader.tasksPassedCount"/>
                         </th>
-                        <th data-field="passedCount" data-align="center">
-                            <spring:message code="contest.results.tableHeader.passedCount"/>
-                        </th>
-                        <th data-field="timePenalty" data-align="center">
+                        <th data-field="timePenalty" data-align="center" data-formatter="timePenaltyFormatter">
                             <spring:message code="contest.results.tableHeader.timePenalty"/>
                         </th>
                     </tr>

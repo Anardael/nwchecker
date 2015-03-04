@@ -16,14 +16,6 @@ var RESULT_TIME;
 var RESULT_MEMORY;
 var RESULT_ERROR_MESSAGE;
 
-function changeFileInputColor() {
-    if ($('#file').val() != "") {
-        $('.btn-file')[0].style.backgroundColor = '#D0D0D0';
-    } else {
-        $('.btn-file')[0].style.backgroundColor = 'white';
-    }
-}
-
 function submitTask() {
 	var formData = new FormData();
 	formData.append("id", $('#id').val());

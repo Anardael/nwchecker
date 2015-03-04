@@ -11,6 +11,7 @@ import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.utils.ContestComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ import java.util.TreeMap;
 
 /**
  * Created by Роман on 11.02.2015.
- * Modified by Станіслав many times :-) (12.02.2015 - 1.03.2015)
+ * Modified by Станіслав many times :-) (12.02.2015 - 03.03.2015)
  */
 @Controller("contestPassController")
 public class ContestPassController {
@@ -157,19 +158,26 @@ public class ContestPassController {
         return result;
     }
 
+    @RequestMapping(value = "/rating", method = RequestMethod.GET)
+    public String getRating(Model model) {
+        List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
+        //TODO Sort contests by date
+        //Collections.sort(archivedContests, new ContestComparator());
+        model.addAttribute("archivedContests", archivedContests);
+        return "contests/rating";
+    }
 
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
         model.addAttribute("contestId", id);
         Contest contest = contestService.getContestByID(id);
         model.addAttribute("contestTitle", contest.getTitle());
-        SimpleDateFormat formatStart = new SimpleDateFormat("dd.MM.yy HH:mm");
+        SimpleDateFormat formatStart = new SimpleDateFormat();
         model.addAttribute("contestStart", formatStart.format(contest.getStarts()));
-        SimpleDateFormat formatDurHours = new SimpleDateFormat("H");
-        SimpleDateFormat formatDurMinutes = new SimpleDateFormat("m");
-        String contestDuration = formatDurHours.format(contest.getDuration()) + "h";
-        contestDuration += formatDurMinutes.format(contest.getDuration()) + "m";
-        model.addAttribute("contestDuration", contestDuration);
+        Calendar contestDuration = Calendar.getInstance();
+        contestDuration.setTime(contest.getDuration());
+        model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
+        model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
         return "contests/contestResults";
     }
 

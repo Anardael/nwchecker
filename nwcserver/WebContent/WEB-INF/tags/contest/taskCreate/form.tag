@@ -102,8 +102,8 @@
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
                     <button id="taskSubmitButton" type="button" class="btn btn-primary sendTaskJsonButton ladda-button" data-style="expand-right" data-modalId="${taskId}"><span class="ladda-label"><spring:message code="btn.save" /></span></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="btn.close" /></button>
                 </div>
             </div>
         </div>

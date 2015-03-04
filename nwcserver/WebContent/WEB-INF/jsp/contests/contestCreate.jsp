@@ -260,11 +260,10 @@
             </div>
         </div>
         <div class="pull-right">
-            <button id="finishContest" class="btn btn-warning btn-sm" value="Submit">
-                <spring:message code="contest.finish.button"/>
-            </button>
             <button id="submitContest" type="submit" class="btn btn-primary btn-sm " value="Submit">
                 <spring:message code="btn.save"/></button>
+            <button id="finishContest" class="btn btn-warning btn-sm" value="Submit">
+                <spring:message code="contest.finish.button"/> </button>
         </div>
     </section>
 </div>
