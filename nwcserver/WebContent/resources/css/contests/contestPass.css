@@ -48,7 +48,7 @@
 }
 .descr-default > p, .descr-success > p, .descr-fail > p {
 	text-align: justify;
-	padding: 1px 20px 1px 20px;
+	padding: 10px 20px 10px 20px;
 }
 
 /* Upload source file button */

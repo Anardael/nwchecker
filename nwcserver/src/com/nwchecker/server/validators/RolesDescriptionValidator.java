@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 @Component
 public class RolesDescriptionValidator implements Validator {
 
-	private final String patternRolesDescription = "^(ROLE_ADMIN)?(ROLE_TEACHER)?(ROLE_USER)?$";
+	private final String patternRolesDescription = "^(ROLE_ADMIN;)?(ROLE_TEACHER;)?(ROLE_USER;)?$";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -24,7 +24,7 @@ public class RolesDescriptionValidator implements Validator {
 		
 		if ((rolesDesc == null) || (rolesDesc.isEmpty())
 			|| (!rolesDesc.matches(patternRolesDescription))) {
-			errors.rejectValue("rolesDesc", "adminPanel.userEdit.roles.error");
+			errors.rejectValue("roles", "adminPanel.userEdit.roles.error");
 		}
 	}
 	
