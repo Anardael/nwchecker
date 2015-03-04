@@ -7,6 +7,7 @@ package test.java.com.nwchecker.server.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
@@ -22,13 +23,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
 import javax.sql.DataSource;
 import java.util.LinkedList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * @author Роман
@@ -66,7 +64,7 @@ public class ContestServiceImplTest {
 
 
     @Test
-    //@DatabaseSetup("classpath:/forTests/dataset.xml")
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     @DatabaseTearDown(value = {"classpath:/forTests/dataset.xml"}, type = DatabaseOperation.DELETE_ALL)
     public void testAddContest() {
         contestService.addContest(contestList.get(0));

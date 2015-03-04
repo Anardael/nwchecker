@@ -48,6 +48,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         //sort contests in execution time order:
         Collections.sort(executableContests, new ContestComparator());
+        for (Contest c : executableContests) {
+            System.out.print(c.getId() + " ");
+        }
+        System.out.println();
 
         //for first in list- create task timer:
         final Contest nextExecuteContest = executableContests.get(0);

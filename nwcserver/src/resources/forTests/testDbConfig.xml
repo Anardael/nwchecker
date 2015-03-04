@@ -24,7 +24,7 @@
     <!-- Налаштування біна dataSource будем зберігати в окремому файлі -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="classpath:\forTests\testJDBC.properties" />
+          p:location="classpath:\forTests\h2Config.properties" />
     
     <!-- Безпосередньо сам бін dataSource -->
     <bean id="dataSource"
