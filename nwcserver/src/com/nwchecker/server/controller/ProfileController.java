@@ -5,7 +5,6 @@ import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.UserProfileValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.security.Principal;
 
 @Controller

@@ -78,7 +78,7 @@
 
             if (!mask && this.length > 0) {
                 input = $(this[0]);
-                var fn = input.data($.mask.dataName)
+                var fn = input.data($.mask.dataName);
                 return fn ? fn() : undefined;
             }
 
@@ -275,7 +275,7 @@
                             next;
 
                     if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {//Ignore
-                        return;
+
                     } else if (k && k !== 13) {
                         if (pos.end - pos.begin !== 0) {
                             clearBuffer(pos.begin, pos.end);

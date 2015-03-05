@@ -7,6 +7,7 @@ package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+
 import java.util.List;
 
 public interface TaskDAO {

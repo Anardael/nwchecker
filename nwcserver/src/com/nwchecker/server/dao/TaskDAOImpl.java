@@ -7,13 +7,12 @@ package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
-
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("TaskDAO")
 public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {

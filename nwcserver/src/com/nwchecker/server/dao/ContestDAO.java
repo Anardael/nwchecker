@@ -6,6 +6,7 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Contest;
+
 import java.util.List;
 
 /**
