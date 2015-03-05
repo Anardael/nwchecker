@@ -7,9 +7,12 @@
 <html>
 <head>
     <jsp:include page="../fragments/staticFiles.jsp"/>
+
     <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
     <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
     <link href="${resources}css/adminOptions/listContests.css" rel="stylesheet"/>
+    <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
     <script type="text/javascript"
@@ -43,7 +46,7 @@
     </jsp:include>
     <input type="text" id="id" value="0" hidden="true"/>
 
-    <div class="row" style="height: 50%;">
+    <div class="row">
         <c:url var="dataUrl" value="/getListOfContests.do"/>
         <table id="contestsData" data-toggle="table" data-striped="true"
                data-url="${dataUrl}" data-method="get" data-cache="false"

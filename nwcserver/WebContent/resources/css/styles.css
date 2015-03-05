@@ -6404,14 +6404,11 @@ body .wrapper section .jumbotron blockquote small:before {
 
 body .wrapper section .info p {
     font: 20px Cuprum, sans-serif;
-    color: #6B6262;
     margin-bottom: 0;
     text-align: justify
 }
 
 body .wrapper footer {
-    background: #7e7e7e;
-    color: #dbdbdb;
     font-size: 11px
 }
 
@@ -6422,8 +6419,6 @@ body .wrapper footer .container {
 
 body footer {
     height: 60px;
-    background: #7e7e7e;
-    color: #dbdbdb;
     font-size: 11px
 }
 

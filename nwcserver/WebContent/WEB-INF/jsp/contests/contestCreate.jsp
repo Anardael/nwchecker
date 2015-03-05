@@ -34,7 +34,6 @@
     <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="${resources}js/includedJS/bootstrap-filestyle.min.js"></script>
 
-
     <script type="text/javascript" src="${resources}js/contests/tasks/taskCreateAddLink.js"></script>
     <script type="text/javascript" src="${resources}js/contests/tasks/taskEditing.js"></script>
     <script type="text/javascript" src="${resources}js/contests/tasks/taskAjax.js"></script>

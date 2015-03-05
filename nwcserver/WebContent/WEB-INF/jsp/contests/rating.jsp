@@ -25,41 +25,30 @@
             <jsp:param name="pageName" value="rating"/>
         </jsp:include>
 
-        <div id="accordion" class="form-group col-sm-12" style="margin:auto">
+        <div class="form-group col-sm-12" style="margin:auto">
             <ul class="col-sm-offset-2 col-sm-8 ">
                 <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center">
                     <spring:message code="rating.caption"/>
                 </li>
                 <c:forEach var="archived" items="${archivedContests}" varStatus="row">
-                    <a class="list-group-item " data-toggle="collapse" data-parent="#accordion"
-                        href="#collapse${row.index}">
+                    <c:url var="results" value="/results.do?id=${archived.id}"/>
+                    <li class="list-group-item">
                         <span class="row">
-                            <b class="pull-left">
-                                ${archived.title}
-                            </b>
-                            <span class="pull-right">
+                            <span class="pull-left">
+                                <b>${archived.title}</b>
+                                <br/>
                                 <spring:message code="contest.results.started.caption"/>
-                                <b>${fn:substring(archived.starts,0,16)}</b>
+                                ${fn:substring(archived.starts,0,16)}
                                 (<spring:message code="contest.results.continued.caption"/>
-                                <b>${fn:substring(archived.duration,11,16)}</b>)
+                                ${fn:substring(archived.duration,11,16)})
+                            </span>
+                            <span class="pull-right">
+                                <a class="btn btn-md btn-info pull-right" href="${results}">
+                                    <spring:message code="rating.openResults.button.caption"/>
+                                </a>
                             </span>
                         </span>
-                    </a>
-                    <div id="collapse${row.index}" class="panel-collapse collapse">
-                        <li class="list-group-item list-group-item-info">
-                            <div class="panel-body">
-                                <div class="edit col-sm-12">
-                                    <c:url var="results" value="/results.do?id=${archived.id}"/>
-                                    <a class="btn btn-sm btn-info pull-right" href="${results}">
-                                        <spring:message code="rating.openResults.button.caption"/>
-                                    </a>
-                                </div>
-                                <div class="col-sm-12">
-                                    ${archived.description}
-                                </div>
-                            </div>
-                        </li>
-                    </div>
+                    </li>
                 </c:forEach>
             </ul>
         </div>
