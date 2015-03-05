@@ -4,25 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- set path to resources foled -->
 <spring:url value="/resources/" var="resources" />
+<link href="${resources}css/loggingAndRegistration/login.css" rel="stylesheet"/>
 <html>
     <!--including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
     </head>
     <!-- include special css for registration:-->
-    <style>
-        .centered {
-            text-align: center;
-        }
-
-        .customButton {
-            width: 150px;
-        }
-
-        .error {
-            color: #FF0000;
-        }
-    </style>
     <body>
         <div class="wrapper container">
             <!--including bodyHead -->

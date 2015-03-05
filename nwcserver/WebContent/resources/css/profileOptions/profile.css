@@ -1,0 +1,26 @@
+.centered {
+    text-align: center;
+}
+
+.customButton {
+    width: 150px;
+}
+
+.error {
+    color: #FF0000;
+}
+
+#changePassword label.error {
+    color: #FF0000;
+}
+
+#changePassword input.error {
+    border: 1px solid red;
+}
+
+.group-info {
+    margin-top: 11px;
+}
+.group-roles {
+    margin-top: 7px;
+}

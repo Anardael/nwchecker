@@ -2,30 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <spring:url value="/resources/" var="resources"/>
-<style>
-    .languageChoose {
-        display: inline;
-    }
-
-    .logo {
-        width: 100px;
-        display: inline;
-    }
-
-    .serverTime {
-        position: relative;
-        margin-left: 59%;
-        display: inline;
-    }
-
-    .admin-subMenu {
-        margin-top: 3px;
-        margin-bottom: 8px;
-    }
-</style>
 <header>
     <!-- service Logo -->
     <script type="text/javascript" src="${resources}js/serverTime.js"></script>
+    <link href="${resources}css/fragments/bodyHeader.css" rel="stylesheet"/>
     <div class="blockContainer">
         <div class="logo"><a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a></div>
         <!-- choose language -->

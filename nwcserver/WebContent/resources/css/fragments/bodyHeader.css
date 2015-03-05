@@ -1,0 +1,20 @@
+.languageChoose {
+    display: inline;
+}
+
+.logo {
+    width: 100px;
+    display: inline;
+}
+
+.serverTime {
+    display: inline-block;
+    margin-top: 29px;
+    margin-right: 5px;
+    float: right;
+}
+
+.admin-subMenu {
+    margin-top: 3px;
+    margin-bottom: 8px;
+}

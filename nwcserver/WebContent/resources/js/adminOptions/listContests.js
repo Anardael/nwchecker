@@ -13,8 +13,20 @@ $(document).ready(function () {
                 data: data
             });
         });
-        $.get('getContestStatus.do?contestId=' + contestId, function (contestStatus) {
-            $("input[name=radioStatus]").val([contestStatus]);
+        $.get('getContestStatus.do?contestId=' + contestId, function (contest) {
+            $("input[name=radioStatus]").prop("disabled",false);
+            $("input[name=radioStatus]").val([contest.statusContest]);
+            if(contest.statusContest=="ARCHIVE") {
+                $("input[id=rbGoing]").prop("disabled",true);
+                $("input[id=rbPreparing]").prop("disabled",true);
+                $("input[id=rbRelease]").prop("disabled",true);
+            }
+            if (contest.isContestHidden) {
+                $('input[id=chbHidden]').prop('checked', true);
+            } else {
+                $('input[id=chbHidden]').prop('checked', false);
+            }
+
         });
         tryToShowContestInfo();
     });
@@ -113,6 +125,7 @@ function collectContestData(fields) {
     //set contest Id:
     data["contestId"] = $('#id').val();
     data["contestStatus"] = $('input:radio[name=radioStatus]:checked').val();
+    data["contestHidden"] = $('#chbHidden').is(':checked');
     //get data from tbody:
     $('tbody tr').each(function () {
         if ($(this).hasClass('selected')) {

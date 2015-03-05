@@ -12,6 +12,18 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/resources/spring/application-context.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/forTests/context.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/hibernate/dbConfig.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/spring/security.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/spring/servlet-context.xml</file>
+          <file>file://$MODULE_DIR$/src/resources/forTests/testDbConfig.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -22,6 +34,9 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.github.springtestdbunit:spring-test-dbunit:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:3.2.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" level="project" />
@@ -33,6 +48,7 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:3.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.github.springtestdbunit:spring-test-dbunit:1.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.10" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.185" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:3.2.5.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
