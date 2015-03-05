@@ -7,6 +7,7 @@ import com.nwchecker.server.model.ContestPass;
  */
 public class ContestPassJson {
 
+    private int rank;
     private String displayName;
     private String tasksPassedCount;
     private int timePenalty;
@@ -16,11 +17,20 @@ public class ContestPassJson {
 
     public static ContestPassJson createContestPassJson(ContestPass contestPass) {
         ContestPassJson contestPassJson = new ContestPassJson();
+        contestPassJson.rank = contestPass.getRank();
         contestPassJson.displayName = contestPass.getUser().getDisplayName();
         contestPassJson.tasksPassedCount = contestPass.getPassedCount()
                                          + "/" + contestPass.getContest().getTasks().size();
         contestPassJson.timePenalty = contestPass.getTimePenalty();
         return contestPassJson;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public String getDisplayName() {

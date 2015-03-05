@@ -2,10 +2,8 @@
  * Created by Станіслав on 01.03.2015.
  */
 
-var place = 0;
-
 function positionFormatter(value) {
-    return '<b>' + ++place + '</b>';
+    return '<b>' + value + '</b>';
 }
 
 function displayNameFormatter(value) {
@@ -13,8 +11,8 @@ function displayNameFormatter(value) {
 }
 
 function tasksPassedCountFormatter(value) {
-    var result = '<span style="color:green;">' + value.substr(0, value.indexOf('/')) + '</span>'
-                + '<span style="color:#5BC0DE;">' + value.substring(value.indexOf('/')) + '</span>';
+    var result = '<span style="color:#00B600;">' + value.substr(0, value.indexOf('/')) + '</span>'
+                + " " + value.substr(value.indexOf('/'), 1) + " " + value.substring(value.indexOf('/') + 1);
     return result;
 }
 
