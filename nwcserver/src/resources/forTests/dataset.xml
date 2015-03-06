@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <Contest id="3" title="I am title" description="I am description" status="PREPARING"/>
+    <Contest id="1" title="I am title 1" description="I am description 1" status="PREPARING" hidden="0"/>
+    <Contest id="2" title="I am title 2" description="I am description 2" status="PREPARING" hidden="0"/>
+    <Contest id="3" title="I am title 3" description="I am description 3" status="PREPARING" hidden="0"/>
+
+    <Users userId="1" ban_time="0" username="user" enabled="0" password="$2a$10$2B8iOyGDQFupeR6UYmfC3OCyL6//u8Ce4t6fCu0DPVqthwA9VGMui"/>
+
+    <contest_users user_id="1" contest_id="1"/>
 </dataset>

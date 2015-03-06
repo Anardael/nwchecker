@@ -15,7 +15,6 @@ import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Роман
@@ -66,56 +66,65 @@ public class ContestServiceImplTest {
 
 
     @Test
-    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    //@DatabaseSetup("classpath:/forTests/dataset.xml")
     @DatabaseTearDown(value = {"classpath:/forTests/dataset.xml"}, type = DatabaseOperation.DELETE_ALL)
     public void testAddContest() {
         contestService.addContest(contestList.get(0));
-
         Contest contest = contestService.getContestByID(contestList.get(0).getId());
-        assertEquals(contest,contestList.get(0));
+        assertEquals(contest, contestList.get(0));
     }
 
     /**
      * Test of updateContest method, of class ContestServiceImpl.
      */
     @Test
-    @Ignore
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testUpdateContest() {
-        Contest c = new Contest();
-        contestService.updateContest(c);
+        Contest contest = new Contest();
+        contest.setId(1);
+        contest.setTitle("I am new title");
+        contestService.updateContest(contest);
+
+        assertEquals(contest, contestService.getContestByID(contest.getId()));
     }
 
     /**
      * Test of mergeContest method, of class ContestServiceImpl.
      */
     @Test
-    @Ignore
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testMergeContest() {
-        Contest c = new Contest();
-        contestService.mergeContest(c);
+        Contest contest = contestService.getContestByID(1);
+
+        //create new Contest and try it to merge:
+        Contest newContest = new Contest();
+        newContest.setId(contest.getId());
+        newContest.setTitle("I am absolutely different contest title");
+        newContest.setDescription("I am description");
+        newContest.setTasks(contest.getTasks());
+
+        contestService.mergeContest(newContest);
+        assertEquals(newContest, contestService.getContestByID(contest.getId()));
     }
 
     /**
      * Test of getContests method, of class ContestServiceImpl.
      */
     @Test
-    @Ignore
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetContests() {
-        List<Contest> expResult = contestList;
         List<Contest> result = contestService.getContests();
-        assertEquals(expResult, result);
+        assertTrue(result.size() == 3);
     }
 
     /**
      * Test of getContestByID method, of class ContestServiceImpl.
      */
     @Test
-    @Ignore
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetContestByID() {
-        int id = 11;
-
-        Contest expResult = contestList.get(0);
-        Contest result = contestService.getContestByID(id);
+        Contest expResult = contestList.get(2);
+        Contest result = contestService.getContestByID(2);
         assertEquals(expResult, result);
     }
 
@@ -124,14 +133,12 @@ public class ContestServiceImplTest {
      * ContestServiceImpl.
      */
     @Test
-    @Ignore
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckIfUserHaveAccessToContest() {
 
-        String username = "TeacherUser1";
-        int ContestId = 11;
-        boolean expResult = true;
-        boolean result = contestService.checkIfUserHaveAccessToContest(username, ContestId);
-        assertEquals(expResult, result);
+        String username = "user";
+        boolean result = contestService.checkIfUserHaveAccessToContest(username, 1);
+        assertTrue(result);
     }
 
 }
