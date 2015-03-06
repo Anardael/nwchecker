@@ -15,7 +15,3 @@
 <script type="text/javascript" src="${resources}js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="${resources}js/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="${resources}js/dropdown.js"></script>
-
-
-
-

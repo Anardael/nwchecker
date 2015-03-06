@@ -1,0 +1,11 @@
+.centered {
+    text-align: center;
+}
+
+.customButton {
+    width: 150px;
+}
+
+.error {
+    color: #FF0000;
+}

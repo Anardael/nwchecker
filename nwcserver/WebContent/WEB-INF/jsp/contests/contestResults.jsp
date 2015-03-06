@@ -13,14 +13,15 @@
 <html>
 <!--including head -->
 <head>
-<jsp:include page="../fragments/staticFiles.jsp" />
+    <jsp:include page="../fragments/staticFiles.jsp" />
 
-<link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
 
-<script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
-<script type="text/javascript"
-        src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
-<script type="text/javascript" src="${resources}js/contests/contestResultsFormatter.js"></script>
+    <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
+    <script type="text/javascript"
+            src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestResultsFormatter.js"></script>
 </head>
 <body>
     <div class="wrapper container">
@@ -33,12 +34,16 @@
         <div class="col-md-12">
             <div class="page-header">
                 <h2>
+                    <c:url var="backToRating" value="/rating.do"/>
+                    <a class="btn btn-md btn-info" href="${backToRating}">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
                     ${contestTitle}
                     <small class="pull-right">
                         <spring:message code="contest.results.started.caption"/>
                         <b>${contestStart}</b>
                         (<spring:message code="contest.results.continued.caption"/>
-                        <b>${contestDurationHours}
+                       <b>${contestDurationHours}
                         <spring:message code="contest.results.hours.description"/>
                         ${contestDurationMinutes}
                         <spring:message code="contest.results.minutes.description"/></b>)
@@ -48,14 +53,15 @@
             </div>
         </div>
         <!-- Statistic table -->
-        <div class="col-md-12" style="height:60%">
+        <div class="col-md-12">
             <c:url var="dataUrl" value="/resultsList.do?id=${contestId}"/>
-            <table id="competitorsList" data-toggle="table"
+            <table id="competitorsList" class="table" data-toggle="table"
                    data-url="${dataUrl}" data-method="get" data-cache="false"
+                   data-search="true" data-clear-search="true"
                    data-pagination="true" data-show-pagination-switch="true">
                 <thead>
                     <tr>
-                        <th data-align="center" data-formatter="positionFormatter">
+                        <th data-field="rank" data-align="center" data-formatter="positionFormatter">
                             <spring:message code="contest.results.tableHeader.place"/>
                         </th>
                         <th data-field="displayName" data-align="center" data-formatter="displayNameFormatter">

@@ -3,7 +3,11 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.model.Task;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Роман on 11.02.2015.

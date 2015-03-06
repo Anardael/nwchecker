@@ -146,13 +146,13 @@
 
             #Create 3 ARCHIVE contests
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('6', 'Passed Contest 1', 'This competition has already passed.',
+                   VALUES ('6', 'Old Contest 1', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 11:00:00', '1970-01-01 01:00:00', 0);
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('7', 'Passed Contest 2', 'This competition has already passed.',
+                   VALUES ('7', 'Old Contest 2', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 12:00:00', '1970-01-01 01:30:00', 1);
             INSERT INTO `contest` (id, title, description, status, starts, duration, hidden)
-                   VALUES ('8', 'Passed Contest 3', 'This competition has already passed.',
+                   VALUES ('8', 'Old Contest 3', 'This competition has already passed.',
                            'ARCHIVE', '2015-03-03 13:00:00', '1970-01-01 02:00:00', 0);
 
             #Add teachers to contest
@@ -238,10 +238,39 @@
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
             #Add users results for ARCHIVE contests
-            #ContestPass (3-5 users)
+            #ContestPass (TaskPass - not required)
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('1', '6', '7', 0, '4', '30', '3');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('2', '6', '8', 0, '5', '40', '2');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('3', '6', '9', 0, '3', '10', '4');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('4', '6', '10', 0, '3', '60', '5');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('5', '6', '11', 0, '5', '20', '1');
 
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('6', '7', '7', 0, '5', '30', '3');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('7', '7', '8', 0, '6', '40', '1');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('8', '7', '9', 0, '3', '10', '5');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('9', '7', '10', 0, '4', '60', '4');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('10', '7', '11', 0, '5', '20', '2');
 
-            #TaskPass
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('11', '8', '7', 0, '7', '30', '2');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('12', '8', '8', 0, '6', '40', '3');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('13', '8', '9', 0, '7', '10', '1');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('14', '8', '10', 0, '3', '60', '5');
+            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+                   VALUES ('15', '8', '11', 0, '5', '20', '4');
 
             #Create Compilers list
             INSERT INTO `compiler` (id, name) VALUES ('1', 'Java');

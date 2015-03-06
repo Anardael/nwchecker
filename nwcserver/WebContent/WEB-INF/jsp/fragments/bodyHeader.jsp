@@ -2,30 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <spring:url value="/resources/" var="resources"/>
-<style>
-    .languageChoose {
-        display: inline;
-    }
-
-    .logo {
-        width: 100px;
-        display: inline;
-    }
-
-    .serverTime {
-        position: relative;
-        margin-left: 59%;
-        display: inline;
-    }
-
-    .admin-subMenu {
-        margin-top: 3px;
-        margin-bottom: 8px;
-    }
-</style>
+<script type="text/javascript">
+    $(function () {
+        $(".dropdown-menu > li > a.trigger").on("click", function (e) {
+            e.stopPropagation();
+        });
+    });
+</script>
 <header>
     <!-- service Logo -->
     <script type="text/javascript" src="${resources}js/serverTime.js"></script>
+    <link href="${resources}css/fragments/bodyHeader.css" rel="stylesheet"/>
     <div class="blockContainer">
         <div class="logo"><a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a></div>
         <!-- choose language -->
@@ -119,7 +106,7 @@
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                         <security:authorize access="hasRole('ROLE_ADMIN')">
                             <li class="dropdown-submenu pull-left admin-subMenu">
-                               <a tabindex="-1" href="#"><spring:message code="admin.caption"/></a>
+                                <a class="trigger"> <spring:message code="admin.caption"/></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="admin.do"><spring:message code="adminPanel.users.caption"/></a></li>
                                     <li class="divider"></li>
@@ -137,7 +124,6 @@
                 </li>
             </security:authorize>
         </ul>
-
     </nav>
     <div class="heading">
         <h1>

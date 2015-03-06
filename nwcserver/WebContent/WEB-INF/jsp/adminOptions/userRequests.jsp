@@ -6,7 +6,10 @@
 <html>
 <head>
     <jsp:include page="../fragments/staticFiles.jsp"/>
+
     <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
     <script type="text/javascript"
             src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
@@ -27,7 +30,7 @@
         <jsp:param name="pageName" value="userRequests"/>
     </jsp:include>
 
-    <div class="row" style="height: 50%;">
+    <div class="row">
         <c:url var="dataUrl" value="/getUsersWithRequests.do"/>
         <table id="usersData" data-toggle="table" data-striped="true"
                data-url="${dataUrl}" data-method="get" data-cache="false"

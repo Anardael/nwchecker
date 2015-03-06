@@ -11,7 +11,7 @@ import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.utils.ContestComparator;
+import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -161,8 +161,8 @@ public class ContestPassController {
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
         List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
-        //TODO Sort contests by date
-        //Collections.sort(archivedContests, new ContestComparator());
+        Collections.sort(archivedContests, new ContestStartTimeComparator());
+        Collections.reverse(archivedContests);
         model.addAttribute("archivedContests", archivedContests);
         return "contests/rating";
     }

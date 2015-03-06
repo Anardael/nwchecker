@@ -3277,9 +3277,9 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 }
 
 .dropdown-menu.pull-right {
-     right: 0;
-     left: auto
- }
+    right: 0;
+    left: auto
+}
 
 .dropdown-menu .divider {
     height: 1px;
@@ -3301,8 +3301,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     color: #262626;
     font-weight: bold !important;
-    background-color:#29c4e5;
-    /*suka*/
+    background-color: #29c4e5;
 }
 
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
@@ -5021,7 +5020,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     padding: 10px 15px;
     margin-bottom: -1px;
     background-color: #f3f3f3;
-    border: 1px solid #e7e7e7
+    border: 1px solid #54c5e7
 }
 
 .list-group-item:first-child {
@@ -5044,11 +5043,11 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 a.list-group-item {
-    color: #555
+    color: #262626
 }
 
 a.list-group-item .list-group-item-heading {
-    color: #333
+    color: #262626
 }
 
 a.list-group-item:hover, a.list-group-item:focus {
@@ -5096,7 +5095,7 @@ a.list-group-item-success.active, a.list-group-item-success.active:hover, a.list
 }
 
 .list-group-item-info {
-    color: #31708f;
+    color: #262626;
     background-color: #d9edf7
 }
 
@@ -6314,7 +6313,6 @@ body .wrapper header .languageChoose img {
 body .wrapper header .navbar-nav a {
     text-transform: uppercase;
     font: 14px Cuprum, sans-serif
-    /*kurva*/
 }
 
 body .wrapper header .navbar-default {
@@ -6365,11 +6363,12 @@ body .wrapper .submenu li {
 }
 
 body .wrapper .submenu li.active {
-    color: #29c5e6
+    color: #262626;
+    font-weight: bold;
 }
 
 body .wrapper .submenu li a {
-    color: #8f8f8f;
+    color: #262626;
     text-decoration: none
 }
 
@@ -6405,14 +6404,11 @@ body .wrapper section .jumbotron blockquote small:before {
 
 body .wrapper section .info p {
     font: 20px Cuprum, sans-serif;
-    color: #6B6262;
     margin-bottom: 0;
     text-align: justify
 }
 
 body .wrapper footer {
-    background: #7e7e7e;
-    color: #dbdbdb;
     font-size: 11px
 }
 
@@ -6423,8 +6419,6 @@ body .wrapper footer .container {
 
 body footer {
     height: 60px;
-    background: #7e7e7e;
-    color: #dbdbdb;
     font-size: 11px
 }
 

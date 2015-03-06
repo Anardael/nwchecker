@@ -6,12 +6,13 @@
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Task;
-import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 public class TaskValidator implements Validator {

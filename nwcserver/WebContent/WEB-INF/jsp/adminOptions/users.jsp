@@ -7,7 +7,10 @@
     <!--Including head -->
     <head>
         <jsp:include page="../fragments/staticFiles.jsp" />
+
         <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
+        <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
+
         <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
         <script type="text/javascript" src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
     	<script type="text/javascript" src="${resources}js/adminOptions/usersFormatters.js" ></script>
@@ -26,7 +29,7 @@
             <jsp:include page="../fragments/bodyHeader.jsp">
                 <jsp:param name="pageName" value="admin"/>
             </jsp:include>
-            <div class="row" style="height: 60%;">
+            <div class="row">
             	<!-- TABLE -->
                 <c:url var="dataUrl" value="/getUsers.do"/>
                 <table id="usersData" data-toggle="table" data-striped="true"

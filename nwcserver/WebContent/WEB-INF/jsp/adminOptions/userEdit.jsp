@@ -104,7 +104,6 @@
                     <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.roles.caption" />
                     </label>
-                    <input type="text" id="rolesDesc" name="rolesDesc" hidden="true" />
                     <div class="col-sm-4">
                     	<input type="checkbox" id="admin" onclick="resetRolesDesc()" />
                     	<label for="admin">
@@ -121,6 +120,7 @@
                     		<spring:message code="adminPanel.userEdit.role.user.caption" />
                     	</label>
                     	<br/>
+                        <input type="text" id="rolesDesc" name="rolesDesc" hidden="true" />
                     	<form:errors path="roles" class="text-danger" />
                     </div>
                 </div>

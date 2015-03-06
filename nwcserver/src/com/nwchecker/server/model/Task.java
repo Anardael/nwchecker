@@ -5,7 +5,8 @@
  */
 package com.nwchecker.server.model;
 
-import java.util.List;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Table(name = "Task")

@@ -1,9 +1,12 @@
 package com.nwchecker.server.controller;
 
-import java.security.Principal;
-import java.util.HashSet;
-import java.util.List;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.nwchecker.server.model.Role;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.validators.RolesDescriptionValidator;
+import com.nwchecker.server.validators.UserEditValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,13 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.nwchecker.server.model.Role;
-import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.validators.RolesDescriptionValidator;
-import com.nwchecker.server.validators.UserEditValidator;
+import java.security.Principal;
+import java.util.HashSet;
+import java.util.List;
 
 /**
 *

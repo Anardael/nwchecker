@@ -39,7 +39,7 @@ function dateFormatter(value) {
     var result = "";
     if (date != "Invalid Date") {
         result += twoDigitsDateTime(date.getDate()) + "/";
-        result += twoDigitsDateTime(date.getMonth()) + "/";
+        result += twoDigitsDateTime(date.getMonth() + 1) + "/";
         result += date.getFullYear() + " ";
         result += twoDigitsDateTime(date.getHours()) + ":";
         result += twoDigitsDateTime(date.getMinutes()) + ":";
@@ -57,17 +57,17 @@ function twoDigitsDateTime(value) {
 }
 
 function usersSorter(a, b) {
-    if (a=='' && b=='') {
+    if (a == '' && b == '') {
         return -1;
     }
-    if (a=='') {
+    if (a == '') {
         return 1;
     }
-    if (b=='') {
+    if (b == '') {
         return -1;
     }
-    if (a>b) return -1;
-    if (a<b) return 1;
+    if (a > b) return -1;
+    if (a < b) return 1;
     return 0;
 }
 

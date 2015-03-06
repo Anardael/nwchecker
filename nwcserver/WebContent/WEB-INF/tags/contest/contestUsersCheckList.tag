@@ -5,8 +5,13 @@
 <%@ tag description="userListt" pageEncoding="UTF-8"%>
 <%@attribute name="contest" %>
 <%@attribute name="contestId" %>
+<!-- set path to resources folder -->
+<spring:url value="/resources/" var="resources"/>
+<head>
+    <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
+</head>
 <div id="userListModal" class="modal fade">
-    <div class="modal-dialog "style="height: 50%">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-header-info">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

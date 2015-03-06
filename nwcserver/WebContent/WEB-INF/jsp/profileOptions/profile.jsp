@@ -16,34 +16,7 @@
         src="${resources}js/validators/userProfileValidator_${pageContext.response.locale}.js"></script>
 <script type="text/javascript" src="${resources}js/profileOptions/profile.js"></script>
 <!-- include special css for profile:-->
-<style>
-    .centered {
-        text-align: center;
-    }
-
-    .customButton {
-        width: 150px;
-    }
-
-    .error {
-        color: #FF0000;
-    }
-
-    #changePassword label.error {
-        color: red;
-    }
-
-    #changePassword input.error {
-        border: 1px solid red;
-    }
-
-    .group-info {
-        margin-top: 11px;
-    }
-    .group-roles {
-        margin-top: 7px;
-    }
-</style>
+<link href="${resources}css/profileOptions/profile.css" rel="stylesheet"/>
 <body>
 <script type="text/javascript">
     $('body').ready(function () {
