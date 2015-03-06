@@ -7,7 +7,7 @@ function positionFormatter(value) {
 }
 
 function displayNameFormatter(value) {
-    return '<span style="color:#5BC0DE;">' + value + '</span>';
+    return '<span>' + value + '</span>';
 }
 
 function tasksPassedCountFormatter(value) {

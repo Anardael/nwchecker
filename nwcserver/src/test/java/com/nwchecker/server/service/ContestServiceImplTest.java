@@ -47,9 +47,6 @@ public class ContestServiceImplTest {
     @Autowired
     private ContestService contestService;
 
-    @Autowired
-    DataSource dataSource;
-
     private List<Contest> contestList = new LinkedList<Contest>();
     private List<User> userList = new LinkedList<User>();
 

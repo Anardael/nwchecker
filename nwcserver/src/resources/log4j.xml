@@ -26,7 +26,7 @@
 
     <!-- debug mode appended to console-->
     <root> 
-        <priority value ="off" /> 
+        <priority value ="error" />
         <appender-ref ref="console" /> 
     </root>
   

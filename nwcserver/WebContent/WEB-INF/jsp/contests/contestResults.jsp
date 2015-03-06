@@ -34,10 +34,6 @@
         <div class="col-md-12">
             <div class="page-header">
                 <h2>
-                    <c:url var="backToRating" value="/rating.do"/>
-                    <a class="btn btn-md btn-info" href="${backToRating}">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
                     ${contestTitle}
                     <small class="pull-right">
                         <spring:message code="contest.results.started.caption"/>

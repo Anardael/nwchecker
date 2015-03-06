@@ -51,7 +51,7 @@
                 </c:if>
             </security:authorize>
             <ul class="col-sm-offset-2 col-sm-8 ">
-                <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center">
+                <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
                     <spring:message code="contest.caption"/></li>
                 <c:forEach items="${contests}" var="contest" varStatus="row">
                     <a class="list-group-item " data-toggle="collapse" data-parent="#accordion"

@@ -74,7 +74,7 @@ public class ListContestsController {
     @RequestMapping(value = "/setContestStatus.do", method = RequestMethod.POST)
     public
     @ResponseBody
-    ValidationResponse setContestStatus(@RequestParam("contestId") int contestId, @RequestParam("contestStatus") String contestStatus,
+    ValidationResponse setContestStatus(@RequestParam("contestId") int contestId, @RequestParam("contestStatus") Contest.Status contestStatus,
                                         @RequestParam("contestHidden") boolean contestHidden, Principal principal) {
         ValidationResponse result = new ValidationResponse();
         Contest contest = contestService.getContestByID(contestId);
@@ -82,23 +82,23 @@ public class ListContestsController {
         boolean isContestHiddenChanged = false;
         if (!contest.getStatus().toString().equals(contestStatus) && contest.getStatus() != Contest.Status.ARCHIVE) {
             switch (contestStatus) {
-                case "GOING": {
+                case GOING: {
                     contest.setStarts(new Date());
                     contest.setStatus(Contest.Status.GOING);
                     isContestStatusChanged = true;
                     break;
                 }
-                case "PREPARING": {
+                case PREPARING: {
                     contest.setStatus(Contest.Status.PREPARING);
                     isContestStatusChanged = true;
                     break;
                 }
-                case "RELEASE": {
+                case RELEASE: {
                     contest.setStatus(Contest.Status.RELEASE);
                     isContestStatusChanged = true;
                     break;
                 }
-                case "ARCHIVE": {
+                case ARCHIVE: {
                     contest.setStatus(Contest.Status.ARCHIVE);
                     isContestStatusChanged = true;
                     break;

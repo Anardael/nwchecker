@@ -27,7 +27,7 @@
 
         <div class="form-group col-sm-12" style="margin:auto">
             <ul class="col-sm-offset-2 col-sm-8 ">
-                <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center">
+                <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
                     <spring:message code="rating.caption"/>
                 </li>
                 <c:forEach var="archived" items="${archivedContests}" varStatus="row">

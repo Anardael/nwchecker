@@ -29,4 +29,9 @@ public class MainController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd yyyy HH:mm:ss");
         return simpleDateFormat.format(new Date());
     }
+
+    @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+    public String accessDenied() throws IllegalArgumentException {
+        return "access/accessDenied403";
+    }
 }
