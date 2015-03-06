@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -136,6 +137,14 @@ public class ContestServiceImplTest {
         String username = "user";
         boolean result = contestService.checkIfUserHaveAccessToContest(username, 1);
         assertTrue(result);
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testFalseCheckIfUserHaveAccessToContest() {
+        String username = "user";
+        boolean result = contestService.checkIfUserHaveAccessToContest(username, 2);
+        assertFalse(result);
     }
 
 }
