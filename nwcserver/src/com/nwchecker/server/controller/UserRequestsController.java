@@ -102,7 +102,7 @@ public class UserRequestsController {
      * @param usersUsername Usernames of users whose requests will be accepted
      * @param principal This is general information about user, who
      *                  tries to call this method
-     * @return Status "SUCCESS" or "FAIL"
+     * @return Status "SUCCESS"
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/acceptUserRequests", method = RequestMethod.POST)
@@ -134,7 +134,7 @@ public class UserRequestsController {
      * @param usersUsername Usernames of users whose requests will be denied
      * @param principal This is general information about user, who
      *                  tries to call this method
-     * @return Status "SUCCESS" or "FAIL"
+     * @return Status "SUCCESS"
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/declineUserRequests", method = RequestMethod.POST)

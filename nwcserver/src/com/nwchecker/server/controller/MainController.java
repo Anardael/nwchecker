@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Controller
 public class MainController {
-
     @RequestMapping("/index.do")
     public String main(HttpSession session, Model model) throws IllegalArgumentException {
         return "index";
@@ -33,5 +32,10 @@ public class MainController {
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
     public String accessDenied() throws IllegalArgumentException {
         return "access/accessDenied403";
+    }
+
+    @RequestMapping(value = "/pageNotFound", method = RequestMethod.GET)
+    public String pageNotFound() throws IllegalArgumentException {
+        return "access/pageNotFound404";
     }
 }

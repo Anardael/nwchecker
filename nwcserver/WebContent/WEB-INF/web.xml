@@ -92,6 +92,6 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/index.do</location>
+        <location>/pageNotFound.do</location>
     </error-page>
 </web-app>

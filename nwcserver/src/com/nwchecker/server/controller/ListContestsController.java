@@ -69,7 +69,7 @@ public class ListContestsController {
      *
      * @param principal This is general information about user, who
      *                  tries to call this method
-     * @return <b>JSON</b> Returns <b>List of Contests</b> in JSON format
+     * @return Returns <b>List of Contests</b> in JSON format
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
@@ -116,11 +116,10 @@ public class ListContestsController {
      * @param contestHidden <b>true</b> if contest need to be hidden
      * @param principal This is general information about user, who
      *                  tries to call this method
-     * @return Returns "SUCCESS" status if <b>success</b>.
-     *         Returns "FAIL" status if <b>fails</b>.
+     * @return Returns "SUCCESS" status.
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/setContestStatus.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/setContestStatus", method = RequestMethod.POST)
     public
     @ResponseBody
     ValidationResponse setContestStatus(@RequestParam("contestId") int contestId, @RequestParam("contestStatus") Contest.Status contestStatus,
