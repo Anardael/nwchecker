@@ -130,7 +130,7 @@ public class ContestController {
                                   Principal principal, BindingResult result
     ) {
         //Json response object:
-        ValidationResponse res = new ValidationResponse();
+        ValidationResponse res = ValidationResponse.createValidationResponse();
         //add logger info:
         LOG.info("\"" + principal.getName() + "\"" + " tries to " + (contestAddForm.getId() == 0 ? "create new" : "edit an existing") + " contest");
 
@@ -139,7 +139,7 @@ public class ContestController {
             if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestAddForm.getId())) {
                 res.setStatus("FAIL");
                 LinkedList<ErrorMessage> linkedList = new LinkedList<ErrorMessage>();
-                linkedList.add(new ErrorMessage("denied", null));
+                linkedList.add(ErrorMessage.createErrorMessage("denied", null));
                 res.setErrorMessageList(linkedList);
                 LOG.info("\"" + principal.getName() + "\"" + " have no access to edit an existing contest");
                 return res;
@@ -155,7 +155,7 @@ public class ContestController {
             List<FieldError> allErrors = result.getFieldErrors();
             List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
             for (FieldError objectError : allErrors) {
-                errorMessages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
+                errorMessages.add(ErrorMessage.createErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
             }
             //set all errors:
             res.setErrorMessageList(errorMessages);
@@ -220,7 +220,7 @@ public class ContestController {
         //get List of all Teacher users
         List<User> teachers = userService.getUsersByRole("ROLE_TEACHER");
         for (User u : teachers) {
-            UserJson newUser = new UserJson();
+            UserJson newUser = UserJson.createUserJson();
             newUser.setId(u.getUserId());
             newUser.setName(u.getDisplayName());
             newUser.setDepartment(u.getDepartment());
@@ -254,8 +254,6 @@ public class ContestController {
                 throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
             }
         }
-        //JSON response class:
-        ValidationResponse result = new ValidationResponse();
         //get Contest:
         Contest c = contestService.getContestByID(contestId);
         //if first element is "-1" - so there are no users in array.
@@ -277,9 +275,8 @@ public class ContestController {
             c.setUsers(null);
             contestService.mergeContest(c);
         }
-        //return SUCCESS status:
-        result.setStatus("SUCCESS");
-        return result;
+        //return SUCCESS status (response in JSON):
+        return ValidationResponse.createValidationResponse("SUCCESS");
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
@@ -291,7 +288,7 @@ public class ContestController {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
 
-        ValidationResponse result = new ValidationResponse();
+        ValidationResponse result = ValidationResponse.createValidationResponse();
         Contest contest = contestService.getContestByID(contestId);
         //validate task size:
         if (contest.getTasks() == null || contest.getTasks().size() == 0) {

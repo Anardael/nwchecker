@@ -1,7 +1,5 @@
 package com.nwchecker.server.model;
 
-import com.google.gson.annotations.Expose;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +22,6 @@ public class UserRequest {
     @JoinColumn(name = "userId")
     private User user;
     @Column(name = "request")
-    @Expose
     private String request;
 
     public UserRequest() {

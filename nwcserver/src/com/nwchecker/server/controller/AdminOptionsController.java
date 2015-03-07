@@ -1,7 +1,6 @@
 package com.nwchecker.server.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.nwchecker.server.json.UserListItemJson;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
@@ -21,13 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 /**
-*
-* @author Станіслав
-*/
+ * <h1>AdminOptionsController</h1>
+ * This spring controller contains mapped methods, that implements
+ * main administrator options.
+ * <p>
+ *     <b>Note:</b>Administrator allows to change users profile data.
+ * </p>
+ *
+ * @author Станіслав
+ * @version 1.0
+ * @since 2015-01-08
+ */
 @Controller
 public class AdminOptionsController {
 
@@ -41,26 +49,55 @@ public class AdminOptionsController {
 	
 	@Autowired
 	private RolesDescriptionValidator rolesDescriptionValidator;
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+
+    /**
+     * This mapped method used to return page when administrator
+     * can watch profile data of all users in system.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return users.jsp This returns page with list of users
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Principal principal) {
 		LOG.info("\"" + principal.getName() + "\" tries to access administrator page(users view).");
 		LOG.info("\"" + principal.getName() + "\" have access to administrator page(users view).");
 		return "adminOptions/users";
 	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+
+    /**
+     * This mapped method used to return general data about
+     * all users in JSON format.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal
+     * @return
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-	public @ResponseBody String getUsers(Principal principal) {
+	public @ResponseBody List<UserListItemJson> getUsers(Principal principal) {
 		LOG.info("\"" + principal.getName() + "\" tries to access users list.");
 		List<User> users = userService.getUsers();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String jsonData = gson.toJson(users.toArray());
+		List<UserListItemJson> jsonData = new ArrayList<>();
+        for (User user : users) {
+            jsonData.add(UserListItemJson.createUserListItemJson(user));
+        }
 		LOG.info("\"" + principal.getName() + "\" received users list.");
 		return jsonData;
 	}
-	
+
+    /**
+     * This mapped method used to return
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal
+     * @return
+     */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
 	public String user(@RequestParam(value = "Username") String username,
@@ -72,7 +109,15 @@ public class AdminOptionsController {
 		LOG.info("\"" + principal.getName() + "\" have access to user editing (" + username + ").");
 		return "adminOptions/userEdit";
 	}
-	
+
+    /**
+     * This mapped method used to return
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal
+     * @return
+     */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
 	public String changeUser(@ModelAttribute("userData") User userData, 
@@ -101,7 +146,15 @@ public class AdminOptionsController {
 		LOG.info("User \"" + user.getUsername() + "\" edited by \"" + principal.getName() + "\".");
 		return "redirect:admin.do";
 	}
-	
+
+    /**
+     * This method used to return
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param
+     * @return
+     */
 	private void setNewPassword(User user, String newPassword) {
 		if (!newPassword.isEmpty()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -110,14 +163,21 @@ public class AdminOptionsController {
 			LOG.info("User \"" + user.getUsername() + "\" password changed.");
 		}
 	}
-	
+
+    /**
+     * This mapped used to return
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param
+     * @return
+     */
 	private void setNewRoles(User user, String rolesDesc) {	
 		if (user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());
 		}
 		
-		Role[] userRoles = 
-				user.getRoles().toArray(new Role[user.getRoles().size()]);
+		Role[] userRoles = user.getRoles().toArray(new Role[user.getRoles().size()]);
 		for (Role role : userRoles) {
 			if (!rolesDesc.contains(role.getRole())) {
 				userService.deleteUserRole(user, role.getRole());
@@ -139,7 +199,15 @@ public class AdminOptionsController {
 			LOG.info("User \"" + user.getUsername() + "\" acquired USER rights.");
 		}
 	}
-	
+
+    /**
+     * This mapped method used to return
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal
+     * @return
+     */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(@RequestParam("username") String username, Principal principal) {

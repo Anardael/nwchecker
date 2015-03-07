@@ -51,8 +51,7 @@ public class ListContestsController {
         List<Contest> contests = contestService.getContests();
         LinkedList<ListContestsJson> listContestsJson = new LinkedList<>();
         for (Contest contest : contests) {
-            ListContestsJson lc = new ListContestsJson(contest);
-            listContestsJson.add(lc);
+            listContestsJson.add(ListContestsJson.createListContestsJson(contest));
         }
         LOG.info("\"" + principal.getName() + "\" received list of contests.");
         return listContestsJson;
@@ -62,12 +61,11 @@ public class ListContestsController {
     @RequestMapping(value = "/getContestStatus", method = RequestMethod.GET)
     @ResponseBody
     public StatusContestJson getContestStatus(@RequestParam("contestId") int contestId, Principal principal) {
-        StatusContestJson status = new StatusContestJson();
         LOG.info("\"" + principal.getName() + "\" tries to receive contest status.");
-        status.setStatusContest(contestService.getContestByID(contestId).getStatus().toString());
-        status.setContestHidden(contestService.getContestByID(contestId).isHidden());
+        String contestStatus = contestService.getContestByID(contestId).getStatus().toString();
+        boolean isContestHidden = contestService.getContestByID(contestId).isHidden();
         LOG.info("\"" + principal.getName() + "\" received contest status.");
-        return status;
+        return StatusContestJson.createStatusContestJson(contestStatus, isContestHidden);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -76,7 +74,6 @@ public class ListContestsController {
     @ResponseBody
     ValidationResponse setContestStatus(@RequestParam("contestId") int contestId, @RequestParam("contestStatus") Contest.Status contestStatus,
                                         @RequestParam("contestHidden") boolean contestHidden, Principal principal) {
-        ValidationResponse result = new ValidationResponse();
         Contest contest = contestService.getContestByID(contestId);
         boolean isContestStatusChanged = false;
         boolean isContestHiddenChanged = false;
@@ -116,9 +113,8 @@ public class ListContestsController {
         } else if (isContestHiddenChanged) {
             contestService.mergeContest(contest);
         }
-        //return SUCCESS status:
-        result.setStatus("SUCCESS");
-        return result;
+        //return SUCCESS status (in JSON):
+        return ValidationResponse.createValidationResponse("SUCCESS");
     }
 }
 

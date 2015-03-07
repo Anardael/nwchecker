@@ -16,14 +16,20 @@ public class UserJson {
     private String department;
     private boolean chose;
 
-    public UserJson(int id, String name, String department, boolean chose) {
-        this.id = String.valueOf(id);
-        this.name = name;
-        this.department = department;
-        this.chose = chose;
+    private UserJson() {
     }
 
-    public UserJson() {
+    public static UserJson createUserJson() {
+        return new UserJson();
+    }
+
+    public static UserJson createUserJson(int id, String name, String department, boolean chose) {
+        UserJson json = new UserJson();
+        json.id = String.valueOf(id);
+        json.name = name;
+        json.department = department;
+        json.chose = chose;
+        return json;
     }
 
     public String getId() {

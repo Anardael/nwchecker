@@ -13,21 +13,24 @@ import java.util.List;
 public class ListContestsJson {
     private int id;
     private String title;
-    private List<String> users = new LinkedList<>();
+    private List<String> users;
     private Date starts;
     private Contest.Status status;
 
-    public ListContestsJson() {
+    private ListContestsJson() {
     }
 
-    public ListContestsJson(Contest contest) {
-        this.id = contest.getId();
-        this.title = contest.getTitle();
+    public static ListContestsJson createListContestsJson(Contest contest) {
+        ListContestsJson json = new ListContestsJson();
+        json.id = contest.getId();
+        json.title = contest.getTitle();
+        json.users = new LinkedList<>();
         for (User user : contest.getUsers()) {
-            this.users.add(user.getDisplayName());
+            json.users.add(user.getDisplayName());
         }
-        this.starts = contest.getStarts();
-        this.status = contest.getStatus();
+        json.starts = contest.getStarts();
+        json.status = contest.getStatus();
+        return json;
     }
 
     public int getId() {

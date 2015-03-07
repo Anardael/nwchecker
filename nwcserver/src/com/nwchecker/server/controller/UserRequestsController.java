@@ -62,8 +62,7 @@ public class UserRequestsController {
         List<User> users = userService.getUsersWithRequests();
         LinkedList<UserRequestsJson> userRequestsJson = new LinkedList<>();
         for (User user : users) {
-            UserRequestsJson ur = new UserRequestsJson(user);
-            userRequestsJson.add(ur);
+            userRequestsJson.add(UserRequestsJson.createUserRequestsJson(user));
         }
         LOG.info("\"" + principal.getName()
                 + "\" received users requests list.");
@@ -89,9 +88,7 @@ public class UserRequestsController {
             userService.updateUser(user);
             LOG.info("Request from \"" + user.getUsername() + "\" for role \"Teacher\" is accepted.");
         }
-        ValidationResponse result = new ValidationResponse();
-        result.setStatus("Success");
-        return result;
+        return ValidationResponse.createValidationResponse("Success");
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -112,8 +109,6 @@ public class UserRequestsController {
             userService.updateUser(user);
             LOG.info("Request from \"" + user.getUsername() + "\" for role \"Teacher\" is declined.");
         }
-        ValidationResponse result = new ValidationResponse();
-        result.setStatus("Success");
-        return result;
+        return ValidationResponse.createValidationResponse("Success");
     }
 }

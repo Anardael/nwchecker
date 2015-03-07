@@ -13,6 +13,21 @@ public class ValidationResponse {
     private String result;
     private List<ErrorMessage> errorMessageList;
 
+    private ValidationResponse() {
+    }
+
+    public static ValidationResponse createValidationResponse() {
+        return new ValidationResponse();
+    }
+
+    public static ValidationResponse createValidationResponse(String status) {
+        ValidationResponse validationResponse = new ValidationResponse();
+        validationResponse.status = status;
+        validationResponse.result = "";
+        validationResponse.errorMessageList = null;
+        return validationResponse;
+    }
+
     public String getStatus() {
         return status;
     }

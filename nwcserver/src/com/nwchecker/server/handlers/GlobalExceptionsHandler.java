@@ -32,10 +32,10 @@ public class GlobalExceptionsHandler {
     @ResponseBody
     ValidationResponse handleMaxUploadException(MaxUploadSizeExceededException e,
                                                 HttpServletRequest request, HttpServletResponse response) {
-        ValidationResponse validationResponse = new ValidationResponse();
+        ValidationResponse validationResponse = ValidationResponse.createValidationResponse();
         validationResponse.setStatus("FAIL");
         LinkedList<ErrorMessage> errors = new LinkedList<ErrorMessage>();
-        errors.add(new ErrorMessage("uploadSize", null));
+        errors.add(ErrorMessage.createErrorMessage("uploadSize", null));
         validationResponse.setErrorMessageList(errors);
         return validationResponse;
     }
@@ -44,10 +44,11 @@ public class GlobalExceptionsHandler {
     @ResponseBody
     public ValidationResponse handleAccessDenied(ContestAccessDenied contestAccessDenied) {
         LOG.warn(contestAccessDenied.getMessage());
-        ValidationResponse jsonResult = new ValidationResponse();
+        ValidationResponse jsonResult = ValidationResponse.createValidationResponse();
         jsonResult.setStatus("FAIL");
         LinkedList<ErrorMessage> linkedList = new LinkedList<ErrorMessage>();
-        ErrorMessage errorMessage = new ErrorMessage("denied", "You have no permissions for this action.");
+        ErrorMessage errorMessage =
+                ErrorMessage.createErrorMessage("denied", "You have no permissions for this action.");
         linkedList.add(errorMessage);
         jsonResult.setErrorMessageList(linkedList);
         return jsonResult;

@@ -125,10 +125,8 @@ public class ProfileController {
 		UserRequest newUserRequest = new UserRequest(user,request);
 		user.getRequests().add(newUserRequest);
 		userService.updateUser(user);
-		ValidationResponse result = new ValidationResponse();
-		result.setStatus("Success");
         LOG.info("\"" + principal.getName() + "\" made request for role \"Teacher\".");
-		return result;
+		return ValidationResponse.createValidationResponse("Success");
 	}
 
 }

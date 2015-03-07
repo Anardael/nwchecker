@@ -67,7 +67,7 @@ public class TaskController {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
         //Json response object:
-        ValidationResponse res = new ValidationResponse();
+        ValidationResponse res = ValidationResponse.createValidationResponse();
         //validation in new TaskValidator:
         taskValidator.validate(task, result);
         //if there are errors:
@@ -78,7 +78,7 @@ public class TaskController {
             List<FieldError> allErrors = result.getFieldErrors();
             List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
             for (FieldError objectError : allErrors) {
-                errorMessages.add(new ErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
+                errorMessages.add(ErrorMessage.createErrorMessage(objectError.getField(), messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
             }
             //set all errors:
             res.setErrorMessageList(errorMessages);
@@ -133,7 +133,6 @@ public class TaskController {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
-        ValidationResponse result = new ValidationResponse();
         Contest c = contestService.getContestByID(contestId);
         for (int i = 0; i < c.getTasks().size(); i++) {
             if (c.getTasks().get(i).getId() == taskId) {
@@ -142,8 +141,7 @@ public class TaskController {
         }
         contestService.updateContest(c);
         LOG.info("Task (id=" + taskId + ") have been successfully deleted.");
-        result.setStatus("SUCCESS");
-        return result;
+        return ValidationResponse.createValidationResponse("SUCCESS");
     }
 
     //get taskModalForm by Json request:
@@ -213,10 +211,8 @@ public class TaskController {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)) {
             throw new ContestAccessDenied(principal.getName() + " tried to edit Contest. Access denied.");
         }
-        ValidationResponse validationResponse = new ValidationResponse();
         //delete taskData:
         taskService.deleteTaskData(testId);
-        validationResponse.setStatus("SUCCESS");
-        return validationResponse;
+        return ValidationResponse.createValidationResponse("SUCCESS");
     }
 }

@@ -5,9 +5,14 @@ public class ErrorMessage {
     private String fieldName;
     private String message;
 
-    public ErrorMessage(String fieldName, String message) {
-        this.fieldName = fieldName;
-        this.message = message;
+    private ErrorMessage() {
+    }
+
+    public static ErrorMessage createErrorMessage(String fieldName, String message) {
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.fieldName = fieldName;
+        errorMessage.message = message;
+        return errorMessage;
     }
 
     public String getFieldName() {

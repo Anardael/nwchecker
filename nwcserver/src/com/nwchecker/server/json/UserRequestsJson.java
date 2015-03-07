@@ -4,8 +4,8 @@ import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ReaktorDTR on 31.01.2015.
@@ -15,35 +15,33 @@ public class UserRequestsJson {
     private int userId;
     private String username;
     private String displayName;
-    private Set<Role> roles = new HashSet<>();
+    private List<RoleJson> roles;
     private String email;
     private String department;
     private String info;
-    private Set<UserRequest> requests = new HashSet<>();
+    private List<RequestJson> requests;
 
-    public UserRequestsJson() {
+    private UserRequestsJson() {
     }
 
-    public UserRequestsJson(User user) {
-        this.checked = false;
-        this.userId = user.getUserId();
-        this.username = user.getUsername();
-        this.displayName = user.getDisplayName();
+    public static UserRequestsJson createUserRequestsJson(User user) {
+        UserRequestsJson json = new UserRequestsJson();
+        json.checked = false;
+        json.userId = user.getUserId();
+        json.username = user.getUsername();
+        json.displayName = user.getDisplayName();
+        json.roles = new ArrayList<>();
         for (Role role : user.getRoles()) {
-            Role roleJson = new Role();
-            roleJson.setRoleId(role.getRoleId());
-            roleJson.setRole(role.getRole());
-            this.roles.add(roleJson);
+            json.roles.add(RoleJson.createRoleJson(role));
         }
-        this.email = user.getEmail();
-        this.department = user.getDepartment();
-        this.info = user.getInfo();
+        json.email = user.getEmail();
+        json.department = user.getDepartment();
+        json.info = user.getInfo();
+        json.requests = new ArrayList<>();
         for (UserRequest userRequest : user.getRequests()) {
-            UserRequest userRequestJson = new UserRequest();
-            userRequestJson.setRequestId(userRequest.getRequestId());
-            userRequestJson.setRequest(userRequest.getRequest());
-            this.requests.add(userRequestJson);
+            json.requests.add(RequestJson.createUserRequestsJson(userRequest));
         }
+        return json;
     }
 
     public boolean isChecked() {
@@ -78,11 +76,11 @@ public class UserRequestsJson {
         this.displayName = displayName;
     }
 
-    public Set<Role> getRoles() {
+    public List<RoleJson> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<RoleJson> roles) {
         this.roles = roles;
     }
 
@@ -110,11 +108,11 @@ public class UserRequestsJson {
         this.info = info;
     }
 
-    public Set<UserRequest> getRequests() {
+    public List<RequestJson> getRequests() {
         return requests;
     }
 
-    public void setRequests(Set<UserRequest> requests) {
+    public void setRequests(List<RequestJson> requests) {
         this.requests = requests;
     }
 }
