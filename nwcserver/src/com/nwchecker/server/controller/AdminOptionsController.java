@@ -25,14 +25,13 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * <h1>AdminOptionsController</h1>
+ * <h1>Admin Options Controller</h1>
  * This spring controller contains mapped methods, that implements
  * main administrator options.
  * <p>
- *     <b>Note:</b>Administrator allows to change users profile data.
- * </p>
+ * <b>Note:</b>Only administrator allows to change users profile data.
  *
- * @author Станіслав
+ * @author Stanislav Krasovskyi
  * @version 1.0
  * @since 2015-01-08
  */
@@ -51,14 +50,14 @@ public class AdminOptionsController {
 	private RolesDescriptionValidator rolesDescriptionValidator;
 
     /**
-     * This mapped method used to return page when administrator
+     * This mapped method used to return page where administrator
      * can watch profile data of all users in system.
      * <p>
      * <b>Note:</b>Only ADMIN has rights to use this method.
      *
      * @param principal This is general information about user, who
      *                  tries to call this method
-     * @return users.jsp This returns page with list of users
+     * @return <b>users.jsp</b> Returns page with list of users
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -74,8 +73,9 @@ public class AdminOptionsController {
      * <p>
      * <b>Note:</b>Only ADMIN has rights to use this method.
      *
-     * @param principal
-     * @return
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>JSON</b> Returns <b>List of Users</b> in JSON format
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
@@ -91,12 +91,16 @@ public class AdminOptionsController {
 	}
 
     /**
-     * This mapped method used to return
+     * This mapped method used to return page where administrator
+     * can edit profile data of selected user.
      * <p>
      * <b>Note:</b>Only ADMIN has rights to use this method.
      *
-     * @param principal
-     * @return
+     * @param username Username of selected user
+     * @param model Spring Framework model for this page
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>userEdit.jsp</b> Returns page that allows to change user data
      */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
@@ -111,12 +115,19 @@ public class AdminOptionsController {
 	}
 
     /**
-     * This mapped method used to return
+     * This mapped method used to receive modified user's data
+     * and update this user in database.
      * <p>
      * <b>Note:</b>Only ADMIN has rights to use this method.
      *
-     * @param principal
-     * @return
+     * @param userData Data set that contains new information about user
+     * @param rolesDesc String that contains new user roles. Example: {@code "ROLE_TEACHER;ROLE_USER;"}
+     * @param result General spring interface that used in data validation
+     * @param model Spring Framework model for this page
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Redirects to users list page if <b>success</b>.
+     *         Shows validation errors on page if <b>validation fails</b>.
      */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/changeUser", method = RequestMethod.POST)
@@ -134,7 +145,7 @@ public class AdminOptionsController {
 			return "adminOptions/userEdit";
 		}
 		LOG.info("User \"" + userData.getUsername() + "\" data validation passed.");
-		
+
 		setNewPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
@@ -148,12 +159,11 @@ public class AdminOptionsController {
 	}
 
     /**
-     * This method used to return
+     * This method used to set new user's password.
      * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
      *
-     * @param
-     * @return
+     * @param user User whose password will be changed
+     * @param newPassword String that will be hashed and set as new password
      */
 	private void setNewPassword(User user, String newPassword) {
 		if (!newPassword.isEmpty()) {
@@ -165,12 +175,13 @@ public class AdminOptionsController {
 	}
 
     /**
-     * This mapped used to return
+     * This method used to set new user's roles.
      * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
+     * <b>Note:</b>If user already has required role -
+     * role will not be changed in database.
      *
-     * @param
-     * @return
+     * @param user User whose roles will be changed
+     * @param rolesDesc String that contains new user roles. Example: {@code "ROLE_TEACHER;ROLE_USER;"}
      */
 	private void setNewRoles(User user, String rolesDesc) {	
 		if (user.getRoles() == null) {
@@ -201,12 +212,14 @@ public class AdminOptionsController {
 	}
 
     /**
-     * This mapped method used to return
+     * This mapped method used to delete user by username.
      * <p>
      * <b>Note:</b>Only ADMIN has rights to use this method.
      *
-     * @param principal
-     * @return
+     * @param username Username of user that will be deleted from database
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Redirects to users list page
      */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)

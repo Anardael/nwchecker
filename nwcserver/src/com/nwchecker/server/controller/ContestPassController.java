@@ -34,8 +34,16 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Created by Роман on 11.02.2015.
- * Modified by Станіслав many times :-) (12.02.2015 - 03.03.2015)
+ * <h1>Contest Pass Controller</h1>
+ * This spring controller contains mapped methods, that allows users
+ * to pass contests and view contests results.
+ * <p>
+ * <b>Note:</b>Only USERs allows to took part in contests.
+ *
+ * @author Roman Zayats
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ * @since 2015-03-03
  */
 @Controller("contestPassController")
 public class ContestPassController {
@@ -51,7 +59,19 @@ public class ContestPassController {
     @Autowired
     private CompilerDAO compilerService;
 
-
+    /**
+     * This mapped method used to return page that allows user to
+     * pass contest.
+     * <p>
+     * <b>Note:</b>Only USER has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param taskId Id of selected task
+     * @param model Spring Framework model for this page
+     * @return Page when user can continue passing contest if <b>success</b>.
+     *         Page <b>accessDenied403.jsp</b> if <b>fails</b>.
+     */
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
@@ -127,6 +147,22 @@ public class ContestPassController {
         return "contests/contestPass";
     }
 
+    /**
+     * This mapped method used to receive user's answer for one task,
+     * send this data to <b>checker</b>, receive answer and return it
+     * to user.
+     * <p>
+     * <b>Note:</b>Only USER has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param taskId ID of task that submits
+     * @param compilerId ID of compiler that must be used to by checker
+     * @param file File that contains user's source code that get solution
+     *             of task problem
+     * @return Result data
+     * @throws IOException If problems occurs while file sending/receiving
+     */
     @RequestMapping(value = "/submitTask", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public
@@ -158,6 +194,14 @@ public class ContestPassController {
         return result;
     }
 
+    /**
+     * This mapped method used to return page when user
+     * can view completed contests.
+     * <p>
+     *
+     * @param model Spring Framework model for this page
+     * @return <b>rating.jsp</b> Returns page with completed contests list
+     */
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
         List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
@@ -167,6 +211,15 @@ public class ContestPassController {
         return "contests/rating";
     }
 
+    /**
+     * This mapped method used to show page that contains
+     * contest results of contest participants.
+     * <p>
+     *
+     * @param model Spring Framework model for this page
+     * @param id ID of contest
+     * @return <b>contestResults.jsp</b> Returns page with contest statistic
+     */
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
         model.addAttribute("contestId", id);
@@ -181,6 +234,14 @@ public class ContestPassController {
         return "contests/contestResults";
     }
 
+    /**
+     * This mapped method used to return results of contest
+     * participants in JSON format.
+     * <p>
+     *
+     * @param id ID of contest
+     * @return <b>JSON</b> Returns <b>results of contest participants</b>
+     */
     @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
     public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int id) {
         List<ContestPass> contestPasses = contestPassService.getContestPasses(id);

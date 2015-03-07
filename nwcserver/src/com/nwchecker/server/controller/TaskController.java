@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.exceptions.ContestAccessDenied;
@@ -41,6 +36,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * <h1>Task Controller</h1>
+ * This spring controller contains mapped methods, that
+ * allows teacher to create, edit and remove tasks from
+ * edited contest.
+ * <p>
+ * <b>Note:</b>Only teacher allows to create and change tasks.
+ * Other users can only view tasks information
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @Controller
 public class TaskController {
 
@@ -56,6 +63,22 @@ public class TaskController {
     @Autowired
     private TaskValidator taskValidator;
 
+    /**
+     * This mapped method used to receive new task
+     * data and create new task.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of contest that task belongs to
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param request HttpServletRequest object
+     * @param task Data set that contains new information about new task
+     * @param result General spring interface that used in data validation
+     * @return Status "SUCCESS" or "FAIL"
+     * @throws MaxUploadSizeExceededException The size of uploading file is higher than allows
+     * @throws IOException Error occurred while sending/receiving file
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/newTaskJson.do", method = RequestMethod.POST)
     public
@@ -125,6 +148,17 @@ public class TaskController {
         return res;
     }
 
+    /**
+     * This mapped method used to delete task from contest.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of contest that task belongs to
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param taskId ID of task that will be removed
+     * @return Status "SUCCESS" or "FAIL"
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/deleteTaskJson.do", method = RequestMethod.GET)
     public
@@ -144,7 +178,17 @@ public class TaskController {
         return ValidationResponse.createValidationResponse("SUCCESS");
     }
 
-    //get taskModalForm by Json request:
+    /**
+     * This mapped method used to return new modal form
+     * for task edit.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param model Spring Framework model for this page
+     * @param taskId ID of task
+     * @param contestId ID of contest that task belongs to
+     * @return <b>createNewTaskForm.jsp</b> Returns modal form for task edit
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/newTaskForm.do", method = RequestMethod.GET)
     public String newTaskFormJson(Model model, @RequestParam("taskId") int taskId,
@@ -163,6 +207,19 @@ public class TaskController {
         return "fragments/createNewTaskForm";
     }
 
+    /**
+     * This mapped method used to receive task test data.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param testId ID of test
+     * @param type Type of test data
+     * @param response HttpServletResponse object
+     * @throws IOException Error occurred while sending/receiving file
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/getTaskTestData", method = RequestMethod.GET)
     public void getFile(@RequestParam("contestId") int contestId, Principal principal,
@@ -187,6 +244,19 @@ public class TaskController {
         response.flushBuffer();
     }
 
+    /**
+     * This mapped method used to return list of task tests.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of contest that task belongs to
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param taskId ID of task
+     * @param localTaskId Task ID that used in current page
+     * @param model Spring Framework model for this page
+     * @return Returns list of task tests
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/getAvailableTests", method = RequestMethod.GET)
     public String getTestFiles(@RequestParam("contestId") int contestId, Principal principal,
@@ -202,6 +272,17 @@ public class TaskController {
 
     }
 
+    /**
+     * This mapped method used to delete test task file.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param testId ID of test
+     * @return Status "SUCCESS" or "FAIL"
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/deleteTaskTestFile", method = RequestMethod.GET)
     public

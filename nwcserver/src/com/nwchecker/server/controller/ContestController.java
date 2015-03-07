@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.exceptions.ContestAccessDenied;
@@ -39,7 +34,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Роман
+ * <h1>Contest Controller</h1>
+ * This spring controller contains mapped methods, that allows
+ * to read, create and edit contests in database.
+ * <p>
+ * <b>Note:</b>Only teacher allows to create and change contests.
+ * Other users can only view contests information
+ *
+ * @author Roman Zayats
+ * @version 1.0
  */
 @Controller("contestController")
 public class ContestController {
@@ -65,7 +68,15 @@ public class ContestController {
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
 
-
+    /**
+     * This mapped method used to return page with contests list
+     * <p>
+     *
+     * @param model Spring Framework model for this page
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>contest.jsp</b> Returns page when user can view contests
+     */
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
         //get all available сontests from DB:
@@ -111,6 +122,17 @@ public class ContestController {
         return "contests/contest";
     }
 
+    /**
+     * This mapped method used to return page when teacher
+     * can create new contest.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param model Spring Framework model for this page
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>contestCreate.jsp</b> Returns page where user can create new contest
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
@@ -122,6 +144,19 @@ public class ContestController {
         return "contests/contestCreate";
     }
 
+    /**
+     * This mapped method used to receive new contest data and
+     * create new contest in database.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestAddForm Data set that contains information about new contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param result General spring interface that used in data validation
+     * @return Returns "SUCCESS" status if <b>success</b>.
+     *         Returns "FAIL" status if <b>fails</b>.
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.POST)
     public
@@ -186,6 +221,18 @@ public class ContestController {
         return res;
     }
 
+    /**
+     * This mapped method used to return page where teacher
+     * can edit selected contest.
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param id ID of contest that will be edited
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param model Spring Framework model for this page
+     * @return <b>contestCreate.jsp</b> Returns page where teacher can edit contest
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
@@ -199,6 +246,17 @@ public class ContestController {
         return "contests/contestCreate";
     }
 
+    /**
+     * This mapped method used to return list of teachers that
+     * have rights to edit this contest.
+     * <p>
+     * <b>Note:</b>Only TEACHERs and ADMINs have rights to use this method.
+     *
+     * @param contestId ID of selected contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>JSON</b> Returns <b>List of Teachers</b> than can edit this contest
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public
@@ -242,6 +300,19 @@ public class ContestController {
         return result;
     }
 
+    /**
+     * This mapped method used to set list of teachers that
+     * have rights to edit this contest.
+     * <p>
+     * <b>Note:</b>Only TEACHERs and ADMINs have rights to use this method.
+     *
+     * @param contestId ID of selected contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param userIds List of users IDs that will have rights to edit contest
+     * @return Returns "SUCCESS" status if <b>success</b>.
+     *         Returns "FAIL" status if <b>fails</b>.
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/setContestUsers.do", method = RequestMethod.POST)
     public
@@ -279,6 +350,16 @@ public class ContestController {
         return ValidationResponse.createValidationResponse("SUCCESS");
     }
 
+    /**
+     * This mapped method used to change contest status to "RELEASE"
+     * <p>
+     * <b>Note:</b>Only TEACHER has rights to use this method.
+     *
+     * @param contestId ID of selected contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Returns status "TASK_SIZE", "FAIL_EMPTY", "FAIL_STARTS" or "SUCCESS"
+     */
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/stopContestPrepare.do", method = RequestMethod.GET)
     public

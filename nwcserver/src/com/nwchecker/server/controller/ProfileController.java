@@ -26,6 +26,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+/**
+ * <h1>Profile Controller</h1>
+ * This spring controller contains mapped methods, that
+ * allows user to edit his profile data.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 @Controller
 @SessionAttributes("user")
 public class ProfileController {
@@ -47,7 +56,18 @@ public class ProfileController {
 		dataBinder.setDisallowedFields("id");
 		dataBinder.setValidator(userProfileValidator);
 	}
-	
+
+    /**
+     * This mapped method used to return page where user
+     * can change his profile data.
+     * <p>
+     * <b>Note:</b>user need to be authenticated.
+     *
+     * @param model Spring Framework model for this page
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>profile.jsp</b> Returns page where user can change his profile data
+     */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = {"/profile", "/changePassword"}, method = RequestMethod.GET)
 	public String initProfileForm(ModelMap model, Principal principal) {
@@ -58,6 +78,18 @@ public class ProfileController {
 		return "profileOptions/profile";
 	}
 
+    /**
+     * This mapped method used to receive changed profile data
+     * and update user in database.
+     * <p>
+     * <b>Note:</b>user needs to be authenticated.
+     *
+     * @param user Data set that contains new information about user
+     * @param result General spring interface that used in data validation
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param model Spring Framework model for this page
+     */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
@@ -80,7 +112,18 @@ public class ProfileController {
 			return "profileOptions/profile";
 		}
 	}
-	
+
+    /**
+     * This mapped method used to receive new user password
+     * and update user in database.
+     * <p>
+     * <b>Note:</b>user needs to be authenticated.
+     *
+     * @param request HttpServletRequest object
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param model Spring Framework model for this page
+     */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model) {
@@ -115,6 +158,16 @@ public class ProfileController {
 		return "profileOptions/profile";
 	}
 
+    /**
+     * This mapped method used to add new user request in database.
+     * <p>
+     * <b>Note:</b>user needs to be authenticated.
+     *
+     * @param request HttpServletRequest object
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Status "SUCCESS" or "FAIL"
+     */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/addUserRequest", method = RequestMethod.POST)
 	public @ResponseBody

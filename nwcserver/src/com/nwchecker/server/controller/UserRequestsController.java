@@ -24,9 +24,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by ReaktorDTR on 25.01.2015.
+ * <h1>User Requests Controller</h1>
+ * This spring controller contains mapped methods, that
+ * allows to work with users requests.
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-01-25
  */
-
 @Controller
 @SessionAttributes("user")
 public class UserRequestsController {
@@ -47,6 +52,16 @@ public class UserRequestsController {
         dataBinder.setValidator(validator);
     }
 
+    /**
+     * This mapped method used to return page where administrator
+     * can view list of users requests.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>userRequests.jsp</b> Returns page where admin ca view list of users requests
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/userRequests", method = RequestMethod.GET)
     public String userRequests(Principal principal) {
@@ -54,6 +69,16 @@ public class UserRequestsController {
         return "adminOptions/userRequests";
     }
 
+    /**
+     * This mapped method used to return list of users requests
+     * in JSON format.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>JSON</b> Returns <b>list of users requests</b> in JSON
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getUsersWithRequests", method = RequestMethod.GET)
     @ResponseBody
@@ -69,6 +94,16 @@ public class UserRequestsController {
         return userRequestsJson;
     }
 
+    /**
+     * This mapped method used to accept some of users requests.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param usersUsername Usernames of users whose requests will be accepted
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Status "SUCCESS" or "FAIL"
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/acceptUserRequests", method = RequestMethod.POST)
     public
@@ -91,6 +126,16 @@ public class UserRequestsController {
         return ValidationResponse.createValidationResponse("Success");
     }
 
+    /**
+     * This mapped method used to deny some of users requests.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param usersUsername Usernames of users whose requests will be denied
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Status "SUCCESS" or "FAIL"
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/declineUserRequests", method = RequestMethod.POST)
     public

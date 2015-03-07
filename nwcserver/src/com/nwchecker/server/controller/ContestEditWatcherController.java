@@ -14,7 +14,15 @@ import org.springframework.web.context.request.async.DeferredResult;
 import java.security.Principal;
 
 /**
- * Created by Роман on 21.02.2015.
+ * <h1>Contest Edit Watcher Controller</h1>
+ * This spring controller contains mapped methods, that used
+ * to synchronize teachers access and prevent simultaneous editing
+ * of the same contest by multiple users.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ * @since 2015-02-21
  */
 @Controller("ContestEditWatcherController")
 public class ContestEditWatcherController {
@@ -31,7 +39,14 @@ public class ContestEditWatcherController {
 
     private static final long REQUEST_CONTEST_STILL_EDIT_TIME_OUT = 1500;
 
-    //method for indicate if Contest is currently editing by someone:
+    /**
+     * This mapped method used to indicate if Contest is currently editing by someone.
+     * <p>
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param id ID of contest
+     */
     @RequestMapping("/checkContestEdit")
     @ResponseBody
     public DeferredResult<String> checkIfContestEditing(Principal principal, @RequestParam(value = "id") final int id) {
@@ -68,7 +83,14 @@ public class ContestEditWatcherController {
         }
     }
 
-    //method for set Contest editing by user:
+    /**
+     * This mapped method used to set Contest editing by user.
+     * <p>
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param id ID of contest
+     */
     @RequestMapping("/editingContest")
     @ResponseBody
     public DeferredResult<String> editingContest(Principal principal, @RequestParam(value = "id") final int id) {

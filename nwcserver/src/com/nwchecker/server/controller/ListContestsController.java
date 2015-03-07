@@ -22,7 +22,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by ReaktorDTR on 06.02.2015.
+ * <h1>List Contests Controller</h1>
+ * This spring controller contains mapped methods, that
+ * allows administrator to view list of contests and
+ * edit contests parameters.
+ * <p>
+ * <b>Note:</b>Only ADMIN allows to use this methods.
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-02-06
  */
 @Controller
 @SessionAttributes("user")
@@ -36,6 +45,16 @@ public class ListContestsController {
     @Autowired
     private ScheduleService scheduleService;
 
+    /**
+     * This mapped method used to return page where admin can
+     * view all contests.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>listContests.jsp</b> Returns page when admin can watch contests
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/listContests", method = RequestMethod.GET)
     public String userRequests(Principal principal) {
@@ -43,6 +62,15 @@ public class ListContestsController {
         return "adminOptions/listContests";
     }
 
+    /**
+     * This mapped method used to list of contests in JSON.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return <b>JSON</b> Returns <b>List of Contests</b> in JSON format
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
     @ResponseBody
@@ -57,6 +85,16 @@ public class ListContestsController {
         return listContestsJson;
     }
 
+    /**
+     * This mapped method used to return contest status.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param contestId ID of contest
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Contest status
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getContestStatus", method = RequestMethod.GET)
     @ResponseBody
@@ -68,6 +106,19 @@ public class ListContestsController {
         return StatusContestJson.createStatusContestJson(contestStatus, isContestHidden);
     }
 
+    /**
+     * This mapped method used to change selected contest status.
+     * <p>
+     * <b>Note:</b>Only ADMIN has rights to use this method.
+     *
+     * @param contestId ID of contest
+     * @param contestStatus New contest status
+     * @param contestHidden <b>true</b> if contest need to be hidden
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @return Returns "SUCCESS" status if <b>success</b>.
+     *         Returns "FAIL" status if <b>fails</b>.
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/setContestStatus.do", method = RequestMethod.POST)
     public
