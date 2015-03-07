@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ReaktorDTR on 31.01.2015.
+ * <h1>User Requests Json</h1>
+ * JSON object that contains valuable data of some UserRequest object.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-01-31
  */
 public class UserRequestsJson {
     boolean checked;

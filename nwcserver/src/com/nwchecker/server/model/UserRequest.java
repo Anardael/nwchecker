@@ -8,8 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 /**
- * Created by ReaktorDTR on 23.01.2015.
+ * <h1>Role Entity</h1>
+ * Entity that represents one request of some User in DB.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-01-23
  */
 @Entity
 @Table(name = "UserRequest")

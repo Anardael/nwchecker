@@ -12,7 +12,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * Created by Станіслав on 22.02.2015.
+ * <h1>Compiler Entity</h1>
+ * Entity that represents some Compiler in DB.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ * @since 2015-02-22
  */
 @Entity
 @Table(name = "compiler")

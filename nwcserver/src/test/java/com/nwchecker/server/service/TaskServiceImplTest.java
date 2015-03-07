@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package test.java.com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDAO;
@@ -29,7 +24,12 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 /**
- * @author Роман
+ * <h1>TaskServiceImpl Test</h1>
+ * Test for TaskServiceImpl methods.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TaskServiceImplTest {

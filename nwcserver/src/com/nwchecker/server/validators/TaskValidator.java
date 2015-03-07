@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Task;
@@ -14,6 +9,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * <h1>Task Validator</h1>
+ * Validator that used to validate data from Task Create modal form.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @Component
 public class TaskValidator implements Validator {
 

@@ -29,7 +29,7 @@
     <jsp:include page="../fragments/bodyHeader.jsp">
         <jsp:param name="pageName" value="userRequests"/>
     </jsp:include>
-
+    <!-- Users Requests table -->
     <div class="row">
         <c:url var="dataUrl" value="/getUsersWithRequests.do"/>
         <table id="usersData" data-toggle="table" data-striped="true"
@@ -83,7 +83,7 @@
         </div>
     </div>
 </div>
-
+<!-- Footer -->
 <jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

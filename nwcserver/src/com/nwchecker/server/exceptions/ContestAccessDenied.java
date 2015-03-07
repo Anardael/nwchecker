@@ -1,7 +1,13 @@
 package com.nwchecker.server.exceptions;
 
 /**
- * Created by Роман on 21.02.2015.
+ * <h1>Contest Access Denied</h1>
+ * Exception for Access Denied situation.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ * @since 2015-02-21
  */
 public class ContestAccessDenied extends RuntimeException {
 

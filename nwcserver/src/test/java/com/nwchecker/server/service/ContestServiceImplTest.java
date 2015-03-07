@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package test.java.com.nwchecker.server.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -32,7 +27,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author Роман
+ * <h1>ContestServiceImpl Test</h1>
+ * Test for ContestServiceImpl methods.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})

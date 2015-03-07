@@ -1,7 +1,13 @@
 package com.nwchecker.server.json;
 
 /**
- * Created by ReaktorDTR on 04.03.2015.
+ * <h1>Status Contest Json</h1>
+ * JSON object that encapsulates data about Status of some Contest.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-03-04
  */
 public class StatusContestJson {
 

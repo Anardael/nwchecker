@@ -8,6 +8,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * <h1>User Registration Validator</h1>
+ * Validator that used to validate new user data from Registration page.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 @Component
 public class UserRegistrationValidator implements Validator {
 

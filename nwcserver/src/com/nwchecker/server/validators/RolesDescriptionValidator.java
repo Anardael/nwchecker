@@ -5,9 +5,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
-*
-* @author Станіслав
-*/
+ * <h1>Roles Description Validator</h1>
+ * Validator that used to validate roles data from User Edit page.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ */
 @Component
 public class RolesDescriptionValidator implements Validator {
 

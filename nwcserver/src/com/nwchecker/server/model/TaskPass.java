@@ -11,7 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Created by Роман on 11.02.2015.
+ * <h1>Task Pass Entity</h1>
+ * Entity that represents and encapsulate one User's
+ * Task submit in some Contest.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ * @since 2015-02-11
  */
 @Entity
 @Table(name = "TaskPass")

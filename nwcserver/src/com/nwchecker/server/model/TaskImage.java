@@ -9,6 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * <h1>Task Image Entity</h1>
+ * Entity that represents image of some Task in DB.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @Entity
 @Table(name = "TaskImages")
 public class TaskImage {

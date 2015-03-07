@@ -3,7 +3,13 @@ package com.nwchecker.server.json;
 import com.nwchecker.server.model.ContestPass;
 
 /**
- * Created by Станіслав on 01.03.2015.
+ * <h1>Contest Pass Json</h1>
+ * JSON object that contains valuable data of some ContestPass object.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ * @since 2015-03-01
  */
 public class ContestPassJson {
 

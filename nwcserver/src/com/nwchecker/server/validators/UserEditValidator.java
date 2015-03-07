@@ -7,9 +7,13 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
-*
-* @author Станіслав
-*/
+ * <h1>User Edit Description Validator</h1>
+ * Validator that used to validate user data from User Edit page.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ */
 @Component
 public class UserEditValidator implements Validator {
 

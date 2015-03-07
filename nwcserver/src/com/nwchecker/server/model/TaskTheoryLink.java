@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.model;
 
 import javax.persistence.Column;
@@ -13,6 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * <h1>Task Theory Link Entity</h1>
+ * Entity that represents theory link of some Task in DB.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @Entity
 @Table(name = "TaskTheoryLink")
 public class TaskTheoryLink {

@@ -13,7 +13,16 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 
 /**
- * Servlet Filter implementation class URLFilter
+ * <h1>URL Filter</h1>
+ * Implementation of class Servlet Filter.
+ * Used to prevent bug in first visit of home page
+ * and to handle absence of "UTF-8" encoding parameter
+ * in some request headers.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @author Stanislav Krasovskyi
+ * @version 1.0
  */
 @WebFilter("/URLFilter")
 public class URLFilter implements Filter {

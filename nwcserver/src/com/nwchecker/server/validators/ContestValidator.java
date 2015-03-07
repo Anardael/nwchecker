@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.validators;
 
 import com.nwchecker.server.model.Contest;
@@ -11,8 +6,12 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
+ * <h1>Contest Validator</h1>
+ * Validator that used to validate data from Contest Create page.
+ * <p>
  *
- * @author Роман
+ * @author Roman Zayats
+ * @version 1.0
  */
 @Component
 public class ContestValidator implements Validator {

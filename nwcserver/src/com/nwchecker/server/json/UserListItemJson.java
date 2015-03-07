@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Станіслав on 07.03.2015.
+ * <h1>User List Item Json</h1>
+ * JSON object that contains valuable data of some User object from users list.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ * @since 2015-03-07
  */
 public class UserListItemJson {
 

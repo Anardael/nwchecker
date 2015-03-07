@@ -7,6 +7,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * <h1>RolesDescriptionValidator Pattern Test</h1>
+ * Test for RolesDescriptionValidator regular expressions.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ */
 public class RolesDescriptionValidatorPatternTest {
 
     private String pattern;

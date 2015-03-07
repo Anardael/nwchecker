@@ -8,7 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by ReaktorDTR on 06.02.2015.
+ * <h1>Contest Pass Json</h1>
+ * JSON object that contains valuable data of some ContestPass object.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ * @since 2015-02-06
  */
 public class ListContestsJson {
     private int id;

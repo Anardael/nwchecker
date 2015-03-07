@@ -17,6 +17,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * <h1>User Entity</h1>
+ * Entity that represents some User in DB.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 @Entity
 @Table(name = "users")
 public class User {

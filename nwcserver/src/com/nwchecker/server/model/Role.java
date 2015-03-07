@@ -9,6 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * <h1>Role Entity</h1>
+ * Entity that represents Role of some User in DB.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

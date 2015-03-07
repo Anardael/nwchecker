@@ -5,10 +5,15 @@ import com.nwchecker.server.model.Contest;
 import java.util.Comparator;
 
 /**
- * Created by Роман on 02.03.2015.
+ * <h1>Contest Comparator</h1>
+ * Comparator that used for sorting contests
+ * with status "GOING" or "RELEASE" in excution
+ * time order.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
  */
-
-//used for sorting contests with status "GOING" or "RELEASE" in excution time order.
 public class ContestComparator implements Comparator<Contest> {
     @Override
     public int compare(Contest contest1, Contest contest2) {

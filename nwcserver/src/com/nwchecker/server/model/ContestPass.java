@@ -16,9 +16,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Роман on 21.02.2015.
+ * <h1>Contest Pass Entity</h1>
+ * Entity that represents and encapsulate User
+ * statistic in some Contest.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ * @since 2015-02-22
  */
-
 @Entity
 @Table(name = "ContestPass")
 public class ContestPass implements Comparable<ContestPass> {

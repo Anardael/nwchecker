@@ -3,7 +3,13 @@ package com.nwchecker.server.json;
 import com.nwchecker.server.model.UserRequest;
 
 /**
- * Created by Станіслав on 07.03.2015.
+ * <h1>Request Json</h1>
+ * JSON object that contains valuable data of some Request object.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ * @since 2015-03-07
  */
 public class RequestJson {
 

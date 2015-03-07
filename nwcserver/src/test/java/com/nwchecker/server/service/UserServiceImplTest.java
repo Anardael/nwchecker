@@ -1,5 +1,13 @@
 package test.java.com.nwchecker.server.service;
 
+/**
+ * <h1>UserServiceImp Test</h1>
+ * Test for UserServiceImp methods.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;

@@ -7,6 +7,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * <h1>UserRegistrationValidator Pattern Test</h1>
+ * Test for UserRegistrationValidator regular expressions.
+ * <p>
+ *
+ * @author Stanislav Krasovskyi
+ * @version 1.0
+ */
 public class UserRegistrationValidatorPatternsTest {
 
 	private String patternUsername;

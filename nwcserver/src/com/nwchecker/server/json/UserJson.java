@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.json;
 
 /**
+ * <h1>User Json</h1>
+ * JSON object that contains valuable data of some User object.
+ * <p>
  *
- * @author Роман
+ * @author Roman Zayats
+ * @version 1.0
  */
 public class UserJson {
 

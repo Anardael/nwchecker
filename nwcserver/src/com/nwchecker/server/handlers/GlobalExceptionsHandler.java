@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.handlers;
 
 import com.nwchecker.server.exceptions.ContestAccessDenied;
@@ -19,7 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedList;
 
 /**
- * @author Роман
+ * <h1>Global Exceptions Handler</h1>
+ * Exception handler that used to handle global system exceptions.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
  */
 @ControllerAdvice
 public class GlobalExceptionsHandler {

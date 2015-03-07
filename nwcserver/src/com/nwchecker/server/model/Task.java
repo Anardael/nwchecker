@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -25,6 +20,14 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+/**
+ * <h1>Task Entity</h1>
+ * Entity that represents some Task in DB.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @Entity
 @Table(name = "Task")
 public class Task {
