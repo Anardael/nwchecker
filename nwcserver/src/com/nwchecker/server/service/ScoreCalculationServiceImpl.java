@@ -13,9 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Роман on 26.02.2015.
- */
 @Service
 public class ScoreCalculationServiceImpl implements ScoreCalculationService {
     @Autowired

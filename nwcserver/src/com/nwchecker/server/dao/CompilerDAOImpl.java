@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by Станіслав on 22.02.2015.
- */
 @Repository("CompilerDAO")
 public class CompilerDAOImpl extends HibernateDaoSupport implements CompilerDAO {
 

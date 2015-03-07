@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by Роман on 11.02.2015.
- */
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
 

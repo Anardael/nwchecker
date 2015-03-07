@@ -11,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Роман on 11.02.2015.
- */
 @Service(value = "TaskPassService")
 public class ContestPassServiceIMpl implements ContestPassService {
     @Autowired

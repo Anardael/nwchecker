@@ -8,10 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by Роман on 21.02.2015.
- */
-
 @Service(value = "ContestEditWatcher")
 public class ContestEditWatcherServiceImpl implements ContestEditWatcherService {
     private static final Logger LOG

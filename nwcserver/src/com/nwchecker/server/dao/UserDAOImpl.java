@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Role;

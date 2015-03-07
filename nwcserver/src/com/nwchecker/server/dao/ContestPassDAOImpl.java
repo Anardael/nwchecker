@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Роман on 21.02.2015.
- */
 @Repository("ContestPassDAO")
 public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPassDAO {
 
