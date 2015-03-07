@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * <h1>Compiler Entity</h1>
@@ -49,5 +50,10 @@ public class Compiler {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object compiler) {
+        return (this.name.equals(((Compiler) compiler).getName()));
     }
 }
