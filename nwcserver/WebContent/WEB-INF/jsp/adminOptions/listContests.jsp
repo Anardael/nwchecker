@@ -92,14 +92,14 @@
                 <h3 class="text-center"><spring:message code="listContests.contestInfo.contestStatus.label"/></h3>
 
                 <div class="groupRadioStatus">
-                    <input type="radio" class="radio-input" name="radioStatus" id="rbGoing" value="GOING"/>
-                    <label class="radio-label" for="rbGoing"><spring:message code="listContests.status.going"/></label>
                     <input type="radio" class="radio-input" name="radioStatus" id="rbPreparing" value="PREPARING"/>
                     <label class="radio-label" for="rbPreparing"><spring:message
                             code="listContests.status.preparing"/></label>
                     <input type="radio" class="radio-input" name="radioStatus" id="rbRelease" value="RELEASE"/>
                     <label class="radio-label" for="rbRelease"><spring:message
                             code="listContests.status.release"/></label>
+                    <input type="radio" class="radio-input" name="radioStatus" id="rbGoing" value="GOING"/>
+                    <label class="radio-label" for="rbGoing"><spring:message code="listContests.status.going"/></label>
                     <input type="radio" class="radio-input" name="radioStatus" id="rbArchive" value="ARCHIVE"/>
                     <label class="radio-label" for="rbArchive"><spring:message
                             code="listContests.status.archive"/></label>

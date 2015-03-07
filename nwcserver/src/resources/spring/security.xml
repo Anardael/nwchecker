@@ -19,6 +19,10 @@
         <intercept-url pattern="/userRequests**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/getUsersWithRequests**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/acceptUserRequests**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/listContests**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/getListOfContests**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/getContestStatus**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/setContestStatus**" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login.do"
                     authentication-failure-url="/login.do?error" 
         />

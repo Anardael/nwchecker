@@ -27,7 +27,7 @@ public class LoginController {
      * This mapped method used to login user in system.
      * <p>
      *
-     * @param error TODO
+     * @param error if process "login" have some errors, value will change to "not null".
      */
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
