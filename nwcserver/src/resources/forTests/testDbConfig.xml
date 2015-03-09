@@ -43,6 +43,7 @@
                 <prop key="connection.characterEncoding">UTF-8</prop>
                 <prop key="hibernate.connection.Useunicode">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
             </props>
         </property>
     </bean>

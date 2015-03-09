@@ -1,185 +1,122 @@
 package test.java.com.nwchecker.server.service;
 
-import com.nwchecker.server.dao.TaskDAO;
-import com.nwchecker.server.model.Contest;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.service.TaskServiceImpl;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.nwchecker.server.service.TaskService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 /**
  * <h1>TaskServiceImpl Test</h1>
  * Test for TaskServiceImpl methods.
- * <p>
+ * <p/>
  *
  * @author Roman Zayats
  * @version 1.0
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+        DbUnitTestExecutionListener.class})
 public class TaskServiceImplTest {
 
-    private TaskDAO taskDAO;
-    private TaskServiceImpl taskServiceImpl = new TaskServiceImpl();
-    private List<Task> taskList = new LinkedList<Task>();
-    private TaskData taskData = new TaskData();
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-        taskDAO = mock(TaskDAO.class);
-        //set dao to service:
-        taskServiceImpl.setDAO(taskDAO);
-        //create contest for Contest below:
-        Contest contest = new Contest();
-        contest.setId(11);
-        contest.setTitle("Hello, I am Contest ;)");
-        contest.setTasks(taskList);
-        //TaskData:
-        taskData.setId(41);
-        //create few tasks:
-        Task task1 = new Task();
-        task1.setId(21);
-        task1.setTitle("I am title ;)");
-        task1.setComplexity(31);
-        task1.setContest(contest);
-        taskList.add(task1);
-        //2:
-        Task task2 = new Task();
-        task2.setId(22);
-        task2.setTitle("I am title ;)");
-        task2.setComplexity(32);
-        task2.setContest(contest);
-        taskList.add(task2);
-        //3:
-        Task task3 = new Task();
-        task3.setId(23);
-        task3.setTitle("I am title ;)");
-        task3.setComplexity(33);
-        task3.setContest(contest);
-        taskList.add(task3);
-
-    }
-
-    @After
-    public void tearDown() {
-    }
+    @Autowired
+    private TaskService taskService;
 
     /**
      * Test of getTaskById method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetTaskById() {
-        when(taskDAO.getTaskById(21)).thenReturn(taskList.get(0));
-
-        Task expResult = taskList.get(0);
-        Task result = taskServiceImpl.getTaskById(21);
-
-        assertEquals(expResult, result);
+        assertEquals(taskService.getTaskById(1).getTitle(), "Task 1");
     }
 
     /**
      * Test of getTasksByContestId method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetTasksByContestId() {
-        int contestId = 11;
-
-        when(taskDAO.getTasksByContestId(contestId)).thenReturn(taskList);
-        List<Task> expResult = taskList;
-
-        List<Task> result = taskServiceImpl.getTasksByContestId(contestId);
-        assertEquals(expResult, result);
+        int contestId = 2;
+        List<Task> result = taskService.getTasksByContestId(contestId);
+        assertEquals(result.get(0).getTitle(), "Task 3");
     }
 
     /**
      * Test of getTasks method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetTasks() {
-        when(taskDAO.getTasks()).thenReturn(taskList);
-        List<Task> expResult = taskList;
-
-        List<Task> result = taskServiceImpl.getTasks();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(taskService.getTasks().size(), 3);
     }
 
     /**
      * Test of addTask method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testAddTask() {
-        Task t = taskList.get(0);
-        taskServiceImpl.addTask(t);
-        verify(taskDAO, times(1)).addTask(t);
-        verifyNoMoreInteractions(taskDAO);
-        // TODO review the generated test code and remove the default call to fail.
+        Task task = new Task();
+        task.setTitle("I am title ;)");
+        task.setComplexity(5);
+        task.setContest(taskService.getTaskById(3).getContest());
+        taskService.addTask(task);
+        assertEquals(taskService.getTasksByContestId(2).size(), 2);
     }
 
     /**
      * Test of updateTask method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testUpdateTask() {
-        Task t = taskList.get(0);
-        taskServiceImpl.updateTask(t);
-        verify(taskDAO, times(1)).updateTask(t);
-        verifyNoMoreInteractions(taskDAO);
+        Task task = taskService.getTaskById(1);
+        task.setTitle("Task1Updated");
+        taskService.updateTask(task);
+        assertEquals(taskService.getTaskById(1).getTitle(), "Task1Updated");
     }
 
     /**
      * Test of deleteTaskById method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testDeleteTaskById() {
-        taskServiceImpl.deleteTaskById(0);
-        verify(taskDAO, times(1)).deleteTaskById(0);
-        verifyNoMoreInteractions(taskDAO);
+        assertEquals(taskService.getTasks().size(), 3);
+        taskService.deleteTaskById(1);
+        assertEquals(taskService.getTasks().size(), 2);
     }
 
     /**
      * Test of getTaskData method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetTaskData() {
-        when(taskDAO.getTaskData(0)).thenReturn(taskData);
-
-        TaskData result = taskServiceImpl.getTaskData(0);
-        assertEquals(taskData, result);
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(taskService.getTaskData(1).getTask().getTitle(), "Task 1");
     }
 
     /**
      * Test of deleteTaskData method, of class TaskServiceImpl.
      */
     @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testDeleteTaskData() {
-        taskServiceImpl.deleteTaskData(0);
-        verify(taskDAO, times(1)).deleteTaskData(0);
-        verifyNoMoreInteractions(taskDAO);
+        assertEquals(taskService.getTaskData(1).getTask().getTitle(), "Task 1");
+        taskService.deleteTaskData(1);
+        assertEquals(taskService.getTaskData(1), null);
     }
 
 }

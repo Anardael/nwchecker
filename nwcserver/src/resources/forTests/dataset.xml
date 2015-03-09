@@ -4,9 +4,24 @@
     <Contest id="2" title="I am title 2" description="I am description 2" status="PREPARING" hidden="0"/>
     <Contest id="3" title="I am title 3" description="I am description 3" status="PREPARING" hidden="0"/>
 
-    <Users userId="1" ban_time="0" username="user" enabled="0" password="$2a$10$2B8iOyGDQFupeR6UYmfC3OCyL6//u8Ce4t6fCu0DPVqthwA9VGMui"/>
+    <Task id="1" contest_id="1" title="Task 1" description="This is task 1." complexity="5" rate="5" inputFileName="inputFile1" outputFileName = "outputFile1" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
+    <Task id="2" contest_id="1" title="Task 2" description="This is task 2." complexity="3" rate="5" inputFileName="inputFile2" outputFileName = "outputFile2" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
+    <Task id="3" contest_id="2" title="Task 3" description="This is task 3." complexity="2" rate="4" inputFileName="inputFile3" outputFileName = "outputFile3" timeLimit="20000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
 
-    <contest_users user_id="1" contest_id="1"/>
+    <TaskData id="1" task_id="1"/>
+    <TaskData id="2" task_id="2"/>
+
+    <Users userId="1" username="admin" display_name="Admin" email="admin@ua.ua" password="$2a$10$5uHAIiMg8TmCrsG8pLGNH.grGCujfeUK/YeMEqExkWHc//BTt7dwq" department="Administrators" info="Info about Admin" ban_time="0" enabled="1" />
+    <Users userId="2" username="teacher" display_name="Teacher" email="Teacher@ua.ua" password="$2a$10$vEKi2nDhEZVthsCbZDFgN.gwYomwexzaD9hKbfjPjGthuemV2fyk6" department="Mathematics" info="Info about Teacher" ban_time="0" enabled="1" />
+    <Users userId="3" username="user" display_name="User" email="User@ua.ua" password="$2a$10$2B8iOyGDQFupeR6UYmfC3OCyL6//u8Ce4t6fCu0DPVqthwA9VGMui" department="NULL" info="Info about User" ban_time="0" enabled="1" />
+
+    <Roles roleId="1" role="ROLE_ADMIN" userId="1" />
+    <Roles roleId="2" role="ROLE_TEACHER" userId="2" />
+    <Roles roleId="3" role="ROLE_USER" userId="3" />
+
+    <Userrequest requestId="1" request="WANT_ROLE_TEACHER" userId="3" />
+
+    <contest_users user_id="3" contest_id="1"/>
 
     <Compiler id="1" name="Java"/>
     <Compiler id="2" name="C#"/>

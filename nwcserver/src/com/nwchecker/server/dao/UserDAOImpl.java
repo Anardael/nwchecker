@@ -36,7 +36,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 	
 	@Override
-	public void deleteRole(Role role) {	
+	public void deleteRole(Role role) {
 		getHibernateTemplate().delete(role);
 	}
 

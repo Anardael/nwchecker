@@ -4,11 +4,9 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
-import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * <h1>ContestServiceImpl Test</h1>
  * Test for ContestServiceImpl methods.
- * <p>
+ * <p/>
  *
  * @author Roman Zayats
  * @version 1.0
@@ -40,10 +38,6 @@ import static org.junit.Assert.assertTrue;
 
 public class ContestServiceImplTest {
 
-    @Autowired
-    private ContestDAO contestDAO;
-    @Autowired
-    private UserService userService;
     @Autowired
     private ContestService contestService;
 
@@ -132,7 +126,6 @@ public class ContestServiceImplTest {
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckIfUserHaveAccessToContest() {
-
         String username = "user";
         boolean result = contestService.checkIfUserHaveAccessToContest(username, 1);
         assertTrue(result);
