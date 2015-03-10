@@ -47,7 +47,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.10" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.185" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:3.2.5.RELEASE" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.dbunit:dbunit:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:3.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:4.3.7.Final" level="project" />

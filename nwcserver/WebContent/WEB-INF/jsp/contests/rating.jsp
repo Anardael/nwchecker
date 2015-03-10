@@ -14,8 +14,6 @@
 <html>
 <head>
     <jsp:include page="../fragments/staticFiles.jsp"/>
-
-    <!-- TODO -->
 </head>
 <body>
     <div class="wrapper container">

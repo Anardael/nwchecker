@@ -16,20 +16,6 @@ import java.util.List;
 public interface ContestService {
 
     /**
-     * Set DAO
-     *
-     * @param dao Contest DAO
-     */
-    public void setContestDAO(ContestDAO dao);
-
-    /**
-     * Set User Service
-     *
-     * @param userService User Service
-     */
-    public void setUserService(UserService userService);
-
-    /**
      * Add new Contest to database.
      * <p>
      *

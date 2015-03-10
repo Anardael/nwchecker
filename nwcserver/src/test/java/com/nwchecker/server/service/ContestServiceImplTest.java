@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * <h1>ContestServiceImpl Test</h1>
  * Test for ContestServiceImpl methods.
- * <p/>
+ * <p>
  *
  * @author Roman Zayats
  * @version 1.0

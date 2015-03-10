@@ -8,6 +8,8 @@
     <Task id="2" contest_id="1" title="Task 2" description="This is task 2." complexity="3" rate="5" inputFileName="inputFile2" outputFileName = "outputFile2" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
     <Task id="3" contest_id="2" title="Task 3" description="This is task 3." complexity="2" rate="4" inputFileName="inputFile3" outputFileName = "outputFile3" timeLimit="20000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
 
+    <ContestPass id="1" passed="0" rank="0" timepenalty="0"/>
+
     <TaskData id="1" task_id="1"/>
     <TaskData id="2" task_id="2"/>
 

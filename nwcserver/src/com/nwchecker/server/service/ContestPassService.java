@@ -36,7 +36,7 @@ public interface ContestPassService {
      * Check some Task and return result.
      * <p>
      *
-     * @param save TODO
+     * @param save this param indicates save to database record or no.
      * @param contestPass ContestPass that Task belongs
      * @param task Task Task for checking
      * @param compilerId Unique ID of compiler

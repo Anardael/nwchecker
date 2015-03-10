@@ -30,7 +30,7 @@ public interface ContestEditWatcherService {
      *
      * @param contestId Unique ID of existing Contest
      * @param username Unique Username of existing User
-     * @param deferredResult TODO
+     * @param deferredResult using for asynchronous response to user.
      */
     void addContestEditingUser(int contestId, String username, DeferredResult<String> deferredResult);
 
@@ -43,11 +43,11 @@ public interface ContestEditWatcherService {
     void removeContestEditingUser(int contestId);
 
     /**
-     * TODO Description
+     * set asynchronous response to user.
      * <p>
      *
      * @param requestId ID of Request
-     * @param result TODO
+     * @param result is returning String to user.
      */
     void setDeferredResult(int requestId, String result);
 
@@ -67,7 +67,7 @@ public interface ContestEditWatcherService {
      * <p>
      *
      * @param contestId Unique ID of existing Contest
-     * @param deferredResult TODO
+     * @param deferredResult set asynchronous response to user.
      */
     void addRequestStillContestEditing(int contestId, DeferredResult<String> deferredResult);
 

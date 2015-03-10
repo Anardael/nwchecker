@@ -1,4 +1,4 @@
-package test.java.com.nwchecker.server.service;
+package test.java.com.nwchecker.server.DAO;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -27,6 +27,7 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  * @since 2015-03-07
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,

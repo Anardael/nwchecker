@@ -120,12 +120,4 @@ public interface UserService {
      *         <b>false</b> if Email do not exists
      */
     public boolean hasEmail(String email);
-
-    /**
-     * Set DAO
-     *
-     * @param userDAO User DAO
-     */
-    public void setUserDAO(UserDAO userDAO);
-
 }

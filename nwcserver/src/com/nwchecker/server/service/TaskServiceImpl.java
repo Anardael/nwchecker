@@ -15,11 +15,6 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskDAO taskDao;
 
-    @Override
-    public void setDAO(TaskDAO dao) {
-        this.taskDao = dao;
-    }
-
     @Transactional(readOnly = true)
     @Override
     public Task getTaskById(int id) {

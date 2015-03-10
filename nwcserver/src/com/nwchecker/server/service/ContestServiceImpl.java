@@ -19,21 +19,6 @@ public class ContestServiceImpl implements ContestService {
     @Autowired
     private ContestDAO contestDAO;
 
-
-    @Override
-    public void setContestDAO(ContestDAO dao) {
-        contestDAO = dao;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    @Override
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     @Transactional
     @Override
     public void addContest(Contest c) {

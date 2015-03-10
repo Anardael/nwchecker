@@ -81,11 +81,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
-    @Override
     public List<User> getUsersWithRequests() {
         return userDAO.getUsersWithRequests();
     }

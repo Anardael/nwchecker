@@ -17,13 +17,6 @@ import java.util.List;
 public interface TaskService {
 
     /**
-     * Set DAO
-     *
-     * @param dao Task DAO
-     */
-    void setDAO(TaskDAO dao);
-
-    /**
      * Return Task from database by unique ID.
      * <p>
      *
