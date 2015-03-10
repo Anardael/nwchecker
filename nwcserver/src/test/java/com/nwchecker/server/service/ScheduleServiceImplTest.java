@@ -19,7 +19,7 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 /**
- * <h1>UserServiceImp Test</h1>
+ * <h1>ScheduleServiceImpl Test</h1>
  * Test for ScheduleServiceImpl methods.
  * <p>
  *

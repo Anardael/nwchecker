@@ -28,8 +28,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * <h1>ContestPassServiceIMpl Test</h1>
- * Test for ContestPassServiceIMpl methods.
+ * <h1>ContestPassServiceImpl Test</h1>
+ * Test for ContestPassServiceImpl methods.
  * <p>
  *
  * @author Stanislav Krasovskyi
@@ -40,7 +40,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
                          DbUnitTestExecutionListener.class})
-public class ContestPassServiceIMplTest {
+public class ContestPassServiceImplTest {
 
     @Autowired
     private ContestPassService contestPassService;

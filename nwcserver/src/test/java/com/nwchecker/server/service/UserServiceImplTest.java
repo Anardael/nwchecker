@@ -1,14 +1,5 @@
 package test.java.com.nwchecker.server.service;
 
-/**
- * <h1>UserServiceImp Test</h1>
- * Test for UserServiceImpl methods.
- * <p>
- *
- * @author Serhii Dovhaniuk
- * @version 1.0
- */
-
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -25,6 +16,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import static org.junit.Assert.assertEquals;
+
+/**
+ * <h1>UserServiceImpl Test</h1>
+ * Test for UserServiceImpl methods.
+ * <p>
+ *
+ * @author Serhii Dovhaniuk
+ * @version 1.0
+ */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
