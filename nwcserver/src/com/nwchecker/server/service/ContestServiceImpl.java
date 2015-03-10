@@ -53,7 +53,6 @@ public class ContestServiceImpl implements ContestService {
     @Transactional
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
         User teacher = userService.getUserByUsername(username);
-        Hibernate.initialize(teacher.getContest());
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
                 if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.PREPARING)) {
