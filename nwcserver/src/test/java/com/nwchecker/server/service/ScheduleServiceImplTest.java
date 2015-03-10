@@ -6,7 +6,6 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,16 +53,16 @@ public class ScheduleServiceImplTest {
         scheduleService.refresh();
         //duration contest = 5 seconds.
         try {
-            Thread.sleep(3*1000);                 //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
+            Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals(contestService.getContestByID(1).getStatus(),Contest.Status.GOING);
+        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.GOING);
         try {
-            Thread.sleep(3*1000);                 //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
+            Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals(contestService.getContestByID(1).getStatus(),Contest.Status.ARCHIVE);
+        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.ARCHIVE);
     }
 }
