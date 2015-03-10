@@ -18,11 +18,18 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * <h1>ScoreCalculationServiceImpl Test</h1>
+ * Test for ScoreCalculationServiceImpl methods.
+ * <p>
+ *
+ * @author Roman Zayats
+ * @version 1.0
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-        DbUnitTestExecutionListener.class})
-
+                         DbUnitTestExecutionListener.class})
 public class ScoreCalculationServiceImplTest {
 
     @Autowired

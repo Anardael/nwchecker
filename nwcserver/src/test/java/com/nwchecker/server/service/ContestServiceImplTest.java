@@ -34,8 +34,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-        DbUnitTestExecutionListener.class})
-
+                         DbUnitTestExecutionListener.class})
 public class ContestServiceImplTest {
 
     @Autowired
