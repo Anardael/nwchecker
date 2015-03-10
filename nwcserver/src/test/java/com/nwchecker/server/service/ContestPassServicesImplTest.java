@@ -40,7 +40,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
                          DbUnitTestExecutionListener.class})
-public class ContestPassServiceImplTest {
+public class ContestPassServicesImplTest {
 
     @Autowired
     private ContestPassService contestPassService;
