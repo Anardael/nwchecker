@@ -95,7 +95,7 @@ public class TaskServiceImplTest {
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testDeleteTaskById() {
         assertEquals(taskService.getTasks().size(), 3);
-        taskService.deleteTaskById(1);
+        taskService.deleteTaskById(3);
         assertEquals(taskService.getTasks().size(), 2);
     }
 

@@ -137,7 +137,7 @@ public class UserServiceImplTest {
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetUsers() throws Exception {
-        assertEquals(userService.getUsers().size(), 3);
+        assertEquals(userService.getUsers().size(), 4);
     }
 
     /**
@@ -146,7 +146,7 @@ public class UserServiceImplTest {
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testGetUsersByRole() throws Exception {
-        assertEquals(userService.getUsersByRole("ROLE_USER").size(), 1);
+        assertEquals(userService.getUsersByRole("ROLE_USER").size(), 2);
     }
 
     /**
