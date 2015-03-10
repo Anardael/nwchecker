@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service(value = "TaskPassService")
-public class ContestPassServicesImpl implements ContestPassService {
+public class ContestPassServiceImpl implements ContestPassService {
     @Autowired
     private UserService userService;
     @Autowired
