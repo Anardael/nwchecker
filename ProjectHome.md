@@ -1,0 +1,1 @@
+NWC is a console checker that compiles and runs participating works and validate them.
