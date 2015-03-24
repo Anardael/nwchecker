@@ -1,0 +1,1 @@
+NWC Checker was console application for checking solution on programming competitions. The new extension to the project is creation java server applicaiton that will be able to perform puniversity competitions in algorithms.
