@@ -23,7 +23,7 @@ public class UserRegistrationValidator implements Validator {
 	private final String	patternDisplayName	= "^[а-яіїєА-ЯІЇЄa-zA-Z]{1}[а-яіїєА-ЯІЇЄa-zA-Z0-9_-]{2,15}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 														+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private final String	patternPhone		="[0-9]{10}";
+	private final String	patternPhone		="[0-9+)(]{10}";
 	private final String	patternPassword		= "^(?=.{6,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?!.*[А-я]).*";
 	
 	private final UserService userService;

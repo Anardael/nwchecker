@@ -121,7 +121,7 @@ public interface UserDAO {
      * @return <b>true</b> if Phone exists
      *         <b>false</b> if Phone do not exists
      */ 
-	public boolean hasPhone(int phone);
+	public boolean hasPhone(String phone);
 
     /**
      * Return Users that have at least one request.

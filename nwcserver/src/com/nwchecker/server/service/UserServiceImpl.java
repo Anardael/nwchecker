@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public boolean hasPhone(int phone) {
+	public boolean hasPhone(String phone) {
 		return userDAO.hasPhone(phone);
 	}
 }

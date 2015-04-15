@@ -88,7 +88,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean hasPhone(int phone) {
+	public boolean hasPhone(String phone) {
 		return  !getHibernateTemplate().find("from User user where user.phone = ?", phone).isEmpty();
 	}
 	
