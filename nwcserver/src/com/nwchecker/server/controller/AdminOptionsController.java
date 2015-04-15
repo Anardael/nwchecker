@@ -149,6 +149,7 @@ public class AdminOptionsController {
 		setNewPassword(user, userData.getPassword());
 		user.setDisplayName(userData.getDisplayName());
 		user.setEmail(userData.getEmail());
+		user.setPhone(userData.getPhone());
 		setNewRoles(user, rolesDesc);
 		user.setDepartment(userData.getDepartment());
 		user.setInfo(userData.getInfo());		

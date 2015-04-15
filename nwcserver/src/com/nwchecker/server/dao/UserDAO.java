@@ -112,6 +112,16 @@ public interface UserDAO {
      *         <b>false</b> if Email do not exists
      */
 	public boolean hasEmail(String email);
+	
+    /**
+     * Checking if some Phone exists.
+     * <p>
+     *
+     * @param phone Phone for checking
+     * @return <b>true</b> if Phone exists
+     *         <b>false</b> if Phone do not exists
+     */ 
+	public boolean hasPhone(int phone);
 
     /**
      * Return Users that have at least one request.

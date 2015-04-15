@@ -59,6 +59,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-4 control-label"><spring:message code="profile.phone.caption"/>:</label>
+
+            <div class="col-sm-4">
+                <label class="control-label">${userProfile.phone}</label> <input type="hidden" name="phone"
+                                                                                 value="${userProfile.phone}"/>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-4 control-label"><spring:message code="profile.department.caption"/>:</label>
 
             <div class="col-sm-4">

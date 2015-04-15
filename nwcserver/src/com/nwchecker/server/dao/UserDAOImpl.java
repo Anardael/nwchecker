@@ -86,6 +86,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return !getHibernateTemplate().find("from User user where user.email = ?", email).isEmpty();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean hasPhone(int phone) {
+		return  !getHibernateTemplate().find("from User user where user.phone = ?", phone).isEmpty();
+	}
+	
 	@Override
 	public List<User> getUsersWithRequests() {
 		@SuppressWarnings("unchecked")

@@ -53,6 +53,9 @@
                             <th data-field="email" data-align="center" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.email"/>
                             </th>
+                            <th data-field="phone" data-align="center" data-sortable="true">
+                                <spring:message code="adminPanel.users.tableHeader.phone"/>
+                            </th>
                             <th data-field="department" data-halign="center" data-formatter="infoFormatter" data-sortable="true">
                                 <spring:message code="adminPanel.users.tableHeader.department"/>
                             </th>

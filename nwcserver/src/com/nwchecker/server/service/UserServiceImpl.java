@@ -84,4 +84,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersWithRequests() {
         return userDAO.getUsersWithRequests();
     }
+
+	@Override
+	public boolean hasPhone(int phone) {
+		return userDAO.hasPhone(phone);
+	}
 }

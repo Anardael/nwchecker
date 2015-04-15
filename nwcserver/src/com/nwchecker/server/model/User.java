@@ -63,6 +63,9 @@ public class User {
     // Enabled user
     @Column(name = "enabled")
     private boolean enabled;
+    // User phoneNumber
+    @Column(name = "phone")
+    private int phone;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
@@ -168,6 +171,14 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+    
+    public int getPhone() {
+		return phone;
+	}
+    
+    public void setPhone(int phone) {
+		this.phone = phone;
+	}
 
     public boolean isNew() {
         return (this.userId == 0);

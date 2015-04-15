@@ -42,6 +42,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-4 control-label"><spring:message code="reg.phone.caption" />:</label>
+                    <div class="col-sm-4">
+                        <form:input path="phone" class="form-control" name="phone" />
+                        <form:errors path="phone" Class="error"/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-4 control-label"><spring:message code="reg.password.caption" />:</label>
                     <div class="col-sm-4">
                         <form:input path="password" class="form-control" type="password" name="password" />

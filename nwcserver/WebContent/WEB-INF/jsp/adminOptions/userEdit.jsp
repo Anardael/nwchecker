@@ -84,6 +84,15 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label">
+                        <spring:message code="adminPanel.userEdit.phone.caption" />
+                    </label>
+                    <div class="col-sm-4">
+                        <form:input path="phone" class="form-control" name="phone" />
+                        <form:errors path="phone" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">
                         <spring:message code="adminPanel.userEdit.password.caption" />
                     </label>
                     <div class="col-sm-4">
