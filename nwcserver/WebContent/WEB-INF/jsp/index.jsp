@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
@@ -47,6 +48,8 @@
                     </div>
                 </section>
             </div>
+     <a href="admin.do"><spring:message code="adminPanel.users.caption"/></a>
+            
         </div>
         <jsp:include page="fragments/footer.jsp"/>
     </body>

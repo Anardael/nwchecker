@@ -108,7 +108,7 @@
                             <li class="dropdown-submenu pull-left admin-subMenu">
                                 <a class="trigger"> <spring:message code="admin.caption"/></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="admin.do"><spring:message code="adminPanel.users.caption"/></a></li>
+                    <!-- 1 -->      <li><a href="admin.do"><spring:message code="adminPanel.users.caption"/></a></li>
                                     <li class="divider"></li>
                                     <li><a href="userRequests.do"><spring:message code="userRequests.caption"/></a></li>
                                     <li class="divider"></li>
