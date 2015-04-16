@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nwchecker.server.model.MyBean;
+
 import javax.servlet.http.HttpSession;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,6 +35,7 @@ public class MainController {
      */
     @RequestMapping("/index.do")
     public String main(HttpSession session, Model model) throws IllegalArgumentException {
+    	model.addAttribute("mybean", new MyBean());
         return "index";
     }
 
