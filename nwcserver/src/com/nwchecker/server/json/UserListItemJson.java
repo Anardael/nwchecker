@@ -23,6 +23,7 @@ public class UserListItemJson {
     private String email;
     private String department;
     private String info;
+    private String phone;
 
     private UserListItemJson() {
     }
@@ -38,6 +39,7 @@ public class UserListItemJson {
         json.email = user.getEmail();
         json.department = user.getDepartment();
         json.info = user.getInfo();
+        json.phone = user.getPhone();
         return json;
     }
 
@@ -88,4 +90,11 @@ public class UserListItemJson {
     public void setInfo(String info) {
         this.info = info;
     }
+    public String getPhone() {
+		return phone;
+	}
+    
+    public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

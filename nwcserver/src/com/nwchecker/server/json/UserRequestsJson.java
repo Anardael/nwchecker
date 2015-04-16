@@ -25,6 +25,7 @@ public class UserRequestsJson {
     private String email;
     private String department;
     private String info;
+    private String phone;
     private List<RequestJson> requests;
 
     private UserRequestsJson() {
@@ -43,6 +44,7 @@ public class UserRequestsJson {
         json.email = user.getEmail();
         json.department = user.getDepartment();
         json.info = user.getInfo();
+        json.phone = user.getPhone();
         json.requests = new ArrayList<>();
         for (UserRequest userRequest : user.getRequests()) {
             json.requests.add(RequestJson.createUserRequestsJson(userRequest));
@@ -121,4 +123,12 @@ public class UserRequestsJson {
     public void setRequests(List<RequestJson> requests) {
         this.requests = requests;
     }
+    
+    public String getPhone() {
+		return phone;
+	}
+    
+    public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

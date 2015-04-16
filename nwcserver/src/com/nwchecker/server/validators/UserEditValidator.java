@@ -23,6 +23,7 @@ public class UserEditValidator implements Validator {
 												+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private final String	patternDepartment	= "^[а-яіїєА-ЯІЇЄa-zA-Z0-9'\" -]*$";
 	private final String	patternInfo			= "^[а-яіїєА-ЯІЇЄa-zA-Z0-9:.;,!?'\")( -]*$";
+	private final String	patternPhone		= "[0-9)(+]{10}";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -54,6 +55,9 @@ public class UserEditValidator implements Validator {
 		if (!user.getInfo().matches(patternInfo)) {
 			errors.rejectValue("info", "adminPanel.userEdit.info.error");
 		}
+		if (!user.getPhone().matches(patternPhone)) {
+			errors.rejectValue("phone", "adminPanel.userEdit.phone.error");
+		}
 	}
 	
 	public String getPatternPassword() {
@@ -74,5 +78,9 @@ public class UserEditValidator implements Validator {
 	
 	public String getPatternInfo() {
 		return patternInfo;
+	}
+	
+	public String getPatternPhone() {
+		return patternPhone;
 	}
 }

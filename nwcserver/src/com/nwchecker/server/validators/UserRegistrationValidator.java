@@ -22,9 +22,9 @@ public class UserRegistrationValidator implements Validator {
 	private final String	patternUsername		= "^[a-zA-Z]{1}[a-zA-Z0-9_-]{2,15}$";
 	private final String	patternDisplayName	= "^[а-яіїєА-ЯІЇЄa-zA-Z]{1}[а-яіїєА-ЯІЇЄa-zA-Z0-9_-]{2,15}$";
 	private final String	patternEmail		= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-														+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private final String	patternPhone		="[0-9+)(]{10}";
+														+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";	
 	private final String	patternPassword		= "^(?=.{6,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?!.*[А-я]).*";
+	private final String	patternPhone		="[0-9+)(]{10}";
 	
 	private final UserService userService;
 	
@@ -71,13 +71,18 @@ public class UserRegistrationValidator implements Validator {
 		if (!(user.getPassword().equals(user.getConfirmPassword()))) {
 			errors.rejectValue("confirmPassword", "reg.badConfirmPassword.caption");
 		}
+		if (!user.getPhone().matches(patternPhone)) {
+			errors.rejectValue("phone", "reg.badPhone.caption");
+		}
 		if (hasUsername) {
 			errors.rejectValue("username", "reg.usernameNotUnique.caption");
 		}
 		if (hasEmail) {
 			errors.rejectValue("email", "reg.emailNotUnique.caption");
 		}
-
+		if (hasPhone){
+			errors.rejectValue("phone", "phoneNotUnique.caption");
+		}
 	}
 	
 	public String getPatternUsername() {

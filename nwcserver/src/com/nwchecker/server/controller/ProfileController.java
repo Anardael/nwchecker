@@ -106,6 +106,7 @@ public class ProfileController {
 			loggedUser.setDisplayName(user.getDisplayName());
 			loggedUser.setDepartment(user.getDepartment());
 			loggedUser.setInfo(user.getInfo());
+			loggedUser.setPhone(user.getPhone());
 			userService.updateUser(loggedUser);
 			model.addAttribute("userUpdated", "true");
             LOG.info("\"" + principal.getName() + "\" updated his profile.");
