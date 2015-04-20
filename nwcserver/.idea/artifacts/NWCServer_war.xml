@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="NWCServer:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="NWCServer.war">
+      <element id="artifact" artifact-name="NWCServer:war exploded" />
+    </root>
+  </artifact>
+</component>
