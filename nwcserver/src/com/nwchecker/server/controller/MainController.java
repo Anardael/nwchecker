@@ -93,8 +93,4 @@ public class MainController {
      * @return news page
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public String newsPage() throws IllegalArgumentException {
-        return "news/news";
-    }
 }

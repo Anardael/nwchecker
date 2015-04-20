@@ -37,11 +37,15 @@
                    </div>
                       <div class="info">
                         <p>
-                        	<spring:message code="news.contests"/>                           
+                        	<spring:message code="news.contests"/>         
+                        				                   
+                      					</br>${contest.title}   ${contest.starts}
+                      					  
                         </p>
                         
                         <p>
                              <spring:message code="news.result"/>
+                             
                         </p>
                   </div>
                 </section>
