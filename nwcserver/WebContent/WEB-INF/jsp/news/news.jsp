@@ -45,7 +45,14 @@
                         
                         <p>
                              <spring:message code="news.result"/>
-                             
+                             			
+          <c:forEach 
+          				items="${result}" var="contest">
+          				 ${contest.id}
+          				 ${contest.rank}
+          				 ${contest.timePenalty}
+
+  		  </c:forEach>               
                         </p>
                   </div>
                 </section>
