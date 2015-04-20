@@ -1,6 +1,7 @@
 package com.nwchecker.server.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ public class Rule {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
 
     @Column(name = "name")
@@ -19,7 +20,7 @@ public class Rule {
     @Column(name = "content")
     private String content;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     /*@JoinTable(name = "rules_languages",
             joinColumns = {
                     @JoinColumn(name = "rules_id")},
@@ -30,6 +31,7 @@ public class Rule {
     public Rule(){
         this.name = "N/A";
         this.content = "N/A";
+        this.languageList = new ArrayList<>();
     }
 
     @Override

@@ -21,6 +21,8 @@ public class Main {
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
 
+        //ruleDAO.deleteRuleById(2);
+
         List<Rule> rules = new ArrayList<Rule>();
         List<Language> languages = new ArrayList<Language>();
         for(int i = 1; i < 3; i++){
@@ -53,8 +55,8 @@ public class Main {
             ruleDAO.createRule(r);
         }
 
-        for(Language l : languages){
+        /*for(Language l : languages){
             languageDAO.createLanguage(l);
-        }
+        }*/
     }
 }

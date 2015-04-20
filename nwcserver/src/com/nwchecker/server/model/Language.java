@@ -1,6 +1,7 @@
 package com.nwchecker.server.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,7 +10,7 @@ public class Language {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
 
     @Column(name = "tag")
@@ -25,6 +26,7 @@ public class Language {
 
     public Language(){
         this.tag = "N/A";
+        this.ruleList = new ArrayList<>();
     }
 
     @Override
