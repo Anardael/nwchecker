@@ -26,7 +26,7 @@ public class Language {
 
     public Language(){
         this.tag = "N/A";
-        //this.ruleList = new ArrayList<>();
+        this.ruleList = new ArrayList<>();
     }
 
     @Override

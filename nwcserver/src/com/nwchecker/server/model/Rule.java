@@ -31,7 +31,7 @@ public class Rule {
     public Rule(){
         this.name = "N/A";
         this.content = "N/A";
-        //this.languageList = new ArrayList<>();
+        this.languageList = new ArrayList<>();
     }
 
     @Override
