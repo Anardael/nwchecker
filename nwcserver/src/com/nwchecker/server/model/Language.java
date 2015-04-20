@@ -16,7 +16,7 @@ public class Language {
     @Column(name = "tag")
     private String tag;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "languageList")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY/*, mappedBy = "languageList"*/)
     /*@JoinTable(name = "rules_languages",
             joinColumns = {
                     @JoinColumn(name = "languages_id")},
@@ -26,7 +26,7 @@ public class Language {
 
     public Language(){
         this.tag = "N/A";
-        this.ruleList = new ArrayList<>();
+        //this.ruleList = new ArrayList<>();
     }
 
     @Override
