@@ -44,7 +44,7 @@ public class MainController {
      * @return In Development page
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
-    @RequestMapping({"/inDevelopment", "/donec", "/vestibulum", "/etiam", "/phasellus", "/news", "/rating"})
+    @RequestMapping({"/inDevelopment", "/donec", "/vestibulum", "/etiam", "/phasellus", "/rating"})
     public String willBeCreated(HttpSession session, Model model) throws IllegalArgumentException {
         return "access/inDevelopment";
     }
@@ -85,5 +85,16 @@ public class MainController {
     @RequestMapping(value = "/pageNotFound", method = RequestMethod.GET)
     public String pageNotFound() throws IllegalArgumentException {
         return "access/pageNotFound404";
+    }
+    /**
+     * This mapped method used to return news page.
+     * <p>
+     *
+     * @return news page
+     * @throws IllegalArgumentException If method took arguments of incorrect type
+     */
+    @RequestMapping(value = "/news", method = RequestMethod.GET)
+    public String newsPage() throws IllegalArgumentException {
+        return "news/news";
     }
 }
