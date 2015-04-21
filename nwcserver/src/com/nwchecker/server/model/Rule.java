@@ -18,7 +18,7 @@ public class Rule {
     @GeneratedValue
     private int id;
 
-    // unique TODO
+    //  delete TODO
     @Column(name = "type")
     private Type type;
 

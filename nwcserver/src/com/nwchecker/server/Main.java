@@ -7,6 +7,7 @@ import com.nwchecker.server.dao.RuleDAO;
 import com.nwchecker.server.dao.RuleDAOImpl;
 import com.nwchecker.server.model.Language;
 import com.nwchecker.server.model.Rule;
+import com.nwchecker.server.service.RuleService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -59,11 +60,17 @@ public class Main {
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
 
+        /*RuleService ruleService = context.getBean("RuleService", RuleService.class);
+
+        List<Rule> rules = ruleService.getRulesByLanguageTag("ENG");
+        for(Rule rule : rules){
+            System.out.println(rule);
+        }*/
+
+
         //createData(ruleDAO, languageDAO);
 
         //ruleDAO.deleteRuleById(2);
-
         //languageDAO.deleteLanguageById(2);
-
     }
 }

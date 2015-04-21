@@ -19,34 +19,40 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO{
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void createRule(Rule rule) {
         getHibernateTemplate().save(rule);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Rule readRuleById(int id) {
         return getHibernateTemplate().load(Rule.class, id);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void updateRule(Rule rule) {
         getHibernateTemplate().update(rule);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void deleteRuleById(int id) {
         getHibernateTemplate().delete(getHibernateTemplate().load(Rule.class, id));
     }
 
     @Override
-    @Transactional()
+    @Transactional
+    public List<Rule> getRulesByLanguageId(int languageId) {
+        return (List<Rule>) getHibernateTemplate().find("from Rule where language_id=?", languageId);
+    }
+
+    @Override
+    @Transactional
     public List<Rule> getAllRules() {
         //@SuppressWarnings("unchecked")    //TODO
-        List<Rule> result = (List<Rule>) getHibernateTemplate().find("from rules");
+        List<Rule> result = (List<Rule>) getHibernateTemplate().find("from Rule");
         return result;
     }
 }

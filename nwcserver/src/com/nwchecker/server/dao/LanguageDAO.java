@@ -4,9 +4,10 @@ import com.nwchecker.server.model.Language;
 import java.util.List;
 
 public interface LanguageDAO {
-    void createLanguage(Language language);
-    Language readLanguageById(int id);
-    void updateLanguage(Language language);
-    void deleteLanguageById(int id);
-    List<Language> getAllLanguages();
+    public void createLanguage(Language language);
+    public Language readLanguageById(int id);
+    public void updateLanguage(Language language);
+    public void deleteLanguageById(int id);
+    public int getLanguageIdByTag(String tag);
+    public List<Language> getAllLanguages();
 }

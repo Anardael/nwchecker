@@ -18,34 +18,42 @@ public class LanguageDAOImpl extends HibernateDaoSupport implements LanguageDAO 
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void createLanguage(Language language) {
         getHibernateTemplate().save(language);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Language readLanguageById(int id) {
         return getHibernateTemplate().load(Language.class, id);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void updateLanguage(Language language) {
         getHibernateTemplate().update(language);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void deleteLanguageById(int id) {
         getHibernateTemplate().delete(getHibernateTemplate().load(Language.class, id));
+    }
+
+    @Transactional
+    @Override
+    public int getLanguageIdByTag(String tag) {
+        @SuppressWarnings("unchecked")
+        List<Language> list = (List<Language>) getHibernateTemplate().find("from Language where tag=?", tag);
+        return list.get(0).getId();
     }
 
     @Override
     @Transactional()
     public List<Language> getAllLanguages() {
-        //@SuppressWarnings("unchecked")    //TODO
-        List<Language> result = (List<Language>) getHibernateTemplate().find("from languages");
+        @SuppressWarnings("unchecked")    //TODO
+        List<Language> result = (List<Language>) getHibernateTemplate().find("from Language");
         return result;
     }
 }

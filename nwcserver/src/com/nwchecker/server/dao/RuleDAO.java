@@ -4,9 +4,10 @@ import com.nwchecker.server.model.Rule;
 import java.util.List;
 
 public interface RuleDAO {
-    void createRule(Rule rule);
-    Rule readRuleById(int id);
-    void updateRule(Rule rule);
-    void deleteRuleById(int id);
-    List<Rule> getAllRules();
+    public void createRule(Rule rule);
+    public Rule readRuleById(int id);
+    public void updateRule(Rule rule);
+    public void deleteRuleById(int id);
+    public List<Rule> getRulesByLanguageId(int languageId);
+    public List<Rule> getAllRules();
 }
