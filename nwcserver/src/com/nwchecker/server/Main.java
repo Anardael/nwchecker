@@ -15,43 +15,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    public static void createData(RuleDAO ruleDAO, LanguageDAO languageDAO){
+        List<Language> languages = new ArrayList<Language>();
+        Language language1 = new Language();
+        language1.setTag("ENG");
+        languages.add(language1);
+        Language language2 = new Language();
+        language2.setTag("UA");
+        languages.add(language2);
+        Language language3 = new Language();
+        language3.setTag("RUS");
+        languages.add(language3);
+
+
+        List<Rule> rules = new ArrayList<Rule>();
+        for(Language language : languages){
+            Rule rule1 = new Rule();
+            rule1.setContent(language.getTag() + " language content");
+            rule1.setType(Rule.Type.TYPE1);
+            rule1.setLanguage(language);
+            Rule rule2 = new Rule();
+            rule2.setContent(language.getTag() + " language content");
+            rule2.setType(Rule.Type.TYPE2);
+            rule2.setLanguage(language);
+
+            language.addRule(rule1);
+            language.addRule(rule2);
+        }
+        /*for(Language l : languages){
+            System.out.println("- " + l);
+            for(Rule r : l.getRules()){
+                System.out.println("     - " + r);
+            }
+        }*/
+        for(Language l : languages){
+            languageDAO.createLanguage(l);
+        }
+    }
+
     public static void main(String[] args) {
         ApplicationContext context = new FileSystemXmlApplicationContext("src/resources/spring/application-context.xml");
 
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
 
-        ruleDAO.deleteRuleById(2);
+        //createData(ruleDAO, languageDAO);
+
+        //ruleDAO.deleteRuleById(2);
+
         //languageDAO.deleteLanguageById(2);
 
-        /*List<Rule> rules = new ArrayList<Rule>();
-        List<Language> languages = new ArrayList<Language>();
-        for(int i = 1; i < 4; i++){
-            Rule rule = new Rule();
-            rule.setContent(i + "st content");
-            rule.setName(i + "st name");
-            rules.add(rule);
-
-            Language language = new Language();
-            language.setTag(i + "st tag");
-            languages.add(language);
-        }
-
-        for(Rule r : rules){
-            r.setLanguages(languages);
-        }
-
-        for(Rule r : rules){
-            ruleDAO.createRule(r);
-        }*/
-
-        /*
-        for(Language l : languages){
-            l.setRules(rules);
-        }
-
-        for(Language l : languages){
-            languageDAO.createLanguage(l);
-        }*/
     }
 }

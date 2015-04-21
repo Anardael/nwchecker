@@ -16,17 +16,12 @@ public class Language {
     @Column(name = "tag")
     private String tag;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY/*, mappedBy = "languageList"*/)
-    /*@JoinTable(name = "rules_languages",
-            joinColumns = {
-                    @JoinColumn(name = "languages_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "rules_id")})*/
-    private List<Rule> ruleList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "language")
+    private List<Rule> rules;
 
     public Language(){
         this.tag = "N/A";
-        this.ruleList = new ArrayList<>();
+        this.rules = new ArrayList<>();
     }
 
     @Override
@@ -43,11 +38,15 @@ public class Language {
     }
 
     public List<Rule> getRules() {
-        return ruleList;
+        return rules;
     }
 
     public void setRules(List<Rule> rules) {
-        this.ruleList = rules;
+        this.rules = rules;
+    }
+
+    public void addRule(Rule rule){
+        this.rules.add(rule);
     }
 
     public String getTag() {

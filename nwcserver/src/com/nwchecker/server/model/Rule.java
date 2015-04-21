@@ -9,42 +9,48 @@ import java.util.List;
 @Table(name = "rules")
 public class Rule {
 
+    public static enum Type {
+        TYPE1, TYPE2
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    // unique TODO
+    @Column(name = "type")
+    private Type type;
 
     @Column(name = "content")
     private String content;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    /*@JoinTable(name = "rules_languages",
-            joinColumns = {
-                    @JoinColumn(name = "rules_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "languages_id")})*/
-    private List<Language> languageList;
+    // without language??? TODO
+    @ManyToOne(/*cascade = CascadeType.PERSIST, */fetch = FetchType.LAZY)
+    private Language language;
 
     public Rule(){
-        this.name = "N/A";
+        this.type = Type.TYPE1;
         this.content = "N/A";
-        this.languageList = new ArrayList<>();
+        //this.language = new Language();
     }
 
     @Override
     public String toString(){
-        return "Rule:{" + id + ", " + name + ", " + content + "}";
+        return "Rule:{" + id + ", " + type + ", " + content + "}";
     }
 
-    public List<Language> getLanguages() {
-        return languageList;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setLanguages(List<Language> languages) {
-        this.languageList = languages;
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public void setLanguageId(int languageId){
+        this.language = new Language();
+        language.setId(languageId);
     }
 
     public String getContent() {
@@ -55,12 +61,12 @@ public class Rule {
         this.content = content;
     }
 
-    public String getName() {
-        return name;
+    public Type getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getId() {
