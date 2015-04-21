@@ -39,16 +39,16 @@ public class NewsController {
     	 
     	 List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
          Collections.sort(archivedContests, new ContestStartTimeComparator());
-         Contest resultLastContest = archivedContests.get(0);
+         Contest resultLastContest = archivedContests.get(archivedContests.size()-1);
     			 
     	 List<ContestPass> contestPasses = contestPassService.getContestPasses(resultLastContest.getId());
+    	 List<ContestPassJson> jsonData = new ArrayList<>();
     	 
-    	 for(int i = 0; i < contestPasses.size(); i ++){
-             model.addAttribute(i + "result", contestPasses.get(i));
-         
-    	 System.out.println(contestPasses.get(i));
-    	 }
-    //	 model.addAttribute("result",contestPasses);
+         for (ContestPass contestPass : contestPasses) {
+             jsonData.add(ContestPassJson.createContestPassJson(contestPass));
+         }
+      
+    	 model.addAttribute("result",jsonData);
     	
       	     	 
             return "news/news";

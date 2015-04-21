@@ -45,13 +45,13 @@
                         
                         <p>
                              <spring:message code="news.result"/>
-                             			
+                            </br> 			
           <c:forEach 
           				items="${result}" var="contest">
-          				 ${contest.id}
-          				 ${contest.rank}
+          			     ${contest.rank}
+          				 ${contest.displayName}
           				 ${contest.timePenalty}
-
+						</br>
   		  </c:forEach>               
                         </p>
                   </div>
