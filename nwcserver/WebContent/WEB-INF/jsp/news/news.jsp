@@ -50,7 +50,7 @@
           				items="${result}" var="contest">
           			     ${contest.rank}
           				 ${contest.displayName}
-          				 ${contest.timePenalty}
+          				 ${contest.tasksPassedCount}
 						</br>
   		  </c:forEach>               
                         </p>
