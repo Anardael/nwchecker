@@ -18,13 +18,13 @@
     </jsp:include>
 
     <div class="rule-place" align="center">
-            <table cellspacing="0">
+            <table>
                 <tr>
-                    <th>Rules</th><th>Content</th>
+                    <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center"><b>Rules</b></td>
                 </tr>
                 <c:forEach items="${ruleList}" var="rule">
                     <tr>
-                        <td>${rule.type}</td><td>${rule.content}</td>
+                        <td class="list-group-item">${rule.type}</td><td class="list-group-item">${rule.content}</td>
                     </tr>
                 </c:forEach>
             </table>

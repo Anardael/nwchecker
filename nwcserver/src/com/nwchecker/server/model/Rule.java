@@ -10,7 +10,7 @@ import java.util.List;
 public class Rule {
 
     public static enum Type {
-        TYPE1, TYPE2
+        ICM, POP
     }
 
     @Id
@@ -30,7 +30,7 @@ public class Rule {
     private Language language;
 
     public Rule(){
-        this.type = Type.TYPE1;
+        this.type = Type.ICM;
         this.content = "N/A";
         //this.language = new Language();
     }

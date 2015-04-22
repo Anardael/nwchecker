@@ -33,11 +33,11 @@ public class Main {
         for(Language language : languages){
             Rule rule1 = new Rule();
             rule1.setContent(language.getTag() + " language content");
-            rule1.setType(Rule.Type.TYPE1);
+            rule1.setType(Rule.Type.ICM);
             rule1.setLanguage(language);
             Rule rule2 = new Rule();
             rule2.setContent(language.getTag() + " language content");
-            rule2.setType(Rule.Type.TYPE2);
+            rule2.setType(Rule.Type.ICM);
             rule2.setLanguage(language);
 
             language.addRule(rule1);
