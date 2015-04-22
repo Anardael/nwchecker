@@ -35,26 +35,36 @@
                             </p>               
                         </blockquote>
                    </div>
-                      <div class="info">
                         <p>
-                        	<spring:message code="news.contests"/>         
-                        				                   
-                      					</br>${contest.title}   ${contest.starts}
-                      					  
+                                <div class="form-group col-sm-12" style="margin:auto">
+          						   <ul class="col-sm-offset-2 col-sm-8 ">
+            					     <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
+              						      <spring:message code="news.contests"/>  
+             						 </li>
+             							 <li class="list-group-item">                               				                 
+                      						</br>${contest.title}   ${contest.starts}   
+                      				     </li>             					                          
+                         		</div>
                         </p>
-                        
                         <p>
-                             <spring:message code="news.result"/>
-                            </br> 			
-          <c:forEach 
-          				items="${result}" var="contest">
-          			     ${contest.rank}
+                        	<div class="form-group col-sm-12" style="margin:auto">
+          					   <ul class="col-sm-offset-2 col-sm-8 ">
+            				     <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
+                           			  <spring:message code="news.result"/>
+                             	</li>                              
+                          
+		  		  			</div>
+  		  				</p> 
+  		  				<table class="table table-condensed"> 		
+          	        	<c:forEach           	        
+          				 items="${result}" var="contest">
+          			     ${contest.rank} 
           				 ${contest.displayName}
           				 ${contest.tasksPassedCount}
-						</br>
-  		  </c:forEach>               
-                        </p>
-                  </div>
+          				 ${contest.timePenalty}
+          				 </br>           				      			
+          				</c:forEach>
+          				 </table>				  		 			       		  				                                                  
                 </section>
             </div>
         </div>
