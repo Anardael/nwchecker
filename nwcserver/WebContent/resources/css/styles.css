@@ -6426,3 +6426,10 @@ body footer .container {
     height: 60px;
     padding: 10px 0
 }
+
+.rule-place {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+
+}
