@@ -23,6 +23,9 @@ public class NewsController {
     	
     		List<ContestPassJson> jsonData = newsService.getResultLastContest();   	 
     		model.addAttribute("result",jsonData);
+    		
+    		String titleLastContest = newsService.getNameLastContest();
+    		model.addAttribute("title", titleLastContest);
     	      	     	 
             return "news/news";
     }

@@ -26,45 +26,57 @@
                         <li class="list-group-item"><a href="phasellus.do"><spring:message code="home.forum.caption" /></a></li>
                     </ul>
                 </aside>
+                
                 <section class="col-md-9">
-                    <div class="jumbotron">
+                    <div class="jumbotron" style="text-align:center; font-size: large" >
                         <blockquote>
                             <p>
-                                "<spring:message code="news.quote"/>"
+                                <spring:message code="news.quote"/>
                                 <c:url var="news" value="/news.do"/>
                             </p>               
                         </blockquote>
-                   </div>
-                        <p>
-                                <div class="form-group col-sm-12" style="margin:auto">
-          						   <ul class="col-sm-offset-2 col-sm-8 ">
-            					     <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
-              						      <spring:message code="news.contests"/>  
-             						 </li>
-             							 <li class="list-group-item">                               				                 
-                      						</br>${contest.title}   ${contest.starts}   
-                      				     </li>             					                          
-                         		</div>
-                        </p>
-                        <p>
-                        	<div class="form-group col-sm-12" style="margin:auto">
-          					   <ul class="col-sm-offset-2 col-sm-8 ">
-            				     <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
-                           			  <spring:message code="news.result"/>
-                             	</li>                              
-                          
-		  		  			</div>
-  		  				</p> 
-  		  				<table class="table table-condensed"> 		
-          	        	<c:forEach           	        
-          				 items="${result}" var="contest">
-          			     ${contest.rank} 
-          				 ${contest.displayName}
-          				 ${contest.tasksPassedCount}
-          				 ${contest.timePenalty}
-          				 </br>           				      			
-          				</c:forEach>
-          				 </table>				  		 			       		  				                                                  
+                    </div>
+                                            
+                    <div class="form-group col-sm-12" style="margin:auto">                                  
+          			   <ul class="col-sm-offset-2 col-sm-8 ">
+            	         <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:left; font-size: large">
+              		         <p>
+              		         	<spring:message code="news.contests"/>
+              		         </p>
+              		         <p>
+              		         	 ${contest.title} 
+              		         	 <br>  
+              		         	 <br> 
+              		             ${contest.starts} 
+              		         </p>  
+              			 </li>                      		    
+                       </ul>                      			  	                    				                 					                          
+                    </div> 
+                                          	
+                    <div class="form-group col-sm-12" style="margin:auto">
+          				<ul class="col-sm-offset-2 col-sm-8 ">
+            				<li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
+                           		<spring:message code="news.result"/> ${title} 
+                            </li>                              	  		  				   
+  		  					<table class="table table-condensed"> 
+  		  					  <thead>
+    							<tr>
+      								<th><spring:message code="contest.results.tableHeader.place"/></th>
+     							    <th><spring:message code="contest.results.tableHeader.displayName"/></th>
+    							    <th><spring:message code="contest.results.tableHeader.tasksPassedCount"/></th>
+      								<th><spring:message code="contest.results.tableHeader.timePenalty"/></th>
+    							</tr>
+  							 </thead>		
+          	        		 <c:forEach items="${result}" var="contest">
+          	        			<tr>
+          			    			<td> ${contest.rank}</td> 
+          				 			<td>${contest.displayName}</td>
+          				 			<td>${contest.tasksPassedCount}</td>
+          				 			<td>${contest.timePenalty}</td>
+          						</tr>          		     				      			
+          					 </c:forEach>
+          				 	</table>
+          			</div>				  		 			       		  				                                                  
                 </section>
             </div>
         </div>

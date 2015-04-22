@@ -22,6 +22,8 @@ public class NewsServiceImpl implements NewsService {
 	@Autowired
 	private ContestPassService contestPassService;
 	 
+	private Contest last;
+	
 	@Override
 	public Contest getNextContest() {
 		List<Contest> avalaibleContests = contestService.getContestByStatus(Status.PREPARING);    	 
@@ -35,9 +37,9 @@ public class NewsServiceImpl implements NewsService {
 		
    	 List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
      Collections.sort(archivedContests, new ContestStartTimeComparator());
-     Contest resultLastContest = archivedContests.get(archivedContests.size()-1);
+     last = archivedContests.get(archivedContests.size()-1);
 			 
-	 List<ContestPass> contestPasses = contestPassService.getContestPasses(resultLastContest.getId());
+	 List<ContestPass> contestPasses = contestPassService.getContestPasses(last.getId());
 	 Collections.sort(contestPasses);
 	 
 	 List<ContestPassJson> jsonData = new ArrayList<>();
@@ -46,5 +48,11 @@ public class NewsServiceImpl implements NewsService {
          jsonData.add(ContestPassJson.createContestPassJson(contestPass));
      }
      return jsonData;
+	}
+
+	@Override
+	public String getNameLastContest() {
+		String name = last.getTitle();
+		return name;
 	}
 }
