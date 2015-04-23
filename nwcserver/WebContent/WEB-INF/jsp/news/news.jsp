@@ -52,7 +52,7 @@
               			 </li>                      		    
                        </ul>                      			  	                    				                 					                          
                     </div> 
-                                          	
+                                                              	
                     <div class="form-group col-sm-12" style="margin:auto">
           				<ul class="col-sm-offset-2 col-sm-8 ">
             				<li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
@@ -76,7 +76,7 @@
           						</tr>          		     				      			
           					 </c:forEach>
           				 	</table>
-          			</div>				  		 			       		  				                                                  
+          			</div>	  						  		 			       		  				                                                  
                 </section>
             </div>
         </div>

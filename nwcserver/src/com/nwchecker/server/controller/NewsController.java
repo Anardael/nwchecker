@@ -1,10 +1,13 @@
 package com.nwchecker.server.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.NewsService;
@@ -15,7 +18,7 @@ public class NewsController {
     @Autowired 
     private NewsService newsService;
       
-    @RequestMapping("/news")
+    @RequestMapping(value = "/news" ,method = RequestMethod.GET)
     public String getLastMews(Model model){
     	
     		Contest contest =newsService.getNextContest();
