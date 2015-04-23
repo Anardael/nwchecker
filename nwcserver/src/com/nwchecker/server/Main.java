@@ -60,6 +60,24 @@ public class Main {
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
 
+        /*Rule rule = new Rule();
+        rule.setId(4);
+        rule.setType(Rule.Type.POP);
+        rule.setContent("\\u0423\\u043A\\u0440\\u0430\\u0457\\u043D\\u0441\\u044C\\u043A\\u0430");
+        rule.setLanguageId(2);
+        ruleDAO.updateRule(rule);*/
+
+        /*Rule rule = new Rule();
+        rule.setId(4);
+        rule.setType(Rule.Type.POP);
+        rule.setContent("Контен української мови");
+        rule.setLanguageId(2);
+        ruleDAO.updateRule(rule);*/
+
+        /*Language language = new Language();
+        language.setId(1);
+        language.setTag("EN");
+        languageDAO.updateLanguage(language);*/
         /*RuleService ruleService = context.getBean("RuleService", RuleService.class);
 
         List<Rule> rules = ruleService.getRulesByLanguageTag("ENG");

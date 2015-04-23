@@ -6433,3 +6433,15 @@ body footer .container {
     margin-left: 20px;
 
 }
+
+.btn-rule {
+    color: #fff;
+    background-color: #29c5e6;
+    border-color: #1abadc;
+
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 11px;
+    line-height: 1.5;
+    border-radius: 3px
+}
