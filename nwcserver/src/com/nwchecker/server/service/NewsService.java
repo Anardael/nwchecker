@@ -8,9 +8,9 @@ import com.nwchecker.server.model.Contest;
 public interface NewsService {
 
 	public Contest getNextContest();
-	
+
 	public List<ContestPassJson> getResultLastContest();
-	
+
 	public String getNameLastContest();
-	
+
 }

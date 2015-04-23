@@ -18,40 +18,45 @@ public class NewsServiceImpl implements NewsService {
 
 	@Autowired
 	private ContestService contestService;
-	
+
 	@Autowired
 	private ContestPassService contestPassService;
-	 
-	private Contest last;
-	
+
 	@Override
 	public Contest getNextContest() {
-		List<Contest> avalaibleContests = contestService.getContestByStatus(Status.PREPARING);    	 
-   	 Collections.sort(avalaibleContests , new ContestStartTimeComparator() );   
-   	 Contest first = avalaibleContests.get(0);
+		List<Contest> avalaibleContests = contestService
+				.getContestByStatus(Status.PREPARING);
+		Collections.sort(avalaibleContests, new ContestStartTimeComparator());
+		Contest first = avalaibleContests.get(0);
 		return first;
 	}
 
 	@Override
 	public List<ContestPassJson> getResultLastContest() {
-		
-   	 List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
-     Collections.sort(archivedContests, new ContestStartTimeComparator());
-     last = archivedContests.get(archivedContests.size()-1);
-			 
-	 List<ContestPass> contestPasses = contestPassService.getContestPasses(last.getId());
-	 Collections.sort(contestPasses);
-	 
-	 List<ContestPassJson> jsonData = new ArrayList<>();
-	 
-     for (ContestPass contestPass : contestPasses) {
-         jsonData.add(ContestPassJson.createContestPassJson(contestPass));
-     }
-     return jsonData;
+
+		List<Contest> archivedContests = contestService
+				.getContestByStatus(Contest.Status.ARCHIVE);
+		Collections.sort(archivedContests, new ContestStartTimeComparator());
+		Contest last = archivedContests.get(archivedContests.size() - 1);
+
+		List<ContestPass> contestPasses = contestPassService
+				.getContestPasses(last.getId());
+		Collections.sort(contestPasses);
+
+		List<ContestPassJson> jsonData = new ArrayList<>();
+
+		for (ContestPass contestPass : contestPasses) {
+			jsonData.add(ContestPassJson.createContestPassJson(contestPass));
+		}
+		return jsonData;
 	}
 
 	@Override
 	public String getNameLastContest() {
+		List<Contest> archivedContests = contestService
+				.getContestByStatus(Contest.Status.ARCHIVE);
+		Collections.sort(archivedContests, new ContestStartTimeComparator());
+		Contest last = archivedContests.get(archivedContests.size() - 1);
 		String name = last.getTitle();
 		return name;
 	}

@@ -3,7 +3,6 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

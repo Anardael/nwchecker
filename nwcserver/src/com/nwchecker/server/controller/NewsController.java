@@ -14,24 +14,23 @@ import com.nwchecker.server.service.NewsService;
 
 @Controller
 public class NewsController {
-   
-    @Autowired 
-    private NewsService newsService;
-      
-    @RequestMapping(value = "/news" ,method = RequestMethod.GET)
-    public String getLastMews(Model model){
-    	
-    		Contest contest =newsService.getNextContest();
-    		model.addAttribute("contest",contest);
-    	
-    		List<ContestPassJson> jsonData = newsService.getResultLastContest();   	 
-    		model.addAttribute("result",jsonData);
-    		
-    		String titleLastContest = newsService.getNameLastContest();
-    		model.addAttribute("title", titleLastContest);
-    	      	     	 
-            return "news/news";
-    }
-    
+
+	@Autowired
+	private NewsService newsService;
+
+	@RequestMapping(value = "/news", method = RequestMethod.GET)
+	public String getLastNews(Model model) {
+
+		Contest contest = newsService.getNextContest();
+		model.addAttribute("contest", contest);
+
+		List<ContestPassJson> jsonData = newsService.getResultLastContest();
+		model.addAttribute("result", jsonData);
+
+		String titleLastContest = newsService.getNameLastContest();
+		model.addAttribute("title", titleLastContest);
+
+		return "news/news";
+	}
 
 }
