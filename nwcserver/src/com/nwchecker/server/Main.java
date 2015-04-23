@@ -68,11 +68,18 @@ public class Main {
         ruleDAO.updateRule(rule);*/
 
         /*Rule rule = new Rule();
-        rule.setId(4);
-        rule.setType(Rule.Type.POP);
+        rule.setId(3);
+        rule.setType(Rule.Type.ICM);
         rule.setContent("Контен української мови");
         rule.setLanguageId(2);
-        ruleDAO.updateRule(rule);*/
+        ruleDAO.updateRule(rule);
+
+        Rule rule2 = new Rule();
+        rule2.setId(4);
+        rule2.setType(Rule.Type.POP);
+        rule2.setContent("Контен української мови");
+        rule2.setLanguageId(2);
+        ruleDAO.updateRule(rule2);*/
 
         /*Language language = new Language();
         language.setId(1);
