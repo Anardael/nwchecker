@@ -42,23 +42,23 @@ public class RuleController{
             String username = principal.getName(); // get logged in username
             model.addAttribute("userData", userService.getUserByUsername(username));
             LOG.info("\"" + principal.getName() + "\" initialized rule page.");
-            for(Role r : userService.getUserByUsername(username).getRoles()){
-                System.out.println(r);
-            }
         } else{
             System.out.println("NULL USER!");
             model.addAttribute("userData", null);
         }
         model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+
+        model.addAttribute("testRule", new Rule());
         return "rule/rules";
     }
 
     @RequestMapping("/donec/edit")
-    public String editRules(Model model, @ModelAttribute("ruleList") List<Rule> rules){
+    public String editRules(Model model, /*@ModelAttribute("ruleList") List<Rule> rules,*/ @ModelAttribute("testRule") Rule rule){
         System.out.println("RULE WAS EDITED!!!");
-        for(Rule r : rules){
+        /*for(Rule r : rules){
             System.out.println(r);
-        }
+        }*/
+        System.out.println(rule);
         model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         return "rule/rules";
     }

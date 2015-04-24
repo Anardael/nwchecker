@@ -59,6 +59,22 @@
                 </button>
             </div>
         </security:authorize>
+
+        <%--<form:form modelAttribute="testRule" action="donec/edit.do" method="post">
+            <c:forEach var="item" items="${userData.roles}">
+                <c:if test="${item.role eq 'ROLE_TEACHER'}">
+                    <div class="rule-content-area">
+                            <form:textarea path="content"/>
+                    </div>
+                </c:if>
+            </c:forEach>
+            <div class="rule-submit-btn">
+                <button class="btn btn-rule" type="submit" >
+                    <spring:message code="rules.submitButton.caption"/>
+                </button>
+            </div>
+        </form:form>--%>
+
     </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
