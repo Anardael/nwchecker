@@ -61,10 +61,10 @@ public class Main {
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
 
         /*Rule rule = new Rule();
-        rule.setId(4);
-        rule.setType(Rule.Type.POP);
-        rule.setContent("\\u0423\\u043A\\u0440\\u0430\\u0457\\u043D\\u0441\\u044C\\u043A\\u0430");
-        rule.setLanguageId(2);
+        rule.setId(1);
+        rule.setType(Rule.Type.ICM);
+        rule.setContent();
+        rule.setLanguageId(1);
         ruleDAO.updateRule(rule);*/
 
         /*Rule rule = new Rule();

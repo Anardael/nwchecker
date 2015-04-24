@@ -19,34 +19,46 @@
         <jsp:param name="pageName" value="rules" />
     </jsp:include>
     <div class="rule-place" align="center">
-        <form:form modelAttribute="updateContent" action="donec/edit.do" method="post" role="form" class="rules-form">
-            <table>
-                <tr>
-                    <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
-                        <b><spring:message code="rules.contests.tableHeader.title"/></b>
-                    </td>
-                </tr>
-                <c:forEach items="${ruleList}" var="rule">
+        <table>
+            <tr>
+                <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
+                    <b><spring:message code="rules.contests.tableHeader.title"/></b>
+                </td>
+            </tr>
+            <c:forEach items="${ruleList}" var="rule">
+                <form:form modelAttribute="rule" action="donec/edit.do" method="post" class="rules-form">
                     <tr>
                         <td class="list-group-item">
                             ${rule.type}
                         </td>
                         <td class="list-group-item">
-                            <div class="rule-content-area" hidden="true"><form:textarea path="content"/>${rule.content}</div>
-                            <%--<div class="rule-content-area" hidden="true"><textarea>${rule.content}</textarea></div>--%>
-                            <div class="rule-content">${rule.content}</div>
+                            <c:forEach var="item" items="${userData.roles}">
+                                <c:choose>
+                                    <c:when test="${item.role eq 'ROLE_TEACHER'}">
+                                        <div class="rule-content-area">
+                                            <form:textarea path="content"/>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="rule-content">${rule.content}</div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${userData eq null}">
+                                <div class="rule-content">${rule.content}</div>
+                            </c:if>
                         </td>
                     </tr>
-                </c:forEach>
-            </table>
-            <security:authorize access="hasRole('ROLE_TEACHER')">
-                <div class="rule-submit-btn">
-                    <button class="btn btn-rule" type="submit" >
-                        <spring:message code="rules.submitButton.caption"/>
-                    </button>
-                </div>
-            </security:authorize>
-        </form:form>
+                </form:form>
+            </c:forEach>
+        </table>
+        <security:authorize access="hasRole('ROLE_TEACHER')">
+            <div class="rule-submit-btn">
+                <button class="btn btn-rule" type="submit" >
+                    <spring:message code="rules.submitButton.caption"/>
+                </button>
+            </div>
+        </security:authorize>
     </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
