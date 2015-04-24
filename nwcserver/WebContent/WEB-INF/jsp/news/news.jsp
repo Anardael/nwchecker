@@ -16,70 +16,49 @@
 			<jsp:param name="pageName" value="news" />
 		</jsp:include>
 
-		<div class="row">
-			<aside class="col-md-3">
-				<ul class="list-group submenu">
-					<li class="list-group-item active"><spring:message
-							code="home.info.caption" /></li>
-					<li class="list-group-item"><a href="donec.do"><spring:message
-								code="home.rules.caption" /></a></li>
-					<li class="list-group-item"><a href="vestibulum.do"><spring:message
-								code="home.contacts.caption" /></a></li>
-					<li class="list-group-item"><a href="etiam.do"><spring:message
-								code="home.archive.caption" /></a></li>
-					<li class="list-group-item"><a href="phasellus.do"><spring:message
-								code="home.forum.caption" /></a></li>
-				</ul>
-			</aside>
+		<div class="form-group col-sm-12" style="margin: auto">
+			<c:url var="news" value="/news.do" />
+			<ul class="col-sm-offset-2 col-sm-8 ">
+				<li
+					class="list-group-item list-group-item-heading list-group-item-info"
+					style="text-align: left; font-size: large"><spring:message
+						code="news.contests" /></li>
+				<li class="list-group-item">${contest.title} <br> <spring:message
+						code="news.contests.date" /> ${contest.starts}
+				</li>
+			</ul>
+			<br>
+			<ul class="col-sm-offset-2 col-sm-8 ">
+				<li
+					class="list-group-item list-group-item-heading list-group-item-info"
+					style="text-align: left; font-size: large"><spring:message
+						code="news.result" /> ${title}</li>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th><spring:message code="contest.results.tableHeader.place" /></th>
+							<th><spring:message
+									code="contest.results.tableHeader.displayName" /></th>
+							<th><spring:message
+									code="contest.results.tableHeader.tasksPassedCount" /></th>
+							<th><spring:message
+									code="contest.results.tableHeader.timePenalty" /></th>
+						</tr>
+					</thead>
 
-			<section class="col-md-9">
-
-				<div class="col-md-0" style="margin: auto">
-				<c:url var="news" value="/news.do" />
-
-					<li
-						class="list-group-item list-group-item-heading list-group-item-info"
-						style="text-align: left; font-size: large">
-						<p>
-							<b> <spring:message code="news.contests" />
-							</b> ${contest.title} <br> <b><spring:message
-									code="news.contests.date" /></b> ${contest.starts}
-						</p>
-					</li>
-
-				</div>
-				<br>
-				<div class="col-md-0" style="margin: auto">
-					<!--  			<ul class="col-md-9">  -->
-					<li
-						class="list-group-item list-group-item-heading list-group-item-info"
-						style="text-align: left; font-size: large"><b><spring:message
-								code="news.result" /></b> ${title}</li>
-					<table class="table table-condensed">
-						<thead>
-							<tr>
-								<th><spring:message
-										code="contest.results.tableHeader.place" /></th>
-								<th><spring:message
-										code="contest.results.tableHeader.displayName" /></th>
-								<th><spring:message
-										code="contest.results.tableHeader.tasksPassedCount" /></th>
-								<th><spring:message
-										code="contest.results.tableHeader.timePenalty" /></th>
-							</tr>
-						</thead>
-						<c:forEach items="${result}" var="contest">
-							<tr>
-								<td>${contest.rank}</td>
-								<td>${contest.displayName}</td>
-								<td>${contest.tasksPassedCount}</td>
-								<td>${contest.timePenalty}</td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</section>
+					<c:forEach items="${result}" var="contest">
+						<tr>
+							<td align="center">${contest.rank}</td>
+							<td align="center">${contest.displayName}</td>
+							<td align="center">${contest.tasksPassedCount}</td>
+							<td align="center">${contest.timePenalty}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</ul>
 		</div>
+
+
 	</div>
 	<jsp:include page="../fragments/footer.jsp" />
 </body>
