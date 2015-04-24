@@ -25,8 +25,8 @@
                     <b><spring:message code="rules.contests.tableHeader.title"/></b>
                 </td>
             </tr>
-            <c:forEach items="${ruleList}" var="rule">
-                <form:form modelAttribute="rule" action="donec/edit.do" method="post" class="rules-form">
+            <c:forEach items="${ruleList}" var="rule" varStatus="vs">
+                <form:form modelAttribute="ruleList" action="donec/edit.do" method="post" class="rules-form">
                     <tr>
                         <td class="list-group-item">
                             ${rule.type}
@@ -36,7 +36,7 @@
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content-area">
-                                            <form:textarea path="content"/>
+                                            <form:textarea path="ruleList[${vs.index}].content"/>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
