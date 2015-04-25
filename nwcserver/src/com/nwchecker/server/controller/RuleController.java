@@ -5,6 +5,7 @@ import com.nwchecker.server.model.Rule;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.RuleService;
 import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.wrapper.RuleWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,30 +37,37 @@ public class RuleController{
     private UserService userService;
 
     /*@PreAuthorize("isAuthenticated()")*/
-    @RequestMapping(value = "/donec", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/rules")
     public String showRules(Model model, Principal principal){
         if(principal != null){
             String username = principal.getName(); // get logged in username
             model.addAttribute("userData", userService.getUserByUsername(username));
-            LOG.info("\"" + principal.getName() + "\" initialized rule page.");
+            LOG.info("\"" + principal.getName() + "\" initialized rules page.");
         } else{
-            System.out.println("NULL USER!");
             model.addAttribute("userData", null);
         }
-        model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
 
-        model.addAttribute("testRule", new Rule());
+        RuleWrapper ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+        model.addAttribute("ruleWrapper", ruleWrapper);
+
         return "rule/rules";
     }
 
-    @RequestMapping("/donec/edit")
-    public String editRules(Model model, /*@ModelAttribute("ruleList") List<Rule> rules,*/ @ModelAttribute("testRule") Rule rule){
-        System.out.println("RULE WAS EDITED!!!");
-        /*for(Rule r : rules){
-            System.out.println(r);
-        }*/
-        System.out.println(rule);
-        model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+    @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})
+    public String editRules(Model model, @ModelAttribute("ruleWrapper") RuleWrapper ruleWrapper, Principal principal){
+        if(principal != null){
+            String username = principal.getName(); // get logged in username
+            model.addAttribute("userData", userService.getUserByUsername(username));
+            LOG.info("\"" + principal.getName() + "\" initialized editRules page.");
+        } else{
+            model.addAttribute("userData", null);
+        }
+
+        ruleService.updateRulesByLanguageTag(ruleWrapper.getRuleList(), LocaleContextHolder.getLocale().toString());
+
+        ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+        model.addAttribute("ruleWrapper", ruleWrapper);
+
         return "rule/rules";
     }
 }

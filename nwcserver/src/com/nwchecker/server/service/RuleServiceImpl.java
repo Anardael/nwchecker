@@ -23,4 +23,13 @@ public class RuleServiceImpl implements RuleService{
         int languageId = languageDAO.getLanguageIdByTag(tag);
         return ruleDAO.getRulesByLanguageId(languageId);
     }
+
+    @Override
+    public void updateRulesByLanguageTag(List<Rule> rules, String tag) {
+        int languageId = languageDAO.getLanguageIdByTag(tag);
+        for(Rule r : rules){
+            r.setLanguageId(languageId);
+            ruleDAO.updateRule(r);
+        }
+    }
 }

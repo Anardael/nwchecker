@@ -6,5 +6,6 @@ import com.nwchecker.server.model.Rule;
 import java.util.List;
 
 public interface RuleService {
-    public List<Rule> getRulesByLanguageTag(String tag);
+    List<Rule> getRulesByLanguageTag(String tag);
+    void updateRulesByLanguageTag(List<Rule> rules, String tag);
 }

@@ -9,6 +9,7 @@
 <html>
 <head>
     <jsp:include page="../fragments/staticFiles.jsp" />
+    <link href="${resources}css/rules/rules-style.css" rel="stylesheet"/>
     <script type="text/javascript" src="${resources}js/rules/rulesEditBtn.js"></script>
 </head>
 <body>
@@ -19,14 +20,14 @@
         <jsp:param name="pageName" value="rules" />
     </jsp:include>
     <div class="rule-place" align="center">
-        <table>
-            <tr>
-                <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
-                    <b><spring:message code="rules.contests.tableHeader.title"/></b>
-                </td>
-            </tr>
-            <c:forEach items="${ruleList}" var="rule" varStatus="vs">
-                <form:form modelAttribute="ruleList" action="donec/edit.do" method="post" class="rules-form">
+        <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post">
+            <table>
+                <tr>
+                    <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
+                        <b><spring:message code="rules.contests.tableHeader.title"/></b>
+                    </td>
+                </tr>
+                <c:forEach items="${ruleWrapper.ruleList}" var="rule" varStatus="vs">
                     <tr>
                         <td class="list-group-item">
                             ${rule.type}
@@ -35,8 +36,10 @@
                             <c:forEach var="item" items="${userData.roles}">
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
-                                        <div class="rule-content-area">
-                                            <form:textarea path="ruleList[${vs.index}].content"/>
+                                        <div>
+                                            <form:hidden path="ruleList[${vs.index}].id"/>
+                                            <form:hidden path="ruleList[${vs.index}].type"/>
+                                            <form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
@@ -49,32 +52,16 @@
                             </c:if>
                         </td>
                     </tr>
-                </form:form>
-            </c:forEach>
-        </table>
-        <security:authorize access="hasRole('ROLE_TEACHER')">
-            <div class="rule-submit-btn">
-                <button class="btn btn-rule" type="submit" >
-                    <spring:message code="rules.submitButton.caption"/>
-                </button>
-            </div>
-        </security:authorize>
-
-        <%--<form:form modelAttribute="testRule" action="donec/edit.do" method="post">
-            <c:forEach var="item" items="${userData.roles}">
-                <c:if test="${item.role eq 'ROLE_TEACHER'}">
-                    <div class="rule-content-area">
-                            <form:textarea path="content"/>
-                    </div>
-                </c:if>
-            </c:forEach>
-            <div class="rule-submit-btn">
-                <button class="btn btn-rule" type="submit" >
-                    <spring:message code="rules.submitButton.caption"/>
-                </button>
-            </div>
-        </form:form>--%>
-
+                </c:forEach>
+            </table>
+            <security:authorize access="hasRole('ROLE_TEACHER')">
+                <div class="rule-submit-btn">
+                    <button class="btn btn-rule" type="submit" >
+                        <spring:message code="rules.editButton.caption"/>
+                    </button>
+                </div>
+            </security:authorize>
+        </form:form>
     </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
