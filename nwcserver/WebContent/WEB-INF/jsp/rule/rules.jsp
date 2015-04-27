@@ -10,17 +10,14 @@
 <head>
     <jsp:include page="../fragments/staticFiles.jsp" />
     <link href="${resources}css/rules/rules-style.css" rel="stylesheet"/>
-    <script type="text/javascript" src="${resources}js/rules/rulesEditBtn.js"></script>
 </head>
 <body>
 <div class="wrapper container">
-    <!--including bodyHead -->
-    <!-- send name of current page-->
     <jsp:include page="../fragments/bodyHeader.jsp">
         <jsp:param name="pageName" value="rules" />
     </jsp:include>
     <div class="rule-place" align="center">
-        <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post">
+        <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post" id="rules-form">
             <table>
                 <tr>
                     <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
@@ -36,7 +33,7 @@
                             <c:forEach var="item" items="${userData.roles}">
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
-                                        <div>
+                                        <div id="rule-area">
                                             <form:hidden path="ruleList[${vs.index}].id"/>
                                             <form:hidden path="ruleList[${vs.index}].type"/>
                                             <form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/>
@@ -55,7 +52,7 @@
                 </c:forEach>
             </table>
             <security:authorize access="hasRole('ROLE_TEACHER')">
-                <div class="rule-submit-btn">
+                <div class="rule-submit-btn" hidden="true">
                     <button class="btn btn-rule" type="submit" >
                         <spring:message code="rules.editButton.caption"/>
                     </button>
@@ -65,5 +62,7 @@
     </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
+
+<script type="text/javascript" src="${resources}js/rules/rulesEdit.js"></script>
 </body>
 </html>
