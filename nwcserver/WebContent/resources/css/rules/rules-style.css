@@ -1,9 +1,12 @@
 .list-group-area {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    padding: 5px 5px;
     margin-bottom: -1px;
     background-color: #f3f3f3;
     border: 0px solid #54c5e7;
-    resize:none
+    /*width: 100px;
+    height: auto;*/
+    resize:none;
 }
+

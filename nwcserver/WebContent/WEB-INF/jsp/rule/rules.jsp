@@ -18,7 +18,7 @@
     </jsp:include>
     <div class="col-sm-offset-2 col-sm-8 ">
         <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post" id="rules-form">
-            <table>
+            <table align="center">
                 <tr>
                     <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
                         <b><spring:message code="rules.contests.tableHeader.title"/></b>
@@ -33,9 +33,9 @@
                             <c:forEach var="item" items="${userData.roles}">
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
-                                        <div id="rule-area">
-                                            <form:hidden path="ruleList[${vs.index}].id"/>
-                                            <form:hidden path="ruleList[${vs.index}].type"/>
+                                        <div class="rule-content">
+                                            <form:hidden path="ruleList[${vs.index}].id" class="list-group-area"/>
+                                            <form:hidden path="ruleList[${vs.index}].type" class="list-group-area"/>
                                             <form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/>
                                         </div>
                                     </c:when>
@@ -52,7 +52,7 @@
                 </c:forEach>
             </table>
             <security:authorize access="hasRole('ROLE_TEACHER')">
-                <div class="rule-submit-btn" hidden="true">
+                <div class="rule-submit-btn" align="center" hidden="true">
                     <button class="btn btn-rule" type="submit" >
                         <spring:message code="rules.editButton.caption"/>
                     </button>
