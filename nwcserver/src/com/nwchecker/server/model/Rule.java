@@ -22,7 +22,7 @@ public class Rule {
     @Column(name = "type")
     private Type type;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 1024)
     private String content;
 
     // without language??? TODO

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="3" author="Kulishenko">
+        <comment>
+            Insert Rules and Languages to DB
+        </comment>
+        <sql>
+            #Add Languages to DBt
+            INSERT INTO `languages` (id, tag) VALUES ('1', 'EN');
+            INSERT INTO `languages` (id, tag) VALUES ('2', 'UA');
+
+            #Add Rules to DB
+            INSERT INTO `rules` (id, content, type, language_id) VALUES ('1', '     The ICPC is a team competition. Current rules stipulate that each team consist of three students. Participants must be university students, who have had less than five years of university education before the contest. Students who have previously competed in two World Finals or five regional competitions are ineligible to compete again.
+
+                 During contest, the teams are given 5 hours to solve between 8 and 12 programming problems (with 8 typical for regionals and 10 for finals). They must submit solutions as programs in C, C++, or Java. Programs are then run on test data. If a program fails to give a correct answer, the team is notified and can submit another program.
+
+                 The winner is the team which correctly solves most problems. If necessary to rank teams for medals or prizes among tying teams, the placement of teams is determined by the sum of the elapsed times at each point that they submitted correct solutions plus 20 minutes for each rejected submission of a problem ultimately solved.', '0', 1);
+            INSERT INTO `rules` (id, content, type, language_id) VALUES ('2', 'ENG LANGUAGE POP', '1', 1);
+            INSERT INTO `rules` (id, content, type, language_id) VALUES ('3', 'УКРАЇНСЬКА МОВА ICM', '0', 2);
+            INSERT INTO `rules` (id, content, type, language_id) VALUES ('4', 'УКРАЇНСЬКА МОВА ICM', '1', 2);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

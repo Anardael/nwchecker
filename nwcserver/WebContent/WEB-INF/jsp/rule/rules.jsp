@@ -16,7 +16,7 @@
     <jsp:include page="../fragments/bodyHeader.jsp">
         <jsp:param name="pageName" value="rules" />
     </jsp:include>
-    <div class="rule-place" align="center">
+    <div class="col-sm-offset-2 col-sm-8 ">
         <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post" id="rules-form">
             <table>
                 <tr>
