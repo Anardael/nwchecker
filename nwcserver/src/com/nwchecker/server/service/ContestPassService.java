@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public interface ContestPassService {
      * @param file Source code files
      * @return
      */
-    Map<String, Object> checkTask(boolean save, ContestPass contestPass, Task task, int compilerId, byte[] file);
+    Map<String, Object> checkTask(boolean save, ContestPass contestPass, Task task, int compilerId, byte[] file, User user);
 
     /**
      * Return list of passed contests for specific Contest.

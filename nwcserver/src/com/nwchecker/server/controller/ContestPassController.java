@@ -85,10 +85,8 @@ public class ContestPassController {
             return "access/accessDenied403";
         }
         //if contest is going:
-        boolean goingContest = false;
         ContestPass currentContestPass = null;
         if (currentTask.getContest().getStatus() == Contest.Status.GOING) {
-            goingContest = true;
             //check if user has contestPass for this contest:
             boolean contains = false;
             for (ContestPass c : user.getContestPassList()) {
@@ -184,10 +182,10 @@ public class ContestPassController {
             }
         }
         if (task.getContest().getStatus() == Contest.Status.GOING && contestPass != null) {
-            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes(), user);
         } else if (task.getContest().getStatus() == Contest.Status.ARCHIVE) {
             //archive:
-            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes(), user);
         } else {
             result.put("accessDenied", true);
         }

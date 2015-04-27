@@ -4,6 +4,8 @@ import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
+import com.nwchecker.server.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,14 +38,14 @@ public class ContestPassServiceImpl implements ContestPassService {
 
     @Override
     @Transactional
-    public Map<String, Object> checkTask(boolean save, ContestPass contestPass, Task task, int compilerId, byte[] file) {
-        TaskPass taskPass = new TaskPass();
-        taskPass.setContestPass(contestPass);
-        taskPass.setTask(task);
+    public Map<String, Object> checkTask(boolean save, ContestPass contestPass, Task task, int compilerId, byte[] file, User user) {
 
         //send File and compiler to checker:
         Map<String, Object> checkResult = checkerService.checkTask(task, file, compilerId);
-
+        
+        TaskPass taskPass = new TaskPass();
+        taskPass.setContestPass(contestPass);
+        taskPass.setTask(task);
         taskPass.setPassed((boolean) checkResult.get("passed"));
         taskPass.setExecutionTime((int) checkResult.get("time"));
         taskPass.setMemoryUsed((int) checkResult.get("memory"));
@@ -54,11 +56,20 @@ public class ContestPassServiceImpl implements ContestPassService {
         long minute = millis / 1000 / 60;
         taskPass.setPassedMinute((int) minute);
         if (save) {
+        	//save user's result       	
+        	List <TaskPass> list = user.getTaskPassList();
+        	list.add(taskPass);
+        	user.setTaskPassList(list);
+        	System.out.println(list);
+        	userService.updateUser(user);
+        	
             contestPass.getTaskPassList().add(taskPass);
             updateContestPass(contestPass);
+        	userService.updateUser(user);
         }
         return checkResult;
     }
+    
 
     @Override
     public List<ContestPass> getContestPasses(int contestId) {

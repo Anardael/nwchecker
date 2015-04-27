@@ -95,7 +95,11 @@ public class Task {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private List<TaskPass> taskPasses;
+    
     public int getId() {
         return id;
     }
