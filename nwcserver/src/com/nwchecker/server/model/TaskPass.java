@@ -1,5 +1,6 @@
 package com.nwchecker.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -129,6 +130,20 @@ public class TaskPass {
 
 	public void setPassedMinute(int passedMinute) {
 		this.passedMinute = passedMinute;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

@@ -52,6 +52,21 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+         <plugin>
+	      	 <groupId>org.liquibase</groupId>
+        		<artifactId>liquibase-maven-plugin</artifactId>
+        		<configuration>
+          			<changeLogFile>${basedir}/src/resources/liquibase/changelog-master.xml</changeLogFile>
+	          		<driver>com.mysql.jdbc.Driver</driver>
+    	      		<url>jdbc:mysql://localhost:3306/nwserver</url>
+    	   	  		<username>root</username>
+          			<password>root</password>
+          			<referenceUrl>jdbc:mysql://localhost:3306/nwserver</referenceUrl>
+          			<referenceDriver>com.mysql.jdbc.Driver</referenceDriver>
+          			<referenceUsername>root</referenceUsername>
+          			<referencePassword>root</referencePassword>
+        		</configuration>
+     	 </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -212,7 +227,7 @@
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
+            <artifactId>liquibase-maven-plugin</artifactId>            
         </dependency>
     </dependencies>
     <dependencyManagement>

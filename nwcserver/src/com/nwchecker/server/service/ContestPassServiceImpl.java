@@ -44,6 +44,7 @@ public class ContestPassServiceImpl implements ContestPassService {
         Map<String, Object> checkResult = checkerService.checkTask(task, file, compilerId);
         
         TaskPass taskPass = new TaskPass();
+        taskPass.setUser(user);
         taskPass.setContestPass(contestPass);
         taskPass.setTask(task);
         taskPass.setPassed((boolean) checkResult.get("passed"));
@@ -55,17 +56,11 @@ public class ContestPassServiceImpl implements ContestPassService {
         long millis = System.currentTimeMillis() - taskPass.getTask().getContest().getStarts().getTime();
         long minute = millis / 1000 / 60;
         taskPass.setPassedMinute((int) minute);
+        
         if (save) {
-        	//save user's result       	
-        	List <TaskPass> list = user.getTaskPassList();
-        	list.add(taskPass);
-        	user.setTaskPassList(list);
-        	System.out.println(list);
-        	userService.updateUser(user);
-        	
             contestPass.getTaskPassList().add(taskPass);
             updateContestPass(contestPass);
-        	userService.updateUser(user);
+                 
         }
         return checkResult;
     }
