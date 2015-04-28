@@ -5,28 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "languages")
-public class Language {
+@Table(name = "types")
+public class Type {
 
     @Id
     @Column(name = "id")
     @GeneratedValue
     private int id;
 
-    @Column(name = "tag")
-    private String tag;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "language")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "type")
     private List<Rule> rules;
 
-    public Language(){
-        this.tag = "N/A";
-        //this.rules = new ArrayList<>();
-    }
-
-    @Override
-    public String toString(){
-        return "Language:{" + id + ", " + tag + "}";
+    public Type(){
+        this.name = "N/A";
     }
 
     public int getId() {
@@ -35,6 +29,14 @@ public class Language {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Rule> getRules() {
@@ -51,13 +53,4 @@ public class Language {
         }
         this.rules.add(rule);
     }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
 }

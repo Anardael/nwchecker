@@ -63,6 +63,10 @@ public class RuleController{
             model.addAttribute("userData", null);
         }
 
+        for(Rule r : ruleWrapper.getRuleList()){
+            System.out.println(r);
+        }
+
         ruleService.updateRulesByLanguageTag(ruleWrapper.getRuleList(), LocaleContextHolder.getLocale().toString());
 
         ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));

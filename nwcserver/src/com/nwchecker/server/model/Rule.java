@@ -9,35 +9,30 @@ import java.util.List;
 @Table(name = "rules")
 public class Rule {
 
-    public static enum Type {
-        ICM, POP
-    }
-
     @Id
     @Column(name = "id")
     @GeneratedValue
     private int id;
 
-    //  delete TODO
-    @Column(name = "type")
-    private Type type;
-
     @Column(name = "content", length = 1024)
     private String content;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Type type;
+
     // without language??? TODO
-    @ManyToOne(/*cascade = CascadeType.PERSIST, */fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Language language;
 
     public Rule(){
-        this.type = Type.ICM;
         this.content = "N/A";
+        //this.type = new Type();
         //this.language = new Language();
     }
 
     @Override
     public String toString(){
-        return "Rule:{" + id + ", " + type + ", " + content + "}";
+        return "Rule:{" + id + ", " + type.getName() + ", " + content + ", " + language.getTag() +"}";
     }
 
     public Language getLanguage() {
@@ -67,6 +62,11 @@ public class Rule {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public void setTypeId(int typeId){
+        this.type = new Type();
+        type.setId(typeId);
     }
 
     public int getId() {

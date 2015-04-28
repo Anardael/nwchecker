@@ -27,7 +27,7 @@
                 <c:forEach items="${ruleWrapper.ruleList}" var="rule" varStatus="vs">
                     <tr>
                         <td class="list-group-item">
-                            ${rule.type}
+                            ${rule.type.name}
                         </td>
                         <td class="list-group-item">
                             <c:forEach var="item" items="${userData.roles}">
@@ -35,7 +35,7 @@
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content">
                                             <form:hidden path="ruleList[${vs.index}].id" class="list-group-area"/>
-                                            <form:hidden path="ruleList[${vs.index}].type" class="list-group-area"/>
+                                            <%--<form:hidden path="ruleList[${vs.index}].type" class="list-group-area"/>--%>
                                             <form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/>
                                         </div>
                                     </c:when>
