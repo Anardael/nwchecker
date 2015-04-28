@@ -34,7 +34,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public void deleteUser(User user) {
 		getHibernateTemplate().delete(user);
 	}
-	
+
 	@Override
 	public void deleteRole(Role role) {
 		getHibernateTemplate().delete(role);
@@ -49,14 +49,16 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public User getUserById(int id) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("from User where id=?", id);
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"from User where id=?", id);
 		return list.get(0);
 	}
 
 	@Override
 	public User getUserByUsername(String username) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("from User where username=?", username);
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"from User where username=?", username);
 		return list.get(0);
 	}
 
@@ -66,30 +68,43 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");
 		return list;
 	}
-	
+
 	@Override
 	public List<User> getUsersByRole(String role) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =?", role);
+		List<User> list = (List<User>) getHibernateTemplate()
+				.find("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =?",
+						role);
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasUsername(String username) {
-		return !getHibernateTemplate().find("from User user where user.username = ?", username).isEmpty();
+		return !getHibernateTemplate().find(
+				"from User user where user.username = ?", username).isEmpty();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasEmail(String email) {
-		return !getHibernateTemplate().find("from User user where user.email = ?", email).isEmpty();
+		return !getHibernateTemplate().find(
+				"from User user where user.email = ?", email).isEmpty();
 	}
 
 	@Override
 	public List<User> getUsersWithRequests() {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.requests");
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"SELECT user FROM User user INNER JOIN user.requests");
 		return list;
+	}
+
+	@Override
+	public User getUserByUsernameOrEmail(String username) {
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"from User where username=? or email=?", username, username);
+		return list.get(0);
 	}
 }
