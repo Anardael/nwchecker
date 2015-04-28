@@ -4,7 +4,7 @@ package com.nwchecker.server;
 import com.nwchecker.server.dao.*;
 import com.nwchecker.server.model.Language;
 import com.nwchecker.server.model.Rule;
-import com.nwchecker.server.model.Type;
+import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.service.RuleService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void createData(RuleDAO ruleDAO, LanguageDAO languageDAO, TypeDAO typeDAO){
+    public static void createData(RuleDAO ruleDAO, LanguageDAO languageDAO, TypeContestDAO typeContestDAO){
         List<Language> languages = new ArrayList<Language>();
         Language language1 = new Language();
         language1.setTag("EN");
@@ -26,23 +26,23 @@ public class Main {
         language3.setTag("RUS");
         languages.add(language3);
 
-        List<Type> types = new ArrayList<Type>();
-        Type type1 = new Type();
-        type1.setName("ACM");
-        types.add(type1);
-        Type type2 = new Type();
-        type2.setName("PC-UA");
-        types.add(type2);
+        List<TypeContest> typeContests = new ArrayList<TypeContest>();
+        TypeContest typeContest1 = new TypeContest();
+        typeContest1.setName("ACM");
+        typeContests.add(typeContest1);
+        TypeContest typeContest2 = new TypeContest();
+        typeContest2.setName("PC-UA");
+        typeContests.add(typeContest2);
 
         List<Rule> rules = new ArrayList<Rule>();
         for(Language language : languages){
             Rule rule1 = new Rule();
             rule1.setContent(language.getTag() + " language content");
-            rule1.setType(type1);
+            rule1.setTypeContest(typeContest1);
             rule1.setLanguage(language);
             Rule rule2 = new Rule();
             rule2.setContent(language.getTag() + " language content");
-            rule2.setType(type2);
+            rule2.setTypeContest(typeContest2);
             rule2.setLanguage(language);
 
             language.addRule(rule1);
@@ -54,8 +54,8 @@ public class Main {
                 System.out.println("     - " + r);
             }
         }*/
-        for(Type t : types){
-            typeDAO.createType(t);
+        for(TypeContest t : typeContests){
+            typeContestDAO.createType(t);
         }
 
         for(Language l : languages){
@@ -68,7 +68,7 @@ public class Main {
 
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
         LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
-        TypeDAO typeDAO = context.getBean("TypeDAO", TypeDAO.class);
+        TypeContestDAO typeContestDAO = context.getBean("TypeDAO", TypeContestDAO.class);
 
         RuleService ruleService = context.getBean("RuleService", RuleService.class);
 

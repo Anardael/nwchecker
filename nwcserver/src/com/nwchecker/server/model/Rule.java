@@ -1,8 +1,6 @@
 package com.nwchecker.server.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -18,7 +16,7 @@ public class Rule {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Type type;
+    private TypeContest typeContest;
 
     // without language??? TODO
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,7 +30,7 @@ public class Rule {
 
     @Override
     public String toString(){
-        return "Rule:{" + id + ", " + type.getName() + ", " + content + ", " + language.getTag() +"}";
+        return "Rule:{" + id + ", " + content +"}";
     }
 
     public Language getLanguage() {
@@ -56,17 +54,17 @@ public class Rule {
         this.content = content;
     }
 
-    public Type getType() {
-        return type;
+    public TypeContest getTypeContest() {
+        return typeContest;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypeContest(TypeContest typeContest) {
+        this.typeContest = typeContest;
     }
 
     public void setTypeId(int typeId){
-        this.type = new Type();
-        type.setId(typeId);
+        this.typeContest = new TypeContest();
+        typeContest.setId(typeId);
     }
 
     public int getId() {

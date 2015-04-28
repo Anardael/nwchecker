@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface RuleService {
     List<Rule> getRulesByLanguageTag(String tag);
+    void updateRules(List<Rule> rules);
     void updateRulesByLanguageTag(List<Rule> rules, String tag);
 }

@@ -27,7 +27,7 @@
                 <c:forEach items="${ruleWrapper.ruleList}" var="rule" varStatus="vs">
                     <tr>
                         <td class="list-group-item">
-                            ${rule.type.name}
+                            ${rule.typeContest.name}
                         </td>
                         <td class="list-group-item">
                             <c:forEach var="item" items="${userData.roles}">
@@ -35,7 +35,8 @@
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content">
                                             <form:hidden path="ruleList[${vs.index}].id" class="list-group-area"/>
-                                            <%--<form:hidden path="ruleList[${vs.index}].type" class="list-group-area"/>--%>
+                                            <form:hidden path="ruleList[${vs.index}].typeContest.id" class="list-group-area"/>
+                                            <form:hidden path="ruleList[${vs.index}].language.id" class="list-group-area"/>
                                             <form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/>
                                         </div>
                                     </c:when>
@@ -53,7 +54,7 @@
             </table>
             <security:authorize access="hasRole('ROLE_TEACHER')">
                 <div class="rule-submit-btn" align="center" hidden="true">
-                    <button class="btn btn-rule" type="submit" >
+                    <button class="btn btn-rule" type="submit">
                         <spring:message code="rules.editButton.caption"/>
                     </button>
                 </div>
@@ -63,6 +64,6 @@
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
 
-<script type="text/javascript" src="${resources}js/rules/rulesEdit.js"></script>
+<script type="text/javascript" src="${resources}js/rules/ruleEdit.js"></script>
 </body>
 </html>

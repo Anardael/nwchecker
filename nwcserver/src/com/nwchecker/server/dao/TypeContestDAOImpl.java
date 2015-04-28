@@ -1,6 +1,6 @@
 package com.nwchecker.server.dao;
 
-import com.nwchecker.server.model.Type;
+import com.nwchecker.server.model.TypeContest;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository("TypeDAO")
-public class TypeDAOImpl extends HibernateDaoSupport implements TypeDAO {
+public class TypeContestDAOImpl extends HibernateDaoSupport implements TypeContestDAO {
 
     @Autowired
     public void init(SessionFactory sessionFactory) {
@@ -19,33 +19,33 @@ public class TypeDAOImpl extends HibernateDaoSupport implements TypeDAO {
 
     @Override
     @Transactional
-    public void createType(Type type) {
-        getHibernateTemplate().save(type);
+    public void createType(TypeContest typeContest) {
+        getHibernateTemplate().save(typeContest);
     }
 
     @Override
     @Transactional
-    public Type readTypeById(int id) {
-        return getHibernateTemplate().load(Type.class, id);
+    public TypeContest readTypeById(int id) {
+        return getHibernateTemplate().load(TypeContest.class, id);
     }
 
     @Override
     @Transactional
-    public void updateType(Type type) {
-        getHibernateTemplate().update(type);
+    public void updateType(TypeContest typeContest) {
+        getHibernateTemplate().update(typeContest);
     }
 
     @Override
     @Transactional
     public void deleteTypeById(int id) {
-        getHibernateTemplate().delete(getHibernateTemplate().load(Type.class, id));
+        getHibernateTemplate().delete(getHibernateTemplate().load(TypeContest.class, id));
     }
 
     @Override
     @Transactional
-    public List<Type> getAllTypes() {
+    public List<TypeContest> getAllTypes() {
         @SuppressWarnings("unchecked")    //TODO
-        List<Type> result = (List<Type>) getHibernateTemplate().find("from Type");
+        List<TypeContest> result = (List<TypeContest>) getHibernateTemplate().find("from TypeContest");
         return result;
     }
 }

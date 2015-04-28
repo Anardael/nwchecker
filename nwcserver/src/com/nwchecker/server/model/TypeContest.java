@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "types")
-public class Type {
+@Table(name = "type_contest")
+public class TypeContest {
 
     @Id
     @Column(name = "id")
@@ -16,10 +16,10 @@ public class Type {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "type")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeContest")
     private List<Rule> rules;
 
-    public Type(){
+    public TypeContest(){
         this.name = "N/A";
     }
 
