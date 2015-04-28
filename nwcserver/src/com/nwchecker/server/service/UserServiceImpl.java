@@ -86,8 +86,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUsersWithRequests();
 	}
 
-	@Override
-	public User getUserByUsernameOrEmail(String username) {
-		return userDAO.getUserByUsernameOrEmail(username);
-	}
+//	@Override
+//	public User getUserByUsernameOrEmail(String username) {
+//		return userDAO.getUserByUsernameOrEmail(username);
+//	}
 }

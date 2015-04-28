@@ -130,5 +130,5 @@ public interface UserService {
 	 */
 	public boolean hasEmail(String email);
 
-	public User getUserByUsernameOrEmail(String username);
+//	public User getUserByUsernameOrEmail(String username);
 }

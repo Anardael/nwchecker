@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = userService.getUserByUsernameOrEmail(username);
+		User user = userService.getUserByUsername(username);
 
 		if(user == null) {
 			throw new UsernameNotFoundException(String.format("User not found: %s", username));
@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 	}
 
 	
-	protected Collection<SimpleGrantedAuthority> loadAuthorities(User user) {
+	private Collection<SimpleGrantedAuthority> loadAuthorities(User user) {
 		final List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
 
 		for(Role authority : user.getRoles()){
@@ -45,7 +45,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 	}
 
 	
-	protected UserDetails createUserDetails(User user, Collection<SimpleGrantedAuthority> authorities) {
+	private UserDetails createUserDetails(User user, Collection<SimpleGrantedAuthority> authorities) {
 		final boolean enabled = user.getEnabled();
 
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), enabled, true, true, true, authorities);

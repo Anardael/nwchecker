@@ -130,6 +130,6 @@ public interface UserDAO {
 	 */
 	public List<User> getUsersWithRequests();
 
-	public User getUserByUsernameOrEmail(String username);
+//	public User getUserByUsernameOrEmail(String username);
 
 }

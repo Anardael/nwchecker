@@ -66,7 +66,7 @@ public class TaskServiceImplTest {
      * Test of addTask method, of class TaskServiceImpl.
      */
     @Test
-    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    //@DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testAddTask() {
         Task task = new Task();
         task.setTitle("I am title ;)");
@@ -74,6 +74,7 @@ public class TaskServiceImplTest {
         task.setContest(taskService.getTaskById(3).getContest());
         taskService.addTask(task);
         assertEquals(taskService.getTasksByContestId(2).size(), 2);
+        assertEquals(2, 2);
     }
 
     /**
