@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
@@ -23,6 +24,8 @@ public class ContestPassServiceImpl implements ContestPassService {
     private CheckerService checkerService;
     @Autowired
     private ContestPassDAO contestPassDAO;
+    @Autowired
+    private CompilerDAO compilerDAO;
 
     @Override
     @Transactional
@@ -51,6 +54,7 @@ public class ContestPassServiceImpl implements ContestPassService {
         taskPass.setExecutionTime((int) checkResult.get("time"));
         taskPass.setMemoryUsed((int) checkResult.get("memory"));
         taskPass.setFile(file);
+        taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
         taskPass.setCompilerMessage(checkResult.get("message") == null ? null : (String) checkResult.get("message"));
         //get passed minute:
         long millis = System.currentTimeMillis() - taskPass.getTask().getContest().getStarts().getTime();

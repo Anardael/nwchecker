@@ -60,6 +60,10 @@ public class TaskPass {
 	@JoinColumn(name = "user")
 	private User user;
 	
+	@ManyToOne()
+	@JoinColumn(name ="compiler")
+	private Compiler compiler;
+	
 	public int getId() {
 		return id;
 	}
@@ -150,5 +154,13 @@ public class TaskPass {
 	public boolean equals(Object obj) {
 		return (obj != null && obj instanceof TaskPass && ((Contest) obj)
 				.getId() == this.id);
+	}
+
+	public Compiler getCompiler() {
+		return compiler;
+	}
+
+	public void setCompiler(Compiler compiler) {
+		this.compiler = compiler;
 	}
 }
