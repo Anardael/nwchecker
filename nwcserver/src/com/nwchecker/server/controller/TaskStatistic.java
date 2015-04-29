@@ -19,9 +19,10 @@ public class TaskStatistic {
 	TaskService taskService;
 	
 	@RequestMapping(value="/TaskStatistic.do",
-			params = {"id"},
+	/*		params = {"id"},*/
 			method=RequestMethod.GET)
-	public ModelAndView getTaskStatistic(@RequestParam("id") int id){
+	public ModelAndView getTaskStatistic(/*@RequestParam("id") int id*/){
+		int id = 45;
 		Task task = taskService.getTaskById(id);
 		List<TaskPass> taskPassList = task.getTaskPassList();
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");

@@ -59,7 +59,7 @@ public class TaskPass {
 	@ManyToOne()
 	@JoinColumn(name = "user")
 	private User user;
-
+	
 	public int getId() {
 		return id;
 	}

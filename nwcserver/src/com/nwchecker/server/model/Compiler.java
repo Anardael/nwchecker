@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import java.util.Objects;
 
 /**
@@ -35,7 +38,7 @@ public class Compiler {
     @NotEmpty
     @Size(max = 100)
     private String name;
-
+    
     public int getId() {
         return id;
     }
