@@ -1,4 +1,4 @@
-var flag = false;
+/*var flag = false;
 
 $('.list-group-area').focus(function(){
     $('.rule-submit-btn').show();
@@ -14,4 +14,5 @@ $('.list-group-area').blur(function(){
     if(flag === false){
         $('.rule-submit-btn').hide();
     }
-});
+});*/
+
