@@ -9,9 +9,11 @@ import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
+import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -58,6 +60,8 @@ public class ContestPassController {
     private ContestPassService contestPassService;
     @Autowired
     private CompilerDAO compilerService;
+    @Autowired
+    private TaskPassService taskPassService;
 
     /**
      * This mapped method used to return page that allows user to
@@ -76,6 +80,14 @@ public class ContestPassController {
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
+    	//Sending task statistic
+    	Long successful = taskPassService.getTaskPassSuccessfulSampleSize(taskId);
+    	Long all = taskPassService.getTaskPassSampleSize(taskId);
+    	if(!(all.equals(0))){
+    		double rate = successful.doubleValue() / all.doubleValue();
+    		model.addAttribute("taskSuccessRate", rate);
+    	}
+    	
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
         User user = userService.getUserByUsername(principal.getName());

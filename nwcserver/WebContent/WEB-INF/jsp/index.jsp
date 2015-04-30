@@ -45,9 +45,6 @@
                         <p>
                             <spring:message code="index.content.goalBody"/>
                         </p>
-                        <p>
-                        <a href="TaskStatistic.do">Some task statistic</a>
-                        </p>
                     </div>
                 </section>
             </div>

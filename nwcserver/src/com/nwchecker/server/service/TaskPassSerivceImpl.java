@@ -23,25 +23,36 @@ public class TaskPassSerivceImpl implements TaskPassService {
 			int pageSize, int pageNumber) {
 		List<TaskPass> taskPassList = taskPassDAO.getPaginatedTaskPassByTaskId(
 				id, pageSize, pageNumber);
-		Long lastPage = taskPassDAO.getTaskPassResponseSize(id) % pageSize;
+		Long lastPage = taskPassDAO.getTaskPassSampleSize(id) % pageSize;
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("taskPassList", taskPassList);
 		result.put("lastPage", lastPage);
 		return result;
 	}
 	
+	@Override
 	public Map<String, Object> getStatisticOfSuccessfulTaskPasses(int taskId, int pageSize, int pageNumber){
 		List<TaskPass> taskPassList = taskPassDAO.getPaginatedSuccessfulTaskPassByTaskId(taskId, pageSize, pageNumber);
 		List<TaskPassJson> taskPassJsonList = new ArrayList<TaskPassJson>();
 		for (TaskPass taskPass : taskPassList){
-			Long attempts = taskPassDAO.getNumberOfAttempts(taskPass.getUser().getUserId());
+			Long attempts = taskPassDAO.getNumberOfAttempts(taskPass.getUser().getUserId(), taskId);
 			taskPassJsonList.add(TaskPassJson.createTaskPassJson(taskPass, attempts));			
 		}
-		Long lastPage = taskPassDAO.getTaskPassSuccessfulResponseSize(taskId);	
+		Long lastPage = taskPassDAO.getTaskPassSuccessfulSampleSize(taskId);	
 		Map<String, Object>	response = new HashMap<String, Object>();		
 		response.put("lastPage", lastPage);
 		response.put("taskPassList", taskPassJsonList);
 		return response;
 	}
+	
+	@Override
+	public Long getTaskPassSampleSize(int id){
+		return taskPassDAO.getTaskPassSampleSize(id);
+	};
+	
+	@Override
+	public Long getTaskPassSuccessfulSampleSize(int id){
+		return taskPassDAO.getTaskPassSuccessfulSampleSize(id);
+	};
 
 }

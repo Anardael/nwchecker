@@ -35,7 +35,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 
 	@Transactional
 	@Override
-	public Long getTaskPassResponseSize(int id) {
+	public Long getTaskPassSampleSize(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Query q = session
@@ -61,24 +61,25 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 
 	@Transactional
 	@Override
-	public Long getNumberOfAttempts(int userId) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		Query q = session
-				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE userid = :id");
-		q.setParameter("id", userId);
-		Long size = (Long) q.uniqueResult();
-		return size;
-	}
-
-	@Transactional
-	@Override
-	public Long getTaskPassSuccessfulResponseSize(int id) {
+	public Long getTaskPassSuccessfulSampleSize(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Query q = session
 				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id AND passed IS true");
 		q.setParameter("id", id);
+		Long size = (Long) q.uniqueResult();
+		return size;
+	}
+	
+	@Transactional
+	@Override
+	public Long getNumberOfAttempts(int userId, int taskId) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session
+				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE userid = :id AND task_id = :taskId");
+		q.setParameter("id", userId);
+		q.setParameter("taskId", taskId);
 		Long size = (Long) q.uniqueResult();
 		return size;
 	}
