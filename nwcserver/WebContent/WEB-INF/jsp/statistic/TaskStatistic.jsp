@@ -21,11 +21,16 @@
 		<div class="row">
 			<aside class="col-md-3">
 			<ul class="list-group submenu">
-				<li class="list-group-item active"><spring:message code="home.info.caption" /></li>
-				<li class="list-group-item"><a href="donec.do"><spring:message code="home.rules.caption" /></a></li>
-				<li class="list-group-item"><a href="vestibulum.do"><spring:message code="home.contacts.caption" /></a></li>
-				<li class="list-group-item"><a href="etiam.do"><spring:message code="home.archive.caption" /></a></li>
-				<li class="list-group-item"><a href="phasellus.do"><spring:message code="home.forum.caption" /></a></li>
+				<li class="list-group-item active"><spring:message
+						code="home.info.caption" /></li>
+				<li class="list-group-item"><a href="donec.do"><spring:message
+							code="home.rules.caption" /></a></li>
+				<li class="list-group-item"><a href="vestibulum.do"><spring:message
+							code="home.contacts.caption" /></a></li>
+				<li class="list-group-item"><a href="etiam.do"><spring:message
+							code="home.archive.caption" /></a></li>
+				<li class="list-group-item"><a href="phasellus.do"><spring:message
+							code="home.forum.caption" /></a></li>
 			</ul>
 			</aside>
 			<section class="col-md-9"> <%-- Table of statistic --%>
@@ -33,19 +38,39 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Execution time</th>
+							<th>#Id</th>
 							<th>Username</th>
+							<th>Compiler</th>
+							<th>Execution time</th>
+							<th>Memory Used</th>
+							<th>Attempts</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${taskPassList}" var="taskPass">
 							<tr>
+								<td>${taskPass.taskPassId}</td>
+								<td>${taskPass.userName}</td>
+								<td>${taskPass.compiler.name}</td>
 								<td>${taskPass.executionTime}</td>
-								<td>${taskPass.user.displayName}</td>
+								<td>${taskPass.memoryUsed}</td>
+								<td>${taskPass.numberOfAttempts}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<div class="text-center">
+					<ul class="pagination">
+						<c:forEach begin="0" end="5" var="loop">
+							<c:if test="${currentPage + loop - 3>0}">
+							<c:if test="${currentPage + loop - 3<=lastPage}">
+								<li><a href="TaskStatistic.do?id=${taskId}&page=${currentPage + loop - 3}"> 
+								<c:out value="${currentPage + loop - 3}" /></a></li>
+							</c:if>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			</section>
 		</div>

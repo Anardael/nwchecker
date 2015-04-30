@@ -22,4 +22,10 @@ public class CompilerDAOImpl extends HibernateDaoSupport implements CompilerDAO 
         List<Compiler> result = (List<Compiler>) getHibernateTemplate().find("from Compiler");
         return result;
     }
+    
+    @Override
+    public Compiler getCompilerById(int id){
+    	Compiler compiler = getHibernateTemplate().get(Compiler.class, id);
+    	return compiler;
+    }
 }
