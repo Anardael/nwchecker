@@ -38,19 +38,23 @@
 				<table class="table">
 					<thead>
 						<tr>
+							<th>#Id</th>
 							<th>Username</th>
 							<th>Compiler</th>
 							<th>Execution time</th>
 							<th>Memory Used</th>
+							<th>Attempts</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${taskPassList}" var="taskPass">
 							<tr>
-								<td>${taskPass.user.displayName}</td>
+								<td>${taskPass.taskPassId}</td>
+								<td>${taskPass.userName}</td>
 								<td>${taskPass.compiler.name}</td>
 								<td>${taskPass.executionTime}</td>
 								<td>${taskPass.memoryUsed}</td>
+								<td>${taskPass.numberOfAttempts}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -59,8 +63,10 @@
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
-								<li><a href="TaskStatistic.do?page=${currentPage + loop - 3}"> 
+							<c:if test="${currentPage + loop - 3<=lastPage}">
+								<li><a href="TaskStatistic.do?id=${taskId}&page=${currentPage + loop - 3}"> 
 								<c:out value="${currentPage + loop - 3}" /></a></li>
+							</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>

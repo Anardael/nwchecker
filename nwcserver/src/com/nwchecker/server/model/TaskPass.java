@@ -57,7 +57,7 @@ public class TaskPass {
 	private int passedMinute;
 
 	@ManyToOne()
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "userid")
 	private User user;
 	
 	@ManyToOne()

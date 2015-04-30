@@ -20,7 +20,7 @@
 			INSERT INTO `users` VALUES (12,0,NULL,'root','root@root.com',TRUE,NULL,'$2a$10$6w63Cc1YjghGWtOOTmWvC.fhPhznKOE4S6y7xU3paZJoSFlmB3FpK','root'),(13,0,NULL,'notRoot','not@not.com',TRUE,NULL,'$2a$10$1bvIh/7NKCmJpucM5kUBW.3qRgesrQlvZrqlYbcUbxm8uieQtY6O6','notRoot'),(14,0,NULL,'TestUser2','test@test.com',TRUE,NULL,'$2a$10$RJfvXJMjQjjvgq6u5FuvU.wBR6H1t3odfdnfUCWSG4Pxsu2416Vo2','TestUser2'),(15,0,NULL,'TestUser3','test2@test.com',TRUE,NULL,'$2a$10$44iONRqeKcerqJAYnfuZ4ObSKmrbkmH0UQWWwdW8pOFQHtgxFDefq','TestUser3');
 			
 			#Dumping data for table `contest`
-			INSERT INTO `contest` VALUES (9,'Test Competition for debug purposes\r\n','1970-01-01 00:10:00',TRUE,'2015-04-29 14:00:00','ARCHIVE','TestCompetition1'),(10,'Test Competition 2\r\n','1970-01-01 00:10:00',TRUE,'2015-04-29 14:05:00','ARCHIVE','Test Competition 2');
+			INSERT INTO `contest` VALUES (9,'Test Competition for debug purposes\r\n','1970-01-01 00:10:00',FALSE,'2015-04-29 14:00:00','ARCHIVE','TestCompetition1'),(10,'Test Competition 2\r\n','1970-01-01 00:10:00',FALSE,'2015-04-29 14:05:00','ARCHIVE','Test Competition 2');
 	
 			#Dumping data for table `contest_users`
 			INSERT INTO `contest_users` VALUES (12,9),(12,10);

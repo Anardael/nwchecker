@@ -119,7 +119,7 @@
 		<div class="col-md-9">
 			<div class="page-header">
 				<h2>
-					${currentTask.title} 
+					<a href="TaskStatistic.do?id=${currentTask.id}">${currentTask.title}</a> 
 					<small> 
 						(<spring:message code="contest.passing.rate.caption"/>
 						<b>${currentTask.rate}</b>)
