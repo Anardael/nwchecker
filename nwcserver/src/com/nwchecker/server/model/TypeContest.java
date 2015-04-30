@@ -19,6 +19,9 @@ public class TypeContest {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeContest")
     private List<Rule> rules;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeContest")
+    private List<Contest> contests;
+
     public TypeContest(){
         this.name = "N/A";
     }
@@ -52,5 +55,20 @@ public class TypeContest {
             rules = new ArrayList<Rule>();
         }
         this.rules.add(rule);
+    }
+
+    public List<Contest> getContests() {
+        return contests;
+    }
+
+    public void setContests(List<Contest> contests) {
+        this.contests = contests;
+    }
+
+    public void addContest(Contest contest){
+        if(contests == null) {
+            contests = new ArrayList<Contest>();
+        }
+        this.contests.add(contest);
     }
 }

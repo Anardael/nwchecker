@@ -19,9 +19,6 @@ public class RuleServiceImpl implements RuleService{
     @Autowired
     private LanguageDAO languageDAO;
 
-    @Autowired
-    private TypeContestDAO typeContestDAO;
-
     @Override
     public List<Rule> getRulesByLanguageTag(String tag) {
         int languageId = languageDAO.getLanguageIdByTag(tag);

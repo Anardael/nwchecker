@@ -6,6 +6,7 @@ import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.RuleService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.wrapper.RuleWrapper;
+import com.nwchecker.server.wrapper.WrapperList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ import java.util.Map;
 
 @Controller("RuleController")
 public class RuleController{
-
     private static final Logger LOG = Logger.getLogger(RuleController.class);
 
     @Autowired
@@ -36,11 +36,10 @@ public class RuleController{
     @Autowired
     private UserService userService;
 
-    /*@PreAuthorize("isAuthenticated()")*/
     @RequestMapping(value = "/rules")
     public String showRules(Model model, Principal principal){
         if(principal != null){
-            String username = principal.getName(); // get logged in username
+            String username = principal.getName();
             model.addAttribute("userData", userService.getUserByUsername(username));
             LOG.info("\"" + principal.getName() + "\" initialized rules page.");
         } else{
@@ -49,6 +48,9 @@ public class RuleController{
 
         RuleWrapper ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
+
+        /*WrapperList<Rule> ruleWrapper = new WrapperList<Rule>(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+        model.addAttribute("ruleWrapper", ruleWrapper);*/
 
         return "rule/rules";
     }
@@ -67,6 +69,11 @@ public class RuleController{
 
         ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
+
+        /*ruleService.updateRules(ruleWrapper.getDataList());
+
+        ruleWrapper = new WrapperList<Rule>(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+        model.addAttribute("ruleWrapper", ruleWrapper);*/
 
         return "rule/rules";
     }

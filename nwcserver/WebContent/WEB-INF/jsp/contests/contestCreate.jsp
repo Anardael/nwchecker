@@ -151,21 +151,26 @@
     <section>
         <!-- add usersList Modal -->
         <contest:usersList contestId="${contestModelForm.id}"/>
-        <div class="accessList pull-right">
-            <button id="showUserList" class="btn btn-warning btn-sm" type="button"><spring:message
-                    code="btn.userAccessList"/></button>
-        </div>
         <form:form id="contestForm" modelAttribute="contestModelForm" class="form-horizontal"
                    action="addContest.do" method="post">
             <form:hidden path="id"/>
             <form:hidden path="status"/>
             <div class="form-group">
                 <spring:message code="contestCreate.title" var="contestTitle"/>
-                <contest:taskModalFormInput element="title" inputDivClass="col-sm-8" label="${contestTitle}: *"/>
+                <contest:taskModalFormInput element="title" inputDivClass="col-sm-7" label="${contestTitle}: *"/>
+                <div class="col-sm-1">
+                    <label class="control-label"><spring:message code="contestCreate.type"/>: </label>
+                </div>
+                <div class="col-sm-2">
+                    <form:select path="typeContest.id" class="form-control">
+                        <c:forEach items="${typeContestList}" var="type">
+                            <form:option value="${type.id}">${type.name}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
             </div>
             <div class="field description form-group">
-                <label class="col-sm-2 control-label"><spring:message code="contestCreate.description"/>: *</label>
-
+                <label class="col-sm-2 control-label"><spring:message code="contestCreate.description"/>: </label>
                 <div class="col-sm-10">
                     <form:textarea style="resize:none" path="description" class="form-control ckEdit"
                                    rows="7"></form:textarea>
@@ -258,11 +263,17 @@
                 </button>
             </div>
         </div>
-        <div class="pull-right">
-            <button id="submitContest" type="submit" class="btn btn-primary btn-sm " value="Submit">
-                <spring:message code="btn.save"/></button>
-            <button id="finishContest" class="btn btn-warning btn-sm" value="Submit">
-                <spring:message code="contest.finish.button"/> </button>
+        <div class="row">
+            <div class="accessList col-xs-offset-3 col-xs-3">
+                <button id="showUserList" class="btn btn-warning btn-sm" type="button"><spring:message
+                        code="btn.userAccessList"/></button>
+            </div>
+            <div class="col-xs-offset-3 col-xs-3 ">
+                <button id="submitContest" type="submit" class="btn btn-primary btn-sm " value="Submit">
+                    <spring:message code="btn.save"/></button>
+                <button id="finishContest" class="btn btn-warning btn-sm" value="Submit">
+                    <spring:message code="contest.finish.button"/> </button>
+            </div>
         </div>
     </section>
 </div>

@@ -80,47 +80,52 @@
                     <div id="collapse${row.index}" class="panel-collapse collapse">
                         <li class="list-group-item list-group-item-info">
                             <div class="panel-body">
-                                <div class="edit col-sm-12">
-                                            <span class="pull-right">
-                                                <security:authorize access="hasRole('ROLE_TEACHER')">
-                                                    <c:set var="user" value="${nowContestEdits[contest.id]}"/>
-                                                    <c:if test="${not empty user}">
-                                                        <label class="label label-warning contestsStatus">
-                                                            <spring:message
-                                                                    code="contest.editing.now.label"/>: ${user}</label>
-                                                    </c:if>
+                                <div class="edit col-sm-12 row">
+                                    <div class="col-sm-4">
+                                        ${contest.typeContest.name}
+                                    </div>
+                                    <span class="col-sm-8">
+                                        <div class="pull-right">
+                                            <security:authorize access="hasRole('ROLE_TEACHER')">
+                                                <c:set var="user" value="${nowContestEdits[contest.id]}"/>
+                                                <c:if test="${not empty user}">
+                                                    <label class="label label-warning contestsStatus">
+                                                        <spring:message
+                                                                code="contest.editing.now.label"/>: ${user}</label>
+                                                </c:if>
 
-                                                    <c:set value="index${contest.id}index" var="contestIndex"/>
-                                                    <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
-                                                        <button class="btnEditContest btn btn-sm btn-info form-group"
-                                                                onclick="edited(${contest.id})">
-                                                            <spring:message code="btn.edit"/></button>
-                                                    </c:if>
-                                                </security:authorize>
-                                                <security:authorize access="hasRole('ROLE_USER')">
-                                                    <c:if test="${(contest.status=='GOING')}">
-                                                        <button class="btn btn-sm btn-info form-group"
-                                                                style="font-weight: 600"
-                                                                onclick="contestStart(${contest.tasks[0].id});">
-                                                            <spring:message code="contest.startButton"/>
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${(contest.status=='ARCHIVE')}">
-                                                        <button class="btn btn-sm btn-info form-group"
-                                                                style="font-weight: 600"
-                                                                onclick="contestStart(${contest.tasks[0].id});">
-                                                            <spring:message code="contest.startButton"/>
-                                                        </button>
-                                                    </c:if>
-                                                </security:authorize>
-                                                <security:authorize access="!isAuthenticated()">
-                                                    <h4>
-                                                        <label class="label label-info label">
-                                                            <spring:message code="contest.unauthenticated"/>
-                                                        </label>
-                                                    </h4>
-                                                </security:authorize>
-                                            </span>
+                                                <c:set value="index${contest.id}index" var="contestIndex"/>
+                                                <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
+                                                    <button class="btnEditContest btn btn-sm btn-info form-group"
+                                                            onclick="edited(${contest.id})">
+                                                        <spring:message code="btn.edit"/></button>
+                                                </c:if>
+                                            </security:authorize>
+                                            <security:authorize access="hasRole('ROLE_USER')">
+                                                <c:if test="${(contest.status=='GOING')}">
+                                                    <button class="btn btn-sm btn-info form-group"
+                                                            style="font-weight: 600"
+                                                            onclick="contestStart(${contest.tasks[0].id});">
+                                                        <spring:message code="contest.startButton"/>
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${(contest.status=='ARCHIVE')}">
+                                                    <button class="btn btn-sm btn-info form-group"
+                                                            style="font-weight: 600"
+                                                            onclick="contestStart(${contest.tasks[0].id});">
+                                                        <spring:message code="contest.startButton"/>
+                                                    </button>
+                                                </c:if>
+                                            </security:authorize>
+                                            <security:authorize access="!isAuthenticated()">
+                                                <h4>
+                                                    <label class="label label-info label">
+                                                        <spring:message code="contest.unauthenticated"/>
+                                                    </label>
+                                                </h4>
+                                            </security:authorize>
+                                        </div>
+                                    </span>
                                 </div>
                                 <div class="description col-sm-12">
                                     <span>${contest.description}</span>

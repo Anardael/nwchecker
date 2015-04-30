@@ -5,12 +5,11 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestEditWatcherService;
-import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.ScheduleServiceImpl;
-import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
+import com.nwchecker.server.wrapper.TypeContestWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -67,6 +66,9 @@ public class ContestController {
 
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
+
+    @Autowired
+    private TypeContestService typeContestService;
 
     /**
      * This mapped method used to return page with contests list
@@ -141,6 +143,13 @@ public class ContestController {
         c.setHidden(true);
         c.setStatus(Contest.Status.PREPARING);
         model.addAttribute("contestModelForm", c);
+
+        /*TypeContestWrapper typeContestWrapper = new TypeContestWrapper(typeContestService.getAllTypeContest());
+        model.addAttribute("typeContestWrapper", typeContestWrapper);*/
+
+        List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
+        model.addAttribute("typeContestList", typeContestList);
+
         return "contests/contestCreate";
     }
 
