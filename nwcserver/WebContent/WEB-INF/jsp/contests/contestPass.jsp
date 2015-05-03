@@ -123,6 +123,7 @@
 					<small> 
 						(<spring:message code="contest.passing.rate.caption"/>
 						<b>${currentTask.rate}</b>)
+						<b>${taskSuccessRate*100}%</b>
                         <label id="timer" class="pull-right"></label>
 					</small>
 				</h2>

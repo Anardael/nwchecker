@@ -14,5 +14,4 @@ public interface TaskPassDAO {
 	public Long getNumberOfAttempts(int userId);
 	
 	public Long getTaskPassSuccessfulResponseSize(int id);
-
 }

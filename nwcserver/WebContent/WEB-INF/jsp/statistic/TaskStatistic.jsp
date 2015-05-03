@@ -8,6 +8,7 @@
 <html>
 <%-- Importing head --%>
 <head>
+<link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
 <jsp:include page="../fragments/staticFiles.jsp" />
 </head>
 <body>
@@ -15,25 +16,41 @@
 		<!--including bodyHead -->
 		<!-- send name of current page-->
 		<jsp:include page="../fragments/bodyHeader.jsp">
-			<jsp:param name="pageName" value="home" />
+			<jsp:param name="pageName" value="contest" />
 		</jsp:include>
-		<%-- Side panel --%>
 		<div class="row">
-			<aside class="col-md-3">
-			<ul class="list-group submenu">
-				<li class="list-group-item active"><spring:message
-						code="home.info.caption" /></li>
-				<li class="list-group-item"><a href="donec.do"><spring:message
-							code="home.rules.caption" /></a></li>
-				<li class="list-group-item"><a href="vestibulum.do"><spring:message
-							code="home.contacts.caption" /></a></li>
-				<li class="list-group-item"><a href="etiam.do"><spring:message
-							code="home.archive.caption" /></a></li>
-				<li class="list-group-item"><a href="phasellus.do"><spring:message
-							code="home.forum.caption" /></a></li>
+		<%-- Side panel --%>		
+		<div id="tasks" class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">			
+				<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
+				<c:set var="count" value="0" scope="page" />
+				
+				<c:forEach var="taskInfo" items="${taskTitles}">
+					<c:set var="count" value="${count + 1}" scope="page"/>
+                    <c:set var="taskId" value="${taskInfo.key}"/>
+                    <c:set var="taskTitle" value="${taskInfo.value}"
+                           scope="page" />
+					<c:choose>
+						<c:when test="${taskId eq currentTask.id}">
+							<li class="active">
+								<a href="${taskURL}${taskId}">
+                                    <b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="default">
+								<a href="${taskURL}${taskId}">
+									<b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</ul>
-			</aside>
-			<section class="col-md-9"> <%-- Table of statistic --%>
+		</div>
+		<section class="col-md-9"> 
+			<%-- Table of statistic --%>
 			<div>
 				<table class="table">
 					<thead>

@@ -43,5 +43,4 @@ public class TaskPassSerivceImpl implements TaskPassService {
 		response.put("taskPassList", taskPassJsonList);
 		return response;
 	}
-
 }
