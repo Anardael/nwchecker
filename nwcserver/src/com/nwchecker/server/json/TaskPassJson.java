@@ -9,6 +9,7 @@ public class TaskPassJson {
 	private int executionTime;
 	private int memoryUsed;
 	private Long numberOfAttempts;
+	private boolean passed;
 	
 	public static TaskPassJson createTaskPassJson(TaskPass taskPass, Long attempts){
 		TaskPassJson tpj = new TaskPassJson();
@@ -19,6 +20,7 @@ public class TaskPassJson {
 		tpj.setMemoryUsed(taskPass.getMemoryUsed());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setNumberOfAttempts(attempts);
+		tpj.setPassed(taskPass.isPassed());
 		return tpj;
 	}	
 	
@@ -68,5 +70,13 @@ public class TaskPassJson {
 
 	public void setNumberOfAttempts(Long numberOfAttempts) {
 		this.numberOfAttempts = numberOfAttempts;
+	}
+
+	public boolean isPassed() {
+		return passed;
+	}
+
+	public void setPassed(boolean passed) {
+		this.passed = passed;
 	}
 }

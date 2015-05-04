@@ -34,17 +34,16 @@ public class TaskStatisticController {
 	@Autowired
 	TaskPassService taskPassService;
 	
-	static private final int PAGE_SIZE = 2;
+	static private final int PAGE_SIZE = 10;
 
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
 			@RequestParam(value = "id", defaultValue = "45") int taskId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber) {
-		
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
 		
-		
-		Map<String, Object> result = taskPassService.getPagedTaskPassesForContest(taskId, PAGE_SIZE, pageNumber);
+		//Map<String, Object> result = taskPassService.getStatisticOfSuccessfulTaskPasses(taskId, PAGE_SIZE, pageNumber);
+		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(taskId, PAGE_SIZE, pageNumber);
 		modelView.addAllObjects(result);
 		
 		Task currentTask = taskService.getTaskById(taskId);

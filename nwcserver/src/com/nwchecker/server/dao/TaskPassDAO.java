@@ -11,7 +11,7 @@ public interface TaskPassDAO {
 	
 	public List<TaskPass> getPaginatedSuccessfulTaskPassByTaskId(int id, int pageSize, int pageNumber);
 	
-	public Long getNumberOfAttempts(int userId);
+	public Long getNumberOfAttempts(int userId, int taskId);
 	
 	public Long getTaskPassSuccessfulResponseSize(int id);
 }

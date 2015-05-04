@@ -27,20 +27,19 @@
 				
 				<c:forEach var="taskInfo" items="${taskTitles}">
 					<c:set var="count" value="${count + 1}" scope="page"/>
-                    <c:set var="taskId" value="${taskInfo.key}"/>
                     <c:set var="taskTitle" value="${taskInfo.value}"
                            scope="page" />
 					<c:choose>
 						<c:when test="${taskId eq currentTask.id}">
 							<li class="active">
-								<a href="${taskURL}${taskId}">
+								<a href="${taskURL}${taskInfo.key}">
                                     <b>${count}. </b><c:out value="${taskTitle}"/>
 								</a>
 							</li>
 						</c:when>
 						<c:otherwise>
 							<li class="default">
-								<a href="${taskURL}${taskId}">
+								<a href="${taskURL}${taskInfo.key}">
 									<b>${count}. </b><c:out value="${taskTitle}"/>
 								</a>
 							</li>
@@ -60,6 +59,7 @@
 							<th>Compiler</th>
 							<th>Execution time</th>
 							<th>Memory Used</th>
+							<th>Passed</th>
 							<th>Attempts</th>
 						</tr>
 					</thead>
@@ -71,6 +71,7 @@
 								<td>${taskPass.compiler.name}</td>
 								<td>${taskPass.executionTime}</td>
 								<td>${taskPass.memoryUsed}</td>
+								<td>${taskPass.passed}</td>
 								<td>${taskPass.numberOfAttempts}</td>
 							</tr>
 						</c:forEach>
@@ -80,7 +81,7 @@
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
-							<c:if test="${currentPage + loop - 3<=lastPage}">
+							<c:if test="${currentPage + loop - 3<lastPage + 1}">
 								<li><a href="TaskStatistic.do?id=${taskId}&page=${currentPage + loop - 3}"> 
 								<c:out value="${currentPage + loop - 3}" /></a></li>
 							</c:if>
