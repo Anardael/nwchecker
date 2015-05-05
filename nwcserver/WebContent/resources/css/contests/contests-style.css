@@ -1,0 +1,31 @@
+.main-block{
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.status-block{
+    float: left;
+    width: 100px;
+}
+.title-block{
+    width: 100%;
+}
+.drop-block{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.drop-block-element{
+    margin: 1px;
+}
+.tasks-block{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contestsStatus {
+    margin-right: 10px;
+    padding: 1px 3px 3px 3px;
+    font-size: 12px;
+    font-weight: normal;
+}

@@ -12,17 +12,13 @@
     <jsp:include page="../fragments/staticFiles.jsp"/>
     <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
     <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
+    <link href="${resources}css/contests/contests-style.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestSignUp.js"></script>
     <script type="text/javascript" src="${resources}js/contests/contestListView.js"></script>
-    <style>
-        .contestsStatus {
-            margin-right: 10px;
-            padding: 1px 3px 3px 3px;
-            font-size: 12px;
-            font-weight: normal;
-        }
-    </style>
+
+
 </head>
 <body>
 <script type="text/javascript">
@@ -35,27 +31,15 @@
 
 </script>
 <div class="wrapper container">
-    <!--including bodyHead -->
-    <!-- send name of current page-->
     <jsp:include page="../fragments/bodyHeader.jsp">
         <jsp:param name="pageName" value="contest"/>
     </jsp:include>
-    <section>
-        <div id="accordion" class="form-group col-sm-12" style="margin:auto">
-            <security:authorize access="hasRole('ROLE_TEACHER')">
-                <c:if test="${fn:length(contests) gt 8}">
-                    <div class="col-sm-6 col-sm-offset-3" style="text-align: center; margin-bottom: 20px">
-                        <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'">
-                            <spring:message code="contest.createButton.caption"/></button>
-                    </div>
-                </c:if>
-            </security:authorize>
-            <ul class="col-sm-offset-2 col-sm-8 ">
-                <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
-                    <spring:message code="contest.caption"/></li>
-                <c:forEach items="${contests}" var="contest" varStatus="row">
-                    <a class="list-group-item " data-toggle="collapse" data-parent="#accordion"
-                       href="#collapse${row.index}">
+    <div class="main-block">
+        <div id="accordion">
+            <c:forEach items="${contests}" var="contest" varStatus="row">
+                <a class="list-group-item" data-toggle="collapse" data-parent="#accordion"
+                   href="#collapse${row.index}">
+                    <div class="status-block">
                         <c:if test="${contest.status=='GOING'}">
                             <label class="label label-success contestsStatus">
                                 <spring:message code="contest.going.label"/></label>
@@ -74,96 +58,102 @@
                             <label class="label label-default contestsStatus"><spring:message
                                     code="contest.hidden.label"/></label>
                         </c:if>
-                        <span>${contest.title}</span>
-                    </a>
+                    </div>
+                    <div class="title-block">
+                        <span class="h5"><b>${contest.title}</b></span>
+                    </div>
+                </a>
 
-                    <div id="collapse${row.index}" class="panel-collapse collapse">
-                        <li class="list-group-item list-group-item-info">
-                            <div class="panel-body">
-                                <div class="edit col-sm-12 row">
-                                    <div class="col-sm-4">
-                                        ${contest.typeContest.name}
-                                    </div>
-                                    <span class="col-sm-8">
-                                        <div class="pull-right">
-                                            <security:authorize access="hasRole('ROLE_TEACHER')">
-                                                <c:set var="user" value="${nowContestEdits[contest.id]}"/>
-                                                <c:if test="${not empty user}">
-                                                    <label class="label label-warning contestsStatus">
-                                                        <spring:message
-                                                                code="contest.editing.now.label"/>: ${user}</label>
-                                                </c:if>
-
-                                                <c:set value="index${contest.id}index" var="contestIndex"/>
-                                                <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
-                                                    <button class="btnEditContest btn btn-sm btn-info form-group"
-                                                            onclick="edited(${contest.id})">
-                                                        <spring:message code="btn.edit"/></button>
-                                                </c:if>
-                                            </security:authorize>
-                                            <security:authorize access="hasRole('ROLE_USER')">
-                                                <c:if test="${(contest.status=='GOING')}">
-                                                    <button class="btn btn-sm btn-info form-group"
-                                                            style="font-weight: 600"
-                                                            onclick="contestStart(${contest.tasks[0].id});">
-                                                        <spring:message code="contest.startButton"/>
-                                                    </button>
-                                                </c:if>
-                                                <c:if test="${(contest.status=='ARCHIVE')}">
-                                                    <button class="btn btn-sm btn-info form-group"
-                                                            style="font-weight: 600"
-                                                            onclick="contestStart(${contest.tasks[0].id});">
-                                                        <spring:message code="contest.startButton"/>
-                                                    </button>
-                                                </c:if>
-                                            </security:authorize>
-                                            <security:authorize access="!isAuthenticated()">
-                                                <h4>
-                                                    <label class="label label-info label">
-                                                        <spring:message code="contest.unauthenticated"/>
-                                                    </label>
-                                                </h4>
-                                            </security:authorize>
-                                        </div>
-                                    </span>
-                                </div>
-                                <div class="description col-sm-12">
-                                    <span>${contest.description}</span>
-                                </div>
-                                <div class="dateDuration col-sm-12 form-group">
-                                    <c:if test="${not empty contest.duration }">
-                                                <span class="pull-left"><spring:message code="contest.table.duration"/>:
-                                                    ${fn:substring(contest.duration,11,16)}
-                                                </span>
-                                    </c:if>
-                                    <c:if test="${not empty contest.starts }">
-                                                <span class="pull-right"><spring:message code="contest.table.starts"/>:
+                <div id="collapse${row.index}" class="panel-collapse collapse drop-block">
+                    <li class="list-group-item list-group-item-info">
+                        <div class="panel-body">
+                            <div class="dateDuration">
+                                <c:if test="${not empty contest.starts }">
+                                                <div class="drop-block-element"><b><spring:message code="contest.table.starts"/>:</b>
                                                     ${fn:substring(contest.starts,0,16)}
-                                                </span>
-                                    </c:if>
-                                </div>
-                                <c:if test="${contest.status=='GOING'}">
-                                    <div class="tasks form-group">
-                                        <label class="col-sm-2 control-label"><spring:message
-                                                code="contest.taskList"/>:</label>
-                                        <ul class="col-sm-8 ">
-                                            <c:forEach items="${contest.tasks}" var="task" varStatus="taskRow">
-                                                <contest:taskView taskId="${taskRow.index}"
-                                                                  contestId="${row.index}"
-                                                                  task="${contest.tasks[taskRow.index]}"/>
-                                                <a class="list-group-item " data-toggle="modal"
-                                                   data-target="#taskView_${row.index}_${taskRow.index}" href="#">
-                                                    <span>${task.title}</span>
-                                                </a>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
+                                                </div>
+                                </c:if>
+                                <c:if test="${not empty contest.duration }">
+                                                <div class="drop-block-element"><b><spring:message code="contest.table.duration"/>:</b>
+                                                    ${fn:substring(contest.duration,11,16)}
+                                                </div>
+                                </c:if>
+                                <c:if test="${not empty contest.typeContest.name }">
+                                                <div class="drop-block-element"><b><spring:message code="contest.table.type"/>:</b>
+                                                    ${contest.typeContest.name}
+                                                </div>
                                 </c:if>
                             </div>
-                        </li>
-                    </div>
-                </c:forEach>
-            </ul>
+
+                            <div class="drop-block-element" >
+                                <div class="text-center" style="margin: 1px">
+                                    <b><spring:message code="contest.table.description"/></b>
+                                </div>
+                                <div>${contest.description}</div>
+                            </div>
+
+                            <c:if test="${contest.status=='GOING'}">
+                                <div class="tasks drop-block-element">
+                                    <div class="text-center">
+                                        <b><spring:message code="contest.taskList"/></b>
+                                    </div>
+                                    <div class="tasks-block">
+                                        <c:forEach items="${contest.tasks}" var="task" varStatus="taskRow">
+                                            <contest:taskView taskId="${taskRow.index}"
+                                                              contestId="${row.index}"
+                                                              task="${contest.tasks[taskRow.index]}"/>
+                                            <a class="list-group-item " data-toggle="modal"
+                                               data-target="#taskView_${row.index}_${taskRow.index}" href="#">
+                                                <span>${task.title}</span>
+                                            </a>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </c:if>
+
+                            <div class="edit text-center drop-block-element" style="margin-top: 10px">
+                                <security:authorize access="hasRole('ROLE_TEACHER')">
+                                    <c:set var="user" value="${nowContestEdits[contest.id]}"/>
+                                    <c:if test="${not empty user}">
+                                        <label class="label label-warning contestsStatus">
+                                            <spring:message
+                                                    code="contest.editing.now.label"/>: ${user}</label>
+                                    </c:if>
+                                    <c:set value="index${contest.id}index" var="contestIndex"/>
+                                    <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
+                                        <button class="btnEditContest btn btn-sm btn-info form-group"
+                                                onclick="edited(${contest.id})">
+                                            <spring:message code="btn.edit"/></button>
+                                    </c:if>
+                                </security:authorize>
+                                <security:authorize access="hasRole('ROLE_USER')">
+                                    <c:if test="${(contest.status=='GOING')}">
+                                        <button class="btn btn-sm btn-info form-group"
+                                                style="font-weight: 600"
+                                                onclick="contestStart(${contest.tasks[0].id});">
+                                            <spring:message code="contest.startButton"/>
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${(contest.status=='ARCHIVE')}">
+                                        <button class="btn btn-sm btn-info form-group"
+                                                style="font-weight: 600"
+                                                onclick="contestStart(${contest.tasks[0].id});">
+                                            <spring:message code="contest.startButton"/>
+                                        </button>
+                                    </c:if>
+                                </security:authorize>
+                                <security:authorize access="!isAuthenticated()">
+                                    <h4>
+                                        <label class="label label-info label">
+                                            <spring:message code="contest.unauthenticated"/>
+                                        </label>
+                                    </h4>
+                                </security:authorize>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </c:forEach>
             <security:authorize access="hasRole('ROLE_TEACHER')">
                 <div class="col-sm-6 col-sm-offset-3" style="text-align: center; margin-top: 20px">
                     <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'">
@@ -171,7 +161,7 @@
                 </div>
             </security:authorize>
         </div>
-    </section>
+    </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
 </body>

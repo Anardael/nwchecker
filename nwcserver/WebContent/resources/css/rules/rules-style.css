@@ -8,4 +8,8 @@
     resize:none;
 }
 
+td{
+    min-width: 80px;
+}
+
 

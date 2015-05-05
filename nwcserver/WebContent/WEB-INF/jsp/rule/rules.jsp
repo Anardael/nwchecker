@@ -20,11 +20,6 @@
     <div class="col-sm-offset-2 col-sm-8 ">
         <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post" id="rules-form">
             <table align="center">
-                <tr>
-                    <td class="list-group-item list-group-item-heading list-group-item-info" colspan="2" align="center">
-                        <b><spring:message code="rules.contests.tableHeader.title"/></b>
-                    </td>
-                </tr>
                 <c:forEach items="${ruleWrapper.ruleList}" var="rule" varStatus="vs">
                     <tr>
                         <td class="list-group-item">
@@ -35,9 +30,8 @@
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content">
-
                                             <p data-toggle="modal" data-target="#myModal_${vs.index}">${rule.content}</p>
-
+                                            <%--modal windows--%>
                                             <div class="modal" id="myModal_${vs.index}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -52,7 +46,6 @@
                                                             <p><form:textarea path="ruleList[${vs.index}].content" class="list-group-area"/></p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <%--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>--%>
                                                             <button type="submit" class="btn btn-primary"><spring:message code="rules.editButton.caption"/></button>
                                                         </div>
                                                     </div>

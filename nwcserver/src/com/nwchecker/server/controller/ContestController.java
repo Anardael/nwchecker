@@ -252,6 +252,10 @@ public class ContestController {
         Contest editContest = contestService.getContestByID(id);
         //add contest to view and forward it:
         model.addAttribute("contestModelForm", editContest);
+
+        List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
+        model.addAttribute("typeContestList", typeContestList);
+
         return "contests/contestCreate";
     }
 
