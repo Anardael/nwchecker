@@ -42,7 +42,6 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id");
 		q.setParameter("id", id);
 		Long size = (Long) q.uniqueResult();
-		System.out.println(size);
 		return size;
 	}
 

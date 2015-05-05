@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%-- Importing head --%>
 <head>
-<link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
+<link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
 <jsp:include page="../fragments/staticFiles.jsp" />
 </head>
 <body>
@@ -19,38 +20,79 @@
 			<jsp:param name="pageName" value="contest" />
 		</jsp:include>
 		<div class="row">
-		<%-- Side panel --%>		
-		<div id="tasks" class="col-md-3">
-			<ul class="nav nav-pills nav-stacked">			
-				<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
-				<c:set var="count" value="0" scope="page" />
-				
-				<c:forEach var="taskInfo" items="${taskTitles}">
-					<c:set var="count" value="${count + 1}" scope="page"/>
-                    <c:set var="taskTitle" value="${taskInfo.value}"
-                           scope="page" />
-					<c:choose>
-						<c:when test="${taskId eq currentTask.id}">
-							<li class="active">
-								<a href="${taskURL}${taskInfo.key}">
-                                    <b>${count}. </b><c:out value="${taskTitle}"/>
-								</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li class="default">
-								<a href="${taskURL}${taskInfo.key}">
-									<b>${count}. </b><c:out value="${taskTitle}"/>
-								</a>
-							</li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</ul>
-		</div>
-		<section class="col-md-9"> 
-			<%-- Table of statistic --%>
+			<%-- Side panel --%>
+			<div id="tasks" class="col-md-3">
+				<ul class="nav nav-pills nav-stacked">
+					<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
+					<c:set var="count" value="0" scope="page" />
+
+					<c:forEach var="taskInfo" items="${taskTitles}">
+						<c:set var="count" value="${count + 1}" scope="page" />
+						<c:set var="taskTitle" value="${taskInfo.value}" scope="page" />
+						<c:choose>
+							<c:when test="${taskId eq taskInfo.key}">
+								<li class="active"><a href="${taskURL}${taskInfo.key}">
+										<b>${count}. </b> <c:out value="${taskTitle}" />
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="default"><a href="${taskURL}${taskInfo.key}">
+										<b>${count}. </b> <c:out value="${taskTitle}" />
+								</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
+			</div>
+			<section class="col-md-9"> <%-- Table of statistic --%>
 			<div>
+				<c:url var="currentTaskURL" value="/TaskStatistic.do?id=" scope="page"/>
+					<form action="TaskStatistic.do?id=${taskId}" method="GET">
+					<p>
+						Results per page: 
+						<select class="selectpicker" name="pageSize">
+							<option>10</option>
+							<option>25</option>
+							<option>50</option>
+							<option>100</option>
+						</select>
+					</p>
+					<p>Order by:
+					<ul>
+						<li><input type="checkbox" name = "username"/>Username
+						<select	class="selectpicker" name = "usernameType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+						<li><input type="checkbox" name = "compiler"/>Compiler
+						<select	class="selectpicker" name = "compilerType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+						<li><input type="checkbox" name="execTime"/>Execution time
+						<select class="selectpicker" name="execTimeType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+						<li><input type="checkbox" name="memoryUsed"/>Memory Used
+						<select class="selectpicker" name="memoryUsedType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+						<li><input type="checkbox" name="passed"/>Passed
+						<select class="selectpicker" name="passedType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+						<li><input type="checkbox" name="attempts"/>Attempts
+						<select class="selectpicker" name="attemptsType">
+								<option>Ascending</option>
+								<option>Descending</option>
+						</select></li>
+					</ul>
+					</p> 
+					<input type="submit"/>
+				</form>
 				<table class="table">
 					<thead>
 						<tr>
@@ -81,10 +123,12 @@
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
-							<c:if test="${currentPage + loop - 3<lastPage + 1}">
-								<li><a href="TaskStatistic.do?id=${taskId}&page=${currentPage + loop - 3}"> 
-								<c:out value="${currentPage + loop - 3}" /></a></li>
-							</c:if>
+								<c:if test="${currentPage + loop - 3<lastPage + 1}">
+									<li><a
+										href="${requestScope['javax.servlet.forward.request_uri']}?id=${taskId}&page=${currentPage + loop - 3}">
+											<c:out value="${currentPage + loop - 3}" />
+									</a></li>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>
