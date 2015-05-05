@@ -46,8 +46,8 @@
 			</div>
 			<section class="col-md-9"> <%-- Table of statistic --%>
 			<div>
-				<c:url var="currentTaskURL" value="/TaskStatistic.do?id=" scope="page"/>
 					<form action="TaskStatistic.do?id=${taskId}" method="GET">
+					<input type="hidden" name ="id" value="${taskId}">
 					<p>
 						Results per page: 
 						<select class="selectpicker" name="pageSize">
@@ -61,33 +61,33 @@
 					<ul>
 						<li><input type="checkbox" name = "username"/>Username
 						<select	class="selectpicker" name = "usernameType">
-								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 						<li><input type="checkbox" name = "compiler"/>Compiler
 						<select	class="selectpicker" name = "compilerType">
-								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 						<li><input type="checkbox" name="execTime"/>Execution time
 						<select class="selectpicker" name="execTimeType">
-								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 						<li><input type="checkbox" name="memoryUsed"/>Memory Used
 						<select class="selectpicker" name="memoryUsedType">
-								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 						<li><input type="checkbox" name="passed"/>Passed
 						<select class="selectpicker" name="passedType">
-								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 						<li><input type="checkbox" name="attempts"/>Attempts
 						<select class="selectpicker" name="attemptsType">
 								<option>Ascending</option>
-								<option>Descending</option>
+								<option value = "desc">Descending</option>
 						</select></li>
 					</ul>
 					</p> 

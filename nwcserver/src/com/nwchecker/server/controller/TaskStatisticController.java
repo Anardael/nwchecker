@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,32 +34,47 @@ public class TaskStatisticController {
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 
-			@RequestParam(value = "username", required = false) boolean username,
-			@RequestParam(value = "usernameType", required = false) String usernameType,
+			@RequestParam(value = "username", required = false, defaultValue="true") boolean username,
+			@RequestParam(value = "usernameType", required = false, defaultValue="Asc") String usernameType,
 
 			@RequestParam(value = "compiler", required = false) boolean compiler,
 			@RequestParam(value = "compilerType", required = false) String compilerType,
 
-			@RequestParam(value = "execTime", required = false) boolean execTime,
-			@RequestParam(value = "execTimeType", required = false) String execTimeType,
+			@RequestParam(value = "execTime", required = false, defaultValue="true") boolean execTime,
+			@RequestParam(value = "execTimeType", required = false, defaultValue="Asc") String execTimeType,
 
 			@RequestParam(value = "memoryUsed", required = false) boolean memoryUsed,
-			@RequestParam(value = "memoryUsedType", required = false) String memoryType,
+			@RequestParam(value = "memoryUsedType", required = false) String memoryUsedType,
 
 			@RequestParam(value = "passed", required = false) boolean passed,
 			@RequestParam(value = "passedType", required = false) String passedType,
 
 			@RequestParam(value = "attempts", required = false) boolean attempts,
 			@RequestParam(value = "attemptsType", required = false) String attemptsType) {
-		System.out.println(username + " " + compiler + execTime + memoryUsed + passed + attempts);
-		System.out.println(usernameType + " " + compilerType + " " + execTimeType + " " + memoryType + " " + passedType + " " + attemptsType);
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
-
+		
+		Map<String, String> orderParams = new HashMap<String, String>();
+		if (username){
+			orderParams.put("t.user.displayName", usernameType);
+		}
+		if (compiler){
+			orderParams.put("compiler", compilerType);
+		}
+		if(execTime){
+			orderParams.put("executionTime", execTimeType);
+		}
+		if(memoryUsed){
+			orderParams.put("memoryUsed", memoryUsedType);
+		}
+		if(passed){
+			orderParams.put("passed", passedType);
+		}
+		
 		// Map<String, Object> result =
 		// taskPassService.getStatisticOfSuccessfulTaskPasses(taskId, PAGE_SIZE,
 		// pageNumber);
 		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, pageSize, pageNumber);
+				taskId, pageSize, pageNumber, orderParams);
 		modelView.addAllObjects(result);
 
 		Task currentTask = taskService.getTaskById(taskId);

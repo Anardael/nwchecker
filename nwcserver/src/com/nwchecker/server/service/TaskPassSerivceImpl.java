@@ -19,6 +19,30 @@ public class TaskPassSerivceImpl implements TaskPassService {
 	TaskPassDAO taskPassDAO;
 
 	@Override
+	public Map<String, Object> getPagedTaskPassesForTask(int taskId, int pageSize,
+			int pageNumber, Map<String, String> orderParams) {
+		List<TaskPass> taskPassList = taskPassDAO.getPaginatedTaskPassByTaskId(
+				taskId, pageSize, pageNumber, orderParams);
+		List<TaskPassJson> taskPassJsonList = new ArrayList<TaskPassJson>();
+		for (TaskPass taskPass : taskPassList) {
+			Long attempts = taskPassDAO.getNumberOfAttempts(taskPass.getUser()
+					.getUserId(), taskId);
+			taskPassJsonList.add(TaskPassJson.createTaskPassJson(taskPass,
+					attempts));
+		}
+		Long lastPage = taskPassDAO.getTaskPassResponseSize(taskId);
+		if ((lastPage / pageSize) * pageSize == lastPage) {
+			lastPage = lastPage / pageSize;
+		} else {
+			lastPage = lastPage / pageSize + 1;
+		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("taskPassList", taskPassJsonList);
+		result.put("lastPage", lastPage);
+		return result;
+	}
+
+	@Override
 	public Map<String, Object> getPagedTaskPassesForTask(int taskId,
 			int pageSize, int pageNumber) {
 		List<TaskPass> taskPassList = taskPassDAO.getPaginatedTaskPassByTaskId(

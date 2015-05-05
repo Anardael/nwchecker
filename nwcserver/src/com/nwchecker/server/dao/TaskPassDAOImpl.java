@@ -1,6 +1,7 @@
 package com.nwchecker.server.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,6 +19,25 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	@Autowired
 	public void init(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
+	}
+	@Transactional
+	@Override	
+	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int pageSize,
+			int pageNumber, Map<String, String> orderParams) {
+		String prefix = "";
+		StringBuffer sb = new StringBuffer("FROM TaskPass t WHERE task_id = :id ORDER BY ");		
+		for (Map.Entry<String, String> entry : orderParams.entrySet()){
+			sb.append(prefix);
+			prefix=",";
+			sb.append(entry.getKey() + " " + entry.getValue());
+		}
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session.createQuery(sb.toString());
+		q.setParameter("id", id);
+		q.setFirstResult((pageNumber - 1) * pageSize);
+		q.setMaxResults(pageSize);
+		return (List<TaskPass>) q.list();
 	}
 
 	@Transactional
