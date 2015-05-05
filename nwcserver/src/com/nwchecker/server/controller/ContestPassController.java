@@ -59,6 +59,14 @@ public class ContestPassController {
     @Autowired
     private CompilerDAO compilerService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/passTask", method = RequestMethod.GET)
+    public String selectTypeContestForPass(Principal principal, @RequestParam("id") int taskId, @RequestParam("typeId") int typeId,
+                                 Model model) {
+        return "passTask?taskId="+taskId;
+    }
+
+
     /**
      * This mapped method used to return page that allows user to
      * pass contest.
