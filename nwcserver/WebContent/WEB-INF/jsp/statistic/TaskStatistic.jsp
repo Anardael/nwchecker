@@ -11,6 +11,7 @@
 <head>
 <link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
 <jsp:include page="../fragments/staticFiles.jsp" />
+<script type="text/javascript" src="${resources}js/TaskStatistic/SortingParams.js"></script>
 </head>
 <body>
 	<div class="wrapper container">
@@ -46,7 +47,8 @@
 			</div>
 			<section class="col-md-9"> <%-- Table of statistic --%>
 			<div>
-					<form action="TaskStatistic.do?id=${taskId}" method="GET">
+				<form method="POST" action="TaskStatistic.do">
+					<jsp:useBean id="orderParams" class="com.nwchecker.server.utils.OrderParams" scope="session"/>
 					<input type="hidden" name ="id" value="${taskId}">
 					<p>
 						Results per page: 
@@ -57,36 +59,31 @@
 							<option>100</option>
 						</select>
 					</p>
-					<p>Order by:
-					<ul>
-						<li><input type="checkbox" name = "username"/>Username
-						<select	class="selectpicker" name = "usernameType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input type="checkbox" name = "compiler"/>Compiler
+					<p>Order by:					
+					<ul>					
+						<li><input id = "compiler" type="checkbox" name = "compiler"/>Compiler
 						<select	class="selectpicker" name = "compilerType">
 								<option value = "asc">Ascending</option>
 								<option value = "desc">Descending</option>
 						</select></li>
-						<li><input type="checkbox" name="execTime"/>Execution time
+						<li><input id = "username" type="checkbox" name = "username"/>Username
+						<select	class="selectpicker" name = "usernameType">
+								<option value = "asc">Ascending</option>
+								<option value = "desc">Descending</option>
+						</select></li>
+						<li><input id="execTime" type="checkbox" name="execTime"/>Execution time
 						<select class="selectpicker" name="execTimeType">
 								<option value = "asc">Ascending</option>
 								<option value = "desc">Descending</option>
 						</select></li>
-						<li><input type="checkbox" name="memoryUsed"/>Memory Used
+						<li><input id = "memoryUsed" type="checkbox" name="memoryUsed"/>Memory Used
 						<select class="selectpicker" name="memoryUsedType">
 								<option value = "asc">Ascending</option>
 								<option value = "desc">Descending</option>
 						</select></li>
-						<li><input type="checkbox" name="passed"/>Passed
+						<li><input id = "passed" type="checkbox" name="passed"/>Passed
 						<select class="selectpicker" name="passedType">
 								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input type="checkbox" name="attempts"/>Attempts
-						<select class="selectpicker" name="attemptsType">
-								<option>Ascending</option>
 								<option value = "desc">Descending</option>
 						</select></li>
 					</ul>
@@ -120,20 +117,25 @@
 					</tbody>
 				</table>
 				<div class="text-center">
-					<ul class="pagination">
+					<ul class="pagination">				
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
 								<c:if test="${currentPage + loop - 3<lastPage + 1}">
-									<li><a
-										href="${requestScope['javax.servlet.forward.request_uri']}?id=${taskId}&page=${currentPage + loop - 3}">
-											<c:out value="${currentPage + loop - 3}" />
-									</a></li>
+								<li>
+									<a href="<c:url value="/TaskStatistic.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+									 	<c:out value="${currentPage + loop - 3}" />									 	
+									 </a>
+								</li>
 								</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+			</form>
 			</section>
 		</div>
 	</div>

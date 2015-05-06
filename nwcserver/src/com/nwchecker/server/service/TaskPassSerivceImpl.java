@@ -7,14 +7,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.nwchecker.server.dao.TaskPassDAO;
 import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
 
 @Service
+@SessionAttributes("taskPassOrdering")
 public class TaskPassSerivceImpl implements TaskPassService {
-
+	
 	@Autowired
 	TaskPassDAO taskPassDAO;
 
@@ -23,6 +25,7 @@ public class TaskPassSerivceImpl implements TaskPassService {
 			int pageNumber, Map<String, String> orderParams) {
 		List<TaskPass> taskPassList = taskPassDAO.getPaginatedTaskPassByTaskId(
 				taskId, pageSize, pageNumber, orderParams);
+		
 		List<TaskPassJson> taskPassJsonList = new ArrayList<TaskPassJson>();
 		for (TaskPass taskPass : taskPassList) {
 			Long attempts = taskPassDAO.getNumberOfAttempts(taskPass.getUser()

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.utils.OrderParams;
 
 import java.util.TreeMap;
 
@@ -26,55 +27,35 @@ public class TaskStatisticController {
 	@Autowired
 	TaskPassService taskPassService;
 
-	static private final int PAGE_SIZE = 10;
-
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
-			@RequestParam(value = "id", defaultValue = "45") int taskId,
+			@RequestParam(value = "id") int taskId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 
-			@RequestParam(value = "username", required = false, defaultValue="true") boolean username,
-			@RequestParam(value = "usernameType", required = false, defaultValue="Asc") String usernameType,
-
-			@RequestParam(value = "compiler", required = false) boolean compiler,
-			@RequestParam(value = "compilerType", required = false) String compilerType,
-
-			@RequestParam(value = "execTime", required = false, defaultValue="true") boolean execTime,
-			@RequestParam(value = "execTimeType", required = false, defaultValue="Asc") String execTimeType,
-
-			@RequestParam(value = "memoryUsed", required = false) boolean memoryUsed,
-			@RequestParam(value = "memoryUsedType", required = false) String memoryUsedType,
-
-			@RequestParam(value = "passed", required = false) boolean passed,
-			@RequestParam(value = "passedType", required = false) String passedType,
-
-			@RequestParam(value = "attempts", required = false) boolean attempts,
-			@RequestParam(value = "attemptsType", required = false) String attemptsType) {
+			@ModelAttribute(value="orderParams") OrderParams orderParams) {
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
-		
-		Map<String, String> orderParams = new HashMap<String, String>();
-		if (username){
-			orderParams.put("t.user.displayName", usernameType);
+
+//TODO:make service out of this crap:
+		Map<String, String> orderParamsMap = new HashMap<String, String>();
+		if(orderParams.isUsername()){
+			orderParamsMap.put("t.user.displayName",orderParams.getUsernameType());
 		}
-		if (compiler){
-			orderParams.put("compiler", compilerType);
+		if(orderParams.isCompiler()){
+			orderParamsMap.put("compiler", orderParams.getCompilerType());
 		}
-		if(execTime){
-			orderParams.put("executionTime", execTimeType);
+		if(orderParams.isExecTime()){
+			orderParamsMap.put("executionTime", orderParams.getExecTimeType());
 		}
-		if(memoryUsed){
-			orderParams.put("memoryUsed", memoryUsedType);
+		if(orderParams.isMemoryUsed()){
+			orderParamsMap.put("memoryUsed", orderParams.getMemoryUsedType());
 		}
-		if(passed){
-			orderParams.put("passed", passedType);
+		if(orderParams.isPassed()){
+			orderParamsMap.put("passed", orderParams.getPassedType());
 		}
-		
-		// Map<String, Object> result =
-		// taskPassService.getStatisticOfSuccessfulTaskPasses(taskId, PAGE_SIZE,
-		// pageNumber);
+
 		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, pageSize, pageNumber, orderParams);
+				taskId, pageSize, pageNumber);
 		modelView.addAllObjects(result);
 
 		Task currentTask = taskService.getTaskById(taskId);
@@ -90,16 +71,47 @@ public class TaskStatisticController {
 		modelView.addObject("taskTitles", taskTitles);
 		return modelView;
 	}
-	/*
-	 * public ModelAndView getTaskStatistic(
-	 * 
-	 * @RequestParam(value = "id", defaultValue = "45") int id,
-	 * 
-	 * @RequestParam(value = "page", defaultValue = "1") int pageNumber) {
-	 * ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
-	 * Map<String, Object> result =
-	 * taskPassService.getPagedTaskPassesForContest(id, PAGE_SIZE, pageNumber);
-	 * modelView.addAllObjects(result); modelView.addObject("currentPage",
-	 * pageNumber); return modelView; }
-	 */
+	
+	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.POST)
+	public ModelAndView changeOrdering(
+			@RequestParam(value = "id", defaultValue = "45") int taskId,
+
+			@ModelAttribute(value="orderParams") OrderParams orderParams) {
+		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
+//TODO:make service out of this crap:
+		Map<String, String> orderParamsMap = new HashMap<String, String>();
+		if(orderParams.isUsername()){
+			orderParamsMap.put("t.user.displayName",orderParams.getUsernameType());
+		}
+		if(orderParams.isCompiler()){
+			orderParamsMap.put("compiler", orderParams.getCompilerType());
+		}
+		if(orderParams.isExecTime()){
+			orderParamsMap.put("executionTime", orderParams.getExecTimeType());
+		}
+		if(orderParams.isMemoryUsed()){
+			orderParamsMap.put("memoryUsed", orderParams.getMemoryUsedType());
+		}
+		if(orderParams.isPassed()){
+			orderParamsMap.put("passed", orderParams.getPassedType());
+		}
+
+		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
+				taskId, orderParams.getPageSize(), 1);
+		modelView.addAllObjects(result);
+
+		Task currentTask = taskService.getTaskById(taskId);
+		Contest currentContest = currentTask.getContest();
+
+		modelView.addObject("currentPage", 1);
+		modelView.addObject("taskId", taskId);
+
+		Map<Integer, String> taskTitles = new TreeMap<>();
+		for (Task task : currentContest.getTasks()) {
+			taskTitles.put(task.getId(), task.getTitle());
+		}
+		modelView.addObject("taskTitles", taskTitles);
+		return modelView;
+	}
+	
 }
