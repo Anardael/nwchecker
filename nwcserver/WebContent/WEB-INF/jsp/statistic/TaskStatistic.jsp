@@ -10,9 +10,11 @@
 <%-- Importing head --%>
 <head>
 <jsp:include page="../fragments/staticFiles.jsp" />
-<script type="text/javascript" src="${resources}/js/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript"
+	src="${resources}/js/bootstrap/bootstrap-select.js"></script>
 <script type="text/javascript"
 	src="${resources}js/TaskStatistic/SortingParams.js"></script>
+
 </head>
 <body>
 	<div class="wrapper container">
@@ -60,53 +62,56 @@
 							<option>100</option>
 						</select>
 					</p>
-					<p>Order by:
-			
-					</p>
+					<p>Order by:</p>
 					<input type="submit" />
-				</form>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>#Id</th>
-							<th><select id="usernameSelect" class="selectpicker" name="usernameType" data-show-icon="true">
-									<option>Username</option>
-									<option value="asc" data-icon="glyphicon-chevron-up">Username</span></option>
-									<option value="desc" data-icon="glyphicon-chevron-down">Username</option>
-							</select></th>
-							<th>Compiler</th>
-							<th><select id = "execTimeSelect" class="selectpicker" name="execTimeType">
-									<option>Execution Time</option>
-									<option value="asc" data-icon="glyphicon-chevron-up">Execution Time</span></option>
-									<option value="desc" data-icon="glyphicon-chevron-down">Execution Time</span></option>
-							</select></th>
-							<th><select class="selectpicker" name="memoryUsedType">
-									<option>Memory used</option>
-									<option value="asc" data-icon="glyphicon-chevron-up">Memory used</span></option>
-									<option value="desc" data-icon="glyphicon-chevron-down">Memory used</span></option>
-							</select></th>
-							<th><select class="selectpicker" name="passedType">
-									<option>Passed</option>
-									<option value="asc" data-icon="glyphicon-chevron-up">Passed</span></option>
-									<option value="desc" data-icon="glyphicon-chevron-down">Passed</span></option>
-							</select></th>
-							<th>Attempts</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${taskPassList}" var="taskPass">
+
+					<table class="table">
+						<thead>
 							<tr>
-								<td>${taskPass.taskPassId}</td>
-								<td>${taskPass.userName}</td>
-								<td>${taskPass.compiler.name}</td>
-								<td>${taskPass.executionTime}</td>
-								<td>${taskPass.memoryUsed}</td>
-								<td>${taskPass.passed}</td>
-								<td>${taskPass.numberOfAttempts}</td>
+								<th>#Id</th>
+								<th><select id="usernameSelect" class="selectpicker" name="username">
+										<option value="">Username</option>
+										<option value="asc" data-icon="glyphicon-chevron-up">Username</option>
+										<option value="desc" data-icon="glyphicon-chevron-down">Username</option>
+								</select></th>
+								<th><select id="compilerSelect" class="selectpicker" name="compiler">
+										<option value="">Compiler</option>
+										<option value="asc" data-icon="glyphicon-chevron-up">Compiler</option>
+										<option value="desc" data-icon="glyphicon-chevron-down">Compiler</option>
+								</select></th>
+								<th><select id="execTimeSelect" class="selectpicker" name="execTime">
+										<option value="">Execution Time</option>
+										<option value="asc" data-icon="glyphicon-chevron-up">Execution Time</option>
+										<option value="desc" data-icon="glyphicon-chevron-down">Execution Time</option>
+								</select></th>
+								<th><select class="selectpicker" name="memoryUsed">
+										<option value="">Memory used</option>
+										<option value="asc" data-icon="glyphicon-chevron-up">Memory used</option>
+										<option value="desc" data-icon="glyphicon-chevron-down">Memory used</option>
+								</select></th>
+								<th><select class="selectpicker" name="passed">
+										<option value="">Passed</option>
+										<option value="asc" data-icon="glyphicon-chevron-up">Passed</option>
+										<option value="desc" data-icon="glyphicon-chevron-down">Passed</option>
+								</select></th>
+								<th>Attempts</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${taskPassList}" var="taskPass">
+								<tr>
+									<td>${taskPass.taskPassId}</td>
+									<td>${taskPass.userName}</td>
+									<td>${taskPass.compiler.name}</td>
+									<td>${taskPass.executionTime}</td>
+									<td>${taskPass.memoryUsed}</td>
+									<td>${taskPass.passed}</td>
+									<td>${taskPass.numberOfAttempts}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</form>
 				<div class="text-center">
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
@@ -125,7 +130,6 @@
 					</ul>
 				</div>
 			</div>
-			</form>
 			</section>
 		</div>
 	</div>

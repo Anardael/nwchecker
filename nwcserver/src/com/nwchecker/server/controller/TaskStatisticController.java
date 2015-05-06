@@ -33,29 +33,15 @@ public class TaskStatisticController {
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 
-			@ModelAttribute(value="orderParams") OrderParams orderParams) {
+			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
 
-//TODO:make service out of this crap:
-		Map<String, String> orderParamsMap = new HashMap<String, String>();
-		if(orderParams.isUsername()){
-			orderParamsMap.put("t.user.displayName",orderParams.getUsernameType());
-		}
-		if(orderParams.isCompiler()){
-			orderParamsMap.put("compiler", orderParams.getCompilerType());
-		}
-		if(orderParams.isExecTime()){
-			orderParamsMap.put("executionTime", orderParams.getExecTimeType());
-		}
-		if(orderParams.isMemoryUsed()){
-			orderParamsMap.put("memoryUsed", orderParams.getMemoryUsedType());
-		}
-		if(orderParams.isPassed()){
-			orderParamsMap.put("passed", orderParams.getPassedType());
-		}
+		// TODO:make service out of this crap:
+		Map<String, String> orderParamsMap = taskPassService
+				.parseOrderParams(orderParams);
 
 		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, pageSize, pageNumber);
+				taskId, pageSize, pageNumber, orderParamsMap);
 		modelView.addAllObjects(result);
 
 		Task currentTask = taskService.getTaskById(taskId);
@@ -71,33 +57,19 @@ public class TaskStatisticController {
 		modelView.addObject("taskTitles", taskTitles);
 		return modelView;
 	}
-	
+
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.POST)
 	public ModelAndView changeOrdering(
 			@RequestParam(value = "id", defaultValue = "45") int taskId,
 
-			@ModelAttribute(value="orderParams") OrderParams orderParams) {
+			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
 		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
-//TODO:make service out of this crap:
-		Map<String, String> orderParamsMap = new HashMap<String, String>();
-		if(orderParams.isUsername()){
-			orderParamsMap.put("t.user.displayName",orderParams.getUsernameType());
-		}
-		if(orderParams.isCompiler()){
-			orderParamsMap.put("compiler", orderParams.getCompilerType());
-		}
-		if(orderParams.isExecTime()){
-			orderParamsMap.put("executionTime", orderParams.getExecTimeType());
-		}
-		if(orderParams.isMemoryUsed()){
-			orderParamsMap.put("memoryUsed", orderParams.getMemoryUsedType());
-		}
-		if(orderParams.isPassed()){
-			orderParamsMap.put("passed", orderParams.getPassedType());
-		}
+		// TODO:make service out of this crap:
+		Map<String, String> orderParamsMap = taskPassService
+				.parseOrderParams(orderParams);
 
 		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, orderParams.getPageSize(), 1);
+				taskId, orderParams.getPageSize(), 1, orderParamsMap);
 		modelView.addAllObjects(result);
 
 		Task currentTask = taskService.getTaskById(taskId);
@@ -113,5 +85,5 @@ public class TaskStatisticController {
 		modelView.addObject("taskTitles", taskTitles);
 		return modelView;
 	}
-	
+
 }

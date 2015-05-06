@@ -125,9 +125,4 @@
             </security:authorize>
         </ul>
     </nav>
-    <div class="heading">
-        <h1>
-            <spring:message code="${param.pageName}.caption"/>
-        </h1>
-    </div>
 </header>
