@@ -9,9 +9,10 @@
 <html>
 <%-- Importing head --%>
 <head>
-<link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
 <jsp:include page="../fragments/staticFiles.jsp" />
-<script type="text/javascript" src="${resources}js/TaskStatistic/SortingParams.js"></script>
+<script type="text/javascript" src="${resources}/js/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript"
+	src="${resources}js/TaskStatistic/SortingParams.js"></script>
 </head>
 <body>
 	<div class="wrapper container">
@@ -48,57 +49,47 @@
 			<section class="col-md-9"> <%-- Table of statistic --%>
 			<div>
 				<form method="POST" action="TaskStatistic.do">
-					<jsp:useBean id="orderParams" class="com.nwchecker.server.utils.OrderParams" scope="session"/>
-					<input type="hidden" name ="id" value="${taskId}">
+					<jsp:useBean id="orderParams"
+						class="com.nwchecker.server.utils.OrderParams" scope="session" />
+					<input type="hidden" name="id" value="${taskId}">
 					<p>
-						Results per page: 
-						<select class="selectpicker" name="pageSize">
+						Results per page: <select class="selectpicker" name="pageSize">
 							<option>10</option>
 							<option>25</option>
 							<option>50</option>
 							<option>100</option>
 						</select>
 					</p>
-					<p>Order by:					
-					<ul>					
-						<li><input id = "compiler" type="checkbox" name = "compiler"/>Compiler
-						<select	class="selectpicker" name = "compilerType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input id = "username" type="checkbox" name = "username"/>Username
-						<select	class="selectpicker" name = "usernameType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input id="execTime" type="checkbox" name="execTime"/>Execution time
-						<select class="selectpicker" name="execTimeType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input id = "memoryUsed" type="checkbox" name="memoryUsed"/>Memory Used
-						<select class="selectpicker" name="memoryUsedType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-						<li><input id = "passed" type="checkbox" name="passed"/>Passed
-						<select class="selectpicker" name="passedType">
-								<option value = "asc">Ascending</option>
-								<option value = "desc">Descending</option>
-						</select></li>
-					</ul>
-					</p> 
-					<input type="submit"/>
+					<p>Order by:
+			
+					</p>
+					<input type="submit" />
 				</form>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>#Id</th>
-							<th>Username</th>
+							<th><select id="usernameSelect" class="selectpicker" name="usernameType" data-show-icon="true">
+									<option>Username</option>
+									<option value="asc" data-icon="glyphicon-chevron-up">Username</span></option>
+									<option value="desc" data-icon="glyphicon-chevron-down">Username</option>
+							</select></th>
 							<th>Compiler</th>
-							<th>Execution time</th>
-							<th>Memory Used</th>
-							<th>Passed</th>
+							<th><select id = "execTimeSelect" class="selectpicker" name="execTimeType">
+									<option>Execution Time</option>
+									<option value="asc" data-icon="glyphicon-chevron-up">Execution Time</span></option>
+									<option value="desc" data-icon="glyphicon-chevron-down">Execution Time</span></option>
+							</select></th>
+							<th><select class="selectpicker" name="memoryUsedType">
+									<option>Memory used</option>
+									<option value="asc" data-icon="glyphicon-chevron-up">Memory used</span></option>
+									<option value="desc" data-icon="glyphicon-chevron-down">Memory used</span></option>
+							</select></th>
+							<th><select class="selectpicker" name="passedType">
+									<option>Passed</option>
+									<option value="asc" data-icon="glyphicon-chevron-up">Passed</span></option>
+									<option value="desc" data-icon="glyphicon-chevron-down">Passed</span></option>
+							</select></th>
 							<th>Attempts</th>
 						</tr>
 					</thead>
@@ -117,18 +108,17 @@
 					</tbody>
 				</table>
 				<div class="text-center">
-					<ul class="pagination">				
+					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
 								<c:if test="${currentPage + loop - 3<lastPage + 1}">
-								<li>
-									<a href="<c:url value="/TaskStatistic.do">
+									<li><a
+										href="<c:url value="/TaskStatistic.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${currentPage + loop - 3}"/>
 										</c:url>">
-									 	<c:out value="${currentPage + loop - 3}" />									 	
-									 </a>
-								</li>
+											<c:out value="${currentPage + loop - 3}" />
+									</a></li>
 								</c:if>
 							</c:if>
 						</c:forEach>
