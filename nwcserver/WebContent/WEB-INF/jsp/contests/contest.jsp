@@ -130,14 +130,14 @@
                                     <c:if test="${(contest.status=='GOING')}">
                                         <button class="btn btn-sm btn-info form-group"
                                                 style="font-weight: 600"
-                                                onclick="contestStart(${contest.tasks[0].id});">
+                                                onclick="contestCheckType(${contest.tasks[0].id}, ${contest.typeContest.id})">
                                             <spring:message code="contest.startButton"/>
                                         </button>
                                     </c:if>
                                     <c:if test="${(contest.status=='ARCHIVE')}">
                                         <button class="btn btn-sm btn-info form-group"
                                                 style="font-weight: 600"
-                                                onclick="contestStart(${contest.tasks[0].id});">
+                                                onclick="contestCheckType(${contest.tasks[0].id}, ${contest.typeContest.id})">
                                             <spring:message code="contest.startButton"/>
                                         </button>
                                     </c:if>

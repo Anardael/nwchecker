@@ -60,10 +60,15 @@ public class ContestPassController {
     private CompilerDAO compilerService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/passTask", method = RequestMethod.GET)
+    @RequestMapping(value = "/checkPassTaskType", method = RequestMethod.GET)
     public String selectTypeContestForPass(Principal principal, @RequestParam("id") int taskId, @RequestParam("typeId") int typeId,
                                  Model model) {
-        return "passTask?taskId="+taskId;
+        String url = null;
+        switch (typeId){
+            case 1: url = getTaskForPass(principal, taskId, model); break;
+            case 2: url = "access/inDevelopment"; break;
+        }
+        return url;
     }
 
 
