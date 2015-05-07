@@ -9,10 +9,12 @@
 <html>
 <%-- Importing head --%>
 <head>
-<jsp:include page="../fragments/staticFiles.jsp" />
-<script type="text/javascript"
+	<jsp:include page="../fragments/staticFiles.jsp" />
+	<link rel="stylesheet" href="${resources}css/TaskStatistic/bootstrap-select.min.css"/>	
+    <link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
+	<script type="text/javascript"
 	src="${resources}/js/bootstrap/bootstrap-select.js"></script>
-<script type="text/javascript"
+	<script type="text/javascript"
 	src="${resources}js/TaskStatistic/SortingParams.js"></script>
 
 </head>
@@ -23,33 +25,51 @@
 		<jsp:include page="../fragments/bodyHeader.jsp">
 			<jsp:param name="pageName" value="contest" />
 		</jsp:include>
-		<div class="row">
-			<%-- Side panel --%>
-			<div id="tasks" class="col-md-3">
-				<ul class="nav nav-pills nav-stacked">
-					<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
-					<c:set var="count" value="0" scope="page" />
-
-					<c:forEach var="taskInfo" items="${taskTitles}">
-						<c:set var="count" value="${count + 1}" scope="page" />
-						<c:set var="taskTitle" value="${taskInfo.value}" scope="page" />
-						<c:choose>
-							<c:when test="${taskId eq taskInfo.key}">
-								<li class="active"><a href="${taskURL}${taskInfo.key}">
-										<b>${count}. </b> <c:out value="${taskTitle}" />
-								</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="default"><a href="${taskURL}${taskInfo.key}">
-										<b>${count}. </b> <c:out value="${taskTitle}" />
-								</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</ul>
-			</div>
-			<section class="col-md-9"> <%-- Table of statistic --%>
-			<div>
+		<div id="tasks" class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+				<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
+				<c:set var="count" value="0" scope="page" />
+				<c:forEach var="taskInfo" items="${taskTitles}">
+					<c:set var="count" value="${count + 1}" scope="page"/>
+                    <c:set var="taskId" value="${taskInfo.key}"/>
+                    <c:set var="taskTitle" value="${taskInfo.value}"
+                           scope="page" />
+					<c:set var="taskResult" value="${taskResults[taskId]}"
+						scope="page" />
+					<c:choose>
+						<c:when test="${taskId eq currentTask.id}">
+							<li class="active">
+								<a href="${taskURL}${taskId}">
+                                    <b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:when>
+						<c:when test="${taskResult == null}">
+							<li class="default">
+								<a href="${taskURL}${taskId}">
+									<b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:when>
+						<c:when test="${taskResult == true}">
+							<li class="success">
+								<a href="${taskURL}${taskId}">
+                                    <b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:when>
+						<c:when test="${taskResult == false}">
+							<li class="fail">
+								<a href="${taskURL}${taskId}">
+                                    <b>${count}. </b><c:out value="${taskTitle}"/>
+								</a>
+							</li>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="col-md-9"> <%-- Table of statistic --%>
 				<form method="POST" action="TaskStatistic.do">
 					<jsp:useBean id="orderParams"
 						class="com.nwchecker.server.utils.OrderParams" scope="session" />
@@ -129,8 +149,6 @@
 						</c:forEach>
 					</ul>
 				</div>
-			</div>
-			</section>
 		</div>
 	</div>
 </body>

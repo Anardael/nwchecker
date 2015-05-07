@@ -1,6 +1,5 @@
 package com.nwchecker.server.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,9 @@ public class TaskStatisticController {
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 
 			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
-		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
+		
+		ModelAndView modelView = new ModelAndView("nwcserver.tasks.abstract");
 
-		// TODO:make service out of this crap:
 		Map<String, String> orderParamsMap = taskPassService
 				.parseOrderParams(orderParams);
 
@@ -48,7 +47,7 @@ public class TaskStatisticController {
 		Contest currentContest = currentTask.getContest();
 
 		modelView.addObject("currentPage", pageNumber);
-		modelView.addObject("taskId", taskId);
+		modelView.addObject("currentTask", currentTask);
 
 		Map<Integer, String> taskTitles = new TreeMap<>();
 		for (Task task : currentContest.getTasks()) {
@@ -63,8 +62,7 @@ public class TaskStatisticController {
 			@RequestParam(value = "id", defaultValue = "45") int taskId,
 
 			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
-		ModelAndView modelView = new ModelAndView("statistic/TaskStatistic");
-		// TODO:make service out of this crap:
+		ModelAndView modelView = new ModelAndView("nwcserver.tasks.abstract");
 		Map<String, String> orderParamsMap = taskPassService
 				.parseOrderParams(orderParams);
 
