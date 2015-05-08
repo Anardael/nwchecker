@@ -7,10 +7,7 @@ import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.service.*;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,6 +55,8 @@ public class ContestPassController {
     private ContestPassService contestPassService;
     @Autowired
     private CompilerDAO compilerService;
+    @Autowired
+    private ScoreCalculationService scoreCalculationService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/checkPassTaskType", method = RequestMethod.GET)
@@ -221,6 +220,18 @@ public class ContestPassController {
         Collections.sort(archivedContests, new ContestStartTimeComparator());
         Collections.reverse(archivedContests);
         model.addAttribute("archivedContests", archivedContests);
+
+        List<Contest> goingContests = contestService.getContestByStatus(Contest.Status.GOING);
+        List<Contest> type2Contests = new ArrayList<Contest>();
+        for(Contest contest : goingContests){
+            if(contest.getTypeContest().getId() == 2){
+                scoreCalculationService.calculateScore(contest.getId());
+                type2Contests.add(contest);
+            }
+        }
+
+        model.addAttribute("type2Contests", type2Contests);
+
         return "contests/rating";
     }
 

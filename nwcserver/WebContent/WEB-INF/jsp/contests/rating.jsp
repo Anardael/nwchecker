@@ -48,6 +48,28 @@
                         </span>
                     </li>
                 </c:forEach>
+                <br>
+                <br>
+                <c:forEach var="type2" items="${type2Contests}" varStatus="row">
+                    <c:url var="results" value="/results.do?id=${type2.id}"/>
+                    <li class="list-group-item">
+                        <span class="row">
+                            <span class="pull-left">
+                                <b>${type2.title}</b>
+                                <br/>
+                                <spring:message code="contest.results.started.caption"/>
+                                ${fn:substring(type2.starts,0,16)}
+                                (<spring:message code="contest.results.continued.caption"/>
+                                ${fn:substring(type2.duration,11,16)})
+                            </span>
+                            <span class="pull-right">
+                                <a class="btn btn-md btn-info pull-right" href="${results}">
+                                    <spring:message code="rating.openResults.button.caption"/>
+                                </a>
+                            </span>
+                        </span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>
