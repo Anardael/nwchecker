@@ -8,6 +8,7 @@ import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
+
 import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,7 +57,7 @@ public class ContestPassController {
     @Autowired
     private CompilerDAO compilerService;
     @Autowired
-    private ScoreCalculationService scoreCalculationService;
+    private TaskPassService taskPassService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/checkPassTaskType", method = RequestMethod.GET)
@@ -88,6 +89,14 @@ public class ContestPassController {
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
+    	//Sending task statistic
+    	Long successful = taskPassService.getTaskPassSuccessfulSampleSize(taskId);
+    	Long all = taskPassService.getTaskPassSampleSize(taskId);
+    	if(!(all.equals(0))){
+    		double rate = successful.doubleValue() / all.doubleValue();
+    		model.addAttribute("taskSuccessRate", rate);
+    	}
+    	
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
         User user = userService.getUserByUsername(principal.getName());
@@ -97,10 +106,8 @@ public class ContestPassController {
             return "access/accessDenied403";
         }
         //if contest is going:
-        boolean goingContest = false;
         ContestPass currentContestPass = null;
         if (currentTask.getContest().getStatus() == Contest.Status.GOING) {
-            goingContest = true;
             //check if user has contestPass for this contest:
             boolean contains = false;
             for (ContestPass c : user.getContestPassList()) {
@@ -156,7 +163,7 @@ public class ContestPassController {
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
 
-        return "contests/contestPass";
+        return "nwcserver.tasks.pass";
     }
 
     /**
@@ -196,10 +203,10 @@ public class ContestPassController {
             }
         }
         if (task.getContest().getStatus() == Contest.Status.GOING && contestPass != null) {
-            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes(), user);
         } else if (task.getContest().getStatus() == Contest.Status.ARCHIVE) {
             //archive:
-            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes(), user);
         } else {
             result.put("accessDenied", true);
         }
@@ -220,18 +227,6 @@ public class ContestPassController {
         Collections.sort(archivedContests, new ContestStartTimeComparator());
         Collections.reverse(archivedContests);
         model.addAttribute("archivedContests", archivedContests);
-
-        List<Contest> goingContests = contestService.getContestByStatus(Contest.Status.GOING);
-        List<Contest> type2Contests = new ArrayList<Contest>();
-        for(Contest contest : goingContests){
-            if(contest.getTypeContest().getId() == 2){
-                scoreCalculationService.calculateScore(contest.getId());
-                type2Contests.add(contest);
-            }
-        }
-
-        model.addAttribute("type2Contests", type2Contests);
-
         return "contests/rating";
     }
 

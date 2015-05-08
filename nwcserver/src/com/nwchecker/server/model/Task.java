@@ -95,7 +95,11 @@ public class Task {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private List<TaskPass> taskPassList;
+    
     public int getId() {
         return id;
     }
@@ -212,4 +216,12 @@ public class Task {
     public boolean equals(Object c) {
         return (c != null && c instanceof Task && ((Task) c).getId() == this.id);
     }
+
+	public List<TaskPass> getTaskPassList() {
+		return taskPassList;
+	}
+
+	public void setTaskPassList(List<TaskPass> taskPassList) {
+		this.taskPassList = taskPassList;
+	}
 }
