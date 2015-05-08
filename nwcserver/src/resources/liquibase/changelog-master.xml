@@ -8,5 +8,7 @@
 
         <include file="classpath:\liquibase\changelog-0.0.1.xml"/>
         <include file="classpath:\liquibase\changelog-0.0.2.xml"/>
+
 	    <include file="classpath:\liquibase\changelog-0.0.5.xml"/>
+        <include file="classpath:\liquibase\changelog-0.0.4.xml"/>
 </databaseChangeLog>
