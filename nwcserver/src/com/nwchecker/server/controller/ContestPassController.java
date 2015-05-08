@@ -163,7 +163,7 @@ public class ContestPassController {
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
 
-        return "nwcserver.tasks.pass";
+        return "contests/contestPass";
     }
 
     /**

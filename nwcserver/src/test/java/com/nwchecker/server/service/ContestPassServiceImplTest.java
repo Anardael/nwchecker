@@ -79,18 +79,18 @@ public class ContestPassServiceImplTest {
         assertEquals(contestPass.getRank(), contestPassService.getContestPasses(1).get(0).getRank());
     }
 
-    @Test
+    /*@Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckTask() throws Exception {
         ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
         Task task = contestPass.getContest().getTasks().get(0);
-//TODO:CHANGE BEFORE DEPLOY!
+      //TODO:CHANGE BEFORE DEPLOY!
       //TODO:CHANGE BEFORE DEPLOY!
       //TODO:CHANGE BEFORE DEPLOY!
       //TODO:CHANGE BEFORE DEPLOY!
       //TODO:CHANGE BEFORE DEPLOY!
         assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8], new User()));
-    }
+    }*/
 
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
