@@ -19,9 +19,6 @@
 			#Dumping data for table `users`
 			INSERT INTO `users` VALUES (12,0,NULL,'root','root@root.com',TRUE,NULL,'$2a$10$6w63Cc1YjghGWtOOTmWvC.fhPhznKOE4S6y7xU3paZJoSFlmB3FpK','root'),(13,0,NULL,'notRoot','not@not.com',TRUE,NULL,'$2a$10$1bvIh/7NKCmJpucM5kUBW.3qRgesrQlvZrqlYbcUbxm8uieQtY6O6','notRoot'),(14,0,NULL,'TestUser2','test@test.com',TRUE,NULL,'$2a$10$RJfvXJMjQjjvgq6u5FuvU.wBR6H1t3odfdnfUCWSG4Pxsu2416Vo2','TestUser2'),(15,0,NULL,'TestUser3','test2@test.com',TRUE,NULL,'$2a$10$44iONRqeKcerqJAYnfuZ4ObSKmrbkmH0UQWWwdW8pOFQHtgxFDefq','TestUser3');
 			
-			#Dumping data for table `contest`
-			INSERT INTO `contest` VALUES (9,'Test Competition for debug purposes\r\n','1970-01-01 00:10:00',FALSE,'2015-04-29 14:00:00','ARCHIVE','TestCompetition1'),(10,'Test Competition 2\r\n','1970-01-01 00:10:00',FALSE,'2015-04-29 14:05:00','ARCHIVE','Test Competition 2');
-	
 			#Dumping data for table `contest_users`
 			INSERT INTO `contest_users` VALUES (12,9),(12,10);
 
@@ -30,9 +27,6 @@
 	
 			#Dumping data for table `roles`
 			INSERT INTO `roles` VALUES (12,'ROLE_ADMIN',12),(13,'ROLE_USER',13),(14,'ROLE_USER',14),(15,'ROLE_USER',15),(16,'ROLE_TEACHER',12);
-
-			#Dumping data for table `task`
-			INSERT INTO `task` VALUES (44,0,'Test Task 1',NULL,'in',0,'out',0,'',0,'Test Task 1',9),(45,0,'Test Task 2',NULL,'in',0,'out',0,'',0,'Test Task 2',9),(46,0,'Test Task 3',NULL,'in',0,'out',0,'',0,'Test Task 3',9),(47,0,'Tast 3',NULL,'in',0,'out',0,'',0,'Test Task 3',10),(48,0,'Test task 4',NULL,'in',0,'out',0,'',0,'Test Task 4',10);
 
 			#Dumping data for table `taskpass`
 			INSERT INTO `taskpass` VALUES (1,'Compiler error',1088,'TestData',3175,FALSE,0,1,16,44,13),
