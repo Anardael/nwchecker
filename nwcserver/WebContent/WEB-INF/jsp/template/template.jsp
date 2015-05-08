@@ -1,30 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<c:url value="/resources/" var="resources"/>
 	<jsp:include page="../fragments/staticFiles.jsp" />
-	<link rel="stylesheet" href="${resources}css/bootstrap-dialog.css"/>
-    <link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
-    <link rel="stylesheet" href="${resources}js/laddaBtnLoad/ladda-themeless.min.css"/>
-
-    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
-    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
-    <script type="text/javascript" src="${resources}js/contests/contestPass.js"></script>
-    <script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
-    <script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
-    <script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
-    <script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
 </head>
 <body>
-	<div class="wrapper-container">
-		<tiles:insertAttribute value="header" />
+	<div class="wrapper container">
+		<tiles:insertAttribute name="header" />
 		<div id="tasks" class="col-md-3">
-			<tiles:insertAttribute value="menu" />
+			<tiles:insertAttribute name="menu" />
 		</div>
 		<div class="col-md-9"> 
-			<tiles:insertAttribute value="body"/>
+			<tiles:insertAttribute name="body"/>
 		</div>		
 	</div>
 </body>

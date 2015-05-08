@@ -13,9 +13,7 @@
 	<link rel="stylesheet" href="${resources}css/TaskStatistic/bootstrap-select.min.css"/>	
     <link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
 	<script type="text/javascript"
-	src="${resources}/js/bootstrap/bootstrap-select.js"></script>
-	<script type="text/javascript"
-	src="${resources}js/TaskStatistic/SortingParams.js"></script>
+	src="${resources}/js/bootstrap/bootstrap-select.js"></script>	
 
 </head>
 <body>

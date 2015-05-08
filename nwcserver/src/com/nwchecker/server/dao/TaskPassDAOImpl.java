@@ -31,7 +31,6 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 			prefix=",";
 			sb.append(entry.getKey() + " " + entry.getValue());
 		}
-		System.out.println(sb.toString());
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Query q = session.createQuery(sb.toString());

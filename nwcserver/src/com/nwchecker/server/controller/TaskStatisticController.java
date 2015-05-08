@@ -34,7 +34,7 @@ public class TaskStatisticController {
 
 			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
 		
-		ModelAndView modelView = new ModelAndView("nwcserver.tasks.abstract");
+		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
 
 		Map<String, String> orderParamsMap = taskPassService
 				.parseOrderParams(orderParams);
@@ -60,9 +60,8 @@ public class TaskStatisticController {
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.POST)
 	public ModelAndView changeOrdering(
 			@RequestParam(value = "id", defaultValue = "45") int taskId,
-
 			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
-		ModelAndView modelView = new ModelAndView("nwcserver.tasks.abstract");
+		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
 		Map<String, String> orderParamsMap = taskPassService
 				.parseOrderParams(orderParams);
 
@@ -74,7 +73,7 @@ public class TaskStatisticController {
 		Contest currentContest = currentTask.getContest();
 
 		modelView.addObject("currentPage", 1);
-		modelView.addObject("taskId", taskId);
+		modelView.addObject("currentTask", currentTask);
 
 		Map<Integer, String> taskTitles = new TreeMap<>();
 		for (Task task : currentContest.getTasks()) {

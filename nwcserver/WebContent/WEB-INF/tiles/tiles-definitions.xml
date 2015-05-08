@@ -3,20 +3,34 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-  
-    <definition name="nwcserver.tasks.abstract" template="/WEB-INF/template/template.jsp">
+
+  	<definition name="nwcserver.abstract.sidepanel" template="/WEB-INF/jsp/template/template.jsp">
         <put-attribute name="header" value="/WEB-INF/jsp/template/bodyHeader.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/jsp/template/menu.jsp" />
+        <put-attribute name="menu" value="" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
     </definition>
     
-  	<definition name="nwcserver.tasks.pass" extends="nwcserver.tasks.abstract">
-        <put-attribute name="body" value="/WEB-INF/jsp/template/passTask.jsp" />
-    </definition>
+    	<definition name="nwcserver.tasks.abstract" extends = "nwcserver.abstract.sidepanel">
+    		<put-attribute name="menu" value="/WEB-INF/jsp/template/contestMenu.jsp" />
+    	</definition>
     
-    <definition name="nwcserver.tasks.statistic" extends="nwcserver.tasks.abstract">
-        <put-attribute name="body" value="/WEB-INF/jsp/template/taskStatistic.jsp" />
-    </definition>
-
+    		<definition name="nwcserver.tasks.pass" extends="nwcserver.tasks.abstract">
+	        	<put-attribute name="body" value="/WEB-INF/jsp/template/passTask.jsp" />
+    		</definition>
+    
+    		<definition name="nwcserver.tasks.statistic" extends="nwcserver.tasks.abstract">
+        		<put-attribute name="body" value="/WEB-INF/jsp/template/taskStatistic.jsp" />
+    		</definition>
+    	
+    	<definition name="nwcserver.static.abstract" extends = "nwcserver.abstract.sidepanel">
+    		<put-attribute name="menu" value="/WEB-INF/jsp/template/staticSidePanel.jsp" />
+    	</definition>
+    		
+    		<definition name="nwcserver.static.index" extends = "nwcserver.static.abstract">
+    			<put-attribute name="body" value="/WEB-INF/jsp/template/index.jsp" />
+    		</definition>
+    
+	    
+    
 </tiles-definitions>

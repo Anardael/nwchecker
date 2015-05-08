@@ -3,6 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+	<link rel="stylesheet" href="${resources}css/bootstrap-dialog.css"/>
+    <link rel="stylesheet" href="${resources}css/contests/contestPass.css"/>
+    <link rel="stylesheet" href="${resources}js/laddaBtnLoad/ladda-themeless.min.css"/>
+
+    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestPass.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/contestPassTimer.js"></script>
+    <script type="text/javascript" src="${resources}js/laddaBtnLoad/spin.min.js"></script>
+    <script type="text/javascript" src="${resources}js/laddaBtnLoad/ladda.min.js"></script>
+    <script type="text/javascript" src="${resources}js/contests/tasks/taskSubmit.js"></script>
+    
+    
 			<ul class="nav nav-pills nav-stacked">
 				<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
 				<c:set var="count" value="0" scope="page" />

@@ -154,7 +154,7 @@ public class ContestPassController {
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
 
-        return "contests/contestPass";
+        return "nwcserver.tasks.pass";
     }
 
     /**

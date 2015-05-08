@@ -3,13 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<link rel="stylesheet" href="${resources}css/TaskStatistic/bootstrap-select.min.css"/>	
+<c:set var="taskId" value="${currentTask.id}" />
+<c:url value="/resources/" var="resources" />
+<jsp:include page="../fragments/staticFiles.jsp" />
+<link rel="stylesheet"
+	href="${resources}css/TaskStatistic/bootstrap-select.min.css" />
+<link rel="stylesheet" href="${resources}css/contests/contestPass.css" />
 <script type="text/javascript"
 	src="${resources}js/TaskStatistic/SortingParams.js"></script>
 <form method="POST" action="TaskStatistic.do">
 	<jsp:useBean id="orderParams"
 		class="com.nwchecker.server.utils.OrderParams" scope="session" />
 	<input type="hidden" name="id" value="${taskId}">
+	<input type="hidden" name="username_selectpicker" value="${taskId}">
+	<input type="hidden" name="compiler_selectpicker" value="${taskId}">
+	<input type="hidden" name="execTime_selectpicker" value="${taskId}">
+	<input type="hidden" name="memUsed_selectpicker" value="${taskId}">
+	<input type="hidden" name="passed_selectpicker" value="${taskId}">
 	<p>
 		Results per page: <select class="selectpicker" name="pageSize">
 			<option>10</option>
