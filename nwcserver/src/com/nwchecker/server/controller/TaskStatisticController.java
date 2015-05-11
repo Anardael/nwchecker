@@ -48,6 +48,7 @@ public class TaskStatisticController {
 
 		modelView.addObject("currentPage", pageNumber);
 		modelView.addObject("currentTask", currentTask);
+		modelView.addObject("pageName", "contest");
 
 		Map<Integer, String> taskTitles = new TreeMap<>();
 		for (Task task : currentContest.getTasks()) {
@@ -80,6 +81,7 @@ public class TaskStatisticController {
 			taskTitles.put(task.getId(), task.getTitle());
 		}
 		modelView.addObject("taskTitles", taskTitles);
+		modelView.addObject("pageName", "contest");
 		return modelView;
 	}
 

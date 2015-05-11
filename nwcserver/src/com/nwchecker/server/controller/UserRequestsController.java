@@ -5,11 +5,13 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -64,9 +66,10 @@ public class UserRequestsController {
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/userRequests", method = RequestMethod.GET)
-    public String userRequests(Principal principal) {
+    public String userRequests(Principal principal, Model model) {
         LOG.info("\"" + principal.getName() + "\" have access to administrator page(users requests).");
-        return "adminOptions/userRequests";
+        model.addAttribute("pageName","userRequests");
+        return "nwcserver.adminOptions.userRequests";
     }
 
     /**

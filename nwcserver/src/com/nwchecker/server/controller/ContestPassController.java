@@ -66,7 +66,7 @@ public class ContestPassController {
         String url = null;
         switch (typeId){
             case 1: url = getTaskForPass(principal, taskId, model); break;
-            case 2: url = "access/inDevelopment"; break;
+            case 2: url = "nwcserver.inDevelopment"; break;
         }
         return url;
     }
@@ -103,7 +103,8 @@ public class ContestPassController {
         //check if contest status provide passing:
         if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||
                 currentTask.getContest().getStatus() == Contest.Status.ARCHIVE)) {
-            return "access/accessDenied403";
+        	model.addAttribute("pageName", "result");
+            return "nwcserver.403";
         }
         //if contest is going:
         ContestPass currentContestPass = null;
@@ -162,8 +163,8 @@ public class ContestPassController {
         }
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
-
-        return "contests/contestPass";
+        model.addAttribute("pageName", "contest");
+        return "nwcserver.tasks.pass";
     }
 
     /**
@@ -227,7 +228,8 @@ public class ContestPassController {
         Collections.sort(archivedContests, new ContestStartTimeComparator());
         Collections.reverse(archivedContests);
         model.addAttribute("archivedContests", archivedContests);
-        return "contests/rating";
+        model.addAttribute("pageName", "rating");
+        return "nwcserver.contests.rating";
     }
 
     /**
@@ -250,7 +252,8 @@ public class ContestPassController {
         contestDuration.setTime(contest.getDuration());
         model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
         model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
-        return "contests/contestResults";
+        model.addAttribute("pageName", "rating");
+        return "nwcserver.contests.results";
     }
 
     /**

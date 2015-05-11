@@ -5,18 +5,8 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
-<head>
-    <jsp:include page="../fragments/staticFiles.jsp"/>
-</head>
 <body>
-    <div class="wrapper container">
-        <!--including bodyHead -->
-        <!-- send name of current page-->
-        <jsp:include page="../fragments/bodyHeader.jsp">
-            <jsp:param name="pageName" value="rating"/>
-        </jsp:include>
-
-        <div class="form-group col-sm-12" style="margin:auto">
+      <div class="form-group col-sm-12" style="margin:auto">
             <ul class="col-sm-offset-2 col-sm-8 ">
                 <li class="list-group-item list-group-item-heading list-group-item-info" style="text-align:center; font-size: large">
                     <spring:message code="rating.caption"/>
@@ -65,7 +55,5 @@
                 </c:forEach>
             </ul>
         </div>
-    </div>
-    <jsp:include page="../fragments/footer.jsp" />
 </body>
 </html>

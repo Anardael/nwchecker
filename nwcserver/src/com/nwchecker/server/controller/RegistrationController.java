@@ -64,6 +64,7 @@ public class RegistrationController {
     public String initRegistrationForm(Model model) {
         LOG.info("Someone initialized registration page");
         model.addAttribute("userRegistrationForm", new User());
+        model.addAttribute("pageName", "registration");
         return "loggingAndRegistration/registration";
     }
 
@@ -77,14 +78,16 @@ public class RegistrationController {
      */
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result) {
+    public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             LOG.info("Someone trying make registration, but inputted not correct data.");
+            model.addAttribute("pageName", "userCreated");
             return "loggingAndRegistration/registration";
         } else {
             userService.addUser(user);
             LOG.info("\"" + user.getUsername() + "\" is registered .");
-            return "loggingAndRegistration/userCreated";
+            model.addAttribute("pageName", "userCreated");
+            return "nwcserver.user.created";
         }
     }
 }

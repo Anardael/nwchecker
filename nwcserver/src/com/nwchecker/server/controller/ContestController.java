@@ -81,8 +81,9 @@ public class ContestController {
      */
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
+    	model.addAttribute("pageName","contest");
         //get all available сontests from DB:
-        List<Contest> allContests = contestService.getContests();
+    	List<Contest> allContests = contestService.getContests();
         //get unhidden contests:
         List<Contest> unhidden = new LinkedList<Contest>();
         for (Contest c : allContests) {
@@ -93,7 +94,7 @@ public class ContestController {
         if (principal == null) {
             //return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
-            return "contests/contest";
+            return "nwcserver.contests.list";
         }
 
         User user = userService.getUserByUsername(principal.getName());
@@ -121,7 +122,7 @@ public class ContestController {
             model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
         }
         model.addAttribute("contests", unhidden);
-        return "contests/contest";
+        return "nwcserver.contests.list";
     }
 
     /**
@@ -138,6 +139,7 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
+    	model.addAttribute("pageName","contest");
         LOG.info("\"" + principal.getName() + "\"" + " starts contest creation.");
         Contest c = new Contest();
         c.setHidden(true);
@@ -150,7 +152,7 @@ public class ContestController {
         List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
         model.addAttribute("typeContestList", typeContestList);
 
-        return "contests/contestCreate";
+        return "nwcserver.contests.create";
     }
 
     /**
@@ -246,7 +248,7 @@ public class ContestController {
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
-            return "access/accessDenied403";
+            return "nwcserver.403";
         }
         //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
@@ -255,8 +257,8 @@ public class ContestController {
 
         List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
         model.addAttribute("typeContestList", typeContestList);
-
-        return "contests/contestCreate";
+        model.addAttribute("pageName", "contest");
+        return "nwcserver.contests.create";
     }
 
     /**

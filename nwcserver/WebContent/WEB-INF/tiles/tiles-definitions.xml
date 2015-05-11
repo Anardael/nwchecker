@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">        
 <tiles-definitions>
 
   	<definition name="nwcserver.abstract.sidepanel" template="/WEB-INF/jsp/template/template.jsp">
@@ -9,28 +7,262 @@
         <put-attribute name="menu" value="" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+        
+        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        	<add-attribute value="css/bootstrap.css"/>
+        	<add-attribute value="css/bootstrap-submenu.css"/>
+        	<add-attribute value="css/styles.css"/>
+        </put-list-attribute>
+        
+        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+        	<add-attribute value="js/jquery-2.1.3.min.js"/>
+        	<add-attribute value="js/bootstrap/bootstrap.min.js"/>        	
+        	<add-attribute value="js/dropdown.js"/>        	
+        </put-list-attribute>        
     </definition>
-    
+
+    	<!-- Pages for tasks: passing contests, checking task statistic -->
     	<definition name="nwcserver.tasks.abstract" extends = "nwcserver.abstract.sidepanel">
     		<put-attribute name="menu" value="/WEB-INF/jsp/template/contestMenu.jsp" />
+        	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/bootstrap-dialog.css"/>
+        		<add-attribute value="css/contests/contestPass.css"/>
+        		<add-attribute value="js/laddaBtnLoad/ladda-themeless.min.css"/>        		
+        	</put-list-attribute>    		
+    		<put-list-attribute name ="scripts" inherit="true" cascade="true">
+    			<add-attribute value="js/bootstrap/bootstrap-select.js"/>
+    			<add-attribute value="js/bootstrap/bootstrap-dialog.js"/>    			
+        	</put-list-attribute>
     	</definition>
-    
+    	
     		<definition name="nwcserver.tasks.pass" extends="nwcserver.tasks.abstract">
 	        	<put-attribute name="body" value="/WEB-INF/jsp/template/passTask.jsp" />
+	        	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+	        		<add-attribute value="css/bootstrap-select.min.css"/>
+    			</put-list-attribute>
+    			<put-list-attribute name ="scripts" inherit="true" cascade="true">
+    				<add-attribute value="js/contests/contestPass.js"/>
+	    			<add-attribute value="js/contests/contestPassTimer.js"/>
+    				<add-attribute value="js/laddaBtnLoad/spin.min.js"/>
+    				<add-attribute value="js/laddaBtnLoad/ladda.min.js"/>
+    				<add-attribute value="js/contests/tasks/taskSubmit.js"/>
+    			</put-list-attribute>
     		</definition>
-    
+    		
     		<definition name="nwcserver.tasks.statistic" extends="nwcserver.tasks.abstract">
         		<put-attribute name="body" value="/WEB-INF/jsp/template/taskStatistic.jsp" />
-    		</definition>
+        		
+        		<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css"/>
+    			</put-list-attribute>
+    			
+    			<put-list-attribute name ="scripts" inherit="true" cascade="true">
+    				<add-attribute value="js/TaskStatistic/SortingParams.js"/>
+    			</put-list-attribute>
+    		</definition>   
     	
+    	<!-- Static pages: information, rules, archive, news, etc -->
     	<definition name="nwcserver.static.abstract" extends = "nwcserver.abstract.sidepanel">
     		<put-attribute name="menu" value="/WEB-INF/jsp/template/staticSidePanel.jsp" />
     	</definition>
     		
     		<definition name="nwcserver.static.index" extends = "nwcserver.static.abstract">
     			<put-attribute name="body" value="/WEB-INF/jsp/template/index.jsp" />
+    			<put-attribute name="pageName" value="home" type="string"/>
+    		</definition>
+    		
+      		<definition name="nwcserver.static.rules" extends = "nwcserver.static.abstract">
+    			<put-attribute name="body" value="/WEB-INF/jsp/template/rules.jsp" />
+    			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        			<add-attribute value="css/rules/rules-style.css"/>
+    			</put-list-attribute>
     		</definition>
     
+    <definition name="nwcserver.abstract.full" template="/WEB-INF/jsp/template/templateFull.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/template/bodyHeader.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+        
+        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        	<add-attribute value="css/bootstrap.css"/>
+        	<add-attribute value="css/bootstrap-submenu.css"/>
+        	<add-attribute value="css/styles.css"/>
+        </put-list-attribute>
+        
+        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+        	<add-attribute value="js/jquery-2.1.3.min.js"/>
+        	<add-attribute value="js/bootstrap/bootstrap.min.js"/>        	
+        	<add-attribute value="js/dropdown.js"/>        	
+        </put-list-attribute>        
+    </definition>
+    	
+
+    	<!-- Access pages -->
+    	<definition name="nwcserver.403" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/accessDenied403.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/taskModalView.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
+	        </put-list-attribute> 
+	    </definition>
 	    
+	    <definition name="nwcserver.404" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/pageNotFound404.jsp" />
+	    </definition>
+	    
+	    <definition name="nwcserver.inDevelopment" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/inDevelopment.jsp" />
+	    </definition>
+	    
+	    <definition name="nwcserver.result" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/result.jsp" />
+	    </definition>
+	    
+    	
+    	<!-- Admin pages -->
+    	<definition name="nwcserver.adminOptions.users" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/users.jsp" />
+	       	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        	<add-attribute value="js/adminOptions/usersFormatters.js" />
+	        </put-list-attribute> 
+	    </definition>
+	    
+    	<definition name="nwcserver.adminOptions.userEdit" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/userEdit.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/bootstrap-dialog.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
+	        	<add-attribute value="js/adminOptions/userEdit.js" />
+	        </put-list-attribute> 
+	    </definition>
+	    
+	    <definition name="nwcserver.adminOptions.listContests" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/listContests.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        		<add-attribute value="css/bootstrap-dialog.css"/>
+        		<add-attribute value="css/adminOptions/listContests.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>        		
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        	<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
+	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        	<add-attribute value="js/adminOptions/listContestsFormatters.js" />
+	        	<add-attribute value="js/contests/contestUsers.js" />
+	        	<add-attribute value="js/adminOptions/listContests.js" />
+	        </put-list-attribute> 	        
+	    </definition>
+	    <definition name="nwcserver.adminOptions.userRequests" extends="nwcserver.abstract.full">
+	    <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/userRequests.jsp" />
+	 	   <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        	<add-attribute value="js/adminOptions/usersFormatters.js" />
+	        	<add-attribute value="js/adminOptions/userRequests.js" />
+	        </put-list-attribute> 
+	    
+	    </definition>
+    
+    
+    	<!-- Contest pages: list all contests, create new contest, etc -->
+	    <definition name="nwcserver.contests.list" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/getContests.jsp" />
+	    </definition>
+	    
+	   	<definition name="nwcserver.contests.create" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/CreateContest.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="js/laddaBtnLoad/ladda-themeless.min.css"/>
+        		<add-attribute value="css/taskModalView.css"/>
+        		<add-attribute value="css/bootstrap-datetimepicker.min.css"/>
+        		<add-attribute value="css/bootstrap-dialog.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/laddaBtnLoad/spin.min.js" />
+	        	<add-attribute value="js/laddaBtnLoad/ladda.min.js" />
+	        	<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
+	        	<add-attribute value="js/maskInput.js" />
+	        	<add-attribute value="js/moment.js" />
+	        	<add-attribute value="js/bootstrap/bootstrap-datetimepicker.min.js" />
+	        	<add-attribute value="js/includedJS/bootstrap-filestyle.min.js" />
+	        	<add-attribute value="js/contests/tasks/taskCreateAddLink.js" />
+	        	<add-attribute value="js/contests/tasks/taskEditing.js" />
+	        	<add-attribute value="js/contests/tasks/taskAjax.js" />
+	        	<add-attribute value="js/contests/contestAjax.js" />
+	        	<add-attribute value="js/ckeditor/ckeditor.js" />
+	        	<add-attribute value="js/ckeditor/ckeditorInit.js" />
+	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        	<add-attribute value="js/contests/contestInit.js" />
+	        	<add-attribute value="js/contests/contestUsers.js" />
+	        </put-list-attribute> 
+	    </definition>
+	    
+	   	<definition name="nwcserver.contests.rating" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/ContestRating.jsp" />
+	    </definition>
+
+	  	<definition name="nwcserver.contests.results" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/contestResults.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        	<add-attribute value="js/contests/contestResultsFormatter.js" />
+	        </put-list-attribute>	        
+	    </definition>
+	    
+	    
+	    <!-- Profile pages -->
+	    <definition name="nwcserver.user.login" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/login.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/loggingAndRegistration/login.css"/>
+	        </put-list-attribute>
+	    </definition>
+	   	<definition name="nwcserver.user.profile" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/profileOptions/profile.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/profileOptions/profile.css"/>
+	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/jquery.validate.min.js" />
+	        	<add-attribute value="js/validators/userProfileValidator_${pageContext.response.locale}.js" />
+	        	<add-attribute value="js/profileOptions/profile.js" />
+	        </put-list-attribute> 
+	        
+	    </definition>
+	    <definition name="nwcserver.user.registration" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/registration.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/loggingAndRegistration/registration.css"/>
+	        </put-list-attribute>
+	    </definition>
+	    <definition name="nwcserver.user.created" extends="nwcserver.abstract.full">
+	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/userCreated.jsp" />
+	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        		<add-attribute value="css/loggingAndRegistration/userCreated.css"/>
+	        </put-list-attribute>      
+	    </definition>
+	    
+	    <!-- -->    
     
 </tiles-definitions>

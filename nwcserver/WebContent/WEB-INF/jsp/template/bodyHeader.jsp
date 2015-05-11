@@ -11,8 +11,9 @@
 </script>
 <header>
     <!-- service Logo -->
-    <script type="text/javascript" src="${resources}js/serverTime.js"></script>
     <link href="${resources}css/fragments/bodyHeader.css" rel="stylesheet"/>
+    
+    <script type="text/javascript" src="${resources}js/serverTime.js"></script>    
     <div class="blockContainer">
         <div class="logo"><a href="index.do"><img src="${resources}images/logo.png" alt="Whitesquare logo"></a></div>
         <!-- choose language -->
@@ -51,7 +52,7 @@
         <ul class="nav navbar-nav">
             <!-- home -->
             <c:choose>
-                <c:when test="${param.pageName=='home'}">
+                <c:when test="${pageName=='home'}">
                     <li class="active"><a><spring:message code="home.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
@@ -60,7 +61,7 @@
             </c:choose>
             <!-- news -->
             <c:choose>
-                <c:when test="${param.pageName=='news'}">
+                <c:when test="${pageName=='news'}">
                     <li class="active"><a><spring:message code="news.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
@@ -69,7 +70,7 @@
             </c:choose>
             <!-- olympiad -->
             <c:choose>
-                <c:when test="${param.pageName=='contest'}">
+                <c:when test="${pageName=='contest'}">
                     <li class="active"><a href="getContests.do"><spring:message code="contest.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
@@ -78,7 +79,7 @@
             </c:choose>
             <!-- rating -->
             <c:choose>
-                <c:when test="${param.pageName=='rating'}">
+                <c:when test="${pageName=='rating'}">
                     <li class="active"><a href="rating.do"><spring:message code="rating.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
@@ -88,7 +89,7 @@
             <!-- login -->
             <security:authorize access="!isAuthenticated()">
                 <c:choose>
-                    <c:when test="${param.pageName=='login'}">
+                    <c:when test="${pageName=='login'}">
                         <li class="active"><a><spring:message code="login.caption"/></a></li>
                     </c:when>
                     <c:otherwise>
@@ -124,5 +125,9 @@
                 </li>
             </security:authorize>
         </ul>
-    </nav>
+    </nav>        <div class="heading text-center">
+        <h1>
+            <spring:message code="${pageName}.caption"/>
+        </h1>
+    </div>
 </header>

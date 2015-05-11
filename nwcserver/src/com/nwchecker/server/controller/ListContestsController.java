@@ -6,10 +6,12 @@ import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleService;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,9 +59,10 @@ public class ListContestsController {
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/listContests", method = RequestMethod.GET)
-    public String userRequests(Principal principal) {
-        LOG.info("\"" + principal.getName() + "\" entered to administrator page \"List of contests\".");
-        return "adminOptions/listContests";
+    public String userRequests(Principal principal, Model model) {
+        LOG.info("\"" + principal.getName() + "\" entered to administrator page \"List of contests\"."); 
+        model.addAttribute("pageName", "listContests");
+        return "nwcserver.adminOptions.listContests";
     }
 
     /**
