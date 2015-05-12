@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.utils.OrderParams;
 
 import java.util.TreeMap;
 
@@ -59,5 +57,4 @@ public class TaskStatisticController {
 		TaskPassTableResponseList jstr = new TaskPassTableResponseList("OK", records, recordCount);
 		return jstr;
 	}
-
 }

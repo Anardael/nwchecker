@@ -12,7 +12,6 @@ label.btn-primary {
 	width: 120px;
 }
 </style>
-<!--including head -->
 <body>
 	<script type="text/javascript">
     //variables for dynamically created Modal forms:

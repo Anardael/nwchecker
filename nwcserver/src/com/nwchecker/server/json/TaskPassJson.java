@@ -4,13 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nwchecker.server.model.TaskPass;
 
 public class TaskPassJson {
+	@JsonProperty("TaskPassId")
 	private int taskPassId;
+	@JsonProperty("Username")
 	private String username;
+
+	@JsonProperty("Compiler")
 	private String compiler;
+
+	@JsonProperty("ExecutionTime")
 	private int executionTime;
+
+	@JsonProperty("MemoryUsed")
 	private int memoryUsed;
+
+	@JsonProperty("NumberOfAttemps")
 	private Long numberOfAttempts;
-	private boolean passed;
+
+	@JsonProperty("Passed")
+	private String passed;
 
 	public TaskPassJson() {
 	}
@@ -19,13 +31,17 @@ public class TaskPassJson {
 			Long attempts) {
 		TaskPassJson tpj = new TaskPassJson();
 		tpj.setTaskPassId(taskPass.getId());
+
 		tpj.setUsername(taskPass.getUser().getDisplayName());
 		tpj.setCompiler(taskPass.getCompiler().getName());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setMemoryUsed(taskPass.getMemoryUsed());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setNumberOfAttempts(attempts);
-		tpj.setPassed(taskPass.isPassed());
+		if (taskPass.isPassed()){
+			tpj.setPassed("Passed");
+		}
+		else tpj.setPassed("Failed");
 		return tpj;
 	}
 
@@ -77,11 +93,18 @@ public class TaskPassJson {
 		this.numberOfAttempts = numberOfAttempts;
 	}
 
-	public boolean isPassed() {
+	/**
+	 * @return the passed
+	 */
+	public String getPassed() {
 		return passed;
 	}
 
-	public void setPassed(boolean passed) {
+	/**
+	 * @param passed the passed to set
+	 */
+	public void setPassed(String passed) {
 		this.passed = passed;
 	}
+
 }

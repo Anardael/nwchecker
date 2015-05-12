@@ -5,57 +5,56 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TaskPassTableResponseList {
-	private String result;
-	private List<TaskPassJson> records;
-	private long totalRecordCount;
-	private String message;
+	private String Result;
+	private List<TaskPassJson> Records;
+	private long TotalRecordCount;
+	private String Message;
+	
 
 	public TaskPassTableResponseList() {
 	}
 
 	public TaskPassTableResponseList(String result, List<TaskPassJson> records,
 			long recordCount) {
-		this.result = result;
-		this.records = records;
-		this.totalRecordCount = recordCount;
-		this.message = "sup";
+		this.Result = result;
+		this.Records = records;
+		this.TotalRecordCount = recordCount;
 	}
 
 	public TaskPassTableResponseList(String result, String message) {
-		this.result = result;
-		this.message = message;
+		this.Result = result;
 	}
 
 	public String getResult() {
-		return result;
+		return Result;
 	}
 
 	public void setResult(String result) {
-		this.result = result;
+		this.Result = result;
 	}
 
 	public List<TaskPassJson> getRecords() {
-		return records;
+		return Records;
 	}
 
 	public void setRecords(List<TaskPassJson> records) {
-		this.records = records;
+		this.Records = records;
 	}
 
 	public long getTotalRecordCount() {
-		return totalRecordCount;
+		return TotalRecordCount;
 	}
 
 	public void setTotalRecordCount(long totalRecordCount) {
-		this.totalRecordCount = totalRecordCount;
+		this.TotalRecordCount = totalRecordCount;
 	}
 
 	public String getMessage() {
-		return message;
+		return Message;
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.Message = message;
 	}
 
 }

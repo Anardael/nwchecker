@@ -15,9 +15,9 @@
 				actions : {
 					listAction : '${baseURL}/TaskStatisticTable.do'
 				},
-				ajaxSettings: {
-				    type: 'GET',
-				    dataType: 'json'
+				ajaxSettings : {
+					type : 'GET',
+					dataType : 'json'
 				},
 				fields : {
 					taskPassId : {
@@ -27,28 +27,28 @@
 						edit : false
 					},
 					username : {
-						title:'Username'						
+						name : 'Username'
 					},
 					compiler : {
-						title:'Compiler'
+						name : 'Compiler'
 					},
 					executionTime : {
-						title:'Execution Time'
+						name : 'Execution Time'
 					},
 					memoryUsed : {
-						title:'Memory Used'
+						name : 'memoryUsed'
 					},
 					numberOfAttempts : {
-						title:'Number of attemps'
+						name : 'Number of Attemps'
 					},
 					passed : {
-						title:'Passed'
+						name : 'Passed'
 					}
 				}
 
 			});
-			$('#jTable').jtable('load',{
-				taskId:'44'
+			$('#jTable').jtable('load', {
+				taskId : '44'
 			});
 		})
 	</script>

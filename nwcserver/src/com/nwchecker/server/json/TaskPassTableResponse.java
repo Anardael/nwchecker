@@ -3,6 +3,23 @@ package com.nwchecker.server.json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TaskPassTableResponse {
+	private TaskPassTableResponseList response;
+
+	/**
+	 * @return the list
+	 */
+	public TaskPassTableResponseList getList() {
+		return response;
+	}
+
+	/**
+	 * @param list the list to set
+	 */
+	public void setList(TaskPassTableResponseList list) {
+		this.response = list;
+	}
+	
+	/*
 	@JsonProperty("Result")
 	private String result;
 	@JsonProperty("Record")
@@ -42,5 +59,5 @@ public class TaskPassTableResponse {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
+	}*/
 }

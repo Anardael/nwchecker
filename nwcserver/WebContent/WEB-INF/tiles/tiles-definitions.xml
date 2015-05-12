@@ -54,14 +54,14 @@
         		
         		<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css"/>
-        			<add-attribute value="js/jtable.2.4.0/themes/basic/jtable_basic.css"/> 
+        			<add-attribute value="js/jtable.2.2.0/themes/basic/jtable_basic.css"/> 
         			<add-attribute value="js/jquery-ui-1.11.4/jquery-ui.min.css"/>       			
     			</put-list-attribute>
     			
     			<put-list-attribute name ="scripts" inherit="true" cascade="true">
     				<add-attribute value="js/jquery-ui-1.11.4/jquery-ui.min.js" />
-    				<add-attribute value="js/jtable.2.4.0/external/json2.js"/>
-    				<add-attribute value="js/jtable.2.4.0/jquery.jtable.js"/>
+    				<add-attribute value="js/jtable.2.2.0/external/json2.js"/>
+    				<add-attribute value="js/jtable.2.2.0/jquery.jtable.js"/>
     			</put-list-attribute>
     		</definition>   
     	
@@ -267,6 +267,4 @@
 	        </put-list-attribute>      
 	    </definition>
 	    
-	    <!-- -->    
-    
 </tiles-definitions>
