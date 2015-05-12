@@ -39,28 +39,33 @@
             <c:forEach items="${contests}" var="contest" varStatus="row">
                 <a class="list-group-item" data-toggle="collapse" data-parent="#accordion"
                    href="#collapse${row.index}">
-                    <div class="status-block">
-                        <c:if test="${contest.status=='GOING'}">
-                            <label class="label label-success contestsStatus">
-                                <spring:message code="contest.going.label"/></label>
-                        </c:if>
-                        <c:if test="${contest.status=='PREPARING'}">
-                            <label class="label label-info contestsStatus">
-                                <spring:message code="contest.preparing.label"/>
-                            </label>
-                        </c:if>
-                        <c:if test="${contest.status=='RELEASE'}">
-                            <label class="label label-info contestsStatus">
-                                <spring:message code="contest.release.label"/>
-                            </label>
-                        </c:if>
-                        <c:if test="${contest.hidden==true}">
-                            <label class="label label-default contestsStatus"><spring:message
-                                    code="contest.hidden.label"/></label>
-                        </c:if>
-                    </div>
-                    <div class="title-block">
-                        <span class="h5"><b>${contest.title}</b></span>
+                    <div class="link-block">
+                        <div class="start_date-block">
+                                ${fn:substring(contest.starts,0,16)}
+                        </div>
+                        <div class="title-block">
+                            <span class="h5"><b>${contest.title}</b></span>
+                        </div>
+                        <div class="status-block">
+                            <c:if test="${contest.status=='GOING'}">
+                                <label class="label label-success contestsStatus">
+                                    <spring:message code="contest.going.label"/></label>
+                            </c:if>
+                            <c:if test="${contest.status=='PREPARING'}">
+                                <label class="label label-info contestsStatus">
+                                    <spring:message code="contest.preparing.label"/>
+                                </label>
+                            </c:if>
+                            <c:if test="${contest.status=='RELEASE'}">
+                                <label class="label label-info contestsStatus">
+                                    <spring:message code="contest.release.label"/>
+                                </label>
+                            </c:if>
+                            <c:if test="${contest.hidden==true}">
+                                <label class="label label-default contestsStatus"><spring:message
+                                        code="contest.hidden.label"/></label>
+                            </c:if>
+                        </div>
                     </div>
                 </a>
 

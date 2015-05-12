@@ -1,16 +1,16 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.CompilerDAO;
+import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.model.User;
+import com.nwchecker.server.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +68,7 @@ public class ContestPassServiceImpl implements ContestPassService {
         }
         return checkResult;
     }
-    
+
 
     @Override
     public List<ContestPass> getContestPasses(int contestId) {

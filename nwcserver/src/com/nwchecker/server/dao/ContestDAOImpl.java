@@ -49,4 +49,9 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     public List<Contest> getContestByStatus(Contest.Status status) {
         return (List<Contest>) getHibernateTemplate().find("from Contest where status=?", status);
     }
+
+    @Override
+    public List<Contest> getContestByTypeId(int typeId) {
+        return (List<Contest>) getHibernateTemplate().find("from Contest where typeContest.id=?", typeId);
+    }
 }

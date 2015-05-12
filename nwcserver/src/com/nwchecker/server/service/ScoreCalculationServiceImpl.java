@@ -32,6 +32,10 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 
         //check each ContestPass for each user:
         for (ContestPass contestPass : allContestPasses) {
+            //refresh
+            contestPass.setPassedCount(0);
+            contestPass.setTimePenalty(0);
+
             Set<Integer> passedTasks = new HashSet<>();
             //go throw each taskPass:
             for (TaskPass taskPass : contestPass.getTaskPassList()) {
