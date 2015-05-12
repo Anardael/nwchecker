@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nwchecker.server.service.TaskPassService;
@@ -16,6 +18,8 @@ import com.nwchecker.server.utils.OrderParams;
 
 import java.util.TreeMap;
 
+import com.nwchecker.server.json.TaskPassJson;
+import com.nwchecker.server.json.TaskPassTableResponseList;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 
@@ -28,28 +32,13 @@ public class TaskStatisticController {
 
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
-			@RequestParam(value = "id") int taskId,
-			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
-			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+			@RequestParam(value = "id") int taskId) {
 
-			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
-		
 		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
-
-		Map<String, String> orderParamsMap = taskPassService
-				.parseOrderParams(orderParams);
-
-		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, pageSize, pageNumber, orderParamsMap);
-		modelView.addAllObjects(result);
 
 		Task currentTask = taskService.getTaskById(taskId);
 		Contest currentContest = currentTask.getContest();
-
-		modelView.addObject("currentPage", pageNumber);
-		modelView.addObject("currentTask", currentTask);
 		modelView.addObject("pageName", "contest");
-
 		Map<Integer, String> taskTitles = new TreeMap<>();
 		for (Task task : currentContest.getTasks()) {
 			taskTitles.put(task.getId(), task.getTitle());
@@ -58,31 +47,17 @@ public class TaskStatisticController {
 		return modelView;
 	}
 
-	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.POST)
-	public ModelAndView changeOrdering(
-			@RequestParam(value = "id", defaultValue = "45") int taskId,
-			@ModelAttribute(value = "orderParams") OrderParams orderParams) {
-		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
-		Map<String, String> orderParamsMap = taskPassService
-				.parseOrderParams(orderParams);
-
-		Map<String, Object> result = taskPassService.getPagedTaskPassesForTask(
-				taskId, orderParams.getPageSize(), 1, orderParamsMap);
-		modelView.addAllObjects(result);
-
-		Task currentTask = taskService.getTaskById(taskId);
-		Contest currentContest = currentTask.getContest();
-
-		modelView.addObject("currentPage", 1);
-		modelView.addObject("currentTask", currentTask);
-
-		Map<Integer, String> taskTitles = new TreeMap<>();
-		for (Task task : currentContest.getTasks()) {
-			taskTitles.put(task.getId(), task.getTitle());
-		}
-		modelView.addObject("taskTitles", taskTitles);
-		modelView.addObject("pageName", "contest");
-		return modelView;
+	@RequestMapping(value = "/TaskStatisticTable.do", method = RequestMethod.GET)
+	public @ResponseBody TaskPassTableResponseList getTaskPasses(
+			@RequestParam int taskId,
+			@RequestParam int jtStartIndex, @RequestParam int jtPageSize,
+			@RequestParam(required = false) String jtSorting) {
+		System.out.println(taskId + " " + jtStartIndex + " " + jtPageSize + " " + jtSorting);
+		Long recordCount = taskPassService.getTaskPassSampleSize(taskId);
+		List<TaskPassJson> records = taskPassService.getPagedTaskPassesForTask(taskId,
+				jtStartIndex, jtPageSize);
+		TaskPassTableResponseList jstr = new TaskPassTableResponseList("OK", records, recordCount);
+		return jstr;
 	}
 
 }

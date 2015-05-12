@@ -42,13 +42,13 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 
 	@Transactional
 	@Override
-	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int pageSize,
-			int pageNumber) {
+	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
+			int pageSize) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Query q = session.createQuery("FROM TaskPass WHERE task_id = :id ORDER BY passed DESC, executionTime");
 		q.setParameter("id", id);
-		q.setFirstResult((pageNumber - 1) * pageSize);
+		q.setFirstResult(startIndex);
 		q.setMaxResults(pageSize);
 		return (List<TaskPass>) q.list();
 	}

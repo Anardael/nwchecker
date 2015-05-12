@@ -1,51 +1,56 @@
 package com.nwchecker.server.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nwchecker.server.model.TaskPass;
 
 public class TaskPassJson {
 	private int taskPassId;
-	private String userName;
-	private com.nwchecker.server.model.Compiler compiler;
+	private String username;
+	private String compiler;
 	private int executionTime;
 	private int memoryUsed;
 	private Long numberOfAttempts;
 	private boolean passed;
-	
-	public static TaskPassJson createTaskPassJson(TaskPass taskPass, Long attempts){
+
+	public TaskPassJson() {
+	}
+
+	public static TaskPassJson createTaskPassJson(TaskPass taskPass,
+			Long attempts) {
 		TaskPassJson tpj = new TaskPassJson();
 		tpj.setTaskPassId(taskPass.getId());
-		tpj.setUserName(taskPass.getUser().getDisplayName());
-		tpj.setCompiler(taskPass.getCompiler());
-		tpj.setExecutionTime(taskPass.getExecutionTime());		
+		tpj.setUsername(taskPass.getUser().getDisplayName());
+		tpj.setCompiler(taskPass.getCompiler().getName());
+		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setMemoryUsed(taskPass.getMemoryUsed());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setNumberOfAttempts(attempts);
 		tpj.setPassed(taskPass.isPassed());
 		return tpj;
-	}	
-	
+	}
+
 	public int getTaskPassId() {
 		return taskPassId;
 	}
-	
+
 	public void setTaskPassId(int taskPassId) {
 		this.taskPassId = taskPassId;
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
-	public com.nwchecker.server.model.Compiler getCompiler() {
+	public String getCompiler() {
 		return compiler;
 	}
 
-	public void setCompiler(com.nwchecker.server.model.Compiler compiler2) {
-		this.compiler = compiler2;
+	public void setCompiler(String compiler) {
+		this.compiler = compiler;
 	}
 
 	public int getExecutionTime() {
