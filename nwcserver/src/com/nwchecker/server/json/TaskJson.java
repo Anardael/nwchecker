@@ -2,9 +2,7 @@ package com.nwchecker.server.json;
 
 import java.util.List;
 
-import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskTheoryLink;
 
 public class TaskJson {
@@ -16,8 +14,6 @@ public class TaskJson {
 	    private int rate;
 
 	    private String description;
-
-	    private int timeLimit;
 
 	    private String forumLink;
 
@@ -63,14 +59,6 @@ public class TaskJson {
 
 	    public void setDescription(String description) {
 	        this.description = description;
-	    }
-
-	    public int getTimeLimit() {
-	        return timeLimit;
-	    }
-
-	    public void setTimeLimit(int timeLimit) {
-	        this.timeLimit = timeLimit;
 	    }
 
 	    public String getForumLink() {

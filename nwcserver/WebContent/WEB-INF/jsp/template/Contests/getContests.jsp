@@ -7,18 +7,6 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
-<!--including head -->
-<head>
-    <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
-    <link href="${resources}css/bootstrap-dialog.css" rel="stylesheet"/>
-    <link href="${resources}css/contests/contests-style.css" rel="stylesheet"/>
-
-    <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
-    <script type="text/javascript" src="${resources}js/contests/contestSignUp.js"></script>
-    <script type="text/javascript" src="${resources}js/contests/contestListView.js"></script>
-
-
-</head>
 <body>
 <script type="text/javascript">
     var successCaption = "<spring:message code="success.caption"/>";

@@ -31,6 +31,16 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
 		<property name="order" value="0" />
 	</bean>
+	
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean> 
  <!--
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
   		<property name="basename" value="views"/>

@@ -90,7 +90,7 @@ public class ContestPassController {
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
     	//Sending task statistic
-    	Long successful = taskPassService.getTaskPassSuccessfulSampleSize(taskId);
+    	Long successful = taskPassService.getTaskPassSampleSize(taskId);
     	Long all = taskPassService.getTaskPassSampleSize(taskId);
     	if(!(all.equals(0))){
     		double rate = successful.doubleValue() / all.doubleValue();

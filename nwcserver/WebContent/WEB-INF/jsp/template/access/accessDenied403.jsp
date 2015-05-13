@@ -7,14 +7,7 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
-    <!--including head -->
-    <head>
-        <link href="${resources}css/taskModalView.css" rel="stylesheet"/>
-        <script type="text/javascript" src="${resources}js/bootstrap/bootstrap-dialog.js"></script>
-    </head>
     <body>
-            <!--including bodyHead -->
-            <!-- send name of current page-->
             <section>
                 <h3 style="text-align: center; color: red"><spring:message code="contest.accessDeniedHeader"/></h3>
                 <h4 style="text-align: center; color: red"><spring:message code="contest.accessDenied" />.</h4>

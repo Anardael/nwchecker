@@ -1,13 +1,18 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Contest.Status;
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskPass;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -68,5 +73,16 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		List<Task> result = (List<Task>) getHibernateTemplate().find("from Task t where t.contest.status = ?", status);
 		return result;
 	}
-    
+	@Transactional
+	@Override
+	public List<Task> getPagedTasksByContestStatus(Contest.Status status, int pageSize, int startIndex) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session.createQuery("from Task t where t.contest.status = :status");
+		q.setParameter("status", status);
+		q.setFirstResult(startIndex);
+		q.setMaxResults(pageSize+startIndex);
+		return (List<Task>) q.list();
+	}
+
 }

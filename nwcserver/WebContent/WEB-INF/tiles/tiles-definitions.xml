@@ -167,6 +167,7 @@
 	        	<add-attribute value="js/adminOptions/listContests.js" />
 	        </put-list-attribute> 	        
 	    </definition>
+	    
 	    <definition name="nwcserver.adminOptions.userRequests" extends="nwcserver.abstract.full">
 	    <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/userRequests.jsp" />
 	 	   <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
@@ -178,14 +179,23 @@
 	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
 	        	<add-attribute value="js/adminOptions/usersFormatters.js" />
 	        	<add-attribute value="js/adminOptions/userRequests.js" />
-	        </put-list-attribute> 
-	    
+	        </put-list-attribute>	    
 	    </definition>
     
     
     	<!-- Contest pages: list all contests, create new contest, etc -->
 	    <definition name="nwcserver.contests.list" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/getContests.jsp" />
+       	    <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+       	    <add-attribute value="css/taskModalView.css"/>
+        	<add-attribute value="css/bootstrap-dialog.css"/>
+        	<add-attribute value="css/contests/contests-style.css"/>
+       	    </put-list-attribute>
+		    <put-list-attribute name ="scripts" inherit="true" cascade="true">
+		    <add-attribute value="js/bootstrap/bootstrap-dialog.js" />
+	        <add-attribute value="js/contests/contestSignUp.js" />
+	        <add-attribute value="js/contests/contestListView.js" />
+		    </put-list-attribute>
 	    </definition>
 	    
 	   	<definition name="nwcserver.contests.create" extends="nwcserver.abstract.full">

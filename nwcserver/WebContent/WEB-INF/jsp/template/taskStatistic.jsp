@@ -9,8 +9,9 @@
 	<script>
 		$(document).ready(function() {
 			$('#jTable').jtable({
+				jqueryuiTheme: true,
 				paging : true,
-				pageSize : 10,
+				pageSize : 5,
 				sorting : true,
 				actions : {
 					listAction : '${baseURL}/TaskStatisticTable.do'
@@ -20,13 +21,6 @@
 					dataType : 'json'
 				},
 				fields : {
-					taskPassId : {
-						key : true,
-						list : true,
-						create : false,
-						edit : false,
-						width: '10%'
-					},
 					username : {
 						title : 'Username'
 					},
@@ -38,10 +32,6 @@
 					},
 					memoryUsed : {
 						title : 'Memory Used'
-					},
-					numberOfAttempts : {
-						title : 'Number of Attemps',
-						sorting : false
 					},
 					passed : {
 						title : 'Passed'

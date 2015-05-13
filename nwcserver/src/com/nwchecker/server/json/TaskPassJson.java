@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nwchecker.server.model.TaskPass;
 
 public class TaskPassJson {
-	@JsonProperty("TaskPassId")
-	private int taskPassId;
 	@JsonProperty("Username")
 	private String username;
 
@@ -18,39 +16,24 @@ public class TaskPassJson {
 	@JsonProperty("MemoryUsed")
 	private int memoryUsed;
 
-	@JsonProperty("NumberOfAttemps")
-	private Long numberOfAttempts;
-
 	@JsonProperty("Passed")
 	private String passed;
 
 	public TaskPassJson() {
 	}
 
-	public static TaskPassJson createTaskPassJson(TaskPass taskPass,
-			Long attempts) {
+	public static TaskPassJson createTaskPassJson(TaskPass taskPass) {
 		TaskPassJson tpj = new TaskPassJson();
-		tpj.setTaskPassId(taskPass.getId());
-
 		tpj.setUsername(taskPass.getUser().getDisplayName());
 		tpj.setCompiler(taskPass.getCompiler().getName());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setMemoryUsed(taskPass.getMemoryUsed());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
-		tpj.setNumberOfAttempts(attempts);
 		if (taskPass.isPassed()){
 			tpj.setPassed("Passed");
 		}
 		else tpj.setPassed("Failed");
 		return tpj;
-	}
-
-	public int getTaskPassId() {
-		return taskPassId;
-	}
-
-	public void setTaskPassId(int taskPassId) {
-		this.taskPassId = taskPassId;
 	}
 
 	public String getUserName() {
@@ -83,14 +66,6 @@ public class TaskPassJson {
 
 	public void setMemoryUsed(int memoryUsed) {
 		this.memoryUsed = memoryUsed;
-	}
-
-	public Long getNumberOfAttempts() {
-		return numberOfAttempts;
-	}
-
-	public void setNumberOfAttempts(Long numberOfAttempts) {
-		this.numberOfAttempts = numberOfAttempts;
 	}
 
 	/**

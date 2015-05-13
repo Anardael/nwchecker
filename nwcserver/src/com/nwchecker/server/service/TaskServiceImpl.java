@@ -1,8 +1,10 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDAO;
+import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,4 +64,15 @@ public class TaskServiceImpl implements TaskService {
     public void deleteTaskData(int id) {
         taskDao.deleteTaskData(id);
     }
+
+	@Override
+	public List<Task> getTasksByContestStatus(Status status) {
+		return taskDao.getTasksByContestStatus(status);
+	}
+
+	@Override
+	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
+			int pageNumber) {
+		return taskDao.getPagedTasksByContestStatus(status, pageSize, (pageNumber-1)*pageSize);
+	}
 }

@@ -84,4 +84,5 @@ public interface TaskDAO {
     void deleteTaskData(int id);
     
     List<Task> getTasksByContestStatus(Contest.Status status);
+    List<Task> getPagedTasksByContestStatus(Contest.Status status, int pageSize, int startIndex);
 }

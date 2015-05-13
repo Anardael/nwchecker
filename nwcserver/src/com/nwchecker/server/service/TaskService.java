@@ -1,6 +1,6 @@
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.dao.TaskDAO;
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 
@@ -82,4 +82,7 @@ public interface TaskService {
      * @param id Unique ID of existing Task
      */
     void deleteTaskData(int id);
+    
+    List<Task> getTasksByContestStatus(Contest.Status status);
+    List<Task> getPagedTasksByContestStatus(Contest.Status status, int pageSize, int startIndex);
 }

@@ -28,7 +28,7 @@
 			<jsp:param name="pageName" value="home" />
 		</jsp:include>
 		<div class="row">
-		<%-- 	<aside class="col-md-3">
+			<aside class="col-md-3">
 				<ul class="list-group submenu">
 					<li class="list-group-item active"><spring:message
 							code="home.info.caption" /></li>
@@ -41,42 +41,56 @@
 					<li class="list-group-item"><a href="phasellus.do"><spring:message
 								code="home.forum.caption" /></a></li>
 				</ul>
-			</aside> --%>
-			<section class="col-md-15">
-				<%--			<table id="table">
-						<c:forEach items="${tasks}" var="task">
-							<tr>
-								<td class="list-group-item ">${task.title}(${task.complexity})</td>
-							</tr>
-							<tr>
-								<td class="list-group-item list-group-item-info" colspan="2">
-									${task.description} ${task.description}${task.description}
-									${task.description}${task.description}
-									${task.description}${task.description}
-									${task.description}${task.description}
-									${task.description}${task.description} ${task.description}</td>
-							</tr>
+			</aside>
+			<div class="col-md-9">
+				<div class="text-center">
+					<ul class="pagination">
+						<c:forEach begin="0" end="5" var="loop">
+							<c:if test="${currentPage + loop - 3>0}">
+								<c:if test="${currentPage + loop - 3<lastPage + 1}">
+									<li><a
+										href="<c:url value="/TaskStatistic.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+											<c:out value="${currentPage + loop - 3}" />
+									</a></li>
+								</c:if>
+							</c:if>
 						</c:forEach>
-					</table>
---%>
-				<c:url var="dataUrl" value="/archivedTasks.do" />
-				<table id="bootstrap-table" data-toggle="table" data-url="${dataUrl}"
-					data-method="get" data-cache="false" data-pagination="true"
-					data-show-pagination-switch="true" data-search="true"
-					data-clear-search="true">
-					<thead>
+					</ul>
+				</div>
+				<c:forEach items="${tasks}" var="task">
+					<table class="table">
 						<tr>
-							<th data-field="complexity" data-align="center" class="col-md-1"><spring:message
-									code="archive.taskComplexity" /></th>
-							<th data-field="title" data-align="center" class="col-md-3"><spring:message
-									code="archive.taskTitle" /></th>
-
-							<th data-field="description" data-align="center" class="col-md-11"><spring:message
-									code="archive.taskDescription" /></th>
+							<td class="list-group-item list-group-item-heading" width="40%">${task.title}</td>
+							<td class="list-group-item list-group-item-heading" width="15%">Difficulty:${task.complexity}</td>
+							<td class="list-group-item list-group-item-heading" width="20%">Discussion</td>
 						</tr>
-					</thead>
-				</table>
-			</section>
+						<tr>
+							<td class="list-group-item list-group-item-info" colspan="3">${task.description}</td>
+						</tr>
+					</table>
+				</c:forEach>
+				<div class="text-center">
+					<ul class="pagination">
+						<c:forEach begin="0" end="5" var="loop">
+							<c:if test="${currentPage + loop - 3>0}">
+								<c:if test="${currentPage + loop - 3<lastPage + 1}">
+									<li><a
+										href="<c:url value="/TaskStatistic.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+											<c:out value="${currentPage + loop - 3}" />
+									</a></li>
+								</c:if>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</div>
+
+			</div>
 		</div>
 	</div>
 
