@@ -121,14 +121,16 @@
                 <h2 align="center">${currentContestTitle}</h2>
 				<h3>
 					<a href="TaskStatistic.do?id=${currentTask.id}">${currentTask.title}</a> 
-					<small> 
+					<small>
 						(<spring:message code="contest.passing.rate.caption"/>
 						<b>${currentTask.rate}</b>)
 						<b>${taskSuccessRate*100}%</b>
                         <label id="timer" class="pull-right"></label>
 					</small>
 				</h3>
-                <a href="/results.do?id=${currentContestId}"><ins style="font-size: 17px;">To contest rating list</ins></a>
+                <a href="/results.do?id=${currentContestId}">
+                    <ins style="font-size: 17px;"><spring:message code="contest.passing.toRating.caption"/></ins>
+                </a>
 			</div>
 			<c:set var="currentTaskResult"
 				value="${taskResults[currentTask.id]}" scope="page" />

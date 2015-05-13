@@ -45,7 +45,9 @@
                         <spring:message code="contest.results.minutes.description"/></b>)
                     </small>
                 </h2>
-                <a href="/passTask.do?id=${currentContestFirstTaskId}"><ins style="font-size: 17px;">To contest</ins></a>
+                <a href="/passTask.do?id=${currentContestFirstTaskId}">
+                    <ins style="font-size: 17px;"><spring:message code="contest.results.toContest.caption"/></ins>
+                </a>
             </div>
         </div>
         <!-- Statistic table -->
