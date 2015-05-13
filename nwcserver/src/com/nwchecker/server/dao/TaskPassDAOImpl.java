@@ -21,8 +21,18 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		setSessionFactory(sessionFactory);
 	}
 	@Transactional
-	@Override	
-	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int pageSize,
+	@Override
+	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
+			int pageSize, String sorting) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session.createQuery("FROM TaskPass t WHERE task_id = :id ORDER BY " + sorting);
+		q.setParameter("id", id);
+		q.setFirstResult(startIndex);
+		q.setMaxResults(pageSize);
+		return (List<TaskPass>) q.list();
+	}
+/*	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int pageSize,
 			int pageNumber, Map<String, String> orderParams) {
 		String prefix = "";
 		StringBuffer sb = new StringBuffer("FROM TaskPass t WHERE task_id = :id ORDER BY ");		
@@ -38,7 +48,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		q.setFirstResult((pageNumber - 1) * pageSize);
 		q.setMaxResults(pageSize);
 		return (List<TaskPass>) q.list();
-	}
+	}*/
 
 	@Transactional
 	@Override

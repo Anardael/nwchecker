@@ -7,7 +7,7 @@ import com.nwchecker.server.model.TaskPass;
 
 public interface TaskPassDAO {
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int pageSize,
-			int pageNumber, Map<String, String> orderParams);
+			int pageNumber, String sorting);
 
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
 			int pageSize);

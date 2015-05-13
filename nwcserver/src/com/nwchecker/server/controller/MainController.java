@@ -45,7 +45,7 @@ public class MainController {
      * @return In Development page
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
-    @RequestMapping({"/inDevelopment", "/vestibulum", "/etiam", "/phasellus", "/news", "/rating"})
+    @RequestMapping({"/inDevelopment", "/vestibulum", "/phasellus", "/news", "/rating"})
     public String willBeCreated(HttpSession session, Model model) throws IllegalArgumentException {
     	model.addAttribute("pageName", "inDevelopment");
         return "nwcserver.inDevelopment";

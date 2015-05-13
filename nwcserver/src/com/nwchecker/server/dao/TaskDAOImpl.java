@@ -1,7 +1,9 @@
 package com.nwchecker.server.dao;
 
+import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -60,5 +62,11 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
     public void deleteTaskData(int id) {
         getHibernateTemplate().delete(getHibernateTemplate().get(TaskData.class, id));
     }
+
+	@Override
+	public List<Task> getTasksByContestStatus(Status status) {
+		List<Task> result = (List<Task>) getHibernateTemplate().find("from Task t where t.contest.status = ?", status);
+		return result;
+	}
     
 }

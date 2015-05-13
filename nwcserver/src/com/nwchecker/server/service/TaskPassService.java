@@ -8,7 +8,7 @@ import com.nwchecker.server.utils.OrderParams;
 
 
 public interface TaskPassService {
-	public Map<String, Object> getPagedTaskPassesForTask(int taskId, int pageSize, int pageNumber, Map<String, String> orderParams);
+	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId, int startIndex, int pageSize, String sorting);
 	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId, int startIndex, int pageSize);
 	public Map<String, Object> getStatisticOfSuccessfulTaskPasses(int taskId, int pageSize, int pageNumber);
 	public Long getTaskPassSampleSize(int taskId);

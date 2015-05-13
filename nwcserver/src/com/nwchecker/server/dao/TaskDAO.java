@@ -1,5 +1,6 @@
 package com.nwchecker.server.dao;
 
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 
@@ -81,4 +82,6 @@ public interface TaskDAO {
      * @param id Unique ID of existing Task
      */
     void deleteTaskData(int id);
+    
+    List<Task> getTasksByContestStatus(Contest.Status status);
 }

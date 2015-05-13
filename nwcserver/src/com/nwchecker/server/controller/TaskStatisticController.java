@@ -29,14 +29,14 @@ public class TaskStatisticController {
 	TaskPassService taskPassService;
 
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
-	public ModelAndView getTaskStatistic(
-			@RequestParam(value = "id") int taskId) {
+	public ModelAndView getTaskStatistic(@RequestParam(value = "id") int taskId) {
 
 		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
 
 		Task currentTask = taskService.getTaskById(taskId);
 		Contest currentContest = currentTask.getContest();
 		modelView.addObject("pageName", "contest");
+		modelView.addObject("currentTask", currentTask);
 		Map<Integer, String> taskTitles = new TreeMap<>();
 		for (Task task : currentContest.getTasks()) {
 			taskTitles.put(task.getId(), task.getTitle());
@@ -47,14 +47,20 @@ public class TaskStatisticController {
 
 	@RequestMapping(value = "/TaskStatisticTable.do", method = RequestMethod.GET)
 	public @ResponseBody TaskPassTableResponseList getTaskPasses(
-			@RequestParam int taskId,
-			@RequestParam int jtStartIndex, @RequestParam int jtPageSize,
+			@RequestParam int taskId, @RequestParam int jtStartIndex,
+			@RequestParam int jtPageSize,
 			@RequestParam(required = false) String jtSorting) {
-		System.out.println(taskId + " " + jtStartIndex + " " + jtPageSize + " " + jtSorting);
 		Long recordCount = taskPassService.getTaskPassSampleSize(taskId);
-		List<TaskPassJson> records = taskPassService.getPagedTaskPassesForTask(taskId,
-				jtStartIndex, jtPageSize);
-		TaskPassTableResponseList jstr = new TaskPassTableResponseList("OK", records, recordCount);
+		List<TaskPassJson> records;
+		if (jtSorting == null) {
+			records = taskPassService.getPagedTaskPassesForTask(taskId,
+					jtStartIndex, jtPageSize);
+		} else {
+			records = taskPassService.getPagedTaskPassesForTask(taskId,
+					jtStartIndex, jtPageSize, jtSorting);
+		}
+		TaskPassTableResponseList jstr = new TaskPassTableResponseList("OK",
+				records, recordCount);
 		return jstr;
 	}
 }

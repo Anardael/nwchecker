@@ -21,31 +21,20 @@ public class TaskPassSerivceImpl implements TaskPassService {
 	@Autowired
 	TaskPassDAO taskPassDAO;
 
-	@Override
-	public Map<String, Object> getPagedTaskPassesForTask(int taskId,
-			int pageSize, int pageNumber, Map<String, String> orderParams) {
-		List<TaskPass> taskPassList = taskPassDAO.getPaginatedTaskPassByTaskId(
-				taskId, pageSize, pageNumber, orderParams);
 
-		List<TaskPassJson> taskPassJsonList = new ArrayList<TaskPassJson>();
-		for (TaskPass taskPass : taskPassList) {
-			Long attempts = taskPassDAO.getNumberOfAttempts(taskPass.getUser()
-					.getUserId(), taskId);
-			taskPassJsonList.add(TaskPassJson.createTaskPassJson(taskPass,
-					attempts));
-		}
-		Long lastPage = taskPassDAO.getTaskPassResponseSize(taskId);
-		if ((lastPage / pageSize) * pageSize == lastPage) {
-			lastPage = lastPage / pageSize;
-		} else {
-			lastPage = lastPage / pageSize + 1;
-		}
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("taskPassList", taskPassJsonList);
-		result.put("lastPage", lastPage);
+	@Override
+	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
+			int startIndex, int pageSize, String sorting) {
+			sorting = sorting.replaceFirst("username", "t.user.displayName");
+			List<TaskPass> taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize, sorting);
+			List<TaskPassJson> result = new ArrayList<TaskPassJson>();
+			for (TaskPass taskPass : taskPasses){
+				TaskPassJson taskPassJson = TaskPassJson.createTaskPassJson(taskPass, taskPassDAO.getNumberOfAttempts(taskPass.getUser().getUserId(), taskId));				
+				result.add(taskPassJson);
+			}
 		return result;
 	}
-
+	
 	@Override
 	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
 			int startIndex, int pageSize) {

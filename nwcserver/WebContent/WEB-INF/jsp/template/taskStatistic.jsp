@@ -24,25 +24,27 @@
 						key : true,
 						list : true,
 						create : false,
-						edit : false
+						edit : false,
+						width: '10%'
 					},
 					username : {
-						name : 'Username'
+						title : 'Username'
 					},
 					compiler : {
-						name : 'Compiler'
+						title : 'Compiler'
 					},
 					executionTime : {
-						name : 'Execution Time'
+						title : 'Execution Time'
 					},
 					memoryUsed : {
-						name : 'memoryUsed'
+						title : 'Memory Used'
 					},
 					numberOfAttempts : {
-						name : 'Number of Attemps'
+						title : 'Number of Attemps',
+						sorting : false
 					},
 					passed : {
-						name : 'Passed'
+						title : 'Passed'
 					}
 				}
 
