@@ -28,7 +28,6 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCodeFormatter">
-    <option name="formatter" value="ECLIPSE" />
     <option name="id" value="1430815214885" />
     <option name="name" value="Eclipse Code Format" />
     <option name="pathToConfigFileJava" value="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" />

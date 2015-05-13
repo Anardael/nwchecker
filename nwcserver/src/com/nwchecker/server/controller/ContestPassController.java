@@ -77,6 +77,8 @@ public class ContestPassController {
     	
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
+        model.addAttribute("currentContestId", currentTask.getContest().getId());
+        model.addAttribute("currentContestTitle", currentTask.getContest().getTitle());
         User user = userService.getUserByUsername(principal.getName());
         //check if contest status provide passing:
         if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||

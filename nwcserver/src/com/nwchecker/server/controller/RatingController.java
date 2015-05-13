@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import com.nwchecker.server.service.ScoreCalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +28,10 @@ public class RatingController {
 
     @Autowired
     private ContestService contestService;
-
     @Autowired
     private ContestPassService contestPassService;
+    @Autowired
+    private ScoreCalculationService scoreCalculationService;
 
     /**
      * This mapped method used to return page when user
@@ -63,6 +65,10 @@ public class RatingController {
     public String getResults(Model model, @RequestParam(value = "id") int id) {
         model.addAttribute("contestId", id);
         Contest contest = contestService.getContestByID(id);
+        if(contest.getTypeContest().getId() == 2){
+            scoreCalculationService.calculateScore(id);
+        }
+        model.addAttribute("currentContestFirstTaskId", contest.getTasks().get(0).getId());
         model.addAttribute("contestTitle", contest.getTitle());
         SimpleDateFormat formatStart = new SimpleDateFormat();
         model.addAttribute("contestStart", formatStart.format(contest.getStarts()));

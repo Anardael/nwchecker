@@ -22,12 +22,6 @@ public class ContestServiceImpl implements ContestService {
     @Autowired
     private ContestDAO contestDAO;
 
-    @Autowired
-    private ScoreCalculationService scoreCalculationService;
-
-    @Autowired
-    private ContestPassDAO contestPassDAO;
-
     @Transactional
     @Override
     public void addContest(Contest c) {
@@ -80,16 +74,15 @@ public class ContestServiceImpl implements ContestService {
 
     @Override
     public List<Contest> getContestForRating() {
-        List<Contest> archivedContests = contestDAO.getContestByStatus(Contest.Status.ARCHIVE);
-
-        List<Contest> type2Contests = contestDAO.getContestByTypeId(2);
-        for (Contest contest : type2Contests){
-            scoreCalculationService.calculateScore(contest.getId());
-        }
-
         List<Contest> ratingContests = new ArrayList<Contest>();
-        ratingContests.addAll(archivedContests);
-        ratingContests.addAll(type2Contests);
+        ratingContests.addAll(contestDAO.getContestByStatus(Contest.Status.ARCHIVE));
+
+        List<Contest> dynamicContests = contestDAO.getContestByTypeId(2);
+        for (Contest contest : dynamicContests){
+            if(contest.getStatus() != Contest.Status.ARCHIVE){
+                ratingContests.add(contest);
+            }
+        }
 
         return ratingContests;
     }
