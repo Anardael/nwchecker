@@ -2,11 +2,11 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">        
 <tiles-definitions>
 
-  	<definition name="nwcserver.abstract.sidepanel" template="/WEB-INF/jsp/template/template.jsp">
-        <put-attribute name="header" value="/WEB-INF/jsp/template/bodyHeader.jsp" />
+  	<definition name="nwcserver.abstract.sidepanel" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/fragments/bodyHeader.jsp" />
         <put-attribute name="menu" value="" />
         <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/fragments/footer.jsp" />
         
         <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         	<add-attribute value="css/bootstrap.css"/>
@@ -23,7 +23,7 @@
 
     	<!-- Pages for tasks: passing contests, checking task statistic -->
     	<definition name="nwcserver.tasks.abstract" extends = "nwcserver.abstract.sidepanel">
-    		<put-attribute name="menu" value="/WEB-INF/jsp/template/contestMenu.jsp" />
+    		<put-attribute name="menu" value="/WEB-INF/jsp/sideMenu/contestMenu.jsp" />
         	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/bootstrap-dialog.css"/>
         		<add-attribute value="css/contests/contestPass.css"/>
@@ -36,7 +36,7 @@
     	</definition>
     	
     		<definition name="nwcserver.tasks.pass" extends="nwcserver.tasks.abstract">
-	        	<put-attribute name="body" value="/WEB-INF/jsp/template/passTask.jsp" />
+	        	<put-attribute name="body" value="/WEB-INF/jsp/task/passTask.jsp" />
 	        	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
 	        		<add-attribute value="css/bootstrap-select.min.css"/>
     			</put-list-attribute>
@@ -50,7 +50,7 @@
     		</definition>
     		
     		<definition name="nwcserver.tasks.statistic" extends="nwcserver.tasks.abstract">
-        		<put-attribute name="body" value="/WEB-INF/jsp/template/taskStatistic.jsp" />
+        		<put-attribute name="body" value="/WEB-INF/jsp/task/taskStatistic.jsp" />
         		
         		<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css"/>
@@ -67,27 +67,27 @@
     	
     	<!-- Static pages: information, rules, archive, news, etc -->
     	<definition name="nwcserver.static.abstract" extends = "nwcserver.abstract.sidepanel">
-    		<put-attribute name="menu" value="/WEB-INF/jsp/template/staticSidePanel.jsp" />
+    		<put-attribute name="menu" value="/WEB-INF/jsp/sideMenu/staticSidePanel.jsp" />
     	</definition>
     		
     		<definition name="nwcserver.static.index" extends = "nwcserver.static.abstract">
-    			<put-attribute name="body" value="/WEB-INF/jsp/template/index.jsp" />
+    			<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
     		</definition>
     		
       		<definition name="nwcserver.static.rules" extends = "nwcserver.static.abstract">
-    			<put-attribute name="body" value="/WEB-INF/jsp/template/rules.jsp" />
+    			<put-attribute name="body" value="/WEB-INF/jsp/other/rules.jsp" />
     			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="css/rules/rules-style.css"/>
     			</put-list-attribute>
     		</definition>
     		<definition name="nwcserver.static.archive" extends = "nwcserver.static.abstract">
-    			<put-attribute name="body" value="/WEB-INF/jsp/template/archive.jsp" />
+    			<put-attribute name="body" value="/WEB-INF/jsp/other/archive.jsp" />
     		</definition>
     
-    <definition name="nwcserver.abstract.full" template="/WEB-INF/jsp/template/templateFull.jsp">
-        <put-attribute name="header" value="/WEB-INF/jsp/template/bodyHeader.jsp" />
+    <definition name="nwcserver.abstract.full" template="/WEB-INF/jsp/templates/templateFull.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/fragments/bodyHeader.jsp" />
         <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/fragments/footer.jsp" />
         
         <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         	<add-attribute value="css/bootstrap.css"/>
@@ -105,7 +105,7 @@
 
     	<!-- Access pages -->
     	<definition name="nwcserver.403" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/accessDenied403.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/access/accessDenied403.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/taskModalView.css"/>
 	        </put-list-attribute>
@@ -115,21 +115,21 @@
 	    </definition>
 	    
 	    <definition name="nwcserver.404" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/pageNotFound404.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/access/pageNotFound404.jsp" />
 	    </definition>
 	    
 	    <definition name="nwcserver.inDevelopment" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/inDevelopment.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/access/inDevelopment.jsp" />
 	    </definition>
 	    
 	    <definition name="nwcserver.result" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/access/result.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/access/result.jsp" />
 	    </definition>
 	    
     	
     	<!-- Admin pages -->
     	<definition name="nwcserver.adminOptions.users" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/users.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/adminOptions/users.jsp" />
 	       	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
         		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
@@ -142,7 +142,7 @@
 	    </definition>
 	    
     	<definition name="nwcserver.adminOptions.userEdit" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/userEdit.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/adminOptions/userEdit.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/bootstrap-dialog.css"/>
 	        </put-list-attribute>
@@ -153,7 +153,7 @@
 	    </definition>
 	    
 	    <definition name="nwcserver.adminOptions.listContests" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/listContests.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/adminOptions/listContests.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
         		<add-attribute value="css/bootstrap-dialog.css"/>
@@ -171,7 +171,7 @@
 	    </definition>
 	    
 	    <definition name="nwcserver.adminOptions.userRequests" extends="nwcserver.abstract.full">
-	    <put-attribute name="body" value="/WEB-INF/jsp/template/adminOptions/userRequests.jsp" />
+	    <put-attribute name="body" value="/WEB-INF/jsp/adminOptions/userRequests.jsp" />
 	 	   <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
         		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
@@ -187,7 +187,7 @@
     
     	<!-- Contest pages: list all contests, create new contest, etc -->
 	    <definition name="nwcserver.contests.list" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/getContests.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/getContests.jsp" />
        	    <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
        	    <add-attribute value="css/taskModalView.css"/>
         	<add-attribute value="css/bootstrap-dialog.css"/>
@@ -201,7 +201,7 @@
 	    </definition>
 	    
 	   	<definition name="nwcserver.contests.create" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/CreateContest.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/CreateContest.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="js/laddaBtnLoad/ladda-themeless.min.css"/>
         		<add-attribute value="css/taskModalView.css"/>
@@ -230,11 +230,11 @@
 	    </definition>
 	    
 	   	<definition name="nwcserver.contests.rating" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/ContestRating.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/ContestRating.jsp" />
 	    </definition>
 
 	  	<definition name="nwcserver.contests.results" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/Contests/contestResults.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/contestResults.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
         		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
@@ -249,13 +249,13 @@
 	    
 	    <!-- Profile pages -->
 	    <definition name="nwcserver.user.login" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/login.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/loggingAndRegistration/login.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/loggingAndRegistration/login.css"/>
 	        </put-list-attribute>
 	    </definition>
 	   	<definition name="nwcserver.user.profile" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/profileOptions/profile.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/profileOptions/profile.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/profileOptions/profile.css"/>
 	        </put-list-attribute>
@@ -267,13 +267,13 @@
 	        
 	    </definition>
 	    <definition name="nwcserver.user.registration" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/registration.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/loggingAndRegistration/registration.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/loggingAndRegistration/registration.css"/>
 	        </put-list-attribute>
 	    </definition>
 	    <definition name="nwcserver.user.created" extends="nwcserver.abstract.full">
-	        <put-attribute name="body" value="/WEB-INF/jsp/template/loggingAndRegistration/userCreated.jsp" />
+	        <put-attribute name="body" value="/WEB-INF/jsp/loggingAndRegistration/userCreated.jsp" />
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/loggingAndRegistration/userCreated.css"/>
 	        </put-list-attribute>      

@@ -48,7 +48,7 @@ public class RatingController {
 
         model.addAttribute("ratingContests", ratingContests);
 
-        return "contests/rating";
+        return "nwcserver.contests.rating";
     }
 
     /**
@@ -77,7 +77,7 @@ public class RatingController {
         contestDuration.setTime(contest.getDuration());
         model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
         model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
-        return "contests/contestResults";
+        return "nwcserver.contests.results";
     }
 
     /**

@@ -4,18 +4,6 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources"/>
 <html>
-<head>
-    <jsp:include page="../fragments/staticFiles.jsp"/>
-
-    <link href="${resources}js/bootstrapTables/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="${resources}js/bootstrapTables/bootstrap-table-heightFix.css" rel="stylesheet"/>
-
-    <script type="text/javascript" src="${resources}js/bootstrapTables/bootstrap-table.min.js"></script>
-    <script type="text/javascript"
-            src="${resources}js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js"></script>
-    <script type="text/javascript" src="${resources}js/adminOptions/usersFormatters.js"></script>
-    <script type="text/javascript" src="${resources}js/adminOptions/userRequests.js"></script>
-</head>
 <body>
 <script type="text/javascript">
     ROLE_ADMIN = '<spring:message code="userRequests.users.table.role.admin" />';
@@ -23,12 +11,6 @@
     ROLE_USER = '<spring:message code="userRequests.users.table.role.user" />';
     UNDEFINED = '<spring:message code="userRequests.users.table.role.undefined" />';
 </script>
-<div class="wrapper container">
-    <!--Including bodyHead -->
-    <!-- Send name of current page-->
-    <jsp:include page="../fragments/bodyHeader.jsp">
-        <jsp:param name="pageName" value="userRequests"/>
-    </jsp:include>
     <!-- Users Requests table -->
     <div class="row">
         <c:url var="dataUrl" value="/getUsersWithRequests.do"/>
@@ -82,8 +64,5 @@
             </div>
         </div>
     </div>
-</div>
-<!-- Footer -->
-<jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

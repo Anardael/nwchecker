@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <div class="text-center">
-    <a href="/results.do?id=${currentContestId}">
+    <a href="<c:url value='/results.do?id=${currentContestId}'/>">
         <p style="font-size: 22px;"><spring:message code="contest.passing.toRating.caption"/></p>
     </a>
 </div>

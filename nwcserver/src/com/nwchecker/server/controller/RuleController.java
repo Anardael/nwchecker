@@ -37,7 +37,7 @@ public class RuleController {
         RuleWrapper ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
 
-        return "rule/rules";
+        return "nwcserver.static.rules";
     }
 
     @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})

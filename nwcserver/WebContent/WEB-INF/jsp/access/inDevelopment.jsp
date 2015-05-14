@@ -6,9 +6,6 @@
 <spring:url value="/resources/" var="resources" />
 <html>
 <!--including head -->
-<head>
-<jsp:include page="../fragments/staticFiles.jsp" />
-</head>
 <!-- include special css for registration:-->
 <style>
 .centered {
@@ -25,19 +22,16 @@
 	}
 </script>
 <body>
-	<div class="wrapper container">
-		<!--including bodyHead -->
-		<!-- send name of current page-->
-		<jsp:include page="../fragments/bodyHeader.jsp">
-			<jsp:param name="pageName" value="inDevelopment" />
-		</jsp:include>
-		<div class="form-group centered">
-			<h1>
-				<spring:message code="inDevelopment.page.caption" />	
-			</h1>
-			<button class="btn btn-primary customButton centered" onclick="goBack()"><spring:message code="inDevelopment.buttonBack.caption" /></button>
-		</div>
+	<!--including bodyHead -->
+	<!-- send name of current page-->
+	<div class="form-group centered">
+		<h1>
+			<spring:message code="inDevelopment.page.caption" />
+		</h1>
+		<button class="btn btn-primary customButton centered"
+			onclick="goBack()">
+			<spring:message code="inDevelopment.buttonBack.caption" />
+		</button>
 	</div>
-	<jsp:include page="../fragments/footer.jsp" />
 </body>
 </html>
