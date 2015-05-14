@@ -1,6 +1,7 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDAO;
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
@@ -74,5 +75,16 @@ public class TaskServiceImpl implements TaskService {
 	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
 			int pageNumber) {
 		return taskDao.getPagedTasksByContestStatus(status, pageSize, (pageNumber-1)*pageSize);
+	}
+
+	@Override
+	public Long getPageCount(Status status, int pageSize) {
+		Long records=taskDao.getRecordCount(status);
+		Long pageCount;
+		if ((records/pageSize)*pageSize == records){
+			pageCount = records/pageSize;
+		}
+		else pageCount = records/pageSize;
+		return pageCount;
 	}
 }

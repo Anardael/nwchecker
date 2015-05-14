@@ -85,4 +85,5 @@ public interface TaskDAO {
     
     List<Task> getTasksByContestStatus(Contest.Status status);
     List<Task> getPagedTasksByContestStatus(Contest.Status status, int pageSize, int startIndex);
+    Long getRecordCount(Contest.Status status);
 }

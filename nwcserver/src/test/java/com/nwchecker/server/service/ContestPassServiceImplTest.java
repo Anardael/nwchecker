@@ -38,10 +38,6 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  * @since 2015-03-10
  */
-//TODO:CHANGE BEFORE DEPLOY!
-//TODO:CHANGE BEFORE DEPLOY!
-//TODO:CHANGE BEFORE DEPLOY!
-//TODO:CHANGE BEFORE DEPLOY!
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
@@ -79,18 +75,14 @@ public class ContestPassServiceImplTest {
         assertEquals(contestPass.getRank(), contestPassService.getContestPasses(1).get(0).getRank());
     }
 
-    /*@Test
+    @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckTask() throws Exception {
         ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
         Task task = contestPass.getContest().getTasks().get(0);
-      //TODO:CHANGE BEFORE DEPLOY!
-      //TODO:CHANGE BEFORE DEPLOY!
-      //TODO:CHANGE BEFORE DEPLOY!
-      //TODO:CHANGE BEFORE DEPLOY!
-      //TODO:CHANGE BEFORE DEPLOY!
-        assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8], new User()));
-    }*/
+        User user = userService.getUserById(3);
+        assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8], user));
+    }
 
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")

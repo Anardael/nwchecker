@@ -162,5 +162,6 @@ public class TaskPass {
 
 	public void setCompiler(Compiler compiler) {
 		this.compiler = compiler;
-	}
+	}	
+	
 }

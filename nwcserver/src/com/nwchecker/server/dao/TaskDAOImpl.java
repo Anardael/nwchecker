@@ -4,7 +4,6 @@ import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.model.TaskPass;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -83,6 +82,16 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		q.setFirstResult(startIndex);
 		q.setMaxResults(pageSize+startIndex);
 		return (List<Task>) q.list();
+	}
+	@Transactional
+	@Override
+	public Long getRecordCount(Status status) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session.createQuery("Select count(*) from Task t where t.contest.status = :status");
+		q.setParameter("status", status);
+		Long records = (Long) q.uniqueResult();
+		return records;
 	}
 
 }

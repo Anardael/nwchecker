@@ -38,7 +38,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 			int pageSize) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Query q = session.createQuery("FROM TaskPass WHERE task_id = :id ORDER BY passed DESC, executionTime");
+		Query q = session.createQuery("FROM TaskPass WHERE task_id = :id");
 		q.setParameter("id", id);
 		q.setFirstResult(startIndex);
 		q.setMaxResults(pageSize);
@@ -53,6 +53,18 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		Query q = session
 				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id");
 		q.setParameter("id", id);
+		Long size = (Long) q.uniqueResult();
+		return size;
+	}
+	@Transactional
+	@Override
+	public Long getSuccessfulTaskPassResponseSize(int id) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query q = session
+				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id AND passed = :passed");
+		q.setParameter("id", id);
+		q.setParameter("passed", true);
 		Long size = (Long) q.uniqueResult();
 		return size;
 	}

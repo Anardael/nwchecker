@@ -29,10 +29,10 @@ public class TaskPassJson {
 		tpj.setExecutionTime(taskPass.getExecutionTime());
 		tpj.setMemoryUsed(taskPass.getMemoryUsed());
 		tpj.setExecutionTime(taskPass.getExecutionTime());
-		if (taskPass.isPassed()){
+		if (taskPass.isPassed()) {
 			tpj.setPassed("Passed");
-		}
-		else tpj.setPassed("Failed");
+		} else
+			tpj.setPassed("Failed");
 		return tpj;
 	}
 
@@ -76,10 +76,14 @@ public class TaskPassJson {
 	}
 
 	/**
-	 * @param passed the passed to set
+	 * @param passed
+	 *            the passed to set
 	 */
 	public void setPassed(String passed) {
 		this.passed = passed;
 	}
 
+	public boolean equals(TaskPassJson other){
+		return (this.username.equals(other.getUserName())&&this.compiler.equals(other.getCompiler())&&this.getExecutionTime()==other.getExecutionTime()&&this.memoryUsed==other.getMemoryUsed()&&this.passed.equals(other.getPassed()));			
+	}
 }

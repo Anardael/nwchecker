@@ -48,4 +48,8 @@ public class TaskPassSerivceImpl implements TaskPassService {
 	public Long getTaskPassSampleSize(int taskId) {
 		return taskPassDAO.getTaskPassResponseSize(taskId);
 	}
+	@Override
+	public Long getSuccessfulTaskPassSampleSize(int taskId) {
+		return taskPassDAO.getSuccessfulTaskPassResponseSize(taskId);
+	}
 }

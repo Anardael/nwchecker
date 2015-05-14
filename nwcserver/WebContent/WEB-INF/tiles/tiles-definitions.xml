@@ -72,7 +72,6 @@
     		
     		<definition name="nwcserver.static.index" extends = "nwcserver.static.abstract">
     			<put-attribute name="body" value="/WEB-INF/jsp/template/index.jsp" />
-    			<put-attribute name="pageName" value="home" type="string"/>
     		</definition>
     		
       		<definition name="nwcserver.static.rules" extends = "nwcserver.static.abstract">
@@ -80,6 +79,9 @@
     			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="css/rules/rules-style.css"/>
     			</put-list-attribute>
+    		</definition>
+    		<definition name="nwcserver.static.archive" extends = "nwcserver.static.abstract">
+    			<put-attribute name="body" value="/WEB-INF/jsp/template/archive.jsp" />
     		</definition>
     
     <definition name="nwcserver.abstract.full" template="/WEB-INF/jsp/template/templateFull.jsp">

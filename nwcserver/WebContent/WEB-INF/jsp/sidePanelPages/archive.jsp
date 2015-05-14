@@ -47,10 +47,9 @@
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
-								<c:if test="${currentPage + loop - 3<lastPage + 1}">
+								<c:if test="${currentPage + loop - 3<pageCount + 1}">
 									<li><a
-										href="<c:url value="/TaskStatistic.do">
-										<c:param name="id" value="${taskId}"/>
+										href="<c:url value="/etiam.do">
 										<c:param name="page" value="${currentPage + loop - 3}"/>
 										</c:url>">
 											<c:out value="${currentPage + loop - 3}" />
@@ -76,9 +75,9 @@
 					<ul class="pagination">
 						<c:forEach begin="0" end="5" var="loop">
 							<c:if test="${currentPage + loop - 3>0}">
-								<c:if test="${currentPage + loop - 3<lastPage + 1}">
+								<c:if test="${currentPage + loop - 3<pageCount + 1}">
 									<li><a
-										href="<c:url value="/TaskStatistic.do">
+										href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${currentPage + loop - 3}"/>
 										</c:url>">

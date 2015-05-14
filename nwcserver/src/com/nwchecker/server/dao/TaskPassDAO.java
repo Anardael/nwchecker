@@ -12,4 +12,5 @@ public interface TaskPassDAO {
 			int pageSize);
 
 	public Long getTaskPassResponseSize(int id);
+	public Long getSuccessfulTaskPassResponseSize(int id);
 }
