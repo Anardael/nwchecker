@@ -90,7 +90,7 @@
                                         <contest:taskView taskId="${taskRow.index}"
                                                           contestId="${row.index}"
                                                           task="${contest.tasks[taskRow.index]}"/>
-                                        <a class="list-group-item " data-toggle="modal"
+                                        <a class="list-group-item " style="margin: 3px" data-toggle="modal"
                                            data-target="#taskView_${row.index}_${taskRow.index}" href="#">
                                             <span>${task.title}</span>
                                         </a>

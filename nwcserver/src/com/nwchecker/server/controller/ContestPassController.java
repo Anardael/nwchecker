@@ -74,11 +74,15 @@ public class ContestPassController {
     		double rate = successful.doubleValue() / all.doubleValue();
     		model.addAttribute("taskSuccessRate", rate);
     	}
-    	
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
-        model.addAttribute("currentContestId", currentTask.getContest().getId());
-        model.addAttribute("currentContestTitle", currentTask.getContest().getTitle());
+        if (currentTask.getContest().getTypeContest() != null
+                && currentTask.getContest().getTypeContest().isDynamic() != null
+                && currentTask.getContest().getTypeContest().isDynamic()) {
+            model.addAttribute("currentContestId", currentTask.getContest().getId());
+        } else  {
+            model.addAttribute("currentContestId", null);
+        }
         User user = userService.getUserByUsername(principal.getName());
         //check if contest status provide passing:
         if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||

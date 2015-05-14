@@ -15,11 +15,13 @@
 				<td class="list-group-item">
 					<p>${rule.typeContest.name}</p>
 				</td>
-				<td class="list-group-item"><c:forEach var="item"
-						items="${userData.roles}">
+				<td class="list-group-item">
+                    <c:forEach var="item" items="${userData.roles}">
+                        <c:set var="flag" value="false"/>
 						<c:choose>
 							<%--if teacher role--%>
 							<c:when test="${item.role eq 'ROLE_TEACHER'}">
+                                <c:set var="flag" value="true"/>
 								<div class="rule-content">
 									<p data-toggle="modal" data-target="#myModal_${vs.index}">${rule.content}</p>
 									<%--modal windows--%>
@@ -55,16 +57,21 @@
 							</c:when>
 							<%-- if other roles--%>
 							<c:otherwise>
-								<div class="rule-content">
-									<p>${rule.content}</p>
-								</div>
+                                <c:if test="${flag == false}">
+                                    <div class="rule-content">
+                                        <p>${rule.content}</p>
+                                    </div>
+                                </c:if>
 							</c:otherwise>
 						</c:choose>
-					</c:forEach> <%--if not authorized--%> <c:if test="${userData eq null}">
+					</c:forEach>
+					<%--if not authorized--%>
+                    <c:if test="${userData eq null}">
 						<div class="rule-content">
 							<p>${rule.content}</p>
 						</div>
-					</c:if></td>
+					</c:if>
+                </td>
 			</tr>
 		</c:forEach>
 	</table>
