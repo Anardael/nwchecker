@@ -30,6 +30,19 @@ public class Rule {
         return "Rule:{" + id + ", " + content + "}";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Rule rule = (Rule) o;
+        if (getId() == rule.getId() && getContent().equals(rule.getContent())){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Language getLanguage() {
         return language;
     }

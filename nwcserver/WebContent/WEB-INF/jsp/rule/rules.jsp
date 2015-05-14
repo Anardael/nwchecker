@@ -27,6 +27,7 @@
                         <td class="list-group-item">
                             <c:forEach var="item" items="${userData.roles}">
                                 <c:choose>
+                                    <%--if teacher role--%>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content">
                                             <p data-toggle="modal"
@@ -53,11 +54,13 @@
                                             </div>
                                         </div>
                                     </c:when>
+                                    <%-- if other roles--%>
                                     <c:otherwise>
                                         <div class="rule-content"><p>${rule.content}</p></div>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
+                            <%--if not authorized--%>
                             <c:if test="${userData eq null}">
                                 <div class="rule-content"><p>${rule.content}</p></div>
                             </c:if>

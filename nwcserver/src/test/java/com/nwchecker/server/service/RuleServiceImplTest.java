@@ -61,9 +61,8 @@ public class RuleServiceImplTest {
     public void updateRulesTest() {
         ruleService.updateRules(ruleList);
         List<Rule> rules = ruleDAO.getAllRules();
-        for (Rule rule : rules) {
-            assertEquals(rule.getLanguage().getId(), 1);
-            assertEquals(rule.getTypeContest().getId(), 1);
+        for (int i = 0; i < ruleList.size(); i++){
+            assertEquals(ruleList.get(i), rules.get(i));
         }
     }
 }

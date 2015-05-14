@@ -72,6 +72,11 @@
 		</jsp:include>
 		<!-- Shows tasks navigation list and marks every task status -->
 		<div id="tasks" class="col-md-3">
+            <div class="text-center">
+                <a href="/results.do?id=${currentContestId}">
+                    <p style="font-size: 22px;"><spring:message code="contest.passing.toRating.caption"/></p>
+                </a>
+            </div>
 			<ul class="nav nav-pills nav-stacked">
 				<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
 				<c:set var="count" value="0" scope="page" />
@@ -128,9 +133,6 @@
                         <label id="timer" class="pull-right"></label>
 					</small>
 				</h3>
-                <a href="/results.do?id=${currentContestId}">
-                    <ins style="font-size: 17px;"><spring:message code="contest.passing.toRating.caption"/></ins>
-                </a>
 			</div>
 			<c:set var="currentTaskResult"
 				value="${taskResults[currentTask.id]}" scope="page" />

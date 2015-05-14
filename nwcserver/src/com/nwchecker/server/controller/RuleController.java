@@ -42,19 +42,8 @@ public class RuleController {
 
     @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})
     public String editRules(Model model, @ModelAttribute("ruleWrapper") RuleWrapper ruleWrapper, Principal principal) {
-        if (principal != null) {
-            String username = principal.getName();
-            model.addAttribute("userData", userService.getUserByUsername(username));
-            LOG.info("\"" + principal.getName() + "\" initialized editRules page.");
-        } else {
-            model.addAttribute("userData", null);
-        }
-
         ruleService.updateRules(ruleWrapper.getRuleList());
 
-        ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
-        model.addAttribute("ruleWrapper", ruleWrapper);
-
-        return "rule/rules";
+        return showRules(model, principal);
     }
 }

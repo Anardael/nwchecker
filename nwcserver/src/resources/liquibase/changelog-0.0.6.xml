@@ -11,8 +11,31 @@
             Update data into DB
         </comment>
         <sql>
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('16', 'kulishenko', 'kulishenko', 'kulishenko@ua.ua',
+            '$2a$10$/5uKw18gWbPLWIhqTAxBs.3evV/owXam/gJ/wE6YZZ5E7Dn2LtgdK', 'Mathematics', 'Info about kulishenko', '0',
+            1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('17', 'newuser1', 'newuser1', 'newuser1@ua.ua',
+            '$2a$10$/5uKw18gWbPLWIhqTAxBs.3evV/owXam/gJ/wE6YZZ5E7Dn2LtgdK', '', 'Info about newuser1', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('18', 'newuser2', 'newuser2', 'newuser2@ua.ua',
+            '$2a$10$/5uKw18gWbPLWIhqTAxBs.3evV/owXam/gJ/wE6YZZ5E7Dn2LtgdK', '', 'Info about newuser2', '0', 1);
+            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
+            VALUES ('19', 'newuser3', 'newuser3', 'newuser3@ua.ua',
+            '$2a$10$/5uKw18gWbPLWIhqTAxBs.3evV/owXam/gJ/wE6YZZ5E7Dn2LtgdK', '', 'Info about newuser3', '0', 1);
+
+
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('17', 'ROLE_TEACHER', '16');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('18', 'ROLE_USER', '17');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('19', 'ROLE_USER', '18');
+            INSERT INTO `roles` (roleId, role, userId) VALUES ('20', 'ROLE_USER', '19');
+
             #Update type_contest into DB
             UPDATE type_contest SET dynamic=true WHERE id='2';
+
+            #Update contest into DB
+            UPDATE contest SET typeContest_id=2 WHERE id='10';
         </sql>
     </changeSet>
 </databaseChangeLog>

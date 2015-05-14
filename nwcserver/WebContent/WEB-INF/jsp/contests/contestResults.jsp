@@ -34,7 +34,16 @@
         <div class="col-md-12">
             <div class="page-header">
                 <h2>
-                    ${contestTitle}
+                    <c:choose>
+                        <c:when test="${currentContestFirstTaskId != null}">
+                            <a href="/passTask.do?id=${currentContestFirstTaskId}" style="font-size: 25px; color: #101010">
+                                ${contestTitle}
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            ${contestTitle}
+                        </c:otherwise>
+                    </c:choose>
                     <small class="pull-right">
                         <spring:message code="contest.results.started.caption"/>
                         <b>${contestStart}</b>
@@ -45,9 +54,6 @@
                         <spring:message code="contest.results.minutes.description"/></b>)
                     </small>
                 </h2>
-                <a href="/passTask.do?id=${currentContestFirstTaskId}">
-                    <ins style="font-size: 17px;"><spring:message code="contest.results.toContest.caption"/></ins>
-                </a>
             </div>
         </div>
         <!-- Statistic table -->

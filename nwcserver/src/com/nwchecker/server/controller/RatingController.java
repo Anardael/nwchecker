@@ -67,6 +67,8 @@ public class RatingController {
         if (contest.getTypeContest() != null && contest.getTypeContest().isDynamic()) {
             scoreCalculationService.calculateScore(id);
             model.addAttribute("currentContestFirstTaskId", contest.getTasks().get(0).getId());
+        } else  {
+            model.addAttribute("currentContestFirstTaskId", null);
         }
         model.addAttribute("contestTitle", contest.getTitle());
         SimpleDateFormat formatStart = new SimpleDateFormat();
