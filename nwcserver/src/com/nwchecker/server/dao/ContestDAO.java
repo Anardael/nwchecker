@@ -62,6 +62,6 @@ public interface ContestDAO {
      */
     List<Contest> getContestByStatus(Contest.Status status);
 
-    List<Contest> getContestByTypeId(int typeId);
+    List<Contest> getContestsWithDynamicRating();
 
 }

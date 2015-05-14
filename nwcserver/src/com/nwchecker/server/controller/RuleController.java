@@ -1,7 +1,8 @@
 package com.nwchecker.server.controller;
 
-import java.security.Principal;
-
+import com.nwchecker.server.service.RuleService;
+import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.wrapper.RuleWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.nwchecker.server.service.RuleService;
-import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.wrapper.RuleWrapper;
+import java.security.Principal;
 
 @Controller("RuleController")
 public class RuleController {
@@ -38,16 +37,13 @@ public class RuleController {
         RuleWrapper ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
 
-        /*WrapperList<Rule> ruleWrapper = new WrapperList<Rule>(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
-        model.addAttribute("ruleWrapper", ruleWrapper);*/
-
         return "rule/rules";
     }
 
     @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})
     public String editRules(Model model, @ModelAttribute("ruleWrapper") RuleWrapper ruleWrapper, Principal principal) {
         if (principal != null) {
-            String username = principal.getName(); // get logged in username
+            String username = principal.getName();
             model.addAttribute("userData", userService.getUserByUsername(username));
             LOG.info("\"" + principal.getName() + "\" initialized editRules page.");
         } else {
@@ -58,11 +54,6 @@ public class RuleController {
 
         ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
-
-        /*ruleService.updateRules(ruleWrapper.getDataList());
-
-        ruleWrapper = new WrapperList<Rule>(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
-        model.addAttribute("ruleWrapper", ruleWrapper);*/
 
         return "rule/rules";
     }

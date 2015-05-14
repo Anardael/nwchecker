@@ -18,19 +18,16 @@ public class Rule {
     @ManyToOne(fetch = FetchType.LAZY)
     private TypeContest typeContest;
 
-    // without language??? TODO
     @ManyToOne(fetch = FetchType.LAZY)
     private Language language;
 
-    public Rule(){
+    public Rule() {
         this.content = "N/A";
-        //this.type = new Type();
-        //this.language = new Language();
     }
 
     @Override
-    public String toString(){
-        return "Rule:{" + id + ", " + content +"}";
+    public String toString() {
+        return "Rule:{" + id + ", " + content + "}";
     }
 
     public Language getLanguage() {
@@ -41,7 +38,7 @@ public class Rule {
         this.language = language;
     }
 
-    public void setLanguageId(int languageId){
+    public void setLanguageId(int languageId) {
         this.language = new Language();
         language.setId(languageId);
     }
@@ -62,7 +59,7 @@ public class Rule {
         this.typeContest = typeContest;
     }
 
-    public void setTypeId(int typeId){
+    public void setTypeId(int typeId) {
         this.typeContest = new TypeContest();
         typeContest.setId(typeId);
     }

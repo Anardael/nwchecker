@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<spring:url value="/resources/" var="resources" />
+<spring:url value="/resources/" var="resources"/>
 
 <html>
 <head>
-    <jsp:include page="../fragments/staticFiles.jsp" />
+    <jsp:include page="../fragments/staticFiles.jsp"/>
     <link href="${resources}css/rules/rules-style.css" rel="stylesheet"/>
 
 </head>
 <body>
 <div class="wrapper container">
     <jsp:include page="../fragments/bodyHeader.jsp">
-        <jsp:param name="pageName" value="rules" />
+        <jsp:param name="pageName" value="rules"/>
     </jsp:include>
     <div class="col-sm-offset-2 col-sm-8 ">
         <form:form modelAttribute="ruleWrapper" action="editRules.do" method="post" id="rules-form">
@@ -29,8 +29,9 @@
                                 <c:choose>
                                     <c:when test="${item.role eq 'ROLE_TEACHER'}">
                                         <div class="rule-content">
-                                            <p data-toggle="modal" data-target="#myModal_${vs.index}">${rule.content}</p>
-                                            <%--modal windows--%>
+                                            <p data-toggle="modal"
+                                               data-target="#myModal_${vs.index}">${rule.content}</p>
+                                                <%--modal windows--%>
                                             <div class="modal" id="myModal_${vs.index}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">

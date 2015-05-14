@@ -19,13 +19,12 @@ public class Language {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "language")
     private List<Rule> rules;
 
-    public Language(){
+    public Language() {
         this.tag = "N/A";
-        //this.rules = new ArrayList<>();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Language:{" + id + ", " + tag + "}";
     }
 
@@ -45,8 +44,8 @@ public class Language {
         this.rules = rules;
     }
 
-    public void addRule(Rule rule){
-        if(rules == null) {
+    public void addRule(Rule rule) {
+        if (rules == null) {
             rules = new ArrayList<Rule>();
         }
         this.rules.add(rule);

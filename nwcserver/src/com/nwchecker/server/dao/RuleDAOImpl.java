@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository("RuleDAO")
-public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO{
+public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
 
     @Autowired
     public void init(SessionFactory sessionFactory) {

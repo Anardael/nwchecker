@@ -53,7 +53,7 @@ public class LanguageDAOImpl extends HibernateDaoSupport implements LanguageDAO 
     @Transactional()
     public List<Language> getAllLanguages() {
         @SuppressWarnings("unchecked")    //TODO
-        List<Language> result = (List<Language>) getHibernateTemplate().find("from Language");
+                List<Language> result = (List<Language>) getHibernateTemplate().find("from Language");
         return result;
     }
 }

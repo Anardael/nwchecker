@@ -51,7 +51,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @Override
-    public List<Contest> getContestByTypeId(int typeId) {
-        return (List<Contest>) getHibernateTemplate().find("from Contest where typeContest.id=?", typeId);
+    public List<Contest> getContestsWithDynamicRating() {
+        return (List<Contest>) getHibernateTemplate().find("from Contest where typeContest.dynamic=?", true);
     }
 }

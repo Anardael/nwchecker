@@ -77,13 +77,12 @@ public class ContestServiceImpl implements ContestService {
         List<Contest> ratingContests = new ArrayList<Contest>();
         ratingContests.addAll(contestDAO.getContestByStatus(Contest.Status.ARCHIVE));
 
-        List<Contest> dynamicContests = contestDAO.getContestByTypeId(2);
+        List<Contest> dynamicContests = contestDAO.getContestsWithDynamicRating();
         for (Contest contest : dynamicContests){
             if(contest.getStatus() != Contest.Status.ARCHIVE){
                 ratingContests.add(contest);
             }
         }
-
         return ratingContests;
     }
 
