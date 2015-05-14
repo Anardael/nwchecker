@@ -92,7 +92,7 @@ public class ContestPassController {
     	//Sending task statistic
     	Long successful = taskPassService.getSuccessfulTaskPassSampleSize(taskId);
     	Long all = taskPassService.getTaskPassSampleSize(taskId);
-    	if(!(all.equals(0))){
+    	if(!(all == 0)){
     		double rate = successful.doubleValue() / all.doubleValue();
     		model.addAttribute("taskSuccessRate", rate);
     	}
@@ -163,7 +163,7 @@ public class ContestPassController {
         }
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
-        model.addAttribute("pageName", "contest");
+        model.addAttribute("pageName", "task");
         return "nwcserver.tasks.pass";
     }
 

@@ -91,6 +91,7 @@ public interface TaskService {
 
 	/**
 	 * Get list of tasks that belong to contests with certain status
+	 * <p>
 	 * 
 	 * @param status
 	 *            status of the contests
@@ -101,6 +102,7 @@ public interface TaskService {
 
 	/**
 	 * Get paginated list of tasks that belong to contests with certain status
+	 * <p>
 	 * 
 	 * @param status
 	 *            status of the contests
@@ -118,6 +120,7 @@ public interface TaskService {
 	/**
 	 * Get number of pages that can fit the list of tasks that belong to
 	 * contests with certain status
+	 * <p>
 	 * 
 	 * @param status
 	 *            status of contests

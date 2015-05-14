@@ -34,18 +34,18 @@ public class TaskPassServiceImplTest {
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetTaskPassSampleSize() {
 		Long sample1 = taskPassService.getTaskPassSampleSize(1);
-		assertEquals(sample1.longValue(), 6L);
+		assertEquals(6L, sample1.longValue());
 		Long sample2 = taskPassService.getTaskPassSampleSize(2);
-		assertEquals(sample2.longValue(), 2L);
+		assertEquals(2L, sample2.longValue());
 	}
 
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetSuccessfulTaskPassSampleSize() {
 		Long sample1 = taskPassService.getSuccessfulTaskPassSampleSize(1);
-		assertEquals(sample1.longValue(), 2L);
+		assertEquals(2L, sample1.longValue());
 		Long sample2 = taskPassService.getSuccessfulTaskPassSampleSize(2);
-		assertEquals(sample2.longValue(), 2L);
+		assertEquals(2L, sample2.longValue());
 	}
 
 	@Test
@@ -76,7 +76,9 @@ public class TaskPassServiceImplTest {
 		Iterator<TaskPassJson> controlled = taskPasses2.iterator();
 		Iterator<TaskPassJson> testing = taskPassesSorted.iterator();
 		while(controlled.hasNext() && testing.hasNext()){
-			assertEquals(controlled.next().getExecutionTime(), testing.next().getExecutionTime());
+			TaskPassJson expected = controlled.next();
+			TaskPassJson actual = testing.next();
+			assertEquals((long) expected.getExecutionTime(),(long) actual.getExecutionTime());
 		}
 	}
 }

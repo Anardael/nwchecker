@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -61,8 +62,10 @@
 	<h2>
 		<a href="TaskStatistic.do?id=${currentTask.id}">${currentTask.title}</a>
 		<small> (<spring:message code="contest.passing.rate.caption" />
-			<b>${currentTask.rate}</b>) <b>${taskSuccessRate*100}%</b> <label
-			id="timer" class="pull-right"></label>
+			<b>${currentTask.rate}</b>) <c:if test="${not empty taskSuccessRate}"><b><fmt:formatNumber
+					value="${taskSuccessRate}" maxFractionDigits="2"
+					minIntegerDigits="2" type="PERCENT" /></b> </c:if><label id="timer"
+			class="pull-right"></label>
 		</small>
 	</h2>
 </div>

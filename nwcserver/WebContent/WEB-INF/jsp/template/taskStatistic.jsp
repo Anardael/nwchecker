@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <c:set var="taskId" value="${currentTask.id}" />
@@ -21,20 +22,20 @@
 					dataType : 'json'
 				},
 				fields : {
-					username : {
-						title : 'Username'
+					Username : {
+						title : '<spring:message code="task.statistic.usernameCaption"/>'
 					},
-					compiler : {
-						title : 'Compiler'
+					Compiler : {
+						title : '<spring:message code="task.statistic.compilerCaption"/>'
 					},
-					executionTime : {
-						title : 'Execution Time'
+					ExecutionTime : {
+						title : '<spring:message code="task.statistic.execTimeCaption"/>'
 					},
-					memoryUsed : {
-						title : 'Memory Used'
+					MemoryUsed : {
+						title : '<spring:message code="task.statistic.memUsedCaption"/>'
 					},
-					passed : {
-						title : 'Passed'
+					Passed : {
+						title : '<spring:message code="task.statistic.passedCaption"/>'
 					}
 				}
 

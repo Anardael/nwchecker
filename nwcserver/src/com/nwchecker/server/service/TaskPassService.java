@@ -5,7 +5,7 @@ import java.util.List;
 import com.nwchecker.server.json.TaskPassJson;
 
 /**
- * <h1>Task Pass Service</h1> Service to get TaskPasses from database
+ * <h1>Task Pass Service</h1> Service to get task solution submits from database
  * <p>
  * 
  * @author Boris Andreev
@@ -15,7 +15,8 @@ import com.nwchecker.server.json.TaskPassJson;
 
 public interface TaskPassService {
 	/**
-	 * Get paginated TaskPasses for task
+	 * Get paginated solution records list for task
+	 * <p>
 	 * 
 	 * @param taskId
 	 *            Id of the task.
@@ -25,41 +26,44 @@ public interface TaskPassService {
 	 *            Count of maximum expected records.
 	 * @param sorting
 	 *            A string represents requested sorting.
-	 * @return list of Json-like objects ready for display
+	 * @return List of Json-like objects ready for display
 	 */
 	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
 			int startIndex, int pageSize, String sorting);
 
 	/**
-	 * Get paginated TaskPasses for task
+	 * Get paginated solution records list for task
+	 * <p>
 	 * 
 	 * @param taskId
 	 *            Id of the task.
 	 * @param startIndex
 	 *            Start index of records for current page.
-	 * @param Count
-	 *            of maximum expected records.
-	 * @return list of Json-like objects ready for display
+	 * @param pageSize
+	 *            Count of maximum expected records.
+	 * @return List of Json-like objects ready for display
 	 */
 	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
 			int startIndex, int pageSize);
 
 	/**
-	 * Get number of TaskPasses for a certain task
+	 * Get number of solution for a certain task
+	 * <p>
 	 * 
 	 * @param taskId
-	 *            id if the task
-	 * @return number of TaskPasses for task
+	 *            Id if the task
+	 * @return Number of TaskPasses for task
 	 */
 
 	public Long getTaskPassSampleSize(int taskId);
 
 	/**
-	 * Get number of TaskPasses for task that have successfully passed tests
+	 * Get number of solution for task that have successfully passed tests
+	 * <p>
 	 * 
 	 * @param taskId
-	 *            id of task
-	 * @return number of successful TaskPasses
+	 *            Id of task
+	 * @return Number of successful TaskPasses
 	 */
 	public Long getSuccessfulTaskPassSampleSize(int taskId);
 }

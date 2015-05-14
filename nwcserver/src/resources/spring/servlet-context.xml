@@ -23,7 +23,7 @@
         <property name="order" value="1"/>
     </bean>
     
-        <bean id="multipartResolver"
+    <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     </bean>
     
@@ -41,12 +41,7 @@
     </bean>
     
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean> 
- <!--
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-  		<property name="basename" value="views"/>
-  		<property name="order" value="1" />
-	</bean>-->
- 
+
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">	
 		<property name="definitions">		
 			<list>

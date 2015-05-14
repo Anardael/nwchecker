@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * <h1>TaskPass Table Response List</h1> JSON entity made to send data from server to
+ * jTable javascript plug-in.
+ * 
+ * @author Boris Andreev
+ * @version 1.0
+ */
 public class TaskPassTableResponseList {
 	@JsonProperty("Result")
 	private String result;
@@ -13,7 +20,6 @@ public class TaskPassTableResponseList {
 	private long totalRecordCount;
 	@JsonProperty("Message")
 	private String message;
-	
 
 	public TaskPassTableResponseList() {
 	}

@@ -51,12 +51,12 @@ public class ScheduleServiceImplTest {
         contestService.mergeContest(contest);
         scheduleService.refresh();
         //duration contest = 5 seconds.
-/*        try {
+        try {
             Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.GOING);*/
+        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.GOING);
         try {
             Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
         } catch (InterruptedException ex) {

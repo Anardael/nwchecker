@@ -85,7 +85,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	}
 	@Transactional
 	@Override
-	public Long getRecordCount(Status status) {
+	public Long getRecordCountByContestStatus(Status status) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Query q = session.createQuery("Select count(*) from Task t where t.contest.status = :status");

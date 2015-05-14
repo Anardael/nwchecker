@@ -3,6 +3,13 @@ package com.nwchecker.server.json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nwchecker.server.model.TaskPass;
 
+/**
+ * <h1>TaskPass JSON</h1> JSON entity that is designed to transform a task
+ * solution record into data ready for display
+ * <p>
+ * @author Boris Andreev
+ * @version 1.0
+ */
 public class TaskPassJson {
 	@JsonProperty("Username")
 	private String username;
@@ -68,22 +75,19 @@ public class TaskPassJson {
 		this.memoryUsed = memoryUsed;
 	}
 
-	/**
-	 * @return the passed
-	 */
 	public String getPassed() {
 		return passed;
 	}
 
-	/**
-	 * @param passed
-	 *            the passed to set
-	 */
 	public void setPassed(String passed) {
 		this.passed = passed;
 	}
 
-	public boolean equals(TaskPassJson other){
-		return (this.username.equals(other.getUserName())&&this.compiler.equals(other.getCompiler())&&this.getExecutionTime()==other.getExecutionTime()&&this.memoryUsed==other.getMemoryUsed()&&this.passed.equals(other.getPassed()));			
+	public boolean equals(TaskPassJson other) {
+		return (this.username.equals(other.getUserName())
+				&& this.compiler.equals(other.getCompiler())
+				&& this.getExecutionTime() == other.getExecutionTime()
+				&& this.memoryUsed == other.getMemoryUsed() && this.passed
+					.equals(other.getPassed()));
 	}
 }

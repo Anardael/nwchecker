@@ -24,7 +24,7 @@
 			<table class="table">
 				<tr>
 					<td class="list-group-item list-group-item-heading" width="40%">${task.title}</td>
-					<td class="list-group-item list-group-item-heading" width="15%">Difficulty:${task.complexity}</td>
+					<td class="list-group-item list-group-item-heading" width="15%"><spring:message code="archive.taskComplexity"/>:${task.complexity}</td>
 					<td class="list-group-item list-group-item-heading" width="20%">Discussion</td>
 				</tr>
 				<tr>
