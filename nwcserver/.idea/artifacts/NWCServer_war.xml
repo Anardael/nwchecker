@@ -3,9 +3,6 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="NWCServer.war">
       <element id="artifact" artifact-name="NWCServer:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib" />
-      </element>
     </root>
   </artifact>
 </component>

@@ -45,6 +45,17 @@
     <Userrequest requestId="1" request="WANT_ROLE_TEACHER" userId="3" />
 
     <contest_users user_id="3" contest_id="1"/>
+    
 
+    <languages id="1" tag="en"/>
+    <languages id="2" tag="ua"/>
+
+    <type_contest id="1" dynamic="false" name="ACM"/>
+    <type_contest id="2" dynamic="true" name="PC-UA"/>
+
+    <rules id="1" content="Rule content 1" language_id="1" typeContest_id="1"/>
+    <rules id="2" content="Rule content 2" language_id="1" typeContest_id="2"/>
+    <rules id="3" content="Rule content 3" language_id="2" typeContest_id="1"/>
+    <rules id="4" content="Rule content 4" language_id="2" typeContest_id="2"/>
 
 </dataset>

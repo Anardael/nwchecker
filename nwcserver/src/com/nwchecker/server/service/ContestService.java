@@ -21,7 +21,7 @@ public interface ContestService {
      *
      * @param c Contest that will be inserted in DB
      */
-    public void addContest(Contest c);
+    void addContest(Contest c);
 
     /**
      * Update existing Contest in database.
@@ -29,14 +29,14 @@ public interface ContestService {
      *
      * @param c Contest that will be updated in DB
      */
-    public void updateContest(Contest c);
+    void updateContest(Contest c);
 
     /**
      * Update existing Contest in database.
      *
      * @param c Contest that will be updated in DB
      */
-    public void mergeContest(Contest c);
+    void mergeContest(Contest c);
 
     /**
      * Return all Contests from database.
@@ -44,7 +44,7 @@ public interface ContestService {
      *
      * @return List of Contests from DB
      */
-    public List<Contest> getContests();
+    List<Contest> getContests();
 
     /**
      * Return Contest from database by unique ID.
@@ -53,7 +53,7 @@ public interface ContestService {
      * @param id Unique ID of required Contest
      * @return Contest from DB
      */
-    public Contest getContestByID(int id);
+    Contest getContestByID(int id);
 
     /**
      * Return all Contests that has specific status.
@@ -61,7 +61,7 @@ public interface ContestService {
      * @param status Specific status of required Contests
      * @return List of Contests that have specific status
      */
-    public List<Contest> getContestByStatus(Contest.Status status);
+    List<Contest> getContestByStatus(Contest.Status status);
 
     /**
      * Checks if some User can edit some Contest.
@@ -72,6 +72,8 @@ public interface ContestService {
      * @return <b>true</b> if User can edit Contest
      *         <b>false</b> if User can not edit Contest
      */
-    public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
+    boolean checkIfUserHaveAccessToContest(String username, int ContestId);
+
+    List<Contest> getContestForRating();
 
 }

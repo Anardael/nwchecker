@@ -146,9 +146,6 @@ public class ContestController {
         c.setStatus(Contest.Status.PREPARING);
         model.addAttribute("contestModelForm", c);
 
-        /*TypeContestWrapper typeContestWrapper = new TypeContestWrapper(typeContestService.getAllTypeContest());
-        model.addAttribute("typeContestWrapper", typeContestWrapper);*/
-
         List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
         model.addAttribute("typeContestList", typeContestList);
 

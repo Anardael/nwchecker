@@ -16,13 +16,16 @@ public class TypeContest {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "dynamic")
+    private Boolean dynamic;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeContest")
     private List<Rule> rules;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeContest")
     private List<Contest> contests;
 
-    public TypeContest(){
+    public TypeContest() {
         this.name = "N/A";
     }
 
@@ -50,8 +53,8 @@ public class TypeContest {
         this.rules = rules;
     }
 
-    public void addRule(Rule rule){
-        if(rules == null) {
+    public void addRule(Rule rule) {
+        if (rules == null) {
             rules = new ArrayList<Rule>();
         }
         this.rules.add(rule);
@@ -65,10 +68,18 @@ public class TypeContest {
         this.contests = contests;
     }
 
-    public void addContest(Contest contest){
-        if(contests == null) {
+    public void addContest(Contest contest) {
+        if (contests == null) {
             contests = new ArrayList<Contest>();
         }
         this.contests.add(contest);
+    }
+
+    public Boolean isDynamic() {
+        return dynamic;
+    }
+
+    public void setDynamic(Boolean dynamic) {
+        this.dynamic = dynamic;
     }
 }

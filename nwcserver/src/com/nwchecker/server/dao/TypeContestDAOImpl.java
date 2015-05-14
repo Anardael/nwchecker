@@ -45,7 +45,7 @@ public class TypeContestDAOImpl extends HibernateDaoSupport implements TypeConte
     @Transactional
     public List<TypeContest> getAllTypes() {
         @SuppressWarnings("unchecked")    //TODO
-        List<TypeContest> result = (List<TypeContest>) getHibernateTemplate().find("from TypeContest");
+                List<TypeContest> result = (List<TypeContest>) getHibernateTemplate().find("from TypeContest");
         return result;
     }
 }

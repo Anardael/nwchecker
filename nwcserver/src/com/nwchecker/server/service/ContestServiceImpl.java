@@ -1,13 +1,16 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
+import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.User;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -68,5 +71,19 @@ public class ContestServiceImpl implements ContestService {
         return contestDAO.getContestByStatus(status);
     }
 
+
+    @Override
+    public List<Contest> getContestForRating() {
+        List<Contest> ratingContests = new ArrayList<Contest>();
+        ratingContests.addAll(contestDAO.getContestByStatus(Contest.Status.ARCHIVE));
+
+        List<Contest> dynamicContests = contestDAO.getContestsWithDynamicRating();
+        for (Contest contest : dynamicContests){
+            if(contest.getStatus() != Contest.Status.ARCHIVE){
+                ratingContests.add(contest);
+            }
+        }
+        return ratingContests;
+    }
 
 }
