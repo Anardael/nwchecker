@@ -75,10 +75,10 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
-			int pageNumber) {
+	public List<Task> getPagedTasksByContestStatus(Status status, int pageNumber,
+			int pageSize) {
 		LOG.debug("Successfully got tasks for contests with status " + status
-				+ " for page " + pageNumber);
+				+ " for page " + pageSize);
 		return taskDao.getPagedTasksByContestStatus(status, pageSize,
 				(pageNumber - 1) * pageSize);
 	}
@@ -87,10 +87,10 @@ public class TaskServiceImpl implements TaskService {
 	public Long getPageCount(Status status, int pageSize) {
 		Long records = taskDao.getRecordCountByContestStatus(status);
 		Long pageCount;
-		if ((records / pageSize) * pageSize == records) {
+		if (records % pageSize == 0) {
 			pageCount = records / pageSize;
 		} else
-			pageCount = records / pageSize;
+			pageCount = records / pageSize + 1;
 		LOG.debug("Got page count for tasks that belong to contests with status "
 				+ status);
 		return pageCount;
