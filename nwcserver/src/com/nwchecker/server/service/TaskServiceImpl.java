@@ -1,11 +1,11 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDAO;
-import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.utils.PaginationWrapper;
+import com.nwchecker.server.json.JsonUtil;
 import com.nwchecker.server.json.TaskJson;
 
 import org.apache.log4j.Logger;
@@ -85,7 +85,7 @@ public class TaskServiceImpl implements TaskService {
 		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(TaskJson.class, tasks);
 		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();
 		response.setDataList(paginatedTaskJson);
-		response.setPageCount(PaginationWrapper.getPageCount(taskDao.getRecordCount(status), pageSize));
+		response.setPageCount(PaginationWrapper.getPageCount(taskDao.getRecordCountByContestStatus(status), pageSize));
 		return response;
 	}
 
