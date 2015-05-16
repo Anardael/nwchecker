@@ -1,12 +1,10 @@
 package com.nwchecker.server.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.nwchecker.server.json.TaskJson;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,19 +20,15 @@ public class ArchiveController {
 
 	@RequestMapping("/etiam")
 	public String archivePage(Model model,
-			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "1", value="page") int pageNumber,
 			@RequestParam(defaultValue = "10") int pageSize) {
-		List<Task> tasks = taskService.getPagedTasksByContestStatus(
-				Contest.Status.ARCHIVE, page, pageSize);
-		Long pageCount = taskService.getPageCount(Contest.Status.ARCHIVE,
-				pageSize);
-		List<TaskJson> tj = new ArrayList<TaskJson>();
-		for (Task task : tasks) {
-			tj.add(TaskJson.createTaskJson(task));
-		}
-		model.addAttribute("tasks", tj);
-		model.addAttribute("pageCount", pageCount);
-		model.addAttribute("currentPage", page);
+		System.out.println(pageNumber + " " + pageSize);
+		PaginationWrapper<TaskJson> paginatedTaskJson = taskService
+				.getTaskJsonForPagination(Contest.Status.ARCHIVE, pageSize,
+						pageNumber);
+		model.addAttribute("tasks", paginatedTaskJson.getDataList());
+		model.addAttribute("pageCount", paginatedTaskJson.getPageCount());
+		model.addAttribute("currentPage", pageNumber);
 		model.addAttribute("pageName", "archive");
 		return "nwcserver.static.archive";
 	}
