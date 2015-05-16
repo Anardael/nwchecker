@@ -80,7 +80,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Query q = session.createQuery("from Task t where t.contest.status = :status");
 		q.setParameter("status", status);
 		q.setFirstResult(startIndex);
-		q.setMaxResults(pageSize+startIndex);
+		q.setMaxResults(pageSize);
 		return (List<Task>) q.list();
 	}
 	@Transactional

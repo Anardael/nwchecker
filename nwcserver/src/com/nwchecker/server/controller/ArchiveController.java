@@ -1,13 +1,11 @@
 package com.nwchecker.server.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.nwchecker.server.json.TaskJson;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ public class ArchiveController {
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 	@RequestMapping("/etiam")
 	public String archivePage(Model model,
-			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "1", value="page") int pageNumber,
 			@RequestParam(defaultValue = "10") int pageSize) {
 		LOG.debug("Someone accessed archive page");
 		List<Task> tasks = taskService.getPagedTasksByContestStatus(
@@ -39,6 +37,13 @@ public class ArchiveController {
 		model.addAttribute("tasks", tj);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPage", page);
+		System.out.println(pageNumber + " " + pageSize);
+		PaginationWrapper<TaskJson> paginatedTaskJson = taskService
+				.getTaskJsonForPagination(Contest.Status.ARCHIVE, pageSize,
+						pageNumber);
+		model.addAttribute("tasks", paginatedTaskJson.getDataList());
+		model.addAttribute("pageCount", paginatedTaskJson.getPageCount());
+		model.addAttribute("currentPage", pageNumber);
 		model.addAttribute("pageName", "archive");
 		LOG.debug("Successfully data for archive page");
 		return "nwcserver.static.archive";
