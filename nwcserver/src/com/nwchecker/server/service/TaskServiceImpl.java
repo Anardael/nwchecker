@@ -80,7 +80,6 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public PaginationWrapper<TaskJson> getTaskJsonForPagination(
 			Status status, int pageSize, int pageNumber) {
-		System.out.println(pageNumber + " " + pageSize);
 		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize, PaginationWrapper.getFirstResult(pageNumber, pageSize));
 		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(TaskJson.class, tasks);
 		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();

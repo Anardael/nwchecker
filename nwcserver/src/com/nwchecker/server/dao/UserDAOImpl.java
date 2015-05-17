@@ -3,7 +3,14 @@ package com.nwchecker.server.dao;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -34,7 +41,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public void deleteUser(User user) {
 		getHibernateTemplate().delete(user);
 	}
-	
+
 	@Override
 	public void deleteRole(Role role) {
 		getHibernateTemplate().delete(role);
@@ -49,14 +56,16 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public User getUserById(int id) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("from User where id=?", id);
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"from User where id=?", id);
 		return list.get(0);
 	}
 
 	@Override
 	public User getUserByUsername(String username) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("from User where username=?", username);
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"from User where username=?", username);
 		return list.get(0);
 	}
 
@@ -66,30 +75,89 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");
 		return list;
 	}
-	
+
 	@Override
 	public List<User> getUsersByRole(String role) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =?", role);
+		List<User> list = (List<User>) getHibernateTemplate()
+				.find("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =?",
+						role);
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasUsername(String username) {
-		return !getHibernateTemplate().find("from User user where user.username = ?", username).isEmpty();
+		return !getHibernateTemplate().find(
+				"from User user where user.username = ?", username).isEmpty();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasEmail(String email) {
-		return !getHibernateTemplate().find("from User user where user.email = ?", email).isEmpty();
+		return !getHibernateTemplate().find(
+				"from User user where user.email = ?", email).isEmpty();
 	}
 
 	@Override
 	public List<User> getUsersWithRequests() {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find("SELECT user FROM User user INNER JOIN user.requests");
+		List<User> list = (List<User>) getHibernateTemplate().find(
+				"SELECT user FROM User user INNER JOIN user.requests");
 		return list;
+	}
+
+	@Override
+	public List<User> getPagedUsers(int startIndex, int pageSize,
+			String sorting, String filter) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = getFilterCriteria(filter, session);
+		if (!(sorting == null) && !(sorting.equals(""))) {
+			if (sorting.contains("ASC")) {
+				String column = sorting.split(" ")[0];
+				if (column.equals("roles")) {
+					criteria.createAlias("roles", "r");
+					criteria.addOrder(Order.asc("r.role"));
+				} else
+					criteria.addOrder(Order.asc(column));
+			} else {
+				String column = sorting.split(" ")[0];
+				if (column.equals("roles")) {
+					criteria.createAlias("roles", "r");
+					criteria.addOrder(Order.desc("r.role"));
+				} else
+					criteria.addOrder(Order.desc(column));
+			}
+		}
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		return criteria.list();
+	}
+
+	@Override
+	@Transactional
+	public Long getRecordCount(String filter) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = getFilterCriteria(filter, session);
+		Long count = (Long) criteria.setProjection(Projections.rowCount())
+				.uniqueResult();
+		return count;
+	}
+
+	private Criteria getFilterCriteria(String filter, Session session) {		
+		Criteria criteria = session.createCriteria(User.class);
+		Disjunction filters = Restrictions.disjunction();
+		if (!(filter == null) && !(filter.equals(""))) {
+			filter = "%" + filter + "%";
+			filters.add(Restrictions.like("username", filter));
+			filters.add(Restrictions.like("displayName", filter));
+			filters.add(Restrictions.like("email", filter));
+			filters.add(Restrictions.like("department", filter));
+			filters.add(Restrictions.like("info", filter));
+			criteria.add(filters);
+		}
+		return criteria;
 	}
 }

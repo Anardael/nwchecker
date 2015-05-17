@@ -5,6 +5,7 @@ import java.util.List;
 public class PaginationWrapper<E> {
 	private List<E> dataList;
 	private Long pageCount;
+	private Long recordCount;
 
 	public List<E> getDataList() {
 		return dataList;
@@ -31,7 +32,14 @@ public class PaginationWrapper<E> {
 		return pageCount;
 	}
 	public static int getFirstResult(int pageNumber, int pageSize){
-		System.out.println((pageNumber-1)*pageSize);
 		return (pageNumber-1)*pageSize;
+	}
+
+	public Long getRecordCount() {
+		return recordCount;
+	}
+
+	public void setRecordCount(Long recordCount) {
+		this.recordCount = recordCount;
 	}
 }

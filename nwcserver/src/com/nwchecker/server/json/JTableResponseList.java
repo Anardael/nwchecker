@@ -11,27 +11,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Boris Andreev
  * @version 1.0
  */
-public class TaskPassTableResponseList {
+public class JTableResponseList {
 	@JsonProperty("Result")
 	private String result;
 	@JsonProperty("Records")
-	private List<TaskPassJson> records;
+	private List<?> records;
 	@JsonProperty("TotalRecordCount")
 	private long totalRecordCount;
 	@JsonProperty("Message")
 	private String message;
 
-	public TaskPassTableResponseList() {
+	public JTableResponseList() {
 	}
 
-	public TaskPassTableResponseList(String result, List<TaskPassJson> records,
+	public JTableResponseList(String result, List<?> records,
 			long recordCount) {
 		this.result = result;
 		this.records = records;
 		this.totalRecordCount = recordCount;
 	}
 
-	public TaskPassTableResponseList(String result, String message) {
+	public JTableResponseList(String result, String message) {
 		this.result = result;
 	}
 
@@ -43,11 +43,11 @@ public class TaskPassTableResponseList {
 		this.result = result;
 	}
 
-	public List<TaskPassJson> getRecords() {
+	public List<?> getRecords() {
 		return records;
 	}
 
-	public void setRecords(List<TaskPassJson> records) {
+	public void setRecords(List<?> records) {
 		this.records = records;
 	}
 

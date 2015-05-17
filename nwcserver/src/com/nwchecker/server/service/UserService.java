@@ -1,8 +1,10 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.UserDAO;
+import com.nwchecker.server.json.UserListItemJson;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
 
@@ -83,6 +85,10 @@ public interface UserService {
      * @return List of Users
      */
     public List<User> getUsers();
+    
+    public List<User> getPagedUsers(int startIndex, int pageSize, String sorting, String filter);
+    public Long getRecordCount(String filter);
+    public PaginationWrapper<UserListItemJson> getUsersForPagination(int startIndex, int pageSize, String sorting, String filter);
 
     /**
      * Return all Users that have specific Role.

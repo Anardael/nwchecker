@@ -27,7 +27,6 @@ public class ArchiveController {
 			@RequestParam(defaultValue = "1", value="page") int pageNumber,
 			@RequestParam(defaultValue = "10") int pageSize) {
 		LOG.debug("Someone accessed archive page");
-		System.out.println(pageNumber + " " + pageSize);
 		PaginationWrapper<TaskJson> paginatedTaskJson = taskService
 				.getTaskJsonForPagination(Contest.Status.ARCHIVE, pageSize,
 						pageNumber);

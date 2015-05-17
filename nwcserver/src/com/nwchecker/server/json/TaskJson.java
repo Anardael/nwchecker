@@ -26,14 +26,20 @@ public class TaskJson extends Json{
 	    	this.rate=task.getRate();
 	    };
 	    public TaskJson(){};
+	    /**
+	     * 
+	     * @deprecated
+	     * 	use JsonUtil instead
+	     */
+	    @Deprecated
 	    public static TaskJson createTaskJson(Task task){
-	    	TaskJson tj = new TaskJson();
-	    	tj.complexity=task.getComplexity();
-	    	tj.description=task.getDescription();
-	    	tj.forumLink=task.getForumLink();
-	    	tj.title=task.getTitle();
-	    	tj.rate=task.getRate();
-	    	return tj;
+	    	TaskJson taskJson = new TaskJson();
+	    	taskJson.complexity=task.getComplexity();
+	    	taskJson.description=task.getDescription();
+	    	taskJson.forumLink=task.getForumLink();
+	    	taskJson.title=task.getTitle();
+	    	taskJson.rate=task.getRate();
+	    	return taskJson;
 	    }
 
 	    public String getTitle() {

@@ -7,18 +7,18 @@ import java.util.List;
 
 public class JsonUtil {
 	public static <E extends Json> List<E> createJsonList(Class<E> clazz,
-			List<?> o) {
+			List<?> sourceList) {
 		List<E> jsonList = new ArrayList<E>();
-		for (Object a : o){
+		for (Object a : sourceList){
 			jsonList.add(createJson(clazz, a));
 		}
 		return jsonList;
 	}
 
-	static <E extends Json> E createJson(Class<E> clazz, Object o) {
+	static <E extends Json> E createJson(Class<E> clazz, Object listElement) {
 		try {
-			Constructor<E> c = clazz.getConstructor(o.getClass());
-			E instance = c.newInstance(o);
+			Constructor<E> c = clazz.getConstructor(listElement.getClass());
+			E instance = c.newInstance(listElement);
 			return instance;
 		} catch (InstantiationException | IllegalAccessException
 				| NoSuchMethodException | SecurityException
