@@ -16,24 +16,11 @@ import java.security.Principal;
 
 @Controller("RuleController")
 public class RuleController {
-    private static final Logger LOG = Logger.getLogger(RuleController.class);
-
     @Autowired
     private RuleService ruleService;
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/rules")
-    public String showRules(Model model, Principal principal) {
-        if (principal != null) {
-            String username = principal.getName();
-            model.addAttribute("userData", userService.getUserByUsername(username));
-            LOG.info("\"" + principal.getName() + "\" initialized rules page.");
-        } else {
-            model.addAttribute("userData", null);
-        }
-
+    public String showRules(Model model) {
         RuleWrapper ruleWrapper = new RuleWrapper(ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
         model.addAttribute("ruleWrapper", ruleWrapper);
 
@@ -41,9 +28,9 @@ public class RuleController {
     }
 
     @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})
-    public String editRules(Model model, @ModelAttribute("ruleWrapper") RuleWrapper ruleWrapper, Principal principal) {
+    public String editRules(Model model, @ModelAttribute("ruleWrapper") RuleWrapper ruleWrapper) {
         ruleService.updateRules(ruleWrapper.getRuleList());
 
-        return showRules(model, principal);
+        return showRules(model);
     }
 }
