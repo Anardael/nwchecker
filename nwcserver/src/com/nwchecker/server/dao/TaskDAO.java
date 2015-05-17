@@ -110,7 +110,7 @@ public interface TaskDAO {
 	 * @return List of tasks
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int pageSize, int startIndex);
+			int pageSize, int startIndex, String filter);
 
 	/**
 	 * Get number of tasks that belong to all contests with certain status
@@ -119,5 +119,5 @@ public interface TaskDAO {
 	 *            Status of the contests
 	 * @return Number of tasks 
 	 */
-	Long getRecordCountByContestStatus(Contest.Status status);
+	Long getRecordCountByContestStatus(Contest.Status status, String filter);
 }

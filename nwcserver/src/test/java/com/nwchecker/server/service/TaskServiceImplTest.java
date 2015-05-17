@@ -127,22 +127,22 @@ public class TaskServiceImplTest {
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetTasksByContestStatus() {
-		assertEquals(
-				taskService.getTasksByContestStatus(Contest.Status.PREPARING)
-						.size(), 3);
+		assertEquals(3,	taskService.getTasksByContestStatus(Contest.Status.PREPARING)
+						.size());
 	}
 
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTasksByContestStatus() {
-		assertEquals(taskService.getPagedTasksByContestStatus(
-				Contest.Status.GOING, 1, 0).size(), 0);
+		assertEquals(0,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
+						1, 0, null).size());
 	}
 
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPageCount() {
-		assertEquals(taskService.getPageCount(Contest.Status.ARCHIVE, 1).intValue(), 0);
+		assertEquals(0,	taskService.getPageCount(Contest.Status.ARCHIVE, 1, null)
+						.intValue());
 	}
 
 }

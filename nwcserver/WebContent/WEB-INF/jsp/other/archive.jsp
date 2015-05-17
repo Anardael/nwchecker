@@ -4,6 +4,14 @@
 <spring:url value="/resources/" var="resources" />
 <html>
 <body>
+	<jsp:useBean id="filterText" class="java.lang.String" scope="session"></jsp:useBean>
+	<form action="<c:url value="/etiam.do"></c:url>">
+		<div class="navbar-form">
+			<input type="text" id="filterText" name="filterText"
+				class="form-control" placeholder="Search">
+			<button type="submit" id="filter" class="btn btn-default">Submit</button>
+		</div>
+
 		<div class="text-center">
 			<ul class="pagination">
 				<c:forEach begin="0" end="5" var="loop">
@@ -12,7 +20,7 @@
 							<li><a
 								href="<c:url value="/etiam.do">
 										<c:param name="page" value="${currentPage + loop - 3}"/>
-										</c:url>">
+									  </c:url>">
 									<c:out value="${currentPage + loop - 3}" />
 							</a></li>
 						</c:if>
@@ -24,7 +32,8 @@
 			<table class="table">
 				<tr>
 					<td class="list-group-item list-group-item-heading" width="40%">${task.title}</td>
-					<td class="list-group-item list-group-item-heading" width="15%"><spring:message code="archive.taskComplexity"/>:${task.complexity}</td>
+					<td class="list-group-item list-group-item-heading" width="15%"><spring:message
+							code="archive.taskComplexity" />:${task.complexity}</td>
 					<td class="list-group-item list-group-item-heading" width="20%">Discussion</td>
 				</tr>
 				<tr>
@@ -49,5 +58,6 @@
 				</c:forEach>
 			</ul>
 		</div>
+	</form>
 </body>
 </html>

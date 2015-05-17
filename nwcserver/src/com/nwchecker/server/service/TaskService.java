@@ -117,10 +117,10 @@ public interface TaskService {
 	 * @author Boris Andreev
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int pageSize, int pageNumber);
+			int pageSize, int pageNumber, String filter);
 
 	PaginationWrapper<TaskJson> getTaskJsonForPagination(
-			Contest.Status status, int pageSize, int pageNumber);
+			Contest.Status status, int pageSize, int pageNumber, String filter);
 
 	/**
 	 * Get number of pages that can fit the list of tasks that belong to
@@ -134,5 +134,5 @@ public interface TaskService {
 	 * @return number of pages
 	 * @author Boris Andreev
 	 */
-	Long getPageCount(Contest.Status status, int pageSize);
+	Long getPageCount(Contest.Status status, int pageSize, String filter);
 }

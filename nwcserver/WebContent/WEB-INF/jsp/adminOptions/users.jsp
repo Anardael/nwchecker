@@ -91,19 +91,20 @@
 
 											});
 							$('#jTable').jtable('load');
-							$('#filter').click(function(e){
-					            e.preventDefault();
-					            $('#jTable').jtable('load', {
-					            	jtFilter : $('#filterText').val()
-					            });    
+							$('#filter').click(function(e) {
+								e.preventDefault();
+								$('#jTable').jtable('load', {
+									jtFilter : $('#filterText').val()
+								});
 							})
 						})
 	</script>
 	<form>
-	<div class="navbar-form">
-		<input type="text" id="filterText" class="form-control" placeholder="Search">
-		<button type="submit" id="filter" class="btn btn-default">Submit</button>
-	</div>
+		<div class="navbar-form">
+			<input type="text" id="filterText" class="form-control"
+				placeholder="Search">
+			<button type="submit" id="filter" class="btn btn-default">Submit</button>
+		</div>
 	</form>
 	<div id="jTable"></div>
 	<!-- TABLE -->

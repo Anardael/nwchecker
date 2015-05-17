@@ -1,7 +1,6 @@
 package com.nwchecker.server.controller;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;

@@ -79,25 +79,25 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PaginationWrapper<TaskJson> getTaskJsonForPagination(
-			Status status, int pageSize, int pageNumber) {
-		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize, PaginationWrapper.getFirstResult(pageNumber, pageSize));
+			Status status, int pageSize, int pageNumber, String filter) {
+		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize, PaginationWrapper.getFirstResult(pageNumber, pageSize), filter);
 		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(TaskJson.class, tasks);
 		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();
 		response.setDataList(paginatedTaskJson);
-		response.setPageCount(PaginationWrapper.getPageCount(taskDao.getRecordCountByContestStatus(status), pageSize));
+		response.setPageCount(PaginationWrapper.getPageCount(taskDao.getRecordCountByContestStatus(status, filter), pageSize));
 		return response;
 	}
 
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
-			int startIndex) {
-		return taskDao.getPagedTasksByContestStatus(status, pageSize, startIndex);
+			int startIndex, String filter) {
+		return taskDao.getPagedTasksByContestStatus(status, pageSize, startIndex, filter);
 	}
 	
 
 	@Override
-	public Long getPageCount(Status status, int pageSize) {
-		Long records = taskDao.getRecordCountByContestStatus(status);
+	public Long getPageCount(Status status, int pageSize, String filter) {
+		Long records = taskDao.getRecordCountByContestStatus(status, filter);
 		Long pageCount;
 		if (records % pageSize == 0) {
 			pageCount = records / pageSize;
