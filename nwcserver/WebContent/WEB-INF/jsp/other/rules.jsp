@@ -24,7 +24,7 @@
                             <div class="modal" id="myModal_${vs.index}">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="editRules.do" method="post">
+                                        <form action="editRule.do" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>

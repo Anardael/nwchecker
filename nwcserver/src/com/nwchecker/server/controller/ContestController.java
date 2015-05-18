@@ -9,7 +9,6 @@ import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
-import com.nwchecker.server.wrapper.TypeContestWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

@@ -42,11 +42,7 @@ public class RatingController {
      */
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
-        List<Contest> ratingContests = contestService.getContestForRating();
-        Collections.sort(ratingContests, new ContestStartTimeComparator());
-        Collections.reverse(ratingContests);
-
-        model.addAttribute("ratingContests", ratingContests);
+        model.addAttribute("ratingContests", contestService.getContestForRating());
 
         return "nwcserver.contests.rating";
     }
@@ -62,6 +58,7 @@ public class RatingController {
      */
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
+
         model.addAttribute("contestId", id);
         Contest contest = contestService.getContestByID(id);
         if (contest.getTypeContest() != null && contest.getTypeContest().isDynamic()) {

@@ -20,8 +20,8 @@ public class RuleController {
         return "nwcserver.static.rules";
     }
 
-    @RequestMapping(value = "/editRules", method = {RequestMethod.GET, RequestMethod.POST})
-    public String editRules(Model model, @RequestParam("content") String ruleContent, @RequestParam("id") int ruleId) {
+    @RequestMapping(value = "/editRule", method = {RequestMethod.GET, RequestMethod.POST})
+    public String editRule(Model model, @RequestParam("content") String ruleContent, @RequestParam("id") int ruleId) {
         ruleService.updateRuleContentById(ruleId, ruleContent);
         return showRules(model);
     }

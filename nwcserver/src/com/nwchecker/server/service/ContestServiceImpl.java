@@ -5,12 +5,14 @@ import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.User;
+import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -83,6 +85,10 @@ public class ContestServiceImpl implements ContestService {
                 ratingContests.add(contest);
             }
         }
+
+        Collections.sort(ratingContests, new ContestStartTimeComparator());
+        Collections.reverse(ratingContests);
+
         return ratingContests;
     }
 
