@@ -5,7 +5,7 @@ import java.util.List;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskTheoryLink;
 
-public class TaskJson {
+public class TaskJson extends Json{
 	
 	    private String title;
 
@@ -18,15 +18,23 @@ public class TaskJson {
 	    private String forumLink;
 
 	    private List<TaskTheoryLink> theoryLinks;
-	    private TaskJson(){};
+	    public TaskJson(Task task){
+	    	this.complexity=task.getComplexity();
+	    	this.description=task.getDescription();
+	    	this.forumLink=task.getForumLink();
+	    	this.title=task.getTitle();
+	    	this.rate=task.getRate();
+	    };
+	    public TaskJson(){};
+	    
 	    public static TaskJson createTaskJson(Task task){
-	    	TaskJson tj = new TaskJson();
-	    	tj.complexity=task.getComplexity();
-	    	tj.description=task.getDescription();
-	    	tj.forumLink=task.getForumLink();
-	    	tj.title=task.getTitle();
-	    	tj.rate=task.getRate();
-	    	return tj;
+	    	TaskJson taskJson = new TaskJson();
+	    	taskJson.complexity=task.getComplexity();
+	    	taskJson.description=task.getDescription();
+	    	taskJson.forumLink=task.getForumLink();
+	    	taskJson.title=task.getTitle();
+	    	taskJson.rate=task.getRate();
+	    	return taskJson;
 	    }
 
 	    public String getTitle() {

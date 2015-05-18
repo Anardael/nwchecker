@@ -3,6 +3,8 @@ package com.nwchecker.server.service;
 import java.util.List;
 
 import com.nwchecker.server.json.TaskPassJson;
+import com.nwchecker.server.model.TaskPass;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 /**
  * <h1>Task Pass Service</h1> Service to get task solution submits from database
@@ -14,6 +16,8 @@ import com.nwchecker.server.json.TaskPassJson;
  */
 
 public interface TaskPassService {
+	PaginationWrapper<TaskPassJson> getPagedTaskPassJsonForTask(int taskId,
+			int startIndex, int pageSize, String sorting);
 	/**
 	 * Get paginated solution records list for task
 	 * <p>
@@ -28,23 +32,8 @@ public interface TaskPassService {
 	 *            A string represents requested sorting.
 	 * @return List of Json-like objects ready for display
 	 */
-	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
+	public List<TaskPass> getPagedTaskPassesForTask(int taskId,
 			int startIndex, int pageSize, String sorting);
-
-	/**
-	 * Get paginated solution records list for task
-	 * <p>
-	 * 
-	 * @param taskId
-	 *            Id of the task.
-	 * @param startIndex
-	 *            Start index of records for current page.
-	 * @param pageSize
-	 *            Count of maximum expected records.
-	 * @return List of Json-like objects ready for display
-	 */
-	public List<TaskPassJson> getPagedTaskPassesForTask(int taskId,
-			int startIndex, int pageSize);
 
 	/**
 	 * Get number of solution for a certain task
@@ -55,7 +44,7 @@ public interface TaskPassService {
 	 * @return Number of TaskPasses for task
 	 */
 
-	public Long getTaskPassSampleSize(int taskId);
+	public Long getTaskPassEntryCount(int taskId);
 
 	/**
 	 * Get number of solution for task that have successfully passed tests
@@ -65,5 +54,5 @@ public interface TaskPassService {
 	 *            Id of task
 	 * @return Number of successful TaskPasses
 	 */
-	public Long getSuccessfulTaskPassSampleSize(int taskId);
+	public Long getSuccessfulTaskPassEntryCount(int taskId);
 }

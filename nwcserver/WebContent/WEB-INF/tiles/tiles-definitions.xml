@@ -131,13 +131,21 @@
     	<definition name="nwcserver.adminOptions.users" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/adminOptions/users.jsp" />
 	       	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
-        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
-        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
-	        </put-list-attribute>
-	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
-	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
-	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
-	        	<add-attribute value="js/adminOptions/usersFormatters.js" />
+        		<!-- <add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        		<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/> 
+        		<add-attribute value="css/TaskStatistic/bootstrap-select.min.css"/>-->
+        		<add-attribute value="js/jquery-ui-1.11.4/custom-theme/jquery-ui-1.10.0.custom.css" />
+        		<add-attribute value="js/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css" />
+    			</put-list-attribute>
+    			
+    			<put-list-attribute name ="scripts" inherit="true" cascade="true">
+    				<add-attribute value="js/jquery-ui-1.11.4/jquery-ui.min.js" />
+    				<add-attribute value="js/jtable.2.4.0/external/json2.js"/>
+    				<add-attribute value="js/jtable.2.4.0/jquery.jtable.js"/>
+
+	        		<!--<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        		<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />-->
+	        		<add-attribute value="js/adminOptions/usersFormatters.js" />
 	        </put-list-attribute> 
 	    </definition>
 	    

@@ -7,10 +7,11 @@ import com.nwchecker.server.model.TaskPass;
  * <h1>TaskPass JSON</h1> JSON entity that is designed to transform a task
  * solution record into data ready for display
  * <p>
+ * 
  * @author Boris Andreev
  * @version 1.0
  */
-public class TaskPassJson {
+public class TaskPassJson extends Json {
 	@JsonProperty("Username")
 	private String username;
 
@@ -29,6 +30,24 @@ public class TaskPassJson {
 	public TaskPassJson() {
 	}
 
+	public TaskPassJson(TaskPass taskPass) {
+		this.setUsername(taskPass.getUser().getDisplayName());
+		this.setCompiler(taskPass.getCompiler().getName());
+		this.setExecutionTime(taskPass.getExecutionTime());
+		this.setMemoryUsed(taskPass.getMemoryUsed());
+		this.setExecutionTime(taskPass.getExecutionTime());
+		if (taskPass.isPassed()) {
+			this.setPassed("Passed");
+		} else
+			this.setPassed("Failed");
+	}
+
+	/**
+	 * 
+	 * @deprecated use JsonUtil instead
+	 */
+
+	@Deprecated
 	public static TaskPassJson createTaskPassJson(TaskPass taskPass) {
 		TaskPassJson tpj = new TaskPassJson();
 		tpj.setUsername(taskPass.getUser().getDisplayName());

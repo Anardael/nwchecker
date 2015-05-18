@@ -1,10 +1,12 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.TaskDAO;
-import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.utils.PaginationWrapper;
+import com.nwchecker.server.json.JsonUtil;
+import com.nwchecker.server.json.TaskJson;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,17 +77,37 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Task> getPagedTasksByContestStatus(Status status, int pageNumber,
-			int pageSize) {
-		LOG.debug("Successfully got tasks for contests with status " + status
-				+ " for page " + pageSize);
-		return taskDao.getPagedTasksByContestStatus(status, pageSize,
-				(pageNumber - 1) * pageSize);
+	public PaginationWrapper<TaskJson> getTaskJsonForPagination(Status status,
+			int pageSize, int pageNumber, String filter) {
+		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize,
+				PaginationWrapper.getFirstIndexOnPage(pageNumber, pageSize),
+				filter);
+		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(
+				TaskJson.class, tasks);
+		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();
+		response.setDataList(paginatedTaskJson);
+		response.setPageCount(PaginationWrapper.getPageCount(
+				taskDao.getRecordCountByContestStatus(status, filter), pageSize));
+		return response;
 	}
 
 	@Override
-	public Long getPageCount(Status status, int pageSize) {
-		Long records = taskDao.getRecordCountByContestStatus(status);
+	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
+			int startIndex, String filter) {
+		List<Task> pagedTasks;
+		if (!(filter == null) && !(filter.equals(""))) {
+			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
+					startIndex, filter);
+		} else {
+			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
+					startIndex);
+		}
+		return pagedTasks;
+	}
+
+	@Override
+	public Long getPageCount(Status status, int pageSize, String filter) {
+		Long records = taskDao.getRecordCountByContestStatus(status, filter);
 		Long pageCount;
 		if (records % pageSize == 0) {
 			pageCount = records / pageSize;

@@ -1,8 +1,10 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.json.TaskJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
 
@@ -115,7 +117,10 @@ public interface TaskService {
 	 * @author Boris Andreev
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int pageSize, int pageNumber);
+			int pageSize, int pageNumber, String filter);
+
+	PaginationWrapper<TaskJson> getTaskJsonForPagination(
+			Contest.Status status, int pageSize, int pageNumber, String filter);
 
 	/**
 	 * Get number of pages that can fit the list of tasks that belong to
@@ -129,5 +134,5 @@ public interface TaskService {
 	 * @return number of pages
 	 * @author Boris Andreev
 	 */
-	Long getPageCount(Contest.Status status, int pageSize);
+	Long getPageCount(Contest.Status status, int pageSize, String filter);
 }

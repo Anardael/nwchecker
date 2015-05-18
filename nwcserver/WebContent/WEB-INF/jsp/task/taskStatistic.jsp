@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <c:set var="taskId" value="${currentTask.id}" />
@@ -12,7 +12,7 @@
 			$('#jTable').jtable({
 				jqueryuiTheme : true,
 				paging : true,
-				pageSize : 5,
+				pageSize : 10,
 				sorting : true,
 				actions : {
 					listAction : '${baseURL}/TaskStatisticTable.do'
@@ -41,11 +41,10 @@
 
 			});
 			$('#jTable').jtable('load', {
-				taskId : '44'
+				taskId : '${taskId}'
 			});
 		})
 	</script>
 	<div id="jTable"></div>
-	<div></div>
 </body>
 </html>

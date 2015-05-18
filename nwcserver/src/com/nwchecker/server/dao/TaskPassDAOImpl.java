@@ -19,17 +19,21 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	public void init(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
 	}
+
 	@Transactional
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
 			int pageSize, String sorting) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Query q = session.createQuery("FROM TaskPass t WHERE task_id = :id ORDER BY " + sorting);
-		q.setParameter("id", id);
-		q.setFirstResult(startIndex);
-		q.setMaxResults(pageSize);
-		return (List<TaskPass>) q.list();
+
+		Query query = session
+				.createQuery("FROM TaskPass t WHERE task_id = :id ORDER BY "
+						+ sorting);
+		query.setParameter("id", id);
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		return (List<TaskPass>) query.list();
 	}
 
 	@Transactional
@@ -38,34 +42,35 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 			int pageSize) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Query q = session.createQuery("FROM TaskPass WHERE task_id = :id");
-		q.setParameter("id", id);
-		q.setFirstResult(startIndex);
-		q.setMaxResults(pageSize);
-		return (List<TaskPass>) q.list();
+		Query query = session.createQuery("FROM TaskPass WHERE task_id = :id");
+		query.setParameter("id", id);
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		return (List<TaskPass>) query.list();
 	}
 
 	@Transactional
 	@Override
-	public Long getTaskPassResponseSize(int id) {
+	public Long getTaskPassEntryCount(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Query q = session
+		Query query = session
 				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id");
-		q.setParameter("id", id);
-		Long size = (Long) q.uniqueResult();
+		query.setParameter("id", id);
+		Long size = (Long) query.uniqueResult();
 		return size;
 	}
+
 	@Transactional
 	@Override
-	public Long getSuccessfulTaskPassResponseSize(int id) {
+	public Long getSuccessfulTaskPassEntryCount(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Query q = session
+		Query query = session
 				.createQuery("SELECT COUNT(*) FROM TaskPass WHERE task_id = :id AND passed = :passed");
-		q.setParameter("id", id);
-		q.setParameter("passed", true);
-		Long size = (Long) q.uniqueResult();
+		query.setParameter("id", id);
+		query.setParameter("passed", true);
+		Long size = (Long) query.uniqueResult();
 		return size;
 	}
 }

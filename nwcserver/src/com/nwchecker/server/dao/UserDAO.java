@@ -120,5 +120,12 @@ public interface UserDAO {
      * @return List of Users that have requests
      */
 	public List<User> getUsersWithRequests();
+	
+	public List<User> getPagedUsersSortedAndFiltered(int startIndex, int pageSize, String sorting, String filter);
+	public List<User> getPagedUsersSorted(int startIndex, int pageSize, String sorting);
+	public List<User> getPagedUsersFiltered(int startIndex, int pageSize, String filter);
+	public List<User> getPagedUsers(int startIndex, int pageSize);
+	
+	public Long getRecordCount(String filter);
 
 }
