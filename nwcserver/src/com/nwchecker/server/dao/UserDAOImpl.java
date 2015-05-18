@@ -108,7 +108,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public List<User> getPagedUsers(int startIndex, int pageSize,
+	public List<User> getPagedUsersSortedAndFiltered(int startIndex, int pageSize,
 			String sorting, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
@@ -146,7 +146,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return count;
 	}
 
-	private Criteria getFilterCriteria(String filter, Session session) {		
+	private Criteria getFilterCriteria(String filter, Session session) {
 		Criteria criteria = session.createCriteria(User.class);
 		Disjunction filters = Restrictions.disjunction();
 		if (!(filter == null) && !(filter.equals(""))) {
@@ -159,5 +159,56 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 			criteria.add(filters);
 		}
 		return criteria;
+	}
+	
+
+	@Override
+	@Transactional
+	public List<User> getPagedUsersSorted(int startIndex, int pageSize,
+			String sorting) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = session.createCriteria(User.class);
+		if (sorting.contains("ASC")) {
+			String column = sorting.split(" ")[0];
+			if (column.equals("roles")) {
+				criteria.createAlias("roles", "r");
+				criteria.addOrder(Order.asc("r.role"));
+			} else
+				criteria.addOrder(Order.asc(column));
+		} else {
+			String column = sorting.split(" ")[0];
+			if (column.equals("roles")) {
+				criteria.createAlias("roles", "r");
+				criteria.addOrder(Order.desc("r.role"));
+			} else
+				criteria.addOrder(Order.desc(column));
+		}		
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		return criteria.list();
+	}
+
+	@Override
+	@Transactional
+	public List<User> getPagedUsersFiltered(int startIndex, int pageSize,
+			String filter) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = getFilterCriteria(filter, session);
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		return criteria.list();
+	}
+
+	@Override
+	@Transactional
+	public List<User> getPagedUsers(int startIndex, int pageSize) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		return criteria.list();
 	}
 }

@@ -92,7 +92,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getPagedUsers(int startIndex, int pageSize,
 			String sorting, String filter) {
-		return userDAO.getPagedUsers(startIndex, pageSize, sorting, filter);
+		List<User> pagedUsers;
+		if (!(sorting == null) && !(sorting.equals("")) && !(filter == null)
+				&& !(filter.equals(""))) {
+			pagedUsers = userDAO.getPagedUsersSortedAndFiltered(startIndex, pageSize, sorting,
+					filter);
+		} else {
+			if (!(sorting == null) && !(sorting.equals(""))) {
+				pagedUsers = userDAO.getPagedUsersSorted(startIndex, pageSize,
+						sorting);
+			} else {
+				if (!(filter == null) && !(filter.equals(""))) {
+					pagedUsers = userDAO.getPagedUsersFiltered(startIndex,
+							pageSize, filter);
+				} else {
+					pagedUsers = userDAO.getPagedUsers(startIndex, pageSize);
+				}
+			}
+		}
+		return pagedUsers;
 	}
 
 	@Override
@@ -104,8 +122,10 @@ public class UserServiceImpl implements UserService {
 	public PaginationWrapper<UserListItemJson> getUsersForPagination(
 			int startIndex, int pageSize, String sorting, String filter) {
 		PaginationWrapper<UserListItemJson> response = new PaginationWrapper<UserListItemJson>();
-		List<User> userList = getPagedUsers(startIndex, pageSize, sorting, filter);
-		List<UserListItemJson> jsonList = JsonUtil.createJsonList(UserListItemJson.class, userList);
+		List<User> userList = getPagedUsers(startIndex, pageSize, sorting,
+				filter);
+		List<UserListItemJson> jsonList = JsonUtil.createJsonList(
+				UserListItemJson.class, userList);
 		response.setDataList(jsonList);
 		response.setRecordCount(getRecordCount(filter));
 		return response;

@@ -11,4 +11,6 @@ public interface TaskPassDAO {
 	public Long getTaskPassEntryCount(int id);
 
 	public Long getSuccessfulTaskPassEntryCount(int id);
+
+	List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,	int pageSize);
 }

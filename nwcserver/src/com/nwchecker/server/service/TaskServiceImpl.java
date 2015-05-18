@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,22 +77,33 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public PaginationWrapper<TaskJson> getTaskJsonForPagination(
-			Status status, int pageSize, int pageNumber, String filter) {
-		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize, PaginationWrapper.getFirstResult(pageNumber, pageSize), filter);
-		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(TaskJson.class, tasks);
+	public PaginationWrapper<TaskJson> getTaskJsonForPagination(Status status,
+			int pageSize, int pageNumber, String filter) {
+		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize,
+				PaginationWrapper.getFirstIndexOnPage(pageNumber, pageSize),
+				filter);
+		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(
+				TaskJson.class, tasks);
 		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();
 		response.setDataList(paginatedTaskJson);
-		response.setPageCount(PaginationWrapper.getPageCount(taskDao.getRecordCountByContestStatus(status, filter), pageSize));
+		response.setPageCount(PaginationWrapper.getPageCount(
+				taskDao.getRecordCountByContestStatus(status, filter), pageSize));
 		return response;
 	}
 
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Status status, int pageSize,
 			int startIndex, String filter) {
-		return taskDao.getPagedTasksByContestStatus(status, pageSize, startIndex, filter);
+		List<Task> pagedTasks;
+		if (!(filter == null) && !(filter.equals(""))) {
+			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
+					startIndex, filter);
+		} else {
+			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
+					startIndex);
+		}
+		return pagedTasks;
 	}
-	
 
 	@Override
 	public Long getPageCount(Status status, int pageSize, String filter) {

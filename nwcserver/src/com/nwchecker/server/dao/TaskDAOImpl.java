@@ -6,7 +6,6 @@ import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
@@ -76,8 +75,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 
 	@Override
 	public List<Task> getTasksByContestStatus(Status status) {
-		List<Task> result = (List<Task>) getHibernateTemplate().find(
-				"from Task t where t.contest.status = ?", status);
+		List<Task> result = (List<Task>) getHibernateTemplate().find("from Task t where t.contest.status = ?", status);
 		return result;
 	}
 
@@ -88,17 +86,24 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
-		if (!(filter == null) && !(filter.equals(""))) {
-			filter = "%" + filter + "%";
-			criteria.add(Restrictions.like("title", filter));
-			criteria.add(Restrictions.like("description", filter));
-		}
+		filter = "%" + filter + "%";
+		criteria.add(Restrictions.like("title", filter));
+		criteria.add(Restrictions.like("description", filter));
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		List<Task> result = criteria.list();
-		for (Task t : result){
-			System.out.println(t.getId());
-		}
+		return result;
+	}
+	@Transactional
+	@Override
+	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
+			int pageSize, int startIndex) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = session.createCriteria(Task.class);
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		List<Task> result = criteria.list();
 		return result;
 	}
 

@@ -60,11 +60,11 @@ public class TaskStatisticController {
 			@RequestParam(required = false, value = "jtSorting") String sorting) {
 		LOG.debug("Attempting to get task result data for page " + startIndex
 				/ pageSize + " for task " + taskId);
-		PaginationWrapper<TaskPassJson> response = taskPassService
+		PaginationWrapper<TaskPassJson> paginatedTaskPass = taskPassService
 				.getPagedTaskPassJsonForTask(taskId, startIndex, pageSize,
 						sorting);
 		JTableResponseList jTableResponse = new JTableResponseList(
-				"OK", response.getDataList(), response.getRecordCount());
+				"OK", paginatedTaskPass.getDataList(), paginatedTaskPass.getRecordCount());
 		LOG.debug("Successfully retuned task result data for page "
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;

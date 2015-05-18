@@ -1,7 +1,6 @@
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.json.JTableResponseList;
-import com.nwchecker.server.json.JsonUtil;
 import com.nwchecker.server.json.UserListItemJson;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
@@ -24,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * <h1>Admin Options Controller</h1> This spring controller contains mapped

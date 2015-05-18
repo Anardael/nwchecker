@@ -22,17 +22,33 @@ public class PaginationWrapper<E> {
 	public void setPageCount(Long pageCount) {
 		this.pageCount = pageCount;
 	}
-	
-	public static Long getPageCount(long entryCount, int pageSize){
+
+	/**
+	 * Get number of pages that fit the results that fit all the records from
+	 * database.
+	 * 
+	 * @param recordCount
+	 * @param pageSize
+	 * @return number of pages
+	 */
+	public static Long getPageCount(long recordCount, int pageSize) {
 		Long pageCount;
-		if (entryCount%pageSize == 0){
-			pageCount = entryCount/pageSize;
-		}
-		else pageCount = entryCount/pageSize +1;
+		if (recordCount % pageSize == 0) {
+			pageCount = recordCount / pageSize;
+		} else
+			pageCount = recordCount / pageSize + 1;
 		return pageCount;
 	}
-	public static int getFirstResult(int pageNumber, int pageSize){
-		return (pageNumber-1)*pageSize;
+
+	/**
+	 * Get index of the first element that will be displayed on the page
+	 * 
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public static int getFirstIndexOnPage(int pageNumber, int pageSize) {
+		return (pageNumber - 1) * pageSize;
 	}
 
 	public Long getRecordCount() {

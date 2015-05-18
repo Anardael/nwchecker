@@ -111,6 +111,8 @@ public interface TaskDAO {
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int pageSize, int startIndex, String filter);
+	List<Task> getPagedTasksByContestStatus(Contest.Status status,
+			int pageSize, int startIndex);
 
 	/**
 	 * Get number of tasks that belong to all contests with certain status

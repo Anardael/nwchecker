@@ -26,12 +26,7 @@ public class TaskJson extends Json{
 	    	this.rate=task.getRate();
 	    };
 	    public TaskJson(){};
-	    /**
-	     * 
-	     * @deprecated
-	     * 	use JsonUtil instead
-	     */
-	    @Deprecated
+	    
 	    public static TaskJson createTaskJson(Task task){
 	    	TaskJson taskJson = new TaskJson();
 	    	taskJson.complexity=task.getComplexity();
