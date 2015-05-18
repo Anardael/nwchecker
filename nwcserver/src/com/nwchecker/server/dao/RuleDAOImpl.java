@@ -2,6 +2,7 @@ package com.nwchecker.server.dao;
 
 
 import com.nwchecker.server.model.Rule;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -44,8 +45,21 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
 
     @Override
     @Transactional
-    public List<Rule> getRulesByLanguageId(int languageId) {
-        return (List<Rule>) getHibernateTemplate().find("from Rule where language_id=?", languageId);
+    public List<Rule> getRulesByLanguageTag(String tag) {
+        return (List<Rule>) getHibernateTemplate().find("select r from Rule as r" +
+                " join r.language as rl" +
+                " where rl.tag=?", tag);
+    }
+
+    @Override
+    @Transactional
+    public void updateRuleContentById(int id, String content) {
+        Session session = getHibernateTemplate().getSessionFactory().openSession();
+        //noinspection JpaQlInspection
+        session.createQuery("update Rule set content = :content where id = :id")
+                .setParameter("content", content)
+                .setParameter("id", id).executeUpdate();
+        session.close();
     }
 
     @Override

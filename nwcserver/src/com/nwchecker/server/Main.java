@@ -67,10 +67,15 @@ public class Main {
         ApplicationContext context = new FileSystemXmlApplicationContext("src/resources/spring/application-context.xml");
 
         RuleDAO ruleDAO = context.getBean("RuleDAO", RuleDAO.class);
-        LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
+        /*LanguageDAO languageDAO = context.getBean("LanguageDAO", LanguageDAO.class);
         TypeContestDAO typeContestDAO = context.getBean("TypeDAO", TypeContestDAO.class);
+        RuleService ruleService = context.getBean("RuleService", RuleService.class);*/
 
-        RuleService ruleService = context.getBean("RuleService", RuleService.class);
+        List<Rule> list = ruleDAO.getRulesByLanguageTag("en");
+
+        for (Rule r : list){
+            System.out.println(r);
+        }
 
         /*Rule rule = new Rule();
         rule.setId(1);

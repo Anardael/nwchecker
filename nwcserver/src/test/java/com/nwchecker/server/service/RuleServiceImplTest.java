@@ -7,6 +7,7 @@ import com.nwchecker.server.dao.RuleDAO;
 import com.nwchecker.server.model.Rule;
 import com.nwchecker.server.service.RuleService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +59,9 @@ public class RuleServiceImplTest {
 
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
-    public void updateRulesTest() {
-        ruleService.updateRules(ruleList);
-        List<Rule> rules = ruleDAO.getAllRules();
-        for (int i = 0; i < ruleList.size(); i++){
-            assertEquals(ruleList.get(i), rules.get(i));
-        }
+    public void updateRuleContentByIdTest() {
+        String content = "new content";
+        ruleService.updateRuleContentById(1, content);
+        assertEquals(content, ruleDAO.readRuleById(1).getContent());
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <h1>Rule Service</h1>
- * Service that can get by language tag and update rules.
+ * Service that can get by language tag and update rule.
  * <p>
  *
  * @author Vitalik Kulishenko
@@ -24,10 +24,11 @@ public interface RuleService {
     List<Rule> getRulesByLanguageTag(String tag);
 
     /**
-     * Update list of Rules into database.
+     * Update rule content into database.
      * <p>
      *
-     * @param rules
+     * @param id
+     * @param content
      */
-    void updateRules(List<Rule> rules);
+    void updateRuleContentById(int id, String content);
 }

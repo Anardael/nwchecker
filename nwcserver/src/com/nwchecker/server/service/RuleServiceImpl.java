@@ -17,22 +17,16 @@ public class RuleServiceImpl implements RuleService {
     @Autowired
     private RuleDAO ruleDAO;
 
-    @Autowired
-    private LanguageDAO languageDAO;
-
     @Override
     public List<Rule> getRulesByLanguageTag(String tag) {
         LOG.debug("Start method getRulesByLanguageTag. Parameter: tag =  " + tag);
-        int languageId = languageDAO.getLanguageIdByTag(tag);
 
-        return ruleDAO.getRulesByLanguageId(languageId);
+        return ruleDAO.getRulesByLanguageTag(tag);
     }
 
     @Override
-    public void updateRules(List<Rule> rules) {
-        LOG.debug("Start method updateRules...");
-        for (Rule r : rules) {
-            ruleDAO.updateRule(r);
-        }
+    public void updateRuleContentById(int id, String content) {
+        LOG.debug("Start method updateRuleContent. Param = {id: " + id + ", content: " + content + "}");
+        ruleDAO.updateRuleContentById(id, content);
     }
 }
