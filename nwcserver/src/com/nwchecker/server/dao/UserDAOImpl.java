@@ -65,7 +65,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public User getUserByUsername(String username) {
 		@SuppressWarnings("unchecked")
 		List<User> list = (List<User>) getHibernateTemplate().find(
-				"from User where username=?", username);
+				"from User where username=? or email=?", username, username);
 		return list.get(0);
 	}
 
@@ -211,4 +211,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		criteria.setMaxResults(pageSize);
 		return criteria.list();
 	}
+
+//	@Override
+//	public User getUserByUsernameOrEmail(String username) {
+//		@SuppressWarnings("unchecked")
+//		List<User> list = (List<User>) getHibernateTemplate().find(
+//				"from User where username=? or email=?", username, username);
+//		return list.get(0);
+//	}
 }
