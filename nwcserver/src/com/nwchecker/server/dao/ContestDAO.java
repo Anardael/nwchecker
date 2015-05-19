@@ -62,7 +62,15 @@ public interface ContestDAO {
      */
     List<Contest> getContestByStatus(Contest.Status status);
 
-    List<Contest> getContestsWithDynamicRating();
+	 public List<Contest> getPagedContests( int pageSize, int startIndex);
+	
+	 public Long getEntryCount();
+	 
+	 
+	 public List<Contest> getPagedContests(Contest.Status status, int pageSize, int startIndex);
+		
+	 public Long getEntryCount(Contest.Status status);
 
     List<Contest> getContestsForRating();
+    List<Contest> getContestsWithDynamicRating();
 }

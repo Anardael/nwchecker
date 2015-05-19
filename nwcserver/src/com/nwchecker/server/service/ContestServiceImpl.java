@@ -72,4 +72,24 @@ public class ContestServiceImpl implements ContestService {
         return contestDAO.getContestsForRating();
     }
 
+    public List<Contest> getPagedContests(int pageSize, int pageNumber) {
+        return contestDAO.getPagedContests(pageSize, (pageNumber-1)*pageSize);
+    }
+    
+    public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber) {
+        return contestDAO.getPagedContests(status, pageSize, (pageNumber-1)*pageSize);
+    }
+    public Long getPageCount(int pageSize){
+    	Long count = contestDAO.getEntryCount();
+    	if (count%pageSize==0)
+    	return count/pageSize;
+    	else return count/pageSize+1;
+    }
+    
+    public Long getPageCount(Contest.Status status, int pageSize){
+    	Long count = contestDAO.getEntryCount(status);  	
+    	if (count%pageSize==0)
+    	return count/pageSize;
+    	else return count/pageSize+1;
+    }
 }

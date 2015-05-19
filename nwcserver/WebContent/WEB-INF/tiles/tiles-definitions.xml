@@ -83,6 +83,9 @@
     		<definition name="nwcserver.static.archive" extends = "nwcserver.static.abstract">
     			<put-attribute name="body" value="/WEB-INF/jsp/other/archive.jsp" />
     		</definition>
+			<definition name="nwcserver.static.news" extends = "nwcserver.static.abstract">
+				<put-attribute name="body" value="/WEB-INF/jsp/news/news.jsp" />
+			</definition>
     
     <definition name="nwcserver.abstract.full" template="/WEB-INF/jsp/templates/templateFull.jsp">
         <put-attribute name="header" value="/WEB-INF/jsp/fragments/bodyHeader.jsp" />
