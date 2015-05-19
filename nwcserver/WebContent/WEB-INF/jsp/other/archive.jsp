@@ -16,7 +16,7 @@
 		</div>
 		<c:choose>
 			<c:when test="${not empty tasks}">
-			<!-- Pagination STARTO -->
+				<!-- Pagination STARTO -->
 				<div class="text-center">
 					<ul class="pagination">
 						<!-- "Previous" button -->
@@ -30,19 +30,20 @@
 						</c:if>
 						<!-- Display first page -->
 						<c:if test="${currentPage - 3 gt 1}">
-							<li><a href="<c:url value="/etiam.do">
+							<li><a
+								href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="1"/>
 										</c:url>">
-											<c:out value="1" />
-									</a></li>
+									<c:out value="1" />
+							</a></li>
 						</c:if>
-						
-						<!-- Display there're more pages before first page -->						
+
+						<!-- Display there're more pages before first page -->
 						<c:if test="${currentPage - 2 gt 1}">
 							<li class="disabled"><a>...</a></li>
 						</c:if>
-						
+
 						<!-- Display 2 closest pages -->
 						<c:forEach begin="1" end="5" var="loop">
 							<c:choose>
@@ -67,12 +68,13 @@
 						</c:if>
 						<!-- Display last page -->
 						<c:if test="${currentPage + 3 lt pageCount}">
-							<li><a href="<c:url value="/etiam.do">
+							<li><a
+								href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${pageCount}"/>
 										</c:url>">
-											<c:out value="${pageCount}" />
-									</a></li>
+									<c:out value="${pageCount}" />
+							</a></li>
 						</c:if>
 
 						<!-- "Next" button -->
@@ -100,11 +102,42 @@
 						</tr>
 					</table>
 				</c:forEach>
+				<!-- Pagination STARTO -->
 				<div class="text-center">
 					<ul class="pagination">
-						<c:forEach begin="0" end="5" var="loop">
-							<c:if test="${currentPage + loop - 3>0}">
-								<c:if test="${currentPage + loop - 3<pageCount + 1}">
+						<!-- "Previous" button -->
+						<c:if test="${currentPage gt 1}">
+							<li><a
+								href="<c:url value="/etiam.do">
+										<c:param name="page" value="${currentPage - 1}"/>
+									  </c:url>"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+						</c:if>
+						<!-- Display first page -->
+						<c:if test="${currentPage - 3 gt 1}">
+							<li><a
+								href="<c:url value="/etiam.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="1"/>
+										</c:url>">
+									<c:out value="1" />
+							</a></li>
+						</c:if>
+
+						<!-- Display there're more pages before first page -->
+						<c:if test="${currentPage - 2 gt 1}">
+							<li class="disabled"><a>...</a></li>
+						</c:if>
+
+						<!-- Display 2 closest pages -->
+						<c:forEach begin="1" end="5" var="loop">
+							<c:choose>
+								<c:when test="${loop eq 3}">
+									<li class="active"><a><c:out value="${currentPage}" /></a></li>
+								</c:when>
+								<c:when
+									test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
 									<li><a
 										href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
@@ -112,11 +145,36 @@
 										</c:url>">
 											<c:out value="${currentPage + loop - 3}" />
 									</a></li>
-								</c:if>
-							</c:if>
+								</c:when>
+							</c:choose>
 						</c:forEach>
+						<!-- Display there're more pages before last page -->
+						<c:if test="${currentPage + 2 lt pageCount}">
+							<li class="disabled"><a>...</a></li>
+						</c:if>
+						<!-- Display last page -->
+						<c:if test="${currentPage + 3 lt pageCount}">
+							<li><a
+								href="<c:url value="/etiam.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${pageCount}"/>
+										</c:url>">
+									<c:out value="${pageCount}" />
+							</a></li>
+						</c:if>
+
+						<!-- "Next" button -->
+						<c:if test="${currentPage lt pageCount}">
+							<li><a
+								href="<c:url value="/etiam.do">
+										<c:param name="page" value="${currentPage + 1}"/>
+									  </c:url>"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</c:if>
 					</ul>
 				</div>
+				<!-- Pagination FINISH -->
 			</c:when>
 			<c:otherwise>
 				<div class="alert alert-danger" role="alert">
