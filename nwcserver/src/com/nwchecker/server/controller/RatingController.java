@@ -38,7 +38,7 @@ public class RatingController {
      * <p/>
      *
      * @param model Spring Framework model for this page
-     * @return <b>rating.jsp</b> Returns page with completed contests list
+     * @return <b>CintestRating.jsp</b> Returns page with completed contests list
      */
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {

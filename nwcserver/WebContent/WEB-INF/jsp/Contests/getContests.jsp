@@ -19,6 +19,36 @@
 </script>
 <div class="main-block">
     <div id="accordion">
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button"
+                    data-toggle="dropdown">
+                <%=request.getParameter("status") == null ? "ALL CONTESTS"
+                        : request.getParameter("status")%>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="/NWCServer/getContests.do">All Contests</a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=GOING"/>">
+                    <spring:message code="contest.going.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=PREPARING"/>">
+                    <spring:message code="contest.preparing.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=RELEASE"/>">
+                    <spring:message code="contest.release.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=ARCHIVE"/>">
+                    <spring:message code="contest.archive.label" />
+                </a></li>
+            </ul>
+        </div>
+
+
         <c:forEach items="${contests}" var="contest" varStatus="row">
             <a class="list-group-item" data-toggle="collapse" data-parent="#accordion"
                href="#collapse${row.index}">
@@ -42,6 +72,11 @@
                         <c:if test="${contest.status=='RELEASE'}">
                             <label class="label label-info contestsStatus">
                                 <spring:message code="contest.release.label"/>
+                            </label>
+                        </c:if>
+                        <c:if test="${contest.status=='ARCHIVE'}">
+                            <label class="label label-danger contestsStatus"> <spring:message
+                                    code="contest.archive.label" />
                             </label>
                         </c:if>
                         <c:if test="${contest.hidden==true}">
@@ -148,6 +183,22 @@
                     <spring:message code="contest.createButton.caption"/></button>
             </div>
         </security:authorize>
+        <div class="text-center">
+            <ul class="pagination">
+                <c:forEach begin="0" end="5" var="loop">
+                    <c:if test="${currentPage + loop - 3>0}">
+                        <c:if test="${currentPage + loop - 3<pageCount + 1}">
+                            <li><a
+                                    href="<c:url value="/getContests.do">
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+                                <c:out value="${currentPage + loop - 3}" />
+                            </a></li>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </div>
     </div>
 </div>
 </body>

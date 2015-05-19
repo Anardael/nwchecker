@@ -54,14 +54,25 @@ public interface ContestDAO {
      */
     Contest getContestByID(int id);
 
-    /**
-     * Return all Contests that has specific status.
-     * <p>
-     * @param status Specific status of required Contests
-     * @return List of Contests that have specific status
-     */
-    List<Contest> getContestByStatus(Contest.Status status);
+	/**
+	 * Return all Contests that has specific status.
+	 * <p>
+	 * 
+	 * @param status
+	 *            Specific status of required Contests
+	 * @return List of Contests that have specific status
+	 */
+	 public List<Contest> getContestByStatus(Contest.Status status);
+	 
+
+	 public List<Contest> getPagedContests( int pageSize, int startIndex);
+	
+	 public Long getEntryCount();
+	 
+	 
+	 public List<Contest> getPagedContests(Contest.Status status, int pageSize, int startIndex);
+		
+	 public Long getEntryCount(Contest.Status status);
 
     List<Contest> getContestsWithDynamicRating();
-
 }

@@ -1,12 +1,18 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Contest;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import javax.transaction.TransactionScoped;
+import javax.transaction.Transactional;
 
 @Repository("ContestDAO")
 public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
@@ -54,4 +60,44 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     public List<Contest> getContestsWithDynamicRating() {
         return (List<Contest>) getHibernateTemplate().find("from Contest where typeContest.dynamic=?", true);
     }
+
+    @Transactional
+	@Override
+	public List<Contest> getPagedContests(int pageSize, int startIndex) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createQuery("from Contest where hidden=:hidden order by starts desc");
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		query.setParameter("hidden", false);
+		return query.list();
+	}
+    @Transactional
+	@Override
+	public Long getEntryCount() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createQuery("select count(*) from Contest where hidden=:hidden");
+		query.setParameter("hidden", false);
+		return (Long) query.uniqueResult();
+	}
+    
+    @Transactional
+	@Override
+	public List<Contest> getPagedContests(Contest.Status status ,int pageSize, int startIndex) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createQuery("from Contest where status = :status and hidden=:hidden order by starts desc");
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		query.setParameter("hidden", false);
+		query.setParameter("status", status);
+		return query.list();
+	}
+    @Transactional
+	@Override
+	public Long getEntryCount(Contest.Status status) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createQuery("select count(*) from Contest where status = :status and hidden=:hidden");
+		query.setParameter("hidden", false);
+		query.setParameter("status", status);
+		return (Long) query.uniqueResult();
+	}
 }
