@@ -126,14 +126,14 @@
 									<security:authorize access="hasRole('ROLE_USER')">
 										<button class="btn btn-sm btn-info form-group"
 											style="font-weight: 600"
-											onclick="startContest(${contest.tasks[0].id})">
+											onclick="openContest(${contest.id})">
 											<spring:message code="contest.startButton" />
 										</button>
 									</security:authorize>
 									<security:authorize access="!isAuthenticated()">
 										<button class="btn btn-sm btn-info form-group"
 											style="font-weight: 600"
-											onclick="startContest(${contest.tasks[0].id})">
+											onclick="openContest(${contest.id})">
 											<spring:message code="contest.unauthenticated" />
 										</button>
 									</security:authorize>

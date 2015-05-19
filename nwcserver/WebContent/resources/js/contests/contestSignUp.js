@@ -1,6 +1,5 @@
-function startContest(indexFirstTask, indexContestType) {
-    /*location.href = 'checkPassTaskType.do?id=' + indexFirstTask + '&typeId=' + indexContestType;*/
-    location.href = 'passTask.do?id=' + indexFirstTask;
+function openContest(indexContest) {
+    location.href = 'passContest.do?id=' + indexContest;
 }
 function archive(){
 	location.href='etiam.do';

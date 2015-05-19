@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.nwchecker.server.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -50,55 +51,52 @@ public class ContestPassController {
     private CompilerDAO compilerService;
     @Autowired
     private TaskPassService taskPassService;
-
-    /**
-     * This mapped method used to return page that allows user to
-     * pass contest.
-     * <p>
-     * <b>Note:</b>Only USER has rights to use this method.
-     *
-     * @param principal This is general information about user, who
-     *                  tries to call this method
-     * @param taskId Id of selected task
-     * @param model Spring Framework model for this page
-     * @return Page when user can continue passing contest if <b>success</b>.
-     *         Page <b>accessDenied403.jsp</b> if <b>fails</b>.
-     */
+    @Autowired
+    private ContestService contestService;
+    
     @Link(label="Task", family="contests", parent = "Contests")
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/passTask", method = RequestMethod.GET)
-    public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
-                                 Model model) {
-    	//Sending task statistic
-    	Long successful = taskPassService.getSuccessfulTaskPassEntryCount(taskId);
-    	Long all = taskPassService.getTaskPassEntryCount(taskId);
-    	if(!(all == 0)){
-    		double rate = successful.doubleValue() / all.doubleValue();
-    		model.addAttribute("taskSuccessRate", rate);
-    	}
-        Task currentTask = taskService.getTaskById(taskId);
-        model.addAttribute("currentTask", currentTask);
-        if (currentTask.getContest().getTypeContest() != null
-                && currentTask.getContest().getTypeContest().isDynamic() != null
-                && currentTask.getContest().getTypeContest().isDynamic()) {
-            model.addAttribute("currentContestId", currentTask.getContest().getId());
+    @RequestMapping(value = "/passContest", method = RequestMethod.GET)
+    public String getContestForPass(Principal principal, @RequestParam("id") int contestId,
+                                    Model model) {
+        Contest currentContest = contestService.getContestByID(contestId);
+
+        if(!model.containsAttribute("currentTask")){
+            //Sending task statistic
+            Task firstTaskCurrentContest = currentContest.getTasks().get(0);
+            Long successful = taskPassService.getSuccessfulTaskPassEntryCount(firstTaskCurrentContest.getId());
+            Long all = taskPassService.getTaskPassEntryCount(firstTaskCurrentContest.getId());
+            if(!(all == 0)){
+                double rate = successful.doubleValue() / all.doubleValue();
+                model.addAttribute("taskSuccessRate", rate);
+                model.addAttribute("currentTask", firstTaskCurrentContest);
+            } else{
+                //double rate = successful.doubleValue() / all.doubleValue();
+                model.addAttribute("taskSuccessRate", 0);
+                model.addAttribute("currentTask", firstTaskCurrentContest);
+            }
+        }
+        if (currentContest.getTypeContest() != null
+                && currentContest.getTypeContest().isDynamic() != null
+                && currentContest.getTypeContest().isDynamic()) {
+            model.addAttribute("currentContestId", currentContest.getId());
         } else  {
             model.addAttribute("currentContestId", null);
         }
         User user = userService.getUserByUsername(principal.getName());
         //check if contest status provide passing:
-        if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||
-                currentTask.getContest().getStatus() == Contest.Status.ARCHIVE)) {
-        	model.addAttribute("pageName", "result");
+        if (!(currentContest.getStatus() == Contest.Status.GOING ||
+                currentContest.getStatus() == Contest.Status.ARCHIVE)) {
+            model.addAttribute("pageName", "result");
             return "nwcserver.403";
         }
         //if contest is going:
         ContestPass currentContestPass = null;
-        if (currentTask.getContest().getStatus() == Contest.Status.GOING) {
+        if (currentContest.getStatus() == Contest.Status.GOING) {
             //check if user has contestPass for this contest:
             boolean contains = false;
             for (ContestPass c : user.getContestPassList()) {
-                if (c.getContest().equals(currentTask.getContest())) {
+                if (c.getContest().equals(currentContest)) {
                     contains = true;
                     currentContestPass = c;
                     break;
@@ -106,15 +104,15 @@ public class ContestPassController {
             }
             if (!contains) {
                 ContestPass contestPass = new ContestPass();
-                contestPass.setContest(currentTask.getContest());
+                contestPass.setContest(currentContest);
                 contestPass.setUser(user);
                 contestPassService.saveContestPass(contestPass);
             }
         }
-        model.addAttribute("isArchive", (currentTask.getContest().getStatus() == Contest.Status.ARCHIVE));
+        model.addAttribute("isArchive", (currentContest.getStatus() == Contest.Status.ARCHIVE));
         //get contest tasks titles
         Map<Integer, String> taskTitles = new TreeMap<>();
-        Contest currentContest = currentTask.getContest();
+
         for (Task task : currentContest.getTasks()) {
             taskTitles.put(task.getId(), task.getTitle());
         }
@@ -151,6 +149,37 @@ public class ContestPassController {
         model.addAttribute("compilers", compilerService.getAllCompilers());
         model.addAttribute("pageName", "task");
         return "nwcserver.tasks.pass";
+    }
+
+    /**
+     * This mapped method used to return page that allows user to
+     * pass contest.
+     * <p>
+     * <b>Note:</b>Only USER has rights to use this method.
+     *
+     * @param principal This is general information about user, who
+     *                  tries to call this method
+     * @param taskId Id of selected task
+     * @param model Spring Framework model for this page
+     * @return Page when user can continue passing contest if <b>success</b>.
+     *         Page <b>accessDenied403.jsp</b> if <b>fails</b>.
+     */
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/passTask", method = RequestMethod.GET)
+    public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
+                                 Model model) {
+    	//Sending task statistic
+    	Long successful = taskPassService.getSuccessfulTaskPassEntryCount(taskId);
+    	Long all = taskPassService.getTaskPassEntryCount(taskId);
+    	if(!(all == 0)){
+    		double rate = successful.doubleValue() / all.doubleValue();
+    		model.addAttribute("taskSuccessRate", rate);
+    	}
+        Task currentTask = taskService.getTaskById(taskId);
+        model.addAttribute("currentTask", currentTask);
+
+        int currentContest = currentTask.getContest().getId();
+        return getContestForPass(principal, currentContest, model);
     }
 
     /**

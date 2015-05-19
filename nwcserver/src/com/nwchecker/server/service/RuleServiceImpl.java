@@ -19,7 +19,7 @@ public class RuleServiceImpl implements RuleService {
 
     @Override
     public List<Rule> getRulesByLanguageTag(String tag) {
-        LOG.debug("Start method getRulesByLanguageTag. Parameter: tag =  " + tag);
+        LOG.debug("Start method getRulesByLanguageTag. Param = {tag: " + tag + "}");
 
         return ruleDAO.getRulesByLanguageTag(tag);
     }

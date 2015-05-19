@@ -64,4 +64,5 @@ public interface ContestDAO {
 
     List<Contest> getContestsWithDynamicRating();
 
+    List<Contest> getContestsForRating();
 }

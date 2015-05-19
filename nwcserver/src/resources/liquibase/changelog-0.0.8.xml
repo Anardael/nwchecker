@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="8" author="Kulishenko">
+        <comment>
+            Update data into DB
+        </comment>
+        <sql>
+            #Update type_contest into DB
+            UPDATE type_contest SET dynamic=false WHERE id='1';
+
+            #Update contest into DB
+            UPDATE contest SET typeContest_id=1 WHERE id='1';
+            UPDATE contest SET typeContest_id=1 WHERE id='2';
+            UPDATE contest SET typeContest_id=1 WHERE id='3';
+            UPDATE contest SET typeContest_id=1 WHERE id='4';
+            UPDATE contest SET typeContest_id=1 WHERE id='5';
+            UPDATE contest SET typeContest_id=1 WHERE id='6';
+            UPDATE contest SET typeContest_id=1 WHERE id='7';
+            UPDATE contest SET typeContest_id=1 WHERE id='8';
+            UPDATE contest SET typeContest_id=1 WHERE id='9';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

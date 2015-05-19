@@ -16,8 +16,8 @@
 		<div class="page-header">
 			<h2>
 				<c:choose>
-					<c:when test="${currentContestFirstTaskId != null}">
-						<a href="<c:url value='/passTask.do?id=${currentContestFirstTaskId}'/>"
+					<c:when test="${dynamic}">
+						<a href="<c:url value='/passContest.do?id=${contestId}'/>"
 							style="font-size: 25px; color: #101010"> ${contestTitle} </a>
 					</c:when>
 					<c:otherwise>
