@@ -3,13 +3,13 @@
 <html>
 <ul class="list-group submenu">
 	<c:choose>
-		<c:when test="${pageName=='archive'}">
-			<li class="list-group-item active"><spring:message
-					code="home.archive.caption" /></li>
+		<c:when test="${pageName=='news'}">
+			<li class="list-group-item active"><a href="news.do"><spring:message
+						code="news.caption" /></a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="list-group-item"><a href="etiam.do"><spring:message
-						code="home.archive.caption" /></a>
+			<li class="list-group-item"><a href="news.do"><spring:message
+						code="news.caption" /></a></li>
 		</c:otherwise>
 	</c:choose>
 	<c:choose>
@@ -33,14 +33,14 @@
 		</c:otherwise>
 	</c:choose>
 	<c:choose>
-	<c:when test="${pageName=='forum'}">
-		<li class="list-group-item active"><spring:message
-				code="home.forum.caption" /></li>
-	</c:when>
-	<c:otherwise>
-		<li class="list-group-item"><a href="phasellus.do"><spring:message
-					code="home.forum.caption" /></a></li>
-	</c:otherwise>
+		<c:when test="${pageName=='forum'}">
+			<li class="list-group-item active"><spring:message
+					code="home.forum.caption" /></li>
+		</c:when>
+		<c:otherwise>
+			<li class="list-group-item"><a href="phasellus.do"><spring:message
+						code="home.forum.caption" /></a></li>
+		</c:otherwise>
 	</c:choose>
 </ul>
 </html>

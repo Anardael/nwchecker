@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.UserListItemJson;
 import com.nwchecker.server.model.Role;
@@ -61,6 +62,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>users.jsp</b> Returns page with list of users
 	 */
+	@Link(label="List of Users", family="adminOptions", parent = "")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Principal principal, Model model) {
@@ -111,6 +113,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>userEdit.jsp</b> Returns page that allows to change user data
 	 */
+	@Link(label="Edit User", family="adminOptions", parent = "List of Users")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
 	public String user(@RequestParam(value = "Username") String username,

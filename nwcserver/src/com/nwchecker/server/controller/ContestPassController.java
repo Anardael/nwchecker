@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.model.*;
 import com.nwchecker.server.service.ContestPassService;
@@ -63,6 +64,7 @@ public class ContestPassController {
      * @return Page when user can continue passing contest if <b>success</b>.
      *         Page <b>accessDenied403.jsp</b> if <b>fails</b>.
      */
+    @Link(label="Task", family="contests", parent = "Contests")
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 
@@ -59,13 +60,14 @@ public class RegistrationController {
      * @param model Spring Framework model for this page
      * @return <b>registration.jsp</b> Returns page where user can register
      */
+    @Link(label="Registration", family="profile", parent = "")
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String initRegistrationForm(Model model) {
         LOG.info("Someone initialized registration page");
         model.addAttribute("userRegistrationForm", new User());
         model.addAttribute("pageName", "registration");
-        return "loggingAndRegistration/registration";
+        return "nwcserver.user.registration";
     }
 
     /**
@@ -77,12 +79,13 @@ public class RegistrationController {
      * @return Redirects to success page or shows validation errors
      */
     @PreAuthorize("!isAuthenticated()")
+    @Link(label="Registration", family="profile", parent = "")
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             LOG.info("Someone trying make registration, but inputted not correct data.");
             model.addAttribute("pageName", "userCreated");
-            return "loggingAndRegistration/registration";
+            return "nwcserver.user.registration";
         } else {
             userService.addUser(user);
             LOG.info("\"" + user.getUsername() + "\" is registered .");

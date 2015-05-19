@@ -61,17 +61,17 @@
             </c:choose>
             <!-- news -->
             <c:choose>
-                <c:when test="${pageName=='news'}">
-                    <li class="active"><a><spring:message code="news.caption"/></a></li>
+                <c:when test="${pageName=='archive'}">
+                    <li class="active"><a><spring:message code="home.archive.caption" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="news.do"><spring:message code="news.caption"/></a></li>
+                    <li><a href="etiam.do"><spring:message code="home.archive.caption" /></a></li>
                 </c:otherwise>
             </c:choose>
             <!-- olympiad -->
             <c:choose>
                 <c:when test="${pageName=='contest'}">
-                    <li class="active"><a href="getContests.do"><spring:message code="contest.caption"/></a></li>
+                    <li class="active"><a><spring:message code="contest.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="getContests.do"><spring:message code="contest.caption"/></a></li>
@@ -80,7 +80,7 @@
             <!-- rating -->
             <c:choose>
                 <c:when test="${pageName=='rating'}">
-                    <li class="active"><a href="rating.do"><spring:message code="rating.caption"/></a></li>
+                    <li class="active"><a><spring:message code="rating.caption"/></a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="rating.do"><spring:message code="rating.caption"/></a></li>
@@ -125,5 +125,19 @@
                 </li>
             </security:authorize>
         </ul>
-    </nav>        
+    </nav>
+    <ol class="breadcrumb">
+	<c:if test="${not empty sessionScope.currentBreadCrumb}">
+    	<c:forEach var="entry" items="${sessionScope.currentBreadCrumb}">
+			<c:choose>
+				<c:when test="${entry.currentPage == true}">
+					<li class="active">${entry.label}</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${entry.url}">${entry.label}</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</c:if>
+	</ol>        
 </header>

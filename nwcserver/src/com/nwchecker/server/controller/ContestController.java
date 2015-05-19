@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
@@ -9,6 +10,7 @@ import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -78,6 +80,7 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>contest.jsp</b> Returns page when user can view contests
      */
+    @Link(label="Contests", family="contests", parent = "")
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
     	model.addAttribute("pageName","contest");
@@ -135,6 +138,7 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>contestCreate.jsp</b> Returns page where user can create new contest
      */
+    @Link(label="Create Contest", family="contests", parent = "Contests")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
@@ -240,6 +244,7 @@ public class ContestController {
      * @param model Spring Framework model for this page
      * @return <b>contestCreate.jsp</b> Returns page where teacher can edit contest
      */
+    @Link(label="Edit Contest", family="contests", parent = "Contests")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {

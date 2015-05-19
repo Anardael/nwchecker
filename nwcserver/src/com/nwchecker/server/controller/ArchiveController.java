@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.TaskJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.TaskService;
@@ -19,6 +20,8 @@ public class ArchiveController {
 	@Autowired
 	TaskService taskService;
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
+	
+	@Link(label="Archive", family="archive", parent = "")
 	@RequestMapping("/etiam")
 	public String archivePage(Model model,
 			@RequestParam(defaultValue = "1", value="page") int pageNumber,
