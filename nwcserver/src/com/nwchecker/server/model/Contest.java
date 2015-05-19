@@ -10,8 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <h1>Contest Entity</h1>
- * Entity that represents some Contest in DB.
+ * <h1>Contest Entity</h1> Entity that represents some Contest in DB.
  * <p>
  *
  * @author Roman Zayats
@@ -21,148 +20,170 @@ import java.util.List;
 @Table(name = "contest")
 public class Contest {
 
-    public static enum Status {
-        ARCHIVE, PREPARING, RELEASE, GOING
-    }
+	public static enum Status {
+		ARCHIVE, PREPARING, RELEASE, GOING;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+		@Override
+		public String toString() {
+			switch (this) {
+			case PREPARING:
+				return "PREPARING";
+			case RELEASE:
+				return "RELEASE";
+			case GOING:
+				return "GOING";
+			default:
+				throw new IllegalArgumentException();
+			}
+		}
 
-    @Column(name = "title")
-    @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
-    @NotEmpty
-    @Size(max = 100)
-    private String title;
+		public static Status stringToStatus(String status) {
+			if (Status.PREPARING.toString().equals(status)) {
+				return Status.PREPARING;
+			}
+			if (Status.RELEASE.toString().equals(status)) {
+				return Status.RELEASE;
+			}
+			if (Status.GOING.toString().equals(status)) {
+				return Status.GOING;
+			}
+			return null;
+		}
+	}
 
-    @Column(name = "description", columnDefinition = "TEXT")
-    @NotEmpty
-    private String description;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    @Column(name = "starts")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date starts;
+	@Column(name = "title")
+	@Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
+	@NotEmpty
+	@Size(max = 100)
+	private String title;
 
-    @Column(name = "duration")
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date duration;
+	@Column(name = "description", columnDefinition = "TEXT")
+	@NotEmpty
+	private String description;
 
-    @OneToMany(mappedBy = "contest", orphanRemoval = true,
-            cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<Task> tasks;
+	@Column(name = "starts")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date starts;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "contest_users",
-            joinColumns = {
-                    @JoinColumn(name = "contest_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")})
-    private List<User> users;
+	@Column(name = "duration")
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date duration;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
+	@OneToMany(mappedBy = "contest", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<Task> tasks;
 
-    @Column(name = "hidden")
-    private boolean hidden;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "contest_users", joinColumns = { @JoinColumn(name = "contest_id") }, inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	private List<User> users;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TypeContest typeContest;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 
-    public Contest() {
-        this.title = "";
-        this.description = "";
-    }
+	@Column(name = "hidden")
+	private boolean hidden;
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	private TypeContest typeContest;
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
+	public Contest() {
+		this.title = "";
+		this.description = "";
+	}
 
-    public int getId() {
-        return id;
-    }
+	public List<Task> getTasks() {
+		return tasks;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public Date getStarts() {
-        return starts;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setStarts(Date starts) {
-        this.starts = starts;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Date getDuration() {
-        return duration;
-    }
+	public Date getStarts() {
+		return starts;
+	}
 
-    public void setDuration(Date duration) {
-        this.duration = duration;
-    }
+	public void setStarts(Date starts) {
+		this.starts = starts;
+	}
 
-    public List<User> getUsers() {
-        return users;
-    }
+	public Date getDuration() {
+		return duration;
+	}
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+	public void setDuration(Date duration) {
+		this.duration = duration;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public List<User> getUsers() {
+		return users;
+	}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
-    public boolean isHidden() {
-        return hidden;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
-    public TypeContest getTypeContest() {
-        return typeContest;
-    }
+	public boolean isHidden() {
+		return hidden;
+	}
 
-    public void setTypeContest(TypeContest typeContest) {
-        this.typeContest = typeContest;
-    }
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
 
-    public void setTypeId(int typeId){
-        this.typeContest = new TypeContest();
-        typeContest.setId(typeId);
-    }
+	public TypeContest getTypeContest() {
+		return typeContest;
+	}
 
-    @Override
-    public boolean equals(Object c) {
-        return (c != null && c instanceof Contest && ((Contest) c).getId() == this.id);
-    }
+	public void setTypeContest(TypeContest typeContest) {
+		this.typeContest = typeContest;
+	}
+
+	public void setTypeId(int typeId) {
+		this.typeContest = new TypeContest();
+		typeContest.setId(typeId);
+	}
+
+	@Override
+	public boolean equals(Object c) {
+		return (c != null && c instanceof Contest && ((Contest) c).getId() == this.id);
+	}
 
 }

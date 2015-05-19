@@ -21,49 +21,50 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * <h1>TaskServiceImpl Test</h1> Test for TaskServiceImpl methods.
+ * <h1>TaskServiceImpl Test</h1>
+ * Test for TaskServiceImpl methods.
  * <p/>
  *
  * @author Roman Zayats
  * @version 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/forTests/context.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+                         DbUnitTestExecutionListener.class})
 public class TaskServiceImplTest {
 
-	@Autowired
-	private TaskService taskService;
+    @Autowired
+    private TaskService taskService;
 
-	/**
-	 * Test of getTaskById method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetTaskById() {
-		assertEquals(taskService.getTaskById(1).getTitle(), "Task 1");
-	}
+    /**
+     * Test of getTaskById method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetTaskById() {
+        assertEquals(taskService.getTaskById(1).getTitle(), "Task 1");
+    }
 
-	/**
-	 * Test of getTasksByContestId method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetTasksByContestId() {
-		int contestId = 2;
-		List<Task> result = taskService.getTasksByContestId(contestId);
-		assertEquals(result.get(0).getTitle(), "Task 3");
-	}
+    /**
+     * Test of getTasksByContestId method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetTasksByContestId() {
+        int contestId = 2;
+        List<Task> result = taskService.getTasksByContestId(contestId);
+        assertEquals(result.get(0).getTitle(), "Task 3");
+    }
 
-	/**
-	 * Test of getTasks method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetTasks() {
-		assertEquals(taskService.getTasks().size(), 3);
-	}
+    /**
+     * Test of getTasks method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetTasks() {
+        assertEquals(taskService.getTasks().size(), 3);
+    }
 
 	/**
 	 * Test of addTask method, of class TaskServiceImpl.
@@ -82,37 +83,37 @@ public class TaskServiceImplTest {
 		assertEquals(taskService.getTasksByContestId(2).size(), 2);
 	}
 
-	/**
-	 * Test of updateTask method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testUpdateTask() {
-		Task task = taskService.getTaskById(1);
-		task.setTitle("Task1Updated");
-		taskService.updateTask(task);
-		assertEquals(taskService.getTaskById(1).getTitle(), "Task1Updated");
-	}
+    /**
+     * Test of updateTask method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testUpdateTask() {
+        Task task = taskService.getTaskById(1);
+        task.setTitle("Task1Updated");
+        taskService.updateTask(task);
+        assertEquals(taskService.getTaskById(1).getTitle(), "Task1Updated");
+    }
 
-	/**
-	 * Test of deleteTaskById method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testDeleteTaskById() {
-		assertEquals(taskService.getTasks().size(), 3);
-		taskService.deleteTaskById(3);
-		assertEquals(taskService.getTasks().size(), 2);
-	}
+    /**
+     * Test of deleteTaskById method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testDeleteTaskById() {
+        assertEquals(taskService.getTasks().size(), 3);
+        taskService.deleteTaskById(3);
+        assertEquals(taskService.getTasks().size(), 2);
+    }
 
-	/**
-	 * Test of getTaskData method, of class TaskServiceImpl.
-	 */
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetTaskData() {
-		assertEquals(taskService.getTaskData(1).getTask().getTitle(), "Task 1");
-	}
+    /**
+     * Test of getTaskData method, of class TaskServiceImpl.
+     */
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetTaskData() {
+        assertEquals(taskService.getTaskData(1).getTask().getTitle(), "Task 1");
+    }
 
 	/**
 	 * Test of deleteTaskData method, of class TaskServiceImpl.

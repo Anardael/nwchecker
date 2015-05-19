@@ -18,39 +18,75 @@
     var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
 
 </script>
-	<div class="main-block">
-		<div id="accordion">
-			<c:forEach items="${contests}" var="contest" varStatus="row">
-				<a class="list-group-item" data-toggle="collapse"
-					data-parent="#accordion" href="#collapse${row.index}">
-					<div class="link-block">
-						<div class="start_date-block">
-							${fn:substring(contest.starts,0,16)}</div>
-						<div class="title-block">
-							<span class="h5"><b>${contest.title}</b></span>
-						</div>
-						<div class="status-block">
-							<c:if test="${contest.status=='GOING'}">
-								<label class="label label-success contestsStatus"> <spring:message
-										code="contest.going.label" /></label>
-							</c:if>
-							<c:if test="${contest.status=='PREPARING'}">
-								<label class="label label-info contestsStatus"> <spring:message
-										code="contest.preparing.label" />
-								</label>
-							</c:if>
-							<c:if test="${contest.status=='RELEASE'}">
-								<label class="label label-info contestsStatus"> <spring:message
-										code="contest.release.label" />
-								</label>
-							</c:if>
-							<c:if test="${contest.hidden==true}">
-								<label class="label label-default contestsStatus"><spring:message
-										code="contest.hidden.label" /></label>
-							</c:if>
-						</div>
-					</div>
-				</a>
+<div class="main-block">
+    <div id="accordion">
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button"
+                    data-toggle="dropdown">
+                <%=request.getParameter("status") == null ? "ALL CONTESTS"
+                        : request.getParameter("status")%>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="/NWCServer/getContests.do">All Contests</a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=GOING"/>">
+                    <spring:message code="contest.going.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=PREPARING"/>">
+                    <spring:message code="contest.preparing.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=RELEASE"/>">
+                    <spring:message code="contest.release.label" />
+                </a></li>
+                <li><a
+                        href="<c:url value="/getContestsByStatus.do?status=ARCHIVE"/>">
+                    <spring:message code="contest.archive.label" />
+                </a></li>
+            </ul>
+        </div>
+
+
+        <c:forEach items="${contests}" var="contest" varStatus="row">
+            <a class="list-group-item" data-toggle="collapse" data-parent="#accordion"
+               href="#collapse${row.index}">
+                <div class="link-block">
+                    <div class="start_date-block">
+                            ${fn:substring(contest.starts,0,16)}
+                    </div>
+                    <div class="title-block">
+                        <span class="h5"><b>${contest.title}</b></span>
+                    </div>
+                    <div class="status-block">
+                        <c:if test="${contest.status=='GOING'}">
+                            <label class="label label-success contestsStatus">
+                                <spring:message code="contest.going.label"/></label>
+                        </c:if>
+                        <c:if test="${contest.status=='PREPARING'}">
+                            <label class="label label-info contestsStatus">
+                                <spring:message code="contest.preparing.label"/>
+                            </label>
+                        </c:if>
+                        <c:if test="${contest.status=='RELEASE'}">
+                            <label class="label label-info contestsStatus">
+                                <spring:message code="contest.release.label"/>
+                            </label>
+                        </c:if>
+                        <c:if test="${contest.status=='ARCHIVE'}">
+                            <label class="label label-danger contestsStatus"> <spring:message
+                                    code="contest.archive.label" />
+                            </label>
+                        </c:if>
+                        <c:if test="${contest.hidden==true}">
+                            <label class="label label-default contestsStatus"><spring:message
+                                    code="contest.hidden.label"/></label>
+                        </c:if>
+                    </div>
+                </div>
+            </a>
 
 				<div id="collapse${row.index}"
 					class="panel-collapse collapse drop-block">
@@ -105,60 +141,71 @@
 								</div>
 							</c:if>
 
-							<div class="edit text-center drop-block-element"
-								style="margin-top: 10px">
-								<security:authorize access="hasRole('ROLE_TEACHER')">
-									<c:set var="user" value="${nowContestEdits[contest.id]}" />
-									<c:if test="${not empty user}">
-										<label class="label label-warning contestsStatus"> <spring:message
-												code="contest.editing.now.label" />: ${user}
-										</label>
-									</c:if>
-									<c:set value="index${contest.id}index" var="contestIndex" />
-									<c:if test="${fn:contains(editContestIndexes,contestIndex)}">
-										<button class="btnEditContest btn btn-sm btn-info form-group"
-											onclick="edited(${contest.id})">
-											<spring:message code="btn.edit" />
-										</button>
-									</c:if>
-								</security:authorize>
-								<c:if test="${(contest.status=='GOING')}">
-									<security:authorize access="hasRole('ROLE_USER')">
-										<button class="btn btn-sm btn-info form-group"
-											style="font-weight: 600"
-											onclick="openContest(${contest.id})">
-											<spring:message code="contest.startButton" />
-										</button>
-									</security:authorize>
-									<security:authorize access="!isAuthenticated()">
-										<button class="btn btn-sm btn-info form-group"
-											style="font-weight: 600"
-											onclick="openContest(${contest.id})">
-											<spring:message code="contest.unauthenticated" />
-										</button>
-									</security:authorize>
-								</c:if>
-								<c:if test="${(contest.status=='ARCHIVE')}">
-									<button class="btn btn-sm btn-info form-group"
-										style="font-weight: 600" onclick="archive()">
-										This competition has been archived
-									</button>
-								</c:if>
-							</div>
-						</div>
-					</li>
-				</div>
-			</c:forEach>
-			<security:authorize access="hasRole('ROLE_TEACHER')">
-				<div class="col-sm-6 col-sm-offset-3"
-					style="text-align: center; margin-top: 20px">
-					<button class="btn btn-primary btn-sm"
-						onclick="window.location.href = 'addContest.do'">
-						<spring:message code="contest.createButton.caption" />
-					</button>
-				</div>
-			</security:authorize>
-		</div>
-	</div>
+                        <div class="edit text-center drop-block-element" style="margin-top: 10px">
+                            <security:authorize access="hasRole('ROLE_TEACHER')">
+                                <c:set var="user" value="${nowContestEdits[contest.id]}"/>
+                                <c:if test="${not empty user}">
+                                    <label class="label label-warning contestsStatus">
+                                        <spring:message
+                                                code="contest.editing.now.label"/>: ${user}</label>
+                                </c:if>
+                                <c:set value="index${contest.id}index" var="contestIndex"/>
+                                <c:if test="${fn:contains(editContestIndexes,contestIndex)}">
+                                    <button class="btnEditContest btn btn-sm btn-info form-group"
+                                            onclick="edited(${contest.id})">
+                                        <spring:message code="btn.edit"/></button>
+                                </c:if>
+                            </security:authorize>
+                            <c:if test="${(contest.status=='GOING')}">
+                                <security:authorize access="hasRole('ROLE_USER')">
+                                    <button class="btn btn-sm btn-info form-group"
+                                            style="font-weight: 600"
+                                            onclick="openContest(${contest.id})">
+                                        <spring:message code="contest.startButton" />
+                                    </button>
+                                </security:authorize>
+                                <security:authorize access="!isAuthenticated()">
+                                    <button class="btn btn-sm btn-info form-group"
+                                            style="font-weight: 600"
+                                            onclick="openContest(${contest.id})">
+                                        <spring:message code="contest.unauthenticated" />
+                                    </button>
+                                </security:authorize>
+                            </c:if>
+                            <c:if test="${(contest.status=='ARCHIVE')}">
+                                <button class="btn btn-sm btn-info form-group"
+                                        style="font-weight: 600" onclick="archive()">
+                                    This competition has been archived
+                                </button>
+                            </c:if>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </c:forEach>
+        <security:authorize access="hasRole('ROLE_TEACHER')">
+            <div class="col-sm-6 col-sm-offset-3" style="text-align: center; margin-top: 20px">
+                <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'">
+                    <spring:message code="contest.createButton.caption"/></button>
+            </div>
+        </security:authorize>
+        <div class="text-center">
+            <ul class="pagination">
+                <c:forEach begin="0" end="5" var="loop">
+                    <c:if test="${currentPage + loop - 3>0}">
+                        <c:if test="${currentPage + loop - 3<pageCount + 1}">
+                            <li><a
+                                    href="<c:url value="/getContests.do">
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+                                <c:out value="${currentPage + loop - 3}" />
+                            </a></li>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

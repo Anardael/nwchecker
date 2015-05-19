@@ -21,7 +21,7 @@ public interface ContestService {
      *
      * @param c Contest that will be inserted in DB
      */
-    void addContest(Contest c);
+    public void addContest(Contest c);
 
     /**
      * Update existing Contest in database.
@@ -29,14 +29,14 @@ public interface ContestService {
      *
      * @param c Contest that will be updated in DB
      */
-    void updateContest(Contest c);
+    public void updateContest(Contest c);
 
     /**
      * Update existing Contest in database.
      *
      * @param c Contest that will be updated in DB
      */
-    void mergeContest(Contest c);
+    public void mergeContest(Contest c);
 
     /**
      * Return all Contests from database.
@@ -44,7 +44,7 @@ public interface ContestService {
      *
      * @return List of Contests from DB
      */
-    List<Contest> getContests();
+    public List<Contest> getContests();
 
     /**
      * Return Contest from database by unique ID.
@@ -53,7 +53,7 @@ public interface ContestService {
      * @param id Unique ID of required Contest
      * @return Contest from DB
      */
-    Contest getContestByID(int id);
+    public Contest getContestByID(int id);
 
     /**
      * Return all Contests that has specific status.
@@ -61,7 +61,7 @@ public interface ContestService {
      * @param status Specific status of required Contests
      * @return List of Contests that have specific status
      */
-    List<Contest> getContestByStatus(Contest.Status status);
+    public List<Contest> getContestByStatus(Contest.Status status);
 
     /**
      * Checks if some User can edit some Contest.
@@ -72,8 +72,16 @@ public interface ContestService {
      * @return <b>true</b> if User can edit Contest
      *         <b>false</b> if User can not edit Contest
      */
-    boolean checkIfUserHaveAccessToContest(String username, int ContestId);
 
     List<Contest> getContestForRating();
+    public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
+    
+    public List<Contest> getPagedContests(int pageSize, int pageNumber);
+    
+    public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber);
+    
+    public Long getPageCount(int pageSize);
+    
+    public Long getPageCount(Contest.Status status, int pageSize);
 
 }
