@@ -30,7 +30,7 @@ public class NewsController {
 		String titleLastContest = newsService.getNameLastContest();
 		model.addAttribute("title", titleLastContest);
 
-		return "news/news";
+		return "nwcserver.static.news";
 	}
 
 }

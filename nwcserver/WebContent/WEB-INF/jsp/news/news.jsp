@@ -5,21 +5,15 @@
 <spring:url value="/resources/" var="resources" />
 <html>
 <!--including head -->
-<head>
-<jsp:include page="../fragments/staticFiles.jsp" />
-</head>
 <body>
 	<div class="wrapper container">
 		<!--including bodyHead -->
 		<!-- send name of current page-->
-		<jsp:include page="../fragments/bodyHeader.jsp">
-			<jsp:param name="pageName" value="news" />
-		</jsp:include>
 
 		<div class="form-group col-sm-12" style="margin: auto">
 		
 			<c:url var="news" value="/news.do" />
-			<ul class="col-sm-offset-2 col-sm-8 ">
+			<ul class="col-sm-offset-0 col-sm-8 ">
 				<li
 					class="list-group-item list-group-item-heading list-group-item-info"
 					style="text-align: left; font-size: large"><spring:message
@@ -29,7 +23,7 @@
 				</li>
 			</ul>
 			<br>
-			<ul class="col-sm-offset-2 col-sm-8 ">
+			<ul class="col-sm-offset-0 col-sm-8 ">
 				<li
 					class="list-group-item list-group-item-heading list-group-item-info"
 					style="text-align: left; font-size: large"><spring:message

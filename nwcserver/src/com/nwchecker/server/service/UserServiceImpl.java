@@ -85,16 +85,6 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public boolean hasUsername(String username) {
-		return userDAO.hasUsername(username);
-	}
-
-	@Override
-	public boolean hasEmail(String email) {
-		return userDAO.hasEmail(email);
-	}
-
-	@Override
 	public List<User> getUsersWithRequests() {
 		return userDAO.getUsersWithRequests();
 	}
