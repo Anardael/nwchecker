@@ -197,7 +197,7 @@
 						<!-- "Previous" button -->
 						<c:if test="${currentPage gt 1}">
 							<li><a
-								href="<c:url value="/etiam.do">
+								href="<c:url value="/getContests.do">
 										<c:param name="page" value="${currentPage - 1}"/>
 									  </c:url>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -206,7 +206,7 @@
 						<!-- Display first page -->
 						<c:if test="${currentPage - 3 ge 1}">
 							<li><a
-								href="<c:url value="/etiam.do">
+								href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="1"/>
 										</c:url>">
@@ -228,7 +228,7 @@
 								<c:when
 									test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
 									<li><a
-										href="<c:url value="/etiam.do">
+										href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${currentPage + loop - 3}"/>
 										</c:url>">
@@ -244,7 +244,7 @@
 						<!-- Display last page -->
 						<c:if test="${currentPage + 3 le pageCount}">
 							<li><a
-								href="<c:url value="/etiam.do">
+								href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${pageCount}"/>
 										</c:url>">
@@ -255,7 +255,7 @@
 						<!-- "Next" button -->
 						<c:if test="${currentPage lt pageCount}">
 							<li><a
-								href="<c:url value="/etiam.do">
+								href="<c:url value="/getContests.do">
 										<c:param name="page" value="${currentPage + 1}"/>
 									  </c:url>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
