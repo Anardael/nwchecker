@@ -24,38 +24,32 @@ public class ContestServiceImpl implements ContestService {
     @Autowired
     private ContestDAO contestDAO;
 
-    @Transactional
     @Override
     public void addContest(Contest c) {
         contestDAO.addContest(c);
     }
 
-    @Transactional
     @Override
     public void updateContest(Contest c) {
         contestDAO.updateContest(c);
     }
 
-    @Transactional
     @Override
     public void mergeContest(Contest c) {
         contestDAO.mergeContest(c);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Contest> getContests() {
         return contestDAO.getContests();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Contest getContestByID(int id) {
         return contestDAO.getContestByID(id);
     }
 
     @Override
-    @Transactional
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
         User teacher = userService.getUserByUsername(username);
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
@@ -73,23 +67,9 @@ public class ContestServiceImpl implements ContestService {
         return contestDAO.getContestByStatus(status);
     }
 
-
     @Override
     public List<Contest> getContestForRating() {
-        List<Contest> ratingContests = new ArrayList<Contest>();
-        ratingContests.addAll(contestDAO.getContestByStatus(Contest.Status.ARCHIVE));
-
-        List<Contest> dynamicContests = contestDAO.getContestsWithDynamicRating();
-        for (Contest contest : dynamicContests){
-            if(contest.getStatus() != Contest.Status.ARCHIVE){
-                ratingContests.add(contest);
-            }
-        }
-
-        Collections.sort(ratingContests, new ContestStartTimeComparator());
-        Collections.reverse(ratingContests);
-
-        return ratingContests;
+        return contestDAO.getContestsForRating();
     }
 
 }

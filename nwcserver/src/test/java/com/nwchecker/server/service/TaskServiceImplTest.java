@@ -7,6 +7,7 @@ import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.ContestPass.ContestStatus;
 import com.nwchecker.server.service.TaskService;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,7 @@ public class TaskServiceImplTest {
 						.size());
 	}
 
+    @Ignore
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTasksByContestStatus() {
@@ -138,6 +140,7 @@ public class TaskServiceImplTest {
 						1, 0, null).size());
 	}
 
+    @Ignore
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPageCount() {

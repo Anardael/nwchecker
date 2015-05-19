@@ -5,6 +5,7 @@ import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
+import com.nwchecker.server.service.RatingService;
 import com.nwchecker.server.service.ScoreCalculationService;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class RatingController {
     private ContestPassService contestPassService;
     @Autowired
     private ScoreCalculationService scoreCalculationService;
+    @Autowired
+    private RatingService ratingService;
 
     /**
      * This mapped method used to return page when user
@@ -58,15 +61,10 @@ public class RatingController {
      */
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
+        Contest contest = contestService.getContestByID(id);
 
         model.addAttribute("contestId", id);
-        Contest contest = contestService.getContestByID(id);
-        if (contest.getTypeContest() != null && contest.getTypeContest().isDynamic()) {
-            scoreCalculationService.calculateScore(id);
-            model.addAttribute("currentContestFirstTaskId", contest.getTasks().get(0).getId());
-        } else  {
-            model.addAttribute("currentContestFirstTaskId", null);
-        }
+        model.addAttribute("dynamic", ratingService.scoreCalculateIfDynamicContest(id));
         model.addAttribute("contestTitle", contest.getTitle());
         SimpleDateFormat formatStart = new SimpleDateFormat();
         model.addAttribute("contestStart", formatStart.format(contest.getStarts()));
@@ -74,6 +72,7 @@ public class RatingController {
         contestDuration.setTime(contest.getDuration());
         model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
         model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
+
         return "nwcserver.contests.results";
     }
 
