@@ -56,15 +56,15 @@ public class RatingController {
      * <p/>
      *
      * @param model Spring Framework model for this page
-     * @param id    ID of contest
+     * @param contestId    ID of contest
      * @return <b>contestResults.jsp</b> Returns page with contest statistic
      */
     @RequestMapping(value = "/results", method = RequestMethod.GET)
-    public String getResults(Model model, @RequestParam(value = "id") int id) {
-        Contest contest = contestService.getContestByID(id);
+    public String getResults(Model model, @RequestParam(value = "id") int contestId) {
+        Contest contest = contestService.getContestByID(contestId);
 
-        model.addAttribute("contestId", id);
-        model.addAttribute("dynamic", ratingService.scoreCalculateIfDynamicContest(id));
+        model.addAttribute("contestId", contestId);
+        model.addAttribute("dynamic", ratingService.scoreCalculateIfDynamicContest(contestId));
         model.addAttribute("contestTitle", contest.getTitle());
         SimpleDateFormat formatStart = new SimpleDateFormat();
         model.addAttribute("contestStart", formatStart.format(contest.getStarts()));
@@ -81,17 +81,11 @@ public class RatingController {
      * participants in JSON format.
      * <p/>
      *
-     * @param id ID of contest
+     * @param contestId ID of contest
      * @return <b>JSON</b> Returns <b>results of contest participants</b>
      */
     @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
-    public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int id) {
-        List<ContestPass> contestPasses = contestPassService.getContestPasses(id);
-        Collections.sort(contestPasses);
-        List<ContestPassJson> jsonData = new ArrayList<>();
-        for (ContestPass contestPass : contestPasses) {
-            jsonData.add(ContestPassJson.createContestPassJson(contestPass));
-        }
-        return jsonData;
+    public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int contestId) {
+        return ratingService.getJsonListForContestPassByContestId(contestId);
     }
 }

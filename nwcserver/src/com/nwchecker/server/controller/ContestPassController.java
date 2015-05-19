@@ -56,7 +56,6 @@ public class ContestPassController {
         Contest currentContest = contestService.getContestByID(contestId);
 
         if(!model.containsAttribute("currentTask")){
-            System.out.println("TRUE");
             //Sending task statistic
             Task firstTaskCurrentContest = currentContest.getTasks().get(0);
             Long successful = taskPassService.getSuccessfulTaskPassEntryCount(firstTaskCurrentContest.getId());
@@ -65,9 +64,12 @@ public class ContestPassController {
                 double rate = successful.doubleValue() / all.doubleValue();
                 model.addAttribute("taskSuccessRate", rate);
                 model.addAttribute("currentTask", firstTaskCurrentContest);
+            } else{
+                //double rate = successful.doubleValue() / all.doubleValue();
+                model.addAttribute("taskSuccessRate", 0);
+                model.addAttribute("currentTask", firstTaskCurrentContest);
             }
         }
-
         if (currentContest.getTypeContest() != null
                 && currentContest.getTypeContest().isDynamic() != null
                 && currentContest.getTypeContest().isDynamic()) {
