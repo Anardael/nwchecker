@@ -25,7 +25,7 @@ public class ArchiveController {
 	@RequestMapping("/etiam")
 	public String archivePage(Model model,
 			@RequestParam(defaultValue = "1", value="page") int pageNumber,
-			@RequestParam(defaultValue = "3") int pageSize,
+			@RequestParam(defaultValue = "5") int pageSize,
 			@ModelAttribute("filterText") String filter) {
 		System.out.println(filter);
 		LOG.debug("Someone accessed archive page");

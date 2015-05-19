@@ -29,7 +29,7 @@
 							</a></li>
 						</c:if>
 						<!-- Display first page -->
-						<c:if test="${currentPage - 3 gt 1}">
+						<c:if test="${currentPage - 3 ge 1}">
 							<li><a
 								href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
@@ -40,7 +40,7 @@
 						</c:if>
 
 						<!-- Display there're more pages before first page -->
-						<c:if test="${currentPage - 2 gt 1}">
+						<c:if test="${currentPage - 3 gt 1}">
 							<li class="disabled"><a>...</a></li>
 						</c:if>
 
@@ -63,11 +63,11 @@
 							</c:choose>
 						</c:forEach>
 						<!-- Display there're more pages before last page -->
-						<c:if test="${currentPage + 2 lt pageCount}">
+						<c:if test="${currentPage + 3 lt pageCount}">
 							<li class="disabled"><a>...</a></li>
 						</c:if>
 						<!-- Display last page -->
-						<c:if test="${currentPage + 3 lt pageCount}">
+						<c:if test="${currentPage + 3 le pageCount}">
 							<li><a
 								href="<c:url value="/etiam.do">
 										<c:param name="id" value="${taskId}"/>
