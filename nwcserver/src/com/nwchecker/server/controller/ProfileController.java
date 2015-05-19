@@ -1,10 +1,12 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.validators.UserProfileValidator;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.security.Principal;
 
 /**
@@ -68,6 +71,7 @@ public class ProfileController {
      *                  tries to call this method
      * @return <b>profile.jsp</b> Returns page where user can change his profile data
      */
+	@Link(label="Profile", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = {"/profile", "/changePassword"}, method = RequestMethod.GET)
 	public String initProfileForm(ModelMap model, Principal principal) {
@@ -91,6 +95,7 @@ public class ProfileController {
      *                  tries to call this method
      * @param model Spring Framework model for this page
      */
+	@Link(label="Profile", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
@@ -125,6 +130,7 @@ public class ProfileController {
      *                  tries to call this method
      * @param model Spring Framework model for this page
      */
+	@Link(label="Profile", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model) {

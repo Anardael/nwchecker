@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
+
 /**
  * <h1>Login Controller</h1>
  * This spring controller contains mapped methods, that
@@ -30,6 +32,7 @@ public class LoginController {
      *
      * @param error if process "login" have some errors, value will change to "not null".
      */
+    @Link(label="Login", family="User", parent = "")
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error) {

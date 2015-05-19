@@ -8,8 +8,8 @@
 	<form action="<c:url value="/etiam.do"></c:url>">
 		<div class="navbar-form">
 			<input type="text" id="filterText" name="filterText"
-				class="form-control" placeholder="Search">
-			<button type="submit" id="filter" class="btn btn-default">Submit</button>
+				class="form-control" placeholder="<spring:message code="pagination.search.field" />">
+			<button type="submit" id="filter" class="btn btn-default"><spring:message code="pagination.search.button" /></button>
 		</div>
 
 		<div class="text-center">

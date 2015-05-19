@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ListContestsJson;
 import com.nwchecker.server.json.StatusContestJson;
 import com.nwchecker.server.json.ValidationResponse;
@@ -57,6 +58,7 @@ public class ListContestsController {
      *                  tries to call this method
      * @return <b>listContests.jsp</b> Returns page when admin can watch contests
      */
+    @Link(label="Contests", family="adminOptions", parent = "")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/listContests", method = RequestMethod.GET)
     public String userRequests(Principal principal, Model model) {

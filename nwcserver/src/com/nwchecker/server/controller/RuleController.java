@@ -1,8 +1,10 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.service.RuleService;
 import com.nwchecker.server.service.UserService;
 import com.nwchecker.server.wrapper.RuleWrapper;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,7 +25,7 @@ public class RuleController {
 
     @Autowired
     private UserService userService;
-
+    @Link(label="Rules", family="rules", parent = "")
     @RequestMapping(value = "/rules")
     public String showRules(Model model, Principal principal) {
         if (principal != null) {

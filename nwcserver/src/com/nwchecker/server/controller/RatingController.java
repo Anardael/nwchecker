@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
@@ -7,6 +8,7 @@ import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScoreCalculationService;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,7 @@ public class RatingController {
      * @param model Spring Framework model for this page
      * @return <b>rating.jsp</b> Returns page with completed contests list
      */
+    @Link(label="Rating", family="contestRating", parent = "")
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
         List<Contest> ratingContests = contestService.getContestForRating();
@@ -60,6 +63,7 @@ public class RatingController {
      * @param id    ID of contest
      * @return <b>contestResults.jsp</b> Returns page with contest statistic
      */
+    @Link(label="Results", family="contestRating", parent = "Rating")
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int id) {
         model.addAttribute("contestId", id);
