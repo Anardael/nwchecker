@@ -8,6 +8,8 @@ import com.nwchecker.server.model.TaskData;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,12 +88,18 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
-		filter = "%" + filter + "%";
-		criteria.add(Restrictions.like("title", filter));
-		criteria.add(Restrictions.like("description", filter));
+		System.out.println(filter);
+		filter = "%"+filter+"%";
+		System.out.println(filter);
+		Criterion title = Restrictions.ilike("title", filter, MatchMode.ANYWHERE);
+		Criterion description = Restrictions.ilike("description", filter, MatchMode.ANYWHERE);
+		criteria.add(Restrictions.or(title, description));
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		List<Task> result = criteria.list();
+		for (Task t : result){
+			System.out.println(t.getId());
+		}
 		return result;
 	}
 	@Transactional
@@ -115,9 +123,10 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Criteria criteria = session.createCriteria(Task.class);
 
 		if (!(filter == null) && !(filter.equals(""))) {
-			filter = "%" + filter + "%";
-			criteria.add(Restrictions.like("title", filter));
-			criteria.add(Restrictions.like("description", filter));
+			filter = "%"+filter+"%";
+			Criterion title = Restrictions.ilike("title", filter, MatchMode.ANYWHERE);
+			Criterion description = Restrictions.ilike("description", filter, MatchMode.ANYWHERE);
+			criteria.add(Restrictions.or(title, description));
 		}
 		Long records = (Long) criteria.setProjection(Projections.rowCount())
 				.uniqueResult();

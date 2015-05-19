@@ -16,9 +16,10 @@
 		</div>
 		<c:choose>
 			<c:when test="${not empty tasks}">
-				<c:set var="loop"></c:set>
+			<!-- Pagination STARTO -->
 				<div class="text-center">
 					<ul class="pagination">
+						<!-- "Previous" button -->
 						<c:if test="${currentPage gt 1}">
 							<li><a
 								href="<c:url value="/etiam.do">
@@ -27,21 +28,55 @@
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 						</c:if>
-						<c:forEach begin="1" end="${pageCount}" var="loop">
+						<!-- Display first page -->
+						<c:if test="${currentPage - 3 gt 1}">
+							<li><a href="<c:url value="/etiam.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="1"/>
+										</c:url>">
+											<c:out value="1" />
+									</a></li>
+						</c:if>
+						
+						<!-- Display there're more pages before first page -->						
+						<c:if test="${currentPage - 2 gt 1}">
+							<li class="disabled"><a>...</a></li>
+						</c:if>
+						
+						<!-- Display 2 closest pages -->
+						<c:forEach begin="1" end="5" var="loop">
 							<c:choose>
-								<c:when test="${loop != currentPage}">
-									<li><a href="<c:url value="/etiam.do">
-										<c:param name="page" value="${loop}"/>
-									  </c:url>">
-											<c:out value="${loop}" />
+								<c:when test="${loop eq 3}">
+									<li class="active"><a><c:out value="${currentPage}" /></a></li>
+								</c:when>
+								<c:when
+									test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
+									<li><a
+										href="<c:url value="/etiam.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${currentPage + loop - 3}"/>
+										</c:url>">
+											<c:out value="${currentPage + loop - 3}" />
 									</a></li>
 								</c:when>
-								<c:otherwise>
-									<li class="active disabled"><a><c:out value="${loop}" /></a></li>
-								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<c:if test="${currentPage lt numberOfPages}">
+						<!-- Display there're more pages before last page -->
+						<c:if test="${currentPage + 2 lt pageCount}">
+							<li class="disabled"><a>...</a></li>
+						</c:if>
+						<!-- Display last page -->
+						<c:if test="${currentPage + 3 lt pageCount}">
+							<li><a href="<c:url value="/etiam.do">
+										<c:param name="id" value="${taskId}"/>
+										<c:param name="page" value="${pageCount}"/>
+										</c:url>">
+											<c:out value="${pageCount}" />
+									</a></li>
+						</c:if>
+
+						<!-- "Next" button -->
+						<c:if test="${currentPage lt pageCount}">
 							<li><a
 								href="<c:url value="/etiam.do">
 										<c:param name="page" value="${currentPage + 1}"/>
@@ -51,6 +86,7 @@
 						</c:if>
 					</ul>
 				</div>
+				<!-- Pagination FINISH -->
 				<c:forEach items="${tasks}" var="task">
 					<table class="table">
 						<tr>

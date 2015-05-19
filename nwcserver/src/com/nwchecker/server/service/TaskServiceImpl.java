@@ -99,6 +99,7 @@ public class TaskServiceImpl implements TaskService {
 			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
 					startIndex, filter);
 		} else {
+			System.out.println(filter);
 			pagedTasks = taskDao.getPagedTasksByContestStatus(status, pageSize,
 					startIndex);
 		}
