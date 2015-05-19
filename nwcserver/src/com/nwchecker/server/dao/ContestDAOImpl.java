@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import javax.transaction.TransactionScoped;
-import javax.transaction.Transactional;
+
 
 @Repository("ContestDAO")
 public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
