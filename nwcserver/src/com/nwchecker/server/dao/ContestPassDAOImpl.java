@@ -18,6 +18,7 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     }
 
     @Override
+    @Transactional
     public void saveContestPass(ContestPass contestPass) {
         getHibernateTemplate().save(contestPass);
     }
@@ -29,6 +30,7 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     }
 
     @Override
+    @Transactional
     public List<ContestPass> getContestPasses(int contestId) {
         return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=?", contestId);
     }

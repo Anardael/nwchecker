@@ -3,6 +3,7 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
+import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.*;
 @Service(value = "TaskPassService")
 public class ContestPassServiceImpl implements ContestPassService {
     @Autowired
-    private UserService userService;
+    private UserDAO userDAO;
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -25,13 +26,11 @@ public class ContestPassServiceImpl implements ContestPassService {
     private CompilerDAO compilerDAO;
 
     @Override
-    @Transactional
     public void saveContestPass(ContestPass contestPass) {
         contestPassDAO.saveContestPass(contestPass);
     }
 
     @Override
-    @Transactional
     public void updateContestPass(ContestPass contestPass) {
         contestPassDAO.updateContestPass(contestPass);
     }
@@ -74,7 +73,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 
     @Override
     public ContestPass getContestPassByUserName(String userName, Contest contest){
-        User user = userService.getUserByUsername(userName);
+        User user = userDAO.getUserByUsername(userName);
         if (contest.getStatus() == Contest.Status.GOING) {
             //check if user has contestPass for this contest:
             for (ContestPass contestPass : user.getContestPassList()) {
@@ -85,7 +84,7 @@ public class ContestPassServiceImpl implements ContestPassService {
             ContestPass contestPass = new ContestPass();
             contestPass.setContest(contest);
             contestPass.setUser(user);
-            saveContestPass(contestPass);
+            contestPassDAO.saveContestPass(contestPass);
         }
         return null;
     }
