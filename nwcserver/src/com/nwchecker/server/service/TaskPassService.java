@@ -32,7 +32,7 @@ public interface TaskPassService {
 	 *            A string represents requested sorting.
 	 * @return List of Json-like objects ready for display
 	 */
-	public List<TaskPass> getPagedTaskPassesForTask(int taskId,
+	List<TaskPass> getPagedTaskPassesForTask(int taskId,
 			int startIndex, int pageSize, String sorting);
 
 	/**
@@ -44,7 +44,7 @@ public interface TaskPassService {
 	 * @return Number of TaskPasses for task
 	 */
 
-	public Long getTaskPassEntryCount(int taskId);
+	Long getTaskPassEntryCount(int taskId);
 
 	/**
 	 * Get number of solution for task that have successfully passed tests
@@ -54,5 +54,7 @@ public interface TaskPassService {
 	 *            Id of task
 	 * @return Number of successful TaskPasses
 	 */
-	public Long getSuccessfulTaskPassEntryCount(int taskId);
+	Long getSuccessfulTaskPassEntryCount(int taskId);
+
+    double getTaskRateById(int taskId);
 }

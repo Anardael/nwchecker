@@ -66,7 +66,6 @@ public class RatingController {
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int contestId) {
         Contest contest = contestService.getContestByID(contestId);
-
         model.addAttribute("contestId", contestId);
         model.addAttribute("dynamic", ratingService.scoreCalculateIfDynamicContest(contestId));
         model.addAttribute("contestTitle", contest.getTitle());

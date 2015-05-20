@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service(value = "TaskPassService")
 public class ContestPassServiceImpl implements ContestPassService {
@@ -73,5 +70,42 @@ public class ContestPassServiceImpl implements ContestPassService {
     @Override
     public List<ContestPass> getContestPasses(int contestId) {
         return contestPassDAO.getContestPasses(contestId);
+    }
+
+    @Override
+    public ContestPass getContestPassByUserName(String userName, Contest contest){
+        User user = userService.getUserByUsername(userName);
+        if (contest.getStatus() == Contest.Status.GOING) {
+            //check if user has contestPass for this contest:
+            for (ContestPass contestPass : user.getContestPassList()) {
+                if (contestPass.getContest().equals(contest)) {
+                    return contestPass;
+                }
+            }
+            ContestPass contestPass = new ContestPass();
+            contestPass.setContest(contest);
+            contestPass.setUser(user);
+            saveContestPass(contestPass);
+        }
+        return null;
+    }
+
+    @Override
+    public Map<Integer, Boolean> getTaskResultForContestByUserName(String userName, Contest contest){
+        ContestPass contestPass = getContestPassByUserName(userName, contest);
+        if (contestPass != null) {
+            Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
+            for (TaskPass taskPass : contestPass.getTaskPassList()) {
+                //if not contains, else-if contains and new result if success
+                if (!taskResults.containsKey(taskPass.getTask().getId())) {
+                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+                } else if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
+                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+                }
+            }
+            return taskResults;
+        } else  {
+            return  null;
+        }
     }
 }

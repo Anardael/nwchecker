@@ -4,6 +4,7 @@ import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
+import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.hibernate.Hibernate;
@@ -11,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ContestServiceImpl implements ContestService {
@@ -91,5 +90,27 @@ public class ContestServiceImpl implements ContestService {
     	if (count%pageSize==0)
     	return count/pageSize;
     	else return count/pageSize+1;
+    }
+
+    @Override
+    public Map<Integer, String> getAllTaskTitles(Contest contest){
+        Map<Integer, String> taskTitles = new TreeMap<>();
+        for (Task task : contest.getTasks()) {
+            taskTitles.put(task.getId(), task.getTitle());
+        }
+        return taskTitles;
+    }
+
+    @Override
+    public Long getContestEndTime(Contest contest){
+        Calendar endDate = Calendar.getInstance();
+        Calendar duration = Calendar.getInstance();
+        endDate.setTime(contest.getStarts());
+        duration.setTime(contest.getDuration());
+        endDate.add(Calendar.HOUR, duration.get(Calendar.HOUR));
+        endDate.add(Calendar.MINUTE, duration.get(Calendar.MINUTE));
+        endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
+        long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
+        return gtmMillis;
     }
 }

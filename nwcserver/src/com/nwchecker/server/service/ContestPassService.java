@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
@@ -55,4 +56,7 @@ public interface ContestPassService {
      */
     List<ContestPass> getContestPasses(int contestId);
 
+    ContestPass getContestPassByUserName(String userName, Contest contest);
+
+    Map<Integer, Boolean> getTaskResultForContestByUserName(String userName, Contest contest);
 }

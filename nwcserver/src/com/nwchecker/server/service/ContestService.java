@@ -4,6 +4,7 @@ import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>Contest Service</h1>
@@ -63,17 +64,8 @@ public interface ContestService {
      */
     public List<Contest> getContestByStatus(Contest.Status status);
 
-    /**
-     * Checks if some User can edit some Contest.
-     * <p>
-     *
-     * @param username Unique Username of existing User
-     * @param ContestId Unique ID of existing User
-     * @return <b>true</b> if User can edit Contest
-     *         <b>false</b> if User can not edit Contest
-     */
-
     List<Contest> getContestForRating();
+
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
     
     public List<Contest> getPagedContests(int pageSize, int pageNumber);
@@ -84,4 +76,7 @@ public interface ContestService {
     
     public Long getPageCount(Contest.Status status, int pageSize);
 
+    Map<Integer, String> getAllTaskTitles(Contest contest);
+
+    Long getContestEndTime(Contest contest);
 }

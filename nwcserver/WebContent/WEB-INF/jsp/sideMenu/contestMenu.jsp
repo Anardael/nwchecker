@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<c:if test="${currentContestId != null}">
+<c:if test="${isDynamic}">
     <div class="text-center">
-        <a href="<c:url value='/results.do?id=${currentContestId}'/>">
+        <a href="<c:url value='/results.do?id=${contestId}'/>">
             <p style="font-size: 22px;"><spring:message code="contest.passing.toRating.caption"/></p>
         </a>
     </div>
