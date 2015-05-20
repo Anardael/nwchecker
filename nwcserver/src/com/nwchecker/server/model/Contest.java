@@ -72,6 +72,7 @@ public class Contest {
 	private String description;
 
 	@Column(name = "starts")
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date starts;
 

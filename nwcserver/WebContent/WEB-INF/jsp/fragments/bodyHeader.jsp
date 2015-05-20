@@ -126,7 +126,7 @@
             </security:authorize>
         </ul>
     </nav>
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="font-size:large;">
 	<c:if test="${not empty sessionScope.currentBreadCrumb}">
     	<c:forEach var="entry" items="${sessionScope.currentBreadCrumb}">
 			<c:choose>

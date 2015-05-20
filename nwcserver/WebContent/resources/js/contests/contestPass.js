@@ -24,7 +24,7 @@ function allTasksComplete() {
 
 function endContest() {
     BootstrapDialog.show({
-        type:    BootstrapDialog.TYPE_WARNING,
+        type:    BootstrapDialog.TYPE_INFO,
         title:   ALL_COMPLETE_TITLE,
         message: ALL_COMPLETE_MESSAGE,
         onhide: function() {

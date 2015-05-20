@@ -109,6 +109,32 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
+	@Transactional
+	public Long getRecordCount(String filter) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Criteria criteria = getFilterCriteria(filter, session);
+		Long count = (Long) criteria.setProjection(Projections.rowCount())
+				.uniqueResult();
+		return count;
+	}
+
+	private Criteria getFilterCriteria(String filter, Session session) {
+		Criteria criteria = session.createCriteria(User.class);
+		if (!(filter == null) && !(filter.equals(""))) {
+			filter = "%" + filter + "%";
+			Criterion username = Restrictions.like("username", filter);
+			Criterion displayName = Restrictions.like("displayName", filter);
+			Criterion email = Restrictions.like("email", filter);
+			Criterion department = Restrictions.like("department", filter);
+			Criterion info = Restrictions.like("info", filter);
+			criteria.add(Restrictions.or(username, displayName, email, department, info));
+		}
+		return criteria;
+	}
+	
+
+	@Override
 	public List<User> getPagedUsersSortedAndFiltered(int startIndex, int pageSize,
 			String sorting, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
@@ -138,51 +164,22 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@Override
 	@Transactional
-	public Long getRecordCount(String filter) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		Criteria criteria = getFilterCriteria(filter, session);
-		Long count = (Long) criteria.setProjection(Projections.rowCount())
-				.uniqueResult();
-		return count;
-	}
-
-	private Criteria getFilterCriteria(String filter, Session session) {
-		Criteria criteria = session.createCriteria(User.class);
-		if (!(filter == null) && !(filter.equals(""))) {
-			filter = "%" + filter + "%";
-			Criterion username = Restrictions.like("username", filter);
-			Criterion displayName = Restrictions.like("displayName", filter);
-			Criterion email = Restrictions.like("email", filter);
-			Criterion department = Restrictions.like("department", filter);
-			Criterion info = Restrictions.like("info", filter);
-			criteria.add(Restrictions.or(username, displayName, email, department, info));
-		}
-		return criteria;
-	}
-	
-
-	@Override
-	@Transactional
 	public List<User> getPagedUsersSorted(int startIndex, int pageSize,
 			String sorting) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);
+		
+		String columnName = sorting.split(" ")[0];
+		if (columnName.equals("roles")) {
+			criteria.createAlias("roles", "r");
+			columnName = "r.role";
+		}
+		
 		if (sorting.contains("ASC")) {
-			String column = sorting.split(" ")[0];
-			if (column.equals("roles")) {
-				criteria.createAlias("roles", "r");
-				criteria.addOrder(Order.asc("r.role"));
-			} else
-				criteria.addOrder(Order.asc(column));
+				criteria.addOrder(Order.asc(columnName));
 		} else {
-			String column = sorting.split(" ")[0];
-			if (column.equals("roles")) {
-				criteria.createAlias("roles", "r");
-				criteria.addOrder(Order.desc("r.role"));
-			} else
-				criteria.addOrder(Order.desc(column));
+				criteria.addOrder(Order.desc(columnName));
 		}		
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
