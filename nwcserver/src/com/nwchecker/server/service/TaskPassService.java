@@ -17,7 +17,7 @@ import com.nwchecker.server.utils.PaginationWrapper;
 
 public interface TaskPassService {
 	PaginationWrapper<TaskPassJson> getPagedTaskPassJsonForTask(int taskId,
-			int startIndex, int pageSize, String sorting);
+			int startIndex, int pageSize, String sorting, String filter);
 	/**
 	 * Get paginated solution records list for task
 	 * <p>
@@ -33,7 +33,7 @@ public interface TaskPassService {
 	 * @return List of Json-like objects ready for display
 	 */
 	public List<TaskPass> getPagedTaskPassesForTask(int taskId,
-			int startIndex, int pageSize, String sorting);
+			int startIndex, int pageSize, String sorting, String filter);
 
 	/**
 	 * Get number of solution for a certain task
@@ -44,7 +44,7 @@ public interface TaskPassService {
 	 * @return Number of TaskPasses for task
 	 */
 
-	public Long getTaskPassEntryCount(int taskId);
+	public Long getTaskPassEntryCount(int taskId, String filter);
 
 	/**
 	 * Get number of solution for task that have successfully passed tests

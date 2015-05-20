@@ -58,7 +58,7 @@ public class ListContestsController {
      *                  tries to call this method
      * @return <b>listContests.jsp</b> Returns page when admin can watch contests
      */
-    @Link(label="Contests", family="adminOptions", parent = "")
+    @Link(label="contest.caption", family="adminOptions", parent = "")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/listContests", method = RequestMethod.GET)
     public String userRequests(Principal principal, Model model) {

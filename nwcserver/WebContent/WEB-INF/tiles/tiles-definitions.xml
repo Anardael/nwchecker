@@ -174,7 +174,7 @@
 	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
 	        	<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 	        	<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
-	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        	<add-attribute value="js/bootstrapTables/locale/bootstrap-table-$\{pageContext.response.locale\}.min.js" />
 	        	<add-attribute value="js/adminOptions/listContestsFormatters.js" />
 	        	<add-attribute value="js/contests/contestUsers.js" />
 	        	<add-attribute value="js/adminOptions/listContests.js" />

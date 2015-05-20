@@ -54,7 +54,7 @@ public class ContestPassController {
     @Autowired
     private ContestService contestService;
     
-    @Link(label="Task", family="contests", parent = "Contests")
+    @Link(label="task.caption", family="contests", parent = "contest.caption")
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/passContest", method = RequestMethod.GET)
     public String getContestForPass(Principal principal, @RequestParam("id") int contestId,
@@ -65,7 +65,7 @@ public class ContestPassController {
             //Sending task statistic
             Task firstTaskCurrentContest = currentContest.getTasks().get(0);
             Long successful = taskPassService.getSuccessfulTaskPassEntryCount(firstTaskCurrentContest.getId());
-            Long all = taskPassService.getTaskPassEntryCount(firstTaskCurrentContest.getId());
+            Long all = taskPassService.getTaskPassEntryCount(firstTaskCurrentContest.getId(), null);
             if(!(all == 0)){
                 double rate = successful.doubleValue() / all.doubleValue();
                 model.addAttribute("taskSuccessRate", rate);
@@ -170,7 +170,7 @@ public class ContestPassController {
                                  Model model) {
     	//Sending task statistic
     	Long successful = taskPassService.getSuccessfulTaskPassEntryCount(taskId);
-    	Long all = taskPassService.getTaskPassEntryCount(taskId);
+    	Long all = taskPassService.getTaskPassEntryCount(taskId, null);
     	if(!(all == 0)){
     		double rate = successful.doubleValue() / all.doubleValue();
     		model.addAttribute("taskSuccessRate", rate);

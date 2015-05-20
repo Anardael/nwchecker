@@ -26,6 +26,8 @@ public class Contest {
 		@Override
 		public String toString() {
 			switch (this) {
+			case ARCHIVE:
+				return "ARCHIVE";
 			case PREPARING:
 				return "PREPARING";
 			case RELEASE:
@@ -38,6 +40,9 @@ public class Contest {
 		}
 
 		public static Status stringToStatus(String status) {
+			if (Status.ARCHIVE.toString().equals(status)){
+				return Status.ARCHIVE;
+			}
 			if (Status.PREPARING.toString().equals(status)) {
 				return Status.PREPARING;
 			}

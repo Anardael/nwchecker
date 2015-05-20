@@ -65,7 +65,7 @@ public class UserRequestsController {
      *                  tries to call this method
      * @return <b>userRequests.jsp</b> Returns page where admin ca view list of users requests
      */
-    @Link(label="List of Users", family="adminOptions", parent = "")
+    @Link(label="userRequests.caption", family="adminOptions", parent = "")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/userRequests", method = RequestMethod.GET)
     public String userRequests(Principal principal, Model model) {

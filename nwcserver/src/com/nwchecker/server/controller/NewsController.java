@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.service.NewsService;
@@ -17,7 +18,8 @@ public class NewsController {
 
 	@Autowired
 	private NewsService newsService;
-
+	
+	@Link(label="news.caption", family="News", parent = "")
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String getLastNews(Model model) {
 

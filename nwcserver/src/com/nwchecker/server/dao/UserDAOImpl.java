@@ -7,6 +7,7 @@ import com.nwchecker.server.model.UserRequest;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -148,15 +149,14 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	private Criteria getFilterCriteria(String filter, Session session) {
 		Criteria criteria = session.createCriteria(User.class);
-		Disjunction filters = Restrictions.disjunction();
 		if (!(filter == null) && !(filter.equals(""))) {
 			filter = "%" + filter + "%";
-			filters.add(Restrictions.like("username", filter));
-			filters.add(Restrictions.like("displayName", filter));
-			filters.add(Restrictions.like("email", filter));
-			filters.add(Restrictions.like("department", filter));
-			filters.add(Restrictions.like("info", filter));
-			criteria.add(filters);
+			Criterion username = Restrictions.like("username", filter);
+			Criterion displayName = Restrictions.like("displayName", filter);
+			Criterion email = Restrictions.like("email", filter);
+			Criterion department = Restrictions.like("department", filter);
+			Criterion info = Restrictions.like("info", filter);
+			criteria.add(Restrictions.or(username, displayName, email, department, info));
 		}
 		return criteria;
 	}

@@ -56,6 +56,9 @@ function finishContest() {
             action: function (dialogItself) {
                 dialogItself.close();
                 sendFinishContest();
+                $(document).on('hide.bs.modal','.type-success', function () {
+                	location.href = 'getContests.do'
+    });
             }
         }, {
             label: btnClose,
@@ -114,7 +117,7 @@ function sendFinishContest() {
                         title: successCaption,
                         type: BootstrapDialog.TYPE_SUCCESS,
                         message: contestReleaset
-                    });
+                    });                    
                 }
             });
         }

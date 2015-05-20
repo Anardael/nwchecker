@@ -35,15 +35,9 @@
 	UPLOAD_FILE = '<spring:message code="contest.passing.uploadSourceFile.button"/>';
 
 	<c:if test="${not empty taskResults[currentTask.id]}">
-	CURRENT_TASK_SUCCESS = $
-	{
-		taskResults[currentTask.id]
-	};
+	CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
 	</c:if>
-	END_TIME_GTM_MILLISECONDS = $
-	{
-		contestEndTimeGTM
-	};
+	END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
 	var isArchive = $
 	{
 		isArchive
@@ -56,7 +50,6 @@
 			startTimer();
 	});
 </script>
-
 <!-- Current Task information -->
 <div class="page-header">
 	<h2>

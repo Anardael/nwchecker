@@ -86,7 +86,7 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>contest.jsp</b> Returns page when user can view contests
      */
-    @Link(label="Contests", family="contests", parent = "")
+    @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContests")
     public String getContests(@RequestParam (defaultValue="1") int page,@RequestParam (defaultValue="3") int pageSize, Model model, Principal principal) {
         Long count = contestService.getPageCount(pageSize);
@@ -149,7 +149,7 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>contestCreate.jsp</b> Returns page where user can create new contest
      */
-    @Link(label="Create Contest", family="contests", parent = "Contests")
+    @Link(label="contestCreate.caption", family="contests", parent = "contest.caption")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
@@ -255,7 +255,7 @@ public class ContestController {
      * @param model Spring Framework model for this page
      * @return <b>contestCreate.jsp</b> Returns page where teacher can edit contest
      */
-    @Link(label="Edit Contest", family="contests", parent = "Contests")
+    @Link(label="contestEdit.caption", family="contests", parent = "contest.caption")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
@@ -429,7 +429,8 @@ public class ContestController {
         }
         return result;
     }
-
+    
+    @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContestsByStatus")
     public String getContestsByStatus(@RequestParam (defaultValue="1") int page,@RequestParam (defaultValue="3") int pageSize,@RequestParam("status") String status,
                                       Model model, Principal principal) {

@@ -131,10 +131,11 @@
     	<c:forEach var="entry" items="${sessionScope.currentBreadCrumb}">
 			<c:choose>
 				<c:when test="${entry.currentPage == true}">
-					<li class="active">${entry.label}</li>
+					<li class="active">
+					<spring:message code="${entry.label}"/></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${entry.url}">${entry.label}</a></li>
+					<li><a href="${entry.url}"><spring:message code="${entry.label}"/></a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
