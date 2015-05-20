@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.nwchecker.server.dao.ContestDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,31 +18,27 @@ import com.nwchecker.server.utils.ContestStartTimeComparator;
 public class NewsServiceImpl implements NewsService {
 
 	@Autowired
+	private ContestDAO contestDAO;
+
+	@Autowired
 	private ContestService contestService;
 
 	@Autowired
 	private ContestPassService contestPassService;
 
 	@Override
-	public Contest getNextContest() {
-		List<Contest> avalaibleContests = contestService
-				.getContestByStatus(Status.PREPARING);
-		Collections.sort(avalaibleContests, new ContestStartTimeComparator());
-		Contest first = avalaibleContests.get(0);
-		return first;
+	public Contest getNearestContest() {
+
+		Contest contest = contestDAO.getNearestContest();
+		return contest;
 	}
 
 	@Override
-	public List<ContestPassJson> getResultLastContest() {
+	public List<ContestPassJson> getLastArchivedContest() {
 
-		List<Contest> archivedContests = contestService
-				.getContestByStatus(Contest.Status.ARCHIVE);
-		Collections.sort(archivedContests, new ContestStartTimeComparator());
-		Contest last = archivedContests.get(archivedContests.size() - 1);
-
+		Contest lastContest = contestDAO.getLastArchivedContest();
 		List<ContestPass> contestPasses = contestPassService
-				.getContestPasses(last.getId());
-		Collections.sort(contestPasses);
+				.getContestPasses(lastContest.getId());
 
 		List<ContestPassJson> jsonData = new ArrayList<>();
 

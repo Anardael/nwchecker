@@ -21,10 +21,10 @@ public class NewsController {
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String getLastNews(Model model) {
 
-		Contest contest = newsService.getNextContest();
+		Contest contest = newsService.getNearestContest();
 		model.addAttribute("contest", contest);
 
-		List<ContestPassJson> jsonData = newsService.getResultLastContest();
+		List<ContestPassJson> jsonData = newsService.getLastArchivedContest();
 		model.addAttribute("result", jsonData);
 
 		String titleLastContest = newsService.getNameLastContest();

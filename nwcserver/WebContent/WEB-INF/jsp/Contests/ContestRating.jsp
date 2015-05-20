@@ -17,12 +17,12 @@
 							${fn:substring(rating.starts,0,16)} (<spring:message
 								code="contest.results.continued.caption" />
 							${fn:substring(rating.duration,11,16)})
-                            <span class="pull-right">
+                        </span>
+					                            <span class="pull-right">
                                 <label class="label label-danger contestsStatus"> <spring:message
 										code="contest.archive.label" />
 								</label>
                             </span>
-                        </span>
 				</span></li>
 			</c:forEach>
 		</ul>

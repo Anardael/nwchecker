@@ -72,5 +72,10 @@ public interface ContestDAO {
 	 public Long getEntryCount(Contest.Status status);
 
     List<Contest> getContestsForRating();
+
     List<Contest> getContestsWithDynamicRating();
+
+    public Contest getNearestContest() ;
+
+    public Contest getLastArchivedContest();
 }

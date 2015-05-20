@@ -35,7 +35,15 @@
                                                                         alt="en"></a>
             </c:if>
 
-            <c:if test="${(empty param['id']) && (empty param['Username'])}">
+            <c:if test="${not empty param['status']}">
+                <a href="?status=${param['status']}&locale=ua"><img src="${resources}images/ukraineFlag.png" width="36"
+                                                            height="36"
+                                                            alt="ua"></a>
+                <a href="?status=${param['status']}&locale=en"><img src="${resources}images/ukFlag.png" width="36" height="36"
+                                                            alt="en"></a>
+            </c:if>
+
+            <c:if test="${(empty param['id']) && (empty param['Username']) && (empty param['status'])}">
                 <a href="?locale=ua"><img src="${resources}images/ukraineFlag.png" width="36" height="36" alt="ua"></a>
                 <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img
                         src="${resources}images/ukFlag.png" width="36" height="36" alt="en"></a>

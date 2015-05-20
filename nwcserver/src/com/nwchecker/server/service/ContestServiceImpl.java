@@ -54,7 +54,7 @@ public class ContestServiceImpl implements ContestService {
         User teacher = userService.getUserByUsername(username);
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
-                if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.PREPARING)) {
+                if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.RELEASE)) {
                     return true;
                 }
             }
@@ -92,4 +92,6 @@ public class ContestServiceImpl implements ContestService {
     	return count/pageSize;
     	else return count/pageSize+1;
     }
+
+
 }

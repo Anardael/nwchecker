@@ -22,14 +22,30 @@
 		<div id="accordion">
 
 			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
+				<button class="btn btn-primary dropdown-toggle" type="button" name="buttonName"
 					data-toggle="dropdown">
-					<%=request.getParameter("status") == null ? "ALL CONTESTS"
-					: request.getParameter("status")%>
+					<c:choose>
+						<c:when test="${param.status == 'GOING'}">
+							<spring:message code="contest.going.label" />
+						</c:when>
+						<c:when test="${param.status == 'PREPARING'}">
+							<spring:message code="contest.preparing.label" />
+						</c:when>
+						<c:when test="${param.status == 'RELEASE'}">
+							<spring:message code="contest.release.label" />
+						</c:when><c:when test="${param.status == 'ARCHIVE'}">
+							<spring:message code="contest.archive.label" />
+						</c:when>
+						<c:otherwise>
+							<spring:message code="contest.status.all.label"/>
+						</c:otherwise>
+					</c:choose>
+
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="/NWCServer/getContests.do">All Contests</a></li>
+					<li><a href="/NWCServer/getContests.do">
+						<spring:message code="contest.status.all.label"/></a></li>
 					<li><a
 						href="<c:url value="/getContestsByStatus.do?status=GOING"/>">
 							<spring:message code="contest.going.label" />
@@ -181,36 +197,26 @@
 					</li>
 				</div>
 			</c:forEach>
-			<security:authorize access="hasRole('ROLE_TEACHER')">
-				<div class="col-sm-6 col-sm-offset-3"
-					style="text-align: center; margin-top: 20px">
-					<button class="btn btn-primary btn-sm"
-						onclick="window.location.href = 'addContest.do'">
-						<spring:message code="contest.createButton.caption" />
-					</button>
-				</div>
-			</security:authorize>
-			<div class="text-center">
-				<!-- Pagination STARTO -->
+				<!-- Pagination START -->
 				<div class="text-center">
 					<ul class="pagination">
 						<!-- "Previous" button -->
 						<c:if test="${currentPage gt 1}">
 							<li><a
-								href="<c:url value="/getContests.do">
+									href="<c:url value="/getContests.do">
 										<c:param name="page" value="${currentPage - 1}"/>
 									  </c:url>"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 						</c:if>
 						<!-- Display first page -->
 						<c:if test="${currentPage - 3 ge 1}">
 							<li><a
-								href="<c:url value="/getContests.do">
+									href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="1"/>
 										</c:url>">
-									<c:out value="1" />
+								<c:out value="1" />
 							</a></li>
 						</c:if>
 
@@ -226,13 +232,13 @@
 									<li class="active"><a><c:out value="${currentPage}" /></a></li>
 								</c:when>
 								<c:when
-									test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
+										test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
 									<li><a
-										href="<c:url value="/getContests.do">
+											href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${currentPage + loop - 3}"/>
 										</c:url>">
-											<c:out value="${currentPage + loop - 3}" />
+										<c:out value="${currentPage + loop - 3}" />
 									</a></li>
 								</c:when>
 							</c:choose>
@@ -244,27 +250,36 @@
 						<!-- Display last page -->
 						<c:if test="${currentPage + 3 le pageCount}">
 							<li><a
-								href="<c:url value="/getContests.do">
+									href="<c:url value="/getContests.do">
 										<c:param name="id" value="${taskId}"/>
 										<c:param name="page" value="${pageCount}"/>
 										</c:url>">
-									<c:out value="${pageCount}" />
+								<c:out value="${pageCount}" />
 							</a></li>
 						</c:if>
 
 						<!-- "Next" button -->
 						<c:if test="${currentPage lt pageCount}">
 							<li><a
-								href="<c:url value="/getContests.do">
+									href="<c:url value="/getContests.do">
 										<c:param name="page" value="${currentPage + 1}"/>
 									  </c:url>"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 						</c:if>
 					</ul>
 				</div>
 				<!-- Pagination FINISH -->
-			</div>
+			<security:authorize access="hasRole('ROLE_TEACHER')">
+				<div class="col-sm-6 col-sm-offset-3"
+					style="text-align: center; margin-top: 20px">
+					<button class="btn btn-primary btn-sm"
+						onclick="window.location.href = 'addContest.do'">
+						<spring:message code="contest.createButton.caption" />
+					</button>
+				</div>
+			</security:authorize>
+
 		</div>
 	</div>
 </body>

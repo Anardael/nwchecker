@@ -1,7 +1,9 @@
 package com.nwchecker.server.dao;
 
+import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 
+import com.nwchecker.server.utils.ContestStartTimeComparator;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +12,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.TransactionScoped;
@@ -116,4 +119,20 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 		query.setParameter("status", status);
 		return (Long) query.uniqueResult();
 	}
+
+    @Override
+    @Transactional
+    public Contest getNearestContest() {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();;
+        Query query = session.createQuery("from Contest where status='RELEASE' order by starts asc");
+        return (Contest) query.setMaxResults(1).uniqueResult();
+    }
+
+    @Override
+    @Transactional
+    public Contest getLastArchivedContest(){
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();;
+        Query query = session.createQuery("from Contest where status='ARCHIVE' order by starts desc");
+        return (Contest) query.setMaxResults(1).uniqueResult();
+    }
 }
