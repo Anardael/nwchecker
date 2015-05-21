@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -121,15 +122,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	private Criteria getFilterCriteria(String filter, Session session) {
 		Criteria criteria = session.createCriteria(User.class);
-		if (!(filter == null) && !(filter.equals(""))) {
-			filter = "%" + filter + "%";
-			Criterion username = Restrictions.like("username", filter);
-			Criterion displayName = Restrictions.like("displayName", filter);
-			Criterion email = Restrictions.like("email", filter);
-			Criterion department = Restrictions.like("department", filter);
-			Criterion info = Restrictions.like("info", filter);
+			Criterion username = Restrictions.like("username", filter, MatchMode.ANYWHERE);
+			Criterion displayName = Restrictions.like("displayName", filter, MatchMode.ANYWHERE);
+			Criterion email = Restrictions.like("email", filter, MatchMode.ANYWHERE);
+			Criterion department = Restrictions.like("department", filter, MatchMode.ANYWHERE);
+			Criterion info = Restrictions.like("info", filter, MatchMode.ANYWHERE);
 			criteria.add(Restrictions.or(username, displayName, email, department, info));
-		}
 		return criteria;
 	}
 	
@@ -140,22 +138,16 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = getFilterCriteria(filter, session);
-		if (!(sorting == null) && !(sorting.equals(""))) {
-			if (sorting.contains("ASC")) {
-				String column = sorting.split(" ")[0];
-				if (column.equals("roles")) {
-					criteria.createAlias("roles", "r");
-					criteria.addOrder(Order.asc("r.role"));
-				} else
-					criteria.addOrder(Order.asc(column));
-			} else {
-				String column = sorting.split(" ")[0];
-				if (column.equals("roles")) {
-					criteria.createAlias("roles", "r");
-					criteria.addOrder(Order.desc("r.role"));
-				} else
-					criteria.addOrder(Order.desc(column));
-			}
+		String columnName = sorting.split(" ")[0];
+		if (columnName.equals("roles")) {
+			criteria.createAlias("roles", "r");
+			columnName = "r.role";
+		}
+		
+		if (sorting.contains("ASC")) {
+				criteria.addOrder(Order.asc(columnName));
+		} else {
+				criteria.addOrder(Order.desc(columnName));
 		}
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);

@@ -104,6 +104,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	public Long getTaskPassEntryCount(int id, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
+		filter = "%" + filter + "%";
 		Query query = session
 				.createQuery("SELECT COUNT(*) FROM TaskPass t WHERE task_id = :id AND t.user.displayName LIKE :filter");
 		query.setParameter("filter", filter);

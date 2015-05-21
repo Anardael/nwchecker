@@ -88,7 +88,6 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
-		filter = "%"+filter+"%";
 		Criterion title = Restrictions.ilike("title", filter, MatchMode.ANYWHERE);
 		Criterion description = Restrictions.ilike("description", filter, MatchMode.ANYWHERE);
 		criteria.add(Restrictions.or(title, description));
@@ -118,7 +117,6 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Criteria criteria = session.createCriteria(Task.class);
 
 		if (!(filter == null) && !(filter.equals(""))) {
-			filter = "%"+filter+"%";
 			Criterion title = Restrictions.ilike("title", filter, MatchMode.ANYWHERE);
 			Criterion description = Restrictions.ilike("description", filter, MatchMode.ANYWHERE);
 			criteria.add(Restrictions.or(title, description));
