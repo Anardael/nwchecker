@@ -44,7 +44,7 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="/NWCServer/getContests.do">
+					<li><a href="<c:url value="/getContests.do"/>">
 						<spring:message code="contest.status.all.label"/></a></li>
 					<li><a
 						href="<c:url value="/getContestsByStatus.do?status=GOING"/>">
