@@ -21,7 +21,7 @@ public class ArchiveController {
 	TaskService taskService;
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 	
-	@Link(label="Archive", family="archive", parent = "")
+	@Link(label="archive.caption", family="archive", parent = "")
 	@RequestMapping("/etiam")
 	public String archivePage(Model model,
 			@RequestParam(defaultValue = "1", value="page") int pageNumber,

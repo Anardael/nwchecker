@@ -60,7 +60,7 @@ public class RegistrationController {
      * @param model Spring Framework model for this page
      * @return <b>registration.jsp</b> Returns page where user can register
      */
-    @Link(label="Registration", family="profile", parent = "")
+    @Link(label="registration.caption", family="profile", parent = "")
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String initRegistrationForm(Model model) {
@@ -79,7 +79,7 @@ public class RegistrationController {
      * @return Redirects to success page or shows validation errors
      */
     @PreAuthorize("!isAuthenticated()")
-    @Link(label="Registration", family="profile", parent = "")
+    @Link(label="registration.caption", family="profile", parent = "")
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String doRegister(@ModelAttribute("userRegistrationForm") @Validated User user, BindingResult result, Model model) {
         if (result.hasErrors()) {

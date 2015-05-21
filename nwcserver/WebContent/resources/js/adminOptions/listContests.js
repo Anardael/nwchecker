@@ -21,7 +21,7 @@ $(document).ready(function () {
                 $("input[id=rbPreparing]").prop("disabled",true);
                 $("input[id=rbRelease]").prop("disabled",true);
             }
-            if (contest.isContestHidden) {
+            if (contest.contestHidden) {
                 $('input[id=chbHidden]').prop('checked', true);
             } else {
                 $('input[id=chbHidden]').prop('checked', false);

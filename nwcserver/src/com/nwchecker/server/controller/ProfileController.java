@@ -71,7 +71,7 @@ public class ProfileController {
      *                  tries to call this method
      * @return <b>profile.jsp</b> Returns page where user can change his profile data
      */
-	@Link(label="Profile", family="profile", parent = "")
+	@Link(label="profile.caption", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = {"/profile", "/changePassword"}, method = RequestMethod.GET)
 	public String initProfileForm(ModelMap model, Principal principal) {
@@ -95,7 +95,7 @@ public class ProfileController {
      *                  tries to call this method
      * @param model Spring Framework model for this page
      */
-	@Link(label="Profile", family="profile", parent = "")
+	@Link(label="profile.caption", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
@@ -130,7 +130,7 @@ public class ProfileController {
      *                  tries to call this method
      * @param model Spring Framework model for this page
      */
-	@Link(label="Profile", family="profile", parent = "")
+	@Link(label="profile.caption", family="profile", parent = "")
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public String doChangePassword(HttpServletRequest request, Principal principal, ModelMap model) {

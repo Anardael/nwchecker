@@ -32,7 +32,7 @@ public class LoginController {
      *
      * @param error if process "login" have some errors, value will change to "not null".
      */
-    @Link(label="Login", family="User", parent = "")
+    @Link(label="login.caption", family="User", parent = "")
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error) {

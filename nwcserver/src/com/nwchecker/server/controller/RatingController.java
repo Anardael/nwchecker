@@ -45,7 +45,7 @@ public class RatingController {
      * @param model Spring Framework model for this page
      * @return <b>CintestRating.jsp</b> Returns page with completed contests list
      */
-    @Link(label="Rating", family="contestRating", parent = "")
+    @Link(label="rating.caption", family="contestRating", parent = "")
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
         model.addAttribute("ratingContests", contestService.getContestForRating());
@@ -62,7 +62,7 @@ public class RatingController {
      * @param contestId    ID of contest
      * @return <b>contestResults.jsp</b> Returns page with contest statistic
      */
-    @Link(label="Results", family="contestRating", parent = "Rating")
+    @Link(label="results.caption", family="contestRating", parent = "rating.caption")
     @RequestMapping(value = "/results", method = RequestMethod.GET)
     public String getResults(Model model, @RequestParam(value = "id") int contestId) {
         Contest contest = contestService.getContestByID(contestId);

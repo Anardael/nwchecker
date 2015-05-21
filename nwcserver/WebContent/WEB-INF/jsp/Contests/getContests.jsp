@@ -189,8 +189,7 @@
 								</c:if>
 								<c:if test="${(contest.status=='ARCHIVE')}">
 									<button class="btn btn-sm btn-info form-group"
-										style="font-weight: 600" onclick="archive()">This
-										competition has been archived</button>
+										style="font-weight: 600" onclick="archive()"><spring:message code="home.archive.caption" /></button>
 								</c:if>
 							</div>
 						</div>

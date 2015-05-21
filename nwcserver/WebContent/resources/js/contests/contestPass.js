@@ -17,12 +17,14 @@ function allTasksComplete() {
     var tasksCount = document.getElementById("tasks").getElementsByTagName("LI").length;
     var completeTasksCount = document.getElementsByClassName("success").length;
     completeTasksCount += document.getElementsByClassName("descr-success").length;
+    console.log(tasksCount);
+    console.log(completeTasksCount);
     return (tasksCount == completeTasksCount);
 }
 
 function endContest() {
     BootstrapDialog.show({
-        type:    BootstrapDialog.TYPE_WARNING,
+        type:    BootstrapDialog.TYPE_INFO,
         title:   ALL_COMPLETE_TITLE,
         message: ALL_COMPLETE_MESSAGE,
         onhide: function() {

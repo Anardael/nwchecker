@@ -15,32 +15,42 @@ import com.nwchecker.server.utils.PaginationWrapper;
 
 @Service
 @SessionAttributes("taskPassOrdering")
-public class TaskPassSerivceImpl implements TaskPassService {
+public class TaskPassServiceImpl implements TaskPassService {
 
 	@Autowired
 	TaskPassDAO taskPassDAO;
 	private static final Logger LOG = Logger
-			.getLogger(TaskPassSerivceImpl.class);
+			.getLogger(TaskPassServiceImpl.class);
 
 	@Override
 	public List<TaskPass> getPagedTaskPassesForTask(int taskId, int startIndex,
-			int pageSize, String sorting) {
+			int pageSize, String sorting, String filter) {
 		LOG.debug("Attempting to create page of task results for " + taskId
 				+ " ordered by " + sorting);
 		List<TaskPass> taskPasses;
-		if (!(sorting == null) && !(sorting.equals(""))) {
-			taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId,
-					startIndex, pageSize, sorting);
+		if (!(sorting == null) && !(sorting.equals("")) && !(filter == null)
+				&& !(filter.equals(""))) {
+			taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdSortedAndFiltered(taskId, startIndex, pageSize, sorting, filter);
 		} else {
-			taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId,
-					startIndex, pageSize);
+			if (!(sorting == null) && !(sorting.equals(""))) {
+				taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdSorted(taskId, startIndex, pageSize, sorting);
+			} else {
+				if (!(filter == null) && !(filter.equals(""))) {
+					taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdFiltered(taskId, startIndex, pageSize, filter);
+				} else {
+					taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize);
+				}
+			}
 		}
 		return taskPasses;
 	}
 
 	@Override
-	public Long getTaskPassEntryCount(int taskId) {
+	public Long getTaskPassEntryCount(int taskId, String filter) {
 		LOG.debug("Got number of solutions for task " + taskId);
+		if (!(filter == null) && !(filter.equals(""))) {
+			return taskPassDAO.getTaskPassEntryCount(taskId, filter);
+		}
 		return taskPassDAO.getTaskPassEntryCount(taskId);
 	}
 
@@ -52,14 +62,14 @@ public class TaskPassSerivceImpl implements TaskPassService {
 
 	@Override
 	public PaginationWrapper<TaskPassJson> getPagedTaskPassJsonForTask(
-			int taskId, int startIndex, int pageSize, String sorting) {
+			int taskId, int startIndex, int pageSize, String sorting, String filter) {
 		List<TaskPass> taskPasses = getPagedTaskPassesForTask(taskId,
-				startIndex, pageSize, sorting);
+				startIndex, pageSize, sorting, filter);
 		List<TaskPassJson> taskPassJsonList = JsonUtil.createJsonList(
 				TaskPassJson.class, taskPasses);
 		PaginationWrapper<TaskPassJson> paginatedTaskPass = new PaginationWrapper<TaskPassJson>();
 		paginatedTaskPass.setDataList(taskPassJsonList);
-		paginatedTaskPass.setRecordCount(getTaskPassEntryCount(taskId));
+		paginatedTaskPass.setRecordCount(getTaskPassEntryCount(taskId, filter));
 		LOG.debug("Successfully created page of task results for " + taskId
 				+ " ordered by " + sorting);
 		return paginatedTaskPass;

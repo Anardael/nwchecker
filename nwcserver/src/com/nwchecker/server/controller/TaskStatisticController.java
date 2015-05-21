@@ -33,7 +33,7 @@ public class TaskStatisticController {
 	private static final Logger LOG = Logger
 			.getLogger(TaskStatisticController.class);
 
-	@Link(label = "Task", family = "contests", parent = "Contests")
+	@Link(label="task.caption", family="contests", parent = "contest.caption")
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
 			@RequestParam(value = "id") int taskId, Principal principal) {
@@ -59,12 +59,13 @@ public class TaskStatisticController {
 			@RequestParam int taskId,
 			@RequestParam("jtStartIndex") int startIndex,
 			@RequestParam("jtPageSize") int pageSize,
-			@RequestParam(required = false, value = "jtSorting") String sorting) {
+			@RequestParam(required = false, value = "jtSorting") String sorting,
+			@RequestParam(required = false, value = "jtFilter") String filter) {
 		LOG.debug("Attempting to get task result data for page " + startIndex
 				/ pageSize + " for task " + taskId);
 		PaginationWrapper<TaskPassJson> paginatedTaskPass = taskPassService
 				.getPagedTaskPassJsonForTask(taskId, startIndex, pageSize,
-						sorting);
+						sorting, filter);
 		JTableResponseList jTableResponse = new JTableResponseList("OK",
 				paginatedTaskPass.getDataList(),
 				paginatedTaskPass.getRecordCount());

@@ -22,7 +22,7 @@ public class RuleController {
 
     @Autowired
     private UserService userService;
-    @Link(label="Rules", family="rules", parent = "")
+    @Link(label="rules.caption", family="rules", parent = "")
     @RequestMapping(value = "/rules")
     public String showRules(Model model) {
         model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));

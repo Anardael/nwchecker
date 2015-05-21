@@ -62,7 +62,8 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>users.jsp</b> Returns page with list of users
 	 */
-	@Link(label="List of Users", family="adminOptions", parent = "")
+	//TODO: FIGURE THIS ***
+	@Link(label="admin.users.caption", family="adminOptions", parent = "")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Principal principal, Model model) {
@@ -113,7 +114,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>userEdit.jsp</b> Returns page that allows to change user data
 	 */
-	@Link(label="Edit User", family="adminOptions", parent = "List of Users")
+	@Link(label="admin.userEdit.caption", family="adminOptions", parent = "admin.users.caption")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
 	public String user(@RequestParam(value = "Username") String username,

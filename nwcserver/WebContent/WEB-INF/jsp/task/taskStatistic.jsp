@@ -43,8 +43,22 @@
 			$('#jTable').jtable('load', {
 				taskId : '${taskId}'
 			});
+			$('#filter').click(function(e) {
+				e.preventDefault();
+				$('#jTable').jtable('load', {
+					jtFilter : $('#filterText').val(),
+					taskId : '${taskId}'
+				});
+			})
 		})
 	</script>
+	<form>
+		<div class="navbar-form">
+			<input type="text" id="filterText" class="form-control"
+				placeholder="<spring:message code="pagination.search.field" />">
+			<button type="submit" id="filter" class="btn btn-default"><spring:message code="pagination.search.button" /></button>
+		</div>
+	</form>
 	<div id="jTable"></div>
 </body>
 </html>

@@ -1,38 +1,38 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.utils.CheckerMessage;
+import com.nwchecker.server.utils.CheckerResponse;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.Map;
-import java.util.Random;
 
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
-
-    private static List<String> compilerErrors = Arrays.asList("NullPointerException", "Compiler error",
-            "RunTimeException", "IOException");
+	static final int PORT = 99;
 
     @Override
     public Map<String, Object> checkTask(Task task, byte[] file, int compilerId) {
-        Map<String, Object> result = new LinkedHashMap<String, Object>();
-        Random rd = new Random();
-
-        boolean passed = rd.nextBoolean();
-        if (passed) {
-            result.put("passed", true);
-            //generate result:
-            result.put("time", rd.nextInt(1000));
-            result.put("memory", rd.nextInt(1000));
-            return result;
-        } else {
-            result.put("passed", false);
-            result.put("time", 1000 + rd.nextInt(3000));
-            result.put("memory", 1000 + rd.nextInt(3000));
-            result.put("message", compilerErrors.get(rd.nextInt(compilerErrors.size())));
-            return result;
-        }
+    	try {
+			Socket connectionSocket = new Socket("127.0.0.1", PORT);
+			ObjectOutputStream dataOutput = new ObjectOutputStream(connectionSocket.getOutputStream());
+			CheckerMessage message = new CheckerMessage();
+			message.setCompilerId(1);
+			dataOutput.writeObject(message);
+			ObjectInputStream dataInput = new ObjectInputStream(connectionSocket.getInputStream());
+			CheckerResponse response = (CheckerResponse) dataInput.readObject();
+			connectionSocket.close();
+			return response.getResponse();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
 }
