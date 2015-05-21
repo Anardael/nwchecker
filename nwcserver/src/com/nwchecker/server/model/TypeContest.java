@@ -82,4 +82,8 @@ public class TypeContest {
     public void setDynamic(Boolean dynamic) {
         this.dynamic = dynamic;
     }
+
+    public Boolean getDynamic() {
+        return dynamic;
+    }
 }

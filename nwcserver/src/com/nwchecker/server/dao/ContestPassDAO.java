@@ -39,4 +39,6 @@ public interface ContestPassDAO {
      */
     List<ContestPass> getContestPasses(int contestId);
 
+    ContestPass getContestPassByUserIdAndContestId(int userId, int contestId);
+
 }

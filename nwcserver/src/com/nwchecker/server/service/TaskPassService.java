@@ -54,5 +54,7 @@ public interface TaskPassService {
 	 *            Id of task
 	 * @return Number of successful TaskPasses
 	 */
-	public Long getSuccessfulTaskPassEntryCount(int taskId);
+	Long getSuccessfulTaskPassEntryCount(int taskId);
+
+    double getTaskRateById(int taskId);
 }
