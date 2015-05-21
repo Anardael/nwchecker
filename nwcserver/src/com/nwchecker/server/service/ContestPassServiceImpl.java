@@ -3,21 +3,19 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
+import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service(value = "TaskPassService")
 public class ContestPassServiceImpl implements ContestPassService {
     @Autowired
-    private UserService userService;
+    private UserDAO userDAO;
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -28,13 +26,11 @@ public class ContestPassServiceImpl implements ContestPassService {
     private CompilerDAO compilerDAO;
 
     @Override
-    @Transactional
     public void saveContestPass(ContestPass contestPass) {
         contestPassDAO.saveContestPass(contestPass);
     }
 
     @Override
-    @Transactional
     public void updateContestPass(ContestPass contestPass) {
         contestPassDAO.updateContestPass(contestPass);
     }
@@ -73,5 +69,43 @@ public class ContestPassServiceImpl implements ContestPassService {
     @Override
     public List<ContestPass> getContestPasses(int contestId) {
         return contestPassDAO.getContestPasses(contestId);
+    }
+
+    @Override
+    public Map<Integer, Boolean> getTaskResultsForContestByUserName(String userName, Contest contest){
+        User user = userDAO.getUserByUsername(userName);
+        if (checkContestPassByUserName(userName, contest)){
+            ContestPass contestPass = contestPassDAO.getContestPassByUserIdAndContestId(user.getUserId(), contest.getId());
+            Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
+
+            for (TaskPass taskPass : contestPass.getTaskPassList()) {
+                int taskId = taskPass.getTask().getId();
+                boolean isPassed = taskPass.isPassed();
+                //if ((not contains) or (new result success))
+                if (!taskResults.containsKey(taskId) || (!taskResults.get(taskId) && isPassed)) {
+                    taskResults.put(taskId, isPassed);
+                }
+            }
+
+            return taskResults;
+        } else  {
+            ContestPass contestPass = new ContestPass();
+            contestPass.setContest(contest);
+            contestPass.setUser(user);
+            contestPassDAO.saveContestPass(contestPass);
+
+            return null;
+        }
+    }
+
+    @Override
+    public boolean checkContestPassByUserName(String userName, Contest contest){
+        User user = userDAO.getUserByUsername(userName);
+        for (ContestPass contestPass : user.getContestPassList()) {
+            if (contestPass.getContest().equals(contest)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

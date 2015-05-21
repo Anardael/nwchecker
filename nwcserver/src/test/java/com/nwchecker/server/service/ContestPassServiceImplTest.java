@@ -12,6 +12,7 @@ import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,7 @@ public class ContestPassServiceImplTest {
         assertEquals(contestPass.getRank(), contestPassService.getContestPasses(1).get(0).getRank());
     }
 
+    @Ignore
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckTask() throws Exception {

@@ -61,93 +61,18 @@ public class ContestPassController {
                                     Model model) {
         Contest currentContest = contestService.getContestByID(contestId);
 
+        // if not redirect from getTaskForPass method
         if(!model.containsAttribute("currentTask")){
-            //Sending task statistic
             Task firstTaskCurrentContest = currentContest.getTasks().get(0);
-            Long successful = taskPassService.getSuccessfulTaskPassEntryCount(firstTaskCurrentContest.getId());
-            Long all = taskPassService.getTaskPassEntryCount(firstTaskCurrentContest.getId(), null);
-            if(!(all == 0)){
-                double rate = successful.doubleValue() / all.doubleValue();
-                model.addAttribute("taskSuccessRate", rate);
-                model.addAttribute("currentTask", firstTaskCurrentContest);
-            } else{
-                //double rate = successful.doubleValue() / all.doubleValue();
-                model.addAttribute("taskSuccessRate", 0);
-                model.addAttribute("currentTask", firstTaskCurrentContest);
-            }
+            model.addAttribute("taskSuccessRate", taskPassService.getTaskRateById(firstTaskCurrentContest.getId()));
+            model.addAttribute("currentTask", firstTaskCurrentContest);
         }
-        if (currentContest.getTypeContest() != null
-                && currentContest.getTypeContest().isDynamic() != null
-                && currentContest.getTypeContest().isDynamic()) {
-            model.addAttribute("currentContestId", currentContest.getId());
-        } else  {
-            model.addAttribute("currentContestId", null);
-        }
-        User user = userService.getUserByUsername(principal.getName());
-        //check if contest status provide passing:
-        if (!(currentContest.getStatus() == Contest.Status.GOING ||
-                currentContest.getStatus() == Contest.Status.ARCHIVE)) {
-            model.addAttribute("pageName", "result");
-            return "nwcserver.403";
-        }
-        //if contest is going:
-        ContestPass currentContestPass = null;
-        if (currentContest.getStatus() == Contest.Status.GOING) {
-            //check if user has contestPass for this contest:
-            boolean contains = false;
-            for (ContestPass c : user.getContestPassList()) {
-                if (c.getContest().equals(currentContest)) {
-                    contains = true;
-                    currentContestPass = c;
-                    break;
-                }
-            }
-            if (!contains) {
-                ContestPass contestPass = new ContestPass();
-                contestPass.setContest(currentContest);
-                contestPass.setUser(user);
-                contestPassService.saveContestPass(contestPass);
-            }
-        }
+        model.addAttribute("contest", currentContest);
         model.addAttribute("isArchive", (currentContest.getStatus() == Contest.Status.ARCHIVE));
-        //get contest tasks titles
-        Map<Integer, String> taskTitles = new TreeMap<>();
-
-        for (Task task : currentContest.getTasks()) {
-            taskTitles.put(task.getId(), task.getTitle());
-        }
-        model.addAttribute("taskTitles", taskTitles);
-
-        // get contest ending time in GMT
-        Calendar endDate = Calendar.getInstance();
-        Calendar duration = Calendar.getInstance();
-        endDate.setTime(currentContest.getStarts());
-        duration.setTime(currentContest.getDuration());
-        endDate.add(Calendar.HOUR, duration.get(Calendar.HOUR));
-        endDate.add(Calendar.MINUTE, duration.get(Calendar.MINUTE));
-        endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
-        long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
-        model.addAttribute("contestEndTimeGTM", gtmMillis);
-
-        //get list of passed/failed tasks, and forward it to UI:
-        if (currentContestPass != null) {
-            Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
-            for (TaskPass taskPass : currentContestPass.getTaskPassList()) {
-                //if not contains:
-                if (!taskResults.containsKey(taskPass.getTask().getId())) {
-                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
-                    continue;
-                }
-                //if contains and new result if success:
-                if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
-                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
-                }
-            }
-            model.addAttribute("taskResults", taskResults);
-        }
-
+        model.addAttribute("contestEndTimeGTM", contestService.getContestEndTime(currentContest));
+        model.addAttribute("taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
         model.addAttribute("compilers", compilerService.getAllCompilers());
-        model.addAttribute("pageName", "task");
+
         return "nwcserver.tasks.pass";
     }
 
@@ -168,18 +93,12 @@ public class ContestPassController {
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
-    	//Sending task statistic
-    	Long successful = taskPassService.getSuccessfulTaskPassEntryCount(taskId);
-    	Long all = taskPassService.getTaskPassEntryCount(taskId, null);
-    	if(!(all == 0)){
-    		double rate = successful.doubleValue() / all.doubleValue();
-    		model.addAttribute("taskSuccessRate", rate);
-    	}
         Task currentTask = taskService.getTaskById(taskId);
+
+        model.addAttribute("taskSuccessRate", taskPassService.getTaskRateById(taskId));
         model.addAttribute("currentTask", currentTask);
 
-        int currentContest = currentTask.getContest().getId();
-        return getContestForPass(principal, currentContest, model);
+        return getContestForPass(principal, currentTask.getContest().getId(), model);
     }
 
     /**

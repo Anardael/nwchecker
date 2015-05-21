@@ -13,7 +13,5 @@ public interface LanguageDAO {
 
     void deleteLanguageById(int id);
 
-    int getLanguageIdByTag(String tag);
-
     List<Language> getAllLanguages();
 }

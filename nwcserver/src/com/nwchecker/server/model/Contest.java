@@ -8,6 +8,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * <h1>Contest Entity</h1> Entity that represents some Contest in DB.

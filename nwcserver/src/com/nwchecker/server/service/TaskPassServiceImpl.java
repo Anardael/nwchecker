@@ -74,4 +74,15 @@ public class TaskPassServiceImpl implements TaskPassService {
 				+ " ordered by " + sorting);
 		return paginatedTaskPass;
 	}
+
+    @Override
+    public double getTaskRateById(int taskId){
+        long successfulPassCount = taskPassDAO.getSuccessfulTaskPassEntryCount(taskId);
+        long allPassCount = taskPassDAO.getTaskPassEntryCount(taskId);
+        if(allPassCount != 0){
+            return ((double) successfulPassCount) / ((double) allPassCount);
+        } else{
+            return 0;
+        }
+    }
 }
