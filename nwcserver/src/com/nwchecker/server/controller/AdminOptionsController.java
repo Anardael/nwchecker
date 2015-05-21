@@ -62,7 +62,6 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>users.jsp</b> Returns page with list of users
 	 */
-	//TODO: FIGURE THIS ***
 	@Link(label="admin.users.caption", family="adminOptions", parent = "")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)

@@ -17,35 +17,14 @@ import com.nwchecker.server.utils.CheckerResponse;
 public class App {
 	public static void main(String[] args) {
 		try {
-			ServerSocket serverSocket = new ServerSocket(99);
-			System.out.println("It works");
-
-			Socket clientSocket = serverSocket.accept();
-			System.out.println("accepted connection");
-			try {
-				ObjectInputStream dataInput = new ObjectInputStream(
-						clientSocket.getInputStream());
-				CheckerMessage message = (CheckerMessage) dataInput
-						.readObject();
-				System.out.println("read data");
-
-				LinkedHashMap<String, Object> checkerResult = TaskChecker
-						.checkTask(message);
-				ObjectOutputStream dataOutput = new ObjectOutputStream(
-						clientSocket.getOutputStream());
-				CheckerResponse checkerResponse = new CheckerResponse();				
-				checkerResponse.setResponse(checkerResult);
-				dataOutput.writeObject(checkerResponse);
-				System.out.println("sent data");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+			ServerSocket socketListener = new ServerSocket(99);
+			while (true) {
+				Socket clientSocket = socketListener.accept();
+				new Thread(new Connect(clientSocket)).run();
 			}
-
-			clientSocket.close();
-			serverSocket.close();
-			} catch (IOException e1) {
+		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 	}
 }
