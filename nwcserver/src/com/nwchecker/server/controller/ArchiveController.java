@@ -10,9 +10,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 @Controller
 public class ArchiveController {
@@ -21,17 +22,18 @@ public class ArchiveController {
 	TaskService taskService;
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 	
+	
 	@Link(label="archive.caption", family="archive", parent = "")
-	@RequestMapping("/etiam")
+	@RequestMapping("/etiam")	
 	public String archivePage(Model model,
 			@RequestParam(defaultValue = "1", value="page") int pageNumber,
 			@RequestParam(defaultValue = "5") int pageSize,
-			@ModelAttribute("filterText") String filter) {
-		System.out.println(filter);
+			@RequestParam(value = "filterText", required = false) String filter) {
 		LOG.debug("Someone accessed archive page");
 		PaginationWrapper<TaskJson> paginatedTaskJson = taskService
 				.getTaskJsonForPagination(Contest.Status.ARCHIVE, pageSize,
 						pageNumber, filter);
+		model.addAttribute("filterText", filter);
 		model.addAttribute("tasks", paginatedTaskJson.getDataList());
 		model.addAttribute("pageCount", paginatedTaskJson.getPageCount());
 		model.addAttribute("currentPage", pageNumber);
