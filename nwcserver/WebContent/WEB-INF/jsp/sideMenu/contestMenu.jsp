@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<c:if test="${isDynamic}">
+<c:if test="${contest.typeContest.dynamic}">
     <div class="text-center">
-        <a href="<c:url value='/results.do?id=${contestId}'/>">
+        <a href="<c:url value='/results.do?id=${contest.id}'/>">
             <p style="font-size: 22px;"><spring:message code="contest.passing.toRating.caption"/></p>
         </a>
     </div>
@@ -14,10 +14,10 @@
 <ul class="nav nav-pills nav-stacked">
 	<c:url var="taskURL" value="/passTask.do?id=" scope="page" />
 	<c:set var="count" value="0" scope="page" />
-	<c:forEach var="taskInfo" items="${taskTitles}">
+	<c:forEach var="taskInfo" items="${contest.tasks}">
 		<c:set var="count" value="${count + 1}" scope="page" />
-		<c:set var="taskId" value="${taskInfo.key}" />
-		<c:set var="taskTitle" value="${taskInfo.value}" scope="page" />
+		<c:set var="taskId" value="${taskInfo.id}" />
+		<c:set var="taskTitle" value="${taskInfo.title}" scope="page" />
 		<c:set var="taskResult" value="${taskResults[taskId]}" scope="page" />
 		<c:choose>
 			<c:when test="${taskId eq currentTask.id}">

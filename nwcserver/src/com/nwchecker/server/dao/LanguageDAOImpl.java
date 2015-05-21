@@ -41,14 +41,6 @@ public class LanguageDAOImpl extends HibernateDaoSupport implements LanguageDAO 
         getHibernateTemplate().delete(getHibernateTemplate().load(Language.class, id));
     }
 
-    @Transactional
-    @Override
-    public int getLanguageIdByTag(String tag) {
-        @SuppressWarnings("unchecked")
-        List<Language> list = (List<Language>) getHibernateTemplate().find("from Language where tag=?", tag);
-        return list.get(0).getId();
-    }
-
     @Override
     @Transactional()
     public List<Language> getAllLanguages() {

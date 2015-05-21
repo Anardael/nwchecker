@@ -93,15 +93,6 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public Map<Integer, String> getAllTaskTitles(Contest contest){
-        Map<Integer, String> taskTitles = new TreeMap<>();
-        for (Task task : contest.getTasks()) {
-            taskTitles.put(task.getId(), task.getTitle());
-        }
-        return taskTitles;
-    }
-
-    @Override
     public Long getContestEndTime(Contest contest){
         Calendar endDate = Calendar.getInstance();
         Calendar duration = Calendar.getInstance();

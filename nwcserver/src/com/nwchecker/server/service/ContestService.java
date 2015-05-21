@@ -76,7 +76,5 @@ public interface ContestService {
     
     public Long getPageCount(Contest.Status status, int pageSize);
 
-    Map<Integer, String> getAllTaskTitles(Contest contest);
-
     Long getContestEndTime(Contest contest);
 }

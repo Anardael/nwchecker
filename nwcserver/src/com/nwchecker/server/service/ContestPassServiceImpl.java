@@ -72,39 +72,40 @@ public class ContestPassServiceImpl implements ContestPassService {
     }
 
     @Override
-    public ContestPass getContestPassByUserName(String userName, Contest contest){
-        User user = userDAO.getUserByUsername(userName);
-        if (contest.getStatus() == Contest.Status.GOING) {
-            //check if user has contestPass for this contest:
-            for (ContestPass contestPass : user.getContestPassList()) {
-                if (contestPass.getContest().equals(contest)) {
-                    return contestPass;
-                }
-            }
-            ContestPass contestPass = new ContestPass();
-            contestPass.setContest(contest);
-            contestPass.setUser(user);
-            contestPassDAO.saveContestPass(contestPass);
-        }
-        return null;
-    }
-
-    @Override
     public Map<Integer, Boolean> getTaskResultsForContestByUserName(String userName, Contest contest){
-        ContestPass contestPass = getContestPassByUserName(userName, contest);
-        if (contestPass != null) {
+        User user = userDAO.getUserByUsername(userName);
+        if (checkContestPassByUserName(userName, contest)){
+            ContestPass contestPass = contestPassDAO.getContestPassByUserIdAndContestId(user.getUserId(), contest.getId());
             Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
+
             for (TaskPass taskPass : contestPass.getTaskPassList()) {
-                //if not contains, else-if contains and new result if success
                 int taskId = taskPass.getTask().getId();
                 boolean isPassed = taskPass.isPassed();
+                //if ((not contains) or (new result success))
                 if (!taskResults.containsKey(taskId) || (!taskResults.get(taskId) && isPassed)) {
                     taskResults.put(taskId, isPassed);
                 }
             }
+
             return taskResults;
         } else  {
-            return  null;
+            ContestPass contestPass = new ContestPass();
+            contestPass.setContest(contest);
+            contestPass.setUser(user);
+            contestPassDAO.saveContestPass(contestPass);
+
+            return null;
         }
+    }
+
+    @Override
+    public boolean checkContestPassByUserName(String userName, Contest contest){
+        User user = userDAO.getUserByUsername(userName);
+        for (ContestPass contestPass : user.getContestPassList()) {
+            if (contestPass.getContest().equals(contest)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

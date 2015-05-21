@@ -67,12 +67,12 @@ public class ContestPassController {
             model.addAttribute("taskSuccessRate", taskPassService.getTaskRateById(firstTaskCurrentContest.getId()));
             model.addAttribute("currentTask", firstTaskCurrentContest);
         }
-        model.addAttribute("contestId", contestId);
-        model.addAttribute("isDynamic", currentContest.getTypeContest().isDynamic());
+        model.addAttribute("contest", currentContest);
         model.addAttribute("isArchive", (currentContest.getStatus() == Contest.Status.ARCHIVE));
-        model.addAttribute("taskTitles", contestService.getAllTaskTitles(currentContest));
         model.addAttribute("contestEndTimeGTM", contestService.getContestEndTime(currentContest));
-        model.addAttribute("taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
+        if(currentContest.getStatus() == Contest.Status.GOING){
+            model.addAttribute("taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
+        }
         model.addAttribute("compilers", compilerService.getAllCompilers());
 
         return "nwcserver.tasks.pass";
