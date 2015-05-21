@@ -1,4 +1,4 @@
-package nwcserver.nwc_dummy_checker;
+package com.nwchecker.server.utils;
 
 import java.io.Serializable;
 import java.util.LinkedList;
