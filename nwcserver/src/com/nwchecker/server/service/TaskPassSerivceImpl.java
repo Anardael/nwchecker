@@ -70,7 +70,7 @@ public class TaskPassSerivceImpl implements TaskPassService {
         long successfulPassCount = taskPassDAO.getSuccessfulTaskPassEntryCount(taskId);
         long allPassCount = taskPassDAO.getTaskPassEntryCount(taskId);
         if(allPassCount != 0){
-            return successfulPassCount / allPassCount;
+            return ((double) successfulPassCount) / ((double) allPassCount);
         } else{
             return 0;
         }

@@ -90,16 +90,16 @@ public class ContestPassServiceImpl implements ContestPassService {
     }
 
     @Override
-    public Map<Integer, Boolean> getTaskResultForContestByUserName(String userName, Contest contest){
+    public Map<Integer, Boolean> getTaskResultsForContestByUserName(String userName, Contest contest){
         ContestPass contestPass = getContestPassByUserName(userName, contest);
         if (contestPass != null) {
             Map<Integer, Boolean> taskResults = new LinkedHashMap<>();
             for (TaskPass taskPass : contestPass.getTaskPassList()) {
                 //if not contains, else-if contains and new result if success
-                if (!taskResults.containsKey(taskPass.getTask().getId())) {
-                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
-                } else if ((!taskResults.get(taskPass.getTask().getId())) && taskPass.isPassed()) {
-                    taskResults.put(taskPass.getTask().getId(), taskPass.isPassed());
+                int taskId = taskPass.getTask().getId();
+                boolean isPassed = taskPass.isPassed();
+                if (!taskResults.containsKey(taskId) || (!taskResults.get(taskId) && isPassed)) {
+                    taskResults.put(taskId, isPassed);
                 }
             }
             return taskResults;

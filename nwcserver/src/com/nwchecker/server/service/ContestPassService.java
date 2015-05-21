@@ -58,5 +58,5 @@ public interface ContestPassService {
 
     ContestPass getContestPassByUserName(String userName, Contest contest);
 
-    Map<Integer, Boolean> getTaskResultForContestByUserName(String userName, Contest contest);
+    Map<Integer, Boolean> getTaskResultsForContestByUserName(String userName, Contest contest);
 }
