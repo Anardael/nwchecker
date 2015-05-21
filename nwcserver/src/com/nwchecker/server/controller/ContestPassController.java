@@ -70,9 +70,7 @@ public class ContestPassController {
         model.addAttribute("contest", currentContest);
         model.addAttribute("isArchive", (currentContest.getStatus() == Contest.Status.ARCHIVE));
         model.addAttribute("contestEndTimeGTM", contestService.getContestEndTime(currentContest));
-        if(currentContest.getStatus() == Contest.Status.GOING){
-            model.addAttribute("taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
-        }
+        model.addAttribute("taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
         model.addAttribute("compilers", compilerService.getAllCompilers());
 
         return "nwcserver.tasks.pass";
