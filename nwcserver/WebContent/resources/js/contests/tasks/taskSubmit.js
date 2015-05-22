@@ -74,6 +74,10 @@ function showSubmitResult(result) {
 		showErrorDialog(ACCESS_DENIED_TITLE, ACCESS_DENIED_MESSAGE);
 		return;
 	}
+	if(result["fileTooLarge"]){
+		showErrorDialog(ACCESS_DENIED_TITLE, ACCESS_DENIED_MESSAGE);
+		return;
+	}}
 
 	var message = RESULT_TIME + ' <b>' + result['time'] + '</b><br/>'
 			+ RESULT_MEMORY + ' <b>' + result['memory'] + '</b><br/>';

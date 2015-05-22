@@ -59,8 +59,10 @@ public class ContestPassServiceImpl implements ContestPassService {
         
         if (save) {
             contestPass.getTaskPassList().add(taskPass);
-            updateContestPass(contestPass);
-                 
+            for (TaskPass t : contestPass.getTaskPassList()){
+            	System.out.println("trying to upload file of size: " + t.getFile().length);
+            }            	
+            updateContestPass(contestPass);                 
         }
         return checkResult;
     }

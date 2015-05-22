@@ -49,11 +49,11 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public boolean checkIfUserHaveAccessToContest(String username, int ContestId) {
+    public boolean checkIfUserHaveAccessToContest(String username, int contestId) {
         User teacher = userService.getUserByUsername(username);
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
-                if (c.getId() == ContestId && c.getStatus().equals(Contest.Status.RELEASE)) {
+                if (c.getId() == contestId && c.getStatus().equals(Contest.Status.PREPARING)) {
                     return true;
                 }
             }
