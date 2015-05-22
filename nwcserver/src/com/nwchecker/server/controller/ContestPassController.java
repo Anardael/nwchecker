@@ -124,11 +124,11 @@ public class ContestPassController {
     Map<String, Object> submitTask(Principal principal, @RequestParam(value = "id") int taskId,
                                    @RequestParam(value = "compilerId") int compilerId,
                                    @RequestParam("file") MultipartFile file) throws IOException {
-    	if (file.getSize() > 20971520){
+    	/*if (file.getSize() > 20971520){
     		Map<String, Object> result = new LinkedHashMap<>();
     		result.put("fileTooLarge", true);
     		return result;
-    	}
+    	}*/
         Map<String, Object> result = new LinkedHashMap<>();
         Task task = taskService.getTaskById(taskId);
         User user = userService.getUserByUsername(principal.getName());

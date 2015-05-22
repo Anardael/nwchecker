@@ -24,10 +24,10 @@ function submitTask() {
 	if ($('#file').val() == "") {
 		showErrorDialog(FILE_NOT_SELECTED_TITLE, FILE_NOT_SELECTED_MESSAGE);
 
-	} else {
+	} else /*{
 		if ($('#file').prop('files')[0].size > 20971520) {
 			showErrorDialog(FILE_TOO_LARGE_TITLE, FILE_TOO_LARGE_MESSAGE)
-		} else {
+		} else*/ {
 			var formData = new FormData();
 			formData.append("id", $('#id').val());
 			formData.append("compilerId", $('#compilerId').val());
@@ -35,7 +35,7 @@ function submitTask() {
 			submitTaskAjax(formData);
 		}
 	}
-}
+
 
 function showErrorDialog(dialogTitle, dialogMessage) {
 	BootstrapDialog.show({

@@ -1,6 +1,8 @@
 package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.ContestPass;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -26,7 +28,8 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     @Override
     @Transactional
     public void updateContestPass(ContestPass contestPass) {
-        getHibernateTemplate().update(contestPass);
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        session.update(contestPass);        		
     }
 
     @Override

@@ -121,9 +121,11 @@ public class TaskController {
                 newDate.setTask(task);
                 data.add(newDate);
                 //check if size is less than 20mb:
-                if (newDate.getInputData().length > 20971520 || newDate.getOutputData().length > 20971520) {
+                
+                //TODO: REMOVE COMMENTS
+               /* if (newDate.getInputData().length > 20971520 || newDate.getOutputData().length > 20971520) {
                     throw new MaxUploadSizeExceededException(1);
-                }
+                }*/
             }
             //set i/o data to task:
             task.setInOutData(data);
