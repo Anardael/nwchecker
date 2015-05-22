@@ -4,6 +4,7 @@ import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -114,77 +115,53 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	public Long getRecordCount(String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		Criteria criteria = getFilterCriteria(filter, session);
+		Criteria criteria = session.createCriteria(User.class);
+		if (StringUtils.isNotBlank(filter)) {
+			criteria.add(getFilterCriteria(filter));
+		}
 		Long count = (Long) criteria.setProjection(Projections.rowCount())
 				.uniqueResult();
 		return count;
 	}
 
-	private Criteria getFilterCriteria(String filter, Session session) {
-		Criteria criteria = session.createCriteria(User.class);
-			Criterion username = Restrictions.like("username", filter, MatchMode.ANYWHERE);
-			Criterion displayName = Restrictions.like("displayName", filter, MatchMode.ANYWHERE);
-			Criterion email = Restrictions.like("email", filter, MatchMode.ANYWHERE);
-			Criterion department = Restrictions.like("department", filter, MatchMode.ANYWHERE);
-			Criterion info = Restrictions.like("info", filter, MatchMode.ANYWHERE);
-			criteria.add(Restrictions.or(username, displayName, email, department, info));
-		return criteria;
-	}
-	
-
-	@Override
-	public List<User> getPagedUsersSortedAndFiltered(int startIndex, int pageSize,
-			String sorting, String filter) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		Criteria criteria = getFilterCriteria(filter, session);
-		String columnName = sorting.split(" ")[0];
-		if (columnName.equals("roles")) {
-			criteria.createAlias("roles", "r");
-			columnName = "r.role";
-		}
-		
-		if (sorting.contains("ASC")) {
-				criteria.addOrder(Order.asc(columnName));
-		} else {
-				criteria.addOrder(Order.desc(columnName));
-		}
-		criteria.setFirstResult(startIndex);
-		criteria.setMaxResults(pageSize);
-		return criteria.list();
+	private Criterion getFilterCriteria(String filter) {
+		Criterion username = Restrictions.like("username", filter,
+				MatchMode.ANYWHERE);
+		Criterion displayName = Restrictions.like("displayName", filter,
+				MatchMode.ANYWHERE);
+		Criterion email = Restrictions
+				.like("email", filter, MatchMode.ANYWHERE);
+		Criterion department = Restrictions.like("department", filter,
+				MatchMode.ANYWHERE);
+		Criterion info = Restrictions.like("info", filter, MatchMode.ANYWHERE);
+		Criterion filterCriterion = Restrictions.or(username, displayName,
+				email, department, info);
+		return filterCriterion;
 	}
 
 	@Override
-	@Transactional
-	public List<User> getPagedUsersSorted(int startIndex, int pageSize,
-			String sorting) {
+	public List<User> getPagedUsers(int startIndex,
+			int pageSize, String sorting, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);
-		
-		String columnName = sorting.split(" ")[0];
-		if (columnName.equals("roles")) {
-			criteria.createAlias("roles", "r");
-			columnName = "r.role";
-		}
-		
-		if (sorting.contains("ASC")) {
-				criteria.addOrder(Order.asc(columnName));
-		} else {
-				criteria.addOrder(Order.desc(columnName));
-		}		
-		criteria.setFirstResult(startIndex);
-		criteria.setMaxResults(pageSize);
-		return criteria.list();
-	}
+		if (StringUtils.isNotEmpty(sorting)) {
+			String columnName = StringUtils.split(sorting, " ")[0];
+			if (StringUtils.equals(columnName, "roles")) {
+				criteria.createAlias("roles", "r");
+				columnName = "r.role";
+			}
 
-	@Override
-	@Transactional
-	public List<User> getPagedUsersFiltered(int startIndex, int pageSize,
-			String filter) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		Criteria criteria = getFilterCriteria(filter, session);
+			if (sorting.contains("ASC")) {
+				criteria.addOrder(Order.asc(columnName));
+			} else {
+				criteria.addOrder(Order.desc(columnName));
+			}
+		}
+
+		if (StringUtils.isNotBlank(filter)) {
+			criteria.add(getFilterCriteria(filter));
+		}
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		return criteria.list();
@@ -200,12 +177,4 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		criteria.setMaxResults(pageSize);
 		return criteria.list();
 	}
-
-//	@Override
-//	public User getUserByUsernameOrEmail(String username) {
-//		@SuppressWarnings("unchecked")
-//		List<User> list = (List<User>) getHibernateTemplate().find(
-//				"from User where username=? or email=?", username, username);
-//		return list.get(0);
-//	}
 }

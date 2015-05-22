@@ -27,21 +27,7 @@ public class TaskPassServiceImpl implements TaskPassService {
 			int pageSize, String sorting, String filter) {
 		LOG.debug("Attempting to create page of task results for " + taskId
 				+ " ordered by " + sorting);
-		List<TaskPass> taskPasses;
-		if (!(sorting == null) && !(sorting.equals("")) && !(filter == null)
-				&& !(filter.equals(""))) {
-			taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdSortedAndFiltered(taskId, startIndex, pageSize, sorting, filter);
-		} else {
-			if (!(sorting == null) && !(sorting.equals(""))) {
-				taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdSorted(taskId, startIndex, pageSize, sorting);
-			} else {
-				if (!(filter == null) && !(filter.equals(""))) {
-					taskPasses = taskPassDAO.getPaginatedTaskPassByTaskIdFiltered(taskId, startIndex, pageSize, filter);
-				} else {
-					taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize);
-				}
-			}
-		}
+		List<TaskPass> taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize, sorting, filter);
 		return taskPasses;
 	}
 

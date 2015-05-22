@@ -10,6 +10,9 @@
 <script type="text/javascript">
 	FILE_NOT_SELECTED_TITLE = '<spring:message code="contest.passing.fileNotSelectedDialog.title"/>';
 	FILE_NOT_SELECTED_MESSAGE = '<spring:message code="contest.passing.fileNotSelectedDialog.message"/>';
+	
+	FILE_TOO_LARGE_TITLE = '<spring:message code="contest.passing.fileTooLargeDialog.title"/>';
+	FILE_TOO_LARGE_MESSAGE = '<spring:message code="contest.passing.fileTooLargeDialog.message"/>';
 
 	TASK_SUBMIT_ERROR_TITLE = '<spring:message code="contest.passing.taskSubmitErrorDialog.title"/>';
 	TASK_SUBMIT_ERROR_MESSAGE = '<spring:message code="contest.passing.taskSubmitErrorDialog.message"/>';
@@ -38,10 +41,7 @@
 	CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
 	</c:if>
 	END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
-	var isArchive = $
-	{
-		isArchive
-	};
+	var isArchive = ${isArchive};
 	$(document).ready(function() {
 		if (allTasksComplete())
 			endContest();

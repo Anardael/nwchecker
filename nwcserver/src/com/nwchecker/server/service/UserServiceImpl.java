@@ -92,24 +92,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getPagedUsers(int startIndex, int pageSize,
 			String sorting, String filter) {
-		List<User> pagedUsers;
-		if (sorting != null && !(sorting.equals("")) && filter != null
-				&& !(filter.equals(""))) {
-			pagedUsers = userDAO.getPagedUsersSortedAndFiltered(startIndex,
-					pageSize, sorting, filter);
-		} else {
-			if (sorting != null && !(sorting.equals(""))) {
-				pagedUsers = userDAO.getPagedUsersSorted(startIndex, pageSize,
-						sorting);
-			} else {
-				if (filter != null && !(filter.equals(""))) {
-					pagedUsers = userDAO.getPagedUsersFiltered(startIndex,
-							pageSize, filter);
-				} else {
-					pagedUsers = userDAO.getPagedUsers(startIndex, pageSize);
-				}
-			}
-		}
+		List<User> pagedUsers = userDAO.getPagedUsers(
+				startIndex, pageSize, sorting, filter);
 		return pagedUsers;
 	}
 

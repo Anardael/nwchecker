@@ -2,9 +2,16 @@ package com.nwchecker.server.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -38,40 +45,34 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return (List<TaskPass>) query.list();
 	}
 
-	@Transactional
-	@Override
-	public List<TaskPass> getPaginatedTaskPassByTaskIdFiltered(int id,
-			int startIndex, int pageSize, String filter) {
-		Session session = getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		filter = "%" + filter + "%";
-		Query query = session
-				.createQuery("FROM TaskPass t WHERE task_id = :id AND t.user.displayName LIKE :filter");
-		query.setParameter("id", id);
-		query.setParameter("filter", filter);
-		query.setFirstResult(startIndex);
-		query.setMaxResults(pageSize);
-		return (List<TaskPass>) query.list();
-	}
 
 	@Transactional
 	@Override
-	public List<TaskPass> getPaginatedTaskPassByTaskIdSortedAndFiltered(int id,
+	public List<TaskPass> getPaginatedTaskPassByTaskId(int id,
 			int startIndex, int pageSize, String sorting, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		if (sorting.contains("Username")) {
-			sorting = sorting.replace("Username", "t.user.displayName");
+		Criteria criteria = session.createCriteria(TaskPass.class);
+		criteria.createAlias("user", "u");
+		if (StringUtils.isNotEmpty(sorting)){
+			String columnName = StringUtils.split(sorting, " ")[0];
+			if (StringUtils.equals(columnName, "Username")){
+				columnName = "u.displayName";
+			}
+			if (sorting.contains("ASC")) {
+				criteria.addOrder(Order.asc(columnName));
+			} else {
+				criteria.addOrder(Order.desc(columnName));
+			}
 		}
-		filter = "%" + filter + "%";
-		Query query = session
-				.createQuery("FROM TaskPass t WHERE task_id = :id AND t.user.displayName LIKE :filter ORDER BY "
-						+ sorting);
-		query.setParameter("id", id);
-		query.setParameter("filter", filter);
-		query.setFirstResult(startIndex);
-		query.setMaxResults(pageSize);
-		return (List<TaskPass>) query.list();
+		if (StringUtils.isNotBlank(filter)){
+			criteria.add(Restrictions.ilike("u.displayName", filter, MatchMode.ANYWHERE));
+		}
+		criteria.createCriteria("task", "t");
+		criteria.add(Restrictions.eq("t.id", id));
+		criteria.setFirstResult(startIndex);
+		criteria.setMaxResults(pageSize);
+		return criteria.list();
 	}
 
 	@Transactional
@@ -104,12 +105,15 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	public Long getTaskPassEntryCount(int id, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
-		filter = "%" + filter + "%";
-		Query query = session
-				.createQuery("SELECT COUNT(*) FROM TaskPass t WHERE task_id = :id AND t.user.displayName LIKE :filter");
-		query.setParameter("filter", filter);
-		query.setParameter("id", id);
-		Long size = (Long) query.uniqueResult();
+		Criteria criteria = session.createCriteria(TaskPass.class);
+		criteria.createAlias("user", "u");
+		if (StringUtils.isNotBlank(filter)){
+			criteria.add(Restrictions.ilike("u.displayName", filter, MatchMode.ANYWHERE));
+		}
+		criteria.createCriteria("task", "t");
+		criteria.add(Restrictions.eq("t.id", id));
+		criteria.setProjection(Projections.rowCount());
+		Long size = (Long) criteria.uniqueResult();
 		return size;
 	}
 
