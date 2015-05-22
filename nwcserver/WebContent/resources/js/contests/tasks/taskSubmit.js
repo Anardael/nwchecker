@@ -75,9 +75,9 @@ function showSubmitResult(result) {
 		return;
 	}
 	if(result["fileTooLarge"]){
-		showErrorDialog(ACCESS_DENIED_TITLE, ACCESS_DENIED_MESSAGE);
+		(FILE_TOO_LARGE_TITLE, FILE_TOO_LARGE_MESSAGE);
 		return;
-	}}
+	}
 
 	var message = RESULT_TIME + ' <b>' + result['time'] + '</b><br/>'
 			+ RESULT_MEMORY + ' <b>' + result['memory'] + '</b><br/>';
