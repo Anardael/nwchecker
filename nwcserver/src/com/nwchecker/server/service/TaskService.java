@@ -1,6 +1,5 @@
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.json.TaskJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
@@ -119,7 +118,7 @@ public interface TaskService {
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int pageSize, int pageNumber, String filter);
 
-	PaginationWrapper<TaskJson> getTaskJsonForPagination(
+	PaginationWrapper<Task> getTaskWrapperForPagination(
 			Contest.Status status, int pageSize, int pageNumber, String filter);
 
 	/**

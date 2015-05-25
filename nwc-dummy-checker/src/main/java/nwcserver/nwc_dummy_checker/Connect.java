@@ -24,11 +24,11 @@ public class Connect implements Runnable {
 			ObjectInputStream dataInput = new ObjectInputStream(
 					socket.getInputStream());
 			CheckerMessage message = (CheckerMessage) dataInput.readObject();
-			try {
+			/*try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 			LinkedHashMap<String, Object> checkerResult = TaskChecker
 					.checkTask(message);
 			Iterator<Object> iterator = checkerResult.values().iterator();

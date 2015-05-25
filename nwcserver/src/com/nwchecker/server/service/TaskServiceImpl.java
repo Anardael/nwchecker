@@ -5,9 +5,6 @@ import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.utils.PaginationWrapper;
-import com.nwchecker.server.json.JsonUtil;
-import com.nwchecker.server.json.TaskJson;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,15 +74,13 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public PaginationWrapper<TaskJson> getTaskJsonForPagination(Status status,
+	public PaginationWrapper<Task> getTaskWrapperForPagination(Status status,
 			int pageSize, int pageNumber, String filter) {
 		List<Task> tasks = getPagedTasksByContestStatus(status, pageSize,
 				PaginationWrapper.getFirstIndexOnPage(pageNumber, pageSize),
 				filter);
-		List<TaskJson> paginatedTaskJson = JsonUtil.createJsonList(
-				TaskJson.class, tasks);
-		PaginationWrapper<TaskJson> response = new PaginationWrapper<TaskJson>();
-		response.setDataList(paginatedTaskJson);
+		PaginationWrapper<Task> response = new PaginationWrapper<Task>();
+		response.setDataList(tasks);
 		response.setPageCount(PaginationWrapper.getPageCount(
 				taskDao.getRecordCountByContestStatus(status, filter), pageSize));
 		return response;

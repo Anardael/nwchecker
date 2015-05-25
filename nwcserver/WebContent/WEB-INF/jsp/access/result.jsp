@@ -8,8 +8,6 @@
 <head>
 </head>
 <body>
-	<!--including bodyHead -->
-	<!-- send name of current page-->
 	<section>
 		<c:set var="result" value="${result}" />
 		<c:if test="${not empty result}">

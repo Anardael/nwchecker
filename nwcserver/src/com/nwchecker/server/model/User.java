@@ -13,6 +13,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.ContestView;
+import com.nwchecker.server.json.UserView;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +39,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
+    @JsonProperty("id")
+    @JsonView(UserView.ViewUsers.class)
     private int userId;
     // User name
     @Column(name = "username")
@@ -43,7 +51,9 @@ public class User {
     @Transient
     private String confirmPassword;
     // Display name
+    @JsonProperty("name")
     @Column(name = "display_name")
+    @JsonView(UserView.ViewUsers.class)
     private String displayName;
     // User email
     @Column(name = "email")
@@ -56,6 +66,8 @@ public class User {
     private Set<Role> roles;
     // Department for teacher users.
     @Column(name = "department")
+    @JsonProperty("department")
+    @JsonView(UserView.ViewUsers.class)
     private String department;
     // Ban Time - if exists 0 time while user will be inactive
     @Column(name = "ban_time")

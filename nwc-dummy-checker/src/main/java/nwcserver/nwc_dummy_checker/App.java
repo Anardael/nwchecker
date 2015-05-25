@@ -15,6 +15,7 @@ public class App {
 			ServerSocket socketListener = new ServerSocket(9999);
 			while (true) {
 				Socket clientSocket = socketListener.accept();
+				System.out.println("1");
 				new Thread(new Connect(clientSocket)).run();
 			}
 		} catch (IOException e1) {

@@ -1,8 +1,10 @@
 package com.nwchecker.server.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.TaskJson;
+import com.nwchecker.server.json.TaskView;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.utils.PaginationWrapper;
 
@@ -12,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 @Controller
 public class ArchiveController {
@@ -22,7 +22,7 @@ public class ArchiveController {
 	TaskService taskService;
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 	
-	
+	@JsonView(TaskView.ForArchive.class)
 	@Link(label="archive.caption", family="archive", parent = "")
 	@RequestMapping("/etiam")	
 	public String archivePage(Model model,
@@ -30,8 +30,8 @@ public class ArchiveController {
 			@RequestParam(defaultValue = "5") int pageSize,
 			@RequestParam(value = "filterText", required = false) String filter) {
 		LOG.debug("Someone accessed archive page");
-		PaginationWrapper<TaskJson> paginatedTaskJson = taskService
-				.getTaskJsonForPagination(Contest.Status.ARCHIVE, pageSize,
+		PaginationWrapper<Task> paginatedTaskJson = taskService
+				.getTaskWrapperForPagination(Contest.Status.ARCHIVE, pageSize,
 						pageNumber, filter);
 		model.addAttribute("filterText", filter);
 		model.addAttribute("tasks", paginatedTaskJson.getDataList());

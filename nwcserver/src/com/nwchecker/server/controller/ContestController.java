@@ -1,9 +1,15 @@
 package com.nwchecker.server.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
+import com.nwchecker.server.json.ContestView;
 import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
+import com.nwchecker.server.json.UserView;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Contest.Status;
@@ -284,6 +290,7 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>JSON</b> Returns <b>List of Teachers</b> than can edit this contest
      */
+   
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public @ResponseBody LinkedList<UserJson> getUsers(
@@ -302,6 +309,15 @@ public class ContestController {
         }
         //get List of all Teacher users
         List<User> teachers = userService.getUsersByRole("ROLE_TEACHER");
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+			String dat = mapper.writerWithView(UserView.ViewUsers.class).writeValueAsString(teachers);
+			System.out.println(dat);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
         for (User u : teachers) {
             UserJson newUser = UserJson.createUserJson();
             newUser.setId(u.getUserId());

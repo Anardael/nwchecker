@@ -2,6 +2,9 @@ package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.TaskView;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,24 +44,28 @@ public class Task {
     @ManyToOne()
     @JoinColumn(name = "contest_id")
     private Contest contest;
-
+    
+    @JsonView(TaskView.ForArchive.class)
     @Column(name = "title")
     @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
     private String title;
 
+    @JsonView(TaskView.ForArchive.class)
     @Column(name = "complexity")
     @Max(100)
     @Min(0)
     private int complexity;
 
+    @JsonView(TaskView.ForArchive.class)
     @Column(name = "rate")
     @NotNull
     @Max(100)
     @Min(0)
     private int rate;
 
+    @JsonView(TaskView.ForArchive.class)
     @Column(name = "description", columnDefinition = "TEXT")
     @NotEmpty
     private String description;
@@ -83,7 +90,8 @@ public class Task {
 
     @Column(name = "scriptForVerification", columnDefinition = "TEXT")
     private String scriptForVerification;
-
+    
+    @JsonView(TaskView.ForArchive.class)
     @Column(name = "forumLink")
     //@Pattern(regexp="https?://.*")
     @Size(max = 500)
@@ -92,7 +100,7 @@ public class Task {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskData> inOutData;
-
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private List<TaskTheoryLink> theoryLinks;
