@@ -25,6 +25,8 @@ public class ContestPassServiceImpl implements ContestPassService {
     @Autowired
     private CompilerDAO compilerDAO;
 
+   
+
     @Override
     public void saveContestPass(ContestPass contestPass) {
         contestPassDAO.saveContestPass(contestPass);
@@ -56,7 +58,6 @@ public class ContestPassServiceImpl implements ContestPassService {
         long millis = System.currentTimeMillis() - taskPass.getTask().getContest().getStarts().getTime();
         long minute = millis / 1000 / 60;
         taskPass.setPassedMinute((int) minute);
-        
         if (save) {
             contestPass.getTaskPassList().add(taskPass);
             for (TaskPass t : contestPass.getTaskPassList()){

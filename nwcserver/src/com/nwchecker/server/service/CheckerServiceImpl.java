@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
-	static final int PORT = 99;
+	static final int PORT = 9999;
 
 	@Override
 	public Map<String, Object> checkTask(Task task, byte[] file, int compilerId) {

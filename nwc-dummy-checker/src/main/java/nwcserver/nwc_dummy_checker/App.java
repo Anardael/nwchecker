@@ -12,7 +12,7 @@ import java.net.Socket;
 public class App {
 	public static void main(String[] args) {
 		try {
-			ServerSocket socketListener = new ServerSocket(99);
+			ServerSocket socketListener = new ServerSocket(9999);
 			while (true) {
 				Socket clientSocket = socketListener.accept();
 				new Thread(new Connect(clientSocket)).run();
