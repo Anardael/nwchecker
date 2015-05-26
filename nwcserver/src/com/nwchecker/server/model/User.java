@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.ContestView;
@@ -40,26 +41,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     @JsonProperty("id")
-    @JsonView(UserView.ViewUsers.class)
+//    @JsonView(UserView.ViewUsers.class)
     private int userId;
     // User name
+    @JsonIgnore
     @Column(name = "username")
     private String username;
     // Password
+    @JsonIgnore
     @Column(name = "password")
     private String password;
     @Transient
+    @JsonIgnore
     private String confirmPassword;
     // Display name
     @JsonProperty("name")
     @Column(name = "display_name")
-    @JsonView(UserView.ViewUsers.class)
+//    @JsonView(UserView.ViewUsers.class)
     private String displayName;
     // User email
     @Column(name = "email")
+    @JsonIgnore
     private String email;
     // Some university user data(probably faculty or group)
     @Column(name = "info")
+    @JsonIgnore
     private String info;
     // User role (User,Teacher or Admin).
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
@@ -67,15 +73,18 @@ public class User {
     // Department for teacher users.
     @Column(name = "department")
     @JsonProperty("department")
-    @JsonView(UserView.ViewUsers.class)
+//  @JsonView(UserView.ViewUsers.class)
+    @JsonIgnore
     private String department;
     // Ban Time - if exists 0 time while user will be inactive
     @Column(name = "ban_time")
+    @JsonIgnore
     private long banTime;
     // Enabled user
+    @JsonIgnore
     @Column(name = "enabled")
     private boolean enabled;
-
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(name = "contest_users",
             joinColumns = {
@@ -83,13 +92,13 @@ public class User {
             inverseJoinColumns = {
                     @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRequest> requests = new HashSet<>();
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<ContestPass> contestPassList;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<TaskPass> taskPassList;
 
@@ -183,7 +192,7 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
+    @JsonIgnore
     public boolean isNew() {
         return (this.userId == 0);
     }

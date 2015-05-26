@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ContestView;
@@ -11,6 +12,8 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.UserView;
 import com.nwchecker.server.json.ValidationResponse;
+import com.nwchecker.server.json.wrapper.FilteredResultProvider;
+import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.TypeContest;
@@ -293,7 +296,7 @@ public class ContestController {
    
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
-    public @ResponseBody LinkedList<UserJson> getUsers(
+    public @ResponseBody String getUsers(
             @RequestParam("contestId") int contestId, Principal principal) {
         // create UserJson result list:
         LinkedList<UserJson> result = new LinkedList<UserJson>();
@@ -309,8 +312,37 @@ public class ContestController {
         }
         //get List of all Teacher users
         List<User> teachers = userService.getUsersByRole("ROLE_TEACHER");
-
-        try {
+		List<MorphedResult<User>> morphedTeachers = new LinkedList<MorphedResult<User>>();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setFilters(new FilteredResultProvider());
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		for (User user : teachers) {
+			MorphedResult<User> morphedTeacher = new MorphedResult<User>(user);
+			morphedTeacher.excludeAttribute("roles");
+			if (c != null) {
+				if (c.getUsers().contains(user)) {
+					morphedTeacher.addExpansionData("chose", true);
+				} else {
+					morphedTeacher.addExpansionData("chose", false);
+				}
+			} else {
+				if (author.equals(user.getUsername())) {
+					morphedTeacher.addExpansionData("chose", true);
+				} else {
+					morphedTeacher.addExpansionData("chose", false);
+				}
+			}
+			morphedTeachers.add(morphedTeacher);
+		}
+		String response = null;
+		try {
+			response = mapper.writeValueAsString(morphedTeachers);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch: Change to logging
+			e.printStackTrace();
+		}
+		return response;
+/*        try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
 			String dat = mapper.writerWithView(UserView.ViewUsers.class).writeValueAsString(teachers);
@@ -338,7 +370,7 @@ public class ContestController {
             }
             result.add(newUser);
         }
-        return result;
+        return result;*/
     }
 
     /**

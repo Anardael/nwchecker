@@ -96,10 +96,8 @@
 							<tr>
 								<th data-field="chose" data-checkbox="true"></th>
 								<th data-field="id" data-sortable="true" class="idField">id</th>
-								<th data-field="name" data-sortable="true"><spring:message
-										code="contest.userList.displayName" /></th>
-								<th data-field="department" data-sortable="true"><spring:message
-										code="contest.userList.department" /></th>
+								<th data-field="name" data-sortable="true"><spring:message code="contest.userList.displayName" /></th>
+								<th data-field="department" data-sortable="true"><spring:message code="contest.userList.department" /></th>
 							</tr>
 						</thead>
 					</table>

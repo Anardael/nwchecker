@@ -8,7 +8,7 @@ $(document).ready(function () {
         var id = document.getElementById("id");
         id.value = contestId;
         $('#ContestUserTable').bootstrapTable('destroy');
-        $.get('getContestUsersList.do?contestId=' + contestId, function (data) {
+        $.getJSON('getContestUsersList.do?contestId=' + contestId, function (data) {
             $('#ContestUserTable').bootstrapTable({
                 data: data
             });
