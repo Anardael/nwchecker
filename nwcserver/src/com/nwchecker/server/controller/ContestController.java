@@ -484,4 +484,9 @@ public class ContestController {
         return "nwcserver.contests.list";
     }
 
+    @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
+    public @ResponseBody List<Contest> getContestListJson() {
+        return contestService.getContests();
+    }
+
 }

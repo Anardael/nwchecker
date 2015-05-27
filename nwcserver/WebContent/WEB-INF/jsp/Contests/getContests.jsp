@@ -9,7 +9,7 @@
 <spring:url value="/resources/" var="resources" />
 <html>
 <body>
-	<script type="text/javascript">
+<script type="text/javascript">
     var successCaption = "<spring:message code="success.caption"/>";
     var successSignUpContest = "<spring:message code="contest.signUpBody"/>";
     var alreadySignUp = "<spring:message code="contest.alreadySubscribed"/>";
@@ -17,11 +17,15 @@
     var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
     var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
 
+
+
+
+
 </script>
 	<div class="main-block">
 		<div id="accordion">
 
-			<div class="dropdown">
+			<%--<div class="dropdown">
 				<button class="btn btn-primary dropdown-toggle" type="button" name="buttonName"
 					data-toggle="dropdown">
 					<c:choose>
@@ -281,5 +285,62 @@
 
 		</div>
 	</div>
+
+<br>
+<br>
+<br>--%>
+
+    <div class="main-block">
+        <c:url var="dataUrl" value="/contestListJson.do" />
+        <table id="contestTable" class="table" data-toggle="table"
+               data-url="${dataUrl}" data-method="get" data-cache="false"
+               data-search="true" data-clear-search="true" data-pagination="true"
+               data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
+            <thead class="bg-primary">
+            <tr>
+                <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
+                    Start date
+                </th>
+                <th data-field="title" data-align="center">
+                    Title
+                </th>
+                <th data-field="status" data-align="center" data-sortable="true" data-width="100">
+                    Status
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <%--<div class="alert alert-success" id="events-result" data-es="Aquí se muestra el resultado del evento">
+        Here is the result of event.
+    </div>--%>
+
+
+    <div id="contestModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-info">
+                    HEADER
+                </div>
+                <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
+                    MODAL BODY
+                </div>
+                <div class="modal-footer">
+                    MODAL FOOTER
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var $result = $('#mdl-body');
+        $('#contestTable').bootstrapTable({
+        }).on('click-row.bs.table', function (e, row, $element) {
+            $result.text(JSON.stringify(row));
+            $('#contestModal').modal();
+        });
+    </script>
+
 </body>
 </html>

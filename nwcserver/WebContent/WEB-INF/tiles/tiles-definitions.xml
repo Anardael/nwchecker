@@ -200,11 +200,13 @@
 	    <definition name="nwcserver.contests.list" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/getContests.jsp" />
        	    <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
        	    <add-attribute value="css/taskModalView.css"/>
         	<add-attribute value="css/bootstrap-dialog.css"/>
         	<add-attribute value="css/contests/contests-style.css"/>
        	    </put-list-attribute>
 		    <put-list-attribute name ="scripts" inherit="true" cascade="true">
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 		    <add-attribute value="js/bootstrap/bootstrap-dialog.js" />
 	        <add-attribute value="js/contests/contestSignUp.js" />
 	        <add-attribute value="js/contests/contestListView.js" />
