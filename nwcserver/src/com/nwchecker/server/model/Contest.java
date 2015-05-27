@@ -3,9 +3,8 @@ package com.nwchecker.server.model;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.nwchecker.server.json.ContestView;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -13,8 +12,6 @@ import javax.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * <h1>Contest Entity</h1> Entity that represents some Contest in DB.
@@ -67,7 +64,6 @@ public class Contest {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonProperty("id")
-	@JsonView(ContestView.ContestList.class)
 	private int id;
 
 	@Column(name = "title")
@@ -75,42 +71,44 @@ public class Contest {
 	@NotEmpty
 	@Size(max = 100)
 	@JsonProperty("title")
-	@JsonView(ContestView.ContestList.class)
 	private String title;
 
 	@Column(name = "description", columnDefinition = "TEXT")
 	@NotEmpty
+	@JsonIgnore
 	private String description;
 
 	@Column(name = "starts")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@JsonProperty("starts")
-	@JsonView(ContestView.ContestList.class)
 	private Date starts;
-
+	
+	@JsonIgnore
 	@Column(name = "duration")
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date duration;
 
 	@OneToMany(mappedBy = "contest", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Task> tasks;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "contest_users", joinColumns = { @JoinColumn(name = "contest_id") }, inverseJoinColumns = { @JoinColumn(name = "user_id") })
-	@JsonView(ContestView.ContestList.class)
+	@JsonIgnore
 	private List<User> users;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	@JsonProperty("status")
-	@JsonView(ContestView.ContestList.class)
 	private Status status;
 
 	@Column(name = "hidden")
+	@JsonIgnore
 	private boolean hidden;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private TypeContest typeContest;
 
 	public Contest() {

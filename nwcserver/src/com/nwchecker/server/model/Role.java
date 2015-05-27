@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * <h1>Role Entity</h1>
  * Entity that represents Role of some User in DB.
@@ -23,10 +26,13 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "roleId")
+	@JsonIgnore
 	private int roleId;
 	@ManyToOne
 	@JoinColumn(name = "userId")
+	@JsonIgnore
 	private User user;
+	@JsonProperty("role")
 	@Column(name = "role")
 	private String role;
 	

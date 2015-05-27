@@ -103,14 +103,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PaginationWrapper<UserListItemJson> getUsersForPagination(
+	public PaginationWrapper<User> getUsersForPagination(
 			int startIndex, int pageSize, String sorting, String filter) {
-		PaginationWrapper<UserListItemJson> response = new PaginationWrapper<UserListItemJson>();
+		PaginationWrapper<User> response = new PaginationWrapper<User>();
 		List<User> userList = getPagedUsers(startIndex, pageSize, sorting,
 				filter);
-		List<UserListItemJson> jsonList = JsonUtil.createJsonList(
-				UserListItemJson.class, userList);
-		response.setDataList(jsonList);
+		response.setDataList(userList);
 		response.setRecordCount(getRecordCount(filter));
 		return response;
 	}

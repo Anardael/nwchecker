@@ -16,9 +16,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.nwchecker.server.json.ContestView;
-import com.nwchecker.server.json.UserView;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,11 +37,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
-    @JsonProperty("id")
-//    @JsonView(UserView.ViewUsers.class)
+    @JsonProperty("userId")
     private int userId;
     // User name
-    @JsonIgnore
+    @JsonProperty("username")
     @Column(name = "username")
     private String username;
     // Password
@@ -55,26 +51,24 @@ public class User {
     @JsonIgnore
     private String confirmPassword;
     // Display name
-    @JsonProperty("name")
+    @JsonProperty("displayName")
     @Column(name = "display_name")
-//    @JsonView(UserView.ViewUsers.class)
     private String displayName;
     // User email
     @Column(name = "email")
-    @JsonIgnore
+    @JsonProperty("email")
     private String email;
     // Some university user data(probably faculty or group)
     @Column(name = "info")
-    @JsonIgnore
+    @JsonProperty("info")
     private String info;
     // User role (User,Teacher or Admin).
+    @JsonProperty("roles")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Role> roles;
     // Department for teacher users.
     @Column(name = "department")
     @JsonProperty("department")
-//  @JsonView(UserView.ViewUsers.class)
-    @JsonIgnore
     private String department;
     // Ban Time - if exists 0 time while user will be inactive
     @Column(name = "ban_time")
@@ -92,7 +86,7 @@ public class User {
             inverseJoinColumns = {
                     @JoinColumn(name = "contest_id")})
     private List<Contest> contest;
-    @JsonIgnore
+    @JsonProperty("requests")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRequest> requests = new HashSet<>();
     @JsonIgnore

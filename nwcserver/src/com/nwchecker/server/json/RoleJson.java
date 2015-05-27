@@ -23,11 +23,6 @@ public class RoleJson extends Json {
 		this.role = role.getRole();
 	}
 
-	/**
-	 * 
-	 * @deprecated use JsonUtil instead
-	 */
-	@Deprecated
 	public static RoleJson createRoleJson(Role role) {
 		RoleJson json = new RoleJson();
 		json.role = role.getRole();

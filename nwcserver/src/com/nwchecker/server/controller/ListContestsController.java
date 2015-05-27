@@ -1,10 +1,15 @@
 package com.nwchecker.server.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.ListContestsJson;
 import com.nwchecker.server.json.StatusContestJson;
 import com.nwchecker.server.json.ValidationResponse;
+import com.nwchecker.server.json.wrapper.FilteredResultProvider;
+import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleService;
 
@@ -79,15 +84,31 @@ public class ListContestsController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
     @ResponseBody
-    public List<ListContestsJson> getListOfContests(Principal principal) {
+    public String getListOfContests(Principal principal) {
         LOG.info("\"" + principal.getName() + "\" tries to receive list of contests.");
         List<Contest> contests = contestService.getContests();
-        LinkedList<ListContestsJson> listContestsJson = new LinkedList<>();
-        for (Contest contest : contests) {
-            listContestsJson.add(ListContestsJson.createListContestsJson(contest));
+        List<MorphedResult<Contest>> morphedContests = new LinkedList<MorphedResult<Contest>>();
+        for (Contest c : contests){
+        	MorphedResult<Contest> morphedContest = new MorphedResult<Contest>(c);
+        	List<String> users = new LinkedList<String>();
+        	for (User u : c.getUsers()){
+        		users.add(u.getDisplayName());
+        	}
+        	morphedContest.addExpansionData("users", users);
+        	morphedContests.add(morphedContest);
         }
-        LOG.info("\"" + principal.getName() + "\" received list of contests.");
-        return listContestsJson;
+        ObjectMapper jsonMapper = new ObjectMapper();
+		jsonMapper.setFilters(new FilteredResultProvider());
+		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		String result = null;
+		try {
+			result = jsonMapper.writeValueAsString(morphedContests);
+			System.out.println(result);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
     }
 
     /**

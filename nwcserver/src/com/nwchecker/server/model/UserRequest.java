@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * <h1>Role Entity</h1>
  * Entity that represents one request of some User in DB.
@@ -24,11 +27,14 @@ public class UserRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "requestId")
+    @JsonIgnore
     private int requestId;
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
     @Column(name = "request")
+    @JsonProperty("request")
     private String request;
 
     public UserRequest() {

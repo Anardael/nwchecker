@@ -88,7 +88,7 @@ public interface UserService {
     
     public List<User> getPagedUsers(int startIndex, int pageSize, String sorting, String filter);
     public Long getRecordCount(String filter);
-    public PaginationWrapper<UserListItemJson> getUsersForPagination(int startIndex, int pageSize, String sorting, String filter);
+    public PaginationWrapper<User> getUsersForPagination(int startIndex, int pageSize, String sorting, String filter);
 
     /**
      * Return all Users that have specific Role.

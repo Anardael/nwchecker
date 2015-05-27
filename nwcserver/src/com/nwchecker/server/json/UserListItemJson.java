@@ -42,12 +42,7 @@ public class UserListItemJson extends Json {
 		this.department = user.getDepartment();
 		this.info = user.getInfo();
 	}
-	/**
-	 * 
-	 * @deprecated
-	 * use JsonUtil instead
-	 */
-	@Deprecated
+
 	public static UserListItemJson createUserListItemJson(User user) {
 		UserListItemJson json = new UserListItemJson();
 		json.username = user.getUsername();

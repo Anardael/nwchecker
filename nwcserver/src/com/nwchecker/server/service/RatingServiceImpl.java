@@ -40,13 +40,9 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public List<ContestPassJson> getJsonListForContestPassByContestId(int contestId) {
+    public List<ContestPass> getJsonListForContestPassByContestId(int contestId) {
         List<ContestPass> contestPasses = contestPassService.getContestPasses(contestId);
-        Collections.sort(contestPasses);
-        List<ContestPassJson> jsonData = new ArrayList<>();
-        for (ContestPass contestPass : contestPasses) {
-            jsonData.add(ContestPassJson.createContestPassJson(contestPass));
-        }
-        return jsonData;
+        
+        return contestPasses;
     }
 }

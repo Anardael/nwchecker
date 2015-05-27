@@ -1,8 +1,13 @@
 package com.nwchecker.server.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.UserListItemJson;
+import com.nwchecker.server.json.wrapper.FilteredResultProvider;
+import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
@@ -25,6 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <h1>Admin Options Controller</h1> This spring controller contains mapped
@@ -93,8 +100,24 @@ public class AdminOptionsController {
 			@RequestParam(required = false, value = "jtSorting") String sorting,
 			@RequestParam(required = false, value = "jtFilter") String filter) {
 		LOG.info("\"" + principal.getName() + "\" tries to access users list.");
-		PaginationWrapper<UserListItemJson> wrappedUserJson = userService.getUsersForPagination(startIndex, pageSize, sorting, filter);
-		JTableResponseList jTableResponse = new JTableResponseList("OK", wrappedUserJson.getDataList(), wrappedUserJson.getRecordCount());
+		PaginationWrapper<User> wrappedUser = userService.getUsersForPagination(startIndex, pageSize, sorting, filter);
+		List<MorphedResult<User>> morphedUserList = new LinkedList<MorphedResult<User>>();
+		for (User user : wrappedUser.getDataList()) {
+			MorphedResult<User> morphedUser = new MorphedResult<User>(user);
+			morphedUser.excludeAttribute("userId");
+			morphedUser.excludeAttribute("requests");
+			morphedUserList.add(morphedUser);
+		}
+		ObjectMapper jsonMapper = new ObjectMapper();
+		jsonMapper.setFilters(new FilteredResultProvider());
+		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		JTableResponseList jTableResponse = null;
+		try {
+			jTableResponse = new JTableResponseList("OK", jsonMapper.writeValueAsString(morphedUserList), wrappedUser.getRecordCount());
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return jTableResponse;
 	}
 

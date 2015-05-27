@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,30 +40,39 @@ public class ContestPass implements Comparable<ContestPass> {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private int id;
 
     @ManyToOne()
+    @JsonIgnore
     private User user;
 
     @ManyToOne()
+    @JsonIgnore
     private Contest contest;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "contestStatus")
+    @JsonIgnore
     private ContestStatus contestStatus;
 
     @Column(name = "passing")
+    @JsonIgnore
     private boolean passing;
 
     @Column(name = "passed")
+    @JsonIgnore
     private int passedCount;
 
+    @JsonProperty("timePenalty")
     @Column(name = "timePenalty")
     private int timePenalty;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contestPass")
+    @JsonIgnore
     private List<TaskPass> taskPassList;
-
+    
+    @JsonProperty("rank")
     @Column(name = "rank")
     private int rank;
 

@@ -1,26 +1,18 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
-import com.nwchecker.server.json.ContestView;
 import com.nwchecker.server.json.ErrorMessage;
-import com.nwchecker.server.json.UserJson;
-import com.nwchecker.server.json.UserView;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.json.wrapper.FilteredResultProvider;
 import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
-import com.nwchecker.server.utils.ContestComparator;
-import com.nwchecker.server.utils.ContestStartTimeComparator;
 import com.nwchecker.server.validators.ContestValidator;
 
 import org.apache.log4j.Logger;
@@ -42,11 +34,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.xml.ws.soap.AddressingFeature.Responses;
 
 /**
  * <h1>Contest Controller</h1>
@@ -298,8 +287,6 @@ public class ContestController {
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
     public @ResponseBody String getUsers(
             @RequestParam("contestId") int contestId, Principal principal) {
-        // create UserJson result list:
-        LinkedList<UserJson> result = new LinkedList<UserJson>();
         //get ContestId Model:
         Contest c = null;
         String author = null;

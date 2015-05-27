@@ -15,7 +15,7 @@ public class JTableResponseList {
 	@JsonProperty("Result")
 	private String result;
 	@JsonProperty("Records")
-	private List<?> records;
+	private Object records;
 	@JsonProperty("TotalRecordCount")
 	private long totalRecordCount;
 	@JsonProperty("Message")
@@ -24,7 +24,7 @@ public class JTableResponseList {
 	public JTableResponseList() {
 	}
 
-	public JTableResponseList(String result, List<?> records,
+	public JTableResponseList(String result, String records,
 			long recordCount) {
 		this.result = result;
 		this.records = records;
@@ -43,11 +43,11 @@ public class JTableResponseList {
 		this.result = result;
 	}
 
-	public List<?> getRecords() {
+	public Object getRecords() {
 		return records;
 	}
 
-	public void setRecords(List<?> records) {
+	public void setRecords(Object records) {
 		this.records = records;
 	}
 

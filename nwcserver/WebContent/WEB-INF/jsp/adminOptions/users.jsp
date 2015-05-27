@@ -31,7 +31,10 @@
 												},
 												ajaxSettings : {
 													type : 'GET',
-													dataType : 'json'
+													dataType : 'text',
+													success : function(data){
+														return JSON.parse(data)
+													}
 												},
 												fields : {
 													username : {
