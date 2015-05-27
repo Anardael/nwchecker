@@ -1,13 +1,9 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
-import com.nwchecker.server.json.UserListItemJson;
-import com.nwchecker.server.json.wrapper.FilteredResultProvider;
-import com.nwchecker.server.json.wrapper.MorphedResult;
+import com.nwchecker.server.json.UserView;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
@@ -30,8 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * <h1>Admin Options Controller</h1> This spring controller contains mapped
@@ -92,32 +86,18 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>JSON</b> Returns <b>List of Users</b> in JSON format
 	 */
+	@JsonView(UserView.ViewUsersAdmin.class)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers.do", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getUsers(Principal principal,
-			@RequestParam("jtStartIndex") int startIndex,
-			@RequestParam("jtPageSize") int pageSize,
-			@RequestParam(required = false, value = "jtSorting") String sorting,
-			@RequestParam(required = false, value = "jtFilter") String filter) {
+			@RequestParam("offset") int startIndex,
+			@RequestParam("limit") int pageSize,
+			@RequestParam(required = false, value = "sort") String sortingColumn,
+			@RequestParam(required = false, value = "order") String sortingOrder,
+			@RequestParam(required = false, value = "search") String filter) {
 		LOG.info("\"" + principal.getName() + "\" tries to access users list.");
-		PaginationWrapper<User> wrappedUser = userService.getUsersForPagination(startIndex, pageSize, sorting, filter);
-		List<MorphedResult<User>> morphedUserList = new LinkedList<MorphedResult<User>>();
-		for (User user : wrappedUser.getDataList()) {
-			MorphedResult<User> morphedUser = new MorphedResult<User>(user);
-			morphedUser.excludeAttribute("userId");
-			morphedUser.excludeAttribute("requests");
-			morphedUserList.add(morphedUser);
-		}
-		ObjectMapper jsonMapper = new ObjectMapper();
-		jsonMapper.setFilters(new FilteredResultProvider());
-		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		JTableResponseList jTableResponse = null;
-		try {
-			jTableResponse = new JTableResponseList("OK", jsonMapper.writeValueAsString(morphedUserList), wrappedUser.getRecordCount());
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		PaginationWrapper<User> wrappedUser = userService.getUsersForPagination(startIndex, pageSize, sortingColumn, sortingOrder, filter);
+		JTableResponseList jTableResponse = new JTableResponseList(wrappedUser.getDataList(), wrappedUser.getRecordCount());
 		return jTableResponse;
 	}
 
@@ -139,7 +119,7 @@ public class AdminOptionsController {
 	@Link(label="admin.userEdit.caption", family="adminOptions", parent = "admin.users.caption")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
-	public String user(@RequestParam(value = "Username") String username,
+	public String user(@RequestParam(value = "username") String username,
 			Model model, Principal principal) {
 		LOG.info("\"" + principal.getName() + "\" tries to edit user \""
 				+ username + "\".");

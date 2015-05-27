@@ -3,6 +3,7 @@ package com.nwchecker.server.json;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 /**
  * <h1>TaskPass Table Response List</h1> JSON entity made to send data from server to
@@ -12,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version 1.0
  */
 public class JTableResponseList {
-	@JsonProperty("Result")
-	private String result;
-	@JsonProperty("Records")
-	private Object records;
-	@JsonProperty("TotalRecordCount")
+	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonProperty("rows")
+	private List<?> records;
+	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonProperty("total")
 	private long totalRecordCount;
 	@JsonProperty("Message")
 	private String message;
@@ -24,33 +25,22 @@ public class JTableResponseList {
 	public JTableResponseList() {
 	}
 
-	public JTableResponseList(String result, String records,
+	public JTableResponseList(List<?> records,
 			long recordCount) {
-		this.result = result;
 		this.records = records;
 		this.totalRecordCount = recordCount;
 	}
 
 	public JTableResponseList(String result, String message) {
-		this.result = result;
 	}
 
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
-
-	public Object getRecords() {
+	public List<?> getRecords() {
 		return records;
 	}
 
-	public void setRecords(Object records) {
+	public void setRecords(List<?> records) {
 		this.records = records;
 	}
-
 	public long getTotalRecordCount() {
 		return totalRecordCount;
 	}
@@ -62,7 +52,6 @@ public class JTableResponseList {
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.utils.PaginationWrapper;
@@ -19,10 +20,11 @@ import com.nwchecker.server.utils.PaginationWrapper;
 import java.util.TreeMap;
 
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.json.JTableResponseList;
+import com.nwchecker.server.json.TaskView;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskPass;
 
 @Controller
 public class TaskStatisticController {
@@ -33,7 +35,7 @@ public class TaskStatisticController {
 	private static final Logger LOG = Logger
 			.getLogger(TaskStatisticController.class);
 
-	@Link(label="task.caption", family="contests", parent = "contest.caption")
+	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
 	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
 			@RequestParam(value = "id") int taskId, Principal principal) {
@@ -54,21 +56,21 @@ public class TaskStatisticController {
 		return modelView;
 	}
 
+	@JsonView(TaskView.TaskPass.class)
 	@RequestMapping(value = "/TaskStatisticTable.do", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getTaskPasses(
 			@RequestParam int taskId,
-			@RequestParam("jtStartIndex") int startIndex,
-			@RequestParam("jtPageSize") int pageSize,
-			@RequestParam(required = false, value = "jtSorting") String sorting,
-			@RequestParam(required = false, value = "jtFilter") String filter) {
+			@RequestParam("offset") int startIndex,
+			@RequestParam("limit") int pageSize,
+			@RequestParam(required = false, value = "sort") String sortingColumn,
+			@RequestParam(required = false, value = "order") String sortingOrder,
+			@RequestParam(required = false, value = "search") String filter) {
 		LOG.debug("Attempting to get task result data for page " + startIndex
 				/ pageSize + " for task " + taskId);
-		PaginationWrapper<TaskPassJson> paginatedTaskPass = taskPassService
+		PaginationWrapper<TaskPass> paginatedTaskPass = taskPassService
 				.getPagedTaskPassJsonForTask(taskId, startIndex, pageSize,
-						sorting, filter);
-		JTableResponseList jTableResponse = new JTableResponseList("OK",
-				paginatedTaskPass.getDataList(),
-				paginatedTaskPass.getRecordCount());
+						sortingColumn, sortingOrder, filter);
+		JTableResponseList jTableResponse = new JTableResponseList();
 		LOG.debug("Successfully retuned task result data for page "
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;

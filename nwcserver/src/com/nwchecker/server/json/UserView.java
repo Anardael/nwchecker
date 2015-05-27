@@ -1,5 +1,5 @@
 package com.nwchecker.server.json;
 
 public class UserView {
-	public interface ViewUsers{}
+	public interface ViewUsersAdmin{}
 }

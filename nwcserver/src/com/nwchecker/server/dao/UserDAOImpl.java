@@ -141,21 +141,20 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@Override
 	public List<User> getPagedUsers(int startIndex,
-			int pageSize, String sorting, String filter) {
+			int pageSize, String sortingColumn, String sortingOrder, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);
-		if (StringUtils.isNotEmpty(sorting)) {
-			String columnName = StringUtils.split(sorting, " ")[0];
-			if (StringUtils.equals(columnName, "roles")) {
+		if (StringUtils.isNotEmpty(sortingColumn)) {
+			if (StringUtils.equals(sortingColumn, "roles")) {
 				criteria.createAlias("roles", "r");
-				columnName = "r.role";
+				sortingColumn = "r.role";
 			}
 
-			if (sorting.contains("ASC")) {
-				criteria.addOrder(Order.asc(columnName));
+			if (sortingOrder.equalsIgnoreCase("asc")) {
+				criteria.addOrder(Order.asc(sortingColumn));
 			} else {
-				criteria.addOrder(Order.desc(columnName));
+				criteria.addOrder(Order.desc(sortingColumn));
 			}
 		}
 

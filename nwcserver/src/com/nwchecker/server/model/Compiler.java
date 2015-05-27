@@ -2,6 +2,10 @@ package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.TaskView;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +44,8 @@ public class Compiler {
     @Pattern(regexp = "[0-9a-zA-Z/.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
+    @JsonView(TaskView.TaskPass.class)
+    @JsonProperty("compiler")
     private String name;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "compiler")

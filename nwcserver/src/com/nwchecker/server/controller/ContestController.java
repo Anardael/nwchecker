@@ -306,6 +306,10 @@ public class ContestController {
 		for (User user : teachers) {
 			MorphedResult<User> morphedTeacher = new MorphedResult<User>(user);
 			morphedTeacher.excludeAttribute("roles");
+			morphedTeacher.excludeAttribute("username");
+			morphedTeacher.excludeAttribute("email");
+			morphedTeacher.excludeAttribute("info");
+			morphedTeacher.excludeAttribute("requests");
 			if (c != null) {
 				if (c.getUsers().contains(user)) {
 					morphedTeacher.addExpansionData("chose", true);

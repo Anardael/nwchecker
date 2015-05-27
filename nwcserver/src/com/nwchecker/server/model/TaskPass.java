@@ -10,6 +10,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.TaskView;
+
 /**
  * <h1>Task Pass Entity</h1> Entity that represents and encapsulate one User's
  * Task submit in some Contest.
@@ -37,12 +41,18 @@ public class TaskPass {
 	private Task task;
 
 	@Column(name = "passed")
+	@JsonProperty("passed")
+	@JsonView(TaskView.TaskPass.class)
 	private boolean passed;
 
 	@Column(name = "executionTime")
+	@JsonProperty("executionTime")
+	@JsonView(TaskView.TaskPass.class)
 	private int executionTime;
 
 	@Column(name = "memoryUsed")
+	@JsonProperty("memoryUsed")
+	@JsonView(TaskView.TaskPass.class)
 	private int memoryUsed;
 
 	@Lob
@@ -57,10 +67,12 @@ public class TaskPass {
 
 	@ManyToOne()
 	@JoinColumn(name = "userid")
+	@JsonView(TaskView.TaskPass.class)	
 	private User user;
 	
 	@ManyToOne()
 	@JoinColumn(name ="compiler")
+	@JsonView(TaskView.TaskPass.class)
 	private Compiler compiler;
 	
 	public int getId() {

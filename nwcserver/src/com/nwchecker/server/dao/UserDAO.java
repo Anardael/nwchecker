@@ -129,7 +129,7 @@ public interface UserDAO {
 	 */
 	public List<User> getUsersWithRequests();
 	
-	public List<User> getPagedUsers(int startIndex, int pageSize, String sorting, String filter);
+	public List<User> getPagedUsers(int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
 	public List<User> getPagedUsers(int startIndex, int pageSize);
 	
 	public Long getRecordCount(String filter);

@@ -18,7 +18,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.service.TaskPassService;
 

@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.UserView;
 
 /**
  * <h1>Role Entity</h1>
@@ -34,6 +36,7 @@ public class Role {
 	private User user;
 	@JsonProperty("role")
 	@Column(name = "role")
+	@JsonView(UserView.ViewUsersAdmin.class)
 	private String role;
 	
 	public Role() {

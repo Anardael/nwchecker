@@ -45,28 +45,28 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return (List<TaskPass>) query.list();
 	}
 
-
 	@Transactional
 	@Override
-	public List<TaskPass> getPaginatedTaskPassByTaskId(int id,
-			int startIndex, int pageSize, String sorting, String filter) {
+	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
+			int pageSize, String sortingColumn, String sortingOrder,
+			String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(TaskPass.class);
 		criteria.createAlias("user", "u");
-		if (StringUtils.isNotEmpty(sorting)){
-			String columnName = StringUtils.split(sorting, " ")[0];
-			if (StringUtils.equals(columnName, "Username")){
-				columnName = "u.displayName";
+		if (StringUtils.isNotEmpty(sortingColumn)) {
+			if (StringUtils.equals(sortingColumn, "Username")) {
+				sortingColumn = "u.displayName";
 			}
-			if (sorting.contains("ASC")) {
-				criteria.addOrder(Order.asc(columnName));
+			if (sortingColumn.equalsIgnoreCase("ASC")) {
+				criteria.addOrder(Order.asc(sortingColumn));
 			} else {
-				criteria.addOrder(Order.desc(columnName));
+				criteria.addOrder(Order.desc(sortingColumn));
 			}
 		}
-		if (StringUtils.isNotBlank(filter)){
-			criteria.add(Restrictions.ilike("u.displayName", filter, MatchMode.ANYWHERE));
+		if (StringUtils.isNotBlank(filter)) {
+			criteria.add(Restrictions.ilike("u.displayName", filter,
+					MatchMode.ANYWHERE));
 		}
 		criteria.createCriteria("task", "t");
 		criteria.add(Restrictions.eq("t.id", id));
@@ -107,8 +107,9 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(TaskPass.class);
 		criteria.createAlias("user", "u");
-		if (StringUtils.isNotBlank(filter)){
-			criteria.add(Restrictions.ilike("u.displayName", filter, MatchMode.ANYWHERE));
+		if (StringUtils.isNotBlank(filter)) {
+			criteria.add(Restrictions.ilike("u.displayName", filter,
+					MatchMode.ANYWHERE));
 		}
 		criteria.createCriteria("task", "t");
 		criteria.add(Restrictions.eq("t.id", id));

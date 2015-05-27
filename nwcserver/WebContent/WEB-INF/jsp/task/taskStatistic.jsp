@@ -7,7 +7,7 @@
 <c:set var="taskId" value="${currentTask.id}" />
 <c:set var="baseURL" value="${pageContext.servletContext.contextPath}" />
 <body>
-	<script>
+	<%-- <script>
 		$(document).ready(function() {
 			$('#jTable').jtable({
 				jqueryuiTheme : true,
@@ -22,20 +22,32 @@
 					dataType : 'json'
 				},
 				fields : {
-					Username : {
-						title : '<spring:message code="task.statistic.usernameCaption"/>'
+					user : {
+						title   : '<spring:message code="task.statistic.usernameCaption"/>',
+						display : function(data){
+							return data.record.user.displayName;
+						}
 					},
-					Compiler : {
-						title : '<spring:message code="task.statistic.compilerCaption"/>'
+					compiler : {
+						title : '<spring:message code="task.statistic.compilerCaption"/>',
+						display:function(data){
+							return data.record.compiler.compiler;
+						}
 					},
-					ExecutionTime : {
+					executionTime : {
 						title : '<spring:message code="task.statistic.execTimeCaption"/>'
 					},
-					MemoryUsed : {
+					memoryUsed : {
 						title : '<spring:message code="task.statistic.memUsedCaption"/>'
 					},
-					Passed : {
-						title : '<spring:message code="task.statistic.passedCaption"/>'
+					passed : {
+						title : '<spring:message code="task.statistic.passedCaption"/>',
+						display:function(data){
+							if (data.record.passed){
+								return 'Passed'
+							}
+							else return 'Failed'
+						}
 					}
 				}
 
@@ -59,6 +71,8 @@
 			<button type="submit" id="filter" class="btn btn-default"><spring:message code="pagination.search.button" /></button>
 		</div>
 	</form>
-	<div id="jTable"></div>
+	<div id="jTable"></div> --%>
+	
+	
 </body>
 </html>

@@ -1,8 +1,6 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.UserDAO;
-import com.nwchecker.server.json.JsonUtil;
-import com.nwchecker.server.json.UserListItemJson;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
@@ -91,9 +89,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getPagedUsers(int startIndex, int pageSize,
-			String sorting, String filter) {
-		List<User> pagedUsers = userDAO.getPagedUsers(
-				startIndex, pageSize, sorting, filter);
+			String sortingColumn, String sortingOrder, String filter) {
+		List<User> pagedUsers = userDAO.getPagedUsers(startIndex, pageSize,
+				sortingColumn, sortingOrder, filter);
 		return pagedUsers;
 	}
 
@@ -103,11 +101,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PaginationWrapper<User> getUsersForPagination(
-			int startIndex, int pageSize, String sorting, String filter) {
+	public PaginationWrapper<User> getUsersForPagination(int startIndex,
+			int pageSize, String sortingColumn, String sortingOrder,
+			String filter) {
 		PaginationWrapper<User> response = new PaginationWrapper<User>();
-		List<User> userList = getPagedUsers(startIndex, pageSize, sorting,
-				filter);
+		List<User> userList = getPagedUsers(startIndex, pageSize,
+				sortingColumn, sortingOrder, filter);
 		response.setDataList(userList);
 		response.setRecordCount(getRecordCount(filter));
 		return response;

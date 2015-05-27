@@ -103,7 +103,6 @@ public class ListContestsController {
 		String result = null;
 		try {
 			result = jsonMapper.writeValueAsString(morphedContests);
-			System.out.println(result);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,6 +125,9 @@ public class ListContestsController {
     @ResponseBody
     public StatusContestJson getContestStatus(@RequestParam("contestId") int contestId, Principal principal) {
         LOG.info("\"" + principal.getName() + "\" tries to receive contest status.");
+        Contest contest = contestService.getContestByID(contestId);
+        contest.getStatus();
+        contest.isHidden();        
         String contestStatus = contestService.getContestByID(contestId).getStatus().toString();
         boolean isContestHidden = contestService.getContestByID(contestId).isHidden();
         LOG.info("\"" + principal.getName() + "\" received contest status.");
