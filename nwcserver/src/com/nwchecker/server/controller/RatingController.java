@@ -49,6 +49,7 @@ public class RatingController {
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String getRating(Model model) {
         model.addAttribute("ratingContests", contestService.getContestForRating());
+        model.addAttribute("pageName", "rating");
 
         return "nwcserver.contests.rating";
     }
@@ -75,6 +76,7 @@ public class RatingController {
         contestDuration.setTime(contest.getDuration());
         model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
         model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
+        model.addAttribute("pageName", "rating");
 
         return "nwcserver.contests.results";
     }

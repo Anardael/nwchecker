@@ -26,12 +26,15 @@ public class RuleController {
     @RequestMapping(value = "/rules")
     public String showRules(Model model) {
         model.addAttribute("ruleList", ruleService.getRulesByLanguageTag(LocaleContextHolder.getLocale().toString()));
+        model.addAttribute("pageName", "rules");
+
         return "nwcserver.static.rules";
     }
 
     @RequestMapping(value = "/editRule", method = {RequestMethod.GET, RequestMethod.POST})
     public String editRule(Model model, @RequestParam("content") String ruleContent, @RequestParam("id") int ruleId) {
         ruleService.updateRuleContentById(ruleId, ruleContent);
+
         return showRules(model);
     }
 }

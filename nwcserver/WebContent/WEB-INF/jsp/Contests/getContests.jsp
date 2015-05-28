@@ -16,59 +16,11 @@
     var errorLabel = "<spring:message code="error.caption" />";
     var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
     var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
-
-
-
-
+    var contestId = 0;
 
 </script>
 	<div class="main-block">
 		<div id="accordion">
-
-			<%--<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button" name="buttonName"
-					data-toggle="dropdown">
-					<c:choose>
-						<c:when test="${param.status == 'GOING'}">
-							<spring:message code="contest.going.label" />
-						</c:when>
-						<c:when test="${param.status == 'PREPARING'}">
-							<spring:message code="contest.preparing.label" />
-						</c:when>
-						<c:when test="${param.status == 'RELEASE'}">
-							<spring:message code="contest.release.label" />
-						</c:when><c:when test="${param.status == 'ARCHIVE'}">
-							<spring:message code="contest.archive.label" />
-						</c:when>
-						<c:otherwise>
-							<spring:message code="contest.status.all.label"/>
-						</c:otherwise>
-					</c:choose>
-
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="<c:url value="/getContests.do"/>">
-						<spring:message code="contest.status.all.label"/></a></li>
-					<li><a
-						href="<c:url value="/getContestsByStatus.do?status=GOING"/>">
-							<spring:message code="contest.going.label" />
-					</a></li>
-					<li><a
-						href="<c:url value="/getContestsByStatus.do?status=PREPARING"/>">
-							<spring:message code="contest.preparing.label" />
-					</a></li>
-					<li><a
-						href="<c:url value="/getContestsByStatus.do?status=RELEASE"/>">
-							<spring:message code="contest.release.label" />
-					</a></li>
-					<li><a
-						href="<c:url value="/getContestsByStatus.do?status=ARCHIVE"/>">
-							<spring:message code="contest.archive.label" />
-					</a></li>
-				</ul>
-			</div>
-
 
 			<c:forEach items="${contests}" var="contest" varStatus="row">
 				<a class="list-group-item" data-toggle="collapse"
@@ -200,79 +152,8 @@
 					</li>
 				</div>
 			</c:forEach>
-				<!-- Pagination START -->
-				<div class="text-center">
-					<ul class="pagination">
-						<!-- "Previous" button -->
-						<c:if test="${currentPage gt 1}">
-							<li><a
-									href="<c:url value="/getContests.do">
-										<c:param name="page" value="${currentPage - 1}"/>
-									  </c:url>"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-						</c:if>
-						<!-- Display first page -->
-						<c:if test="${currentPage - 3 ge 1}">
-							<li><a
-									href="<c:url value="/getContests.do">
-										<c:param name="id" value="${taskId}"/>
-										<c:param name="page" value="1"/>
-										</c:url>">
-								<c:out value="1" />
-							</a></li>
-						</c:if>
 
-						<!-- Display there're more pages before first page -->
-						<c:if test="${currentPage - 3 gt 1}">
-							<li class="disabled"><a>...</a></li>
-						</c:if>
 
-						<!-- Display 2 closest pages -->
-						<c:forEach begin="1" end="5" var="loop">
-							<c:choose>
-								<c:when test="${loop eq 3}">
-									<li class="active"><a><c:out value="${currentPage}" /></a></li>
-								</c:when>
-								<c:when
-										test="${(currentPage + loop - 3 gt 0)and(currentPage + loop - 3 lt pageCount + 1)}">
-									<li><a
-											href="<c:url value="/getContests.do">
-										<c:param name="id" value="${taskId}"/>
-										<c:param name="page" value="${currentPage + loop - 3}"/>
-										</c:url>">
-										<c:out value="${currentPage + loop - 3}" />
-									</a></li>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<!-- Display there're more pages before last page -->
-						<c:if test="${currentPage + 3 lt pageCount}">
-							<li class="disabled"><a>...</a></li>
-						</c:if>
-						<!-- Display last page -->
-						<c:if test="${currentPage + 3 le pageCount}">
-							<li><a
-									href="<c:url value="/getContests.do">
-										<c:param name="id" value="${taskId}"/>
-										<c:param name="page" value="${pageCount}"/>
-										</c:url>">
-								<c:out value="${pageCount}" />
-							</a></li>
-						</c:if>
-
-						<!-- "Next" button -->
-						<c:if test="${currentPage lt pageCount}">
-							<li><a
-									href="<c:url value="/getContests.do">
-										<c:param name="page" value="${currentPage + 1}"/>
-									  </c:url>"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</c:if>
-					</ul>
-				</div>
-				<!-- Pagination FINISH -->
 			<security:authorize access="hasRole('ROLE_TEACHER')">
 				<div class="col-sm-6 col-sm-offset-3"
 					style="text-align: center; margin-top: 20px">
@@ -282,13 +163,12 @@
 					</button>
 				</div>
 			</security:authorize>
-
 		</div>
 	</div>
 
 <br>
 <br>
-<br>--%>
+<br>
 
     <div class="main-block">
         <c:url var="dataUrl" value="/contestListJson.do" />
@@ -296,7 +176,7 @@
                data-url="${dataUrl}" data-method="get" data-cache="false"
                data-search="true" data-clear-search="true" data-pagination="true"
                data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
-            <thead class="bg-primary">
+            <thead style="background-color: lightskyblue">
             <tr>
                 <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
                     Start date
@@ -312,16 +192,13 @@
         </table>
     </div>
 
-    <%--<div class="alert alert-success" id="events-result" data-es="Aquí se muestra el resultado del evento">
-        Here is the result of event.
-    </div>--%>
-
 
     <div id="contestModal" class="modal">
+        <c:set var="ID" value="111"/>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-info">
-                    HEADER
+                    HEADER ${ID}
                 </div>
                 <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
                     MODAL BODY
@@ -333,14 +210,7 @@
         </div>
     </div>
 
-    <script>
-        var $result = $('#mdl-body');
-        $('#contestTable').bootstrapTable({
-        }).on('click-row.bs.table', function (e, row, $element) {
-            $result.text(JSON.stringify(row));
-            $('#contestModal').modal();
-        });
-    </script>
+
 
 </body>
 </html>

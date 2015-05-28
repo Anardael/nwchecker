@@ -104,6 +104,7 @@ public class ContestController {
         if (principal == null) {
             //return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
+            model.addAttribute("pageName", "contest");
             return "nwcserver.contests.list";
         }
 
@@ -135,6 +136,7 @@ public class ContestController {
                     contestEditWatcherService.getNowEditsMap());
         }
         model.addAttribute("contests", unhidden);
+        model.addAttribute("pageName", "contest");
         return "nwcserver.contests.list";
     }
 
