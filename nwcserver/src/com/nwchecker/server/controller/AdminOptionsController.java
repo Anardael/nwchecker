@@ -3,7 +3,7 @@ package com.nwchecker.server.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
-import com.nwchecker.server.json.UserView;
+import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
@@ -86,7 +86,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>JSON</b> Returns <b>List of Users</b> in JSON format
 	 */
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers.do", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getUsers(Principal principal,

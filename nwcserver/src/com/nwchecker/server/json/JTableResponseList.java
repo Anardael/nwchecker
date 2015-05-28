@@ -13,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonView;
  * @version 1.0
  */
 public class JTableResponseList {
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	@JsonProperty("rows")
 	private List<?> records;
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	@JsonProperty("total")
 	private long totalRecordCount;
 	@JsonProperty("Message")

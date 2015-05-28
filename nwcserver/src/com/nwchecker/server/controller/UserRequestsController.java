@@ -67,7 +67,7 @@ public class UserRequestsController {
 	 * @param principal
 	 *            This is general information about user, who tries to call this
 	 *            method
-	 * @return <b>userRequests.jsp</b> Returns page where admin ca view list of
+	 * @return <b>userRequests.jsp</b> Returns page where admin can view list of
 	 *         users requests
 	 */
 	@Link(label = "userRequests.caption", family = "adminOptions", parent = "")

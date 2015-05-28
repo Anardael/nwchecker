@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.TaskView;
-import com.nwchecker.server.json.UserView;
+import com.nwchecker.server.json.JsonViews;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public class User {
 	// User name
 	@JsonProperty("username")
 	@Column(name = "username")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	private String username;
 	// Password
 	@JsonIgnore
@@ -56,27 +56,27 @@ public class User {
 	// Display name
 	@JsonProperty("displayName")
 	@Column(name = "display_name")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	private String displayName;
 	// User email
 	@Column(name = "email")
 	@JsonProperty("email")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	private String email;
 	// Some university user data(probably faculty or group)
 	@Column(name = "info")
 	@JsonProperty("info")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	private String info;
 	// User role (User,Teacher or Admin).
 	@JsonProperty("roles")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	private Set<Role> roles;
 	// Department for teacher users.
 	@Column(name = "department")
 	@JsonProperty("department")
-	@JsonView(UserView.ViewUsersAdmin.class)
+	@JsonView(JsonViews.ViewUsersAdmin.class)
 	private String department;
 	// Ban Time - if exists 0 time while user will be inactive
 	@Column(name = "ban_time")

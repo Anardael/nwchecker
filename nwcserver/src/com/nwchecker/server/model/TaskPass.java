@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.TaskView;
 
 /**
@@ -42,17 +43,17 @@ public class TaskPass {
 
 	@Column(name = "passed")
 	@JsonProperty("passed")
-	@JsonView(TaskView.TaskPass.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	private boolean passed;
 
 	@Column(name = "executionTime")
 	@JsonProperty("executionTime")
-	@JsonView(TaskView.TaskPass.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	private int executionTime;
 
 	@Column(name = "memoryUsed")
 	@JsonProperty("memoryUsed")
-	@JsonView(TaskView.TaskPass.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	private int memoryUsed;
 
 	@Lob
@@ -67,12 +68,12 @@ public class TaskPass {
 
 	@ManyToOne()
 	@JoinColumn(name = "userid")
-	@JsonView(TaskView.TaskPass.class)	
+	@JsonView(JsonViews.TaskPassView.class)	
 	private User user;
 	
 	@ManyToOne()
 	@JoinColumn(name ="compiler")
-	@JsonView(TaskView.TaskPass.class)
+	@JsonView(JsonViews.TaskPassView.class)
 	private Compiler compiler;
 	
 	public int getId() {

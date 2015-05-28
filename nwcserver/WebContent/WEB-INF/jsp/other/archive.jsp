@@ -4,6 +4,7 @@
 <spring:url value="/resources/" var="resources" />
 <html>
 <body>
+	<%-- 
 	<form action="<c:url value="/etiam.do"></c:url>">
 		<div class="navbar-form">
 			<input type="text" id="filterText" class="form-control"
@@ -132,6 +133,40 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-	</form>
+	</form> --%>
+	<c:url var="dataURL" value="/archiveTable.do" />
+	<table id="archiveTable" class="table" data-toggle="table"
+		data-striped="true" data-url="${dataURL}"
+		data-side-pagination="server" data-pagination="true"
+		data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
+		data-clear-search="true" data-sort-name="username"
+		data-sort-order="asc">
+		<thead>
+			<tr>
+				<th data-field="id" data-align="center" data-sortable="true"></th>
+				<th data-field="title" data-align="center" data-sortable="true">Title</th>
+				<th data-field="complexity" data-align="center" data-sortable="true">Complexity</th>
+				<th data-field="rate" data-align="center" data-sortable="true">
+					Rate</th>
+				<th data-field="timeLimit" data-halign="center" data-sortable="true">Time
+					limit</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="taskDetailsModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-header-info">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4>
+						<spring:message code="listContests.contestInfo.header" />
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

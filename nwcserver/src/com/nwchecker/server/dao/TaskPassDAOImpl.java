@@ -58,7 +58,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 			if (StringUtils.equals(sortingColumn, "Username")) {
 				sortingColumn = "u.displayName";
 			}
-			if (sortingColumn.equalsIgnoreCase("ASC")) {
+			if (sortingOrder.equalsIgnoreCase("ASC")) {
 				criteria.addOrder(Order.asc(sortingColumn));
 			} else {
 				criteria.addOrder(Order.desc(sortingColumn));

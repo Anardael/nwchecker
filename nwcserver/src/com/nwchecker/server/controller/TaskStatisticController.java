@@ -21,6 +21,7 @@ import java.util.TreeMap;
 
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
+import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.TaskView;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
@@ -36,7 +37,7 @@ public class TaskStatisticController {
 			.getLogger(TaskStatisticController.class);
 
 	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
-	@RequestMapping(value = "/TaskStatistic.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/TaskStatistic", method = RequestMethod.GET)
 	public ModelAndView getTaskStatistic(
 			@RequestParam(value = "id") int taskId, Principal principal) {
 		LOG.debug("User " + principal.getName()
@@ -56,8 +57,8 @@ public class TaskStatisticController {
 		return modelView;
 	}
 
-	@JsonView(TaskView.TaskPass.class)
-	@RequestMapping(value = "/TaskStatisticTable.do", method = RequestMethod.GET)
+	@JsonView(JsonViews.TaskPassView.class)
+	@RequestMapping(value = "/TaskStatisticTable", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getTaskPasses(
 			@RequestParam int taskId,
 			@RequestParam("offset") int startIndex,
@@ -70,7 +71,9 @@ public class TaskStatisticController {
 		PaginationWrapper<TaskPass> paginatedTaskPass = taskPassService
 				.getPagedTaskPassJsonForTask(taskId, startIndex, pageSize,
 						sortingColumn, sortingOrder, filter);
-		JTableResponseList jTableResponse = new JTableResponseList();
+		JTableResponseList jTableResponse = new JTableResponseList(
+				paginatedTaskPass.getDataList(),
+				paginatedTaskPass.getRecordCount());
 		LOG.debug("Successfully retuned task result data for page "
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;

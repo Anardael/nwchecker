@@ -2,7 +2,9 @@ package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.TaskView;
 
 import javax.persistence.CascadeType;
@@ -39,33 +41,38 @@ public class Task {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(JsonViews.ForArchive.class)
+    @JsonProperty("id")
     private int id;
 
     @ManyToOne()
     @JoinColumn(name = "contest_id")
     private Contest contest;
     
-    @JsonView(TaskView.ForArchive.class)
+    @JsonView(JsonViews.ForArchive.class)
+    @JsonProperty("title")
     @Column(name = "title")
     @Pattern(regexp = "[0-9a-zA-Zа-яіїєА-ЯІЇЄ ,.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
     private String title;
 
-    @JsonView(TaskView.ForArchive.class)
+    @JsonView(JsonViews.ForArchive.class)
+    @JsonProperty("complexity")
     @Column(name = "complexity")
     @Max(100)
     @Min(0)
     private int complexity;
 
-    @JsonView(TaskView.ForArchive.class)
+    @JsonView(JsonViews.ForArchive.class)
     @Column(name = "rate")
     @NotNull
     @Max(100)
     @Min(0)
     private int rate;
-
-    @JsonView(TaskView.ForArchive.class)
+    
+    @JsonView(JsonViews.SingleTask.class)
+    @JsonProperty("description")
     @Column(name = "description", columnDefinition = "TEXT")
     @NotEmpty
     private String description;
@@ -73,25 +80,32 @@ public class Task {
     @Column(name = "inputFileName")
     @NotEmpty
     @Size(max = 60)
+    @JsonProperty("inputFileName")
+    @JsonView(JsonViews.SingleTask.class)
     private String inputFileName;
 
     @Column(name = "outputFileName")
     @NotEmpty
     @Size(max = 60)
+    @JsonView(JsonViews.SingleTask.class)
+    @JsonProperty("outputFileName")
     private String outputFileName;
 
     @Min(0)
     @Column(name = "memoryLimit")
+    @JsonView(JsonViews.SingleTask.class)
     private int memoryLimit;
 
     @Min(0)
     @Column(name = "timeLimit")
+    @JsonView(JsonViews.ForArchive.class)
+    @JsonProperty("timeLimit")
     private int timeLimit;
 
     @Column(name = "scriptForVerification", columnDefinition = "TEXT")
     private String scriptForVerification;
     
-    @JsonView(TaskView.ForArchive.class)
+    @JsonView(JsonViews.SingleTask.class)
     @Column(name = "forumLink")
     //@Pattern(regexp="https?://.*")
     @Size(max = 500)

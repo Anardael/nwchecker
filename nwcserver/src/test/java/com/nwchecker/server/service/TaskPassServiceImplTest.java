@@ -52,10 +52,10 @@ public class TaskPassServiceImplTest {
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTaskPassesForTask() {
 		List<TaskPass> taskPasses = taskPassService.getPagedTaskPassesForTask(
-				2, 0, 5, null, null);
+				2, 0, 5, null, null, null);
 		assertEquals(2, taskPasses.size());
 		List<TaskPass> taskPasses2 = taskPassService.getPagedTaskPassesForTask(
-				1, 0, 5, null, null);
+				1, 0, 5, null, null, null);
 		assertEquals(5, taskPasses2.size());
 	}
 
@@ -64,7 +64,7 @@ public class TaskPassServiceImplTest {
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTaskPassesForTaskSorted() {
 		List<TaskPass> taskPasses2 = taskPassService.getPagedTaskPassesForTask(
-				1, 0, 6, null, null);
+				1, 0, 6, null, null,null);
 		Collections.sort(taskPasses2, new Comparator<TaskPass>() {
 			@Override
 			public int compare(TaskPass current, TaskPass other) {
@@ -74,7 +74,7 @@ public class TaskPassServiceImplTest {
 			}
 		});
 		List<TaskPass> taskPassesSorted = taskPassService
-				.getPagedTaskPassesForTask(1, 0, 6, "executionTime asc", null);
+				.getPagedTaskPassesForTask(1, 0, 6, "executionTime", "asc", null);
 		Iterator<TaskPass> controlled = taskPasses2.iterator();
 		Iterator<TaskPass> testing = taskPassesSorted.iterator();
 		while (controlled.hasNext() && testing.hasNext()) {

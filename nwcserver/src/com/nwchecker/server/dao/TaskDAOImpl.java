@@ -85,15 +85,17 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	@Transactional
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int pageSize, int startIndex, String filter) {
+			int startIndex, int pageSize, String sortingOrder, String sortingColumn, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
-		Criterion title = Restrictions.ilike("title", filter,
-				MatchMode.ANYWHERE);
-		Criterion description = Restrictions.ilike("description", filter,
-				MatchMode.ANYWHERE);
-		criteria.add(Restrictions.or(title, description));
+		if (!(filter == null) && !(filter.equals(""))) {
+			Criterion title = Restrictions.ilike("title", filter,
+					MatchMode.ANYWHERE);
+			Criterion description = Restrictions.ilike("description", filter,
+					MatchMode.ANYWHERE);
+			criteria.add(Restrictions.or(title, description));
+		}		
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		List<Task> result = criteria.list();

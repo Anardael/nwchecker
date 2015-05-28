@@ -56,12 +56,17 @@
         			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css"/>
         			<add-attribute value="js/jquery-ui-1.11.4/custom-theme/jquery-ui-1.10.0.custom.css" />
         			<add-attribute value="js/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css" />
+        			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/> 
     			</put-list-attribute>
     			
     			<put-list-attribute name ="scripts" inherit="true" cascade="true">
     				<add-attribute value="js/jquery-ui-1.11.4/jquery-ui.min.js" />
     				<add-attribute value="js/jtable.2.4.0/external/json2.js"/>
     				<add-attribute value="js/jtable.2.4.0/jquery.jtable.js"/>
+    				<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        		<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        		<add-attribute value="js/TaskStatistic/ResultFormatters.js" />
     			</put-list-attribute>
     		</definition>   
     	
@@ -82,6 +87,15 @@
     		</definition>
     		<definition name="nwcserver.static.archive" extends = "nwcserver.static.abstract">
     			<put-attribute name="body" value="/WEB-INF/jsp/other/archive.jsp" />
+    			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+        			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/> 
+    			</put-list-attribute>
+    			<put-list-attribute name ="scripts" inherit="true" cascade="true">
+    				<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        		<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        		<add-attribute value="js/archive/modal.js" />
+    			</put-list-attribute>
     		</definition>
 			<definition name="nwcserver.static.news" extends = "nwcserver.static.abstract">
 				<put-attribute name="body" value="/WEB-INF/jsp/news/news.jsp" />

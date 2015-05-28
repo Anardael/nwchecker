@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.TaskView;
 
 import javax.persistence.CascadeType;
@@ -44,7 +45,7 @@ public class Compiler {
     @Pattern(regexp = "[0-9a-zA-Z/.'()-]{0,}")
     @NotEmpty
     @Size(max = 100)
-    @JsonView(TaskView.TaskPass.class)
+    @JsonView(JsonViews.TaskPassView.class)
     @JsonProperty("compiler")
     private String name;
     

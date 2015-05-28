@@ -56,7 +56,7 @@
 
 	<!-- modal -->
 	<div id="userListModal" class="modal fade">
-		<div class="modal-dialog " style="height: 50%">
+		<div class="modal-dialog" style="height: 50%">
 			<div class="modal-content">
 				<div class="modal-header modal-header-info">
 					<button type="button" class="close" data-dismiss="modal"
