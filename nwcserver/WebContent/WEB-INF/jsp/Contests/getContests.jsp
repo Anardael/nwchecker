@@ -176,7 +176,7 @@
                data-url="${dataUrl}" data-method="get" data-cache="false"
                data-search="true" data-clear-search="true" data-pagination="true"
                data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
-            <thead style="background-color: lightskyblue">
+            <thead class="list-group-item-info">
             <tr>
                 <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
                     Start date
@@ -194,23 +194,71 @@
 
 
     <div id="contestModal" class="modal">
-        <c:set var="ID" value="111"/>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-info">
-                    HEADER ${ID}
+                    <div id="title-block">
+                        <span id="title-text" class="h4"></span>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
                 <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
-                    MODAL BODY
+                    <div id="start_date-block">
+                        <b><spring:message code="contest.table.starts" />:</b>
+                        <span id="start_date"></span>
+                    </div>
+                    <div id="duration-block">
+                        <b><spring:message code="contest.table.duration" />:</b>
+                        <span id="duration"></span>
+                    </div>
+                    <div id="type-block">
+                        <b><spring:message code="contest.table.type" />:</b>
+                        <span id="type"></span>
+                    </div>
+
+                    <div id="description-block">
+                        <div class="text-center" style="margin: 1px">
+                            <b><spring:message code="contest.table.description" /></b>
+                        </div>
+                        <span id="description"></span>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
-                    MODAL FOOTER
+                    <div class="pull-right" style="margin-top: 10px">
+                        <security:authorize access="hasRole('ROLE_TEACHER')">
+                            <%--<c:set var="user" value="${nowContestEdits[contest.id]}" />
+                            <c:if test="${not empty user}">
+                                <label class="label label-warning contestsStatus"> <spring:message
+                                        code="contest.editing.now.label" />: ${user}
+                                </label>
+                            </c:if>--%>
+                            <button class="btn btn-sm btn-info" onclick="edited(contestId)">
+                                <spring:message code="btn.edit" />
+                            </button>
+                        </security:authorize>
+                        <security:authorize access="hasRole('ROLE_USER')">
+                            <button class="btn btn-sm btn-info form-group"
+                                    style="font-weight: 600" onclick="openContest(contestId)">
+                                <spring:message code="contest.startButton" />
+                            </button>
+                        </security:authorize>
+                        <security:authorize access="!isAuthenticated()">
+                            <button class="btn btn-sm btn-info form-group"
+                                    style="font-weight: 600" onclick="openContest(contestId)">
+                                <spring:message code="contest.unauthenticated" />
+                            </button>
+                        </security:authorize>
+                        <button id="archive-btn" class="btn btn-sm btn-info form-group" style="font-weight: 600" onclick="archive()">
+                            <spring:message code="home.archive.caption" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 </body>
 </html>

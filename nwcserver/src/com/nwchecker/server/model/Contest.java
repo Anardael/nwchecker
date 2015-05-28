@@ -65,7 +65,7 @@ public class Contest {
     private String title;
     @Column(name = "description", columnDefinition = "TEXT")
     @NotEmpty
-    @JsonIgnore
+    @JsonProperty("description")
     private String description;
     @Column(name = "starts")
     @Temporal(TemporalType.DATE)
@@ -73,9 +73,9 @@ public class Contest {
     @JsonProperty("starts")
     private Date starts;
 
-    @JsonIgnore
     @Column(name = "duration")
     @DateTimeFormat(pattern = "HH:mm")
+    @JsonProperty("duration")
     private Date duration;
     @OneToMany(mappedBy = "contest", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonIgnore
