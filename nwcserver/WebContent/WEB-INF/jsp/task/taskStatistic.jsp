@@ -73,7 +73,7 @@
 	</form>
 	<div id="jTable"></div> --%>
 	<c:url var="dataURL" value="/TaskStatisticTable.do?taskId=${taskId}" />
-	<table id="usersData" class="table" data-toggle="table"
+	<table id="archiveTable" class="table" data-toggle="table"
 		data-striped="true" data-url="${dataURL}"
 		data-side-pagination="server" data-pagination="true"
 		data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
