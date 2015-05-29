@@ -23,14 +23,15 @@
 </c:forEach>
 </head>
 <body>
-	<div class="wrapper container">
-		 <tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="header" />
+	<div class="wrapper container">		 
 		<div class="col-md-3">
 			<tiles:insertAttribute name="menu" />
 		</div>
 		<div class="col-md-9">
 			<tiles:insertAttribute name="body" />
-		</div>
+		</div>		
 	</div>
+	<tiles:insertAttribute name="footer" />
 </body>
 </html>

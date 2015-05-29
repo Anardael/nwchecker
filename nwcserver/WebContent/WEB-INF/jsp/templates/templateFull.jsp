@@ -21,9 +21,10 @@
 </c:forEach>
 </head>
 <body>
+	<tiles:insertAttribute name="header" />
 	<div class="wrapper container">
-		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="body" />
 	</div>
+	<tiles:insertAttribute name="footer" />
 </body>
 </html>
