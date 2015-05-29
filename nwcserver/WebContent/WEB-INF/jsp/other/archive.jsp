@@ -13,12 +13,12 @@
 		data-sort-order="asc">
 		<thead>
 			<tr>
-				<th data-field="id" data-align="center" data-sortable="true"></th>
+				<th data-field="id" data-align="center" data-sortable="true" class="col-md-1"></th>
 				<th data-field="title" data-align="center" data-sortable="true">Title</th>
-				<th data-field="complexity" data-align="center" data-sortable="true">Complexity</th>
-				<th data-field="rate" data-align="center" data-sortable="true">
+				<th data-field="complexity" data-align="center" data-sortable="true" class="col-md-2">Complexity</th>
+				<th data-field="rate" data-align="center" data-sortable="true"class="col-md-2">
 					Rate</th>
-				<th data-field="timeLimit" data-halign="center" data-sortable="true">Time
+				<th data-field="timeLimit" data-align="center" data-sortable="true"class="col-md-2">Time
 					limit</th>
 			</tr>
 		</thead>

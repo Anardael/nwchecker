@@ -16,7 +16,7 @@
 	<!-- service Logo -->
 	<%-- 	<script type="text/javascript" src="${resources}js/serverTime.js"></script> --%>
 
-<%-- 	<div class="blockContainer">
+	<%-- 	<div class="blockContainer">
 			<div class="logo">
 				<a href="index.do"><img src="${resources}images/logo.png"
 					alt="Whitesquare logo"></a>
@@ -155,21 +155,15 @@
 						data-toggle="dropdown" role="button"> <security:authentication
 								property="principal.username" /> <span class="caret"></span>
 					</a>
-						<ul class="dropdown-menu multi-level" role="menu"
+						<ul class="dropdown-menu" role="menu"
 							aria-labelledby="dropdownMenu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<li class="dropdown-submenu pull-left admin-subMenu"><a
-									class="trigger"> <spring:message code="admin.caption" /></a>
-									<ul class="dropdown-menu">
-										<li><a href="admin.do"><spring:message
-													code="adminPanel.users.caption" /></a></li>
-										<li class="divider"></li>
-										<li><a href="userRequests.do"><spring:message
-													code="userRequests.caption" /></a></li>
-										<li class="divider"></li>
-										<li><a href="listContests.do"><spring:message
-													code="listContests.caption" /></a></li>
-									</ul></li>
+								<li><a href="admin.do"><spring:message
+											code="adminPanel.users.caption" /></a></li>
+								<li><a href="userRequests.do"><spring:message
+											code="userRequests.caption" /></a></li>
+								<li><a href="listContests.do"><spring:message
+											code="listContests.caption" /></a></li>
 								<li class="divider"></li>
 							</security:authorize>
 							<li><a href="profile.do"><spring:message

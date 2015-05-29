@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	FILE_NOT_SELECTED_TITLE = '<spring:message code="contest.passing.fileNotSelectedDialog.title"/>';
 	FILE_NOT_SELECTED_MESSAGE = '<spring:message code="contest.passing.fileNotSelectedDialog.message"/>';
-	
+
 	FILE_TOO_LARGE_TITLE = '<spring:message code="contest.passing.fileTooLargeDialog.title"/>';
 	FILE_TOO_LARGE_MESSAGE = '<spring:message code="contest.passing.fileTooLargeDialog.message"/>';
 
@@ -36,6 +36,8 @@
 	ALL_COMPLETE_MESSAGE = '<spring:message code="contest.passing.allCompleteDialog.message"/>';
 
 	UPLOAD_FILE = '<spring:message code="contest.passing.uploadSourceFile.button"/>';
+	
+	TASK_ID = "${currentTask.id}"
 
 	<c:if test="${not empty taskResults[currentTask.id]}">
 	CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
@@ -48,6 +50,9 @@
 		disableDangerousOptions();
 		if (!isArchive)
 			startTimer();
+		$('#showModal').click(function(){
+			tryToShowStatistic()
+		})
 	});
 </script>
 <!-- Current Task information -->
@@ -55,10 +60,10 @@
 	<h2>
 		<a href="TaskStatistic.do?id=${currentTask.id}">${currentTask.title}</a>
 		<small> (<spring:message code="contest.passing.rate.caption" />
-			<b>${currentTask.rate}</b>) <c:if test="${not empty taskSuccessRate}"><b><fmt:formatNumber
-					value="${taskSuccessRate}" maxFractionDigits="2"
-					minIntegerDigits="2" type="PERCENT" /></b> </c:if><label id="timer"
-			class="pull-right"></label>
+			<b>${currentTask.rate}</b>) <c:if test="${not empty taskSuccessRate}">
+				<b id="showModal"><fmt:formatNumber value="${taskSuccessRate}"
+						maxFractionDigits="2" minIntegerDigits="2" type="PERCENT" /></b>
+			</c:if><label id="timer" class="pull-right"></label>
 		</small>
 	</h2>
 </div>
@@ -149,5 +154,40 @@
 			</div>
 		</div>
 	</form:form>
+</div>
+
+<!-- modal task statistic window -->
+<div id="taskStatistic" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<table id="statisticTable" class="table" data-toggle="table"
+					data-striped="true" data-url="TaskStatisticTable.do?taskId=${currentTask.id}"
+					data-side-pagination="server" data-pagination="true"
+					data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
+					data-clear-search="true">
+					<thead>
+						<tr>
+							<th data-field="user" data-align="center"
+								data-formatter="usernameFormatter" data-sortable="true"><spring:message
+									code="adminPanel.users.tableHeader.username" /></th>
+							<th data-field="compiler" data-align="center"
+								data-formatter="compilerFormatter" data-sortable="true"><spring:message
+									code="adminPanel.users.tableHeader.displayName" /></th>
+							<th data-field="executionTime" data-align="center"
+								data-sortable="true"><spring:message
+									code="task.statistic.execTimeCaption" /></th>
+							<th data-field="memoryUsed" data-halign="center"
+								data-sortable="true"><spring:message
+									code="task.statistic.memUsedCaption" /></th>
+							<th data-field="passed" data-halign="center"
+								data-formatter="passedFormatter" data-sortable="true"><spring:message
+									code="task.statistic.passedCaption" /></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 </html>

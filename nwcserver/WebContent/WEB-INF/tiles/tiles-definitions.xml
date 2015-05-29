@@ -39,6 +39,8 @@
 	        	<put-attribute name="body" value="/WEB-INF/jsp/task/passTask.jsp" />
 	        	<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
 	        		<add-attribute value="css/bootstrap-select.min.css"/>
+	        		<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/> 
     			</put-list-attribute>
     			<put-list-attribute name ="scripts" inherit="true" cascade="true">
     				<add-attribute value="js/contests/contestPass.js"/>
@@ -46,6 +48,10 @@
     				<add-attribute value="js/laddaBtnLoad/spin.min.js"/>
     				<add-attribute value="js/laddaBtnLoad/ladda.min.js"/>
     				<add-attribute value="js/contests/tasks/taskSubmit.js"/>
+    				<add-attribute value="js/contests/tasks/taskModal.js"/>
+    				<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+	        		<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+	        		<add-attribute value="js/TaskStatistic/ResultFormatters.js" />
     			</put-list-attribute>
     		</definition>
     		

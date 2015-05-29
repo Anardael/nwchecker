@@ -17,8 +17,6 @@ function allTasksComplete() {
     var tasksCount = document.getElementById("tasks").getElementsByTagName("LI").length;
     var completeTasksCount = document.getElementsByClassName("success").length;
     completeTasksCount += document.getElementsByClassName("descr-success").length;
-    console.log(tasksCount);
-    console.log(completeTasksCount);
     return (tasksCount == completeTasksCount);
 }
 

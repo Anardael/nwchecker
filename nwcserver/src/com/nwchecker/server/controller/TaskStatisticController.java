@@ -61,8 +61,8 @@ public class TaskStatisticController {
 	@RequestMapping(value = "/TaskStatisticTable", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getTaskPasses(
 			@RequestParam int taskId,
-			@RequestParam("offset") int startIndex,
-			@RequestParam("limit") int pageSize,
+			@RequestParam(value = "offset", required = false, defaultValue = "0") int startIndex,
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int pageSize,
 			@RequestParam(required = false, value = "sort") String sortingColumn,
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
