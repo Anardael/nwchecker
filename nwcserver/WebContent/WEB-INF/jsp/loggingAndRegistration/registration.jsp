@@ -9,7 +9,7 @@
 <body>
 	<form:form modelAttribute="userRegistrationForm"
 		action="registration.do" method="post" role="form"
-		class="form-horizontal">
+		class="form-horizontal" id="registrationForm">
 		<div class="form-group">
 			<label class="col-sm-4 control-label"><spring:message
 					code="reg.username.caption" />:</label>

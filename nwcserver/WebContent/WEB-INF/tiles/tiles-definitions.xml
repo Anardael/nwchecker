@@ -75,17 +75,17 @@
     		<put-attribute name="menu" value="/WEB-INF/jsp/sideMenu/staticSidePanel.jsp" />
     	</definition>
     		
-    		<definition name="nwcserver.static.index" extends = "nwcserver.static.abstract">
+    		<definition name="nwcserver.static.index" extends = "nwcserver.abstract.full">
     			<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
     		</definition>
     		
-      		<definition name="nwcserver.static.rules" extends = "nwcserver.static.abstract">
+      		<definition name="nwcserver.static.rules" extends = "nwcserver.abstract.full">
     			<put-attribute name="body" value="/WEB-INF/jsp/other/rules.jsp" />
     			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="css/rules/rules-style.css"/>
     			</put-list-attribute>
     		</definition>
-    		<definition name="nwcserver.static.archive" extends = "nwcserver.static.abstract">
+    		<definition name="nwcserver.static.archive" extends = "nwcserver.abstract.full">
     			<put-attribute name="body" value="/WEB-INF/jsp/other/archive.jsp" />
     			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
@@ -97,7 +97,7 @@
 	        		<add-attribute value="js/archive/modal.js" />
     			</put-list-attribute>
     		</definition>
-			<definition name="nwcserver.static.news" extends = "nwcserver.static.abstract">
+			<definition name="nwcserver.static.news" extends = "nwcserver.abstract.full">
 				<put-attribute name="body" value="/WEB-INF/jsp/news/news.jsp" />
 			</definition>
     
@@ -296,6 +296,11 @@
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/loggingAndRegistration/registration.css"/>
 	        </put-list-attribute>
+	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
+	        	<add-attribute value="js/jquery.validate.min.js" />
+	        	<add-attribute value="js/LoginAndRegistration/registration.js" />
+	        </put-list-attribute> 
+	        
 	    </definition>
 	    <definition name="nwcserver.user.created" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/loggingAndRegistration/userCreated.jsp" />
