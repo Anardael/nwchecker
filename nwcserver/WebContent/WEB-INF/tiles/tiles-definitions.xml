@@ -296,11 +296,6 @@
 	        <put-list-attribute name ="stylesheets" inherit="true" cascade="true">
         		<add-attribute value="css/loggingAndRegistration/registration.css"/>
 	        </put-list-attribute>
-	        <put-list-attribute name ="scripts" inherit="true" cascade="true">
-	        	<add-attribute value="js/jquery.validate.min.js" />
-	        	<add-attribute value="js/LoginAndRegistration/registration.js" />
-	        </put-list-attribute> 
-	        
 	    </definition>
 	    <definition name="nwcserver.user.created" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/loggingAndRegistration/userCreated.jsp" />
@@ -308,5 +303,4 @@
         		<add-attribute value="css/loggingAndRegistration/userCreated.css"/>
 	        </put-list-attribute>      
 	    </definition>
-	    
 </tiles-definitions>
