@@ -56,11 +56,19 @@
 	});
 </script>
 <!-- Current Task information -->
+<c:if test="${not empty taskSuccessRate}">
+	<div style="float: right;">
+		<button type="button" class="btn btn-default" data-style="zoom-out"
+			onclick="tryToShowStatistic();">
+			<spring:message code="task.statistic.modalTitle" />
+		</button>
+	</div>
+</c:if>
 <div class="page-header">
 	<h2>
-		<a href="TaskStatistic.do?id=${currentTask.id}">${currentTask.title}</a>
-		<small> (<spring:message code="contest.passing.rate.caption" />
-			<b>${currentTask.rate}</b>) <c:if test="${not empty taskSuccessRate}">
+		${currentTask.title} <small> (<spring:message
+				code="contest.passing.rate.caption" /> <b>${currentTask.rate}</b>)
+			<c:if test="${not empty taskSuccessRate}">
 				<b id="showModal"><fmt:formatNumber value="${taskSuccessRate}"
 						maxFractionDigits="2" minIntegerDigits="2" type="PERCENT" /></b>
 			</c:if><label id="timer" class="pull-right"></label>
@@ -161,27 +169,41 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<table id="statisticTable" class="table" data-toggle="table"
-					data-striped="true" data-url="TaskStatisticTable.do?taskId=${currentTask.id}"
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 id="pageHeader" class="modal-title">
+					<spring:message code="task.statistic.modalTitle" />
+				</h4>
+			</div>
+			<div class="modal-body">
+				<table id="statisticTable" class="table"
+					style="table-layout: fixed; overflow-word: break-word;"
+					data-toggle="table" data-striped="true"
+					data-url="TaskStatisticTable.do?taskId=${currentTask.id}"
 					data-side-pagination="server" data-pagination="true"
 					data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
 					data-clear-search="true">
 					<thead>
 						<tr>
 							<th data-field="user" data-align="center"
-								data-formatter="usernameFormatter" data-sortable="true"><spring:message
-									code="adminPanel.users.tableHeader.username" /></th>
+								data-formatter="usernameFormatter" data-sortable="true"
+								class="col-md-1"><spring:message
+									code="task.statistic.usernameCaption" /></th>
 							<th data-field="compiler" data-align="center"
-								data-formatter="compilerFormatter" data-sortable="true"><spring:message
-									code="adminPanel.users.tableHeader.displayName" /></th>
+								data-formatter="compilerFormatter" data-sortable="true"
+								class="col-md-1"><spring:message
+									code="task.statistic.compilerCaption" /></th>
 							<th data-field="executionTime" data-align="center"
-								data-sortable="true"><spring:message
+								data-sortable="true" class="col-md-1"><spring:message
 									code="task.statistic.execTimeCaption" /></th>
-							<th data-field="memoryUsed" data-halign="center"
-								data-sortable="true"><spring:message
+							<th data-field="memoryUsed" data-align="center"
+								data-sortable="true" class="col-md-1"><spring:message
 									code="task.statistic.memUsedCaption" /></th>
-							<th data-field="passed" data-halign="center"
-								data-formatter="passedFormatter" data-sortable="true"><spring:message
+							<th data-field="passed" data-align="center"
+								data-formatter="passedFormatter" data-sortable="true"
+								class="col-md-1"><spring:message
 									code="task.statistic.passedCaption" /></th>
 						</tr>
 					</thead>

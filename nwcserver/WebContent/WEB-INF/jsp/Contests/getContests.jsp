@@ -20,7 +20,6 @@
 </script>
 	<div class="main-block">
 		<div id="accordion">
-
 			<div class="dropdown">
 				<button class="btn btn-primary dropdown-toggle" type="button" name="buttonName"
 					data-toggle="dropdown">

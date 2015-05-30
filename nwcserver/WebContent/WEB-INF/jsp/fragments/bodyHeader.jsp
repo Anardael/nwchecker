@@ -16,7 +16,7 @@
 	<!-- service Logo -->
 	<%-- 	<script type="text/javascript" src="${resources}js/serverTime.js"></script> --%>
 
-	<%-- 	<div class="blockContainer">
+<%-- 	<div class="blockContainer">
 			<div class="logo">
 				<a href="index.do"><img src="${resources}images/logo.png"
 					alt="Whitesquare logo"></a>
@@ -79,16 +79,15 @@
 						<li><a href="index.do"><spring:message
 									code="home.caption" /></a></li>
 					</c:otherwise>
-				</c:choose>
+				</c:choose>				
 				<!-- news -->
 				<c:choose>
-					<c:when test="${pageName=='archive'}">
-						<li class="active"><a><spring:message
-									code="home.archive.caption" /></a></li>
+					<c:when test="${pageName=='news'}">
+						<li class="active"><a href="news.do"><spring:message
+									code="news.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="etiam.do"><spring:message
-									code="home.archive.caption" /></a></li>
+						<li><a href="news.do"><spring:message code="news.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- olympiad -->
@@ -112,17 +111,7 @@
 						<li><a href="rating.do"><spring:message
 									code="rating.caption" /></a></li>
 					</c:otherwise>
-				</c:choose>
-				<!-- news -->
-				<c:choose>
-					<c:when test="${pageName=='news'}">
-						<li class="active"><a href="news.do"><spring:message
-									code="news.caption" /></a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="news.do"><spring:message code="news.caption" /></a></li>
-					</c:otherwise>
-				</c:choose>
+				</c:choose>				
 				<!-- rules -->
 				<c:choose>
 					<c:when test="${pageName=='rules'}">
@@ -132,6 +121,17 @@
 					<c:otherwise>
 						<li><a href="rules.do"><spring:message
 									code="home.rules.caption" /></a></li>
+					</c:otherwise>
+				</c:choose>
+				<!-- archive -->
+				<c:choose>
+					<c:when test="${pageName=='archive'}">
+						<li class="active"><a><spring:message
+									code="home.archive.caption" /></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="etiam.do"><spring:message
+									code="home.archive.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- login -->
@@ -155,15 +155,21 @@
 						data-toggle="dropdown" role="button"> <security:authentication
 								property="principal.username" /> <span class="caret"></span>
 					</a>
-						<ul class="dropdown-menu" role="menu"
+						<ul class="dropdown-menu multi-level" role="menu"
 							aria-labelledby="dropdownMenu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<li><a href="admin.do"><spring:message
-											code="adminPanel.users.caption" /></a></li>
-								<li><a href="userRequests.do"><spring:message
-											code="userRequests.caption" /></a></li>
-								<li><a href="listContests.do"><spring:message
-											code="listContests.caption" /></a></li>
+								<li class="dropdown-submenu pull-left admin-subMenu"><a
+									class="trigger"> <spring:message code="admin.caption" /></a>
+									<ul class="dropdown-menu">
+										<li><a href="admin.do"><spring:message
+													code="adminPanel.users.caption" /></a></li>
+										<li class="divider"></li>
+										<li><a href="userRequests.do"><spring:message
+													code="userRequests.caption" /></a></li>
+										<li class="divider"></li>
+										<li><a href="listContests.do"><spring:message
+													code="listContests.caption" /></a></li>
+									</ul></li>
 								<li class="divider"></li>
 							</security:authorize>
 							<li><a href="profile.do"><spring:message
@@ -175,39 +181,39 @@
 				</security:authorize>
 				<!-- localization -->
 				<c:if test="${not empty param['id']}">
-					<li><a href="?id=${param['id']}&locale=ua"><img
+					<li><a href="?id=${param['id']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
-					<li><a href="?id=${param['id']}&locale=en"><img
+					<li><a href="?id=${param['id']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if test="${not empty param['Username']}">
-					<li><a href="?Username=${param['Username']}&locale=ua"><img
+					<li><a href="?Username=${param['Username']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a> <a
-						href="?Username=${param['Username']}&locale=en"><img
+						href="?Username=${param['Username']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if test="${not empty param['status']}">
-					<li><a href="?status=${param['status']}&locale=ua"><img
+					<li><a href="?status=${param['status']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
-					<li><a href="?status=${param['status']}&locale=en"><img
+					<li><a href="?status=${param['status']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if
 					test="${(empty param['id']) && (empty param['Username']) && (empty param['status'])}">
-					<li><a href="?locale=ua"><img
+					<li><a href="?locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
 					<li><a
-						href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img
+						href="${requestScope['javax.servlet.forward.request_uri']}?locale=en" style="padding-left: 2px;padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>

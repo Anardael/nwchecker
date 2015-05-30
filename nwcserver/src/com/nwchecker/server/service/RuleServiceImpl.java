@@ -1,7 +1,6 @@
 package com.nwchecker.server.service;
 
 
-import com.nwchecker.server.dao.LanguageDAO;
 import com.nwchecker.server.dao.RuleDAO;
 import com.nwchecker.server.model.Rule;
 import org.apache.log4j.Logger;

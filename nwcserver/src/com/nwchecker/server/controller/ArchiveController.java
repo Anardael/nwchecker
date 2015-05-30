@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.JsonViews;
-import com.nwchecker.server.json.TaskView;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;

@@ -4,7 +4,6 @@ import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.service.RuleService;
 import com.nwchecker.server.service.UserService;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;

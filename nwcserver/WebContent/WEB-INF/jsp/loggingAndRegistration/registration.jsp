@@ -62,4 +62,16 @@
 		</div>
 	</form:form>
 </body>
+<script>
+	USERNAME_REQUIRED = "<spring:message code='reg.empty.username.caption' />";
+	USERNAME_SIZE = "<spring:message code='reg.badUsername.caption' />";
+	DISPLAYNAME_REQUIRED = "<spring:message code='reg.empty.displayName.caption' />";
+	DISPLAYNAME_SIZE = "<spring:message code='reg.badDisplayName.caption' />";
+	EMAIL_REQUIRED = "<spring:message code='reg.empty.email.caption' />";
+	EMAIL_BAD = "<spring:message code='reg.badEmail.caption' />";
+	PASSWORD_REQUIRED = "<spring:message code='reg.empty.password.caption' />";
+	PASSWORD_SIZE = "<spring:message code='reg.badPassword.caption' />";
+	CONFIRM_PASSWORD_REQUIRED = "<spring:message code='reg.empty.confirmPassword.caption' />";
+	PASSWORD_EQUALS = "<spring:message code='reg.badConfirmPassword.caption' />";
+</script>
 </html>

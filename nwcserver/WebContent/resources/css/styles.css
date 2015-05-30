@@ -1,4 +1,4 @@
-/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+ /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -281,7 +281,7 @@ html {
 
 body {
     font-family: Tahoma, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.42857143;
     color: #262626;
     background-color: #f8f8f8
@@ -6425,4 +6425,4 @@ body footer {
 body footer .container {
     height: 60px;
     padding: 10px 0
-}
+} 

@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
-import com.nwchecker.server.json.TaskView;
 
 /**
  * <h1>Task Pass Entity</h1> Entity that represents and encapsulate one User's

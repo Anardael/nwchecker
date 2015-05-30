@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.json.wrapper.FilteredResultProvider;
 import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
@@ -13,7 +12,6 @@ import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.RatingService;
 import com.nwchecker.server.service.ScoreCalculationService;
-import com.nwchecker.server.utils.ContestStartTimeComparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,12 +48,11 @@ public class RatingController {
 	 * @return <b>CintestRating.jsp</b> Returns page with completed contests
 	 *         list
 	 */
-	@Link(label = "rating.caption", family = "contestRating", parent = "")
+	@Link(label = "rating.caption", family = "rating", parent = "")
 	@RequestMapping(value = "/rating", method = RequestMethod.GET)
 	public String getRating(Model model) {
 		model.addAttribute("ratingContests",
 				contestService.getContestForRating());
-
 		return "nwcserver.contests.rating";
 	}
 
@@ -72,7 +67,7 @@ public class RatingController {
 	 *            ID of contest
 	 * @return <b>contestResults.jsp</b> Returns page with contest statistic
 	 */
-	@Link(label = "results.caption", family = "contestRating", parent = "rating.caption")
+	@Link(label = "results.caption", family = "rating", parent = "rating.caption")
 	@RequestMapping(value = "/results", method = RequestMethod.GET)
 	public String getResults(Model model,
 			@RequestParam(value = "id") int contestId) {

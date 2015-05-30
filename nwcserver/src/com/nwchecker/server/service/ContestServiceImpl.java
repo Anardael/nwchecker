@@ -1,16 +1,11 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
-import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.utils.ContestStartTimeComparator;
-import org.hibernate.Hibernate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -104,4 +99,17 @@ public class ContestServiceImpl implements ContestService {
         long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
         return gtmMillis;
     }
+	@Override
+	public Contest getNearestContest() {
+
+		Contest contest = contestDAO.getNearestContest();
+		return contest;
+	}
+
+	@Override
+	public Contest getLastArchivedContest() {
+
+	return contestDAO.getLastArchivedContest();
+	}
 }
+

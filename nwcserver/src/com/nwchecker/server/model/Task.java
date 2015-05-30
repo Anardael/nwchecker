@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
-import com.nwchecker.server.json.TaskView;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

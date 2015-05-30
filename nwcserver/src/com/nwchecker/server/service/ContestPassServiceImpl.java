@@ -1,7 +1,6 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.*;

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Iterator;
 import java.util.Map;
 
 @Service(value = "CheckerService")
@@ -30,12 +29,6 @@ public class CheckerServiceImpl implements CheckerService {
 					connectionSocket.getInputStream());
 			CheckerResponse response = (CheckerResponse) dataInput.readObject();
 			connectionSocket.close();
-			Iterator<Object> iterator = response.getResponse().values()
-					.iterator();
-
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
 			return response.getResponse();
 		} catch (IOException e) {
 			e.printStackTrace();

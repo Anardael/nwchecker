@@ -111,7 +111,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Criteria criteria = session.createCriteria(Task.class);
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
-		List<Task> result = criteria.list();
+		List<Task> result = (List<Task>) criteria.list();
 		return result;
 	}
 

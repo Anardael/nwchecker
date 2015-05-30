@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
-import com.nwchecker.server.json.TaskView;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,14 +13,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <h1>Compiler Entity</h1>

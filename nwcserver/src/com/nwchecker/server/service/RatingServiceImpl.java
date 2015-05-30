@@ -1,16 +1,12 @@
 package com.nwchecker.server.service;
 
 
-import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service("RatingService")

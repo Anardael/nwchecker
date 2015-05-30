@@ -4,10 +4,9 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.ContestPass.ContestStatus;
 import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.utils.PaginationWrapper;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,20 +132,24 @@ public class TaskServiceImplTest {
 						.size());
 	}
 
-    @Ignore
-	@Test
+    @Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTasksByContestStatus() {
 		assertEquals(0,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
-						1, 0, null).size());
+						0, 0, null, null, null).size());
 	}
 
-    @Ignore
+    
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetPageCount() {
-		assertEquals(0,	taskService.getPageCount(Contest.Status.ARCHIVE, 1, null)
-						.intValue());
+	public void testGetRecordCount() {
+		assertEquals(0,	taskService.getRecordCount(Contest.Status.ARCHIVE, null).intValue());
 	}
-
+	
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testGetTaskWrapperForPagination(){
+		PaginationWrapper<Task> paginatedTasks = taskService.getTaskWrapperForPagination(Contest.Status.PREPARING, 0, 10, null, null, "1");
+		assertEquals(paginatedTasks.getDataList().size(), paginatedTasks.getRecordCount().intValue());
+	}
 }
