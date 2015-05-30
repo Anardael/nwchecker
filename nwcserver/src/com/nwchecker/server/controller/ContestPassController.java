@@ -94,6 +94,7 @@ public class ContestPassController {
 	 * @return Page when user can continue passing contest if <b>success</b>.
 	 *         Page <b>accessDenied403.jsp</b> if <b>fails</b>.
 	 */
+	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/passTask", method = RequestMethod.GET)
 	public String getTaskForPass(Principal principal,
