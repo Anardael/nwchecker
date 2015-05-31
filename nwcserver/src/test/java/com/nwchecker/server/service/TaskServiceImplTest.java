@@ -133,20 +133,20 @@ public class TaskServiceImplTest {
 						.size());
 	}
 
-    @Ignore
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetPagedTasksByContestStatus() {
-		assertEquals(0,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
-						1, 0, null).size());
-	}
-
-    @Ignore
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetPageCount() {
-		assertEquals(0,	taskService.getPageCount(Contest.Status.ARCHIVE, 1, null)
-						.intValue());
-	}
+//    @Ignore
+//	@Test
+//	@DatabaseSetup("classpath:/forTests/dataset.xml")
+//	public void testGetPagedTasksByContestStatus() {
+//		assertEquals(0,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
+//						1, 0, null).size());
+//	}
+//
+//    @Ignore
+//	@Test
+//	@DatabaseSetup("classpath:/forTests/dataset.xml")
+//	public void testGetPageCount() {
+//		assertEquals(0,	taskService.getPageCount(Contest.Status.ARCHIVE, 1, null)
+//						.intValue());
+//	}
 
 }

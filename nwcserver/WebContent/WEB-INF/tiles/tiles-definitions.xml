@@ -256,6 +256,14 @@
 	    
 	   	<definition name="nwcserver.contests.rating" extends="nwcserver.abstract.full">
 	        <put-attribute name="body" value="/WEB-INF/jsp/Contests/ContestRating.jsp" />
+			<put-list-attribute name ="stylesheets" inherit="true" cascade="true">
+				<add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+				<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css"/>
+			</put-list-attribute>
+			<put-list-attribute name ="scripts" inherit="true" cascade="true">
+				<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+				<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+			</put-list-attribute>
 	    </definition>
 
 	  	<definition name="nwcserver.contests.results" extends="nwcserver.abstract.full">

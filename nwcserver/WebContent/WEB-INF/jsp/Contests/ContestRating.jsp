@@ -8,23 +8,46 @@
 <body>
 	<div class="form-group col-sm-12" style="margin: auto">
 		<ul class="col-sm-offset-2 col-sm-8 ">
-			<c:forEach var="rating" items="${ratingContests}" varStatus="row">
-				<c:url var="results" value="/results.do?id=${rating.id}" />
-				<li class="list-group-item"><span class="row"> <span
-						class="pull-left"> <b><a href="${results}">${rating.title}</a></b>
-                                <br/> <br /> <spring:message
-								code="contest.results.started.caption" />
-							${fn:substring(rating.starts,0,16)} (<spring:message
-								code="contest.results.continued.caption" />
-							${fn:substring(rating.duration,11,16)})
-                        </span>
-					                            <span class="pull-right">
-                                <label class="label label-danger contestsStatus"> <spring:message
-										code="contest.archive.label" />
-								</label>
-                            </span>
-				</span></li>
-			</c:forEach>
+			<%--<table id="ratingTable" class="table table-bordered" data-search="true"--%>
+				   <%--data-clear-search="true">--%>
+				<%--<tr>--%>
+					<%--<th style="text-align: center"><spring:message--%>
+							<%--code="contest.table.title"/></th>--%>
+					<%--<th style="text-align: center"><spring:message--%>
+							<%--code="contest.table.description"/></th>--%>
+					<%--<th style="text-align: center"><spring:message--%>
+							<%--code="contest.results.started.caption"/></th>--%>
+					<%--<th style="text-align: center"><spring:message--%>
+							<%--code="listContests.contests.tableHeader.status"/></th>--%>
+				<%--</tr>--%>
+				<%--<c:forEach items="${ratingContests}" var="contest">--%>
+					<%--<c:url var="results" value="/results.do?id=${contest.id}"/>--%>
+					<%--<tr>--%>
+						<%--<td align="center"><a href="${results}">${contest.title}</a></td>--%>
+						<%--<td align="center">${contest.description}</td>--%>
+						<%--<td align="center">${contest.starts}</td>--%>
+						<%--<td align="center">${contest.status}</td>--%>
+					<%--</tr>--%>
+				<%--</c:forEach>--%>
+			<%--</table>--%>
+
+			<c:url var="dataURL" value="/rating.do" />
+			<table id="ratingContest" class="table" data-toggle="table"
+				   data-striped="true" data-url="${dataURL}"
+				   data-side-pagination="server" data-pagination="true"
+				   data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
+				   data-clear-search="true" data-sort-name="username"
+				   data-sort-order="asc">
+				<thead>
+				<tr>
+					<th data-field="title" data-align="center" data-sortable="true">Title</th>
+					<th data-field="description" data-align="center" data-sortable="true">Description</th>
+					<th data-field="starts" data-align="center" data-sortable="true">Starts</th>
+					<th data-field="status" data-align="center" data-sortable="true">Status</th>
+				</tr>
+				</thead>
+			</table>
+
 		</ul>
 	</div>
 </body>
