@@ -1,7 +1,9 @@
 NWC Checker was console application for checking solution on programming competitions. The new extension to the project is creation java server applicaiton that will be able to perform puniversity competitions in algorithms.
 
 Deployment instructions
+
 Requirements:
+
 1. Java v1.7 or higher
 2. Apache Tomcat that supports Java 1.7(Tomcat 7 or higher)
 3. MySQL database
@@ -9,6 +11,7 @@ Requirements:
 4. Maven (3.0 or higher)
 
 Instructions:
+
 1. Clone repository.
 2. Using Maven, create a .war file:
   in folder ~/nwcserver/ run following command: mvn make-install
