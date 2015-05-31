@@ -18,11 +18,22 @@ Instructions:
 3. Create MySQL schema for server using following command:
   CREATE DATABASE nwserver CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-  grant access privileges to user root with password root on this database:
+4. grant access privileges to user root with password root on this database:
   
   CREATE USER 'root' IDENTIFIED BY 'root';
   GRANT ALL ON root.* TO 'nwserver'@'%' IDENTIFIED BY 'root';
   GRANT ALL ON root.* TO 'nwserver'@'localhost' IDENTIFIED BY 'root';
   FLUSH PRIVILEGES;
+
+5. Set max_allowed_packet to 85983232 using:
+
+  mysql --max_allowed_packet=85983232
   
-4. Deploy the project on your Tomcat server.
+6. Set lower_case_table_names variable to 1
+  * Go to your MySQL configuration file
+  * Under [mysqld] add a line:
+  
+  lower_case_table_names=1
+
+  
+7. Deploy the project on your Tomcat server.
