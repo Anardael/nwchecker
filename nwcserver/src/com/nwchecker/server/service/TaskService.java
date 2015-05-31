@@ -102,38 +102,61 @@ public interface TaskService {
 	List<Task> getTasksByContestStatus(Contest.Status status);
 
 	/**
-	 * Get paginated list of tasks that belong to contests with certain status
+	 * Get list of tasks that belong to contests with certain status for
+	 * pagination
 	 * <p>
 	 * 
 	 * @param status
-	 *            status of the contests
+	 *            Status of the contest to which the tasks belong.
+	 * @param startIndex
+	 *            Index of the record first requested record.
 	 * @param pageSize
-	 *            Count of maximum expected records
-	 * @param pageNumber
-	 *            number of the requested page
+	 *            Number of records requested.
+	 * @param sortingColumn
+	 *            Name of attribute for sorting
+	 * @param sortingOrder
+	 *            sorting order(asc or desc)
+	 * @param filter
+	 *            String that represents search query of the results.
 	 * @return List of tasks that belong to contests with certain status,
-	 *         limited by pageSize and PageNumber
-	 * @author Boris Andreev
+	 *         limited by pageSize and pageNumber
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int startIndex, int pageSize, String sortingColumn,
 			String sortingOrder, String filter);
 
+	/**
+	 * Tasks wrapped for pagination that belong to contests with certain status
+	 * <p>
+	 * 
+	 * @param status
+	 *            Status of the contest to which the tasks belong.
+	 * @param startIndex
+	 *            Index of the record first requested record.
+	 * @param pageSize
+	 *            Number of records requested.
+	 * @param sortingColumn
+	 *            Name of attribute for sorting
+	 * @param sortingOrder
+	 *            Sorting order(asc or desc)
+	 * @param filter
+	 *            String that represents search query of the results.
+	 * @return A wrapper that contains list of tasks and total number of records
+	 *         that fit the status and filter criteria.
+	 */
 	PaginationWrapper<Task> getTaskWrapperForPagination(Contest.Status status,
 			int startIndex, int pageSize, String sortingColumn,
 			String sortingOrder, String filter);
 
 	/**
-	 * Get number of pages that can fit the list of tasks that belong to
-	 * contests with certain status
+	 * Total number of Tasks that fit the criteria
 	 * <p>
 	 * 
 	 * @param status
-	 *            status of contests
-	 * @param pageSize
-	 *            count of maximum expected records
-	 * @return number of pages
-	 * @author Boris Andreev
+	 *            Status of the contest to which the tasks belong.
+	 * @param filter
+	 *            String that represents search query of the results.
+	 * @return Total number of Tasks that fit the criteria.
 	 */
 	Long getRecordCount(Contest.Status status, String filter);
 }

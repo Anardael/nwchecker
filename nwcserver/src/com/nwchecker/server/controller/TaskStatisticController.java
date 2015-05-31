@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.TreeMap;
 
@@ -24,7 +23,6 @@ import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskPass;
 
 @Controller
 public class TaskStatisticController {
@@ -66,13 +64,11 @@ public class TaskStatisticController {
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
 		LOG.debug("Attempting to get task result data for page " + startIndex
-				/ pageSize + " for task " + taskId);
-		PaginationWrapper<TaskPass> paginatedTaskPass = taskPassService
-				.getPagedTaskPassJsonForTask(taskId, startIndex, pageSize,
-						sortingColumn, sortingOrder, filter);
+				/ pageSize + " for task " + taskId);		
 		JTableResponseList jTableResponse = new JTableResponseList(
-				paginatedTaskPass.getDataList(),
-				paginatedTaskPass.getRecordCount());
+				taskPassService.getPagedTaskPassesForTask(taskId, startIndex,
+						pageSize, sortingColumn, sortingOrder, filter),
+				taskPassService.getTaskPassEntryCount(taskId, filter));
 		LOG.debug("Successfully retuned task result data for page "
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;

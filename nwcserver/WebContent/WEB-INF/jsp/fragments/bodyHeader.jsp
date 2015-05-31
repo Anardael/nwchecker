@@ -12,60 +12,6 @@
 </script>
 <link href="${resources}css/fragments/bodyHeader.css" rel="stylesheet" />
 <header>
-
-	<!-- service Logo -->
-	<%-- 	<script type="text/javascript" src="${resources}js/serverTime.js"></script> --%>
-
-<%-- 	<div class="blockContainer">
-			<div class="logo">
-				<a href="index.do"><img src="${resources}images/logo.png"
-					alt="Whitesquare logo"></a>
-			</div>
-			<!-- choose language -->
-			<div class="languageChoose">
-				<c:if test="${not empty param['id']}">
-					<a href="?id=${param['id']}&locale=ua"><img
-						src="${resources}images/ukraineFlag.png" width="36" height="36"
-						alt="ua"></a>
-					<a href="?id=${param['id']}&locale=en"><img
-						src="${resources}images/ukFlag.png" width="36" height="36"
-						alt="en"></a>
-				</c:if>
-
-				<c:if test="${not empty param['Username']}">
-					<a href="?Username=${param['Username']}&locale=ua"><img
-						src="${resources}images/ukraineFlag.png" width="36" height="36"
-						alt="ua"></a>
-					<a href="?Username=${param['Username']}&locale=en"><img
-						src="${resources}images/ukFlag.png" width="36" height="36"
-						alt="en"></a>
-				</c:if>
-
-				<c:if test="${not empty param['status']}">
-					<a href="?status=${param['status']}&locale=ua"><img
-						src="${resources}images/ukraineFlag.png" width="36" height="36"
-						alt="ua"></a>
-					<a href="?status=${param['status']}&locale=en"><img
-						src="${resources}images/ukFlag.png" width="36" height="36"
-						alt="en"></a>
-				</c:if>
-
-				<c:if
-					test="${(empty param['id']) && (empty param['Username']) && (empty param['status'])}">
-					<a href="?locale=ua"><img
-						src="${resources}images/ukraineFlag.png" width="36" height="36"
-						alt="ua"></a>
-					<a
-						href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"><img
-						src="${resources}images/ukFlag.png" width="36" height="36"
-						alt="en"></a>
-				</c:if>
-			</div>
-						<div class="serverTime">
-				<label><spring:message code="home.serverTime" /></label> <label
-					id="currentTime"></label>
-			</div>
-		</div> --%>
 	<!-- navigating toolbar -->
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
@@ -79,7 +25,7 @@
 						<li><a href="index.do"><spring:message
 									code="home.caption" /></a></li>
 					</c:otherwise>
-				</c:choose>				
+				</c:choose>
 				<!-- news -->
 				<c:choose>
 					<c:when test="${pageName=='news'}">
@@ -111,7 +57,7 @@
 						<li><a href="rating.do"><spring:message
 									code="rating.caption" /></a></li>
 					</c:otherwise>
-				</c:choose>				
+				</c:choose>
 				<!-- rules -->
 				<c:choose>
 					<c:when test="${pageName=='rules'}">
@@ -181,48 +127,56 @@
 				</security:authorize>
 				<!-- localization -->
 				<c:if test="${not empty param['id']}">
-					<li><a href="?id=${param['id']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?id=${param['id']}&locale=ua"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
-					<li><a href="?id=${param['id']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?id=${param['id']}&locale=en"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if test="${not empty param['Username']}">
-					<li><a href="?Username=${param['Username']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?Username=${param['Username']}&locale=ua"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a> <a
-						href="?Username=${param['Username']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
+						href="?Username=${param['Username']}&locale=en"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if test="${not empty param['status']}">
-					<li><a href="?status=${param['status']}&locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?status=${param['status']}&locale=ua"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
-					<li><a href="?status=${param['status']}&locale=en" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?status=${param['status']}&locale=en"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 
 				<c:if
 					test="${(empty param['id']) && (empty param['Username']) && (empty param['status'])}">
-					<li><a href="?locale=ua" style="padding-left: 2px;padding-right: 2px;"><img
+					<li><a href="?locale=ua"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
 							alt="ua"></a></li>
 					<li><a
-						href="${requestScope['javax.servlet.forward.request_uri']}?locale=en" style="padding-left: 2px;padding-right: 2px;"><img
+						href="${requestScope['javax.servlet.forward.request_uri']}?locale=en"
+						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"
 							alt="en"></a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
-	<div class="container">
-		<ol class="breadcrumb" style="font-size: large;">
-			<c:if test="${not empty sessionScope.currentBreadCrumb}">
+	<c:if test="${not empty sessionScope.currentBreadCrumb}">
+		<div class="container">
+			<ol class="breadcrumb" style="font-size: large;">
 				<c:forEach var="entry" items="${sessionScope.currentBreadCrumb}">
 					<c:choose>
 						<c:when test="${entry.currentPage == true}">
@@ -234,7 +188,8 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-			</c:if>
-		</ol>
-	</div>
+
+			</ol>
+		</div>
+	</c:if>
 </header>

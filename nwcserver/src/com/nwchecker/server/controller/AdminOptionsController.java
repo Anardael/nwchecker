@@ -7,7 +7,6 @@ import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.utils.PaginationWrapper;
 import com.nwchecker.server.validators.RolesDescriptionValidator;
 import com.nwchecker.server.validators.UserEditValidator;
 
@@ -63,7 +62,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>users.jsp</b> Returns page with list of users
 	 */
-	@Link(label="admin.users.caption", family="adminOptions", parent = "")
+	@Link(label = "admin.users.caption", family = "adminOptions", parent = "")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Principal principal, Model model) {
@@ -89,15 +88,18 @@ public class AdminOptionsController {
 	@JsonView(JsonViews.ViewUsersAdmin.class)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsers.do", method = RequestMethod.GET)
-	public @ResponseBody JTableResponseList getUsers(Principal principal,
+	public @ResponseBody JTableResponseList getUsers(
+			Principal principal,
 			@RequestParam("offset") int startIndex,
 			@RequestParam("limit") int pageSize,
 			@RequestParam(required = false, value = "sort") String sortingColumn,
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
 		LOG.info("\"" + principal.getName() + "\" tries to access users list.");
-		PaginationWrapper<User> wrappedUser = userService.getUsersForPagination(startIndex, pageSize, sortingColumn, sortingOrder, filter);
-		JTableResponseList jTableResponse = new JTableResponseList(wrappedUser.getDataList(), wrappedUser.getRecordCount());
+		JTableResponseList jTableResponse = new JTableResponseList(
+				userService.getPagedUsers(startIndex, pageSize, sortingColumn,
+						sortingOrder, filter),
+				userService.getRecordCount(filter));
 		return jTableResponse;
 	}
 
@@ -116,7 +118,7 @@ public class AdminOptionsController {
 	 *            method
 	 * @return <b>userEdit.jsp</b> Returns page that allows to change user data
 	 */
-	@Link(label="admin.userEdit.caption", family="adminOptions", parent = "admin.users.caption")
+	@Link(label = "admin.userEdit.caption", family = "adminOptions", parent = "admin.users.caption")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
 	public String user(@RequestParam(value = "username") String username,

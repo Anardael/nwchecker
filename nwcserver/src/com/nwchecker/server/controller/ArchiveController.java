@@ -7,7 +7,6 @@ import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +23,15 @@ public class ArchiveController {
 	TaskService taskService;
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 
-	
 	@Link(label = "archive.caption", family = "archive", parent = "")
 	@RequestMapping("/etiam")
 	public String archivePage(Model model) {
-		LOG.debug("Someone accessed archive page");
+		LOG.info("Someone accessed archive page");
 		model.addAttribute("pageName", "archive");
-		LOG.debug("Successfully data for archive page");
+		LOG.info("Successfully data for archive page");
 		return "nwcserver.static.archive";
 	}
+
 	@JsonView(JsonViews.ForArchive.class)
 	@RequestMapping("/archiveTable")
 	public @ResponseBody JTableResponseList archivedTableResponse(
@@ -41,17 +40,20 @@ public class ArchiveController {
 			@RequestParam(required = false, value = "sort") String sortingColumn,
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
-		PaginationWrapper<Task> paginatedTaskJson = taskService
-				.getTaskWrapperForPagination(Contest.Status.ARCHIVE,
-						startIndex, pageSize, sortingColumn, sortingOrder,
-						filter);
-		JTableResponseList jTableResponse = new JTableResponseList(paginatedTaskJson.getDataList(), paginatedTaskJson.getRecordCount());
+		LOG.info("Successfully data for archive page");
+		JTableResponseList jTableResponse = new JTableResponseList(
+				taskService.getPagedTasksByContestStatus(
+						Contest.Status.ARCHIVE, startIndex, pageSize,
+						sortingColumn, sortingOrder, filter),
+				taskService.getRecordCount(Contest.Status.ARCHIVE, filter));
+		LOG.info("Successfully data for archive page");
 		return jTableResponse;
 	}
-	
+
 	@JsonView(JsonViews.SingleTask.class)
 	@RequestMapping("/getTaskDetails")
-	public @ResponseBody Task getTaskDetails(@RequestParam("taskId") int taskId){
-		return taskService.getTaskById(taskId);		
+	public @ResponseBody Task getTaskDetails(@RequestParam("taskId") int taskId) {
+		LOG.info("Attempted to get task details");
+		return taskService.getTaskById(taskId);
 	}
 }

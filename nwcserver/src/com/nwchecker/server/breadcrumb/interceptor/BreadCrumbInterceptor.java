@@ -18,8 +18,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.breadcrumb.breadcrumb.BreadCrumbLink;
 
-/*
- This is the main interceptor class
+/**
+ * This is the interceptor class for breadcrumbs
  */
 public class BreadCrumbInterceptor extends HandlerInterceptorAdapter {
 
@@ -60,7 +60,6 @@ public class BreadCrumbInterceptor extends HandlerInterceptorAdapter {
 
 		LinkedHashMap<String, BreadCrumbLink> familyMap = breadCrumb
 				.get(family);
-
 		if (familyMap == null) {
 			familyMap = new LinkedHashMap<String, BreadCrumbLink>();
 			breadCrumb.put(family, familyMap);
