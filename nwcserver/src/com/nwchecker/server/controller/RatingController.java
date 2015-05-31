@@ -52,13 +52,22 @@ public class RatingController {
 	 * @return <b>CintestRating.jsp</b> Returns page with completed contests
 	 *         list
 	 */
-	@Link(label = "rating.caption", family = "contestRating", parent = "")
-	@RequestMapping(value = "/rating", method = RequestMethod.GET)
-	public String getRating(Model model) {
-		model.addAttribute("ratingContests",
-				contestService.getContestForRating());
+//	@Link(label = "rating.caption", family = "contestRating", parent = "")
+//	@RequestMapping(value = "/rating", method = RequestMethod.GET)
+//	public String getRating(Model model) {
+//		model.addAttribute("ratingContests",
+//				contestService.getContestForRating());
+//
+//		return "nwcserver.contests.rating";
+//	}
 
-		return "nwcserver.contests.rating";
+
+	@Link(label = "rating.caption", family = "contestRating", parent = "")
+	@RequestMapping(value = "/rating.do", method = RequestMethod.GET)
+	 public @ResponseBody String getRating(){
+
+		List<Contest> contest = contestService.getContestForRating();
+			return null;
 	}
 
 	/**
