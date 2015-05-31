@@ -32,7 +32,6 @@ Instructions:
 6. Set lower_case_table_names variable to 1
   * Go to your MySQL configuration file
   * Under [mysqld] add a line:
-  
   lower_case_table_names=1
 
   
