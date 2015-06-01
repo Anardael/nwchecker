@@ -8,11 +8,12 @@ function edited(contestId) {
             if (data == "OK") {
                 location.href = 'editContest.do?id=' + contestId;
             } else {
-                BootstrapDialog.show({
+                location.href = 'editContest.do?id=' + contestId;
+                /*BootstrapDialog.show({
                     title: errorLabel,
                     type: BootstrapDialog.TYPE_DANGER,
                     message: nowEditingBody + "\n" + nowEditingUser + ": " + data
-                });
+                });*/
             }
         }
     );

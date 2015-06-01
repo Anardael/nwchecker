@@ -86,22 +86,11 @@ public class ContestController {
      */
     @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContests")
-    public String getContests(@RequestParam (defaultValue="1") int page,@RequestParam (defaultValue="3") int pageSize, Model model, Principal principal) {
-        Long count = contestService.getPageCount(pageSize);
-        model.addAttribute("currentPage" , page);
-        model.addAttribute("pageCount", count);
-        // get all available сontests from DB:
-        List<Contest> allContests = contestService.getPagedContests(pageSize, page);
-        // get unhidden contests:
-        List<Contest> unhidden = new LinkedList<Contest>();
-        for (Contest c : allContests) {
-            if (!c.isHidden()) {
-                unhidden.add(c);
-            }
-        }
-        if (principal == null) {
-            //return all "unhidden" contests:
-            model.addAttribute("contests", unhidden);
+    public String getContests(Model model, Principal principal) {
+
+        if(principal == null){
+            model.addAttribute("pageName", "contest");
+
             return "nwcserver.contests.list";
         }
 
@@ -120,19 +109,16 @@ public class ContestController {
                             editableContestIndexes.add("index" + c.getId()
                                     + "index");
                         }
-                        // add Contest to unhidden list:
-                        if (c.isHidden()) {
-                            unhidden.add(c);
-                        }
                     }
                 }
             }
             model.addAttribute("editContestIndexes", editableContestIndexes);
             // set usernames for editing contests:
-            model.addAttribute("nowContestEdits",
-                    contestEditWatcherService.getNowEditsMap());
+            model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
         }
-        model.addAttribute("contests", unhidden);
+
+        model.addAttribute("pageName", "contest");
+
         return "nwcserver.contests.list";
     }
 
@@ -257,9 +243,9 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
-        if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
+        /*if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
             return "nwcserver.403";
-        }
+        }*/
         //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
         //add contest to view and forward it:
@@ -521,6 +507,11 @@ public class ContestController {
         }
         model.addAttribute("contests", unhidden);
         return "nwcserver.contests.list";
+    }
+
+    @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
+    public @ResponseBody List<Contest> getContestListJson() {
+        return contestService.getContests();
     }
 
 }

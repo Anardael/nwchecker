@@ -180,12 +180,15 @@
 			<add-attribute value="css/taskModalView.css" />
 			<add-attribute value="css/bootstrap-dialog.css" />
 			<add-attribute value="css/contests/contests-style.css" />
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
 		</put-list-attribute>
 		<put-list-attribute name="scripts" inherit="true"
 			cascade="true">
 			<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
 			<add-attribute value="js/contests/contestSignUp.js" />
 			<add-attribute value="js/contests/contestListView.js" />
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+            <add-attribute value="js/contests/showContests.js" />
 		</put-list-attribute>
 	</definition>
 

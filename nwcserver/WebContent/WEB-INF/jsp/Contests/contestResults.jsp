@@ -17,12 +17,13 @@
 			<h2>
 				<c:choose>
 					<c:when test="${dynamic}">
-						<a href="<c:url value='/passContest.do?id=${contestId}'/>"
-							style="font-size: 25px; color: #101010"> ${contestTitle} </a>
+						<a style="font-size: 25px;" href="<c:url value='/passContest.do?id=${contestId}'/>">
+						    ${contestTitle}
+                        </a>
 					</c:when>
 					<c:otherwise>
                             ${contestTitle}
-                        </c:otherwise>
+                    </c:otherwise>
 				</c:choose>
 				<small class="pull-right"> <spring:message
 						code="contest.results.started.caption" /> <b>${contestStart}</b> (<spring:message

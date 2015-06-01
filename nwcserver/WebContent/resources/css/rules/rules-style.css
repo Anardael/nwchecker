@@ -1,3 +1,19 @@
+.main-block{
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+dl{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+dt{
+    /*margin-left: 10px;*/
+    font-size: 15px;
+}
+dd{
+    margin-left: 40px;
+}
 .list-group-area {
     width: 100%;
     height: 300px;
@@ -5,10 +21,6 @@
     border: 0px solid #F5F5F5;
     outline: none;
     resize:none;
-}
-
-td{
-    min-width: 80px;
 }
 
 
