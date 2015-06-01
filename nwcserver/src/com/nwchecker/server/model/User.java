@@ -77,6 +77,9 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<ContestPass> contestPassList;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<TaskPass> taskPassList;
 
     public User() {
     }
@@ -221,7 +224,21 @@ public class User {
         this.contestPassList = contestPassList;
     }
 
-    @Override
+    /**
+	 * @return the taskPassList
+	 */
+	public List<TaskPass> getTaskPassList() {
+		return taskPassList;
+	}
+
+	/**
+	 * @param taskPassList the taskPassList to set
+	 */
+	public void setTaskPassList(List<TaskPass> taskPassList) {
+		this.taskPassList = taskPassList;
+	}
+
+	@Override
     public boolean equals(Object u) {
         return (u != null && u instanceof User && ((User) u).getUserId() == this.userId);
     }

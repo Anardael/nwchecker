@@ -1,0 +1,14 @@
+.list-group-area {
+    width: 100%;
+    height: 300px;
+    display: block;
+    border: 0px solid #F5F5F5;
+    outline: none;
+    resize:none;
+}
+
+td{
+    min-width: 80px;
+}
+
+

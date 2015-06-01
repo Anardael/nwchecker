@@ -1,17 +1,12 @@
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.json.ContestPassJson;
-import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.utils.ContestStartTimeComparator;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,16 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import com.nwchecker.server.dao.CompilerDAO;
+import com.nwchecker.server.model.*;
+import com.nwchecker.server.service.ContestPassService;
+import com.nwchecker.server.service.TaskPassService;
+import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.service.UserService;
 
 /**
  * <h1>Contest Pass Controller</h1>
@@ -51,13 +42,13 @@ public class ContestPassController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ContestService contestService;
-    @Autowired
     private TaskService taskService;
     @Autowired
     private ContestPassService contestPassService;
     @Autowired
     private CompilerDAO compilerService;
+    @Autowired
+    private TaskPassService taskPassService;
 
     /**
      * This mapped method used to return page that allows user to
@@ -76,19 +67,32 @@ public class ContestPassController {
     @RequestMapping(value = "/passTask", method = RequestMethod.GET)
     public String getTaskForPass(Principal principal, @RequestParam("id") int taskId,
                                  Model model) {
+    	//Sending task statistic
+    	Long successful = taskPassService.getSuccessfulTaskPassSampleSize(taskId);
+    	Long all = taskPassService.getTaskPassSampleSize(taskId);
+    	if(!(all == 0)){
+    		double rate = successful.doubleValue() / all.doubleValue();
+    		model.addAttribute("taskSuccessRate", rate);
+    	}
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("currentTask", currentTask);
+        if (currentTask.getContest().getTypeContest() != null
+                && currentTask.getContest().getTypeContest().isDynamic() != null
+                && currentTask.getContest().getTypeContest().isDynamic()) {
+            model.addAttribute("currentContestId", currentTask.getContest().getId());
+        } else  {
+            model.addAttribute("currentContestId", null);
+        }
         User user = userService.getUserByUsername(principal.getName());
         //check if contest status provide passing:
         if (!(currentTask.getContest().getStatus() == Contest.Status.GOING ||
                 currentTask.getContest().getStatus() == Contest.Status.ARCHIVE)) {
-            return "access/accessDenied403";
+        	model.addAttribute("pageName", "result");
+            return "nwcserver.403";
         }
         //if contest is going:
-        boolean goingContest = false;
         ContestPass currentContestPass = null;
         if (currentTask.getContest().getStatus() == Contest.Status.GOING) {
-            goingContest = true;
             //check if user has contestPass for this contest:
             boolean contains = false;
             for (ContestPass c : user.getContestPassList()) {
@@ -143,8 +147,8 @@ public class ContestPassController {
         }
 
         model.addAttribute("compilers", compilerService.getAllCompilers());
-
-        return "contests/contestPass";
+        model.addAttribute("pageName", "task");
+        return "nwcserver.tasks.pass";
     }
 
     /**
@@ -184,72 +188,13 @@ public class ContestPassController {
             }
         }
         if (task.getContest().getStatus() == Contest.Status.GOING && contestPass != null) {
-            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(true, contestPass, task, compilerId, file.getBytes(), user);
         } else if (task.getContest().getStatus() == Contest.Status.ARCHIVE) {
             //archive:
-            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes());
+            result = contestPassService.checkTask(false, contestPass, task, compilerId, file.getBytes(), user);
         } else {
             result.put("accessDenied", true);
         }
         return result;
-    }
-
-    /**
-     * This mapped method used to return page when user
-     * can view completed contests.
-     * <p>
-     *
-     * @param model Spring Framework model for this page
-     * @return <b>rating.jsp</b> Returns page with completed contests list
-     */
-    @RequestMapping(value = "/rating", method = RequestMethod.GET)
-    public String getRating(Model model) {
-        List<Contest> archivedContests = contestService.getContestByStatus(Contest.Status.ARCHIVE);
-        Collections.sort(archivedContests, new ContestStartTimeComparator());
-        Collections.reverse(archivedContests);
-        model.addAttribute("archivedContests", archivedContests);
-        return "contests/rating";
-    }
-
-    /**
-     * This mapped method used to show page that contains
-     * contest results of contest participants.
-     * <p>
-     *
-     * @param model Spring Framework model for this page
-     * @param id ID of contest
-     * @return <b>contestResults.jsp</b> Returns page with contest statistic
-     */
-    @RequestMapping(value = "/results", method = RequestMethod.GET)
-    public String getResults(Model model, @RequestParam(value = "id") int id) {
-        model.addAttribute("contestId", id);
-        Contest contest = contestService.getContestByID(id);
-        model.addAttribute("contestTitle", contest.getTitle());
-        SimpleDateFormat formatStart = new SimpleDateFormat();
-        model.addAttribute("contestStart", formatStart.format(contest.getStarts()));
-        Calendar contestDuration = Calendar.getInstance();
-        contestDuration.setTime(contest.getDuration());
-        model.addAttribute("contestDurationHours", contestDuration.get(Calendar.HOUR));
-        model.addAttribute("contestDurationMinutes", contestDuration.get(Calendar.MINUTE));
-        return "contests/contestResults";
-    }
-
-    /**
-     * This mapped method used to return results of contest
-     * participants in JSON format.
-     * <p>
-     *
-     * @param id ID of contest
-     * @return <b>JSON</b> Returns <b>results of contest participants</b>
-     */
-    @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
-    public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int id) {
-        List<ContestPass> contestPasses = contestPassService.getContestPasses(id);
-        Collections.sort(contestPasses);
-        List<ContestPassJson> jsonData = new ArrayList<>();
-        for (ContestPass contestPass : contestPasses) {
-            jsonData.add(ContestPassJson.createContestPassJson(contestPass));
-        }
-        return jsonData;
     }
 }

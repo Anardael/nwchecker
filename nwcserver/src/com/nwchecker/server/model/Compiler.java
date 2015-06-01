@@ -2,14 +2,20 @@ package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,7 +41,10 @@ public class Compiler {
     @NotEmpty
     @Size(max = 100)
     private String name;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "compiler")
+    private List<TaskPass> taskPass;
+    
     public int getId() {
         return id;
     }

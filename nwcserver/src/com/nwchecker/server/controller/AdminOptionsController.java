@@ -61,10 +61,11 @@ public class AdminOptionsController {
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin(Principal principal) {
+	public String admin(Principal principal, Model model) {
+    	model.addAttribute("pageName", "admin");
 		LOG.info("\"" + principal.getName() + "\" tries to access administrator page(users view).");
 		LOG.info("\"" + principal.getName() + "\" have access to administrator page(users view).");
-		return "adminOptions/users";
+		return "nwcserver.adminOptions.users";
 	}
 
     /**
@@ -111,7 +112,8 @@ public class AdminOptionsController {
 		user.setPassword("");
 		model.addAttribute("userData", user);
 		LOG.info("\"" + principal.getName() + "\" have access to user editing (" + username + ").");
-		return "adminOptions/userEdit";
+		model.addAttribute("pageName", "admin");
+		return "nwcserver.adminOptions.userEdit";
 	}
 
     /**

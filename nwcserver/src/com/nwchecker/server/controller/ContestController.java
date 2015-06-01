@@ -5,12 +5,11 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestEditWatcherService;
-import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.ScheduleServiceImpl;
-import com.nwchecker.server.service.UserService;
+import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
+import com.nwchecker.server.wrapper.TypeContestWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -68,6 +67,9 @@ public class ContestController {
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
 
+    @Autowired
+    private TypeContestService typeContestService;
+
     /**
      * This mapped method used to return page with contests list
      * <p>
@@ -79,8 +81,9 @@ public class ContestController {
      */
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
+    	model.addAttribute("pageName","contest");
         //get all available сontests from DB:
-        List<Contest> allContests = contestService.getContests();
+    	List<Contest> allContests = contestService.getContests();
         //get unhidden contests:
         List<Contest> unhidden = new LinkedList<Contest>();
         for (Contest c : allContests) {
@@ -91,7 +94,7 @@ public class ContestController {
         if (principal == null) {
             //return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
-            return "contests/contest";
+            return "nwcserver.contests.list";
         }
 
         User user = userService.getUserByUsername(principal.getName());
@@ -119,7 +122,7 @@ public class ContestController {
             model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
         }
         model.addAttribute("contests", unhidden);
-        return "contests/contest";
+        return "nwcserver.contests.list";
     }
 
     /**
@@ -136,12 +139,17 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/addContest", method = RequestMethod.GET)
     public String initAddContest(Model model, Principal principal) {
+    	model.addAttribute("pageName","contest");
         LOG.info("\"" + principal.getName() + "\"" + " starts contest creation.");
         Contest c = new Contest();
         c.setHidden(true);
         c.setStatus(Contest.Status.PREPARING);
         model.addAttribute("contestModelForm", c);
-        return "contests/contestCreate";
+
+        List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
+        model.addAttribute("typeContestList", typeContestList);
+
+        return "nwcserver.contests.create";
     }
 
     /**
@@ -237,13 +245,17 @@ public class ContestController {
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
         if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
-            return "access/accessDenied403";
+            return "nwcserver.403";
         }
         //get Contest by id:
         Contest editContest = contestService.getContestByID(id);
         //add contest to view and forward it:
         model.addAttribute("contestModelForm", editContest);
-        return "contests/contestCreate";
+
+        List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
+        model.addAttribute("typeContestList", typeContestList);
+        model.addAttribute("pageName", "contest");
+        return "nwcserver.contests.create";
     }
 
     /**

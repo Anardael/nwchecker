@@ -138,4 +138,11 @@ public class ContestServiceImplTest {
         assertFalse(result);
     }
 
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetContestForRating() {
+        List<Contest> contests = contestService.getContestForRating();
+        assertEquals(0, contests.size());
+    }
+
 }

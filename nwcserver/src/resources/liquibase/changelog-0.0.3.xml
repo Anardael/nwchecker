@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="3" author="Kulishenko">
+        <comment>
+            Insert Rules, Types and Languages to DB
+        </comment>
+        <sql>
+            #Add Languages to DB
+            INSERT INTO `languages` (id, tag) VALUES ('1', 'EN');
+            INSERT INTO `languages` (id, tag) VALUES ('2', 'UA');
+
+            #Add Types to DB
+            INSERT INTO `type_contest` (id, name) VALUES ('1', 'ACM');
+            INSERT INTO `type_contest` (id, name) VALUES ('2', 'PC-UA');
+
+            #Add Rules to DB
+            INSERT INTO `rules` (id, content, typeContest_id, language_id)
+            VALUES ('1', '  The ICPC is a team competition. Current rules stipulate that each team consist of three students.
+            Participants must be university students, who have had less than five years of university education before the contest.
+            Students who have previously competed in two World Finals or five regional competitions are ineligible to compete again.
+            During contest, the teams are given 5 hours to solve between 8 and 12 programming problems (with 8 typical for regionals
+            and 10 for finals). They must submit solutions as programs in C, C++, or Java. Programs are then run on test data. If a
+            program fails to give a correct answer, the team is notified and can submit another program.
+            The winner is the team which correctly solves most problems. If necessary to rank teams for medals or prizes among tying
+            teams, the placement of teams is determined by the sum of the elapsed times at each point that they submitted correct
+            solutions plus 20 minutes for each rejected submission of a problem ultimately solved.', '1', '1');
+
+            INSERT INTO `rules` (id, content, typeContest_id, language_id)
+            VALUES ('2', 'ENG LANGUAGE PC-UA', '2', '1');
+
+            INSERT INTO `rules` (id, content, typeContest_id, language_id)
+            VALUES ('3', '  Олимпиада — командное соревнование. Каждая команда состоит из трёх студентов. К участию допускаются студенты
+            высших учебных заведений, а также аспиранты первого года обучения. Студенты, дважды участвовавшие в финальной стадии олимпиады,
+            или пятикратно принимавшие участие в региональном отборе, не допускаются к участию. Есть ограничение по возрасту: участники
+            старше 24 лет не допускаются.
+            Тур олимпиады происходит следующим образом: каждой команде выдаётся компьютер и от восьми до двенадцати задач, условия которых
+            написаны на английском языке, на пять часов. Команды пишут решения на языках программирования C, C++ или Java и посылают их на
+            тестирующий сервер. Во время некоторых региональных туров набор языков может быть изменен. Так, например, при проведении
+            четвертьфинала по северо-восточному региону участникам доступен Паскаль. Программы тестируются на большом количестве различных
+            входных тестов, неизвестных участникам. Если программа выдала неправильный ответ или не уложилась в ограничения по времени или
+            памяти, то пославшая её команда получает об этом сообщение и может послать исправленную версию. Задача считается решённой, если
+            программа выдала правильные ответы на всех тестах. В отличие от других олимпиад, частичные решения не учитываются.
+            Побеждает команда, решившая правильно наибольшее число задач. Если несколько команд решают одинаковое количество задач, то их
+            положение в рейтинге определяется штрафным временем. Изначально штрафное время каждой команды равно нулю. За каждую правильно
+            сданную задачу к штрафному времени команды прибавляют время, прошедшее с начала соревнования до момента сдачи задачи. Кроме
+            того, если зачтённой попытке предшествовало несколько неудачных попыток сдать ту же задачу, то за каждую из них к штрафному
+            времени прибавляют двадцать минут. За неудачные попытки сдать задачу, которую команде в итоге так и не удалось решить, штрафного
+            времени не начисляется.', '1', '2');
+
+            INSERT INTO `rules` (id, content, typeContest_id, language_id)
+            VALUES ('4', 'УКРАЇНСЬКА МОВА PC-UA', '2', '2');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

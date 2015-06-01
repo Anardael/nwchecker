@@ -32,7 +32,8 @@ public class MainController {
      */
     @RequestMapping("/index.do")
     public String main(HttpSession session, Model model) throws IllegalArgumentException {
-        return "index";
+    	model.addAttribute("pageName", "home");
+        return "nwcserver.static.index";
     }
 
     /**
@@ -44,9 +45,10 @@ public class MainController {
      * @return In Development page
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
-    @RequestMapping({"/inDevelopment", "/donec", "/vestibulum", "/etiam", "/phasellus", "/news", "/rating"})
+    @RequestMapping({"/inDevelopment", "/vestibulum", "/phasellus", "/news", "/rating"})
     public String willBeCreated(HttpSession session, Model model) throws IllegalArgumentException {
-        return "access/inDevelopment";
+    	model.addAttribute("pageName", "inDevelopment");
+        return "nwcserver.inDevelopment";
     }
 
     /**
@@ -71,8 +73,9 @@ public class MainController {
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
-    public String accessDenied() throws IllegalArgumentException {
-        return "access/accessDenied403";
+    public String accessDenied(Model model) throws IllegalArgumentException {
+    	model.addAttribute("pageName", "accessDenied403");
+        return "nwcserver.403";
     }
 
     /**
@@ -83,7 +86,8 @@ public class MainController {
      * @throws IllegalArgumentException If method took arguments of incorrect type
      */
     @RequestMapping(value = "/pageNotFound", method = RequestMethod.GET)
-    public String pageNotFound() throws IllegalArgumentException {
-        return "access/pageNotFound404";
+    public String pageNotFound(Model model) throws IllegalArgumentException {
+    	model.addAttribute("pageName", "pageNotFound");
+        return "nwcserver.404";
     }
 }

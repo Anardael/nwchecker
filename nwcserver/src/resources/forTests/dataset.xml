@@ -10,6 +10,10 @@
     <Roles roleId="2" role="ROLE_TEACHER" userId="2" />
     <Roles roleId="3" role="ROLE_USER" userId="3" />
     <Roles roleId="4" role="ROLE_USER" userId="4" />
+    
+    <Compiler id="1" name="Java"/>
+    <Compiler id="2" name="C#"/>
+    <Compiler id="3" name="C++"/>
 
     <Contest id="1" title="I am title 1" description="I am description 1" status="PREPARING" hidden="0" starts="2015-03-03 11:00:00" duration="1970-01-01 00:00:05"/>
     <Contest id="2" title="I am title 2" description="I am description 2" status="PREPARING" hidden="0" starts="2015-03-03 11:00:00" duration="1970-01-01 00:00:05"/>
@@ -22,15 +26,15 @@
     <ContestPass id="1" passing="0" passed="0" rank="0" timepenalty="0" contest_id="1" user_userId="3"/>
     <ContestPass id="2" passing="0" passed="0" rank="0" timepenalty="0" contest_id="1" user_userId="4"/>
 
-    <TaskPass id="1" executionTime="10" memoryUsed="10" passed="0" passedMinute="0" contestPass="1" task_id="1"/>
-    <TaskPass id="2" executionTime="10" memoryUsed="10" passed="0" passedMinute="0" contestPass="1" task_id="1"/>
-    <TaskPass id="3" executionTime="10" memoryUsed="10" passed="1" passedMinute="13" contestPass="1" task_id="1"/>
-    <TaskPass id="4" executionTime="10" memoryUsed="10" passed="1" passedMinute="20" contestPass="1" task_id="2"/>
+    <TaskPass id="1" executionTime="3" memoryUsed="10" passed="0" passedMinute="0" compiler="1" contestPass="1" task_id="1" userid="3"/>
+    <TaskPass id="2" executionTime="1" memoryUsed="10" passed="0" passedMinute="0" compiler="1" contestPass="1" task_id="1" userid="3"/>
+    <TaskPass id="3" executionTime="10" memoryUsed="10" passed="1" passedMinute="13" compiler="1" contestPass="1" task_id="1" userid="3"/>
+    <TaskPass id="4" executionTime="8" memoryUsed="10" passed="1" passedMinute="20" compiler="1" contestPass="1" task_id="2" userid="3"/>
 
-    <TaskPass id="5" executionTime="10" memoryUsed="10" passed="0" passedMinute="0" contestPass="2" task_id="1"/>
-    <TaskPass id="6" executionTime="10" memoryUsed="10" passed="0" passedMinute="0" contestPass="2" task_id="1"/>
-    <TaskPass id="7" executionTime="10" memoryUsed="10" passed="1" passedMinute="13" contestPass="2" task_id="1"/>
-    <TaskPass id="8" executionTime="10" memoryUsed="10" passed="1" passedMinute="21" contestPass="2" task_id="2"/>
+    <TaskPass id="5" executionTime="5" memoryUsed="10" passed="0" passedMinute="0" compiler="2" contestPass="2" task_id="1" userid="4"/>
+    <TaskPass id="6" executionTime="1" memoryUsed="10" passed="0" passedMinute="0" compiler="2" contestPass="2" task_id="1" userid="4"/>
+    <TaskPass id="7" executionTime="3" memoryUsed="10" passed="1" passedMinute="13" compiler="2" contestPass="2" task_id="1" userid="4"/>
+    <TaskPass id="8" executionTime="10" memoryUsed="10" passed="1" passedMinute="21" compiler="2" contestPass="2" task_id="2" userid="4"/>
 
 
     <TaskData id="1" task_id="1"/>
@@ -41,8 +45,17 @@
     <Userrequest requestId="1" request="WANT_ROLE_TEACHER" userId="3" />
 
     <contest_users user_id="3" contest_id="1"/>
+    
 
-    <Compiler id="1" name="Java"/>
-    <Compiler id="2" name="C#"/>
-    <Compiler id="3" name="C++"/>
+    <languages id="1" tag="en"/>
+    <languages id="2" tag="ua"/>
+
+    <type_contest id="1" dynamic="false" name="ACM"/>
+    <type_contest id="2" dynamic="true" name="PC-UA"/>
+
+    <rules id="1" content="Rule content 1" language_id="1" typeContest_id="1"/>
+    <rules id="2" content="Rule content 2" language_id="1" typeContest_id="2"/>
+    <rules id="3" content="Rule content 3" language_id="2" typeContest_id="1"/>
+    <rules id="4" content="Rule content 4" language_id="2" typeContest_id="2"/>
+
 </dataset>

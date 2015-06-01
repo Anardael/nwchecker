@@ -5,10 +5,12 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.service.UserService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +38,7 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  * @since 2015-03-10
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
@@ -77,8 +80,8 @@ public class ContestPassServiceImplTest {
     public void testCheckTask() throws Exception {
         ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
         Task task = contestPass.getContest().getTasks().get(0);
-
-        assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8]));
+        User user = userService.getUserById(3);
+        assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8], user));
     }
 
     @Test

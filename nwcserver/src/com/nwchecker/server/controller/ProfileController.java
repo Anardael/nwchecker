@@ -75,7 +75,8 @@ public class ProfileController {
 		User user = userService.getUserByUsername(username);
 		model.addAttribute("userProfile", user);
         LOG.info("\"" + principal.getName() + "\" initialized profile page.");
-		return "profileOptions/profile";
+        model.addAttribute("pageName", "login");
+		return "nwcserver.user.profile";
 	}
 
     /**
@@ -101,7 +102,7 @@ public class ProfileController {
 		user.setRequests(loggedUser.getRequests());
 		if (result.hasErrors()) {
             LOG.info("\"" + principal.getName() + "\" inputted bad data to profile.");
-			return "profileOptions/profile";
+			return "nwcserver.user.profile";
 		} else {
 			loggedUser.setDisplayName(user.getDisplayName());
 			loggedUser.setDepartment(user.getDepartment());
@@ -109,7 +110,7 @@ public class ProfileController {
 			userService.updateUser(loggedUser);
 			model.addAttribute("userUpdated", "true");
             LOG.info("\"" + principal.getName() + "\" updated his profile.");
-			return "profileOptions/profile";
+			return "nwcserver.user.profile";
 		}
 	}
 
@@ -155,7 +156,7 @@ public class ProfileController {
             LOG.info("\"" + principal.getName() + "\" inputted bad old password.");
 			model.addAttribute("passwordChanged", "false");
 		}
-		return "profileOptions/profile";
+		return "nwcserver.user.profile";
 	}
 
     /**
