@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="9" author="Entro-yuhim">
+		<comment>
+            Update data in DB
+        </comment>
+		<sql>
+			#Update update contest titles, task titles for more real ones
+			UPDATE `nwserver`.`task` SET `title`='Пирамида декана' WHERE `id`='1';
+			UPDATE `nwserver`.`task` SET `title`='Владислава' WHERE `id`='2';
+			UPDATE `nwserver`.`task` SET `title`='Предохранители' WHERE `id`='3';
+			UPDATE `nwserver`.`task` SET `title`='Автомобили' WHERE `id`='4';
+			UPDATE `nwserver`.`task` SET `title`='Кубик в лабиринте' WHERE `id`='5';
+			UPDATE `nwserver`.`task` SET `title`='Минимальное покрытие' WHERE `id`='6';
+			UPDATE `nwserver`.`task` SET `title`='Параллелепипед' WHERE `id`='7';
+			UPDATE `nwserver`.`task` SET `title`='Выпуклая оболочка' WHERE `id`='8';
+			UPDATE `nwserver`.`task` SET `title`='Медиана последовательности' WHERE `id`='9';
+			UPDATE `nwserver`.`task` SET `title`='Архиватор' WHERE `id`='10';
+			UPDATE `nwserver`.`task` SET `title`='Искусство спора' WHERE `id`='11';
+			UPDATE `nwserver`.`task` SET `title`='Диагностика ACM' WHERE `id`='12';
+			UPDATE `nwserver`.`task` SET `title`='Устойчивая конструкция' WHERE `id`='13';
+			UPDATE `nwserver`.`task` SET `title`='Тарелки' WHERE `id`='14';
+			UPDATE `nwserver`.`task` SET `title`='К вопросу о спорте' WHERE `id`='15';
+			UPDATE `nwserver`.`task` SET `title`='Погоня в метро' WHERE	`id`='16';
+			UPDATE `nwserver`.`task` SET `title`='ПДВАС и ПВИПАС' WHERE `id`='17';
+			UPDATE `nwserver`.`task` SET `title`='Биржа' WHERE `id`='18';
+			UPDATE `nwserver`.`task` SET `title`='Град' WHERE `id`='19';
+			UPDATE `nwserver`.`task` SET `title`='Разбиение графа' WHERE `id`='20';
+			UPDATE `nwserver`.`task` SET `title`='Шпион' WHERE `id`='21';
+			UPDATE `nwserver`.`task` SET `title`='Одноклассники' WHERE `id`='22';
+			UPDATE `nwserver`.`task` SET `title`='Лишние пробелы' WHERE `id`='23';
+			UPDATE `nwserver`.`task` SET `title`='Грязь' WHERE `id`='24';
+			UPDATE `nwserver`.`task` SET `title`='Крышки' WHERE `id`='25';
+			UPDATE `nwserver`.`task` SET `title`='Галактическая история' WHERE `id`='26';
+			UPDATE `nwserver`.`task` SET `title`='Интервалы' WHERE `id`='27';
+			UPDATE `nwserver`.`task` SET `title`='Джинн-бомбардировки' WHERE `id`='28';
+			UPDATE `nwserver`.`task` SET `title`='Белый тезис' WHERE `id`='29';
+			UPDATE `nwserver`.`task` SET `title`='Проблема Бен Бецалеля' WHERE `id`='30';
+			UPDATE `nwserver`.`task` SET `title`='Бюрократия' WHERE `id`='31';
+			UPDATE `nwserver`.`task` SET `title`='Автомобили' WHERE `id`='32';
+			UPDATE `nwserver`.`task` SET `title`='Рыцари и леди' WHERE `id`='33';
+			UPDATE `nwserver`.`task` SET `title`='О друзьях человека' WHERE `id`='34';
+			UPDATE `nwserver`.`task` SET `title`='Фирма веников не вяжет' WHERE `id`='35';
+			UPDATE `nwserver`.`task` SET `title`='12 месяцев' WHERE `id`='36';
+			UPDATE `nwserver`.`task` SET `title`='Репка' WHERE `id`='37';
+			UPDATE `nwserver`.`task` SET `title`='HTML' WHERE `id`='38';
+			UPDATE `nwserver`.`task` SET `title`='Интервалы монотонности' WHERE	`id`='39';
+			UPDATE `nwserver`.`task` SET `title`='Блог' WHERE `id`='40';
+			UPDATE `nwserver`.`task` SET `title`='Пусти козла в огород 2' WHERE	`id`='41';
+			UPDATE `nwserver`.`task` SET `title`='Ферма' WHERE `id`='42';
+			UPDATE `nwserver`.`task` SET `title`='Столовая' WHERE `id`='43';
+
+
+			UPDATE `nwserver`.`contest` SET `title`='Чемпионат Урала 1998' WHERE `id`='1';
+			UPDATE `nwserver`.`contest` SET `title`='Чемпионат Урала 2004. Тур 1' WHERE `id`='2';
+			UPDATE `nwserver`.`contest` SET `title`='Весеннее первенство школьников	2005' WHERE `id`='3';
+			UPDATE `nwserver`.`contest` SET `title`='NEERC 2014 Eastern Subregional' WHERE `id`='8';
+			UPDATE `nwserver`.`contest` SET `title`='Петрозаводск лето 2014. Ural FU Contest' WHERE `id`='7';
+			UPDATE `nwserver`.`contest` SET `title`='Чемпионат Урала 2015' WHERE`id`='6';
+			UPDATE `nwserver`.`contest` SET `title`='Чемпионат Урала 2004. Тур 1' WHERE	`id`='5';
+			UPDATE `nwserver`.`contest` SET `title`='Осеннее первенство школьников 2007' WHERE `id`='4';
+		</sql>
+	</changeSet>
+</databaseChangeLog>

@@ -14,12 +14,11 @@
 		<thead>
 			<tr>
 				<th data-field="id" data-align="center" data-sortable="true" class="col-md-1"></th>
-				<th data-field="title" data-align="center" data-sortable="true">Title</th>
-				<th data-field="complexity" data-align="center" data-sortable="true" class="col-md-2">Complexity</th>
+				<th data-field="title" data-align="center" data-sortable="true"><spring:message code="archive.taskTitle" /></th>
+				<th data-field="complexity" data-align="center" data-sortable="true" class="col-md-2"><spring:message code="archive.taskComplexity" /></th>
 				<th data-field="rate" data-align="center" data-sortable="true"class="col-md-2">
-					Rate</th>
-				<th data-field="timeLimit" data-align="center" data-sortable="true"class="col-md-2">Time
-					limit</th>
+					<spring:message code="archive.taskRate" /></th>
+				<th data-field="timeLimit" data-align="center" data-sortable="true"class="col-md-2"><spring:message code="archive.timeLimit" /></th>
 			</tr>
 		</thead>
 	</table>

@@ -5,7 +5,7 @@ var UNDEFINED;
 var WANT_ROLE_TEACHER;
 
 function usernameFormatter(value) {
-	return '<a href="userEdit.do?Username=' + value + '">' + value + '</a>';
+	return '<a href="userEdit.do?username=' + value + '">' + value + '</a>';
 }
 
 function rolesFormatter(value) {
