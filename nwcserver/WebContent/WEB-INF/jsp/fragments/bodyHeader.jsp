@@ -104,18 +104,13 @@
 						<ul class="dropdown-menu multi-level" role="menu"
 							aria-labelledby="dropdownMenu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<li class="dropdown-submenu pull-left admin-subMenu"><a
-									class="trigger"> <spring:message code="admin.caption" /></a>
-									<ul class="dropdown-menu">
-										<li><a href="admin.do"><spring:message
-													code="adminPanel.users.caption" /></a></li>
-										<li class="divider"></li>
-										<li><a href="userRequests.do"><spring:message
-													code="userRequests.caption" /></a></li>
-										<li class="divider"></li>
-										<li><a href="listContests.do"><spring:message
-													code="listContests.caption" /></a></li>
-									</ul></li>
+
+								<li><a href="admin.do"><spring:message
+											code="adminPanel.users.caption" /></a></li>
+								<li><a href="userRequests.do"><spring:message
+											code="userRequests.caption" /></a></li>
+								<li><a href="listContests.do"><spring:message
+											code="listContests.caption" /></a></li>
 								<li class="divider"></li>
 							</security:authorize>
 							<li><a href="profile.do"><spring:message
@@ -137,7 +132,7 @@
 							alt="en"></a></li>
 				</c:if>
 
-				<c:if test="${not empty param['Username']}">
+				<c:if test="${not empty param['username']}">
 					<li><a href="?Username=${param['Username']}&locale=ua"
 						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
