@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ContestPassJson;
+import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.wrapper.FilteredResultProvider;
 import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
@@ -15,6 +16,7 @@ import com.nwchecker.server.service.RatingService;
 import com.nwchecker.server.service.ScoreCalculationService;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
 
+import com.nwchecker.server.utils.PaginationWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,27 +49,29 @@ public class RatingController {
 	 * contests.
 	 * <p/>
 	 *
-	 * @param model
+//	 * @param model
 	 *            Spring Framework model for this page
 	 * @return <b>CintestRating.jsp</b> Returns page with completed contests
 	 *         list
 	 */
-//	@Link(label = "rating.caption", family = "contestRating", parent = "")
-//	@RequestMapping(value = "/rating", method = RequestMethod.GET)
-//	public String getRating(Model model) {
-//		model.addAttribute("ratingContests",
-//				contestService.getContestForRating());
-//
-//		return "nwcserver.contests.rating";
-//	}
+	@Link(label = "rating.caption", family = "contestRating", parent = "")
+	@RequestMapping(value = "/rating", method = RequestMethod.GET)
+	public String getRating(Model model) {
+		model.addAttribute("pageName", "rating");
+
+		return "nwcserver.contests.rating";
+	}
 
 
 	@Link(label = "rating.caption", family = "contestRating", parent = "")
-	@RequestMapping(value = "/rating.do", method = RequestMethod.GET)
-	 public @ResponseBody String getRating(){
+	@RequestMapping(value = "/ratingContest", method = RequestMethod.GET)
+	 public @ResponseBody
+	JTableResponseList getRating(){
 
-		List<Contest> contest = contestService.getContestForRating();
-			return null;
+		PaginationWrapper <Contest> contests = contestService.getRatingContestSorPagination();
+
+		JTableResponseList jTableResponse = new JTableResponseList(contests.getDataList(), contests.getRecordCount());
+		return jTableResponse;
 	}
 
 	/**

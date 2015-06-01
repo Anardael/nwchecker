@@ -31,23 +31,26 @@
 				<%--</c:forEach>--%>
 			<%--</table>--%>
 
-			<c:url var="dataURL" value="/rating.do" />
+			<c:url var="dataURL" value="/ratingContest.do" />
 			<table id="ratingContest" class="table" data-toggle="table"
 				   data-striped="true" data-url="${dataURL}"
 				   data-side-pagination="server" data-pagination="true"
 				   data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
-				   data-clear-search="true" data-sort-name="username"
+				   data-clear-search="true" data-sort-name="starts"
 				   data-sort-order="asc">
 				<thead>
 				<tr>
-					<th data-field="title" data-align="center" data-sortable="true">Title</th>
-					<th data-field="description" data-align="center" data-sortable="true">Description</th>
-					<th data-field="starts" data-align="center" data-sortable="true">Starts</th>
-					<th data-field="status" data-align="center" data-sortable="true">Status</th>
+					<th data-field="title" data-align="center" data-sortable="true"><spring:message
+							code="contest.table.title"/></th>
+					<th data-field="description" data-align="center" data-sortable="true"><spring:message
+							code="contest.table.description"/></th>
+					<th data-field="starts" data-align="center" data-sortable="true"><spring:message
+							code="contest.results.started.caption"/></th>
+					<th data-field="status" data-align="center" data-sortable="true"><spring:message
+							code="listContests.contests.tableHeader.status"/></th>
 				</tr>
 				</thead>
 			</table>
-
 		</ul>
 	</div>
 </body>

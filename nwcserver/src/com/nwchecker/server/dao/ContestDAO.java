@@ -65,8 +65,7 @@ public interface ContestDAO {
 	 public List<Contest> getPagedContests( int pageSize, int startIndex);
 	
 	 public Long getEntryCount();
-	 
-	 
+
 	 public List<Contest> getPagedContests(Contest.Status status, int pageSize, int startIndex);
 		
 	 public Long getEntryCount(Contest.Status status);
@@ -78,4 +77,6 @@ public interface ContestDAO {
     public Contest getNearestContest() ;
 
     public Contest getLastArchivedContest();
+
+    public Long getEntryCountForRating();
 }

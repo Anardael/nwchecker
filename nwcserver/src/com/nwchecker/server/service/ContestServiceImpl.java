@@ -7,6 +7,7 @@ import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.utils.ContestStartTimeComparator;
+import com.nwchecker.server.utils.PaginationWrapper;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class ContestServiceImpl implements ContestService {
     }
 
     public List<Contest> getPagedContests(int pageSize, int pageNumber) {
-        return contestDAO.getPagedContests(pageSize, (pageNumber-1)*pageSize);
+        return contestDAO.getPagedContests(pageSize, (pageNumber - 1) * pageSize);
     }
     
     public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber) {
@@ -103,5 +104,19 @@ public class ContestServiceImpl implements ContestService {
         endDate.add(Calendar.SECOND, duration.get(Calendar.SECOND));
         long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
         return gtmMillis;
+    }
+
+    @Override
+    public Long getEntryCountForRating(){
+        Long count = contestDAO.getEntryCountForRating();
+        return count+1;
+    }
+
+    @Override
+    public PaginationWrapper<Contest> getRatingContestSorPagination() {
+        PaginationWrapper<Contest> paginatedRatingContest = new PaginationWrapper<Contest>();
+        paginatedRatingContest.setDataList(getContestForRating());
+        paginatedRatingContest.setRecordCount(getEntryCountForRating());
+        return paginatedRatingContest;
     }
 }

@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
 import java.util.Map;
@@ -77,4 +78,8 @@ public interface ContestService {
     public Long getPageCount(Contest.Status status, int pageSize);
 
     Long getContestEndTime(Contest contest);
+
+    public PaginationWrapper<Contest> getRatingContestSorPagination();
+
+    public Long getEntryCountForRating();
 }
