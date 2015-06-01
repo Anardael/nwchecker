@@ -5,11 +5,13 @@ import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +87,8 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	@Transactional
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int startIndex, int pageSize, String sortingOrder, String sortingColumn, String filter) {
+			int startIndex, int pageSize, String sortingColumn,
+			String sortingOrder, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
@@ -95,7 +98,13 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 			Criterion description = Restrictions.ilike("description", filter,
 					MatchMode.ANYWHERE);
 			criteria.add(Restrictions.or(title, description));
-		}		
+		}
+		if (StringUtils.isNotEmpty(sortingColumn)) {
+			if (sortingOrder.equalsIgnoreCase("asc")) {
+				criteria.addOrder(Order.asc(sortingColumn));
+			} else
+				criteria.addOrder(Order.desc(sortingColumn));
+		}
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		List<Task> result = criteria.list();

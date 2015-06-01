@@ -9,7 +9,7 @@
 		data-striped="true" data-url="${dataURL}"
 		data-side-pagination="server" data-pagination="true"
 		data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
-		data-clear-search="true" data-sort-name="username"
+		data-clear-search="true" data-sort-name="id"
 		data-sort-order="asc">
 		<thead>
 			<tr>
