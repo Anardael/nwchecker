@@ -21,9 +21,6 @@
     width: 100px;
 }
 .title-block{
-    /*position: absolute;
-    left: 100px;
-    right: 100px;*/
     float: left;
     margin-left: 100px;
     width: calc(100% - 180px);
