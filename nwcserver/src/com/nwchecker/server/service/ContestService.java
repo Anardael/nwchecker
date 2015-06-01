@@ -1,8 +1,11 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>Contest Service</h1>
@@ -78,4 +81,6 @@ public interface ContestService {
 	public Contest getNearestContest();
 
 	public Contest getLastArchivedContest();
+
+    public Long getEntryCountForRating();
 }

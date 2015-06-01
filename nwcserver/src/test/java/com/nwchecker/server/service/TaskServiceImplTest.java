@@ -4,9 +4,11 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.ContestPass.ContestStatus;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.utils.PaginationWrapper;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
