@@ -42,11 +42,11 @@
 		<table id="competitorsList" class="table" data-toggle="table"
 			data-url="${dataUrl}" data-method="get" data-cache="false"
 			data-search="true" data-clear-search="true" data-pagination="true"
-			data-show-pagination-switch="true">
+			data-show-pagination-switch="true" data-sort-name="rank">
 			<thead>
 				<tr>
 					<th data-field="rank" data-align="center"
-						data-formatter="positionFormatter"><spring:message
+						data-formatter="positionFormatter" data-sortable="true"><spring:message
 							code="contest.results.tableHeader.place" /></th>
 					<th data-field="displayName" data-align="center"
 						data-formatter="displayNameFormatter"><spring:message

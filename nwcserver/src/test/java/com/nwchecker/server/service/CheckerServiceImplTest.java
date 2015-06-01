@@ -40,7 +40,7 @@ public class CheckerServiceImplTest {
 	private CheckerService checkerService;
 	
 	@Before
-	private void init() {
+	public void init() {
 		checkerService = mock(CheckerService.class);
 		
 		Map<String, Object> result1 = new HashMap<String, Object>();

@@ -28,27 +28,27 @@
 				<li class="list-group-item "
 					style="text-align: left; font-size: large"><c:url
 						var="dataUrl" value="/resultsList.do?id=${contestId}" />
-					<table id="competitorsList" class="table" data-toggle="table"
-						data-url="${dataUrl}" data-method="get" data-cache="false"
-						data-search="true" data-clear-search="true" data-pagination="true"
-						data-show-pagination-switch="true">
-						<thead>
-							<tr>
-								<th data-field="rank" data-align="center"
-									data-formatter="positionFormatter"><spring:message
-										code="contest.results.tableHeader.place" /></th>
-								<th data-field="displayName" data-align="center"
-									data-formatter="displayNameFormatter"><spring:message
-										code="contest.results.tableHeader.displayName" /></th>
-								<th data-field="tasksPassedCount" data-align="center"
-									data-formatter="tasksPassedCountFormatter"><spring:message
-										code="contest.results.tableHeader.tasksPassedCount" /></th>
-								<th data-field="timePenalty" data-align="center"
-									data-formatter="timePenaltyFormatter"><spring:message
-										code="contest.results.tableHeader.timePenalty" /></th>
-							</tr>
-						</thead>
-					</table></li>
+                    <table id="competitorsList" class="table" data-toggle="table"
+                           data-url="${dataUrl}" data-method="get" data-cache="false"
+                           data-search="true" data-clear-search="true" data-pagination="true"
+                           data-show-pagination-switch="true" data-sort-name="rank">
+                        <thead>
+                        <tr>
+                            <th data-field="rank" data-align="center"
+                                data-formatter="positionFormatter" data-sortable="true"><spring:message
+                                    code="contest.results.tableHeader.place" /></th>
+                            <th data-field="displayName" data-align="center"
+                                data-formatter="displayNameFormatter"><spring:message
+                                    code="contest.results.tableHeader.displayName" /></th>
+                            <th data-field="tasksPassedCount" data-align="center"
+                                data-formatter="tasksPassedCountFormatter"><spring:message
+                                    code="contest.results.tableHeader.tasksPassedCount" /></th>
+                            <th data-field="timePenalty" data-align="center"
+                                data-formatter="timePenaltyFormatter"><spring:message
+                                    code="contest.results.tableHeader.timePenalty" /></th>
+                        </tr>
+                        </thead>
+                    </table></li>
 			</ul>
 		</div>
 	</div>

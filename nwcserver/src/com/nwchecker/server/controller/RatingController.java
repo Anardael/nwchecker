@@ -82,16 +82,47 @@ public class RatingController {
         return "nwcserver.contests.results";
     }
 
+
+   /* @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
+    public @ResponseBody List<ContestPass> getResultsList(@RequestParam(value = "id") int contestId) {
+        return ratingService.getJsonListForContestPassByContestId(contestId);
+    }*/
+
     /**
-     * This mapped method used to return results of contest
-     * participants in JSON format.
+     * This mapped method used to return results of contest participants in JSON
+     * format.
      * <p/>
      *
-     * @param contestId ID of contest
+     * @param contestId
+     *            ID of contest
      * @return <b>JSON</b> Returns <b>results of contest participants</b>
      */
     @RequestMapping(value = "/resultsList", method = RequestMethod.GET)
-    public @ResponseBody List<ContestPassJson> getResultsList(@RequestParam(value = "id") int contestId) {
-        return ratingService.getJsonListForContestPassByContestId(contestId);
+    public @ResponseBody String getResultsList(
+            @RequestParam(value = "id") int contestId) {
+        List<ContestPass> contestPasses = ratingService
+                .getJsonListForContestPassByContestId(contestId);
+        List<MorphedResult<ContestPass>> morphedContestPass = new LinkedList<MorphedResult<ContestPass>>();
+        for (ContestPass contestPass : contestPasses) {
+            MorphedResult<ContestPass> morphedPass = new MorphedResult<ContestPass>(
+                    contestPass);
+            morphedPass.addExpansionData("displayName", contestPass.getUser()
+                    .getDisplayName());
+            morphedPass.addExpansionData("tasksPassedCount",
+                    contestPass.getPassedCount() + "/"
+                            + contestPass.getContest().getTasks().size());
+
+            morphedContestPass.add(morphedPass);
+        }
+        ObjectMapper jsonMapper = new ObjectMapper();
+        jsonMapper.setFilters(new FilteredResultProvider());
+        jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String response = null;
+        try {
+            response = jsonMapper.writeValueAsString(morphedContestPass);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 }

@@ -135,7 +135,7 @@ public class TaskServiceImplTest {
     @Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTasksByContestStatus() {
-		assertEquals(0,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
+		assertEquals(3,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
 						0, 0, null, null, null).size());
 	}
 
@@ -143,7 +143,7 @@ public class TaskServiceImplTest {
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetRecordCount() {
-		assertEquals(0,	taskService.getRecordCount(Contest.Status.ARCHIVE, null).intValue());
+		assertEquals(3,	taskService.getRecordCount(Contest.Status.ARCHIVE, null).intValue());
 	}
 	
 	@Test
