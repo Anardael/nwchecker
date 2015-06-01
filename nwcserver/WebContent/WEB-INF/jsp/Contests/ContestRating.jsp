@@ -5,40 +5,24 @@
 <!-- set path to resources folder -->
 <spring:url value="/resources/" var="resources" />
 <html>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#ratingContest').on('click-row.bs.table', function(e, row, $element) {
+			location.href = 'results.do?id='+ row['id']
+		});
+	});
+
+</script>
 <body>
 	<div class="form-group col-sm-12" style="margin: auto">
 		<ul class="col-sm-offset-2 col-sm-8 ">
-			<%--<table id="ratingTable" class="table table-bordered" data-search="true"--%>
-				   <%--data-clear-search="true">--%>
-				<%--<tr>--%>
-					<%--<th style="text-align: center"><spring:message--%>
-							<%--code="contest.table.title"/></th>--%>
-					<%--<th style="text-align: center"><spring:message--%>
-							<%--code="contest.table.description"/></th>--%>
-					<%--<th style="text-align: center"><spring:message--%>
-							<%--code="contest.results.started.caption"/></th>--%>
-					<%--<th style="text-align: center"><spring:message--%>
-							<%--code="listContests.contests.tableHeader.status"/></th>--%>
-				<%--</tr>--%>
-				<%--<c:forEach items="${ratingContests}" var="contest">--%>
-					<%--<c:url var="results" value="/results.do?id=${contest.id}"/>--%>
-					<%--<tr>--%>
-						<%--<td align="center"><a href="${results}">${contest.title}</a></td>--%>
-						<%--<td align="center">${contest.description}</td>--%>
-						<%--<td align="center">${contest.starts}</td>--%>
-						<%--<td align="center">${contest.status}</td>--%>
-					<%--</tr>--%>
-				<%--</c:forEach>--%>
-			<%--</table>--%>
-
 			<c:url var="dataURL" value="/ratingContest.do" />
-			<table id="ratingContest" class="table" data-toggle="table"
-				   data-striped="true" data-url="${dataURL}"
-				   data-side-pagination="server" data-pagination="true"
-				   data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
-				   data-clear-search="true" data-sort-name="starts"
-				   data-sort-order="asc">
-				<thead>
+				<table id="ratingContest" class="table" data-toggle="table"
+					   data-url="${dataURL}" data-method="get" data-cache="false"
+					   data-search="true" data-clear-search="true" data-pagination="true"
+					   data-show-pagination-switch="true">
+					<thead>
 				<tr>
 					<th data-field="title" data-align="center" data-sortable="true"><spring:message
 							code="contest.table.title"/></th>

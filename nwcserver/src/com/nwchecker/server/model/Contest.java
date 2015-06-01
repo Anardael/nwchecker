@@ -76,6 +76,7 @@ public class Contest {
 	@Column(name = "description", columnDefinition = "TEXT")
 	@NotEmpty
 	@JsonIgnore
+	@JsonProperty("description")
 	private String description;
 
 	@Column(name = "starts")

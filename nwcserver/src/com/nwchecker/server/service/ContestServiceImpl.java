@@ -111,12 +111,4 @@ public class ContestServiceImpl implements ContestService {
         Long count = contestDAO.getEntryCountForRating();
         return count+1;
     }
-
-    @Override
-    public PaginationWrapper<Contest> getRatingContestSorPagination() {
-        PaginationWrapper<Contest> paginatedRatingContest = new PaginationWrapper<Contest>();
-        paginatedRatingContest.setDataList(getContestForRating());
-        paginatedRatingContest.setRecordCount(getEntryCountForRating());
-        return paginatedRatingContest;
-    }
 }

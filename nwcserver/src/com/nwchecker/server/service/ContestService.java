@@ -79,7 +79,5 @@ public interface ContestService {
 
     Long getContestEndTime(Contest contest);
 
-    public PaginationWrapper<Contest> getRatingContestSorPagination();
-
     public Long getEntryCountForRating();
 }

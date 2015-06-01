@@ -63,16 +63,11 @@ public class RatingController {
 	}
 
 
-	@Link(label = "rating.caption", family = "contestRating", parent = "")
 	@RequestMapping(value = "/ratingContest", method = RequestMethod.GET)
-	 public @ResponseBody
-	JTableResponseList getRating(){
-
-		PaginationWrapper <Contest> contests = contestService.getRatingContestSorPagination();
-
-		JTableResponseList jTableResponse = new JTableResponseList(contests.getDataList(), contests.getRecordCount());
-		return jTableResponse;
+	 public  @ResponseBody 	List<Contest> getContestForRating(){
+		return contestService.getContestForRating();
 	}
+
 
 	/**
 	 * This mapped method used to show page that contains contest results of
