@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.wrapper.FilteredResultProvider;
 import com.nwchecker.server.json.wrapper.MorphedResult;
