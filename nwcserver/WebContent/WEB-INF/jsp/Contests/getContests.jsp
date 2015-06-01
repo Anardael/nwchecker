@@ -25,7 +25,7 @@
                data-url="${dataUrl}" data-method="get" data-cache="false"
                data-search="true" data-clear-search="true" data-pagination="true"
                data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
-            <thead class="list-group-item-info">
+            <thead>
             <tr>
                 <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
                     Start date

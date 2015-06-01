@@ -130,4 +130,13 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
         Query query = session.createQuery("from Contest where status='ARCHIVE' order by starts desc");
         return (Contest) query.setMaxResults(1).uniqueResult();
     }
+
+    @Transactional
+    @Override
+    public Long getEntryCountForRating() {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        Query query = session.createQuery("select count(*) from Contest where hidden=:hidden");
+        query.setParameter("hidden", true);
+        return (Long) query.uniqueResult();
+    }
 }

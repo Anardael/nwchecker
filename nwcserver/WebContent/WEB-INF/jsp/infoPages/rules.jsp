@@ -9,7 +9,7 @@
 <html>
     <div class="main-block">
         <c:forEach items="${ruleList}" var="rule" varStatus="vs">
-            <dl class="list-group-item">
+            <dl>
                 <dt>
                     ${rule.typeContest.name}
                     <security:authorize access="hasRole('ROLE_TEACHER')">
@@ -18,14 +18,7 @@
                     </security:authorize>
                 </dt>
                 <dd>
-                        <%--if teacher role--%>
-                    <security:authorize access="hasRole('ROLE_TEACHER')">
-                        <p data-toggle="modal" data-target="#myModal_${vs.index}">${rule.content}</p>
-                    </security:authorize>
-                        <%-- if other roles or not authorized--%>
-                    <security:authorize access="!hasRole('ROLE_TEACHER')">
-                        <p>${rule.content}</p>
-                    </security:authorize>
+                    <p>${rule.content}</p>
                 </dd>
             </dl>
             <security:authorize access="hasRole('ROLE_TEACHER')">
