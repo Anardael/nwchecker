@@ -33,27 +33,6 @@ public class TaskStatisticController {
 	private static final Logger LOG = Logger
 			.getLogger(TaskStatisticController.class);
 
-	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
-	@RequestMapping(value = "/TaskStatistic", method = RequestMethod.GET)
-	public ModelAndView getTaskStatistic(
-			@RequestParam(value = "id") int taskId, Principal principal) {
-		LOG.debug("User " + principal.getName()
-				+ " accessed task statistic page for task with id " + taskId);
-		ModelAndView modelView = new ModelAndView("nwcserver.tasks.statistic");
-		Task currentTask = taskService.getTaskById(taskId);
-		Contest currentContest = currentTask.getContest();
-		modelView.addObject("pageName", "task");
-		modelView.addObject("currentTask", currentTask);
-		Map<Integer, String> taskTitles = new TreeMap<>();
-		for (Task task : currentContest.getTasks()) {
-			taskTitles.put(task.getId(), task.getTitle());
-		}
-		modelView.addObject("taskTitles", taskTitles);
-		LOG.debug("Successfully passed data for task statistic page (task id = "
-				+ taskId + ")");
-		return modelView;
-	}
-
 	@JsonView(JsonViews.TaskPassView.class)
 	@RequestMapping(value = "/TaskStatisticTable", method = RequestMethod.GET)
 	public @ResponseBody JTableResponseList getTaskPasses(
@@ -63,13 +42,13 @@ public class TaskStatisticController {
 			@RequestParam(required = false, value = "sort") String sortingColumn,
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
-		LOG.debug("Attempting to get task result data for page " + startIndex
+		LOG.info("Attempting to get task result data for page " + startIndex
 				/ pageSize + " for task " + taskId);		
 		JTableResponseList jTableResponse = new JTableResponseList(
 				taskPassService.getPagedTaskPassesForTask(taskId, startIndex,
 						pageSize, sortingColumn, sortingOrder, filter),
 				taskPassService.getTaskPassEntryCount(taskId, filter));
-		LOG.debug("Successfully retuned task result data for page "
+		LOG.info("Successfully retuned task result data for page "
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;
 	}

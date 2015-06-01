@@ -110,7 +110,6 @@ public class UserRequestsController {
 		try {
 			result = jsonMapper.writeValueAsString(morphedUserList);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		LOG.info("\"" + principal.getName()
