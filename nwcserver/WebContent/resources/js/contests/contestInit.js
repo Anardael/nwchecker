@@ -21,14 +21,14 @@ function setMask() {
 
 function submitContest() {
     sendJsonContest().success(function (data) {
-        if (data.status == "FAIL") {
+        if (data['status'] == "FAIL") {
             if (data.errorMessageList[0].fieldName == "denied") {
                 showAccessDeniedModal();
             } else {
                 contestAjaxFailed(errorCaption, emptyContestfields, data);
             }
         }
-        if (data.status == "SUCCESS") {
+        if (data['status'] == "SUCCESS") {
             BootstrapDialog.show({
                 title: successCaption,
                 type: BootstrapDialog.TYPE_SUCCESS,
@@ -73,14 +73,14 @@ function finishContest() {
 function sendFinishContest() {
     //first of all- send ajax to save current contest:
     sendJsonContest().success(function (data) {
-        if (data.status == "FAIL") {
+        if (data['status'] == "FAIL") {
             if (data.errorMessageList[0].fieldName == "denied") {
                 showAccessDeniedModal();
             } else {
                 contestAjaxFailed(errorCaption, emptyContestfields, data);
             }
         }
-        if (data.status == "SUCCESS") {
+        if (data['status'] == "SUCCESS") {
             if (data.result != null) {
                 $('#id').val(data.result);
             }
@@ -90,21 +90,22 @@ function sendFinishContest() {
                 type: 'GET',
                 data: "id=" + ($('#id').val())
             }).success(function (data) {
-                if (data.status == "FAIL_STARTS") {
-                    BootstrapDialog.show({
-                        title: errorCaption,
-                        type: BootstrapDialog.TYPE_DANGER,
-                        message: contestReleaseFailDueDate
-                    });
-                }
-                if (data.status == "FAIL_EMPTY") {
+            	console.log(JSON.stringify(data));
+                if (data['status'] == "FAIL_STARTS") {
                     BootstrapDialog.show({
                         title: errorCaption,
                         type: BootstrapDialog.TYPE_DANGER,
                         message: emptyStart
                     });
                 }
-                if (data.status == "TASK_SIZE") {
+                if (data['status'] == "FAIL_EMPTY") {
+                    BootstrapDialog.show({
+                        title: errorCaption,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        message: contestReleaseFailDueDate                        
+                    });
+                }
+                if (data['status'] == "TASK_SIZE") {
                     BootstrapDialog.show({
                         title: errorCaption,
                         type: BootstrapDialog.TYPE_DANGER,
@@ -112,7 +113,7 @@ function sendFinishContest() {
                     });
                 }
 
-                if (data.status == "SUCCESS") {
+                if (data['status'] == "SUCCESS") {
                     BootstrapDialog.show({
                         title: successCaption,
                         type: BootstrapDialog.TYPE_SUCCESS,

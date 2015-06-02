@@ -33,7 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -439,6 +441,12 @@ public class ContestController {
             result.setStatus("FAIL_EMPTY");
             return result;
         }
+        long yourmilliseconds = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MM,yyyy HH:mm");    
+        Date resultdate = new Date(yourmilliseconds);
+        System.out.println(sdf.format(resultdate));
+        System.out.println(sdf.format(contest.getStarts()));
+        System.out.println(contest.getStarts().getTime()-yourmilliseconds);
         //if start date less than now:
         if (contest.getStarts().getTime() < (System.currentTimeMillis())) {
             result.setStatus("FAIL_STARTS");

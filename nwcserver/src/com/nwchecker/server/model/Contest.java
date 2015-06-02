@@ -80,7 +80,7 @@ public class Contest {
 	private String description;
 
 	@Column(name = "starts")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@JsonProperty("starts")
 	private Date starts;
