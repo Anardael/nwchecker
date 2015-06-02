@@ -93,28 +93,13 @@ public class UserRequestsController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getUsersWithRequests", method = RequestMethod.GET)
 	@ResponseBody
-	public String getUsersWithRequests(Principal principal) {
+	public List<User> getUsersWithRequests(Principal principal) {
 		LOG.info("\"" + principal.getName()
 				+ "\" tries to access users requests list.");
 		List<User> users = userService.getUsersWithRequests();
-		List<MorphedResult<User>> morphedUserList = new LinkedList<MorphedResult<User>>();
-		for (User user : users) {
-			MorphedResult<User> morphedUser = new MorphedResult<User>(user);
-			morphedUser.addExpansionData("checked", false);
-			morphedUserList.add(morphedUser);
-		}
-		ObjectMapper jsonMapper = new ObjectMapper();
-		jsonMapper.setFilters(new FilteredResultProvider());
-		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		String result = null;
-		try {
-			result = jsonMapper.writeValueAsString(morphedUserList);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
 		LOG.info("\"" + principal.getName()
 				+ "\" received users requests list.");
-		return result;
+		return users;
 	}
 
 	/**

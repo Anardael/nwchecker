@@ -1,11 +1,14 @@
 package com.nwchecker.server.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
+import com.nwchecker.server.json.JsonViews;
+import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.json.wrapper.FilteredResultProvider;
 import com.nwchecker.server.json.wrapper.MorphedResult;
@@ -270,57 +273,41 @@ public class ContestController {
      *                  tries to call this method
      * @return <b>JSON</b> Returns <b>List of Teachers</b> than can edit this contest
      */
-   
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_TEACHER')")
     @RequestMapping(value = "/getContestUsersList.do", method = RequestMethod.GET)
-    public @ResponseBody String getUsers(
+    public @ResponseBody List<UserJson> getUsers(
             @RequestParam("contestId") int contestId, Principal principal) {
         //get ContestId Model:
-        Contest c = null;
+        Contest contest = null;
         String author = null;
         //if it is not new Contest- get Users for this Contest:
         if (contestId != 0) {
-            c = contestService.getContestByID(contestId);
+            contest = contestService.getContestByID(contestId);
         } else {
             //else - set author:
             author = principal.getName();
         }
         //get List of all Teacher users
         List<User> teachers = userService.getUsersByRole("ROLE_TEACHER");
-		List<MorphedResult<User>> morphedTeachers = new LinkedList<MorphedResult<User>>();
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setFilters(new FilteredResultProvider());
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		List<UserJson> morphedTeachers = new LinkedList<UserJson>();
 		for (User user : teachers) {
-			MorphedResult<User> morphedTeacher = new MorphedResult<User>(user);
-			morphedTeacher.excludeAttribute("roles");
-			morphedTeacher.excludeAttribute("username");
-			morphedTeacher.excludeAttribute("email");
-			morphedTeacher.excludeAttribute("info");
-			morphedTeacher.excludeAttribute("requests");
-			if (c != null) {
-				if (c.getUsers().contains(user)) {
-					morphedTeacher.addExpansionData("chose", true);
+			UserJson morphedTeacher = UserJson.createUserJson(user);
+			if (contest != null) {
+				if (contest.getUsers().contains(user)) {
+					morphedTeacher.setChosen(true);
 				} else {
-					morphedTeacher.addExpansionData("chose", false);
+					morphedTeacher.setChosen(false);
 				}
 			} else {
 				if (author.equals(user.getUsername())) {
-					morphedTeacher.addExpansionData("chose", true);
+					morphedTeacher.setChosen(true);
 				} else {
-					morphedTeacher.addExpansionData("chose", false);
+					morphedTeacher.setChosen(false);
 				}
 			}
 			morphedTeachers.add(morphedTeacher);
 		}
-		String response = null;
-		try {
-			response = mapper.writeValueAsString(morphedTeachers);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch: Change to logging
-			e.printStackTrace();
-		}
-		return response;
+		return morphedTeachers;
     }
 
     /**

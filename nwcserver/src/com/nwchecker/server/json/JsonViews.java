@@ -5,4 +5,5 @@ public class JsonViews {
 	public interface ViewUsersAdmin extends TaskPassView{}
 	public interface ForArchive extends TaskPassView{}
 	public interface SingleTask extends ForArchive{}
+	public interface UserList extends TaskPassView{}
 }
