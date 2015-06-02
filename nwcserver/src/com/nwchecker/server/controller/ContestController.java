@@ -93,7 +93,7 @@ public class ContestController {
         if(principal == null){
             model.addAttribute("pageName", "contest");
 
-            return "nwcserver.contests.list";
+            return "nwcserver.contests.show";
         }
 
         User user = userService.getUserByUsername(principal.getName());
@@ -121,7 +121,7 @@ public class ContestController {
 
         model.addAttribute("pageName", "contest");
 
-        return "nwcserver.contests.list";
+        return "nwcserver.contests.show";
     }
 
     /**
@@ -483,7 +483,7 @@ public class ContestController {
         if (principal == null) {
             // return all "unhidden" contests:
             model.addAttribute("contests", unhidden);
-            return "nwcserver.contests.list";
+            return "nwcserver.contests.show";
         }
 
         User user = userService.getUserByUsername(principal.getName());
@@ -514,7 +514,7 @@ public class ContestController {
                     contestEditWatcherService.getNowEditsMap());
         }
         model.addAttribute("contests", unhidden);
-        return "nwcserver.contests.list";
+        return "nwcserver.contests.show";
     }
 
     @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)

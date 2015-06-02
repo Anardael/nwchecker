@@ -135,7 +135,7 @@ label.btn-primary {
 			</div>
 			<div class="field description form-group">
 				<label class="col-sm-2 control-label"><spring:message
-						code="contestCreate.description" />: *</label>
+						code="contestCreate.description" />: </label>
 				<div class="col-sm-10">
 					<form:textarea style="resize:none" path="description"
 						class="form-control ckEdit" rows="7"></form:textarea>
@@ -146,7 +146,7 @@ label.btn-primary {
 			<div class="form-group">
 				<div class="field starts">
 					<spring:message code="contestCreate.starts" var="contestStarts" />
-					<label class="col-sm-2 control-label">${contestStarts}: *</label>
+					<label class="col-sm-2 control-label">${contestStarts}:</label>
 
 					<div class="col-sm-3">
 						<div class="">

@@ -22,7 +22,7 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
-	<div class="container">
+	<div class="main-block">
 		<tiles:insertAttribute name="body" />
 	</div>
 	<tiles:insertAttribute name="footer" />

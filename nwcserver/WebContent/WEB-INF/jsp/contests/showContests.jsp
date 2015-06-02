@@ -5,48 +5,47 @@
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="contest" uri="/tlds/ContestTags"%>
-<!-- set path to resources folder -->
-<spring:url value="/resources/" var="resources" />
-<html>
-<body>
-<script type="text/javascript">
-    var successCaption = "<spring:message code="success.caption"/>";
-    var successSignUpContest = "<spring:message code="contest.signUpBody"/>";
-    var alreadySignUp = "<spring:message code="contest.alreadySubscribed"/>";
-    var errorLabel = "<spring:message code="error.caption" />";
-    var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
-    var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
-    var contestId = 0;
 
-</script>
-    <div class="main-block">
-        <c:url var="dataUrl" value="/contestListJson.do" />
-        <table id="contestTable" class="table" data-toggle="table"
-               data-url="${dataUrl}" data-method="get" data-cache="false"
-               data-search="true" data-clear-search="true" data-pagination="true"
-               data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
-            <thead>
-            <tr>
-                <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
-                    Start date
-                </th>
-                <th data-field="title" data-align="center">
-                    Title
-                </th>
-                <th data-field="status" data-align="center" data-sortable="true" data-width="100">
-                    Status
-                </th>
-            </tr>
-            </thead>
-        </table>
-        <security:authorize access="hasRole('ROLE_TEACHER')">
-            <div class="text-center" style="text-align: center; margin-top: 20px">
-                <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'">
-                    <spring:message code="contest.createButton.caption" />
-                </button>
-            </div>
-        </security:authorize>
-    </div>
+<spring:url value="/resources/" var="resources" />
+
+<html>
+    <script type="text/javascript">
+        var successCaption = "<spring:message code="success.caption"/>";
+        var successSignUpContest = "<spring:message code="contest.signUpBody"/>";
+        var alreadySignUp = "<spring:message code="contest.alreadySubscribed"/>";
+        var errorLabel = "<spring:message code="error.caption" />";
+        var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
+        var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
+        var contestId = 0;
+    </script>
+
+    <c:url var="dataUrl" value="/contestListJson.do" />
+    <table id="contestTable" class="table" data-toggle="table"
+           data-url="${dataUrl}" data-method="get" data-cache="false"
+           data-search="true" data-clear-search="true" data-pagination="true"
+           data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
+        <thead>
+        <tr>
+            <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
+                Start date
+            </th>
+            <th data-field="title" data-align="center">
+                Title
+            </th>
+            <th data-field="status" data-align="center" data-sortable="true" data-width="100">
+                Status
+            </th>
+        </tr>
+        </thead>
+    </table>
+
+    <security:authorize access="hasRole('ROLE_TEACHER')">
+        <div class="text-center" style="text-align: center; margin-top: 20px">
+            <button class="btn btn-primary btn-sm" onclick="window.location.href = 'addContest.do'">
+                <spring:message code="contest.createButton.caption" />
+            </button>
+        </div>
+    </security:authorize>
 
     <div id="contestModal" class="modal">
         <div class="modal-dialog">
@@ -109,5 +108,4 @@
             </div>
         </div>
     </div>
-</body>
 </html>

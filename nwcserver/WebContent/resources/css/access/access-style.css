@@ -1,0 +1,8 @@
+.back-btn {
+    width: 150px;
+    text-align: center;
+}
+.denied-msg{
+    text-align: center;
+    color: red;
+}

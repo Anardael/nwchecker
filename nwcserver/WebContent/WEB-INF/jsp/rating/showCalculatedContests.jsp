@@ -2,19 +2,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!-- set path to resources folder -->
+
 <spring:url value="/resources/" var="resources" />
+
 <html>
-<script type="text/javascript">
+    <script type="text/javascript">
 
-	$(document).ready(function() {
-		$('#ratingContest').on('click-row.bs.table', function(e, row, $element) {
-			location.href = 'results.do?id='+ row['id']
-		});
-	});
+        $(document).ready(function() {
+            $('#ratingContest').on('click-row.bs.table', function(e, row, $element) {
+                location.href = 'results.do?id='+ row['id']
+            });
+        });
 
-</script>
-<body>
+    </script>
 	<div class="form-group col-sm-12" style="margin: auto">
 		<ul class="col-sm-offset-2 col-sm-8 ">
 			<c:url var="dataURL" value="/ratingContest.do" />
@@ -37,5 +37,4 @@
 			</table>
 		</ul>
 	</div>
-</body>
 </html>
