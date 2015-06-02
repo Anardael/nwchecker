@@ -4,6 +4,7 @@ import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.utils.PaginationWrapper;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -83,4 +84,6 @@ public interface ContestService {
 	public Contest getLastArchivedContest();
 
     public Long getEntryCountForRating();
+
+    public List<Contest> getContestsByPrincipal(Principal principal);
 }
