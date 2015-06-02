@@ -321,35 +321,6 @@ public class ContestController {
 			e.printStackTrace();
 		}
 		return response;
-/*        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
-			String dat = mapper.writerWithView(UserView.ViewUsers.class).writeValueAsString(teachers);
-			System.out.println(dat);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-        for (User u : teachers) {
-            UserJson newUser = UserJson.createUserJson();
-            newUser.setId(u.getUserId());
-            newUser.setName(u.getDisplayName());
-            newUser.setDepartment(u.getDepartment());
-            if (c != null) {
-                if (c.getUsers().contains(u)) {
-                    newUser.setChose(true);
-                } else {
-                    newUser.setChose(false);
-                }
-            } else {
-                if (author.equals(u.getUsername())) {
-                    newUser.setChose(true);
-                } else {
-                    newUser.setChose(false);
-                }
-            }
-            result.add(newUser);
-        }
-        return result;*/
     }
 
     /**
@@ -441,12 +412,6 @@ public class ContestController {
             result.setStatus("FAIL_EMPTY");
             return result;
         }
-        long yourmilliseconds = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MM,yyyy HH:mm");    
-        Date resultdate = new Date(yourmilliseconds);
-        System.out.println(sdf.format(resultdate));
-        System.out.println(sdf.format(contest.getStarts()));
-        System.out.println(contest.getStarts().getTime()-yourmilliseconds);
         //if start date less than now:
         if (contest.getStarts().getTime() < (System.currentTimeMillis())) {
             result.setStatus("FAIL_STARTS");
