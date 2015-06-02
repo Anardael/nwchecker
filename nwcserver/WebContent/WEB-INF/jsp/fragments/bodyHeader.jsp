@@ -13,7 +13,7 @@
 <link href="${resources}css/fragments/bodyHeader.css" rel="stylesheet" />
 <header>
 	<!-- navigating toolbar -->
-	<div class="navbar navbar-default navbar-static-top">
+	<div class="navbar navbar-default navbar-static-top" style="margin-top: 30px; ">
 		<div class="container">
 			<ul class="nav navbar-nav">
 				<!-- home -->

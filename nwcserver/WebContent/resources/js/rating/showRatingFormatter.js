@@ -1,7 +1,3 @@
-/**
- * Created by Станіслав on 01.03.2015.
- */
-
 function positionFormatter(value) {
     return '<b>' + value + '</b>';
 }

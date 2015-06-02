@@ -58,7 +58,7 @@ public class RatingController {
 	public String getRating(Model model) {
 		model.addAttribute("pageName", "rating");
 
-		return "nwcserver.contests.rating";
+		return "nwcserver.rating.calculated";
 	}
 
 
@@ -98,7 +98,7 @@ public class RatingController {
 		model.addAttribute("contestDurationMinutes",
 				contestDuration.get(Calendar.MINUTE));
 
-		return "nwcserver.contests.results";
+		return "nwcserver.rating.show";
 	}
 
 	/**
