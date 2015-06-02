@@ -85,9 +85,10 @@ public class Contest {
 	@JsonProperty("starts")
 	private Date starts;
 	
-	@JsonIgnore
+
 	@Column(name = "duration")
 	@DateTimeFormat(pattern = "HH:mm")
+    @JsonProperty("duration")
 	private Date duration;
 
 	@OneToMany(mappedBy = "contest", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -105,11 +106,11 @@ public class Contest {
 	private Status status;
 
 	@Column(name = "hidden")
-	@JsonIgnore
+	@JsonProperty("hidden")
 	private boolean hidden;
 
+    @JsonProperty("type")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
 	private TypeContest typeContest;
 
 	public Contest() {
