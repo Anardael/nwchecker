@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
+import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -21,6 +23,9 @@ public class ContestServiceImpl implements ContestService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Autowired
     private ContestDAO contestDAO;
@@ -80,6 +85,16 @@ public class ContestServiceImpl implements ContestService {
     public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber) {
         return contestDAO.getPagedContests(status, pageSize, (pageNumber-1)*pageSize);
     }
+
+    @Override
+    public List<Contest> getContestsByPrincipal(Principal principal) {
+        if (principal == null || !userDAO.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")){
+            return contestDAO.getUnhiddenContests();
+        } else {
+            return contestDAO.getContests();
+        }
+    }
+
     public Long getPageCount(int pageSize){
     	Long count = contestDAO.getEntryCount();
     	if (count%pageSize==0)
@@ -124,4 +139,6 @@ public class ContestServiceImpl implements ContestService {
 
 	return contestDAO.getLastArchivedContest();
 	}
+
+
 }
