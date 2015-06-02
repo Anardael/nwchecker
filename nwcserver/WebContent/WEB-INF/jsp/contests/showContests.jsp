@@ -23,7 +23,8 @@
     <table id="contestTable" class="table" data-toggle="table"
            data-url="${dataUrl}" data-method="get" data-cache="false"
            data-search="true" data-clear-search="true" data-pagination="true"
-           data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc">
+           data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc"
+           data-row-style="rowStyle">
         <thead>
         <tr>
             <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
@@ -32,7 +33,8 @@
             <th data-field="title" data-align="center">
                 Title
             </th>
-            <th data-field="status" data-align="center" data-sortable="true" data-width="100">
+            <th data-field="status" data-align="center" data-sortable="true" data-width="100"
+                data-formatter="statusFormatter">
                 Status
             </th>
         </tr>
