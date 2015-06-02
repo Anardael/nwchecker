@@ -10,6 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
@@ -74,6 +75,10 @@ public class TaskPass {
 	@JoinColumn(name ="compiler")
 	@JsonView(JsonViews.TaskPassView.class)
 	private Compiler compiler;
+	
+	@JsonIgnore
+	@Column(name = "successfulResult")
+	private String result;
 	
 	public int getId() {
 		return id;

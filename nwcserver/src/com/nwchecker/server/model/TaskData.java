@@ -38,6 +38,10 @@ public class TaskData {
     @Lob
     @Column(name = "outputData", length = 20971520)
     private byte[] outputData;
+        
+    //TODO: add ability to save data.
+    @Column(name = "rate", nullable = false, columnDefinition="int default 1")
+    private int rate;
 
     public int getId() {
         return id;
@@ -78,5 +82,13 @@ public class TaskData {
         this.inputData = inputData;
         this.outputData = outputData;
     }
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
 
 }

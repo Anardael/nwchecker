@@ -8,6 +8,8 @@ function preparePostTaskJson(taskId) {
     $('#taskModalForm_' + taskId + ' .newTest:not([hidden=true])').each(function() {
         var inLength = $(this).find("input[name^='in']").val().length;
         var outLength = $(this).find("input[name^='out']").val().length;
+        console.log(inLength);
+        console.log(outLength);
         if ((inLength != 0 && outLength == 0) || (inLength == 0 && outLength != 0)) {
             errrosIndex[index] = avaibleTestsInt;
             index++;
@@ -28,6 +30,7 @@ function preparePostTaskJson(taskId) {
             $controlGroup.addClass('has-error');
             $controlGroup.find('.help-inline').html("Each input file should have appropriate output file.");
         }
+        Ladda.stopAll();
     }
 }
 

@@ -120,17 +120,18 @@ public class TaskController {
 			Iterator<String> itr = request.getFileNames();
 			LinkedList<TaskData> data = new LinkedList<TaskData>();
 			while (itr.hasNext()) {
+				TaskData newData = new TaskData();
 				MultipartFile mpf = request.getFile(itr.next());
-				TaskData newDate = new TaskData();
-				newDate.setInputData(mpf.getBytes());
+				newData.setInputData(mpf.getBytes());
+				
 				mpf = request.getFile(itr.next());
-				newDate.setOutputData(mpf.getBytes());
-				newDate.setTask(task);
-				data.add(newDate);
+				newData.setOutputData(mpf.getBytes());
+				newData.setTask(task);
+				data.add(newData);
 				// check if size is less than 20mb:
 
-				if (newDate.getInputData().length > 20971520
-						|| newDate.getOutputData().length > 20971520) {
+				if (newData.getInputData().length > 20971520
+						|| newData.getOutputData().length > 20971520) {
 					throw new MaxUploadSizeExceededException(1);
 				}
 			}
