@@ -3,12 +3,13 @@ $(document).ready(function () {
     }).on('click-row.bs.table', function (e, row, $element) {
         console.log(JSON.stringify(row));
 
+        var typeContest = row['type'];
         window.contestId = row['id'];
 
         $('#title-text').text(row['title']);
         $('#start_date').text(row['starts']);
         $('#duration').text(row['duration']/3600000);
-        $('#type').text(row['type']);
+        $('#type').text(typeContest['name']);
         $('#description').text(row['description']);
 
         switch (row['status']){
@@ -59,7 +60,34 @@ function edited(contestId) {
 function openContest(contestId) {
     location.href = 'passContest.do?id=' + contestId;
 }
+
 function archive(){
     location.href='etiam.do';
 }
 
+function statusFormatter(value, row) {
+    rowStyle(row);
+    switch (value){
+        case 'GOING': {
+            return '<span style="color:limegreen;">' + value + '</span>';
+        }
+        case 'ARCHIVE': {
+            return '<span style="color:#ff0000;">' + value + '</span>';
+        }
+        case 'PREPARING': {
+            return '<span style="color:cornflowerblue;">' + value + '</span>';
+        }
+        case 'RELEASE': {
+            return '<span style="color:blue;">' + value + '</span>';
+        }
+    }
+}
+
+function rowStyle(row) {
+    if(row['hidden']){
+        return {
+            classes: 'warning'
+        };
+    }
+    return {};
+}
