@@ -19,7 +19,9 @@
         var contestId = 0;
     </script>
 
+
     <c:url var="dataUrl" value="/contestListJson.do" />
+
     <table id="contestTable" class="table" data-toggle="table"
            data-url="${dataUrl}" data-method="get" data-cache="false"
            data-search="true" data-clear-search="true" data-pagination="true"

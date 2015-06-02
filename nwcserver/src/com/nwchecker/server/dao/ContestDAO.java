@@ -74,6 +74,8 @@ public interface ContestDAO {
 
     List<Contest> getContestsWithDynamicRating();
 
+    List<Contest> getUnhiddenContests();
+
     public Contest getNearestContest() ;
 
     public Contest getLastArchivedContest();

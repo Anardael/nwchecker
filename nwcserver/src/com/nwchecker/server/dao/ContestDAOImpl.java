@@ -85,6 +85,13 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 		query.setParameter("hidden", false);
 		return query.list();
 	}
+
+    @Transactional
+    @Override
+    public List<Contest> getUnhiddenContests() {
+        return (List<Contest>) getHibernateTemplate().find("from Contest where hidden=?", false);
+    }
+
     @Transactional
 	@Override
 	public Long getEntryCount() {

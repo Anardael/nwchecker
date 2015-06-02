@@ -483,8 +483,7 @@ public class ContestController {
     }
 
     @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
-    public @ResponseBody List<Contest> getContestListJson() {
-        return contestService.getContests();
+    public @ResponseBody List<Contest> getContestListJson(Principal principal) {
+        return contestService.getContestsByPrincipal(principal);
     }
-
 }
