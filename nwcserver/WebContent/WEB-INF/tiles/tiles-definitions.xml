@@ -308,20 +308,6 @@
 	<definition name="nwcserver.abstract.sidepanel" extends="nwcserver.abstract.full"
 				template="/WEB-INF/jsp/layouts/templateSidepanel.jsp">
 		<put-attribute name="menu" value="" />
-
-		<put-list-attribute name="stylesheets" inherit="true"
-							cascade="true">
-			<add-attribute value="css/bootstrap.css" />
-			<add-attribute value="css/bootstrap-submenu.css" />
-			<add-attribute value="css/styles.css" />
-		</put-list-attribute>
-
-		<put-list-attribute name="scripts" inherit="true"
-							cascade="true">
-			<add-attribute value="js/jquery-2.1.3.min.js" />
-			<add-attribute value="js/bootstrap/bootstrap.min.js" />
-			<add-attribute value="js/dropdown.js" />
-		</put-list-attribute>
 	</definition>
 
 	<!-- Pages for tasks: passing contests, checking task statistic -->
@@ -371,18 +357,12 @@
 		<put-list-attribute name="stylesheets" inherit="true"
 							cascade="true">
 			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css" />
-			<add-attribute
-					value="js/jquery-ui-1.11.4/custom-theme/jquery-ui-1.10.0.custom.css" />
-			<add-attribute value="js/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css" />
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css" />
 			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css" />
 		</put-list-attribute>
 
 		<put-list-attribute name="scripts" inherit="true"
 							cascade="true">
-			<add-attribute value="js/jquery-ui-1.11.4/jquery-ui.min.js" />
-			<add-attribute value="js/jtable.2.4.0/external/json2.js" />
-			<add-attribute value="js/jtable.2.4.0/jquery.jtable.js" />
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 			<add-attribute
 					value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
