@@ -87,12 +87,20 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public List<Contest> getContestsByPrincipal(Principal principal) {
-        if (principal == null || !userDAO.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")){
-            return contestDAO.getUnhiddenContests();
-        } else {
-            return contestDAO.getContests();
-        }
+    public List<Contest> getUnhiddenContests() {
+        return contestDAO.getUnhiddenContests();
+    }
+
+    @Override
+    public List<Contest> getHiddenContestsByUserName(String username) {
+        int userId = userDAO.getUserByUsername(username).getUserId();
+        return contestDAO.getHiddenContestsByUserId(userId);
+    }
+
+    @Override
+    public List<Contest> getContestsByUserName(String username) {
+        int userId = userDAO.getUserByUsername(username).getUserId();
+        return contestDAO.getContestsByUserId(userId);
     }
 
     public Long getPageCount(int pageSize){

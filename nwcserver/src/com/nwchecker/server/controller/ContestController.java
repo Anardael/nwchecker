@@ -92,7 +92,6 @@ public class ContestController {
     @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
-
         if(principal == null){
             model.addAttribute("pageName", "contest");
 
@@ -471,6 +470,19 @@ public class ContestController {
 
     @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
     public @ResponseBody List<Contest> getContestListJson(Principal principal) {
-        return contestService.getContestsByPrincipal(principal);
+        if(principal == null){
+            return contestService.getUnhiddenContests();
+        } else {
+            return contestService.getContestsByUserName(principal.getName());
+        }
+    }
+
+    @RequestMapping(value = "/contestListUpdateJson", method = RequestMethod.GET)
+    public @ResponseBody List<Contest> updateContestListJson(@RequestParam("hidden") boolean hidden, Principal principal) {
+        if(!hidden){
+            return contestService.getUnhiddenContests();
+        } else {
+            return contestService.getHiddenContestsByUserName(principal.getName());
+        }
     }
 }

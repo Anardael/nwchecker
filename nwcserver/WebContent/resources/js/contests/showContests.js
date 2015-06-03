@@ -91,3 +91,51 @@ function rowStyle(row) {
     }
     return {};
 }
+
+function showHidden(value){
+    console.log(value);
+    switch (value){
+        case 'all': {
+            $('#contestTable').bootstrapTable('destroy');
+            $('#contestTable').bootstrapTable({
+                method: 'get',
+                url: 'contestListJson.do'
+            });
+        } break;
+        case 'unhidden': {
+            $('#contestTable').bootstrapTable('destroy');
+            $('#contestTable').bootstrapTable({
+                method: 'get',
+                url: 'contestListUpdateJson.do?hidden=' + false
+            });
+        } break;
+        case 'hidden': {
+            $('#contestTable').bootstrapTable('destroy');
+            $('#contestTable').bootstrapTable({
+                method: 'get',
+                url: 'contestListUpdateJson.do?hidden=' + true
+            });
+        } break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

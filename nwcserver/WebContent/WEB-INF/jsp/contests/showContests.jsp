@@ -19,14 +19,46 @@
         var contestId = 0;
     </script>
 
+    <security:authorize access="hasRole('ROLE_TEACHER')">
+        <div class="radio-inline">
+            <label>
+                <input type="radio" name="optionRadio" id="optionsRadios1" value="all" checked
+                        onclick="showHidden(value)">
+                All
+            </label>
+        </div>
+        <div class="radio-inline">
+            <label>
+                <input type="radio" name="optionRadio" id="optionsRadios2" value="unhidden"
+                       onclick="showHidden(value)">
+                Unhidden
+            </label>
+        </div>
+        <div class="radio-inline">
+            <label class="hidden-radio">
+                <input type="radio" name="optionRadio" id="optionsRadios3" value="hidden"
+                       onclick="showHidden(value)">
+                Hidden
+            </label>
+        </div>
+    </security:authorize>
+
+    <div class="form-inline pull-right">
+        <select class="form-control">
+            <option>ALL</option>
+            <option>GOING</option>
+            <option>RELEASE</option>
+            <option>PREPARING</option>
+            <option>ARCHIVE</option>
+        </select>
+    </div>
 
     <c:url var="dataUrl" value="/contestListJson.do" />
-
     <table id="contestTable" class="table" data-toggle="table"
            data-url="${dataUrl}" data-method="get" data-cache="false"
-           data-search="true" data-clear-search="true" data-pagination="true"
-           data-show-pagination-switch="true" data-sort-name="starts" data-sort-order="desc"
-           data-row-style="rowStyle">
+           data-search="true" data-clear-search="true" data-search-align="left"
+           data-pagination="true" data-show-pagination-switch="true" data-sort-name="starts"
+           data-sort-order="desc" data-row-style="rowStyle" data-maintain-selected="true">
         <thead>
         <tr>
             <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">

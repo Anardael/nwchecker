@@ -85,5 +85,9 @@ public interface ContestService {
 
     public Long getEntryCountForRating();
 
-    public List<Contest> getContestsByPrincipal(Principal principal);
+    List<Contest> getContestsByUserName(String username);
+
+    List<Contest> getHiddenContestsByUserName(String username);
+
+    List<Contest> getUnhiddenContests();
 }
