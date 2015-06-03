@@ -126,7 +126,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     @Transactional
     public Contest getNearestContest() {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();;
-        Query query = session.createQuery("from Contest where status='RELEASE' order by starts asc");
+        Query query = session.createQuery("from Contest where status='RELEASE' and hidden=false order by starts asc");
         return (Contest) query.setMaxResults(1).uniqueResult();
     }
 

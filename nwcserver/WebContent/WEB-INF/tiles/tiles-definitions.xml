@@ -237,6 +237,7 @@
 		<put-list-attribute name ="scripts" inherit="true" cascade="true">
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 			<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
+			<add-attribute value="js/contests/showContests.js" />
 		</put-list-attribute>
 	</definition>
 

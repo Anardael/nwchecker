@@ -76,9 +76,9 @@ public class TaskPass {
 	@JsonView(JsonViews.TaskPassView.class)
 	private Compiler compiler;
 	
-	@JsonIgnore
-	@Column(name = "successfulResult")
-	private String result;
+//	@JsonIgnore
+//	@Column(name = "successfulResult")
+//	private String result;
 	
 	public int getId() {
 		return id;
