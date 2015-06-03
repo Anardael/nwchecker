@@ -1,6 +1,8 @@
 function setMask() {
     $('#datetimepicker1').datetimepicker({
         language: 'uk'
+    }).on('dp.change', function(e){
+    	$('.bootstrap-datetimepicker-widget').hide();
     });
     $('#datetimepicker4').datetimepicker({
         pickDate: false,

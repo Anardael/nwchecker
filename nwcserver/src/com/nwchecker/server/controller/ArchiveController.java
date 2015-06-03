@@ -2,10 +2,12 @@ package com.nwchecker.server.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.breadcrumb.annotations.Link;
+import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 
 import org.apache.log4j.Logger;
@@ -21,6 +23,13 @@ public class ArchiveController {
 
 	@Autowired
 	TaskService taskService;
+	
+	@Autowired
+	TaskPassService taskPassService;
+	
+	@Autowired
+	CompilerDAO compilerService;
+	
 	private static final Logger LOG = Logger.getLogger(ArchiveController.class);
 
 	@Link(label = "archive.caption", family = "archive", parent = "")
@@ -52,8 +61,13 @@ public class ArchiveController {
 
 	@JsonView(JsonViews.SingleTask.class)
 	@RequestMapping("/getTaskDetails")
-	public @ResponseBody Task getTaskDetails(@RequestParam("taskId") int taskId) {
+	public String getTaskDetails(@RequestParam("id") int taskId, Model model) {
 		LOG.info("Attempted to get task details");
-		return taskService.getTaskById(taskId);
+		Task currentTask = taskService.getTaskById(taskId);
+		model.addAttribute("taskSuccessRate",
+				taskPassService.getTaskRateById(taskId));
+		model.addAttribute("currentTask", currentTask);
+		model.addAttribute("compilers", compilerService.getAllCompilers());
+		return "nwcserver.tasks.archivedTask";
 	}
 }

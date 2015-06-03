@@ -1,15 +1,10 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
+import com.nwchecker.server.json.ContestJson;
 import com.nwchecker.server.json.StatusContestJson;
 import com.nwchecker.server.json.ValidationResponse;
-import com.nwchecker.server.json.wrapper.FilteredResultProvider;
-import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScheduleService;
 
@@ -30,10 +25,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * <h1>List Contests Controller</h1>
- * This spring controller contains mapped methods, that
- * allows administrator to view list of contests and
- * edit contests parameters.
+ * <h1>List Contests Controller</h1> This spring controller contains mapped
+ * methods, that allows administrator to view list of contests and edit contests
+ * parameters.
  * <p>
  * <b>Note:</b>Only ADMIN allows to use this methods.
  *
@@ -44,155 +38,154 @@ import java.util.List;
 @Controller
 @SessionAttributes("user")
 public class ListContestsController {
-    private static final Logger LOG = Logger
-            .getLogger(AdminOptionsController.class);
+	private static final Logger LOG = Logger
+			.getLogger(AdminOptionsController.class);
 
-    @Autowired
-    private ContestService contestService;
+	@Autowired
+	private ContestService contestService;
 
-    @Autowired
-    private ScheduleService scheduleService;
+	@Autowired
+	private ScheduleService scheduleService;
 
-    /**
-     * This mapped method used to return page where admin can
-     * view all contests.
-     * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
-     *
-     * @param principal This is general information about user, who
-     *                  tries to call this method
-     * @return <b>listContests.jsp</b> Returns page when admin can watch contests
-     */
-    @Link(label="contest.caption", family="adminOptions", parent = "")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/listContests", method = RequestMethod.GET)
-    public String userRequests(Principal principal, Model model) {
-        LOG.info("\"" + principal.getName() + "\" entered to administrator page \"List of contests\"."); 
-        model.addAttribute("pageName", "listContests");
-        return "nwcserver.adminOptions.listContests";
-    }
+	/**
+	 * This mapped method used to return page where admin can view all contests.
+	 * <p>
+	 * <b>Note:</b>Only ADMIN has rights to use this method.
+	 *
+	 * @param principal
+	 *            This is general information about user, who tries to call this
+	 *            method
+	 * @return <b>listContests.jsp</b> Returns page when admin can watch
+	 *         contests
+	 */
+	@Link(label = "contest.caption", family = "adminOptions", parent = "")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/listContests", method = RequestMethod.GET)
+	public String userRequests(Principal principal, Model model) {
+		LOG.info("\"" + principal.getName()
+				+ "\" entered to administrator page \"List of contests\".");
+		model.addAttribute("pageName", "listContests");
+		return "nwcserver.adminOptions.listContests";
+	}
 
-    /**
-     * This mapped method used to list of contests in JSON.
-     * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
-     *
-     * @param principal This is general information about user, who
-     *                  tries to call this method
-     * @return Returns <b>List of Contests</b> in JSON format
-     */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
-    @ResponseBody
-    public String getListOfContests(Principal principal) {
-        LOG.info("\"" + principal.getName() + "\" tries to receive list of contests.");
-        List<Contest> contests = contestService.getContests();
-        List<MorphedResult<Contest>> morphedContests = new LinkedList<MorphedResult<Contest>>();
-        for (Contest c : contests){
-        	MorphedResult<Contest> morphedContest = new MorphedResult<Contest>(c);
-        	List<String> users = new LinkedList<String>();
-        	for (User u : c.getUsers()){
-        		users.add(u.getDisplayName());
-        	}
-        	morphedContest.addExpansionData("users", users);
-        	morphedContests.add(morphedContest);
-        }
-        ObjectMapper jsonMapper = new ObjectMapper();
-		jsonMapper.setFilters(new FilteredResultProvider());
-		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		String result = null;
-		try {
-			result = jsonMapper.writeValueAsString(morphedContests);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	/**
+	 * This mapped method used to list of contests in JSON.
+	 * <p>
+	 * <b>Note:</b>Only ADMIN has rights to use this method.
+	 *
+	 * @param principal
+	 *            This is general information about user, who tries to call this
+	 *            method
+	 * @return Returns <b>List of Contests</b> in JSON format
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/getListOfContests", method = RequestMethod.GET)
+	public @ResponseBody List<ContestJson> getListOfContests(Principal principal) {
+		LOG.info("\"" + principal.getName()
+				+ "\" tries to receive list of contests.");
+		List<Contest> contests = contestService.getContests();
+		List<ContestJson> contestJson = new LinkedList<ContestJson>();
+		for (Contest c : contests) {
+			contestJson.add(ContestJson.createListContestsJson(c));
 		}
-		return result;
-    }
+		return contestJson;
+	}
 
-    /**
-     * This mapped method used to return contest status.
-     * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
-     *
-     * @param contestId ID of contest
-     * @param principal This is general information about user, who
-     *                  tries to call this method
-     * @return Contest status
-     */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/getContestStatus", method = RequestMethod.GET)
-    @ResponseBody
-    public StatusContestJson getContestStatus(@RequestParam("contestId") int contestId, Principal principal) {
-        LOG.info("\"" + principal.getName() + "\" tries to receive contest status.");
-        Contest contest = contestService.getContestByID(contestId);
-        contest.getStatus();
-        contest.isHidden();        
-        String contestStatus = contestService.getContestByID(contestId).getStatus().toString();
-        boolean isContestHidden = contestService.getContestByID(contestId).isHidden();
-        LOG.info("\"" + principal.getName() + "\" received contest status.");
-        return StatusContestJson.createStatusContestJson(contestStatus, isContestHidden);
-    }
+	/**
+	 * This mapped method used to return contest status.
+	 * <p>
+	 * <b>Note:</b>Only ADMIN has rights to use this method.
+	 *
+	 * @param contestId
+	 *            ID of contest
+	 * @param principal
+	 *            This is general information about user, who tries to call this
+	 *            method
+	 * @return Contest status
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/getContestStatus", method = RequestMethod.GET)
+	@ResponseBody
+	public StatusContestJson getContestStatus(
+			@RequestParam("contestId") int contestId, Principal principal) {
+		LOG.info("\"" + principal.getName()
+				+ "\" tries to receive contest status.");
+		Contest contest = contestService.getContestByID(contestId);
+		contest.getStatus();
+		contest.isHidden();
+		String contestStatus = contestService.getContestByID(contestId)
+				.getStatus().toString();
+		boolean isContestHidden = contestService.getContestByID(contestId)
+				.isHidden();
+		LOG.info("\"" + principal.getName() + "\" received contest status.");
+		return StatusContestJson.createStatusContestJson(contestStatus,
+				isContestHidden);
+	}
 
-    /**
-     * This mapped method used to change selected contest status.
-     * <p>
-     * <b>Note:</b>Only ADMIN has rights to use this method.
-     *
-     * @param contestId ID of contest
-     * @param contestStatus New contest status
-     * @param contestHidden <b>true</b> if contest need to be hidden
-     * @param principal This is general information about user, who
-     *                  tries to call this method
-     * @return Returns "SUCCESS" status.
-     */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/setContestStatus", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ValidationResponse setContestStatus(@RequestParam("contestId") int contestId, @RequestParam("contestStatus") Contest.Status contestStatus,
-                                        @RequestParam("contestHidden") boolean contestHidden, Principal principal) {
-        Contest contest = contestService.getContestByID(contestId);
-        boolean isContestStatusChanged = false;
-        boolean isContestHiddenChanged = false;
-        if (!contest.getStatus().toString().equals(contestStatus) && contest.getStatus() != Contest.Status.ARCHIVE) {
-            switch (contestStatus) {
-                case GOING: {
-                    contest.setStarts(new Date());
-                    contest.setStatus(Contest.Status.GOING);
-                    isContestStatusChanged = true;
-                    break;
-                }
-                case PREPARING: {
-                    contest.setStatus(Contest.Status.PREPARING);
-                    isContestStatusChanged = true;
-                    break;
-                }
-                case RELEASE: {
-                    contest.setStatus(Contest.Status.RELEASE);
-                    isContestStatusChanged = true;
-                    break;
-                }
-                case ARCHIVE: {
-                    contest.setStatus(Contest.Status.ARCHIVE);
-                    isContestStatusChanged = true;
-                    break;
-                }
-            }
-        }
-        if (contest.isHidden() != contestHidden) {
-            contest.setHidden(contestHidden);
-            isContestHiddenChanged = true;
-        }
+	/**
+	 * This mapped method used to change selected contest status.
+	 * <p>
+	 * <b>Note:</b>Only ADMIN has rights to use this method.
+	 *
+	 * @param contestId
+	 *            ID of contest
+	 * @param contestStatus
+	 *            New contest status
+	 * @param contestHidden
+	 *            <b>true</b> if contest need to be hidden
+	 * @param principal
+	 *            This is general information about user, who tries to call this
+	 *            method
+	 * @return Returns "SUCCESS" status.
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/setContestStatus", method = RequestMethod.POST)
+	public @ResponseBody ValidationResponse setContestStatus(
+			@RequestParam("contestId") int contestId,
+			@RequestParam("contestStatus") Contest.Status contestStatus,
+			@RequestParam("contestHidden") boolean contestHidden,
+			Principal principal) {
+		Contest contest = contestService.getContestByID(contestId);
+		boolean isContestStatusChanged = false;
+		boolean isContestHiddenChanged = false;
+		if (!contest.getStatus().toString().equals(contestStatus)
+				&& contest.getStatus() != Contest.Status.ARCHIVE) {
+			switch (contestStatus) {
+			case GOING: {
+				contest.setStarts(new Date());
+				contest.setStatus(Contest.Status.GOING);
+				isContestStatusChanged = true;
+				break;
+			}
+			case PREPARING: {
+				contest.setStatus(Contest.Status.PREPARING);
+				isContestStatusChanged = true;
+				break;
+			}
+			case RELEASE: {
+				contest.setStatus(Contest.Status.RELEASE);
+				isContestStatusChanged = true;
+				break;
+			}
+			case ARCHIVE: {
+				contest.setStatus(Contest.Status.ARCHIVE);
+				isContestStatusChanged = true;
+				break;
+			}
+			}
+		}
+		if (contest.isHidden() != contestHidden) {
+			contest.setHidden(contestHidden);
+			isContestHiddenChanged = true;
+		}
 
-        if (isContestStatusChanged) {
-            contestService.mergeContest(contest);
-            scheduleService.refresh();
-        } else if (isContestHiddenChanged) {
-            contestService.mergeContest(contest);
-        }
-        //return SUCCESS status (in JSON):
-        return ValidationResponse.createValidationResponse("SUCCESS");
-    }
+		if (isContestStatusChanged) {
+			contestService.mergeContest(contest);
+			scheduleService.refresh();
+		} else if (isContestHiddenChanged) {
+			contestService.mergeContest(contest);
+		}
+		// return SUCCESS status (in JSON):
+		return ValidationResponse.createValidationResponse("SUCCESS");
+	}
 }
-

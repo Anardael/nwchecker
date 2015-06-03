@@ -48,6 +48,7 @@ import java.util.List;
  */
 @Controller
 public class TaskController {
+	private final long MAX_FILE_SIZE_BYTE = 20971520;
 
 	private static final Logger LOG = Logger.getLogger(TaskController.class);
 
@@ -130,8 +131,8 @@ public class TaskController {
 				data.add(newData);
 				// check if size is less than 20mb:
 
-				if (newData.getInputData().length > 20971520
-						|| newData.getOutputData().length > 20971520) {
+				if (newData.getInputData().length > MAX_FILE_SIZE_BYTE
+						|| newData.getOutputData().length > MAX_FILE_SIZE_BYTE) {
 					throw new MaxUploadSizeExceededException(1);
 				}
 			}

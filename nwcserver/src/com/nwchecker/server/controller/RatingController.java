@@ -1,21 +1,14 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.json.JTableResponseList;
-import com.nwchecker.server.json.wrapper.FilteredResultProvider;
-import com.nwchecker.server.json.wrapper.MorphedResult;
+import com.nwchecker.server.json.ContestPassJson;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.service.ContestPassService;
 import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.RatingService;
 import com.nwchecker.server.service.ScoreCalculationService;
-import com.nwchecker.server.utils.ContestStartTimeComparator;
 
-import com.nwchecker.server.utils.PaginationWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,8 +39,8 @@ public class RatingController {
 	 * contests.
 	 * <p/>
 	 *
-//	 * @param model
-	 *            Spring Framework model for this page
+	 * // * @param model Spring Framework model for this page
+	 * 
 	 * @return <b>CintestRating.jsp</b> Returns page with completed contests
 	 *         list
 	 */
@@ -61,12 +52,10 @@ public class RatingController {
 		return "nwcserver.rating.calculated";
 	}
 
-
 	@RequestMapping(value = "/ratingContest", method = RequestMethod.GET)
-	 public  @ResponseBody 	List<Contest> getContestForRating(){
+	public @ResponseBody List<Contest> getContestForRating() {
 		return contestService.getContestForRating();
 	}
-
 
 	/**
 	 * This mapped method used to show page that contains contest results of
@@ -111,32 +100,15 @@ public class RatingController {
 	 * @return <b>JSON</b> Returns <b>results of contest participants</b>
 	 */
 	@RequestMapping(value = "/resultsList", method = RequestMethod.GET)
-	public @ResponseBody String getResultsList(
+	public @ResponseBody List<ContestPassJson> getResultsList(
 			@RequestParam(value = "id") int contestId) {
 		List<ContestPass> contestPasses = ratingService
 				.getJsonListForContestPassByContestId(contestId);
-		List<MorphedResult<ContestPass>> morphedContestPass = new LinkedList<MorphedResult<ContestPass>>();
+		List<ContestPassJson> contestPassJson = new LinkedList<ContestPassJson>();
 		for (ContestPass contestPass : contestPasses) {
-			MorphedResult<ContestPass> morphedPass = new MorphedResult<ContestPass>(
-					contestPass);
-			morphedPass.addExpansionData("displayName", contestPass.getUser()
-					.getDisplayName());
-			morphedPass.addExpansionData("tasksPassedCount",
-					contestPass.getPassedCount() + "/"
-							+ contestPass.getContest().getTasks().size());
-
-			morphedContestPass.add(morphedPass);
+			contestPassJson.add(ContestPassJson
+					.createContestPassJson(contestPass));
 		}
-		ObjectMapper jsonMapper = new ObjectMapper();
-		jsonMapper.setFilters(new FilteredResultProvider());
-		jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		String response = null;
-		try {
-			response = jsonMapper.writeValueAsString(morphedContestPass);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return response;
+		return contestPassJson;
 	}
 }

@@ -23,8 +23,6 @@
         <intercept-url pattern="/getListOfContests**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/getContestStatus**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/setContestStatus**" access="hasRole('ROLE_ADMIN')" />
-       	<intercept-url pattern="/TaskStatistic**" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/TaskStatisticTable**" access="hasRole('ROLE_USER')" />
         <form-login login-page="/login.do"
                     authentication-failure-url="/login.do?error" 
         />

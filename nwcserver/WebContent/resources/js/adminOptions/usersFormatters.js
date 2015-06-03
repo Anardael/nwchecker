@@ -4,8 +4,19 @@ var ROLE_USER;
 var UNDEFINED;
 var WANT_ROLE_TEACHER;
 
+function operateFormatter(value, row, index) {
+	return [
+			'<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+			'<i class="glyphicon glyphicon-edit"></i>', '</a>' ].join('');
+}
+window.operateEvents = {
+        'click .edit': function (e, value, row, index) {
+        	location.href = 'userEdit.do?Username=' + row['username'];
+        }
+    };
+
 function usernameFormatter(value) {
-	return '<a href="userEdit.do?username=' + value + '">' + value + '</a>';
+	return '<a href="userEdit.do?Username=' + value + '">' + value + '</a>';
 }
 
 function rolesFormatter(value) {

@@ -11,11 +11,6 @@ var PASSWORD_EQUALS;
 $(document).ready(function() {
 	$('#registrationForm').validate({
 		rules : {
-			username:{
-				required:true,
-				minlength:3,
-				maxlength:16
-			},
 			displayName:{
 				required:true,
 				minlength:3,
@@ -33,16 +28,11 @@ $(document).ready(function() {
 			confirmPassword:{
 				required:true,
 				minlength:6,
-				maxlength:32,				
-				equalsTo:'#password'
+				maxlength:32,
+				equalTo:'#password'
 			}
 		},
 		messages:{
-			username:{
-				required:USERNAME_REQUIRED,
-				minlength:USERNAME_SIZE,
-				maxlength:USERNAME_SIZE
-			},
 			displayName:{
 				required:DISPLAYNAME_REQUIRED,
 				minlength:DISPLAYNAME_SIZE,
@@ -61,7 +51,7 @@ $(document).ready(function() {
 				required:CONFIRM_PASSWORD_REQUIRED,
 				minlength:PASSWORD_SIZE,
 				maxlength:PASSWORD_SIZE,				
-				equalsTo:'#password'
+				equalTo:PASSWORD_EQUALS
 			}
 		}
 	});

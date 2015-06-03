@@ -121,7 +121,7 @@ public class AdminOptionsController {
 	@Link(label = "admin.userEdit.caption", family = "adminOptions", parent = "admin.users.caption")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/userEdit", method = RequestMethod.GET)
-	public String user(@RequestParam(value = "username") String username,
+	public String user(@RequestParam(value = "Username") String username,
 			Model model, Principal principal) {
 		LOG.info("\"" + principal.getName() + "\" tries to edit user \""
 				+ username + "\".");
@@ -170,7 +170,7 @@ public class AdminOptionsController {
 			LOG.warn("User \"" + userData.getUsername()
 					+ "\" data validation failed!");
 			model.addAttribute("roles", user.getRoles());
-			return "adminOptions/userEdit";
+			return "nwcserver.adminOptions.userEdit";
 		}
 		LOG.info("User \"" + userData.getUsername()
 				+ "\" data validation passed.");

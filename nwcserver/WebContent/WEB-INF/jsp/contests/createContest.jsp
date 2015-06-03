@@ -149,14 +149,12 @@ label.btn-primary {
 					<label class="col-sm-2 control-label">${contestStarts}:</label>
 
 					<div class="col-sm-3">
-						<div class="">
-							<div class='input-group date' id='datetimepicker1'>
-								<%-- --%>
-								<form:input path="starts" type='text' class="form-control"
-									data-date-format="YYYY-MM-DD HH:mm" />
-								<span class="input-group-addon"><span
-									class="glyphicon glyphicon-calendar"></span> </span>
-							</div>
+						<div class='input-group date' id='datetimepicker1'>
+							<%-- --%>
+							<form:input path="starts" type='text' class="form-control"
+								data-date-format="YYYY-MM-DD HH:mm" />
+							<span class="input-group-addon"><span
+								class="glyphicon glyphicon-calendar"></span> </span>
 						</div>
 						<span class="help-inline control-label"></span>
 					</div>
