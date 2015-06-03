@@ -413,60 +413,6 @@ public class ContestController {
         }
         return result;
     }
-    
-    @Link(label="contest.caption", family="contests", parent = "")
-    @RequestMapping("/getContestsByStatus")
-    public String getContestsByStatus(@RequestParam (defaultValue="1") int page,@RequestParam (defaultValue="3") int pageSize,@RequestParam("status") String status,
-                                      Model model, Principal principal) {
-        // get сontests by status from DB:
-        Long count = contestService.getPageCount(Contest.Status.stringToStatus(status), pageSize);
-        model.addAttribute("currentPage" , page);
-        model.addAttribute("pageCount" ,count );
-
-        List<Contest> contestByStatus = contestService.getPagedContests(Contest.Status.stringToStatus(status), pageSize, page);
-        // get unhidden contests:
-        List<Contest> unhidden = new LinkedList<Contest>();
-        for (Contest c : contestByStatus) {
-            if (!c.isHidden()) {
-                unhidden.add(c);
-            }
-        }
-        if (principal == null) {
-            // return all "unhidden" contests:
-            model.addAttribute("contests", unhidden);
-            return "nwcserver.contests.show";
-        }
-
-        User user = userService.getUserByUsername(principal.getName());
-
-        if (((UsernamePasswordAuthenticationToken) principal).getAuthorities()
-                .contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-            List<String> editableContestIndexes = new LinkedList<String>();
-            // getContests which user can edit:
-            if ((user.getContest() != null) && (user.getContest().size() > 0)) {
-                for (Contest c : user.getContest()) {
-                    if (c.getStatus().equals(Contest.Status.PREPARING)
-                            || c.getStatus().equals(Contest.Status.ARCHIVE)) {
-                        // set index for view
-                        if (c.getStatus().equals(Contest.Status.PREPARING)) {
-                            editableContestIndexes.add("index" + c.getId()
-                                    + "index");
-                        }
-                        // add Contest to unhidden list:
-                        if (c.isHidden()) {
-                            unhidden.add(c);
-                        }
-                    }
-                }
-            }
-            model.addAttribute("editContestIndexes", editableContestIndexes);
-            // set usernames for editing contests:
-            model.addAttribute("nowContestEdits",
-                    contestEditWatcherService.getNowEditsMap());
-        }
-        model.addAttribute("contests", unhidden);
-        return "nwcserver.contests.show";
-    }
 
     @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
     public @ResponseBody List<Contest> getContestListJson(Principal principal) {
@@ -478,11 +424,17 @@ public class ContestController {
     }
 
     @RequestMapping(value = "/contestListUpdateJson", method = RequestMethod.GET)
-    public @ResponseBody List<Contest> updateContestListJson(@RequestParam("hidden") boolean hidden, Principal principal) {
+    public @ResponseBody List<Contest> updateContestListJsonByHidden(@RequestParam("hidden") boolean hidden, Principal principal) {
         if(!hidden){
             return contestService.getUnhiddenContests();
         } else {
             return contestService.getHiddenContestsByUserName(principal.getName());
         }
+    }
+
+    @RequestMapping(value = "/contestListJsonByStatus", method = RequestMethod.GET)
+    public @ResponseBody List<Contest> updateContestListJsonByStatus(@RequestParam("status") String status, Principal principal) {
+        System.out.println(status);
+        return contestService.getUnhiddenContests();
     }
 }
