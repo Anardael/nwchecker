@@ -52,3 +52,9 @@
     font-size: 12px;
     font-weight: normal;
 }
+label{
+    font-weight: 100;
+}
+.hidden-radio{
+    background-color: rgb(252, 248, 227);;
+}

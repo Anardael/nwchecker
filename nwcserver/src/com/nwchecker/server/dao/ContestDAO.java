@@ -76,6 +76,10 @@ public interface ContestDAO {
 
     List<Contest> getUnhiddenContests();
 
+    List<Contest> getHiddenContestsByUserId(int userId);
+
+    List<Contest> getContestsByUserId(int userId);
+
     public Contest getNearestContest() ;
 
     public Contest getLastArchivedContest();
