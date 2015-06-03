@@ -132,11 +132,11 @@
 							alt="en"></a></li>
 				</c:if>
 
-				<c:if test="${not empty param['username']}">
+				<c:if test="${not empty param['Username']}">
 					<li><a href="?Username=${param['Username']}&locale=ua"
 						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukraineFlag.png" width="36" height="36"
-							alt="ua"></a> <a
+							alt="ua"></a> </li><li><a
 						href="?Username=${param['Username']}&locale=en"
 						style="padding-left: 2px; padding-right: 2px;"><img
 							src="${resources}images/ukFlag.png" width="36" height="36"

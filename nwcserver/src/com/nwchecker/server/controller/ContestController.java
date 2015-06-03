@@ -10,8 +10,6 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
-import com.nwchecker.server.json.wrapper.FilteredResultProvider;
-import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
@@ -36,9 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -37,6 +37,8 @@ import com.nwchecker.server.service.UserService;
  */
 @Controller("contestPassController")
 public class ContestPassController {
+	//Maximum upload file size
+	private final long MAX_FILE_SIZE_BYTE = 20971520;
 
 	@Autowired
 	private UserService userService;
@@ -135,7 +137,7 @@ public class ContestPassController {
 			@RequestParam(value = "id") int taskId,
 			@RequestParam(value = "compilerId") int compilerId,
 			@RequestParam("file") MultipartFile file) throws IOException {
-		if (file.getSize() > 20971520) {
+		if (file.getSize() > MAX_FILE_SIZE_BYTE) {
 			Map<String, Object> result = new LinkedHashMap<>();
 			result.put("fileTooLarge", true);
 			return result;

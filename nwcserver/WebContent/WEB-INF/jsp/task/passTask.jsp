@@ -4,6 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -97,27 +99,28 @@
 <div class="row">
 	<div class="col-sm-offset-1 col-sm-4" align="right">
 		<h4>
-			<spring:message code="contest.passing.timeLimit.caption" />
-			<b>${currentTask.timeLimit}</b>
+			<b><spring:message code="contest.passing.timeLimit.caption" /></b>
+			${currentTask.timeLimit}
 		</h4>
 		<h4>
-			<spring:message code="contest.passing.memoryLimit.caption" />
-			<b>${currentTask.memoryLimit}</b>
+			<b><spring:message code="contest.passing.memoryLimit.caption" /></b>
+			${currentTask.memoryLimit}
 		</h4>
 	</div>
-	<div class="col-sm-4" align="right">
+	<div class="col-sm-4" align="center">
 		<h4>
-			<spring:message code="contest.passing.inputFile.caption" />
-			<b>${currentTask.inputFileName}</b>
+			<b><spring:message code="contest.passing.inputFile.caption" /></b>
+			${currentTask.inputFileName}
 		</h4>
 		<h4>
-			<spring:message code="contest.passing.outputFile.caption" />
-			<b>${currentTask.outputFileName}</b>
+			<b><spring:message code="contest.passing.outputFile.caption" /></b>
+			${currentTask.outputFileName}
 		</h4>
 	</div>
 </div>
 <br />
 <br />
+<security:authorize access="isAuthenticated()">
 <!-- Send answer form -->
 <div class="row">
 	<form:form id="task" class="form-horizontal"
@@ -163,6 +166,7 @@
 		</div>
 	</form:form>
 </div>
+</security:authorize>
 
 <!-- modal task statistic window -->
 <div id="taskStatistic" class="modal fade">

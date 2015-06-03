@@ -22,31 +22,5 @@
 			</tr>
 		</thead>
 	</table>
-	<div id="taskDetailsModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 id="pageHeader" class="modal-title"></h4>
-				</div>
-				<div id="taskBody" class="modal-body"></div>
-				<div class="row">
-					<div class="col-sm-offset-4 col-sm-4 modal-body" align="center">
-						<h4>
-							<spring:message code="contest.passing.timeLimit.caption" />
-							<br /> <b id="timeLimit"></b>
-						</h4>
-						<h4>
-							<spring:message code="contest.passing.memoryLimit.caption" />
-							<br /> <b id="memoryLimit"></b>
-						</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

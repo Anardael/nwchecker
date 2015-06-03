@@ -1,12 +1,7 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.ValidationResponse;
-import com.nwchecker.server.json.wrapper.FilteredResultProvider;
-import com.nwchecker.server.json.wrapper.MorphedResult;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
@@ -27,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.security.Principal;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

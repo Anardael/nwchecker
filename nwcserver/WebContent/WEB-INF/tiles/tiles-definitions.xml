@@ -129,6 +129,7 @@
 		</put-list-attribute>
 		<put-list-attribute name="scripts" inherit="true"
 							cascade="true">
+			<add-attribute value="js/jquery.validate.min.js" />
 			<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
 			<add-attribute value="js/adminOptions/userEdit.js" />
 		</put-list-attribute>
@@ -350,24 +351,5 @@
 			<add-attribute value="js/TaskStatistic/ResultFormatters.js" />
 		</put-list-attribute>
 	</definition>
-
-	<definition name="nwcserver.tasks.statistic" extends="nwcserver.tasks.abstract">
-		<put-attribute name="body"
-					   value="/WEB-INF/jsp/task/taskStatistic.jsp" />
-
-		<put-list-attribute name="stylesheets" inherit="true"
-							cascade="true">
-			<add-attribute value="css/TaskStatistic/bootstrap-select.min.css" />
-			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css" />
-			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css" />
-		</put-list-attribute>
-
-		<put-list-attribute name="scripts" inherit="true"
-							cascade="true">
-			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
-			<add-attribute
-					value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
-			<add-attribute value="js/TaskStatistic/ResultFormatters.js" />
-		</put-list-attribute>
-	</definition>
+	<definition name="nwcserver.tasks.archivedTask" extends="nwcserver.tasks.pass" template="/WEB-INF/jsp/layouts/templateFull.jsp" />
 </tiles-definitions>

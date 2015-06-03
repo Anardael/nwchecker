@@ -17,6 +17,14 @@
 			DELETE_DIALOG_MESSAGE = '<spring:message code="adminPanel.userEdit.deleteDialog.message"/>';
 			CANCEL_BUTTON         = '<spring:message code="adminPanel.userEdit.deleteDialog.cancelButton"/>';
 			CONFIRM_BUTTON        = '<spring:message code="adminPanel.userEdit.deleteDialog.confirmButton"/>';
+			DISPLAYNAME_REQUIRED = "<spring:message code='reg.empty.displayName.caption' />";
+    		DISPLAYNAME_SIZE = "<spring:message code='reg.badDisplayName.caption' />";
+    		EMAIL_REQUIRED = "<spring:message code='reg.empty.email.caption' />";
+    		EMAIL_BAD = "<spring:message code='reg.badEmail.caption' />";
+    		PASSWORD_REQUIRED = "<spring:message code='reg.empty.password.caption' />";
+    		PASSWORD_SIZE = "<spring:message code='reg.badPassword.caption' />";
+    		CONFIRM_PASSWORD_REQUIRED = "<spring:message code='reg.empty.confirmPassword.caption' />";
+    		PASSWORD_EQUALS = "<spring:message code='reg.badConfirmPassword.caption' />";    
     	
     		$('body').ready(function() {	
     			showUserRoles([
@@ -35,7 +43,7 @@
     		$('body').on('click', '#deleteBtn', function() {
     			showDeleteDialog();
     		});
-    	</script>
+		</script>
 
 	<form:form id="userEditForm" accept-charset="UTF-8"
 		modelAttribute="userData" method="post" class="form-horizontal">
