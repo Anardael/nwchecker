@@ -19,6 +19,11 @@ var RESULT_TIME;
 var RESULT_MEMORY;
 var RESULT_ERROR_MESSAGE;
 
+var RESULT_SUCCESSFUL = "Successful tests: ";
+var RESULT_TOTAL = " Total tests ";
+var DYNAMIC;
+
+
 function submitTask() {
 	console.log();
 	if ($('#file').val() == "") {
@@ -80,12 +85,12 @@ function showSubmitResult(result) {
 		return;
 	}
 
-	var message = RESULT_TIME + ' <b>' + result['time'] + '</b><br/>'
-			+ RESULT_MEMORY + ' <b>' + result['memory'] + '</b><br/>';
+	/*var message = RESULT_TIME + ' <b>' + result['time'] + '</b><br/>'
+			+ RESULT_MEMORY + ' <b>' + result['memory'] + '</b><br/>';*/
+	var message = RESULT_SUCCESSFUL + result['successful'] + ' out of ' + RESULT_TOTAL + result['total'];
 	if (result['passed']) {
 		showResultSuccess(message);
-	} else {
-		message += RESULT_ERROR_MESSAGE + ' <b>' + result['message'] + '</b>';
+	} else {		
 		showResultFail(message);
 	}
 }

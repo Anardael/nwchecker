@@ -58,7 +58,9 @@
 	});
 </script>
 <!-- Current Task information -->
-<c:if test="${not empty taskSuccessRate}">
+<c:set var="displayStatistic"
+	value="${(not empty taskSuccessRate)&&contest.typeContest.dynamic||(contest.status == ARCHIVE)}" />
+<c:if test="${displayStatistic}">
 	<div style="float: right;">
 		<button type="button" class="btn btn-default" data-style="zoom-out"
 			onclick="tryToShowStatistic();">
@@ -70,7 +72,7 @@
 	<h2>
 		${currentTask.title} <small> (<spring:message
 				code="contest.passing.rate.caption" /> <b>${currentTask.rate}</b>)
-			<c:if test="${not empty taskSuccessRate}">
+			<c:if test="${displayStatistic}">
 				<b id="showModal"><fmt:formatNumber value="${taskSuccessRate}"
 						maxFractionDigits="2" minIntegerDigits="2" type="PERCENT" /></b>
 			</c:if><label id="timer" class="pull-right"></label>
@@ -121,99 +123,101 @@
 <br />
 <br />
 <security:authorize access="isAuthenticated()">
-<!-- Send answer form -->
-<div class="row">
-	<form:form id="task" class="form-horizontal"
-		modelAttribute="currentTask" role="form">
-		<form:hidden path="id" />
-		<div class="form-group">
-			<div class="col-sm-4">
-				<h4 class="pull-right">
-					<b><spring:message
-							code="contest.passing.compilerSelect.caption" /></b>
-				</h4>
+	<!-- Send answer form -->
+	<div class="row">
+		<form:form id="task" class="form-horizontal"
+			modelAttribute="currentTask" role="form">
+			<form:hidden path="id" />
+			<div class="form-group">
+				<div class="col-sm-4">
+					<h4 class="pull-right">
+						<b><spring:message
+								code="contest.passing.compilerSelect.caption" /></b>
+					</h4>
+				</div>
+				<div class="col-sm-4">
+					<select id="compilerId" name="compilerId" class="selectpicker">
+						<c:forEach var="compiler" items="${compilers}">
+							<option value="${compiler.id}">${compiler.name}</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<select id="compilerId" name="compilerId" class="selectpicker">
-					<c:forEach var="compiler" items="${compilers}">
-						<option value="${compiler.id}">${compiler.name}</option>
-					</c:forEach>
-				</select>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<h4 class="pull-right">
+						<b><spring:message
+								code="contest.passing.uploadSourceFile.caption" /></b>
+					</h4>
+				</div>
+				<div class="col-sm-4">
+					<span class="btn btn-block btn-file"> <span id="fileCaption">
+							<spring:message code="contest.passing.uploadSourceFile.button" />
+					</span> <input type="file" id="file" name="file"
+						onchange="changeFileInputColor()">
+					</span>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-4">
-				<h4 class="pull-right">
-					<b><spring:message
-							code="contest.passing.uploadSourceFile.caption" /></b>
-				</h4>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-4">
+					<button type="button" class="btn btn-info btn-block ladda-button"
+						data-style="zoom-out" onclick="submitTask();">
+						<spring:message code="contest.passing.submitButton.caption" />
+					</button>
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<span class="btn btn-block btn-file"> <span id="fileCaption">
-						<spring:message code="contest.passing.uploadSourceFile.button" />
-				</span> <input type="file" id="file" name="file"
-					onchange="changeFileInputColor()">
-				</span>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-4 col-sm-4">
-				<button type="button" class="btn btn-info btn-block ladda-button"
-					data-style="zoom-out" onclick="submitTask();">
-					<spring:message code="contest.passing.submitButton.caption" />
-				</button>
-			</div>
-		</div>
-	</form:form>
-</div>
+		</form:form>
+	</div>
 </security:authorize>
 
 <!-- modal task statistic window -->
-<div id="taskStatistic" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 id="pageHeader" class="modal-title">
-					<spring:message code="task.statistic.modalTitle" />
-				</h4>
-			</div>
-			<div class="modal-body">
-				<table id="statisticTable" class="table"
-					style="table-layout: fixed; overflow-word: break-word;"
-					data-toggle="table" data-striped="true"
-					data-url="TaskStatisticTable.do?taskId=${currentTask.id}"
-					data-side-pagination="server" data-pagination="true"
-					data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
-					data-clear-search="true">
-					<thead>
-						<tr>
-							<th data-field="user" data-align="center"
-								data-formatter="usernameFormatter" data-sortable="true"
-								class="col-md-1"><spring:message
-									code="task.statistic.usernameCaption" /></th>
-							<th data-field="compiler" data-align="center"
-								data-formatter="compilerFormatter" data-sortable="true"
-								class="col-md-1"><spring:message
-									code="task.statistic.compilerCaption" /></th>
-							<th data-field="executionTime" data-align="center"
-								data-sortable="true" class="col-md-1"><spring:message
-									code="task.statistic.execTimeCaption" /></th>
-							<th data-field="memoryUsed" data-align="center"
-								data-sortable="true" class="col-md-1"><spring:message
-									code="task.statistic.memUsedCaption" /></th>
-							<th data-field="passed" data-align="center"
-								data-formatter="passedFormatter" data-sortable="true"
-								class="col-md-1"><spring:message
-									code="task.statistic.passedCaption" /></th>
-						</tr>
-					</thead>
-				</table>
+<c:if test="${displayStatistic}">
+	<div id="taskStatistic" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 id="pageHeader" class="modal-title">
+						<spring:message code="task.statistic.modalTitle" />
+					</h4>
+				</div>
+				<div class="modal-body">
+					<table id="statisticTable" class="table"
+						style="table-layout: fixed; overflow-word: break-word;"
+						data-toggle="table" data-striped="true"
+						data-url="TaskStatisticTable.do?taskId=${currentTask.id}"
+						data-side-pagination="server" data-pagination="true"
+						data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true"
+						data-clear-search="true">
+						<thead>
+							<tr>
+								<th data-field="user" data-align="center"
+									data-formatter="usernameFormatter" data-sortable="true"
+									class="col-md-1"><spring:message
+										code="task.statistic.usernameCaption" /></th>
+								<th data-field="compiler" data-align="center"
+									data-formatter="compilerFormatter" data-sortable="true"
+									class="col-md-1"><spring:message
+										code="task.statistic.compilerCaption" /></th>
+								<th data-field="executionTime" data-align="center"
+									data-sortable="true" class="col-md-1"><spring:message
+										code="task.statistic.execTimeCaption" /></th>
+								<th data-field="memoryUsed" data-align="center"
+									data-sortable="true" class="col-md-1"><spring:message
+										code="task.statistic.memUsedCaption" /></th>
+								<th data-field="passed" data-align="center"
+									data-formatter="passedFormatter" data-sortable="true"
+									class="col-md-1"><spring:message
+										code="task.statistic.passedCaption" /></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</c:if>
 </html>

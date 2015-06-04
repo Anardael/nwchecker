@@ -166,6 +166,7 @@ public class ContestPassController {
 		} else {
 			result.put("accessDenied", true);
 		}
+		result.put("total", task.getInOutData().size());
 		return result;
 	}
 }

@@ -25,7 +25,6 @@ public class TaskPassServiceImpl implements TaskPassService {
 		LOG.debug("Attempting to create page of task results for " + taskId
 				+ " ordered by " + sortingColumn);
 		List<TaskPass> taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize, sortingColumn, sortingOrder, filter);
-		System.out.println(taskPasses.get(0).getTestResults().size());
 		return taskPasses;
 	}
 

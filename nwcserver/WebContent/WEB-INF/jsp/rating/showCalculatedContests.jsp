@@ -15,8 +15,6 @@
 						});
 			});
 </script>
-<div class="form-group col-sm-12" style="margin: auto">
-	<ul class="col-sm-offset-2 col-sm-8 ">
 		<c:url var="dataURL" value="/ratingContest.do" />
 		<table id="ratingContest" class="table" data-toggle="table"
 			data-url="${dataURL}" data-method="get" data-cache="false"
@@ -36,6 +34,4 @@
 				</tr>
 			</thead>
 		</table>
-	</ul>
-</div>
 </html>
