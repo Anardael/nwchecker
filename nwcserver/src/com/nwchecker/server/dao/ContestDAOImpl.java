@@ -94,18 +94,25 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @Transactional
     @Override
-    public List<Contest> getContestsByUserId(int userId) {
-        List<Contest> result = (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
+    public List<Contest> getHiddenContestsByUserId(int userId) {
+        return (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
                 " where (cu.userId=? and hidden=?)", userId, true);
-        result.addAll((List<Contest>) getHibernateTemplate().find("from Contest where hidden=?", false));
-        return result;
     }
 
     @Transactional
     @Override
-    public List<Contest> getHiddenContestsByUserId(int userId) {
-        return (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
+    public List<Contest> getContestsByUserId(int userId) {
+        List<Contest> result = (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
                 " where (cu.userId=? and hidden=?)", userId, true);
+        result.addAll((List<Contest>) getHibernateTemplate().find("from Contest where hidden=?", false));
+
+        return result;
+    }    
+
+    @Transactional
+    @Override
+    public List<Contest> getUnhiddenContestsByStatus(Contest.Status status) {
+        return (List<Contest>) getHibernateTemplate().find("from Contest where (status=? and hidden=?)",  status, false);
     }
 
     @Transactional

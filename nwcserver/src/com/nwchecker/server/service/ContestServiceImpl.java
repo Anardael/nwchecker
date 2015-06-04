@@ -1,21 +1,14 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
-import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 
-import com.nwchecker.server.utils.ContestStartTimeComparator;
-import com.nwchecker.server.utils.PaginationWrapper;
-import org.hibernate.Hibernate;
+import com.nwchecker.server.utils.Support;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -78,43 +71,56 @@ public class ContestServiceImpl implements ContestService {
         return contestDAO.getContestsForRating();
     }
 
-    public List<Contest> getPagedContests(int pageSize, int pageNumber) {
-        return contestDAO.getPagedContests(pageSize, (pageNumber-1)*pageSize);
-    }
-    
-    public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber) {
-        return contestDAO.getPagedContests(status, pageSize, (pageNumber-1)*pageSize);
-    }
-
     @Override
     public List<Contest> getUnhiddenContests() {
         return contestDAO.getUnhiddenContests();
     }
 
     @Override
-    public List<Contest> getHiddenContestsByUserName(String username) {
+    public List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username) {
         int userId = userDAO.getUserByUsername(username).getUserId();
-        return contestDAO.getHiddenContestsByUserId(userId);
+        boolean isBooleanHidden = Support.isBoolean(stringHidden);
+        boolean isStatus = Support.isStatus(stringStatus);
+
+        if (!isBooleanHidden && !isStatus){     // hidden: ALL, status: ALL
+            return contestDAO.getContestsByUserId(userId);
+        }
+
+        if (isBooleanHidden && !isStatus){      // hidden: notALL, status: ALL
+            boolean hidden = Boolean.parseBoolean(stringHidden);
+            if (hidden){
+                return contestDAO.getHiddenContestsByUserId(userId);
+            } else {
+                return contestDAO.getUnhiddenContests();
+            }
+        }
+
+        Contest.Status status = Contest.Status.valueOf(stringStatus);
+
+        if (!isBooleanHidden && isStatus) {     // hidden: ALL, status: notALL
+            return makeSelectionByStatus(contestDAO.getContestsByUserId(userId), status);
+        }
+
+        if (isBooleanHidden && isStatus) {      // hidden: notALL, status: notALL
+            boolean hidden = Boolean.parseBoolean(stringHidden);
+            if (hidden){
+                return makeSelectionByStatus(contestDAO.getHiddenContestsByUserId(userId), status);
+            } else {
+                return makeSelectionByStatus(contestDAO.getUnhiddenContests(), status);
+            }
+        }
+
+        return null;
     }
 
     @Override
-    public List<Contest> getContestsByUserName(String username) {
-        int userId = userDAO.getUserByUsername(username).getUserId();
-        return contestDAO.getContestsByUserId(userId);
-    }
-
-    public Long getPageCount(int pageSize){
-    	Long count = contestDAO.getEntryCount();
-    	if (count%pageSize==0)
-    	return count/pageSize;
-    	else return count/pageSize+1;
-    }
-    
-    public Long getPageCount(Contest.Status status, int pageSize){
-    	Long count = contestDAO.getEntryCount(status);  	
-    	if (count%pageSize==0)
-    	return count/pageSize;
-    	else return count/pageSize+1;
+    public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
+        // if status notALL
+        if (Support.isStatus(stringStatus)){
+            return contestDAO.getUnhiddenContestsByStatus(Contest.Status.stringToStatus(stringStatus));
+        } else {
+            return contestDAO.getUnhiddenContests();
+        }
     }
 
     @Override
@@ -130,23 +136,25 @@ public class ContestServiceImpl implements ContestService {
         return gtmMillis;
     }
 
-    @Override
-    public Long getEntryCountForRating(){
-        Long count = contestDAO.getEntryCountForRating();
-        return count+1;
-    }
 	@Override
 	public Contest getNearestContest() {
-
-		Contest contest = contestDAO.getNearestContest();
-		return contest;
+		return contestDAO.getNearestContest();
 	}
 
 	@Override
 	public Contest getLastArchivedContest() {
-
-	return contestDAO.getLastArchivedContest();
+	    return contestDAO.getLastArchivedContest();
 	}
 
+    private static List<Contest> makeSelectionByStatus(List<Contest> contests, Contest.Status status){
+        Iterator<Contest> iterator = contests.iterator();
 
+        while(iterator.hasNext()){
+            if(iterator.next().getStatus() != status){
+                iterator.remove();
+            }
+        }
+
+        return contests;
+    }
 }

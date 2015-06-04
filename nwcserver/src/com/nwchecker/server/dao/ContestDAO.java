@@ -80,6 +80,8 @@ public interface ContestDAO {
 
     List<Contest> getContestsByUserId(int userId);
 
+    List<Contest> getUnhiddenContestsByStatus(Contest.Status status);
+
     public Contest getNearestContest() ;
 
     public Contest getLastArchivedContest();
