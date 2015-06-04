@@ -2,6 +2,9 @@ package com.nwchecker.server.utils;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
+
+import com.nwchecker.server.model.TaskData;
 
 public class CheckerMessage implements Serializable {
 	/**
@@ -9,26 +12,9 @@ public class CheckerMessage implements Serializable {
 	 */
 	private static final long serialVersionUID = 5776109336339786305L;
 
-	private LinkedList<byte[]> inputData;
-	private LinkedList<byte[]> outputData;
+	private List<TaskData> inOutDataPairs;
 	private byte[] userSolution;
 	private int compilerId;
-
-	public LinkedList<byte[]> getInputData() {
-		return inputData;
-	}
-
-	public void setInputData(LinkedList<byte[]> inputData) {
-		this.inputData = inputData;
-	}
-
-	public LinkedList<byte[]> getOutputData() {
-		return outputData;
-	}
-
-	public void setOutputData(LinkedList<byte[]> outputData) {
-		this.outputData = outputData;
-	}
 
 	public byte[] getUserSolution() {
 		return userSolution;
@@ -44,5 +30,13 @@ public class CheckerMessage implements Serializable {
 
 	public void setCompilerId(int compilerId) {
 		this.compilerId = compilerId;
+	}
+
+	public List<TaskData> getInOutDataPairs() {
+		return inOutDataPairs;
+	}
+
+	public void setInOutDataPairs(List<TaskData> inOutData) {
+		this.inOutDataPairs = inOutData;
 	}
 }

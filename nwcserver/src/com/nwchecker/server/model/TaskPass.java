@@ -1,13 +1,18 @@
 package com.nwchecker.server.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -77,10 +82,9 @@ public class TaskPass {
 	@JsonView(JsonViews.TaskPassView.class)
 	private Compiler compiler;
 	
-	@Transient
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "taskPass")
 	@JsonIgnore
-	@Column(name = "successfulResult")
-	private String result;
+	private List<TaskTestResult> testResults;
 	
 	public int getId() {
 		return id;
@@ -180,6 +184,14 @@ public class TaskPass {
 
 	public void setCompiler(Compiler compiler) {
 		this.compiler = compiler;
+	}
+
+	public List<TaskTestResult> getTestResults() {
+		return testResults;
+	}
+
+	public void setTestResults(List<TaskTestResult> testResults) {
+		this.testResults = testResults;
 	}	
 	
 }

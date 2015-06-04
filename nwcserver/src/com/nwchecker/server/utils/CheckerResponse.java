@@ -1,17 +1,40 @@
 package com.nwchecker.server.utils;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
+public class CheckerResponse {
+	private int success;
+	private int executionTime;
+	private int memoryUsed;
 
-public class CheckerResponse implements Serializable {
-	private static final long serialVersionUID = -6224973570501211472L;
-	private LinkedHashMap<String, Object> response;
-
-	public LinkedHashMap<String, Object> getResponse() {
-		return response;
+	/*
+	 * private static final long serialVersionUID = -6224973570501211472L;
+	 * private LinkedHashMap<String, Object> response;
+	 * 
+	 * public LinkedHashMap<String, Object> getResponse() { return response; }
+	 * 
+	 * public void setResponse(LinkedHashMap<String, Object> response) {
+	 * this.response = response; }
+	 */
+	public int getSuccess() {
+		return success;
 	}
 
-	public void setResponse(LinkedHashMap<String, Object> response) {
-		this.response = response;
+	public void setSuccess(int success) {
+		this.success = success;
+	}
+
+	public int getExecutionTime() {
+		return executionTime;
+	}
+
+	public void setExecutionTime(int executionTime) {
+		this.executionTime = executionTime;
+	}
+
+	public int getMemoryUsed() {
+		return memoryUsed;
+	}
+
+	public void setMemoryUsed(int memoryUsed) {
+		this.memoryUsed = memoryUsed;
 	}
 }

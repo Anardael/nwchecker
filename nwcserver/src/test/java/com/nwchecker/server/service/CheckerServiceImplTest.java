@@ -1,4 +1,4 @@
-package test.java.com.nwchecker.server.service;
+/*package test.java.com.nwchecker.server.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.nwchecker.server.model.Task;
@@ -22,14 +22,14 @@ import java.util.Random;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-/**
+*//**
  * <h1>CheckerServiceImpl Test</h1> Test for CheckerServiceImpl method.
  * <p>
  *
  * @author Stanislav Krasovskyi
  * @version 1.0
  * @since 2015-03-10
- */
+ *//*
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/forTests/context.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -79,4 +79,4 @@ public class CheckerServiceImplTest {
 			assertTrue(result2.containsKey("message"));
 		}
 	}
-}
+}*/

@@ -26,16 +26,14 @@ public class TaskPassServiceImpl implements TaskPassService {
 		LOG.debug("Attempting to create page of task results for " + taskId
 				+ " ordered by " + sortingColumn);
 		List<TaskPass> taskPasses = taskPassDAO.getPaginatedTaskPassByTaskId(taskId, startIndex, pageSize, sortingColumn, sortingOrder, filter);
+		System.out.println(taskPasses.get(0).getTestResults().size());
 		return taskPasses;
 	}
 
 	@Override
 	public Long getTaskPassEntryCount(int taskId, String filter) {
 		LOG.debug("Got number of solutions for task " + taskId);
-		if (!(filter == null) && !(filter.equals(""))) {
-			return taskPassDAO.getTaskPassEntryCount(taskId, filter);
-		}
-		return taskPassDAO.getTaskPassEntryCount(taskId);
+		return taskPassDAO.getTaskPassEntryCount(taskId, filter);
 	}
 
 	@Override

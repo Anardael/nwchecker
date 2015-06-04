@@ -52,5 +52,4 @@ public class TaskStatisticController {
 				+ startIndex / pageSize + 1 + " for task " + taskId);
 		return jTableResponse;
 	}
-
 }

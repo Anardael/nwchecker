@@ -1,7 +1,12 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskTestResult;
+import com.nwchecker.server.utils.CheckerMessage;
+import com.nwchecker.server.utils.CheckerResponse;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,5 +29,7 @@ public interface CheckerService {
      * @param compilerId Unique ID of compiler
      * @return Result of Task checking
      */
-    Map<String, Object> checkTask(Task task, byte[] file, int compilerId);
+	public List<CheckerResponse> sendSolutionToChecker(CheckerMessage message);
+    
+    Map<String, Object> checkTask(Task task, int compilerId, byte[] userSolution);
 }
