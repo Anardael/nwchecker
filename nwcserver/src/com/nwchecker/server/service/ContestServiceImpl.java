@@ -95,16 +95,18 @@ public class ContestServiceImpl implements ContestService {
             }
         }
 
+        Contest.Status status = Contest.Status.valueOf(stringStatus);
+
         if (!isBooleanHidden && isStatus) {     // hidden: ALL, status: notALL
-            return makeSelectionByStatus(contestDAO.getContestsByUserId(userId), Contest.Status.stringToStatus(stringStatus));
+            return makeSelectionByStatus(contestDAO.getContestsByUserId(userId), status);
         }
 
         if (isBooleanHidden && isStatus) {      // hidden: notALL, status: notALL
             boolean hidden = Boolean.parseBoolean(stringHidden);
             if (hidden){
-                return makeSelectionByStatus(contestDAO.getHiddenContestsByUserId(userId), Contest.Status.stringToStatus(stringStatus));
+                return makeSelectionByStatus(contestDAO.getHiddenContestsByUserId(userId), status);
             } else {
-                return makeSelectionByStatus(contestDAO.getUnhiddenContests(), Contest.Status.stringToStatus(stringStatus));
+                return makeSelectionByStatus(contestDAO.getUnhiddenContests(), status);
             }
         }
 
@@ -145,13 +147,14 @@ public class ContestServiceImpl implements ContestService {
 	}
 
     private static List<Contest> makeSelectionByStatus(List<Contest> contests, Contest.Status status){
-        List<Contest> result = new ArrayList<>();
-        for (Contest contest : contests){
-            if (contest.getStatus() == status){
-                result.add(contest);
+        Iterator<Contest> iterator = contests.iterator();
+
+        while(iterator.hasNext()){
+            if(iterator.next().getStatus() != status){
+                iterator.remove();
             }
         }
 
-        return result;
+        return contests;
     }
 }

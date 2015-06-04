@@ -43,6 +43,8 @@ public class Contest {
 			}
 		}
 
+
+
 		public static Status stringToStatus(String status) {
 			if (Status.ARCHIVE.toString().equals(status)){
 				return Status.ARCHIVE;
