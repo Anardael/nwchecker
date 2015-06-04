@@ -68,4 +68,12 @@ public class TaskTestResult {
 		this.id = id;
 	}
 
+	public TaskPass getTaskPass() {
+		return taskPass;
+	}
+
+	public void setTaskPass(TaskPass taskPass) {
+		this.taskPass = taskPass;
+	}
+
 }
