@@ -20,51 +20,48 @@
     </script>
 
 
-    <div>
-        <div class="radio-inline">
-            <label>
-                <span style="float: left; margin-right: 5px; padding-top: 5px">Status</span>
-                <div style="float: left">
-                    <select class="form-control" onchange="changeStatus(value)">
-                        <option value="all">ALL</option>
-                        <option value="going">GOING</option>
-                        <option value="release">RELEASE</option>
-                        <option value="preparing">PREPARING</option>
-                        <option value="archive">ARCHIVE</option>
-                    </select>
-                </div>
-            </label>
-        </div>
-
+    <div class="pull-right" style="margin-top: 10px">
         <security:authorize access="hasRole('ROLE_TEACHER')">
             <div class="radio-inline">
                 <label>
-                    <input type="radio" name="optionRadio" id="optionsRadios1" value="all" checked
-                           onclick="showHidden(value)">
+                    <input type="radio" name="radioOption" id="optionsRadios1" value="all" checked
+                           onclick="updateContestsList()">
                     All
                 </label>
             </div>
             <div class="radio-inline">
                 <label>
-                    <input type="radio" name="optionRadio" id="optionsRadios2" value="unhidden"
-                           onclick="showHidden(value)">
+                    <input type="radio" name="radioOption" id="optionsRadios2" value="false"
+                           onclick="updateContestsList()">
                     Unhidden
                 </label>
             </div>
             <div class="radio-inline">
                 <label class="hidden-radio">
-                    <input type="radio" name="optionRadio" id="optionsRadios3" value="hidden"
-                           onclick="showHidden(value)">
+                    <input type="radio" name="radioOption" id="optionsRadios3" value="true"
+                           onclick="updateContestsList()">
                     Hidden
                 </label>
             </div>
         </security:authorize>
+
+        <div class="radio-inline">
+            <label>
+                <select id="selectOption" class="form-control" onchange="updateContestsList()">
+                    <option value="all">ALL</option>
+                    <option value="going">GOING</option>
+                    <option value="release">RELEASE</option>
+                    <option value="preparing">PREPARING</option>
+                    <option value="archive">ARCHIVE</option>
+                </select>
+            </label>
+        </div>
     </div>
 
     <c:url var="dataUrl" value="/contestListJson.do" />
     <table id="contestTable" class="table" data-toggle="table"
            data-url="${dataUrl}" data-method="get" data-cache="false"
-           data-search="true" data-clear-search="true" data-search-align="right"
+           data-search="true" data-clear-search="true" data-search-align="left"
            data-pagination="true" data-show-pagination-switch="true" data-sort-name="starts"
            data-sort-order="desc" data-row-style="rowStyle" data-maintain-selected="true">
         <thead>

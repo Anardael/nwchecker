@@ -203,9 +203,20 @@ public class Contest {
 		typeContest.setId(typeId);
 	}
 
-	@Override
-	public boolean equals(Object c) {
-		return (c != null && c instanceof Contest && ((Contest) c).getId() == this.id);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Contest contest = (Contest) o;
+
+        if (id != contest.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

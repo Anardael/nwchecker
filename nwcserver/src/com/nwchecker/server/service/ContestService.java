@@ -69,25 +69,16 @@ public interface ContestService {
     List<Contest> getContestForRating();
 
     public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
-    
-    public List<Contest> getPagedContests(int pageSize, int pageNumber);
-    
-    public List<Contest> getPagedContests(Contest.Status status, int pageSize, int pageNumber);
-    
-    public Long getPageCount(int pageSize);
-    
-    public Long getPageCount(Contest.Status status, int pageSize);
 
     Long getContestEndTime(Contest contest);
+
 	public Contest getNearestContest();
 
 	public Contest getLastArchivedContest();
 
-    public Long getEntryCountForRating();
+    List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username);
 
-    List<Contest> getContestsByUserName(String username);
-
-    List<Contest> getHiddenContestsByUserName(String username);
+    List<Contest> getUnhiddenContestsListByStatus(String stringStatus);
 
     List<Contest> getUnhiddenContests();
 }
