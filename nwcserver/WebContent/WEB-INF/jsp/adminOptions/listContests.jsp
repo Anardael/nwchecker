@@ -33,7 +33,7 @@
 			data-minimum-count-columns="0">
 			<thead>
 				<tr>
-					<th data-field="id" hidden = true data-align="center" data-sortable="true"
+					<th data-field="id" data-align="center" data-sortable="true"
 						data-switchable="false"><spring:message
 							code="listContests.contests.tableHeader.id" /></th>
 					<th data-field="title" data-align="center" data-sortable="true"
