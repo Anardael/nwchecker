@@ -19,4 +19,5 @@ public interface TaskPassDAO {
 
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
 			int pageSize, String sortingColumn, String sortingOrder, String filter);
+	void delete(TaskPass taskPass);
 }

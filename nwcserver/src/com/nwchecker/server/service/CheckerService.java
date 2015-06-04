@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.TaskTestResult;
 import com.nwchecker.server.utils.CheckerMessage;
 import com.nwchecker.server.utils.CheckerResponse;
@@ -31,5 +32,5 @@ public interface CheckerService {
      */
 	public List<CheckerResponse> sendSolutionToChecker(CheckerMessage message);
     
-    Map<String, Object> checkTask(Task task, int compilerId, byte[] userSolution);
+    Map<String, Object> checkTask(Task task, int compilerId, byte[] userSolution, TaskPass taskPass);
 }

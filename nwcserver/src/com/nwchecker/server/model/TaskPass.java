@@ -45,6 +45,7 @@ public class TaskPass {
 
 	@ManyToOne()
 	@JoinColumn(name = "task_id")
+	@JsonIgnore
 	private Task task;
 
 	@Column(name = "passed")

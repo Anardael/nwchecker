@@ -12,7 +12,6 @@ import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.utils.PaginationWrapper;
 
 @Service
-@SessionAttributes("taskPassOrdering")
 public class TaskPassServiceImpl implements TaskPassService {
 
 	@Autowired
@@ -65,4 +64,9 @@ public class TaskPassServiceImpl implements TaskPassService {
             return 0;
         }
     }
+
+	@Override
+	public void delete(TaskPass taskPass) {
+		taskPassDAO.delete(taskPass);
+	}
 }

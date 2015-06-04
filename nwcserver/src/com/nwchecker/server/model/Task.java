@@ -2,6 +2,7 @@ package com.nwchecker.server.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
@@ -112,6 +113,7 @@ public class Task {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
+    @JsonIgnore
     private List<TaskData> inOutData;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -23,6 +23,8 @@ public class ContestPassServiceImpl implements ContestPassService {
 	private ContestPassDAO contestPassDAO;
 	@Autowired
 	private CompilerDAO compilerDAO;
+	@Autowired
+	private TaskPassService taskPassService;
 
 	@Override
 	public void saveContestPass(ContestPass contestPass) {
@@ -39,26 +41,56 @@ public class ContestPassServiceImpl implements ContestPassService {
 	public Map<String, Object> checkTask(boolean save, ContestPass contestPass,
 			Task task, int compilerId, byte[] userSolution, User user) {
 
-		// send File and compiler to checker:				
-		Map<String, Object> checkResult = checkerService.checkTask(task, compilerId, userSolution);
+		// send File and compiler to checker:
 		TaskPass taskPass = new TaskPass();
+		Map<String, Object> checkResult = checkerService.checkTask(task,
+				compilerId, userSolution, taskPass);
 		taskPass.setUser(user);
 		taskPass.setContestPass(contestPass);
 		taskPass.setTask(task);
 		taskPass.setPassed((boolean) checkResult.get("passed"));
 		taskPass.setFile(userSolution);
 		taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
-		taskPass.setTestResults((List<TaskTestResult>) checkResult.get("results"));
+		taskPass.setTestResults((List<TaskTestResult>) checkResult
+				.get("results"));
+		addTaskPass(contestPass, taskPass, task);
 		// get passed minute:
 		long millis = System.currentTimeMillis()
 				- taskPass.getTask().getContest().getStarts().getTime();
 		long minute = millis / 1000 / 60;
 		taskPass.setPassedMinute((int) minute);
 		if (save) {
-			contestPass.getTaskPassList().add(taskPass);
 			updateContestPass(contestPass);
 		}
 		return checkResult;
+	}
+
+	public void addTaskPass(ContestPass contestPass, TaskPass taskPass,
+			Task task) {
+		boolean contains = false;
+		if (!(contestPass.getContest().getTypeContest().isDynamic())) {
+			for (int index = 0; index < contestPass.getTaskPassList().size(); index++) {
+				if (contestPass.getTaskPassList().get(index).getTask()
+						.equals(task)) {
+					contains = true;
+					TaskPass oldTaskPass = contestPass.getTaskPassList().get(
+							index);
+					taskPass.setId(oldTaskPass.getId());
+					contestPass.getTaskPassList().set(index, taskPass);
+					Iterator<TaskTestResult> newTestData = taskPass
+							.getTestResults().iterator();
+					Iterator<TaskTestResult> oldTestData = oldTaskPass
+							.getTestResults().iterator();
+					while (newTestData.hasNext() && oldTestData.hasNext()) {
+						newTestData.next().setId(oldTestData.next().getId());
+					}
+
+				}
+			}
+		}
+		if (!contains) {
+			contestPass.getTaskPassList().add(taskPass);
+		}
 	}
 
 	@Override

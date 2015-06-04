@@ -56,4 +56,6 @@ public interface TaskPassService {
 	Long getSuccessfulTaskPassEntryCount(int taskId);
 
     double getTaskRateById(int taskId);
+    
+    void delete(TaskPass taskPass);
 }

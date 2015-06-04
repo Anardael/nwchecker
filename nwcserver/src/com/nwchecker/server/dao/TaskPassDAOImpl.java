@@ -129,4 +129,12 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		Long size = (Long) query.uniqueResult();
 		return size;
 	}
+
+	@Override
+	@Transactional
+	public void delete(TaskPass taskPass) {
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		session.delete(taskPass);
+	}
 }

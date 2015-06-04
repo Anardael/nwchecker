@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
+import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.TaskTestResult;
 import com.nwchecker.server.utils.CheckerMessage;
 import com.nwchecker.server.utils.CheckerResponse;
@@ -50,7 +51,7 @@ public class CheckerServiceImpl implements CheckerService {
 
 	@Override
 	public Map<String, Object> checkTask(Task task, int compilerId,
-			byte[] userSolution) {
+			byte[] userSolution, TaskPass taskPass) {
 		//Create message to be sent to checker
 		CheckerMessage message = new CheckerMessage();
 		message.setCompilerId(compilerId);
@@ -72,6 +73,7 @@ public class CheckerServiceImpl implements CheckerService {
 				testResult.setMemoryUsed(atomicResponse.getMemoryUsed());
 				testResult.setRate(atomicResponse.getSuccess());
 			}
+			testResult.setTaskPass(taskPass);
 			testResults.add(testResult);
 		}
 		Map<String, Object> response = new HashMap<String, Object>();

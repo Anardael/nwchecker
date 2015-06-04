@@ -32,8 +32,8 @@ public class TaskTestResult {
 	@Column(name = "compilerMessage")
 	private String compilerMessage;
 
-	@ManyToOne()
-	@JoinColumn(name="taskPass")
+	@ManyToOne
+	@JoinColumn(name="taskPassId")
 	private TaskPass taskPass;
 
 	public int getExecutionTime() {
