@@ -96,12 +96,11 @@ function rowStyle(row) {
 function updateContestsList(){
     var selectVar = $('#selectOption').val();
     var radioVar = $('input:radio[name="radioOption"]:checked').val();
-    console.log(selectVar + ' ' + radioVar);
 
     $('#contestTable').bootstrapTable('destroy');
     $('#contestTable').bootstrapTable({
         method: 'get',
-        url: 'updateContestListJson.do?hidden=' + radioVar + '&status=' + selectVar.toUpperCase()
+        url: 'contestListJson.do?hidden=' + radioVar + '&status=' + selectVar.toUpperCase()
     });
 }
 

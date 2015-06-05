@@ -117,7 +117,7 @@ public class ContestServiceImpl implements ContestService {
     public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
         // if status notALL
         if (Support.isStatus(stringStatus)){
-            return contestDAO.getUnhiddenContestsByStatus(Contest.Status.stringToStatus(stringStatus));
+            return contestDAO.getUnhiddenContestsByStatus(Contest.Status.valueOf(stringStatus));
         } else {
             return contestDAO.getUnhiddenContests();
         }
