@@ -22,13 +22,22 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 
     @Autowired
     private ContestPassDAO contestPassDAO;
+   /*
+    * Checker has two different algorhythms for calculating score of the finished contest based on contest's type(static or dynamic).
+    * Static contest's score is based on the score that competitor earns passing tests.
+    * Dynamic contest's score is based on a number of criteria:
+    * 1. Number of attemps.
+    * 2. Execution time. 
+    * (non-Javadoc)
+    * @see com.nwchecker.server.service.ScoreCalculationService#calculateScore(int)
+    */
 
+    
     @Override
     @Transactional
-    public void calculateScore(int ContestId) {
-        Contest contest = contestService.getContestByID(ContestId);
+    public void calculateScore(int contestId) {
         //get all user ContestPasses for this contest:
-        List<ContestPass> allContestPasses = contestPassService.getContestPasses(ContestId);
+        List<ContestPass> allContestPasses = contestPassService.getContestPasses(contestId);
 
         //check each ContestPass for each user:
         for (ContestPass contestPass : allContestPasses) {
@@ -39,7 +48,7 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
             Set<Integer> passedTasks = new HashSet<>();
             //go throw each taskPass:
             for (TaskPass taskPass : contestPass.getTaskPassList()) {
-                //if passed firs time:
+                //if passed first time:
                 if (taskPass.isPassed() && !passedTasks.contains(taskPass.getTask().getId())) {
                     passedTasks.add(taskPass.getTask().getId());
                     //increment passed count for this contestPass:
