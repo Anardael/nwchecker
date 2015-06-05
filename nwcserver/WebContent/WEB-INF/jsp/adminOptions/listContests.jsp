@@ -34,7 +34,7 @@
 			<thead>
 				<tr>
 					<th data-field="id" data-align="center" data-sortable="true"
-						data-switchable="false"><spring:message
+						data-switchable="false" data-visible = "false"><spring:message
 							code="listContests.contests.tableHeader.id" /></th>
 					<th data-field="title" data-align="center" data-sortable="true"
 						data-switchable="false"><spring:message

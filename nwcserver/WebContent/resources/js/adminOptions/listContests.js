@@ -3,9 +3,8 @@
  */
 
 $(document).ready(function () {
-    $('#contestsData').on('click', 'tbody tr', function (event) {
-        var contestId = $(this).find('td:nth-child(1)').html();
-        var id = document.getElementById("id");
+    $('#contestsData').on('click-row.bs.table', function (e, row, $element) {
+        var contestId = row['id'];      
         id.value = contestId;
         $('#ContestUserTable').bootstrapTable('destroy');
         $.getJSON('getContestUsersList.do?contestId=' + contestId, function (data) {

@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $('#contestTable').bootstrapTable({
-    }).on('click-row.bs.table', function (e, row, $element) {
+    $('#contestTable').on('click-row.bs.table', function (e, row, $element) {
         console.log(JSON.stringify(row));
 
         var typeContest = row['type'];
