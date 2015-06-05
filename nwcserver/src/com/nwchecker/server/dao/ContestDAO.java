@@ -78,7 +78,11 @@ public interface ContestDAO {
 
     List<Contest> getHiddenContestsByUserId(int userId);
 
+    List<Contest> getHiddenContestsByUserIdAndStatus(int userId, Contest.Status status);
+
     List<Contest> getContestsByUserId(int userId);
+
+    List<Contest> getContestsByUserIdAndStatus(int userId, Contest.Status status);
 
     List<Contest> getUnhiddenContestsByStatus(Contest.Status status);
 
