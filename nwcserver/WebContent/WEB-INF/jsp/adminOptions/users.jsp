@@ -19,7 +19,7 @@
 	}
 	window.operateEvents = {
 	        'click .edit': function (e, value, row, index) {
-	        	location.href = 'userEdit.do?username=' + row['username'];
+	        	location.href = 'userEdit.do?Username=' + row['username'];
 	        }
 	    };
 </script>
