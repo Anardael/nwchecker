@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.nwchecker.server.model.TaskData;
 
-public class CheckerMessage implements Serializable {
+public class CheckerMessageOld implements Serializable {
 	/**
 	 * 
 	 */

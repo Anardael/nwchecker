@@ -1,20 +1,18 @@
 package com.nwchecker.server.service;
 
+import com.google.protobuf.ByteString;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.TaskTestResult;
-import com.nwchecker.server.utils.CheckerMessage;
-import com.nwchecker.server.utils.CheckerResponse;
+import com.nwchecker.server.utils.messages.CheckerMessageProto.CheckerMessage;
+import com.nwchecker.server.utils.messages.CheckerMessageProto.CheckerMessage.DataPair;
+import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse;
+import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse.AtomicResponse;
 
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -23,59 +21,46 @@ import java.util.Random;
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
 	static final int PORT = 9999;
-
-	@Override
-	public List<CheckerResponse> sendSolutionToChecker(CheckerMessage message) {
-		List<CheckerResponse> checkerResults = new LinkedList<CheckerResponse>();
-		Iterator<TaskData> it = message.getInOutDataPairs().iterator();
-		while (it.hasNext()) {
-			CheckerResponse mockResult = new CheckerResponse();
-			Random rd = new Random();
-			boolean passed = rd.nextBoolean();
-			if (passed) {
-				mockResult.setSuccess(1);
-				mockResult.setExecutionTime(rd.nextInt(5000));
-				mockResult.setMemoryUsed(rd.nextInt(5000));
-			}
-			//failed
-			else{
-				mockResult.setSuccess(0);
-				mockResult.setExecutionTime(rd.nextInt(20000));
-				mockResult.setMemoryUsed(rd.nextInt(20000));
-			}
-			checkerResults.add(mockResult);
-			it.next();
-		}
-		return checkerResults;
-	}
-
+	
 	@Override
 	public Map<String, Object> checkTask(Task task, int compilerId,
 			byte[] userSolution, TaskPass taskPass) {
-		//Create message to be sent to checker
-		CheckerMessage message = new CheckerMessage();
-		message.setCompilerId(compilerId);
-		message.setInOutDataPairs(task.getInOutData());
-		message.setUserSolution(userSolution);
+		// Create message to be sent to checker
+		CheckerMessage.Builder checkerMessageBuilder = CheckerMessage
+				.newBuilder().setCompilerId(compilerId)
+				.setUserSolution(ByteString.copyFrom(userSolution));
+
+		for (TaskData taskData : task.getInOutData()) {
+			// add in/out data to message
+			CheckerMessage.DataPair.Builder dataPairBuilder = CheckerMessage.DataPair
+					.newBuilder();
+			dataPairBuilder.setInputData(ByteString.copyFrom(taskData
+					.getInputData()));
+			dataPairBuilder.setOutputData(ByteString.copyFrom(taskData
+					.getOutputData()));
+			CheckerMessage.DataPair dataPair = dataPairBuilder.build();
+			checkerMessageBuilder.addInOutData(dataPair);
+		}
+		CheckerMessage builtMessage = checkerMessageBuilder.build();
+		// send data to checker
+		CheckerResponse checkerResponse = sendSolutionToChecker(builtMessage);
 		
-		//Send data to checker
-		List<CheckerResponse> checkerResults = sendSolutionToChecker(message);
-		
-		//Process data from checker
+		// Process data from checker
 		Integer successful = 0;
 		List<TaskTestResult> testResults = new LinkedList<TaskTestResult>();
-		
-		for (CheckerResponse atomicResponse : checkerResults) {
+		for (AtomicResponse atomicResponse : checkerResponse.getTestDataList()) {
 			TaskTestResult testResult = new TaskTestResult();
 			if (atomicResponse.getSuccess() > 0) {
 				successful++;
-				testResult.setExecutionTime(atomicResponse.getExecutionTime());
-				testResult.setMemoryUsed(atomicResponse.getMemoryUsed());
-				testResult.setRate(atomicResponse.getSuccess());
 			}
+			testResult.setExecutionTime(atomicResponse.getExecutionTime());
+			testResult.setMemoryUsed(atomicResponse.getMemoryUsed());
+			testResult.setRate(atomicResponse.getSuccess());
 			testResult.setTaskPass(taskPass);
 			testResults.add(testResult);
 		}
+		// Process data from checker
+
 		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("results", testResults);
 		response.put("successful", successful);
@@ -83,6 +68,36 @@ public class CheckerServiceImpl implements CheckerService {
 
 		return response;
 	}
+
+	@Override
+	public CheckerResponse sendSolutionToChecker(CheckerMessage message) {
+		/*
+		 * int compilerId = message.getCompilerId(); byte[] userSolution =
+		 * message.getUserSolution().toByteArray();
+		 */// TODO: parse this as XML
+		CheckerResponse.Builder responseBuilder = CheckerResponse.newBuilder();
+		Random rd = new Random();
+		for (@SuppressWarnings("unused")
+		DataPair dataPair : message.getInOutDataList()) {
+			CheckerResponse.AtomicResponse.Builder atomicResponseBuilder = CheckerResponse.AtomicResponse
+					.newBuilder();
+			boolean passed = rd.nextBoolean();
+			if (passed) {
+				atomicResponseBuilder.setSuccess(1);
+				atomicResponseBuilder.setExecutionTime(rd.nextInt(5000));
+				atomicResponseBuilder.setMemoryUsed(rd.nextInt(5000));
+			}
+			// failed
+			else {
+				atomicResponseBuilder.setSuccess(0);
+				atomicResponseBuilder.setExecutionTime(rd.nextInt(20000));
+				atomicResponseBuilder.setMemoryUsed(rd.nextInt(20000));
+			}
+			responseBuilder.addTestData(atomicResponseBuilder.build());
+		}
+		return responseBuilder.build();
+	}
+
 }
 /*
  * Message to checker: 1. Compiler(ID?) 2. User's solution file.(byte array) 3.

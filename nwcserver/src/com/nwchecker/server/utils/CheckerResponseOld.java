@@ -1,6 +1,6 @@
 package com.nwchecker.server.utils;
 
-public class CheckerResponse {
+public class CheckerResponseOld {
 	private int success;
 	private int executionTime;
 	private int memoryUsed;

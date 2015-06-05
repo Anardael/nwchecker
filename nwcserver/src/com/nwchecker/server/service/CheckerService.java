@@ -4,8 +4,10 @@ import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.model.TaskTestResult;
-import com.nwchecker.server.utils.CheckerMessage;
-import com.nwchecker.server.utils.CheckerResponse;
+import com.nwchecker.server.utils.CheckerMessageOld;
+import com.nwchecker.server.utils.CheckerResponseOld;
+import com.nwchecker.server.utils.messages.CheckerMessageProto.CheckerMessage;
+import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,7 @@ public interface CheckerService {
      * @param compilerId Unique ID of compiler
      * @return Result of Task checking
      */
-	public List<CheckerResponse> sendSolutionToChecker(CheckerMessage message);
+	public CheckerResponse sendSolutionToChecker(CheckerMessage message);
     
     Map<String, Object> checkTask(Task task, int compilerId, byte[] userSolution, TaskPass taskPass);
 }
