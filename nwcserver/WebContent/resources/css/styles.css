@@ -3300,7 +3300,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     color: #262626;
-    font-weight: bold !important;
+    font-weight: normal;
     background-color: #29c4e5;
 }
 
@@ -4298,9 +4298,10 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #262626;
+    color: #29c5e6;
     font-weight: normal;
     background-color: transparent
+    
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
