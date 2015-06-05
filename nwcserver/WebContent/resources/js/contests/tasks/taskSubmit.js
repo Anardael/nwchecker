@@ -19,13 +19,13 @@ var RESULT_TIME;
 var RESULT_MEMORY;
 var RESULT_ERROR_MESSAGE;
 
-var RESULT_SUCCESSFUL = "Successful tests: ";
-var RESULT_TOTAL = " Total tests ";
+var RESULT_SUCCESSFUL;
+var RESULT_TOTAL;
 var DYNAMIC;
+var DYNAMIC_MESSAGE;
 
 
 function submitTask() {
-	console.log();
 	if ($('#file').val() == "") {
 		showErrorDialog(FILE_NOT_SELECTED_TITLE, FILE_NOT_SELECTED_MESSAGE);
 
@@ -84,14 +84,15 @@ function showSubmitResult(result) {
 		(FILE_TOO_LARGE_TITLE, FILE_TOO_LARGE_MESSAGE);
 		return;
 	}
-
-	/*var message = RESULT_TIME + ' <b>' + result['time'] + '</b><br/>'
-			+ RESULT_MEMORY + ' <b>' + result['memory'] + '</b><br/>';*/
-	var message = RESULT_SUCCESSFUL + result['successful'] + ' out of ' + RESULT_TOTAL + result['total'];
+	var message = RESULT_SUCCESSFUL +' <b>' + result['successful'] + '</b><br/>' + RESULT_TOTAL + ' <b>'+ result['total']+'</b>';
+	if (DYNAMIC){
 	if (result['passed']) {
 		showResultSuccess(message);
 	} else {		
 		showResultFail(message);
+	}
+	} else {
+		showResultsSuccess(DYNAMIC_MESSAGE);
 	}
 }
 

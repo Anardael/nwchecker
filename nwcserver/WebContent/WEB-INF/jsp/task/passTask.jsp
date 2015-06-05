@@ -26,7 +26,11 @@
 	RESULT_SUCCESS_MESSAGE = '<spring:message code="contest.passing.resultSuccessDialog.message"/>';
 
 	RESULT_FAIL_TITLE = '<spring:message code="contest.passing.resultFailDialog.title"/>';
-
+	
+	DYNAMIC = "${(not empty taskSuccessRate)&&contest.typeContest.dynamic||(contest.status == ARCHIVE)}";
+	RESULT_SUCCESSFUL = '<spring:message code="contest.passing.resultDialog.successfulTests"/>'
+	RESULT_TOTAL = '<spring:message code="contest.passing.resultDialog.totalTests"/>'
+	DYNAMIC_MESSAGE = '<spring:message code="contest.passing.resultDialog.dynamicMessage"/>';
 	RESULT_TIME = '<spring:message code="contest.passing.resultDialog.time"/>';
 	RESULT_MEMORY = '<spring:message code="contest.passing.resultDialog.memory"/>';
 	RESULT_ERROR_MESSAGE = '<spring:message code="contest.passing.resultDialog.message"/>';
@@ -38,8 +42,7 @@
 	ALL_COMPLETE_MESSAGE = '<spring:message code="contest.passing.allCompleteDialog.message"/>';
 
 	UPLOAD_FILE = '<spring:message code="contest.passing.uploadSourceFile.button"/>';
-	
-	TASK_ID = "${currentTask.id}"
+	TASK_ID = "${currentTask.id}";
 
 	<c:if test="${not empty taskResults[currentTask.id]}">
 	CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
