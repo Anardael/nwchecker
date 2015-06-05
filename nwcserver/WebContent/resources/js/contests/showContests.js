@@ -10,7 +10,7 @@ $(document).ready(function () {
         $('#start_date').text(row['starts']);
         $('#duration').text(row['duration']/3600000);
         $('#type').text(typeContest['name']);
-        $('#description').text(row['description']);
+        $('#description').html(row['description']);
 
         switch (row['status']){
             case 'GOING': {
