@@ -58,27 +58,17 @@ public interface ContestService {
      */
     public Contest getContestByID(int id);
 
-    /**
-     * Return all Contests that has specific status.
-     * <p>
-     * @param status Specific status of required Contests
-     * @return List of Contests that have specific status
-     */
-    public List<Contest> getContestByStatus(Contest.Status status);
-
     List<Contest> getContestForRating();
 
-    public boolean checkIfUserHaveAccessToContest(String username, int ContestId);
+    boolean checkIfUserHaveAccessToContest(String username, int ContestId);
 
     Long getContestEndTime(Contest contest);
 
-	public Contest getNearestContest();
+	Contest getNearestContest();
 
-	public Contest getLastArchivedContest();
+	Contest getLastArchivedContest();
 
     List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username);
 
     List<Contest> getUnhiddenContestsListByStatus(String stringStatus);
-
-    List<Contest> getUnhiddenContests();
 }

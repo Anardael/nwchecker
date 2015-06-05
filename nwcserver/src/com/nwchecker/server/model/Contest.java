@@ -42,24 +42,6 @@ public class Contest {
 				throw new IllegalArgumentException();
 			}
 		}
-
-
-
-		public static Status stringToStatus(String status) {
-			if (Status.ARCHIVE.toString().equals(status)){
-				return Status.ARCHIVE;
-			}
-			if (Status.PREPARING.toString().equals(status)) {
-				return Status.PREPARING;
-			}
-			if (Status.RELEASE.toString().equals(status)) {
-				return Status.RELEASE;
-			}
-			if (Status.GOING.toString().equals(status)) {
-				return Status.GOING;
-			}
-			return null;
-		}
 	}
 	
 	@Id

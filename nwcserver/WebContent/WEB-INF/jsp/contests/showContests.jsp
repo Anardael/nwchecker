@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <c:url var="dataUrl" value="/contestListJson.do" />
+    <c:url var="dataUrl" value="/contestListJson.do?hidden=all&status=all" />
     <table id="contestTable" class="table" data-toggle="table"
            data-url="${dataUrl}" data-method="get" data-cache="false"
            data-search="true" data-clear-search="true" data-search-align="left"

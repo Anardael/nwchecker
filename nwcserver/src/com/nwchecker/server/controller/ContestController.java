@@ -411,20 +411,10 @@ public class ContestController {
     }
 
     @RequestMapping(value = "/contestListJson", method = RequestMethod.GET)
-    public @ResponseBody List<Contest> getContestListJson(Principal principal) {
-        if(principal != null && userService.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")){
-            return contestService.getContestsListByHiddenStatusUsername("all", "all", principal.getName());
-        } else {
-            return contestService.getUnhiddenContests();
-        }
-    }
-
-
-    @RequestMapping(value = "/updateContestListJson", method = RequestMethod.GET)
-    public @ResponseBody List<Contest> updateContestListJson(@RequestParam("hidden") String stringHidden,
+    public @ResponseBody List<Contest> getContestListJson(@RequestParam("hidden") String stringHidden,
                                                              @RequestParam("status") String stringStatus,
                                                              Principal principal) {
-        if(principal !=null && userService.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")){
+        if(principal != null && userService.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")){
             return contestService.getContestsListByHiddenStatusUsername(stringHidden, stringStatus, principal.getName());
         } else {
             return contestService.getUnhiddenContestsListByStatus(stringStatus);

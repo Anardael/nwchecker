@@ -62,29 +62,22 @@ public interface ContestDAO {
      */
     List<Contest> getContestByStatus(Contest.Status status);
 
-	 public List<Contest> getPagedContests( int pageSize, int startIndex);
-	
-	 public Long getEntryCount();
-
-	 public List<Contest> getPagedContests(Contest.Status status, int pageSize, int startIndex);
-		
-	 public Long getEntryCount(Contest.Status status);
-
     List<Contest> getContestsForRating();
-
-    List<Contest> getContestsWithDynamicRating();
 
     List<Contest> getUnhiddenContests();
 
     List<Contest> getHiddenContestsByUserId(int userId);
 
+    List<Contest> getHiddenContestsByUserIdAndStatus(int userId, Contest.Status status);
+
     List<Contest> getContestsByUserId(int userId);
+
+    List<Contest> getContestsByUserIdAndStatus(int userId, Contest.Status status);
 
     List<Contest> getUnhiddenContestsByStatus(Contest.Status status);
 
-    public Contest getNearestContest() ;
+    Contest getNearestContest() ;
 
-    public Contest getLastArchivedContest();
+    Contest getLastArchivedContest();
 
-    public Long getEntryCountForRating();
 }

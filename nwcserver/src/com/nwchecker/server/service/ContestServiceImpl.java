@@ -5,7 +5,7 @@ import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
 
-import com.nwchecker.server.utils.Support;
+import com.nwchecker.server.utils.CheckSortType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,32 +62,23 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public List<Contest> getContestByStatus(Contest.Status status) {
-        return contestDAO.getContestByStatus(status);
-    }
-
-    @Override
     public List<Contest> getContestForRating() {
         return contestDAO.getContestsForRating();
     }
 
     @Override
-    public List<Contest> getUnhiddenContests() {
-        return contestDAO.getUnhiddenContests();
-    }
-
-    @Override
     public List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username) {
         int userId = userDAO.getUserByUsername(username).getUserId();
-        boolean isBooleanHidden = Support.isBoolean(stringHidden);
-        boolean isStatus = Support.isStatus(stringStatus);
+        boolean isBooleanHidden = CheckSortType.isBoolean(stringHidden);
+        boolean isStatus = CheckSortType.isStatus(stringStatus);
 
         if (!isBooleanHidden && !isStatus){     // hidden: ALL, status: ALL
             return contestDAO.getContestsByUserId(userId);
         }
 
+        boolean hidden = Boolean.parseBoolean(stringHidden);
+
         if (isBooleanHidden && !isStatus){      // hidden: notALL, status: ALL
-            boolean hidden = Boolean.parseBoolean(stringHidden);
             if (hidden){
                 return contestDAO.getHiddenContestsByUserId(userId);
             } else {
@@ -98,15 +89,14 @@ public class ContestServiceImpl implements ContestService {
         Contest.Status status = Contest.Status.valueOf(stringStatus);
 
         if (!isBooleanHidden && isStatus) {     // hidden: ALL, status: notALL
-            return makeSelectionByStatus(contestDAO.getContestsByUserId(userId), status);
+            return contestDAO.getContestsByUserIdAndStatus(userId, status);
         }
 
         if (isBooleanHidden && isStatus) {      // hidden: notALL, status: notALL
-            boolean hidden = Boolean.parseBoolean(stringHidden);
             if (hidden){
-                return makeSelectionByStatus(contestDAO.getHiddenContestsByUserId(userId), status);
+                return contestDAO.getHiddenContestsByUserIdAndStatus(userId, status);
             } else {
-                return makeSelectionByStatus(contestDAO.getUnhiddenContests(), status);
+                return contestDAO.getUnhiddenContestsByStatus(status);
             }
         }
 
@@ -116,8 +106,8 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
         // if status notALL
-        if (Support.isStatus(stringStatus)){
-            return contestDAO.getUnhiddenContestsByStatus(Contest.Status.stringToStatus(stringStatus));
+        if (CheckSortType.isStatus(stringStatus)){
+            return contestDAO.getUnhiddenContestsByStatus(Contest.Status.valueOf(stringStatus));
         } else {
             return contestDAO.getUnhiddenContests();
         }
@@ -146,15 +136,4 @@ public class ContestServiceImpl implements ContestService {
 	    return contestDAO.getLastArchivedContest();
 	}
 
-    private static List<Contest> makeSelectionByStatus(List<Contest> contests, Contest.Status status){
-        Iterator<Contest> iterator = contests.iterator();
-
-        while(iterator.hasNext()){
-            if(iterator.next().getStatus() != status){
-                iterator.remove();
-            }
-        }
-
-        return contests;
-    }
 }

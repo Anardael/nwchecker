@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.utils.ContestComparator;
 import org.apache.log4j.Logger;
@@ -16,7 +17,7 @@ import java.util.concurrent.ScheduledFuture;
 public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
-    private ContestService contestService;
+    private ContestDAO contestDAO;
 
     @Autowired
     private ScoreCalculationService scoreCalculationService;
@@ -40,9 +41,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         //get all contests for which need Timer task:
         //get release contests:
-        List<Contest> executableContests = contestService.getContestByStatus(Contest.Status.RELEASE);
+        List<Contest> executableContests = contestDAO.getContestByStatus(Contest.Status.RELEASE);
         //add going contests:
-        executableContests.addAll(contestService.getContestByStatus(Contest.Status.GOING));
+        executableContests.addAll(contestDAO.getContestByStatus(Contest.Status.GOING));
         if (executableContests.size() == 0) {
             return;
         }
@@ -68,12 +69,12 @@ public class ScheduleServiceImpl implements ScheduleService {
             public void run() {
                 if (nextExecuteContest.getStatus() == Contest.Status.RELEASE) {
                     nextExecuteContest.setStatus(Contest.Status.GOING);
-                    contestService.updateContest(nextExecuteContest);
+                    contestDAO.updateContest(nextExecuteContest);
                     LOG.debug("Contest (id=" + nextExecuteContest.getId() + ") changed status to GOING");
                 } else {
                     nextExecuteContest.setStatus(Contest.Status.ARCHIVE);
                     nextExecuteContest.setHidden(true);
-                    contestService.updateContest(nextExecuteContest);
+                    contestDAO.updateContest(nextExecuteContest);
                     scoreCalculationService.calculateScore(nextExecuteContest.getId());
                     LOG.debug("Contest (id=" + nextExecuteContest.getId() + ") changed status to ARCHIVE");
                 }
