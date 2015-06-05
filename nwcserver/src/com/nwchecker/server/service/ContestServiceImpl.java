@@ -9,7 +9,6 @@ import com.nwchecker.server.utils.CheckSortType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.PrintStream;
 import java.util.*;
 
 @Service
@@ -63,18 +62,8 @@ public class ContestServiceImpl implements ContestService {
     }
 
     @Override
-    public List<Contest> getContestByStatus(Contest.Status status) {
-        return contestDAO.getContestByStatus(status);
-    }
-
-    @Override
     public List<Contest> getContestForRating() {
         return contestDAO.getContestsForRating();
-    }
-
-    @Override
-    public List<Contest> getUnhiddenContests() {
-        return contestDAO.getUnhiddenContests();
     }
 
     @Override
