@@ -32,11 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * <h1>Contest Controller</h1>
@@ -76,6 +77,9 @@ public class ContestController {
     @Autowired
     private TypeContestService typeContestService;
 
+    @Autowired
+    private PageTrackingService pageTrackingService;
+
     /**
      * This mapped method used to return page with contests list
      * <p>
@@ -94,27 +98,14 @@ public class ContestController {
             return "nwcserver.contests.show";
         }
 
-        User user = userService.getUserByUsername(principal.getName());
+        if(pageTrackingService.containPath("/getContests.do")){
+            System.out.println("User on page showContests.jsp: "
+                    + pageTrackingService.getUsernamesByPath("/getContests.do").get(0));
+        }
 
-        if (((UsernamePasswordAuthenticationToken) principal).getAuthorities()
-                .contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-            List<String> editableContestIndexes = new LinkedList<String>();
-            //getContests which user can edit:
-            if ((user.getContest() != null) && (user.getContest().size() > 0)) {
-                for (Contest c : user.getContest()) {
-                    if (c.getStatus().equals(Contest.Status.PREPARING)
-                            || c.getStatus().equals(Contest.Status.ARCHIVE)) {
-                        // set index for view
-                        if (c.getStatus().equals(Contest.Status.PREPARING)) {
-                            editableContestIndexes.add("index" + c.getId()
-                                    + "index");
-                        }
-                    }
-                }
-            }
-            model.addAttribute("editContestIndexes", editableContestIndexes);
-            // set usernames for editing contests:
-            model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
+        if(pageTrackingService.containPath("/contestListJson.do")){
+            System.out.println("User on page showContests.jsp: "
+                    + pageTrackingService.getUsernamesByPath("/contestListJson.do").get(0));
         }
 
         model.addAttribute("pageName", "contest");
