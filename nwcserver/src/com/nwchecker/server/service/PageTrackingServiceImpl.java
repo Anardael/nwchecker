@@ -6,7 +6,7 @@ import java.util.*;
 
 @Service("PageTrackingService")
 public class PageTrackingServiceImpl implements PageTrackingService {
-    private static Map<String, String> trackerMap = new HashMap<>(); // TODO change to TreeMap
+    private static Map<String, String> trackerMap = new LinkedHashMap<>();
 
     @Override
     public void addTrack(String username, String servletPath) {
@@ -23,8 +23,7 @@ public class PageTrackingServiceImpl implements PageTrackingService {
         List<String> userNames = null;
         if(trackerMap.containsValue(servletPath)){
             userNames = new ArrayList<>();
-            Set<String> userNameSet = trackerMap.keySet();
-            for (String key : userNameSet){
+            for (String key : trackerMap.keySet()){
                 if(trackerMap.get(key).equals(servletPath)) {
                     userNames.add(key);
                 }

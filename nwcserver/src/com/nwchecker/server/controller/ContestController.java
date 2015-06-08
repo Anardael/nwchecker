@@ -1,13 +1,8 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
-import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
@@ -15,7 +10,6 @@ import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -27,17 +21,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <h1>Contest Controller</h1>

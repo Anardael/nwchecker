@@ -1,12 +1,12 @@
 package com.nwchecker.server.service;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.async.DeferredResult;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Service(value = "ContestEditWatcher")
 public class ContestEditWatcherServiceImpl implements ContestEditWatcherService {

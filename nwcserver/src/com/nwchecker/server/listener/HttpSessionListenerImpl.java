@@ -1,13 +1,10 @@
 package com.nwchecker.server.listener;
 
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HttpSessionListenerImpl implements HttpSessionListener {
     private static final Set<String> sessions = new HashSet<>();
