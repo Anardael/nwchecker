@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.nwchecker.server.dao.TaskPassDAO;
+import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.utils.PaginationWrapper;
 
@@ -67,5 +69,16 @@ public class TaskPassServiceImpl implements TaskPassService {
 	@Override
 	public void delete(TaskPass taskPass) {
 		taskPassDAO.delete(taskPass);
+	}
+
+	@Override
+	public List<TaskPassJson> getPagedTaskPassJson(int taskId, int startIndex,
+			int pageSize, String sortingColumn, String sortingOrder,
+			String filter) {
+		List<TaskPassJson> jsonList = new LinkedList<TaskPassJson>();
+		for (TaskPass taskPass : getPagedTaskPassesForTask(taskId, startIndex, pageSize, sortingColumn, sortingOrder, filter)){
+			jsonList.add(TaskPassJson.createTaskPassJson(taskPass));
+		}
+		return jsonList;
 	}
 }

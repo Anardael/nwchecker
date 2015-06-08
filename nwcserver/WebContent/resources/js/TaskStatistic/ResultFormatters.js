@@ -1,13 +1,13 @@
 var PASSED = 'true';
 var FAILED = 'false';
 
-function usernameFormatter(value){
-	return value['displayName'];
+/*function usernameFormatter(value){
+	return value['name'];
 }
 
 function compilerFormatter(value){
 	return value['compiler'];
-}
+}*/
 
 function passedFormatter(value){
 	if (value){

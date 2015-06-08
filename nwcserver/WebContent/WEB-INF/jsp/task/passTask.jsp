@@ -205,12 +205,9 @@
 									data-formatter="compilerFormatter" data-sortable="true"
 									class="col-md-1"><spring:message
 										code="task.statistic.compilerCaption" /></th>
-								<th data-field="executionTime" data-align="center"
-									data-sortable="true" class="col-md-1"><spring:message
-										code="task.statistic.execTimeCaption" /></th>
-								<th data-field="memoryUsed" data-align="center"
-									data-sortable="true" class="col-md-1"><spring:message
-										code="task.statistic.memUsedCaption" /></th>
+								<th data-field="passedTests" data-align="center"
+									data-sortable="false" class="col-md-1"><spring:message
+										code="task.statistic.execTimeCaption" /></th>								
 								<th data-field="passed" data-align="center"
 									data-formatter="passedFormatter" data-sortable="true"
 									class="col-md-1"><spring:message
