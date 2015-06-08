@@ -50,9 +50,10 @@ public class ContestValidator implements Validator {
             errors.rejectValue("starts", "Contest.startTime.less");
         }
         else  if (c.getStarts()== null) {
-            c.setStarts(Calendar.getInstance().getTime());
-            
+//        	errors.rejectValue("starts", "Contest.startTime.default");
+            c.setStarts(Calendar.getInstance().getTime());           
         }
+        
         if (errors.hasFieldErrors("duration")) {
             errors.rejectValue("duration", "Pattern.duration");
         }

@@ -37,6 +37,7 @@ label.btn-primary {
     //success modal:
     var successContestSave = "<spring:message code="contest.successSave"/>";
     var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
+    var contestEmptyDateSuccess = "<spring:message code="contest.startTime.empty"/>";
     //contest submit finish form:
     var contestFinishHeader = "<spring:message code="contest.submit.header"/>";
     var contestFinishBody = "<spring:message code="contest.submit.body"/>";
@@ -44,6 +45,7 @@ label.btn-primary {
     var contestReleaseFailDueDate = "<spring:message code="contest.failReleaseDueDate"/>";
     var emptyStart = "<spring:message code="contest.startDateEmpty"/>";
     var emptyTask = "<spring:message code="contest.release.taskEmpty"/>";
+    vr startDef = "<spring:message code="contest.startDate.def"/>";
     //contestUserAccessListWarning:
     var emptyUserListHeader = "<spring:message code="contest.userList.EmptyListHeader"/>";
     var emptyUserListBody = "<spring:message code="contest.userList.EmptyListBody"/>";

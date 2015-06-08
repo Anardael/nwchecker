@@ -100,6 +100,13 @@ function sendFinishContest() {
                         message: emptyStart
                     });
                 }
+                if (data['status'] == "EMPTY_DATE") {
+                    BootstrapDialog.show({
+                        title: contestEmptyDateSuccess,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        message: startDef
+                    });
+                }
                 if (data['status'] == "FAIL_EMPTY") {
                     BootstrapDialog.show({
                         title: errorCaption,
