@@ -15,22 +15,22 @@ $(document).ready(function () {
             case 'GOING': {
                 $('.open-btn').show();
                 $('#archive-btn').hide();
-                $('#edit-btn').hide();
+                $('#edit-group').hide();
             } break;
             case 'ARCHIVE': {
                 $('#archive-btn').show();
                 $('.open-btn').hide();
-                $('#edit-btn').hide();
+                $('#edit-group').hide();
             } break;
             case 'PREPARING': {
                 $('#archive-btn').hide();
                 $('.open-btn').hide();
-                $('#edit-btn').show();
+                showEditGroup(row);
             } break;
             case 'RELEASE': {
                 $('#archive-btn').hide();
                 $('.open-btn').hide();
-                $('#edit-btn').hide();
+                $('#edit-group').hide();
             } break;
         }
 
@@ -39,21 +39,22 @@ $(document).ready(function () {
 });
 
 function edited(contestId) {
-    //1. Send ajax to check if somebody currently edit contest:
+    /*//1. Send ajax to check if somebody currently edit contest:
     $.get("checkContestEdit.do?id=" + contestId)
         .success(function (data) {
             if (data == "OK") {
                 location.href = 'editContest.do?id=' + contestId;
             } else {
                 location.href = 'editContest.do?id=' + contestId;
-                /*BootstrapDialog.show({
+                *//*BootstrapDialog.show({
                  title: errorLabel,
                  type: BootstrapDialog.TYPE_DANGER,
                  message: nowEditingBody + "\n" + nowEditingUser + ": " + data
-                 });*/
+                 });*//*
             }
         }
-    );
+    );*/
+    location.href = 'editContest.do?id=' + contestId;
 }
 
 function openContest(contestId) {
@@ -103,9 +104,32 @@ function updateContestsList(){
     });
 }
 
+function showEditGroup(row){
+    $.ajax({
+        type: 'GET',
+        url: 'checkContestIsEdited.do?id=' + row['id'],
+        dataType:'text',
+        success: function (response) {
+            console.log('Success response!');
+            updateEditGroup(response === 'true');
+        },
+        error: function() {
+            console.log('Error response!');
+        }
+    });
+}
 
-
-
+function updateEditGroup(isEdit){
+    $('#edit-group').show();
+    if(isEdit){
+        $('#now-edit').show()
+        $('#edit-username').text('SOME USER');
+        $('#edit-btn').show().attr('disabled','disabled');
+    } else {
+        $('#now-edit').hide();
+        $('#edit-btn').show().removeAttr('disabled');
+    }
+}
 
 
 

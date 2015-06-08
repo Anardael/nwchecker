@@ -127,11 +127,4 @@ function sendFinishContest() {
     });
 }
 
-function contestLongPolling() {
-    var id = $("#id").val();
-    $.get("editingContest.do?id=" + id).success(function (data) {
-        if (data == "timeOut") {
-            contestLongPolling();
-        }
-    });
-}
+

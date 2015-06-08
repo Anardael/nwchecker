@@ -6,16 +6,11 @@ import java.util.*;
 
 @Service("PageTrackingService")
 public class PageTrackingServiceImpl implements PageTrackingService {
-    private static Map<String, String> trackerMap = new HashMap<>();
+    private static Map<String, String> trackerMap = new HashMap<>(); // TODO change to TreeMap
 
     @Override
     public void addTrack(String username, String servletPath) {
         trackerMap.put(username, servletPath);
-    }
-
-    @Override
-    public void removeTrackByUsername(String userName) {
-        trackerMap.remove(userName);
     }
 
     @Override

@@ -124,9 +124,12 @@
                 <div class="modal-footer">
                     <div class="pull-right" style="margin-top: 10px">
                         <security:authorize access="hasRole('ROLE_TEACHER')">
-                            <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">
-                                <spring:message code="btn.edit" />
-                            </button>
+                            <div id="edit-group">
+                                <span id="now-edit">Contest is editing now by <span id="edit-username"></span></span>
+                                <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">
+                                    <spring:message code="btn.edit" />
+                                </button>
+                            </div>
                         </security:authorize>
                         <security:authorize access="hasRole('ROLE_USER')">
                             <button class="open-btn btn btn-sm btn-info form-group"
