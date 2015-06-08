@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -81,24 +82,7 @@ public class ContestController {
     @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
-        if(principal == null){
-            model.addAttribute("pageName", "contest");
-
-            return "nwcserver.contests.show";
-        }
-
-        if(pageTrackingService.containPath("/getContests.do")){
-            System.out.println("User on page showContests.jsp: "
-                    + pageTrackingService.getUsernamesByPath("/getContests.do").get(0));
-        }
-
-        if(pageTrackingService.containPath("/contestListJson.do")){
-            System.out.println("User on page showContests.jsp: "
-                    + pageTrackingService.getUsernamesByPath("/contestListJson.do").get(0));
-        }
-
         model.addAttribute("pageName", "contest");
-
         return "nwcserver.contests.show";
     }
 
@@ -223,6 +207,12 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int contestId, Principal principal, Model model) {
+        if(principal != null
+                && userService.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")
+                && contestEditWatcherService.checkContestIsEditedById(contestId)){
+            return "nwcserver.contestIsEdited";
+        }
+
         contestEditWatcherService.addParameters(contestId, principal.getName());
 
         model.addAttribute("contestModelForm", contestService.getContestByID(contestId));

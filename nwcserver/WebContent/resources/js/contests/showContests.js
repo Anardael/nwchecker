@@ -36,24 +36,11 @@ $(document).ready(function () {
 
         $('#contestModal').modal();
     });
+
+    console.log(window.contestIsEdited);
 });
 
 function edited(contestId) {
-    /*//1. Send ajax to check if somebody currently edit contest:
-    $.get("checkContestEdit.do?id=" + contestId)
-        .success(function (data) {
-            if (data == "OK") {
-                location.href = 'editContest.do?id=' + contestId;
-            } else {
-                location.href = 'editContest.do?id=' + contestId;
-                *//*BootstrapDialog.show({
-                 title: errorLabel,
-                 type: BootstrapDialog.TYPE_DANGER,
-                 message: nowEditingBody + "\n" + nowEditingUser + ": " + data
-                 });*//*
-            }
-        }
-    );*/
     location.href = 'editContest.do?id=' + contestId;
 }
 
