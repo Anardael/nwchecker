@@ -45,7 +45,7 @@ label.btn-primary {
     var contestReleaseFailDueDate = "<spring:message code="contest.failReleaseDueDate"/>";
     var emptyStart = "<spring:message code="contest.startDateEmpty"/>";
     var emptyTask = "<spring:message code="contest.release.taskEmpty"/>";
-    vr startDef = "<spring:message code="contest.startDate.def"/>";
+    var startDef = "<spring:message code="contest.startDate.def"/>";
     //contestUserAccessListWarning:
     var emptyUserListHeader = "<spring:message code="contest.userList.EmptyListHeader"/>";
     var emptyUserListBody = "<spring:message code="contest.userList.EmptyListBody"/>";

@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -185,7 +186,7 @@ public class ContestController {
 				+ "\""
 				+ " tries to "
 				+ (contestAddForm.getId() == 0 ? "create new"
-						: "edit an existing") + " contest");
+				: "edit an existing") + " contest");
 
 		// if Contest has id- check if user has access to modify it:
 		if (contestAddForm.getId() != 0) {
@@ -216,35 +217,38 @@ public class ContestController {
 			}
 			// set all errors:
 			res.setErrorMessageList(errorMessages);
-		} else if (contestAddForm.getStarts() == null) {
-			LOG.info("Contest validation passed.");
-			res.setStatus("EMPTY_DATE");
 		} else {
-			LOG.info("Contest validation passed.");
-			res.setStatus("SUCCESS");
-			// set users:
-			if (contestAddForm.getId() != 0) {
-				Contest exist = contestService.getContestByID(contestAddForm
-						.getId());
-				// set users:
-				contestAddForm.setUsers(exist.getUsers());
-				// set tasks:
-				contestAddForm.setTasks(exist.getTasks());
-				// update contest:
-				contestService.mergeContest(contestAddForm);
+			if (contestAddForm.getStarts() == null) {
+				LOG.info("Contest validation passed.");
+				res.setStatus("EMPTY_DATE");
+				contestAddForm.setStarts(Calendar.getInstance().getTime());
 			} else {
-				// set author:
-				User author = userService
-						.getUserByUsername(principal.getName());
-				List<User> list = new LinkedList<User>();
-				list.add(author);
-				contestAddForm.setUsers(list);
-				contestService.addContest(contestAddForm);
-			}
-			LOG.info("Contest successfully saved to DB.");
-			// set generated id to JSON response:
-			res.setResult(String.valueOf(contestAddForm.getId()));
+				LOG.info("Contest validation passed.");
+				res.setStatus("SUCCESS");
+			}// set users:
+
+		if (contestAddForm.getId() != 0) {
+			Contest exist = contestService.getContestByID(contestAddForm
+					.getId());
+			// set users:
+			contestAddForm.setUsers(exist.getUsers());
+			// set tasks:
+			contestAddForm.setTasks(exist.getTasks());
+			// update contest:
+			contestService.mergeContest(contestAddForm);
+		} else {
+			// set author:
+			User author = userService
+					.getUserByUsername(principal.getName());
+			List<User> list = new LinkedList<User>();
+			list.add(author);
+			contestAddForm.setUsers(list);
+			contestService.addContest(contestAddForm);
 		}
+		LOG.info("Contest successfully saved to DB.");
+		// set generated id to JSON response:
+		res.setResult(String.valueOf(contestAddForm.getId()));
+	}
 		return res;
 	}
 
