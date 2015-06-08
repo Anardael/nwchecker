@@ -12,6 +12,8 @@ import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse.
 
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.Random;
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
 	static final int PORT = 9999;
-	
+
 	@Override
 	public Map<String, Object> checkTask(Task task, int compilerId,
 			byte[] userSolution, TaskPass taskPass) {
@@ -44,7 +46,7 @@ public class CheckerServiceImpl implements CheckerService {
 		CheckerMessage builtMessage = checkerMessageBuilder.build();
 		// send data to checker
 		CheckerResponse checkerResponse = sendSolutionToChecker(builtMessage);
-		
+
 		// Process data from checker
 		Integer successful = 0;
 		List<TaskTestResult> testResults = new LinkedList<TaskTestResult>();
@@ -64,6 +66,7 @@ public class CheckerServiceImpl implements CheckerService {
 		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("results", testResults);
 		response.put("successful", successful);
+		response.put("total", task.getInOutData().size());
 		response.put("passed", successful.equals(task.getInOutData().size()));
 
 		return response;
@@ -71,31 +74,41 @@ public class CheckerServiceImpl implements CheckerService {
 
 	@Override
 	public CheckerResponse sendSolutionToChecker(CheckerMessage message) {
-		/*
-		 * int compilerId = message.getCompilerId(); byte[] userSolution =
-		 * message.getUserSolution().toByteArray();
-		 */// TODO: parse this as XML
-		CheckerResponse.Builder responseBuilder = CheckerResponse.newBuilder();
-		Random rd = new Random();
-		for (@SuppressWarnings("unused")
-		DataPair dataPair : message.getInOutDataList()) {
-			CheckerResponse.AtomicResponse.Builder atomicResponseBuilder = CheckerResponse.AtomicResponse
+		CheckerResponse checkerResponse;
+		try {
+			Socket socket = new Socket();
+			message.writeTo(socket.getOutputStream());
+			checkerResponse = CheckerResponse
+					.parseFrom(socket.getInputStream());
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			CheckerResponse.Builder responseBuilder = CheckerResponse
 					.newBuilder();
-			boolean passed = rd.nextBoolean();
-			if (passed) {
-				atomicResponseBuilder.setSuccess(1);
-				atomicResponseBuilder.setExecutionTime(rd.nextInt(5000));
-				atomicResponseBuilder.setMemoryUsed(rd.nextInt(5000));
+			Random rd = new Random();
+			for (@SuppressWarnings("unused")
+			DataPair dataPair : message.getInOutDataList()) {
+				CheckerResponse.AtomicResponse.Builder atomicResponseBuilder = CheckerResponse.AtomicResponse
+						.newBuilder();
+				boolean passed = rd.nextBoolean();
+				if (passed) {
+					atomicResponseBuilder.setSuccess(1);
+					atomicResponseBuilder.setExecutionTime(rd.nextInt(5000));
+					atomicResponseBuilder.setMemoryUsed(rd.nextInt(5000));
+				}
+				// failed
+				else {
+					atomicResponseBuilder.setSuccess(0);
+					atomicResponseBuilder.setExecutionTime(rd.nextInt(20000));
+					atomicResponseBuilder.setMemoryUsed(rd.nextInt(20000));
+				}
+				responseBuilder.addTestData(atomicResponseBuilder.build());
 			}
-			// failed
-			else {
-				atomicResponseBuilder.setSuccess(0);
-				atomicResponseBuilder.setExecutionTime(rd.nextInt(20000));
-				atomicResponseBuilder.setMemoryUsed(rd.nextInt(20000));
-			}
-			responseBuilder.addTestData(atomicResponseBuilder.build());
+			checkerResponse = responseBuilder.build();
 		}
-		return responseBuilder.build();
+
+		return checkerResponse;
 	}
 
 }

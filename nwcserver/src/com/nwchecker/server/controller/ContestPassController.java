@@ -72,8 +72,7 @@ public class ContestPassController {
 				(currentContest.getStatus() == Contest.Status.ARCHIVE));
 		model.addAttribute("contestEndTimeGTM",
 				contestService.getContestEndTime(currentContest));
-		model.addAttribute(
-				"taskResults",
+		model.addAttribute("taskResults",
 				contestPassService.getTaskResultsForContestByUserName(
 						principal.getName(), currentContest));
 		model.addAttribute("compilers", compilerService.getAllCompilers());
@@ -137,12 +136,11 @@ public class ContestPassController {
 			@RequestParam(value = "id") int taskId,
 			@RequestParam(value = "compilerId") int compilerId,
 			@RequestParam("file") MultipartFile file) throws IOException {
+		Map<String, Object> result = new LinkedHashMap<>();
 		if (file.getSize() > MAX_FILE_SIZE_BYTE) {
-			Map<String, Object> result = new LinkedHashMap<>();
 			result.put("fileTooLarge", true);
 			return result;
-		}
-		Map<String, Object> result = new LinkedHashMap<>();
+		}		
 		Task task = taskService.getTaskById(taskId);
 		User user = userService.getUserByUsername(principal.getName());
 		// check access:
@@ -155,18 +153,7 @@ public class ContestPassController {
 				}
 			}
 		}
-		if (task.getContest().getStatus() == Contest.Status.GOING
-				&& contestPass != null) {
-			result = contestPassService.checkTask(true, contestPass, task,
-					compilerId, file.getBytes(), user);
-		} else if (task.getContest().getStatus() == Contest.Status.ARCHIVE) {
-			// archive:
-			result = contestPassService.checkTask(false, contestPass, task,
-					compilerId, file.getBytes(), user);
-		} else {
-			result.put("accessDenied", true);
-		}
-		result.put("total", task.getInOutData().size());
+		result = contestPassService.checkTask(contestPass, task, compilerId, file.getBytes(), user);
 		return result;
 	}
 }

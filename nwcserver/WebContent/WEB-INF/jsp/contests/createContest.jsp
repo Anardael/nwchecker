@@ -123,7 +123,7 @@ label.btn-primary {
 					label="${contestTitle}: *" />
 				<div class="col-sm-1">
 					<label class="control-label"><spring:message
-							code="contestCreate.type" />: </label>
+							code="contestCreate.type" />: *</label>
 				</div>
 				<div class="col-sm-2">
 					<form:select path="typeContest.id" class="form-control">

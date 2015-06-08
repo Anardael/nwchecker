@@ -83,7 +83,7 @@ public class ContestPassServiceImplTest {
         ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
         Task task = contestPass.getContest().getTasks().get(0);
         User user = userService.getUserById(3);
-        assertNotNull(contestPassService.checkTask(true, contestPass, task, 1, new byte[8], user));
+        assertNotNull(contestPassService.checkTask(contestPass, task, 1, new byte[8], user));
     }
 
     @Test

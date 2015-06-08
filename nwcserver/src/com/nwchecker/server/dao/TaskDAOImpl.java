@@ -92,6 +92,8 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
+		criteria.createAlias("contest", "cont");
+		criteria.add(Restrictions.eq("cont.status", Contest.Status.ARCHIVE));
 		if (!(filter == null) && !(filter.equals(""))) {
 			Criterion title = Restrictions.ilike("title", filter,
 					MatchMode.ANYWHERE);
@@ -118,6 +120,8 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
+		criteria.createAlias("contest", "cont");
+		criteria.add(Restrictions.eq("cont.status", Contest.Status.ARCHIVE));
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
 		List<Task> result = (List<Task>) criteria.list();
@@ -130,7 +134,8 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
 		Criteria criteria = session.createCriteria(Task.class);
-
+		criteria.createAlias("contest", "cont");
+		criteria.add(Restrictions.eq("cont.status", Contest.Status.ARCHIVE));
 		if (!(filter == null) && !(filter.equals(""))) {
 			Criterion title = Restrictions.ilike("title", filter,
 					MatchMode.ANYWHERE);

@@ -25,6 +25,8 @@ public class ContestPassServiceImpl implements ContestPassService {
 	private CompilerDAO compilerDAO;
 	@Autowired
 	private TaskPassService taskPassService;
+	@Autowired
+	private ScoreCalculationService scoreCalculationService;
 
 	@Override
 	public void saveContestPass(ContestPass contestPass) {
@@ -38,29 +40,37 @@ public class ContestPassServiceImpl implements ContestPassService {
 
 	@Override
 	@Transactional
-	public Map<String, Object> checkTask(boolean save, ContestPass contestPass,
+	public Map<String, Object> checkTask(ContestPass contestPass,
 			Task task, int compilerId, byte[] userSolution, User user) {
+		if (contestPass == null){
+			HashMap<String, Object> response = new HashMap<String, Object>();
+			response.put("accessDenied", true);
+			return response;
+		}
 
 		// send File and compiler to checker:
 		TaskPass taskPass = new TaskPass();
 		Map<String, Object> checkResult = checkerService.checkTask(task,
 				compilerId, userSolution, taskPass);
-		taskPass.setUser(user);
-		taskPass.setContestPass(contestPass);
-		taskPass.setTask(task);
-		taskPass.setPassed((boolean) checkResult.get("passed"));
-		taskPass.setFile(userSolution);
-		taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
-		taskPass.setTestResults((List<TaskTestResult>) checkResult
-				.get("results"));
-		addTaskPass(contestPass, taskPass, task);
-		// get passed minute:
-		long millis = System.currentTimeMillis()
-				- taskPass.getTask().getContest().getStarts().getTime();
-		long minute = millis / 1000 / 60;
-		taskPass.setPassedMinute((int) minute);
-		if (save) {
-			updateContestPass(contestPass);
+		
+		if (task.getContest().getStatus() == Contest.Status.GOING) {			
+			taskPass.setUser(user);
+			taskPass.setContestPass(contestPass);
+			taskPass.setTask(task);
+			taskPass.setPassed((boolean) checkResult.get("passed"));
+			taskPass.setFile(userSolution);
+			taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
+			taskPass.setTestResults((List<TaskTestResult>) checkResult.remove("results"));		
+			// get passed minute:
+			long millis = System.currentTimeMillis()
+					- taskPass.getTask().getContest().getStarts().getTime();
+			long minute = millis / 1000 / 60;
+			taskPass.setPassedMinute((int) minute);
+			addTaskPass(contestPass, taskPass, task);
+			updateContestPass(contestPass);			
+		}
+		if (task.getContest().getTypeContest().isDynamic()){
+			scoreCalculationService.calculateScore(task.getContest().getId());
 		}
 		return checkResult;
 	}
