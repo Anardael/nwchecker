@@ -51,7 +51,7 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 			// refresh
 			contestPass.setPassedCount(0);
 			contestPass.setTimePenalty(0);
-			
+
 			if (contest.getTypeContest().isDynamic()) {
 				calculateDynamicScore(contestPass);
 			} else {
@@ -75,7 +75,6 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 						+ taskResult.getRate());
 			}
 		}
-		contestPassDAO.updateContestPass(contestPass);
 	}
 
 	private void calculateDynamicScore(ContestPass contestPass) {
@@ -101,7 +100,6 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 					contestPass
 							.setTimePenalty(contestPass.getTimePenalty() + 20);
 				}
-				contestPassDAO.updateContestPass(contestPass);
 			}
 		}
 	}
