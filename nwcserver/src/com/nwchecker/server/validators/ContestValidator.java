@@ -5,10 +5,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * <h1>Contest Validator</h1>
  * Validator that used to validate data from Contest Create page.
- * <p>
+ * <p/>
  *
  * @author Roman Zayats
  * @version 1.0
@@ -43,8 +46,12 @@ public class ContestValidator implements Validator {
         if (errors.hasFieldErrors("starts")) {
             errors.rejectValue("starts", "Pattern.starts");
         }
-        if (c.getStarts()!=null && c.getStarts().getTime()<(System.currentTimeMillis())){        	
-            errors.rejectValue("starts","Contest.startTime.less");
+        if (c.getStarts()!= null && c.getStarts().getTime() < (System.currentTimeMillis())) {
+            errors.rejectValue("starts", "Contest.startTime.less");
+        }
+        else  if (c.getStarts()== null) {
+            c.setStarts(Calendar.getInstance().getTime());
+            
         }
         if (errors.hasFieldErrors("duration")) {
             errors.rejectValue("duration", "Pattern.duration");
