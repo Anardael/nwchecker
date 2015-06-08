@@ -60,7 +60,6 @@ public class TaskPassServiceImplTest {
 	}
 
 	@Test
-	@Ignore
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTaskPassesForTaskSorted() {
 		List<TaskPass> taskPasses2 = taskPassService.getPagedTaskPassesForTask(

@@ -14,9 +14,9 @@ public class RatingServiceImpl implements RatingService {
     private static final Logger LOG = Logger.getLogger(RatingServiceImpl.class);
 
     @Autowired
-    ScoreCalculationService scoreCalculationService;
+    private ScoreCalculationService scoreCalculationService;
     @Autowired
-    ContestService contestService;
+    private ContestService contestService;
     @Autowired
     private ContestPassService contestPassService;
 

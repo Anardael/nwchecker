@@ -45,7 +45,7 @@ public interface ContestPassService {
      * @param file Source code files
      * @return
      */
-    Map<String, Object> checkTask(boolean save, ContestPass contestPass, Task task, int compilerId, byte[] file, User user);
+    Map<String, Object> checkTask(ContestPass contestPass, Task task, int compilerId, byte[] file, User user);
 
     /**
      * Return list of passed contests for specific Contest.

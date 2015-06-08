@@ -8,14 +8,12 @@ import com.nwchecker.server.model.TaskTestResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestResult;
 
 @Service
 public class ScoreCalculationServiceImpl implements ScoreCalculationService {
@@ -23,7 +21,6 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 	private ContestService contestService;
 	@Autowired
 	private ContestPassService contestPassService;
-
 	@Autowired
 	private ContestPassDAO contestPassDAO;
 
@@ -39,7 +36,6 @@ public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 	 */
 
 	@Override
-	@Transactional
 	public void calculateScore(int contestId) {
 		Contest contest = contestService.getContestByID(contestId);
 		// get all user ContestPasses for this contest:

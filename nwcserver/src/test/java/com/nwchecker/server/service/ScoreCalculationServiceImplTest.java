@@ -37,7 +37,7 @@ public class ScoreCalculationServiceImplTest {
     @Autowired
     private ContestPassService contestPassService;
 
-    @Test
+    @Test    
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCalculateScore() throws Exception {
         scoreCalculationService.calculateScore(1);
