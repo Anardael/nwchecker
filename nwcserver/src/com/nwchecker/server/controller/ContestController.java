@@ -226,7 +226,7 @@ public class ContestController {
      * <p>
      * <b>Note:</b>Only TEACHER has rights to use this method.
      *
-     * @param id ID of contest that will be edited
+     * @param contestId ID of contest that will be edited
      * @param principal This is general information about user, who
      *                  tries to call this method
      * @param model Spring Framework model for this page
@@ -235,12 +235,12 @@ public class ContestController {
     @Link(label="contestEdit.caption", family="contests", parent = "contest.caption")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
-    public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
+    public String initEditContest(@RequestParam("id") int contestId, Principal principal, Model model) {
         /*if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
             return "nwcserver.403";
         }*/
         //get Contest by id:
-        Contest editContest = contestService.getContestByID(id);
+        Contest editContest = contestService.getContestByID(contestId);
         //add contest to view and forward it:
         model.addAttribute("contestModelForm", editContest);
 
