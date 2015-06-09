@@ -48,7 +48,6 @@ public class RatingController {
 	@RequestMapping(value = "/rating", method = RequestMethod.GET)
 	public String getRating(Model model) {
 		model.addAttribute("pageName", "rating");
-
 		return "nwcserver.rating.calculated";
 	}
 
@@ -74,8 +73,7 @@ public class RatingController {
 			@RequestParam(value = "id") int contestId) {
 		Contest contest = contestService.getContestByID(contestId);
 		model.addAttribute("contestId", contestId);
-		model.addAttribute("dynamic",
-				ratingService.scoreCalculateIfDynamicContest(contestId));
+		model.addAttribute("dynamic",contest.getTypeContest().isDynamic());
 		model.addAttribute("contestTitle", contest.getTitle());
 		SimpleDateFormat formatStart = new SimpleDateFormat();
 		model.addAttribute("contestStart",

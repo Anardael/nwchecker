@@ -45,7 +45,7 @@ public class TaskStatisticController {
 		LOG.info("Attempting to get task result data for page " + startIndex
 				/ pageSize + " for task " + taskId);		
 		JTableResponseList jTableResponse = new JTableResponseList(
-				taskPassService.getPagedTaskPassesForTask(taskId, startIndex,
+				taskPassService.getPagedTaskPassJson(taskId, startIndex,
 						pageSize, sortingColumn, sortingOrder, filter),
 				taskPassService.getTaskPassEntryCount(taskId, filter));
 		LOG.info("Successfully retuned task result data for page "

@@ -47,14 +47,18 @@
 	<c:if test="${not empty taskResults[currentTask.id]}">
 	CURRENT_TASK_SUCCESS = ${taskResults[currentTask.id]};
 	</c:if>
-	END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};
+	<c:if test="${not empty contest}">	
+	END_TIME_GTM_MILLISECONDS = ${contestEndTimeGTM};	
 	var isArchive = ${isArchive};
+	</c:if>
 	$(document).ready(function() {
+		<c:if test="${not empty contest}">
 		if (allTasksComplete())
 			endContest();
 		disableDangerousOptions();
 		if (!isArchive)
 			startTimer();
+		</c:if>
 		$('#showModal').click(function(){
 			tryToShowStatistic()
 		})
@@ -205,12 +209,9 @@
 									data-formatter="compilerFormatter" data-sortable="true"
 									class="col-md-1"><spring:message
 										code="task.statistic.compilerCaption" /></th>
-								<th data-field="executionTime" data-align="center"
-									data-sortable="true" class="col-md-1"><spring:message
-										code="task.statistic.execTimeCaption" /></th>
-								<th data-field="memoryUsed" data-align="center"
-									data-sortable="true" class="col-md-1"><spring:message
-										code="task.statistic.memUsedCaption" /></th>
+								<th data-field="passedTests" data-align="center"
+									data-sortable="false" class="col-md-1"><spring:message
+										code="task.statistic.execTimeCaption" /></th>								
 								<th data-field="passed" data-align="center"
 									data-formatter="passedFormatter" data-sortable="true"
 									class="col-md-1"><spring:message

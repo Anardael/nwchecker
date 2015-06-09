@@ -2,6 +2,7 @@ package com.nwchecker.server.service;
 
 import java.util.List;
 
+import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.utils.PaginationWrapper;
 
@@ -54,6 +55,9 @@ public interface TaskPassService {
 	 * @return Number of successful TaskPasses
 	 */
 	Long getSuccessfulTaskPassEntryCount(int taskId);
+	
+	public List<TaskPassJson> getPagedTaskPassJson(int taskId,
+			int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
 
     double getTaskRateById(int taskId);
     
