@@ -207,13 +207,16 @@ public class ContestController {
 		// if there are errors in field input:
 		if (result.hasErrors()) {
 			LOG.info("Contest validation failed.");
-			res.setStatus("FAIL");
+					res.setStatus("FAIL");
 			List<FieldError> allErrors = result.getFieldErrors();
-			List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+						List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 			for (FieldError objectError : allErrors) {
 				errorMessages.add(ErrorMessage.createErrorMessage(objectError
 						.getField(), messageSource.getMessage(objectError,
 						LocaleContextHolder.getLocale())));
+			}
+			if(result.hasFieldErrors("starts")) {
+				res.setStatus("WRONG_DATE");
 			}
 			// set all errors:
 			res.setErrorMessageList(errorMessages);

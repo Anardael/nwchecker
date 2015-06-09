@@ -30,6 +30,11 @@ function submitContest() {
                 contestAjaxFailed(errorCaption, emptyContestfields, data);
             }
         }
+
+        if (data['status'] == "WRONG_DATE") {
+            contestAjaxFailed(errorDate, errorContestWrongDate, data);
+        }
+
         if (data['status'] == "EMPTY_DATE") {
             BootstrapDialog.show({
                 title: contestEmptyDateSuccess,

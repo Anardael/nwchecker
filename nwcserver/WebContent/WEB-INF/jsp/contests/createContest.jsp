@@ -38,6 +38,8 @@ label.btn-primary {
     var successContestSave = "<spring:message code="contest.successSave"/>";
     var contestUserListSuccess = "<spring:message code="contest.success.userList.save"/>";
     var contestEmptyDateSuccess = "<spring:message code="contest.startTime.empty"/>";
+	var errorContestWrongDate =  "<spring:message code="Contest.startTime.less"/>";
+	var errorDate = "<spring:message code="error.caption"/>";
     //contest submit finish form:
     var contestFinishHeader = "<spring:message code="contest.submit.header"/>";
     var contestFinishBody = "<spring:message code="contest.submit.body"/>";
