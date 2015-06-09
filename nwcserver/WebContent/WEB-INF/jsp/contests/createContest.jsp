@@ -105,7 +105,7 @@ label.btn-primary {
     //start long polling:
     $(function () {
         if ($('#id') != 0) {
-            contestLongPolling();
+            //contestLongPolling();
         }
     });
 </script>

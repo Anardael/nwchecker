@@ -69,11 +69,11 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username) {
         int userId = userDAO.getUserByUsername(username).getUserId();
-        boolean isBooleanHidden = CheckSortType.isBoolean(stringHidden);
-        boolean isStatus = CheckSortType.isStatus(stringStatus);
+        boolean isBooleanHidden = CheckSortType.stringIsBoolean(stringHidden);
+        boolean isStatus = CheckSortType.stringIsStatus(stringStatus);
 
         if (!isBooleanHidden && !isStatus){     // hidden: ALL, status: ALL
-            return contestDAO.getContestsByUserId(userId);
+            return contestDAO.getUnhiddenContestsByUserId(userId);
         }
 
         boolean hidden = Boolean.parseBoolean(stringHidden);
@@ -89,7 +89,7 @@ public class ContestServiceImpl implements ContestService {
         Contest.Status status = Contest.Status.valueOf(stringStatus);
 
         if (!isBooleanHidden && isStatus) {     // hidden: ALL, status: notALL
-            return contestDAO.getContestsByUserIdAndStatus(userId, status);
+            return contestDAO.getUnhiddenContestsByUserIdAndStatus(userId, status);
         }
 
         if (isBooleanHidden && isStatus) {      // hidden: notALL, status: notALL
@@ -106,7 +106,7 @@ public class ContestServiceImpl implements ContestService {
     @Override
     public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
         // if status notALL
-        if (CheckSortType.isStatus(stringStatus)){
+        if (CheckSortType.stringIsStatus(stringStatus)){
             return contestDAO.getUnhiddenContestsByStatus(Contest.Status.valueOf(stringStatus));
         } else {
             return contestDAO.getUnhiddenContests();

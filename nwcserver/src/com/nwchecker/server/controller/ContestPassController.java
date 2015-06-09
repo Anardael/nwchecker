@@ -56,25 +56,19 @@ public class ContestPassController {
 	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/passContest", method = RequestMethod.GET)
-	public String getContestForPass(Principal principal,
-			@RequestParam("id") int contestId, Model model) {
+	public String getContestForPass(Principal principal, @RequestParam("id") int contestId, Model model) {
 		Contest currentContest = contestService.getContestByID(contestId);
 
 		// if not redirect from getTaskForPass method
 		if (!model.containsAttribute("currentTask")) {
 			Task firstTaskCurrentContest = currentContest.getTasks().get(0);
-			model.addAttribute("taskSuccessRate", taskPassService
-					.getTaskRateById(firstTaskCurrentContest.getId()));
+			model.addAttribute("taskSuccessRate", taskPassService .getTaskRateById(firstTaskCurrentContest.getId()));
 			model.addAttribute("currentTask", firstTaskCurrentContest);
 		}
 		model.addAttribute("contest", currentContest);
-		model.addAttribute("isArchive",
-				(currentContest.getStatus() == Contest.Status.ARCHIVE));
-		model.addAttribute("contestEndTimeGTM",
-				contestService.getContestEndTime(currentContest));
-		model.addAttribute("taskResults",
-				contestPassService.getTaskResultsForContestByUserName(
-						principal.getName(), currentContest));
+		model.addAttribute("isArchive", (currentContest.getStatus() == Contest.Status.ARCHIVE));
+		model.addAttribute("contestEndTimeGTM", contestService.getContestEndTime(currentContest));
+		model.addAttribute( "taskResults", contestPassService.getTaskResultsForContestByUserName(principal.getName(), currentContest));
 		model.addAttribute("compilers", compilerService.getAllCompilers());
 
 		return "nwcserver.tasks.pass";

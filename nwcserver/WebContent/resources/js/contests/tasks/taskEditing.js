@@ -7,7 +7,7 @@ function tryToAddTask(locale) {
             if (data.status == "SUCCESS") {
                 $('#id').val(data.result);
                 createNewTask(locale);
-                contestLongPolling();
+                //contestLongPolling();
             }
         });
     } else {

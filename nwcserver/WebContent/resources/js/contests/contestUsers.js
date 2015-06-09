@@ -92,7 +92,7 @@ function tryToShowUserList() {
             if (data.status == "SUCCESS") {
                 $('#id').val(data.result);
                 $('#userListModal').modal();
-                contestLongPolling();
+                //contestLongPolling();
             }
         });
     } else {

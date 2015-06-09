@@ -27,54 +27,8 @@ import static org.junit.Assert.assertEquals;
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
 public class ContestEditWatcherServiceImplTest {
-    private static final long CONTEST_EDIT_TIME_OUT_POLLING = 10000;
-
-    final DeferredResult<String> deferredResult = new DeferredResult<>(CONTEST_EDIT_TIME_OUT_POLLING, "timeOut");
-
-    final int contestId = 1;
 
     @Autowired
     private ContestEditWatcherService contestEditWatcherService;
 
-    /**
-     * Test of getNowEditsMap method, of class ContestEditWatcherServiceImpl.
-     */
-    @Test
-    public void testGetNowEditsMap() throws Exception {
-        contestEditWatcherService.addContestEditingUser(contestId, "Teacher", deferredResult);
-        assertEquals(contestEditWatcherService.getNowEditsMap().size(), 1);
-        contestEditWatcherService.removeContestEditingUser(contestId);
-    }
-
-    /**
-     * Test of dddContestEditingUser method, of class ContestEditWatcherServiceImpl.
-     */
-    @Test
-    public void testAddContestEditingUser() throws Exception {
-        assertEquals(contestEditWatcherService.isEditing(contestId), null);
-        contestEditWatcherService.addContestEditingUser(contestId, "Teacher", deferredResult);
-        assertEquals(contestEditWatcherService.isEditing(contestId), "Teacher");
-        contestEditWatcherService.removeContestEditingUser(contestId);
-    }
-
-    /**
-     * Test of removeContestEditingUser method, of class ContestEditWatcherServiceImpl.
-     */
-    @Test
-    public void testRemoveContestEditingUser() throws Exception {
-        contestEditWatcherService.addContestEditingUser(contestId, "Teacher", deferredResult);
-        assertEquals(contestEditWatcherService.isEditing(contestId), "Teacher");
-        contestEditWatcherService.removeContestEditingUser(contestId);
-        assertEquals(contestEditWatcherService.isEditing(contestId), null);
-    }
-
-    /**
-     * Test of removeContestEditingUser method, of class ContestEditWatcherServiceImpl.
-     */
-    @Test
-    public void testIsEditing() throws Exception {
-        contestEditWatcherService.addContestEditingUser(contestId, "Teacher", deferredResult);
-        assertEquals(contestEditWatcherService.isEditing(contestId), "Teacher");
-        contestEditWatcherService.removeContestEditingUser(contestId);
-    }
 }

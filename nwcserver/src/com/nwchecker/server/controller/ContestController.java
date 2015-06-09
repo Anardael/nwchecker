@@ -1,13 +1,8 @@
 package com.nwchecker.server.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.exceptions.ContestAccessDenied;
 import com.nwchecker.server.json.ErrorMessage;
-import com.nwchecker.server.json.JsonViews;
 import com.nwchecker.server.json.UserJson;
 import com.nwchecker.server.json.ValidationResponse;
 import com.nwchecker.server.model.Contest;
@@ -15,7 +10,6 @@ import com.nwchecker.server.model.TypeContest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.*;
 import com.nwchecker.server.validators.ContestValidator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -27,12 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -76,6 +67,9 @@ public class ContestController {
     @Autowired
     private TypeContestService typeContestService;
 
+    @Autowired
+    private PageTrackingService pageTrackingService;
+
     /**
      * This mapped method used to return page with contests list
      * <p>
@@ -88,37 +82,7 @@ public class ContestController {
     @Link(label="contest.caption", family="contests", parent = "")
     @RequestMapping("/getContests")
     public String getContests(Model model, Principal principal) {
-        if(principal == null){
-            model.addAttribute("pageName", "contest");
-
-            return "nwcserver.contests.show";
-        }
-
-        User user = userService.getUserByUsername(principal.getName());
-
-        if (((UsernamePasswordAuthenticationToken) principal).getAuthorities()
-                .contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
-            List<String> editableContestIndexes = new LinkedList<String>();
-            //getContests which user can edit:
-            if ((user.getContest() != null) && (user.getContest().size() > 0)) {
-                for (Contest c : user.getContest()) {
-                    if (c.getStatus().equals(Contest.Status.PREPARING)
-                            || c.getStatus().equals(Contest.Status.ARCHIVE)) {
-                        // set index for view
-                        if (c.getStatus().equals(Contest.Status.PREPARING)) {
-                            editableContestIndexes.add("index" + c.getId()
-                                    + "index");
-                        }
-                    }
-                }
-            }
-            model.addAttribute("editContestIndexes", editableContestIndexes);
-            // set usernames for editing contests:
-            model.addAttribute("nowContestEdits", contestEditWatcherService.getNowEditsMap());
-        }
-
         model.addAttribute("pageName", "contest");
-
         return "nwcserver.contests.show";
     }
 
@@ -233,7 +197,7 @@ public class ContestController {
      * <p>
      * <b>Note:</b>Only TEACHER has rights to use this method.
      *
-     * @param id ID of contest that will be edited
+     * @param contestId ID of contest that will be edited
      * @param principal This is general information about user, who
      *                  tries to call this method
      * @param model Spring Framework model for this page
@@ -242,18 +206,20 @@ public class ContestController {
     @Link(label="contestEdit.caption", family="contests", parent = "contest.caption")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
-    public String initEditContest(@RequestParam("id") int id, Principal principal, Model model) {
-        /*if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
-            return "nwcserver.403";
-        }*/
-        //get Contest by id:
-        Contest editContest = contestService.getContestByID(id);
-        //add contest to view and forward it:
-        model.addAttribute("contestModelForm", editContest);
+    public String initEditContest(@RequestParam("id") int contestId, Principal principal, Model model) {
+        if(!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)){
+            return "nwcserver.accessDeniedToContest";
+        }
+        if(contestEditWatcherService.checkContestIsEditedById(contestId)){
+            return "nwcserver.contestIsEdited";
+        }
 
-        List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
-        model.addAttribute("typeContestList", typeContestList);
+        contestEditWatcherService.addParameters(contestId, principal.getName());
+
+        model.addAttribute("contestModelForm", contestService.getContestByID(contestId));
+        model.addAttribute("typeContestList", typeContestService.getAllTypeContest());
         model.addAttribute("pageName", "contest");
+
         return "nwcserver.contests.create";
     }
 
