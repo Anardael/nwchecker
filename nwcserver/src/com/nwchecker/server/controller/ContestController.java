@@ -236,13 +236,12 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int contestId, Principal principal, Model model) {
-        /*if (!contestService.checkIfUserHaveAccessToContest(principal.getName(), id)) {
-            return "nwcserver.403";
-        }*/
-        //get Contest by id:
-        Contest editContest = contestService.getContestByID(contestId);
-        //add contest to view and forward it:
-        model.addAttribute("contestModelForm", editContest);
+        if(!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)){
+            return "nwcserver.accessDeniedToContest";
+        }
+        if(contestEditWatcherService.checkContestIsEditedById(contestId)){
+            return "nwcserver.contestIsEdited";
+        }
 
         contestEditWatcherService.addParameters(contestId, principal.getName());
 

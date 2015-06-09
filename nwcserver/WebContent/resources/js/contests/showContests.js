@@ -112,7 +112,7 @@ function showEditGroup(contestId){
 function updateEditGroup(isEdit){
     $('#edit-group').show();
     if(isEdit){
-        $('#now-edit').show()
+        $('#now-edit').show();
         $('#edit-username').text('SOME USER');
         $('#edit-btn').show().attr('disabled','disabled');
     } else {
