@@ -69,6 +69,10 @@ function statusFormatter(value, row) {
     }
 }
 
+function dateFormatter(value) {
+    return new Date(value).toLocaleDateString();
+}
+
 function rowStyle(row) {
     if(row['hidden']){
         return {
