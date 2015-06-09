@@ -66,13 +66,15 @@
            data-sort-order="desc" data-row-style="rowStyle" data-maintain-selected="true">
         <thead>
         <tr>
-            <th data-field="starts" data-align="center" data-sortable="true"  data-formatter="dateTimeFormatter">
+            <th data-field="starts" data-align="center" data-sortable="true"  data-width="100"
+                data-formatter="dateFormatter">
                 Start date
             </th>
             <th data-field="title" data-align="center">
                 Title
             </th>
-            <th data-field="status" data-align="center" data-sortable="true"data-formatter="statusFormatter">
+            <th data-field="status" data-align="center" data-sortable="true" data-width="100"
+                data-formatter="statusFormatter">
                 Status
             </th>
         </tr>
@@ -104,9 +106,14 @@
                         <b><spring:message code="contest.table.starts" />:</b>
                         <span id="start_date"></span>
                     </div>
+                    <div id="start_time-block">
+                        <b><spring:message code="contest.table.time" />:</b>
+                        <span id="start_time"></span>
+                    </div>
                     <div id="duration-block">
                         <b><spring:message code="contest.table.duration" />:</b>
                         <span id="duration"></span>
+                        hours
                     </div>
                     <div id="type-block">
                         <b><spring:message code="contest.table.type" />:</b>
@@ -123,9 +130,19 @@
                 <div class="modal-footer">
                     <div class="pull-right" style="margin-top: 10px">
                         <security:authorize access="hasRole('ROLE_TEACHER')">
-                            <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">
-                                <spring:message code="btn.edit" />
-                            </button>
+                            <div id="edit-group">
+                                <span id="now-edit">
+                                    Contest is editing now by
+                                    <span id="edit-username"></span>
+                                    <button type="button" class="btn btn-sm btn-info" onclick="refresh(contestId)">
+                                        <span class="glyphicon glyphicon-refresh"></span>
+                                        Refresh
+                                    </button>
+                                </span>
+                                <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">
+                                    <spring:message code="btn.edit" />
+                                </button>
+                            </div>
                         </security:authorize>
                         <security:authorize access="hasRole('ROLE_USER')">
                             <button class="open-btn btn btn-sm btn-info form-group"

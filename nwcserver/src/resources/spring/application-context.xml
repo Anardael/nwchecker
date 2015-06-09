@@ -43,12 +43,13 @@
 	</beans:bean>
 
 	<interceptors>
-		<beans:bean
-			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<beans:property name="paramName" value="locale" />
 		</beans:bean>
 
 		<beans:bean	class="com.nwchecker.server.breadcrumb.interceptor.BreadCrumbInterceptor" />
+
+        <beans:bean	class="com.nwchecker.server.handlers.PageTrackingHandler" />
 	</interceptors>
 	<beans:import resource="security.xml" />
 

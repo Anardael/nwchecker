@@ -101,6 +101,30 @@
         </put-list-attribute>
 	</definition>
 
+    <definition name="nwcserver.contestIsEdited" extends="nwcserver.abstract.full">
+        <put-attribute name="body"
+                       value="/WEB-INF/jsp/access/contestIsEdited.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true"
+                            cascade="true">
+            <add-attribute value="css/access/access-style.css" />
+        </put-list-attribute>
+        <put-list-attribute name="scripts" inherit="true" cascade="true">
+            <add-attribute value="js/access/access.js" />
+        </put-list-attribute>
+    </definition>
+
+    <definition name="nwcserver.accessDeniedToContest" extends="nwcserver.abstract.full">
+        <put-attribute name="body"
+                       value="/WEB-INF/jsp/access/accessDeniedToContest.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true"
+                            cascade="true">
+            <add-attribute value="css/access/access-style.css" />
+        </put-list-attribute>
+        <put-list-attribute name="scripts" inherit="true" cascade="true">
+            <add-attribute value="js/access/access.js" />
+        </put-list-attribute>
+    </definition>
+
 	<!-- Admin pages -->
 	<definition name="nwcserver.adminOptions.users" extends="nwcserver.abstract.full">
 		<put-attribute name="body"
