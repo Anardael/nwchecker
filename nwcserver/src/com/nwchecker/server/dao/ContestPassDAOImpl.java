@@ -37,6 +37,12 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     public List<ContestPass> getContestPasses(int contestId) {
         return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=?", contestId);
     }
+    
+    @Override
+    @Transactional
+	public List<ContestPass> getValidContestPasses(int contestId) {
+    	 return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=? and rank > 0", contestId);
+	}
 
     @Override
     @Transactional
@@ -44,4 +50,6 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
         return ((List<ContestPass>) getHibernateTemplate()
                 .find("from ContestPass where contest_id=? and user_userId=?", contestId, userId)).get(0);
     }
+
+	
 }

@@ -66,14 +66,13 @@
            data-sort-order="desc" data-row-style="rowStyle" data-maintain-selected="true">
         <thead>
         <tr>
-            <th data-field="starts" data-align="center" data-sortable="true"  data-width="100">
+            <th data-field="starts" data-align="center" data-sortable="true"  data-formatter="dateTimeFormatter">
                 Start date
             </th>
             <th data-field="title" data-align="center">
                 Title
             </th>
-            <th data-field="status" data-align="center" data-sortable="true" data-width="100"
-                data-formatter="statusFormatter">
+            <th data-field="status" data-align="center" data-sortable="true"data-formatter="statusFormatter">
                 Status
             </th>
         </tr>

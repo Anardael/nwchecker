@@ -194,6 +194,7 @@
 			<add-attribute value="js/bootstrap/bootstrap-dialog.js" />
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 			<add-attribute value="js/contests/showContests.js" />
+			<add-attribute value="js/rating/showRatingListResultFormatter.js" />
 		</put-list-attribute>
 	</definition>
 
@@ -239,6 +240,7 @@
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 			<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
 			<add-attribute value="js/contests/showContests.js" />
+			<add-attribute value="js/rating/showRatingListResultFormatter.js" />
 		</put-list-attribute>
 	</definition>
 

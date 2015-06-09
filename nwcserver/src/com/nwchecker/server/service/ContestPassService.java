@@ -55,6 +55,7 @@ public interface ContestPassService {
      * @return List of passed contests for specific Contest
      */
     List<ContestPass> getContestPasses(int contestId);
+    List<ContestPass> getValidContestPasses(int contestId);
 
     Map<Integer, Boolean> getTaskResultsForContestByUserName(String userName, Contest contest);
 

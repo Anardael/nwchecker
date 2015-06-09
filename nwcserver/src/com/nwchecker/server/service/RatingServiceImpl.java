@@ -37,8 +37,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public List<ContestPass> getJsonListForContestPassByContestId(int contestId) {
-        List<ContestPass> contestPasses = contestPassService.getContestPasses(contestId);
-        
+        List<ContestPass> contestPasses = contestPassService.getValidContestPasses(contestId);        
         return contestPasses;
     }
 }

@@ -123,7 +123,7 @@ label.btn-primary {
 					label="${contestTitle}: *" />
 				<div class="col-sm-1">
 					<label class="control-label"><spring:message
-							code="contestCreate.type" />: *</label>
+							code="contestCreate.type" />:</label>
 				</div>
 				<div class="col-sm-2">
 					<form:select path="typeContest.id" class="form-control">
@@ -135,7 +135,7 @@ label.btn-primary {
 			</div>
 			<div class="field description form-group">
 				<label class="col-sm-2 control-label"><spring:message
-						code="contestCreate.description" />: </label>
+						code="contestCreate.description" />: *</label>
 				<div class="col-sm-10">
 					<form:textarea style="resize:none" path="description"
 						class="form-control ckEdit" rows="7"></form:textarea>

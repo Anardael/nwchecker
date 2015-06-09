@@ -27,7 +27,7 @@
 					<th data-field="description" data-align="center"
 						data-sortable="true"><spring:message
 							code="contest.table.description" /></th>
-					<th data-field="starts" data-align="center" data-sortable="true"><spring:message
+					<th data-field="starts" data-align="center" data-sortable="true" data-formatter="dateTimeFormatter"><spring:message
 							code="contest.results.started.caption" /></th>
 					<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter"><spring:message
 							code="listContests.contests.tableHeader.status" /></th>

@@ -42,7 +42,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 	@Transactional
 	public Map<String, Object> checkTask(ContestPass contestPass,
 			Task task, int compilerId, byte[] userSolution, User user) {
-		if (contestPass == null){
+		if ((contestPass == null)&&(task.getContest().getStatus() != Contest.Status.ARCHIVE)){
 			HashMap<String, Object> response = new HashMap<String, Object>();
 			response.put("accessDenied", true);
 			return response;
@@ -107,6 +107,10 @@ public class ContestPassServiceImpl implements ContestPassService {
 	public List<ContestPass> getContestPasses(int contestId) {
 		return contestPassDAO.getContestPasses(contestId);
 	}
+	@Override
+	public List<ContestPass> getValidContestPasses(int contestId) {
+		return contestPassDAO.getValidContestPasses(contestId);
+	}
 
 	@Override
 	public Map<Integer, Boolean> getTaskResultsForContestByUserName(
@@ -149,4 +153,6 @@ public class ContestPassServiceImpl implements ContestPassService {
 		}
 		return false;
 	}
+
+	
 }
