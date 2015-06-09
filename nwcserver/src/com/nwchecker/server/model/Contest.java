@@ -25,23 +25,7 @@ import java.util.List;
 public class Contest {
 
 	public static enum Status {
-		ARCHIVE, PREPARING, RELEASE, GOING;
-
-		@Override
-		public String toString() {
-			switch (this) {
-			case ARCHIVE:
-				return "ARCHIVE";
-			case PREPARING:
-				return "PREPARING";
-			case RELEASE:
-				return "RELEASE";
-			case GOING:
-				return "GOING";
-			default:
-				throw new IllegalArgumentException();
-			}
-		}
+		ARCHIVE, PREPARING, RELEASE, GOING
 	}
 	
 	@Id
