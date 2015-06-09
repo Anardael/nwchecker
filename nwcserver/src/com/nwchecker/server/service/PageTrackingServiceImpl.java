@@ -7,10 +7,12 @@ import java.util.*;
 @Service("PageTrackingService")
 public class PageTrackingServiceImpl implements PageTrackingService {
     private static Map<String, String> trackerMap = new LinkedHashMap<>();
+    private static Map<String, String> sessionsMap = new HashMap<>();
 
     @Override
-    public void addTrack(String username, String servletPath) {
+    public void addTrack(String username, String servletPath, String sessionId) {
         trackerMap.put(username, servletPath);
+        sessionsMap.put(username, sessionId);
     }
 
     @Override
@@ -19,21 +21,7 @@ public class PageTrackingServiceImpl implements PageTrackingService {
     }
 
     @Override
-    public List<String> getUsernamesByPath(String servletPath) {
-        List<String> userNames = null;
-        if(trackerMap.containsValue(servletPath)){
-            userNames = new ArrayList<>();
-            for (String key : trackerMap.keySet()){
-                if(trackerMap.get(key).equals(servletPath)) {
-                    userNames.add(key);
-                }
-            }
-        }
-        return userNames;
-    }
-
-    @Override
-    public boolean containPath(String servletPath) {
-        return trackerMap.containsValue(servletPath);
+    public String getSessionByUsername(String username){
+        return sessionsMap.get(username);
     }
 }

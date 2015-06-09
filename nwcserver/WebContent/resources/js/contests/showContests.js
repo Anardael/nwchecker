@@ -6,8 +6,9 @@ $(document).ready(function () {
         window.contestId = row['id'];
 
         $('#title-text').text(row['title']);
-        $('#start_date').text(row['starts']);
-        $('#duration').text(row['duration']/3600000);
+        $('#start_date').text(new Date(row['starts']).toDateString());
+        $('#start_time').text(new Date(row['starts']).toLocaleTimeString());
+        $('#duration').text((row['duration']+7200000)/3600000);
         $('#type').text(typeContest['name']);
         $('#description').html(row['description']);
 
@@ -25,7 +26,7 @@ $(document).ready(function () {
             case 'PREPARING': {
                 $('#archive-btn').hide();
                 $('.open-btn').hide();
-                showEditGroup(row);
+                showEditGroup(row['id']);
             } break;
             case 'RELEASE': {
                 $('#archive-btn').hide();
@@ -36,8 +37,6 @@ $(document).ready(function () {
 
         $('#contestModal').modal();
     });
-
-    console.log(window.contestIsEdited);
 });
 
 function edited(contestId) {
@@ -91,10 +90,10 @@ function updateContestsList(){
     });
 }
 
-function showEditGroup(row){
+function showEditGroup(contestId){
     $.ajax({
         type: 'GET',
-        url: 'checkContestIsEdited.do?id=' + row['id'],
+        url: 'checkContestIsEdited.do?id=' + contestId,
         dataType:'text',
         success: function (response) {
             console.log('Success response!');
@@ -117,6 +116,12 @@ function updateEditGroup(isEdit){
         $('#edit-btn').show().removeAttr('disabled');
     }
 }
+
+function refresh(contestId){
+    showEditGroup(contestId);
+}
+
+
 
 
 

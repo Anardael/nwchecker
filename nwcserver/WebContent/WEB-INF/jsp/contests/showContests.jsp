@@ -105,9 +105,14 @@
                         <b><spring:message code="contest.table.starts" />:</b>
                         <span id="start_date"></span>
                     </div>
+                    <div id="start_time-block">
+                        <b><spring:message code="contest.table.time" />:</b>
+                        <span id="start_time"></span>
+                    </div>
                     <div id="duration-block">
                         <b><spring:message code="contest.table.duration" />:</b>
                         <span id="duration"></span>
+                        hours
                     </div>
                     <div id="type-block">
                         <b><spring:message code="contest.table.type" />:</b>
@@ -125,7 +130,14 @@
                     <div class="pull-right" style="margin-top: 10px">
                         <security:authorize access="hasRole('ROLE_TEACHER')">
                             <div id="edit-group">
-                                <span id="now-edit">Contest is editing now by <span id="edit-username"></span></span>
+                                <span id="now-edit">
+                                    Contest is editing now by
+                                    <span id="edit-username"></span>
+                                    <button type="button" class="btn btn-sm btn-info" onclick="refresh(contestId)">
+                                        <span class="glyphicon glyphicon-refresh"></span>
+                                        Refresh
+                                    </button>
+                                </span>
                                 <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">
                                     <spring:message code="btn.edit" />
                                 </button>

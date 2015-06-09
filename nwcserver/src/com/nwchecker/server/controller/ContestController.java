@@ -207,9 +207,10 @@ public class ContestController {
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @RequestMapping(value = "/editContest", method = RequestMethod.GET, params = "id")
     public String initEditContest(@RequestParam("id") int contestId, Principal principal, Model model) {
-        if(principal != null
-                && userService.getUserByUsername(principal.getName()).hasRole("ROLE_TEACHER")
-                && contestEditWatcherService.checkContestIsEditedById(contestId)){
+        if(!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)){
+            return "nwcserver.accessDeniedToContest";
+        }
+        if(contestEditWatcherService.checkContestIsEditedById(contestId)){
             return "nwcserver.contestIsEdited";
         }
 

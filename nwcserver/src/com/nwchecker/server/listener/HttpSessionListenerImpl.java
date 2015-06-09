@@ -3,25 +3,32 @@ package com.nwchecker.server.listener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpSessionListenerImpl implements HttpSessionListener {
-    private static final Set<String> sessions = new HashSet<>();
+    private static final Map<String, HttpSession> sessions = new HashMap<>();
 
     @Override
     public void sessionCreated(HttpSessionEvent event) {
         HttpSession session = event.getSession();
-        sessions.add(session.getId());
+        sessions.put(session.getId(), session);
+        /*System.out.println("SESSION CREATED: " + event.getSession().getId());
+        System.out.println(sessions + "\n");*/
     }
-
 
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
         sessions.remove(event.getSession().getId());
+        /*System.out.println("SESSION DESTROYED: " + event.getSession().getId());
+        System.out.println(sessions + "\n");*/
     }
 
     public static boolean sessionIsAliveById(String sessionId) {
-        return sessions.contains(sessionId);
+        return sessions.containsKey(sessionId);
+    }
+
+    public static Map<String, HttpSession> getSessions(){
+        return sessions;
     }
 }

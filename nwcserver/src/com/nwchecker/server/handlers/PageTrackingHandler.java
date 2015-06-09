@@ -18,8 +18,14 @@ public class PageTrackingHandler extends HandlerInterceptorAdapter {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
+        /*System.out.println(request.getRemoteUser() + " "
+                + request.getServletPath() + " "
+                + request.getSession().getId() + " "
+                + request.getRequestedSessionId()
+                + "\n");*/
         if(request.isUserInRole("ROLE_TEACHER")){
-            pageTrackingService.addTrack(request.getRemoteUser(), request.getServletPath());
+            //System.out.println(request.getRemoteUser() + " " + request.getServletPath() + " " + request.getSession().getId() + "\n");
+            pageTrackingService.addTrack(request.getRemoteUser(), request.getServletPath(), request.getRequestedSessionId());
         }
         super.postHandle(request, response, handler, modelAndView);
     }

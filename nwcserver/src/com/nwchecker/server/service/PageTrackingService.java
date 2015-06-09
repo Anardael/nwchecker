@@ -4,11 +4,9 @@ import java.util.List;
 
 
 public interface PageTrackingService {
-    void addTrack(String username, String servletPath);
+    void addTrack(String username, String servletPath, String sessionId);
 
     String getPathByUsername(String username);
 
-    List<String> getUsernamesByPath(String servletPath);
-
-    boolean containPath(String servletPath);
+    String getSessionByUsername(String username);
 }

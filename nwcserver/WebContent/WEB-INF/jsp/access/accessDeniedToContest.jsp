@@ -11,7 +11,7 @@
         Access denied
     </h1>
     <h3>
-        Contest is Edited!
+        You have not access for this contest!
     </h3>
     <button class="btn btn-primary back-btn" onclick="goToContests()">
         To contests
