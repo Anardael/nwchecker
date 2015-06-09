@@ -80,6 +80,17 @@
 									code="home.archive.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
+				<!--    contacts   -->
+				<c:choose>
+					<c:when test="${pageName=='contacts'}">
+						<li class="active"><a><spring:message
+								code="home.contacts.caption" /></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="contacts.do"><spring:message
+								code="home.contacts.caption" /></a></li>
+					</c:otherwise>
+				</c:choose>
 				<!-- login -->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
