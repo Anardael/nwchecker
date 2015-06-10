@@ -69,11 +69,11 @@ public class RatingController {
 	 */
 	@Link(label = "results.caption", family = "contestRating", parent = "rating.caption")
 	@RequestMapping(value = "/results", method = RequestMethod.GET)
-	public String getResults(Model model,
-			@RequestParam(value = "id") int contestId) {
+	public String getResults(Model model, @RequestParam(value = "id") int contestId) {
 		Contest contest = contestService.getContestByID(contestId);
 		model.addAttribute("contestId", contestId);
 		model.addAttribute("dynamic",contest.getTypeContest().isDynamic());
+        model.addAttribute("status", contest.getStatus());
 		model.addAttribute("contestTitle", contest.getTitle());
 		SimpleDateFormat formatStart = new SimpleDateFormat();
 		model.addAttribute("contestStart",

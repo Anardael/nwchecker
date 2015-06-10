@@ -4,11 +4,13 @@ $(document).ready(function () {
 
         var typeContest = row['type'];
         window.contestId = row['id'];
+        var startDate = new Date(row['starts']);
+        var duration = new Date(row['duration']);
 
         $('#title-text').text(row['title']);
-        $('#start_date').text(new Date(row['starts']).toLocaleDateString());
-        $('#start_time').text(new Date(row['starts']).toLocaleTimeString().substr(0, 5));
-        $('#duration').text((row['duration']+7200000)/3600000);
+        $('#start-date').text(startDate.toLocaleDateString() + " " + startDate.toLocaleTimeString().substr(0, 5));
+        $('#duration-hours').text(duration.getHours());
+        $('#duration-minutes').text(duration.getMinutes());
         $('#type').text(typeContest['name']);
         $('#description').html(row['description']);
 

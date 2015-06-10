@@ -291,6 +291,7 @@
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
 			<add-attribute value="js/bootstrapTables/locale/bootstrap-table-${pageContext.response.locale}.min.js" />
 			<add-attribute value="js/rating/showRatingFormatter.js" />
+            <add-attribute value="js/rating/showRating.js" />
 		</put-list-attribute>
 	</definition>
 
