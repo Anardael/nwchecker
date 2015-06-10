@@ -13,15 +13,15 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent event) {
         HttpSession session = event.getSession();
         sessions.put(session.getId(), session);
-        System.out.println("SESSION CREATED: " + session.getId());
-        System.out.println(sessions + "\n");
+        /*System.out.println("SESSION CREATED: " + session.getId());
+        System.out.println(sessions + "\n");*/
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
         sessions.remove(event.getSession().getId());
-        System.out.println("SESSION DESTROYED: " + event.getSession().getId());
-        System.out.println(sessions + "\n");
+        /*System.out.println("SESSION DESTROYED: " + event.getSession().getId());
+        System.out.println(sessions + "\n");*/
     }
 
     public static boolean sessionIsAliveById(String sessionId) {
