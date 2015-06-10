@@ -15,8 +15,8 @@ public interface ScoreCalculationService {
      * Calculate Users score.
      * <p>
      *
-     * @param ContestId Unique ID of existing Contest
+     * @param contestId Unique ID of existing Contest
      */
-    public void calculateScore(int ContestId);
+    public void calculateScore(int contestId);
 
 }

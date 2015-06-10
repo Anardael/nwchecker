@@ -1,5 +1,7 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.model.Contest;
+
 /**
  * <h1>Schedule Service</h1>
  * Service for working with server Schedule
@@ -16,4 +18,5 @@ public interface ScheduleService {
      * <p>
      */
     void refresh();
+
 }
