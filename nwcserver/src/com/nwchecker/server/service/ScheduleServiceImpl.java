@@ -3,14 +3,17 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.ContestDAO;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.utils.ContestComparator;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.ScheduledFuture;
 
 @Service(value = "ScheduleService")
@@ -52,7 +55,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         //for first in list- create task timer:
         final Contest nextExecuteContest = executableContests.get(0);
-
         long executionTime = 0;
         if (nextExecuteContest.getStatus().equals(Contest.Status.RELEASE)) {
             executionTime = nextExecuteContest.getStarts().getTime();
@@ -60,10 +62,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         } else {
             executionTime = nextExecuteContest.getStarts().getTime();
             executionTime += nextExecuteContest.getDuration().getTime();
-            executionTime += 2 * 60 * 60 * 1000;
+            executionTime += TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime())*-1000;
             LOG.debug("Register stop contest action for contest id=" + nextExecuteContest.getId());
         }
-
         nextTaskExecution = taskScheduler.schedule(new Runnable() {
             @Override
             public void run() {
@@ -83,5 +84,3 @@ public class ScheduleServiceImpl implements ScheduleService {
         }, new Date(executionTime));
     }
 }
-
-
