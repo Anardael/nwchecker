@@ -10,8 +10,8 @@ public class PageTrackingServiceImpl implements PageTrackingService {
     private static Map<String, String> sessionsMap = new HashMap<>();
 
     @Override
-    public void addTrack(String username, String servletPath, String sessionId) {
-        trackerMap.put(username, servletPath);
+    public void addTrack(String username, String viewName, String sessionId) {
+        trackerMap.put(username, viewName);
         sessionsMap.put(username, sessionId);
     }
 

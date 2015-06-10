@@ -1,0 +1,11 @@
+#info{
+    text-align: center;
+}
+#info b{
+    font-size: large;
+}
+#info p{
+    text-align: left;
+    text-indent: 20px;
+    text-align: justify;
+}

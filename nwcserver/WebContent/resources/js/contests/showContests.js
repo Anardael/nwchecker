@@ -6,8 +6,8 @@ $(document).ready(function () {
         window.contestId = row['id'];
 
         $('#title-text').text(row['title']);
-        $('#start_date').text(new Date(row['starts']).toDateString());
-        $('#start_time').text(new Date(row['starts']).toLocaleTimeString());
+        $('#start_date').text(new Date(row['starts']).toLocaleDateString());
+        $('#start_time').text(new Date(row['starts']).toLocaleTimeString().substr(0, 5));
         $('#duration').text((row['duration']+7200000)/3600000);
         $('#type').text(typeContest['name']);
         $('#description').html(row['description']);
