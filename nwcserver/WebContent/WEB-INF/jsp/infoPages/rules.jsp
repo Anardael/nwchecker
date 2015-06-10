@@ -14,7 +14,7 @@
                     ${rule.typeContest.name}
                     <security:authorize access="hasRole('ROLE_TEACHER')">
                         <button class="btn btn-sm btn-info" style="float: right"
-                                data-toggle="modal" data-target="#myModal_${vs.index}">Edit</button>
+                                data-toggle="modal" data-target="#myModal_${vs.index}"><spring:message code="rules.editButton.caption" /></button>
                     </security:authorize>
                 </dt>
                 <dd>
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">
-                                        <spring:message code="rules.editButton.caption" />
+                                        <spring:message code="rules.submitButton.caption" />
                                     </button>
                                 </div>
                             </form>
