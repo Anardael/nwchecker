@@ -23,7 +23,7 @@
             </dl>
             <security:authorize access="hasRole('ROLE_TEACHER')">
                 <%--modal windows--%>
-                <div class="modal" id="myModal_${vs.index}">
+                <div class="modal" id="myModal_${vs.index}" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form action="editRule.do" method="post">

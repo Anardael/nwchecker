@@ -43,6 +43,14 @@ public class MainController {
 		return "nwcserver.static.index";
 	}
 
+	@Link(label = "home.contacts.caption", family = "contacts", parent = "")
+	@RequestMapping("/contacts")
+	public String contacts (HttpSession session, Model model)
+			throws IllegalArgumentException {
+		model.addAttribute("pageName", "contacts");
+		return "nwcserver.static.contacts";
+	}
+
 	/**
 	 * This mapped method used to return In Development page.
 	 * <p>
@@ -55,7 +63,7 @@ public class MainController {
 	 * @throws IllegalArgumentException
 	 *             If method took arguments of incorrect type
 	 */
-	@RequestMapping({ "/inDevelopment", "/vestibulum", "/phasellus", "/rating" })
+	@RequestMapping({ "/inDevelopment", "/phasellus", "/rating" })
 	public String willBeCreated(HttpSession session, Model model)
 			throws IllegalArgumentException {
 		model.addAttribute("pageName", "inDevelopment");
