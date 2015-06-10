@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <spring:url value="/resources/" var="resources" />
 <html>
 <body>
@@ -18,7 +19,8 @@
                     <c:otherwise>
                         ${contest.title}<br/>
                         <span style="font-size: 15px; font-weight: normal">
-                            <spring:message code="news.contests.date" /> ${contest.starts}
+                            <c:set var="date" value="${contest.starts}"/>
+                            <spring:message code="news.contests.date" /> ${fn:substring(date, 0, 16)}
                         </span>
                     </c:otherwise>
                 </c:choose>
@@ -33,7 +35,7 @@
                 <c:url var="dataUrl" value="/resultsList.do?id=${contestId}" />
             <table id="competitorsList" class="table" data-classes="table" data-toggle="table"
                    data-url="${dataUrl}" data-method="get" data-cache="false"
-                   data-search="true" data-clear-search="true" data-pagination="true"
+                   data-search="true" data-clear-search="true" data-pagination="true" data-search-align="left"
                    data-show-pagination-switch="true" data-sort-name="rank" >
                 <thead>
                 <tr>

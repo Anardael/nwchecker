@@ -102,18 +102,16 @@
                     </div>
                 </div>
                 <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
-                    <div id="start_date-block">
+                    <div id="start-date-block">
                         <b><spring:message code="contest.table.starts" />:</b>
-                        <span id="start_date"></span>
-                    </div>
-                    <div id="start_time-block">
-                        <b><spring:message code="contest.table.time" />:</b>
-                        <span id="start_time"></span>
+                        <span id="start-date"></span>
                     </div>
                     <div id="duration-block">
                         <b><spring:message code="contest.table.duration" />:</b>
-                        <span id="duration"></span>
+                        <span id="duration-hours"></span>
                         hours
+                        <span id="duration-minutes"></span>
+                        minutes
                     </div>
                     <div id="type-block">
                         <b><spring:message code="contest.table.type" />:</b>

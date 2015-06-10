@@ -19,18 +19,17 @@
 		<table id="ratingContest" class="table" data-toggle="table"
 			data-url="${dataURL}" data-method="get" data-cache="false"
 			data-search="true" data-clear-search="true" data-pagination="true"
-			data-show-pagination-switch="true">
+			data-show-pagination-switch="true" data-search-align="left">
 			<thead>
 				<tr>
-					<th data-field="title" data-align="center" data-sortable="true"><spring:message
-							code="contest.table.title" /></th>
-					<th data-field="description" data-align="center"
-						data-sortable="true"><spring:message
-							code="contest.table.description" /></th>
-					<th data-field="starts" data-align="center" data-sortable="true" data-formatter="dateTimeFormatter"><spring:message
-							code="contest.results.started.caption" /></th>
-					<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter"><spring:message
-							code="listContests.contests.tableHeader.status" /></th>
+                    <th data-field="starts" data-align="center" data-sortable="true" data-formatter="dateTimeFormatter">
+                        <spring:message code="contest.results.started.caption" /></th>
+					<th data-field="title" data-align="center" data-sortable="true">
+                        <spring:message code="contest.table.title" /></th>
+					<th data-field="description" data-align="center" data-sortable="true">
+                        <spring:message code="contest.table.description" /></th>
+					<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">
+                        <spring:message code="listContests.contests.tableHeader.status" /></th>
 				</tr>
 			</thead>
 		</table>
