@@ -43,7 +43,7 @@ public class MainController {
 		return "nwcserver.static.index";
 	}
 
-	@Link(label = "home.contacts.caption", family = "contacts", parent = "home")
+	@Link(label = "home.contacts.caption", family = "contacts", parent = "")
 	@RequestMapping("/contacts")
 	public String contacts (HttpSession session, Model model)
 			throws IllegalArgumentException {

@@ -89,7 +89,7 @@
         </div>
     </security:authorize>
 
-    <div id="contestModal" class="modal">
+    <div id="contestModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-info">
