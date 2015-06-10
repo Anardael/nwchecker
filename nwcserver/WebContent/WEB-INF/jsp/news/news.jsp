@@ -5,59 +5,55 @@
 <html>
 <body>
 	<c:url var="news" value="/news.do" />
-	<div>
-		<div>
-			<dl>
-				<dt>
-                    <spring:message code="news.contests" />
-                </dt>
-				<c:choose>
-					<c:when test="${empty contest}">
-						<dt>
-                            <spring:message code="news.contest.noContest" />
-                        </dt>
-					</c:when>
-					<c:otherwise>
-						<dt>${contest.title}
-                            <spring:message code="news.contests.date" />
-                            ${contest.starts}
-						</dt>
-					</c:otherwise>
-				</c:choose>
-			</dl>
-		</div>
+	<div class="main-block">
+        <dl>
+            <dt>
+                <spring:message code="news.contests" /> <br/>
+            </dt>
+            <dd>
+                <c:choose>
+                    <c:when test="${empty contest}">
+                        <spring:message code="news.contest.noContest" />
+                    </c:when>
+                    <c:otherwise>
+                        ${contest.title}<br/>
+                        <span style="font-size: 15px; font-weight: normal">
+                            <spring:message code="news.contests.date" /> ${contest.starts}
+                        </span>
+                    </c:otherwise>
+                </c:choose>
+            </dd>
+        </dl>
 		<br>
-		<div>
-			<dl>
-				<dt>
-                    <spring:message code="news.result" />
-				<dt>${title}</dt>
-				<dt>
-                    <c:url var="dataUrl" value="/resultsList.do?id=${contestId}" />
-					<table id="competitorsList" class="table" data-toggle="table"
-						data-url="${dataUrl}" data-method="get" data-cache="false"
-						data-search="true" data-clear-search="true" data-pagination="true"
-						data-show-pagination-switch="true" data-sort-name="rank">
-						<thead>
-							<tr>
-								<th data-field="rank" data-align="center" data-sortable="true">
-                                    <spring:message code="contest.results.tableHeader.place" />
-                                </th>
-								<th data-field="displayName" data-align="center" >
-                                    <spring:message code="contest.results.tableHeader.displayName" />
-                                </th>
-								<th data-field="tasksPassedCount" data-align="center">
-                                    <spring:message code="contest.results.tableHeader.tasksPassedCount" />
-                                </th>
-								<th data-field="timePenalty" data-align="center" >
-                                    <spring:message code="contest.results.tableHeader.timePenalty" />
-                                </th>
-							</tr>
-						</thead>
-					</table>
-                </dt>
-			</dl>
-		</div>
+        <dl>
+            <dt>
+                <spring:message code="news.result" />
+            <dd style="font-size: large;">${title}</dd>
+            <dd>
+                <c:url var="dataUrl" value="/resultsList.do?id=${contestId}" />
+            <table id="competitorsList" class="table" data-classes="table" data-toggle="table"
+                   data-url="${dataUrl}" data-method="get" data-cache="false"
+                   data-search="true" data-clear-search="true" data-pagination="true"
+                   data-show-pagination-switch="true" data-sort-name="rank" >
+                <thead>
+                <tr>
+                    <th data-field="rank" data-align="center" data-sortable="true">
+                        <spring:message code="contest.results.tableHeader.place" />
+                    </th>
+                    <th data-field="displayName" data-align="center" >
+                        <spring:message code="contest.results.tableHeader.displayName" />
+                    </th>
+                    <th data-field="tasksPassedCount" data-align="center">
+                        <spring:message code="contest.results.tableHeader.tasksPassedCount" />
+                    </th>
+                    <th data-field="timePenalty" data-align="center" >
+                        <spring:message code="contest.results.tableHeader.timePenalty" />
+                    </th>
+                </tr>
+                </thead>
+            </table>
+            </dd>
+        </dl>
 	</div>
 </body>
 </html>

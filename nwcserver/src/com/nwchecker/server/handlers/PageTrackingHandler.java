@@ -23,9 +23,9 @@ public class PageTrackingHandler extends HandlerInterceptorAdapter {
                 + request.getSession().getId() + " "
                 + request.getRequestedSessionId()
                 + "\n");*/
-        if(request.isUserInRole("ROLE_TEACHER")){
-            //System.out.println(request.getRemoteUser() + " " + request.getServletPath() + " " + request.getSession().getId() + "\n");
-            pageTrackingService.addTrack(request.getRemoteUser(), request.getServletPath(), request.getRequestedSessionId());
+        if(request.isUserInRole("ROLE_TEACHER") && modelAndView != null){
+            //System.out.println(request.getRemoteUser() + " " + request.getRequestedSessionId() + " " + modelAndView.getViewName());
+            pageTrackingService.addTrack(request.getRemoteUser(), modelAndView.getViewName(), request.getRequestedSessionId());
         }
         super.postHandle(request, response, handler, modelAndView);
     }

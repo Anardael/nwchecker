@@ -28,6 +28,16 @@
 
 	<definition name="nwcserver.static.index" extends="nwcserver.abstract.full">
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+        <put-list-attribute name="stylesheets" inherit="true" cascade="true">
+            <add-attribute value="css/index-style.css" />
+        </put-list-attribute>
+	</definition>
+
+	<definition name="nwcserver.static.contacts" extends="nwcserver.abstract.full">
+		<put-attribute name="body" value="/WEB-INF/jsp/infoPages/contacts.jsp" ></put-attribute>
+		<put-list-attribute name="stylesheets" inherit="true"
+							cascade="true">
+		</put-list-attribute>
 	</definition>
 
 	<definition name="nwcserver.static.rules" extends="nwcserver.abstract.full">
@@ -58,6 +68,7 @@
 							cascade="true">
 			<add-attribute value="js/bootstrapTables/bootstrap-table.min.css" />
 			<add-attribute value="js/bootstrapTables/bootstrap-table-heightFix.css" />
+            <add-attribute value="css/news/news-style.css" />
 		</put-list-attribute>
 		<put-list-attribute name="scripts" inherit="true"
 							cascade="true">

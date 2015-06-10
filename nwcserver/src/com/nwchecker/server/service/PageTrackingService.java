@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public interface PageTrackingService {
-    void addTrack(String username, String servletPath, String sessionId);
+    void addTrack(String username, String viewName, String sessionId);
 
     String getPathByUsername(String username);
 

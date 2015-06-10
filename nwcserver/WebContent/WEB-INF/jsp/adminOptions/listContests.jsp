@@ -55,7 +55,7 @@
 	</div>
 
 	<!-- modal -->
-	<div id="userListModal" class="modal fade">
+	<div id="userListModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog" style="height: 50%">
 			<div class="modal-content">
 				<div class="modal-header modal-header-info">

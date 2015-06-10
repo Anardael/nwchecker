@@ -13,7 +13,7 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent event) {
         HttpSession session = event.getSession();
         sessions.put(session.getId(), session);
-        /*System.out.println("SESSION CREATED: " + event.getSession().getId());
+        /*System.out.println("SESSION CREATED: " + session.getId());
         System.out.println(sessions + "\n");*/
     }
 

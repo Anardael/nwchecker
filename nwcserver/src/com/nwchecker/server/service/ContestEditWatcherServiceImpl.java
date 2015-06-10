@@ -14,14 +14,12 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     private static Map<Integer, String> lastEditorInContest = new HashMap<>();
     private static Map<String, Integer> lastEditedContestByUser = new HashMap<>();
 
-    private final static Set<String> EDIT_URL_SET = new HashSet<>();
+    private final static Set<String> EDIT_VIEW_SET = new HashSet<>();
 
     static {
-        EDIT_URL_SET.add("/getContestUsersList.do");
-        EDIT_URL_SET.add("/newTaskForm.do");
-        EDIT_URL_SET.add("/getAvailableTests.do");
-        EDIT_URL_SET.add("/setContestUsers.do");
-        EDIT_URL_SET.add("/addContest.do");
+        EDIT_VIEW_SET.add("nwcserver.contests.create");
+        EDIT_VIEW_SET.add("fragments/createNewTaskForm");
+        EDIT_VIEW_SET.add("fragments/taskDataView");
     }
 
     @Autowired
@@ -36,14 +34,14 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     @Override
     public boolean checkContestIsEditedById(int contestId){
         String lastEditorUsername = lastEditorInContest.get(contestId);
-        String lastUserURL = pageTrackingService.getPathByUsername(lastEditorUsername);
+        String lastUserView = pageTrackingService.getPathByUsername(lastEditorUsername);
         String userSessionId = pageTrackingService.getSessionByUsername(lastEditorUsername);
 
         /*System.out.println("Map: ");
         System.out.println(HttpSessionListenerImpl.getSessions());
         System.out.println("UserSessionId: " + userSessionId);*/
 
-        return (EDIT_URL_SET.contains(lastUserURL)
+        return (EDIT_VIEW_SET.contains(lastUserView)
                 && lastEditedContestByUser.get(lastEditorUsername)!= null
                 && lastEditedContestByUser.get(lastEditorUsername)==contestId)
                 /*&& HttpSessionListenerImpl.sessionIsAliveById(userSessionId)*/
