@@ -48,11 +48,11 @@
         <div class="radio-inline">
             <label>
                 <select id="selectOption" class="form-control" onchange="updateContestsList()">
-                    <option value="all">ALL</option>
-                    <option value="going">GOING</option>
-                    <option value="release">RELEASE</option>
-                    <option value="preparing">PREPARING</option>
-                    <option value="archive">ARCHIVE</option>
+                    <option value="all"><spring:message code="contest.status.all" /></option>
+                    <option value="going"><spring:message code="listContests.status.going" /></option>
+                    <option value="release"><spring:message code="listContests.status.release" /></option>
+                    <option value="preparing"><spring:message code="listContests.status.preparing" /></option>
+                    <option value="archive"><spring:message code="listContests.status.archive" /></option>
                 </select>
             </label>
         </div>

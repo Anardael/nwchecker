@@ -170,6 +170,7 @@ public class ListContestsController {
 			case ARCHIVE: {
 				contest.setStatus(Contest.Status.ARCHIVE);
 				isContestStatusChanged = true;
+				scheduleService.finishContest(contest);
 				break;
 			}
 			}

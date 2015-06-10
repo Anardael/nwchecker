@@ -18,70 +18,86 @@ import java.util.concurrent.ScheduledFuture;
 @Service(value = "ScheduleService")
 public class ScheduleServiceImpl implements ScheduleService {
 
-    @Autowired
-    private ContestDAO contestDAO;
+	@Autowired
+	private ContestDAO contestDAO;
 
-    @Autowired
-    private ScoreCalculationService scoreCalculationService;
+	@Autowired
+	private ScoreCalculationService scoreCalculationService;
 
-    @Autowired
-    private TaskScheduler taskScheduler;
+	@Autowired
+	private TaskScheduler taskScheduler;
 
-    private ScheduledFuture<?> nextTaskExecution;
+	private ScheduledFuture<?> nextTaskExecution;
 
-    private static final Logger LOG
-            = Logger.getLogger(ScheduleServiceImpl.class);
+	private static final Logger LOG = Logger
+			.getLogger(ScheduleServiceImpl.class);
 
-    @Override
-    public void refresh() {
-        //if next task registered- cancel it:
-        if (nextTaskExecution != null) {
-            if (!nextTaskExecution.isDone()) {
-                nextTaskExecution.cancel(false);
-            }
-        }
+	@Override
+	public void refresh() {
+		// if next task registered- cancel it:
+		if (nextTaskExecution != null) {
+			if (!nextTaskExecution.isDone()) {
+				nextTaskExecution.cancel(false);
+			}
+		}
 
-        //get all contests for which need Timer task:
-        //get release contests:
-        List<Contest> executableContests = contestDAO.getContestByStatus(Contest.Status.RELEASE);
-        //add going contests:
-        executableContests.addAll(contestDAO.getContestByStatus(Contest.Status.GOING));
-        if (executableContests.size() == 0) {
-            return;
-        }
-        //sort contests in execution time order:
-        Collections.sort(executableContests, new ContestComparator());
+		// get all contests for which need Timer task:
+		// get release contests:
+		List<Contest> executableContests = contestDAO
+				.getContestByStatus(Contest.Status.RELEASE);
+		// add going contests:
+		executableContests.addAll(contestDAO
+				.getContestByStatus(Contest.Status.GOING));
+		if (executableContests.size() == 0) {
+			return;
+		}
+		// sort contests in execution time order:
+		Collections.sort(executableContests, new ContestComparator());
 
-        //for first in list- create task timer:
-        final Contest nextExecuteContest = executableContests.get(0);
+		// for first in list- create task timer:
+		final Contest nextExecuteContest = executableContests.get(0);
 
-        long executionTime = 0;
-        if (nextExecuteContest.getStatus().equals(Contest.Status.RELEASE)) {
-            executionTime = nextExecuteContest.getStarts().getTime();
-            LOG.debug("Register start contest action for contest id=" + nextExecuteContest.getId());
-        } else {
-            executionTime = nextExecuteContest.getStarts().getTime();
-            executionTime += nextExecuteContest.getDuration().getTime();
-            executionTime += TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime())*-1000;
-            LOG.debug("Register stop contest action for contest id=" + nextExecuteContest.getId());
-        }
+		long executionTime = 0;
+		if (nextExecuteContest.getStatus().equals(Contest.Status.RELEASE)) {
+			executionTime = nextExecuteContest.getStarts().getTime();
+			LOG.debug("Register start contest action for contest id="
+					+ nextExecuteContest.getId());
+		} else {
+			executionTime = nextExecuteContest.getStarts().getTime();
+			executionTime += nextExecuteContest.getDuration().getTime();
+			executionTime += TimeZone.getDefault().getOffset(
+					nextExecuteContest.getDuration().getTime())
+					* -1000;
+			LOG.debug("Register stop contest action for contest id="
+					+ nextExecuteContest.getId());
+		}
 
-        nextTaskExecution = taskScheduler.schedule(new Runnable() {
-            @Override
-            public void run() {
-                if (nextExecuteContest.getStatus() == Contest.Status.RELEASE) {
-                    nextExecuteContest.setStatus(Contest.Status.GOING);
-                    contestDAO.updateContest(nextExecuteContest);
-                    LOG.debug("Contest (id=" + nextExecuteContest.getId() + ") changed status to GOING");
-                } else {
-                    nextExecuteContest.setStatus(Contest.Status.ARCHIVE);
-                    nextExecuteContest.setHidden(true);
-                    contestDAO.updateContest(nextExecuteContest);
-                    scoreCalculationService.calculateScore(nextExecuteContest.getId());
-                    LOG.debug("Contest (id=" + nextExecuteContest.getId() + ") changed status to ARCHIVE");
-                }
-                refresh();
-            }
-        }, new Date(executionTime));
-    }
+		nextTaskExecution = taskScheduler.schedule(new Runnable() {
+			@Override
+			public void run() {
+				if (nextExecuteContest.getStatus() == Contest.Status.RELEASE) {
+					startContest(nextExecuteContest);
+				} else {
+					finishContest(nextExecuteContest);
+				}
+				refresh();
+			}
+		}, new Date(executionTime));
+	}
+	@Override
+	public void finishContest(Contest contest) {
+		contest.setStatus(Contest.Status.ARCHIVE);
+		contest.setHidden(true);
+		contestDAO.updateContest(contest);
+		scoreCalculationService.calculateScore(contest.getId());
+		LOG.debug("Contest (id=" + contest.getId()
+				+ ") changed status to ARCHIVE");
+	}
+
+	private void startContest(Contest contest) {
+		contest.setStatus(Contest.Status.GOING);
+		contestDAO.updateContest(contest);
+		LOG.debug("Contest (id=" + contest.getId()
+				+ ") changed status to GOING");
+	}
 }
