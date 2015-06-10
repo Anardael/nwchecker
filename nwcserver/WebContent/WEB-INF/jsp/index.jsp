@@ -4,14 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <div class="jumbotron">
-        <blockquote>
-            <p>
-                "
-                <spring:message code="index.quote" />
-                "
-            </p>
+        <div class="container">
+            <p>"<spring:message code="index.quote" />"</p>
             <spring:message code="index.quoteAuthor" />
-        </blockquote>
+        </div>
     </div>
     <div id="info">
         <b>NWCServer</b>

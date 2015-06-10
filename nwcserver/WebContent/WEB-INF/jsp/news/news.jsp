@@ -9,22 +9,20 @@
         <dl>
             <dt>
                 <spring:message code="news.contests" /> <br/>
-                <span style="font-size: 15px; font-weight: normal">
-                    (<spring:message code="news.contests.date" /> ${contest.starts})
-                </span>
             </dt>
-            <c:choose>
-                <c:when test="${empty contest}">
-                    <dd>
+            <dd>
+                <c:choose>
+                    <c:when test="${empty contest}">
                         <spring:message code="news.contest.noContest" />
-                    </dd>
-                </c:when>
-                <c:otherwise>
-                    <dd>
-                        ${contest.title}
-                    </dd>
-                </c:otherwise>
-            </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        ${contest.title}<br/>
+                        <span style="font-size: 15px; font-weight: normal">
+                            <spring:message code="news.contests.date" /> ${contest.starts}
+                        </span>
+                    </c:otherwise>
+                </c:choose>
+            </dd>
         </dl>
 		<br>
         <dl>
