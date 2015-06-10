@@ -129,7 +129,7 @@
 </div>
 <br />
 <br />
-<security:authorize access="isAuthenticated()">
+<security:authorize access="hasRole('ROLE_USER')">
 	<!-- Send answer form -->
 	<div class="row">
 		<form:form id="task" class="form-horizontal"
