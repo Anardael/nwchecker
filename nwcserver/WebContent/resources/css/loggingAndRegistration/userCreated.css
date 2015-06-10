@@ -1,9 +1,9 @@
-.centered {
+.p {
     text-align: center;
 }
 
-.customButton {
-    width: 150px;
+input{
+    text-align: center;
 }
 
 .error {

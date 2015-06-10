@@ -2,8 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="contest" uri="/tlds/ContestTags"%>
 
 <spring:url value="/resources/" var="resources" />
@@ -11,14 +10,9 @@
 <html>
     <script type="text/javascript">
         var successCaption = "<spring:message code="success.caption"/>";
-        var successSignUpContest = "<spring:message code="contest.signUpBody"/>";
-        var alreadySignUp = "<spring:message code="contest.alreadySubscribed"/>";
         var errorLabel = "<spring:message code="error.caption" />";
-        var nowEditingBody = "<spring:message code="contest.editing.now.body"/>";
-        var nowEditingUser = "<spring:message code="contest.editing.now.username"/>";
         var contestId = 0;
     </script>
-
 
     <div class="pull-right" style="margin-top: 10px">
         <security:authorize access="hasRole('ROLE_TEACHER')">
@@ -26,21 +20,21 @@
                 <label>
                     <input type="radio" name="radioOption" id="optionsRadios1" value="all" checked
                            onclick="updateContestsList()">
-                    All
+                    <spring:message code="contest.radio.All"/>
                 </label>
             </div>
             <div class="radio-inline">
                 <label>
                     <input type="radio" name="radioOption" id="optionsRadios2" value="false"
                            onclick="updateContestsList()">
-                    Unhidden
+                    <spring:message code="contest.radio.unhidden" />
                 </label>
             </div>
             <div class="radio-inline">
                 <label class="hidden-radio">
                     <input type="radio" name="radioOption" id="optionsRadios3" value="true"
                            onclick="updateContestsList()">
-                    Hidden
+                    <spring:message code="contest.radio.hidden"/>
                 </label>
             </div>
         </security:authorize>
@@ -68,14 +62,14 @@
         <tr>
             <th data-field="starts" data-align="center" data-sortable="true"  data-width="100"
                 data-formatter="dateFormatter">
-                Start date
+                <spring:message code="listContests.contests.tableHeader.starts" />
             </th>
             <th data-field="title" data-align="center">
-                Title
+                <spring:message code="listContests.contests.tableHeader.title" />
             </th>
             <th data-field="status" data-align="center" data-sortable="true" data-width="100"
                 data-formatter="statusFormatter">
-                Status
+                <spring:message code="listContests.contests.tableHeader.status" />
             </th>
         </tr>
         </thead>
@@ -109,9 +103,9 @@
                     <div id="duration-block">
                         <b><spring:message code="contest.table.duration" />:</b>
                         <span id="duration-hours"></span>
-                        hours
+                        <spring:message code="contest.table.duration.hours" />
                         <span id="duration-minutes"></span>
-                        minutes
+                        <spring:message code="contest.table.duration.minutes" />
                     </div>
                     <div id="type-block">
                         <b><spring:message code="contest.table.type" />:</b>
@@ -130,11 +124,11 @@
                         <security:authorize access="hasRole('ROLE_TEACHER')">
                             <div id="edit-group">
                                 <span id="now-edit">
-                                    Contest is editing now by
+                                    <spring:message code="contest.table.edited" />
                                     <span id="edit-username"></span>
                                     <button type="button" class="btn btn-sm btn-info" onclick="refresh(contestId)">
                                         <span class="glyphicon glyphicon-refresh"></span>
-                                        Refresh
+                                        <spring:message code="contest.table.refresh" />
                                     </button>
                                 </span>
                                 <button id="edit-btn" class="btn btn-sm btn-info" onclick="edited(contestId)">

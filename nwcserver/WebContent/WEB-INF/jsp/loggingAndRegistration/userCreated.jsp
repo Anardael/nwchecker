@@ -7,21 +7,14 @@
 <html>
 <body>
 	<form:form modelAttribute="userRegistrationForm" action="login.do"
-		method="get" role="form" class="form-horizontal centered">
-		<div class="form-group">
-			<h1>
-				<spring:message code="userCreated.username.caption" />
-				<b>${userRegistrationForm.username}</b>
-				<spring:message code="userCreated.created.caption" />
-			</h1>
-		</div>
-		<div class="form-group">
-			<div class="form-actions centered">
-				<input type="submit"
-					value="<spring:message code="userCreated.button.caption" />"
-					class="btn btn-primary customButton">
-			</div>
-		</div>
+		method="get" role="form" class="form-horizontal">
+        <h2>
+            <spring:message code="userCreated.username.caption" />
+            <b>${userRegistrationForm.username}</b>
+            <spring:message code="userCreated.created.caption" />
+        </h2>
+        <input type="submit" value="<spring:message code="userCreated.button.caption" />"
+               class="btn btn-primary">
 	</form:form>
 </body>
 </html>

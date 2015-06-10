@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#contestTable').on('click-row.bs.table', function (e, row, $element) {
-        console.log(JSON.stringify(row));
+        //console.log(JSON.stringify(row));
 
         var typeContest = row['type'];
         window.contestId = row['id'];
@@ -100,10 +100,10 @@ function showEditGroup(contestId){
     $.ajax({
         type: 'GET',
         url: 'checkContestIsEdited.do?id=' + contestId,
-        dataType:'text',
+        dataType:'json',
         success: function (response) {
-            console.log('Success response!');
-            updateEditGroup(response === 'true');
+            //console.log(JSON.stringify(response));
+            updateEditGroup(response);
         },
         error: function() {
             console.log('Error response!');
@@ -111,11 +111,11 @@ function showEditGroup(contestId){
     });
 }
 
-function updateEditGroup(isEdit){
+function updateEditGroup(editResponse){
     $('#edit-group').show();
-    if(isEdit){
+    if(editResponse['edit'] === true){
         $('#now-edit').show();
-        $('#edit-username').text('SOME USER');
+        $('#edit-username').text(editResponse['name']);
         $('#edit-btn').show().attr('disabled','disabled');
     } else {
         $('#now-edit').hide();

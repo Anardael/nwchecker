@@ -17,5 +17,7 @@ import java.util.Map;
 public interface ContestEditWatcherService {
     void addParameters(int contestId, String username);
 
-    boolean checkContestIsEditedById(int contestId);
+    boolean checkContestIsEditedById(int contestId, String currentUsername);
+
+    String getLastContestEditorById(int contestId);
 }

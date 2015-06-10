@@ -58,3 +58,8 @@ label{
 .hidden-radio{
     background-color: rgb(252, 248, 227);;
 }
+#edit-username{
+    font-style: italic;
+    font-size: medium;
+    margin-right: 5px;
+}

@@ -32,7 +32,7 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     }
 
     @Override
-    public boolean checkContestIsEditedById(int contestId){
+    public boolean checkContestIsEditedById(int contestId, String currentUsername){
         String lastEditorUsername = lastEditorInContest.get(contestId);
         String lastUserView = pageTrackingService.getPathByUsername(lastEditorUsername);
         String userSessionId = pageTrackingService.getSessionByUsername(lastEditorUsername);
@@ -43,9 +43,14 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
 
         return (EDIT_VIEW_SET.contains(lastUserView)
                 && lastEditedContestByUser.get(lastEditorUsername)!= null
-                && lastEditedContestByUser.get(lastEditorUsername)==contestId)
+                && lastEditedContestByUser.get(lastEditorUsername)==contestId
+                && !lastEditorUsername.equals(currentUsername))
                 /*&& HttpSessionListenerImpl.sessionIsAliveById(userSessionId)*/
                 ? true : false;
     }
 
+    @Override
+    public String getLastContestEditorById(int contestId){
+        return lastEditorInContest.get(contestId);
+    }
 }

@@ -1,17 +1,15 @@
-.main-block{
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-dl{
+p{
+    font-size: large;
+    font-weight: 600;
     margin-top: 5px;
     margin-bottom: 5px;
+    text-align: center;
 }
-dt{
+#title{
     font-size: large;
     text-align: center;
     margin-bottom: 5px;
 }
-dd{
+.block-center{
     text-align: center;
 }

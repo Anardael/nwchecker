@@ -1,5 +1,6 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.json.EditorJson;
 import com.nwchecker.server.service.ContestEditWatcherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.Principal;
 
 /**
  * <h1>Contest Edit Watcher Controller</h1>
@@ -26,7 +29,9 @@ public class ContestEditWatcherController {
     ContestEditWatcherService contestEditWatcherService;
 
     @RequestMapping(value = "/checkContestIsEdited", method = RequestMethod.GET)
-    public @ResponseBody boolean checkContestIsEdited(@RequestParam("id") int contestId) {
-        return contestEditWatcherService.checkContestIsEditedById(contestId);
+    public @ResponseBody EditorJson checkContestIsEdited(@RequestParam("id") int contestId, Principal principal) {
+        return EditorJson.createEditorJson(
+                contestEditWatcherService.checkContestIsEditedById(contestId, principal.getName()),
+                contestEditWatcherService.getLastContestEditorById(contestId));
     }
 }

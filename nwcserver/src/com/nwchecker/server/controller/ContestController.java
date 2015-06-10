@@ -239,7 +239,7 @@ public class ContestController {
         if(!contestService.checkIfUserHaveAccessToContest(principal.getName(), contestId)){
             return "nwcserver.accessDeniedToContest";
         }
-        if(contestEditWatcherService.checkContestIsEditedById(contestId)){
+        if(contestEditWatcherService.checkContestIsEditedById(contestId, principal.getName())){
             return "nwcserver.contestIsEdited";
         }
 
