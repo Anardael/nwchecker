@@ -51,6 +51,8 @@
         <fb:login-button scope="public_profile,email" data-auto-logout-link="true" onlogin="checkLoginState();">
         </fb:login-button>
         <div id="status" >
+            <span id="status-name"></span>
+            <span id="status-email"></span>
         </div>
     </div>
 
