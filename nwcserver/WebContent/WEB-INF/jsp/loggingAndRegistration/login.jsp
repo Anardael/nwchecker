@@ -45,5 +45,14 @@
 			</div>
 		</div>
 	</form>
+
+    <br/><br/>
+    <div style="text-align: center">
+        <fb:login-button scope="public_profile,email" data-auto-logout-link="true" onlogin="checkLoginState();">
+        </fb:login-button>
+        <div id="status" >
+        </div>
+    </div>
+
 </body>
 </html>
