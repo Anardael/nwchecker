@@ -26,6 +26,7 @@ public class NewsController {
 
 		Contest lastContest = contestService.getLastArchivedContest();
 		model.addAttribute("title", lastContest.getTitle());
+		model.addAttribute("dynamic", lastContest.getTypeContest().isDynamic());
 		model.addAttribute("contestId", lastContest.getId());
 		model.addAttribute("pageName", "news");
 

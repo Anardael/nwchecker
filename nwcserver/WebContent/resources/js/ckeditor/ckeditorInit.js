@@ -5,6 +5,7 @@ function initializeCKEdior(textareaId, language) {
 	}
 	CKEDITOR.replace( textareaId,
 			{
+				filebrowserBrowseUrl: '../Filemanager/index.html',
 				language: lang
 			});
 }

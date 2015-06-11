@@ -11,6 +11,11 @@ var PASSWORD_EQUALS;
 $(document).ready(function() {
 	$('#registrationForm').validate({
 		rules : {
+			username:{
+				required:true,
+				minlength:3,
+				maxlength:16
+			},
 			displayName:{
 				required:true,
 				minlength:3,
