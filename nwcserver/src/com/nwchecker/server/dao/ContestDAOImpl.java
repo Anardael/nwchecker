@@ -119,13 +119,13 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     @Transactional
     public Contest getNearestContest() {
         List <Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where status='RELEASE' and hidden=false order by starts asc");
-        return result.get(0);
+        return result.isEmpty() ? null : result.get(0);
     }
 
     @Override
     @Transactional
     public Contest getLastArchivedContest(){
         List <Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where status='ARCHIVE' order by starts desc");
-        return  result.get(0);
+        return result.isEmpty() ? null : result.get(0);
     }
 }
