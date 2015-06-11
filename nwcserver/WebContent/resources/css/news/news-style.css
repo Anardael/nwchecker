@@ -3,11 +3,11 @@ p{
     font-weight: 600;
     margin-top: 5px;
     margin-bottom: 5px;
-    text-align: center;
+    text-align: left;
 }
 #title{
     font-size: large;
-    text-align: center;
+    text-align: left;
     margin-bottom: 5px;
 }
 .block-center{
