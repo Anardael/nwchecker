@@ -71,7 +71,14 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return list.get(0);
 	}
 
-	@Override
+    @Override
+    public User getUserByEmail(String email) {
+        @SuppressWarnings("unchecked")
+        List<User> list = (List<User>) getHibernateTemplate().find("from User where email=?", email);
+        return list.get(0);
+    }
+
+    @Override
 	public List<User> getUsers() {
 		@SuppressWarnings("unchecked")
 		List<User> list = (List<User>) getHibernateTemplate().find("from User");

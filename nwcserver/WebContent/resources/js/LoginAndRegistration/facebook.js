@@ -59,13 +59,21 @@ window.fbAsyncInit = function() {
 function testAPI() {
     FB.api('/me', function(response) {
         console.log('Name: ' + response.name + '. ' + ' Email: ' + response['email']);
+        var nickname = response.name;
+        var email = response['email'];
 
         $.ajax({
             type: 'GET',
-            url: 'getFacebookUser.do?email=' + response['email'] + '&nickname=' + response.name,
-            dataType:'json',
+            url: 'checkFacebookUser.do?email=' + response['email'] + '&nickname=' + response.name,
+            dataType:'text',
             success: function (response) {
                 console.log(JSON.stringify(response));
+                if(response === 'true'){
+                    showAlertMsg(nickname, email);
+                } else {
+                    location.href = 'index.do';
+                }
+
             },
             error: function() {
                 console.log('Error response!');
@@ -74,4 +82,13 @@ function testAPI() {
 
         //location.href = 'j_spring_security_check?j_username=JNAME&j_password=JPASSWORD';
     });
+}
+
+function showAlertMsg(nickname, email){
+    $('#alert-block').text('' + nickname + ', we send your login and password to ' + email);
+    $('#facebookModal').modal();
+}
+
+function goHome() {
+    location.href = 'index.do';
 }

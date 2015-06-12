@@ -1,8 +1,16 @@
 package com.nwchecker.server.controller;
 
-import com.nwchecker.server.model.User;
+import com.nwchecker.server.dao.UserDAO;
+import com.nwchecker.server.json.FacebookUserJson;
+import com.nwchecker.server.service.FacebookService;
 import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,14 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FacebookController {
 
     @Autowired
-    UserService userService;
+    FacebookService facebookService;
 
-    @RequestMapping(value = "/getFacebookUser", method = RequestMethod.GET)
-    public @ResponseBody boolean getFacebookUserJson(@RequestParam("nickname") String nickname,
-                                                 @RequestParam("email") String email){
-        if(userService.hasEmail(email)){
-            return true;
-        }
-        return userService.hasEmail(email);
+    @RequestMapping(value = "/checkFacebookUser", method = RequestMethod.GET)
+    public @ResponseBody boolean getFacebookJson(@RequestParam("nickname") String nickname,
+                                                     @RequestParam("email") String email){
+        return facebookService.checkFacebookJsonByEmailAndNickname(email, nickname);
     }
 }
