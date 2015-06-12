@@ -1,15 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <title></title>
 </head>
 <body>
 
-  <p> Розроблено компанією SoftServe group Ch-030</p>
-  <p2> Адреса </p2>  </br>
-  м . Чернівці </br>
-  вул. Головна 226-а , офіс 506 </br>
-  nwchecker@gmail.com </br>
+  <p> <spring:message code="Developer.caption" /></p>
+  <p2><spring:message code="Address.caption" /></p2></br>
+  <spring:message code="City.caption" /></br>
+  <spring:message code="Street.caption" /> , <spring:message code="Office.caption" /></br>
+  <spring:message code="E-mail.caption" /></br>
 
 
   </br>
