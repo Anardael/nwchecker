@@ -9,6 +9,10 @@
 
 <html>
     <script type="text/javascript">
+    	var statusCaptionArchive = "<spring:message code="listContests.status.archive" />";
+    	var statusCaptionGoing = "<spring:message code="listContests.status.going" />";
+    	var statusCaptionPreparing = "<spring:message code="listContests.status.preparing" />";
+    	var statusCaptionRelease = "<spring:message code="listContests.status.release" />";
         var successCaption = "<spring:message code="success.caption"/>";
         var errorLabel = "<spring:message code="error.caption" />";
         var contestId = 0;
@@ -83,7 +87,7 @@
         </div>
     </security:authorize>
 
-    <div id="contestModal" class="modal" tabindex="-1">
+    <div id="contestModal" class="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-info">
@@ -95,7 +99,7 @@
                         </button>
                     </div>
                 </div>
-                <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
+                <div id="mdl-body" class="modal-body" style="height: 400px; width: 595px; overflow: auto;">
                     <div id="start-date-block">
                         <b><spring:message code="contest.table.starts" />:</b>
                         <span id="start-date"></span>
@@ -112,7 +116,7 @@
                         <span id="type"></span>
                     </div>
 
-                    <div id="description-block">
+                    <div id="description-block" style="">
                         <div class="text-center" style="margin: 1px">
                             <b><spring:message code="contest.table.description" /></b>
                         </div>

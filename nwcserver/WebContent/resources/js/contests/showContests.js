@@ -57,16 +57,16 @@ function statusFormatter(value, row) {
     rowStyle(row);
     switch (value){
         case 'GOING': {
-            return '<span style="color:limegreen;">' + value + '</span>';
+            return '<span style="color:limegreen;">' + statusCaptionGoing + '</span>';
         }
         case 'ARCHIVE': {
-            return '<span style="color:#ff0000;">' + value + '</span>';
+            return '<span style="color:#ff0000;">' + statusCaptionArchive + '</span>';
         }
         case 'PREPARING': {
-            return '<span style="color:cornflowerblue;">' + value + '</span>';
+            return '<span style="color:cornflowerblue;">' + statusCaptionPreparing + '</span>';
         }
         case 'RELEASE': {
-            return '<span style="color:blue;">' + value + '</span>';
+            return '<span style="color:blue;">' + statusCaptionRelease + '</span>';
         }
     }
 }
