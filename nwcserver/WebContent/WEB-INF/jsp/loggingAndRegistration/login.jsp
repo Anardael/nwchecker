@@ -41,13 +41,15 @@
 			<div class="col-sm-12 centered">
 				<spring:message code="login.registration.label.caption" />
 				<a href="registration.do"><spring:message
-						code="login.reglink.caption" /></a>
+						code="login.reglink.caption" />.</a>
 			</div>
 		</div>
 	</form>
 
-    <br/><br/>
+
+
     <div style="text-align: center">
+        <p>or login as facebook user</p>
         <fb:login-button scope="public_profile,email" data-auto-logout-link="true" onlogin="checkLoginState();">
         </fb:login-button>
         <div id="status" >

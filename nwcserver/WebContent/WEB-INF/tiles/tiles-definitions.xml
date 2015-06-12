@@ -306,6 +306,7 @@
 		</put-list-attribute>
         <put-list-attribute name="scripts" inherit="true" cascade="true">
             <add-attribute value="js/LoginAndRegistration/facebook.js" />
+            <add-attribute value="js/LoginAndRegistration/web-sdk.js" />
         </put-list-attribute>
 	</definition>
 	<definition name="nwcserver.user.profile" extends="nwcserver.abstract.full">
