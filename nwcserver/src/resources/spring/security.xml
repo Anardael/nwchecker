@@ -23,9 +23,7 @@
         <intercept-url pattern="/getListOfContests**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/getContestStatus**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/setContestStatus**" access="hasRole('ROLE_ADMIN')" />
-        <form-login login-page="/login.do"
-                    authentication-failure-url="/login.do?error" 
-        />
+        <form-login login-page="/login.do" authentication-failure-url="/login.do?error" />
         <logout logout-url="/logout.do" />
     </http>
 
@@ -38,5 +36,10 @@
 	<beans:bean id="userDetailsService"
 		class="com.nwchecker.server.service.UserDetailsServiceImpl">
 	</beans:bean>
+
+    <beans:bean id="authenticationFilter"
+                class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" >
+        <beans:property name="postOnly" value="false" />
+    </beans:bean>
 
 </beans:beans>

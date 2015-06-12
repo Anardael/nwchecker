@@ -59,5 +59,19 @@ window.fbAsyncInit = function() {
 function testAPI() {
     FB.api('/me', function(response) {
         console.log('Name: ' + response.name + '. ' + ' Email: ' + response['email']);
+
+        $.ajax({
+            type: 'GET',
+            url: 'getFacebookUser.do?email=' + response['email'] + '&nickname=' + response.name,
+            dataType:'json',
+            success: function (response) {
+                console.log(JSON.stringify(response));
+            },
+            error: function() {
+                console.log('Error response!');
+            }
+        });
+
+        //location.href = 'j_spring_security_check?j_username=JNAME&j_password=JPASSWORD';
     });
 }

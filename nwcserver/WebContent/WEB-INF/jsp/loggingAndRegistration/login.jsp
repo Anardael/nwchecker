@@ -7,20 +7,21 @@
 <html>
 <!--including head -->
 <body>
-	<form class="form-horizontal"
-		action="<c:url value="/j_spring_security_check"/>" method="POST">
+	<form class="form-horizontal" action="<c:url value="/j_spring_security_check"/>" method="POST">
 		<div class="form-group">
-			<label class="col-sm-4 control-label"><spring:message
-					code="login.username.caption" />:</label>
+			<label class="col-sm-4 control-label">
+                <spring:message code="login.username.caption" />:
+            </label>
 			<div class="col-sm-4">
-				<input class="form-control" name="j_username">
+				<input id="input-username" class="form-control" name="j_username">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-4 control-label"><spring:message
-					code="login.password.caption" />:</label>
+			<label class="col-sm-4 control-label">
+                <spring:message code="login.password.caption" />:
+            </label>
 			<div class="col-sm-4">
-				<input class="form-control" type="password" name="j_password">
+				<input id="input-password" class="form-control" type="password" name="j_password">
 			</div>
 		</div>
 		<c:if test="${not empty error}">
@@ -32,16 +33,14 @@
 		</c:if>
 		<div class="form-group">
 			<div class="form-actions centered">
-				<input type="submit"
-					value="<spring:message code="login.button.caption" />"
+				<input type="submit" value="<spring:message code="login.button.caption" />"
 					class="btn btn-primary customButton">
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-12 centered">
 				<spring:message code="login.registration.label.caption" />
-				<a href="registration.do"><spring:message
-						code="login.reglink.caption" />.</a>
+				<a href="registration.do"><spring:message code="login.reglink.caption" />.</a>
 			</div>
 		</div>
 	</form>
