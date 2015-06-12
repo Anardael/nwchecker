@@ -76,14 +76,14 @@ public class ContestPassServiceImplTest {
         assertEquals(contestPass.getRank(), contestPassService.getContestPasses(1).get(0).getRank());
     }
 
-    @Ignore
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckTask() throws Exception {
         ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
         Task task = contestPass.getContest().getTasks().get(0);
         User user = userService.getUserById(3);
-        assertNotNull(contestPassService.checkTask(contestPass, task, 1, new byte[8], user));
+        byte[] data = new byte[8];        
+        assertNotNull(contestPassService.checkTask(contestPass, task, 1, data, user));
     }
 
     @Test

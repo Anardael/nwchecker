@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -65,13 +68,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 		} else {
 			executionTime = nextExecuteContest.getStarts().getTime();
 			executionTime += nextExecuteContest.getDuration().getTime();
+			System.out.println("Duration " + DateFormat.getInstance().format(new Date(nextExecuteContest.getDuration().getTime() + (TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime()) * -1000))));
 			executionTime += TimeZone.getDefault().getOffset(
 					nextExecuteContest.getDuration().getTime())
 					* -1000;
 			LOG.debug("Register stop contest action for contest id="
 					+ nextExecuteContest.getId());
 		}
-
+		System.out.println("Starts "
+				+ DateFormat.getInstance().format(new Date(executionTime)));
 		nextTaskExecution = taskScheduler.schedule(new Runnable() {
 			@Override
 			public void run() {
@@ -84,6 +89,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			}
 		}, new Date(executionTime));
 	}
+
 	@Override
 	public void finishContest(Contest contest) {
 		contest.setStatus(Contest.Status.ARCHIVE);

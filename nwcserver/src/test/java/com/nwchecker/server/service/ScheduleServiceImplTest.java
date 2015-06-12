@@ -43,7 +43,6 @@ public class ScheduleServiceImplTest {
     /**
      * Test of refresh method, of class ScheduleServiceImpl.
      */
-    @Ignore
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testRefresh() throws Exception {
@@ -52,18 +51,17 @@ public class ScheduleServiceImplTest {
         contest.setStatus(Contest.Status.RELEASE);
         contestService.mergeContest(contest);
         scheduleService.refresh();
-        //duration contest = 5 seconds.
         try {
             Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.GOING);
+        assertEquals(Contest.Status.GOING, contestService.getContestByID(1).getStatus());
         try {
             Thread.sleep(3 * 1000);                 //1000 milliseconds is one second.
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals(contestService.getContestByID(1).getStatus(), Contest.Status.ARCHIVE);
+        assertEquals(Contest.Status.ARCHIVE, contestService.getContestByID(1).getStatus());
     }
 }

@@ -123,7 +123,6 @@ public class ContestServiceImplTest {
      * Test of checkIfUserHavesAccessToContest method, of class
      * ContestServiceImpl.
      */
-    @Ignore
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testCheckIfUserHaveAccessToContest() {

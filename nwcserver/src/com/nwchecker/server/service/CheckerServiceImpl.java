@@ -75,14 +75,14 @@ public class CheckerServiceImpl implements CheckerService {
 	@Override
 	public CheckerResponse sendSolutionToChecker(CheckerMessage message) {
 		CheckerResponse checkerResponse;
-		try {
+	/*	try {
 			Socket socket = new Socket();
 			message.writeTo(socket.getOutputStream());
 			checkerResponse = CheckerResponse
 					.parseFrom(socket.getInputStream());
 			socket.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();*/
 
 			CheckerResponse.Builder responseBuilder = CheckerResponse
 					.newBuilder();
@@ -106,7 +106,7 @@ public class CheckerServiceImpl implements CheckerService {
 				responseBuilder.addTestData(atomicResponseBuilder.build());
 			}
 			checkerResponse = responseBuilder.build();
-		}
+		/*}*/
 
 		return checkerResponse;
 	}

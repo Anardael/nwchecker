@@ -40,8 +40,8 @@
     <TaskPass id="8" executionTime="10" memoryUsed="10" passed="1" passedMinute="21" compiler="2" contestPass="2" task_id="2" userid="4"/>
 
 
-    <TaskData id="1" task_id="1"/>
-    <TaskData id="2" task_id="2"/>
+    <TaskData id="1" task_id="1" inputData="0" outputData="0"/>
+    <TaskData id="2" task_id="2" inputData="0" outputData="0"/>
 
 
 
