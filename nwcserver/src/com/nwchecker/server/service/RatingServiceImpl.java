@@ -20,20 +20,6 @@ public class RatingServiceImpl implements RatingService {
     @Autowired
     private ContestPassService contestPassService;
 
-    @Override
-    public boolean scoreCalculateIfDynamicContest(int contestId) {
-        LOG.debug("Start method scoreCalculateIfDynamicContest. Param = {contestId: " + contestId + "}");
-        Contest contest = contestService.getContestByID(contestId);
-
-        if (contest.getTypeContest().isDynamic()) {
-            scoreCalculationService.calculateScore(contestId);
-            LOG.debug("Finish method scoreCalculateIfDynamicContest. Return: " + true);
-            return true;
-        } else  {
-            LOG.debug("Finish method scoreCalculateIfDynamicContest. Return: " + false);
-            return false;
-        }
-    }
 
     @Override
     public List<ContestPass> getJsonListForContestPassByContestId(int contestId) {

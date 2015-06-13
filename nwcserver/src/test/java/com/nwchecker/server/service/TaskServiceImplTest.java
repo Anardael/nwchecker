@@ -4,11 +4,9 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.ContestPass.ContestStatus;
 import com.nwchecker.server.service.TaskService;
 import com.nwchecker.server.utils.PaginationWrapper;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,26 +124,23 @@ public class TaskServiceImplTest {
 		taskService.deleteTaskData(1);
 		assertEquals(taskService.getTaskData(1), null);
 	}
-	@Ignore
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetTasksByContestStatus() {
 		assertEquals(3,	taskService.getTasksByContestStatus(Contest.Status.PREPARING)
 						.size());
 	}
-	@Ignore
     @Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetPagedTasksByContestStatus() {
-		assertEquals(3,	taskService.getPagedTasksByContestStatus(Contest.Status.GOING,
-						0, 0, null, null, null).size());
+		assertEquals(3,	taskService.getPagedTasksByContestStatus(Contest.Status.PREPARING,
+						0, 3, null, null, null).size());
 	}
 
-	@Ignore
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetRecordCount() {
-		assertEquals(3,	taskService.getRecordCount(Contest.Status.ARCHIVE, null).intValue());
+		assertEquals(3,	taskService.getRecordCount(Contest.Status.PREPARING, null).intValue());
 	}
 	
 	@Test

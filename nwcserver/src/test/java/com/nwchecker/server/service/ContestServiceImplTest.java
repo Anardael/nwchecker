@@ -7,6 +7,7 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -145,5 +147,29 @@ public class ContestServiceImplTest {
         List<Contest> contests = contestService.getContestForRating();
         assertEquals(0, contests.size());
     }
-
+    
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetContestsListByHiddenStatusUsername(){
+    	assertEquals(3, contestService.getContestsListByHiddenStatusUsername("", "", "user").size());
+    }
+    
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetUnhiddenContestsListByStatus() {
+    	assertEquals(3, contestService.getUnhiddenContestsListByStatus("PREPARING").size());
+    }
+    
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetNearestContest(){
+    	assertNull(contestService.getNearestContest());
+    }
+    
+    @Test
+    @DatabaseSetup("classpath:/forTests/dataset.xml")
+    public void testGetLastArchivedContest(){
+    	assertNull(contestService.getLastArchivedContest());
+    }
+    
 }

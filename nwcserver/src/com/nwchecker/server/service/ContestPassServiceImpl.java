@@ -75,7 +75,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 		return checkResult;
 	}
 
-	public void addTaskPass(ContestPass contestPass, TaskPass taskPass,
+	private void addTaskPass(ContestPass contestPass, TaskPass taskPass,
 			Task task) {
 		boolean contains = false;
 		if (!(contestPass.getContest().getTypeContest().isDynamic())) {

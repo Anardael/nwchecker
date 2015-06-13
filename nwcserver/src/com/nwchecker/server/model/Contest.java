@@ -49,13 +49,13 @@ public class Contest {
 
 	@Column(name = "starts")
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@JsonProperty("starts")
 	private Date starts;
 	
 
 	@Column(name = "duration")
-	@DateTimeFormat(pattern = "HH:mm:ss")
+	@DateTimeFormat(pattern = "HH:mm")
     @JsonProperty("duration")
 	private Date duration;
 

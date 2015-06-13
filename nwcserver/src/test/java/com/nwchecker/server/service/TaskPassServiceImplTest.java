@@ -18,6 +18,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
 import com.nwchecker.server.service.TaskPassService;
 
@@ -82,5 +83,21 @@ public class TaskPassServiceImplTest {
 			assertEquals((long) expected.getExecutionTime(),
 					(long) actual.getExecutionTime());
 		}
+	}
+	
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testGetPagedTaskPassJson(){
+		List<TaskPassJson> taskPasses = taskPassService.getPagedTaskPassJson(
+				2, 0, 5, null, null, null);
+		assertEquals(2, taskPasses.size());
+		List<TaskPassJson> taskPasses2 = taskPassService.getPagedTaskPassJson(
+				1, 0, 5, null, null, null);
+		assertEquals(5, taskPasses2.size());
+	}
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testGetTaskSuccessRateById(){
+		assertEquals(0.3, taskPassService.getTaskSuccessRateById(1), 0.04);
 	}
 }

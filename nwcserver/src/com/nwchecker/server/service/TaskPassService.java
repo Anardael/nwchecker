@@ -59,7 +59,7 @@ public interface TaskPassService {
 	public List<TaskPassJson> getPagedTaskPassJson(int taskId,
 			int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
 
-    double getTaskRateById(int taskId);
+    double getTaskSuccessRateById(int taskId);
     
     void delete(TaskPass taskPass);
 }

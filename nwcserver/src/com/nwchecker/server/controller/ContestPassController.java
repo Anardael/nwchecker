@@ -62,7 +62,7 @@ public class ContestPassController {
 		// if not redirect from getTaskForPass method
 		if (!model.containsAttribute("currentTask")) {
 			Task firstTaskCurrentContest = currentContest.getTasks().get(0);
-			model.addAttribute("taskSuccessRate", taskPassService .getTaskRateById(firstTaskCurrentContest.getId()));
+			model.addAttribute("taskSuccessRate", taskPassService .getTaskSuccessRateById(firstTaskCurrentContest.getId()));
 			model.addAttribute("currentTask", firstTaskCurrentContest);
 		}
 		model.addAttribute("contest", currentContest);
@@ -97,7 +97,7 @@ public class ContestPassController {
 		Task currentTask = taskService.getTaskById(taskId);
 
 		model.addAttribute("taskSuccessRate",
-				taskPassService.getTaskRateById(taskId));
+				taskPassService.getTaskSuccessRateById(taskId));
 		model.addAttribute("currentTask", currentTask);
 
 		return getContestForPass(principal, currentTask.getContest().getId(),

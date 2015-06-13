@@ -56,7 +56,7 @@ public class TaskPassServiceImpl implements TaskPassService {
 	}
 
     @Override
-    public double getTaskRateById(int taskId){
+    public double getTaskSuccessRateById(int taskId){
         long successfulPassCount = taskPassDAO.getSuccessfulTaskPassEntryCount(taskId);
         long allPassCount = taskPassDAO.getTaskPassEntryCount(taskId);
         if(allPassCount != 0){

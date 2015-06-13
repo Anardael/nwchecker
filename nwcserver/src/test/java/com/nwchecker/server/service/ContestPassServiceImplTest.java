@@ -27,12 +27,13 @@ import java.util.Map;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * <h1>ContestPassServiceImpl Test</h1>
- * Test for ContestPassServiceImpl methods.
+ * <h1>ContestPassServiceImpl Test</h1> Test for ContestPassServiceImpl methods.
  * <p>
  *
  * @author Stanislav Krasovskyi
@@ -41,54 +42,75 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-                         DbUnitTestExecutionListener.class})
+@ContextConfiguration(locations = { "classpath:/forTests/context.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
 public class ContestPassServiceImplTest {
 
-    @Autowired
-    private ContestPassService contestPassService;
-    @Autowired
-    private ContestService contestService;
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private ContestPassService contestPassService;
+	@Autowired
+	private ContestService contestService;
+	@Autowired
+	private UserService userService;
 
-    @Test
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testSaveContestPass() throws Exception {
+		int contestsBefore = contestPassService.getContestPasses(2).size();
+
+		ContestPass contestPass = new ContestPass();
+		contestPass.setContest(contestService.getContestByID(2));
+		contestPass.setUser(userService.getUserById(4));
+		contestPassService.saveContestPass(contestPass);
+
+		assertEquals(contestPassService.getContestPasses(2).size(),
+				contestsBefore + 1);
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testUpdateContestPass() throws Exception {
+		ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
+		contestPass.setRank(9001);
+
+		contestPassService.updateContestPass(contestPass);
+		assertEquals(contestPass.getRank(), contestPassService
+				.getContestPasses(1).get(0).getRank());
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testCheckTask() throws Exception {
+		ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
+		Task task = contestPass.getContest().getTasks().get(0);
+		User user = userService.getUserById(3);
+		byte[] data = new byte[8];
+		assertNotNull(contestPassService.checkTask(contestPass, task, 1, data,
+				user));
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testGetContestPasses() throws Exception {
+		assertTrue(!contestPassService.getContestPasses(1).isEmpty());
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testCheckContestPassByUserName() {
+		assertTrue(contestPassService.checkContestPassByUserName("user", contestService.getContestByID(1)));
+		assertFalse(contestPassService.checkContestPassByUserName("user", contestService.getContestByID(2)));
+	}
+	@Test
+	@DatabaseSetup("classpath:/forTests/dataset.xml")
+	public void testGetTaskResultsForContestByUserName(){
+		assertNull(contestPassService.getTaskResultsForContestByUserName("user", contestService.getContestByID(2)));
+		assertNotNull(contestPassService.getTaskResultsForContestByUserName("user", contestService.getContestByID(1)));
+	}
+	@Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
-    public void testSaveContestPass() throws Exception {
-        int contestsBefore = contestPassService.getContestPasses(2).size();
-
-        ContestPass contestPass = new ContestPass();
-        contestPass.setContest(contestService.getContestByID(2));
-        contestPass.setUser(userService.getUserById(4));
-        contestPassService.saveContestPass(contestPass);
-
-        assertEquals(contestPassService.getContestPasses(2).size(), contestsBefore + 1);
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/forTests/dataset.xml")
-    public void testUpdateContestPass() throws Exception {
-        ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
-        contestPass.setRank(9001);
-
-        contestPassService.updateContestPass(contestPass);
-        assertEquals(contestPass.getRank(), contestPassService.getContestPasses(1).get(0).getRank());
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/forTests/dataset.xml")
-    public void testCheckTask() throws Exception {
-        ContestPass contestPass = contestPassService.getContestPasses(1).get(0);
-        Task task = contestPass.getContest().getTasks().get(0);
-        User user = userService.getUserById(3);
-        byte[] data = new byte[8];        
-        assertNotNull(contestPassService.checkTask(contestPass, task, 1, data, user));
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/forTests/dataset.xml")
-    public void testGetContestPasses() throws Exception {
-        assertTrue(!contestPassService.getContestPasses(1).isEmpty());
+    public void testGetValidContestPasses(){
+    	assertEquals(0, contestPassService.getValidContestPasses(1).size());
     }
 }
