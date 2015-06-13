@@ -79,6 +79,9 @@
 	</definition>
 
 	<!-- Access pages -->
+	<definition name="nwcserver.error" extends="nwcserver.abstract.full">
+		<put-attribute name="body" value="/WEB-INF/jsp/access/error.jsp" />
+	</definition>
 	<definition name="nwcserver.403" extends="nwcserver.abstract.full">
 		<put-attribute name="body"
 					   value="/WEB-INF/jsp/access/accessDenied403.jsp" />

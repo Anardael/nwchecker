@@ -27,7 +27,6 @@ CKEDITOR.editorConfig = function(config) {
                 {name: 'colors', items: ['TextColor', 'BGColor']},
                 {name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
                 {name: 'other', items: ['Maximize']},
-                {name: 'image', items:['Image']}
             ];
     config.toolbar = 'Full';
 };

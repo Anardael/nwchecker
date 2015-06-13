@@ -66,4 +66,8 @@
     <error-code>404</error-code>
     <location>/pageNotFound.do</location>
   </error-page>
+  <error-page>
+  	<error-code>500</error-code>
+    <location>/error.do</location>
+  </error-page>
 </web-app>
