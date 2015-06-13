@@ -46,11 +46,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 		// get all contests for which need Timer task:
 		// get release contests:
-		List<Contest> executableContests = contestDAO
-				.getContestByStatus(Contest.Status.RELEASE);
+		List<Contest> executableContests = contestDAO.getContestByStatus(Contest.Status.RELEASE);
 		// add going contests:
-		executableContests.addAll(contestDAO
-				.getContestByStatus(Contest.Status.GOING));
+		executableContests.addAll(contestDAO.getContestByStatus(Contest.Status.GOING));
 		if (executableContests.size() == 0) {
 			return;
 		}
@@ -68,15 +66,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 		} else {
 			executionTime = nextExecuteContest.getStarts().getTime();
 			executionTime += nextExecuteContest.getDuration().getTime();
-			System.out.println("Duration " + DateFormat.getInstance().format(new Date(nextExecuteContest.getDuration().getTime() + (TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime()) * -1000))));
-			executionTime += TimeZone.getDefault().getOffset(
-					nextExecuteContest.getDuration().getTime())
-					* -1000;
+System.out.println(nextExecuteContest.getDuration().getTime() + TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime()));
+//System.out.println("Duration " + DateFormat.getInstance().format(new Date(nextExecuteContest.getDuration().getTime() + (TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime()) * -1000))));
+			executionTime += TimeZone.getDefault().getOffset(nextExecuteContest.getDuration().getTime())* -1000;	
 			LOG.debug("Register stop contest action for contest id="
 					+ nextExecuteContest.getId());
 		}
-		System.out.println("Starts "
-				+ DateFormat.getInstance().format(new Date(executionTime)));
+System.out.println("Starts " + DateFormat.getInstance().format(new Date(executionTime)));
 		nextTaskExecution = taskScheduler.schedule(new Runnable() {
 			@Override
 			public void run() {
