@@ -30,6 +30,13 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
         <put-list-attribute name="stylesheets" inherit="true" cascade="true">
             <add-attribute value="css/index-style.css" />
+            <add-attribute value="css/taskModalView.css" />
+            <add-attribute value="css/bootstrap-dialog.css" />
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.css"/>
+        </put-list-attribute>
+        <put-list-attribute name="scripts" inherit="true" cascade="true">
+            <add-attribute value="js/bootstrapTables/bootstrap-table.min.js" />
+            <add-attribute value="js/index.js" />
         </put-list-attribute>
 	</definition>
 

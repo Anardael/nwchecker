@@ -9,10 +9,19 @@
     text-indent: 20px;
     text-align: justify;
 }
-
 .jumbotron{
     border-radius: 5px;
 }
 .jumbotron p{
     font-style: italic;
+}
+#facebookModal{
+    text-align: center;
+}
+#mdl-body{
+    height: 100px;
+    width: 600px
+}
+#mdl-footer{
+    text-align: center;
 }

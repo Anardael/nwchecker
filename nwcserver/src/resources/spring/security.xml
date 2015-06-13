@@ -33,12 +33,5 @@
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="userDetailsService" class="com.nwchecker.server.service.UserDetailsServiceImpl">
-	</beans:bean>
-
-    <!--<beans:bean id="authenticationFilter"
-                class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" >
-        <beans:property name="postOnly" value="false" />
-    </beans:bean>-->
-
+	<beans:bean id="userDetailsService" class="com.nwchecker.server.service.UserDetailsServiceImpl"/>
 </beans:beans>

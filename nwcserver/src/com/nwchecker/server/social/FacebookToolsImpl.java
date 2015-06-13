@@ -1,9 +1,11 @@
-package com.nwchecker.server.service;
+package com.nwchecker.server.social;
 
 import com.nwchecker.server.dao.UserDAO;
-import com.nwchecker.server.json.FacebookUserJson;
 import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,9 +14,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
-@Service("FacebookService")
-public class FacebookServiceImpl implements FacebookService {
+
+@Service("FacebookTools")
+public class FacebookToolsImpl implements FacebookTools {
 
     @Autowired
     UserDAO userDAO;
@@ -22,8 +28,11 @@ public class FacebookServiceImpl implements FacebookService {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
     @Override
-    public boolean checkFacebookJsonByEmailAndNickname(String email, String nickname) {
+    public boolean loginFacebookUserByEmailAndNickname(String email, String nickname) {
         if(userDAO.hasEmail(email)){
             User user = userDAO.getUserByEmail(email);
 
@@ -32,7 +41,7 @@ public class FacebookServiceImpl implements FacebookService {
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             User user = new User();
-            long rand = Math.round(Math.random()*100);
+            long rand = Math.round(Math.random()*1000);
             user.setUsername("FacebookUser" + rand);
             user.setPassword(encoder.encode("Facebook" + rand));
             user.setEmail(email);
@@ -41,6 +50,8 @@ public class FacebookServiceImpl implements FacebookService {
             userDAO.addUser(user);
 
             addUserToSecurityContext(user.getUsername());
+            sendMessageToEmail(email, "FacebookUser" + rand, "Facebook" + rand);
+
             return true;
         }
 
@@ -51,5 +62,20 @@ public class FacebookServiceImpl implements FacebookService {
         UserDetails details = userDetailsService.loadUserByUsername(username);
         Authentication authentication =  new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    private void sendMessageToEmail(String email, String username, String password){
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = null;
+        try {
+            helper = new MimeMessageHelper(message, true);
+            helper.setFrom("nwchecker@gmail.com");
+            helper.setTo(email);
+            helper.setSubject("Login and password for NWCServer");
+            helper.setText("Your login information\n" + "Username: " + username + "\nPassword: " + password);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        javaMailSender.send(message);
     }
 }

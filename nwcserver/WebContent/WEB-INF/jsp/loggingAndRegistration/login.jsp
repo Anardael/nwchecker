@@ -47,37 +47,7 @@
 
     <div style="text-align: center">
         <p>or login as facebook user</p>
-        <fb:login-button scope="public_profile,email" data-auto-logout-link="true" onlogin="checkLoginState();">
-        </fb:login-button>
-        <div id="status" >
-            <span id="status-name"></span>
-            <span id="status-email"></span>
-        </div>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" />
     </div>
-
-
-
-
-    <div id="facebookModal" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-info">
-                    <div id="title-block">
-                    </div>
-                </div>
-                <div id="mdl-body" class="modal-body" style="height: 400px; width: 600px">
-                    <div id="alert-block">
-                        <span id="alert"></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-info" onclick="goHome()">
-                        OK
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>
