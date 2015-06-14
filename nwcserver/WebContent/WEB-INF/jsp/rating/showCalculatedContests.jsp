@@ -7,6 +7,10 @@
 
 <html>
 <script type="text/javascript">
+    var statusCaptionArchive = "<spring:message code="listContests.status.archive" />";
+    var statusCaptionGoing = "<spring:message code="listContests.status.going" />";
+    var statusCaptionPreparing = "<spring:message code="listContests.status.preparing" />";
+    var statusCaptionRelease = "<spring:message code="listContests.status.release" />";
 	$(document).ready(
 			function() {
 				$('#ratingContest').on('click-row.bs.table',
