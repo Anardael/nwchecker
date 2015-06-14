@@ -94,14 +94,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasUsername(String username) {
 		return !getHibernateTemplate().find(
 				"from User user where user.username = ?", username).isEmpty();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean hasEmail(String email) {
 		return !getHibernateTemplate().find(
@@ -145,6 +143,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return filterCriterion;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getPagedUsers(int startIndex,
 			int pageSize, String sortingColumn, String sortingOrder, String filter) {
@@ -172,6 +171,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<User> getPagedUsers(int startIndex, int pageSize) {

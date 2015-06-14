@@ -77,6 +77,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 				getHibernateTemplate().get(TaskData.class, id));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Task> getTasksByContestStatus(Status status) {
 		List<Task> result = (List<Task>) getHibernateTemplate().find(
@@ -84,6 +85,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
@@ -113,6 +115,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,

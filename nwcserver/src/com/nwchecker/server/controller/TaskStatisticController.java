@@ -1,8 +1,5 @@
 package com.nwchecker.server.controller;
 
-import java.security.Principal;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,19 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.service.TaskPassService;
 import com.nwchecker.server.service.TaskService;
 
-import java.util.TreeMap;
-
-import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.json.JTableResponseList;
 import com.nwchecker.server.json.JsonViews;
-import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.Task;
 
 @Controller
 public class TaskStatisticController {

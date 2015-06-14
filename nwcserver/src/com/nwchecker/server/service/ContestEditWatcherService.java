@@ -1,8 +1,5 @@
 package com.nwchecker.server.service;
 
-import org.springframework.web.context.request.async.DeferredResult;
-
-import java.util.Map;
 
 /**
  * <h1>Contest Edit Watcher Service</h1>

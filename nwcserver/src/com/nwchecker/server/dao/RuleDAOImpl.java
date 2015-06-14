@@ -2,6 +2,7 @@ package com.nwchecker.server.dao;
 
 
 import com.nwchecker.server.model.Rule;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,8 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
         getHibernateTemplate().delete(getHibernateTemplate().load(Rule.class, id));
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional
     public List<Rule> getRulesByLanguageTag(String tag) {
         return (List<Rule>) getHibernateTemplate().find("select r from Rule as r" +
@@ -62,10 +64,10 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
         session.close();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional
     public List<Rule> getAllRules() {
-        //@SuppressWarnings("unchecked")    //TODO
         List<Rule> result = (List<Rule>) getHibernateTemplate().find("from Rule");
         return result;
     }

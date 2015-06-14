@@ -5,11 +5,9 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.ContestService;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,6 @@ public class ContestServiceImplTest {
     private ContestService contestService;
 
     private List<Contest> contestList = new LinkedList<Contest>();
-    private List<User> userList = new LinkedList<User>();
 
     @Before
     public void init() {

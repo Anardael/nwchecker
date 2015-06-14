@@ -4,7 +4,6 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.ContestService;
 import com.nwchecker.server.service.ScoreCalculationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

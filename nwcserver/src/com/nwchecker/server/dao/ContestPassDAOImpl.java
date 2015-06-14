@@ -32,19 +32,22 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
         session.update(contestPass);        		
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional
     public List<ContestPass> getContestPasses(int contestId) {
         return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=?", contestId);
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional
 	public List<ContestPass> getValidContestPasses(int contestId) {
     	 return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=? and rank > 0", contestId);
 	}
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     @Transactional
     public ContestPass getContestPassByUserIdAndContestId(int userId, int contestId){
         return ((List<ContestPass>) getHibernateTemplate()

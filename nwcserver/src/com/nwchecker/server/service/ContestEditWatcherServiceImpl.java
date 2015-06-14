@@ -1,6 +1,5 @@
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.listener.HttpSessionListenerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

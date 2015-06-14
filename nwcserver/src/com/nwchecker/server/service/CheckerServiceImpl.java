@@ -11,9 +11,6 @@ import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse;
 import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse.AtomicResponse;
 
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

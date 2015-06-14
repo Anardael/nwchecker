@@ -5,12 +5,10 @@ import com.nwchecker.server.json.ErrorMessage;
 import com.nwchecker.server.json.ValidationResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
-import org.springframework.web.util.NestedServletException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

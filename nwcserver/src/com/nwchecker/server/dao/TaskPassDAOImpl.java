@@ -26,6 +26,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		setSessionFactory(sessionFactory);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskIdSorted(int id,
@@ -44,6 +45,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return (List<TaskPass>) query.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
@@ -74,6 +76,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,

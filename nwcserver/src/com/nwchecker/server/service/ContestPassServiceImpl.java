@@ -38,6 +38,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 		contestPassDAO.updateContestPass(contestPass);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public Map<String, Object> checkTask(ContestPass contestPass,

@@ -1,7 +1,6 @@
 package com.nwchecker.server.service;
 
 
-import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public List<ContestPass> getJsonListForContestPassByContestId(int contestId) {
+    	LOG.info("Retrieved list of contests");
         List<ContestPass> contestPasses = contestPassService.getValidContestPasses(contestId);        
         return contestPasses;
     }
