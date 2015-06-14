@@ -8,7 +8,7 @@
 	<c:url var="news" value="/news.do" />
 
     <p><spring:message code="news.contests" /></p>
-    <div class="block-center">
+    <div class="block-left">
         <c:choose>
             <c:when test="${empty contest}">
                 <spring:message code="news.contest.noContest" />
@@ -24,9 +24,10 @@
     </div>
 
     <br>
+	
 
     <p><spring:message code="news.result" /></p>
-    <div id="title">${title}</div>
+    <div id="title" style="font-size: 15px; font-weight: normal">${title}</div>
     <c:url var="dataUrl" value="/resultsList.do?id=${contestId}" />
 
     <table id="competitorsList" class="table" data-classes="table" data-toggle="table"

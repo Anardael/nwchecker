@@ -99,7 +99,7 @@ public class ProfileController {
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String doUpdateProfile(@ModelAttribute("userProfile") @Validated User user, BindingResult result,
-								  Principal principal, Model model) {
+								  Principal principal, Model model, HttpServletRequest request) {
         LOG.info("\"" + principal.getName() + "\" trying update profile.");
 		String username = principal.getName(); // get logged in username
 		User loggedUser = userService.getUserByUsername(username);
@@ -114,6 +114,7 @@ public class ProfileController {
 			loggedUser.setInfo(user.getInfo());
 			userService.updateUser(loggedUser);
 			model.addAttribute("userUpdated", "true");
+            request.getSession().setAttribute("nickname", user.getDisplayName());
             LOG.info("\"" + principal.getName() + "\" updated his profile.");
 			return "nwcserver.user.profile";
 		}

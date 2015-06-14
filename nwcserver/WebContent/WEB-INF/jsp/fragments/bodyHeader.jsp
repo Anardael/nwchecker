@@ -22,15 +22,13 @@
 						<li class="active"><a><spring:message code="home.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="index.do"><spring:message
-									code="home.caption" /></a></li>
+						<li><a href="index.do"><spring:message code="home.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- news -->
 				<c:choose>
 					<c:when test="${pageName=='news'}">
-						<li class="active"><a href="news.do"><spring:message
-									code="news.caption" /></a></li>
+						<li class="active"><a href="news.do"><spring:message code="news.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="news.do"><spring:message code="news.caption" /></a></li>
@@ -39,56 +37,46 @@
 				<!-- olympiad -->
 				<c:choose>
 					<c:when test="${pageName=='contest'}">
-						<li class="active"><a><spring:message
-									code="contest.caption" /></a></li>
+						<li class="active"><a><spring:message code="contest.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="getContests.do"><spring:message
-									code="contest.caption" /></a></li>
+						<li><a href="getContests.do"><spring:message code="contest.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- rating -->
 				<c:choose>
 					<c:when test="${pageName=='rating'}">
-						<li class="active"><a><spring:message
-									code="rating.caption" /></a></li>
+						<li class="active"><a><spring:message code="rating.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="rating.do"><spring:message
-									code="rating.caption" /></a></li>
+						<li><a href="rating.do"><spring:message code="rating.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- rules -->
 				<c:choose>
 					<c:when test="${pageName=='rules'}">
-						<li class="active"><a href="rules.do"><spring:message
-									code="home.rules.caption" /></a></li>
+						<li class="active"><a href="rules.do"><spring:message code="home.rules.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="rules.do"><spring:message
-									code="home.rules.caption" /></a></li>
+						<li><a href="rules.do"><spring:message code="home.rules.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- archive -->
 				<c:choose>
 					<c:when test="${pageName=='archive'}">
-						<li class="active"><a><spring:message
-									code="home.archive.caption" /></a></li>
+						<li class="active"><a><spring:message code="home.archive.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="etiam.do"><spring:message
-									code="home.archive.caption" /></a></li>
+						<li><a href="etiam.do"><spring:message code="home.archive.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!--    contacts   -->
 				<c:choose>
 					<c:when test="${pageName=='contacts'}">
-						<li class="active"><a><spring:message
-								code="home.contacts.caption" /></a></li>
+						<li class="active"><a><spring:message code="home.contacts.caption" /></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="contacts.do"><spring:message
-								code="home.contacts.caption" /></a></li>
+						<li><a href="contacts.do"><spring:message code="home.contacts.caption" /></a></li>
 					</c:otherwise>
 				</c:choose>
 				<!-- login -->
@@ -97,38 +85,30 @@
 				<security:authorize access="!isAuthenticated()">
 					<c:choose>
 						<c:when test="${pageName=='login'}">
-							<li class="active"><a><spring:message
-										code="login.caption" /></a></li>
+							<li class="active"><a><spring:message code="login.caption" /></a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="login.do"><spring:message
-										code="login.caption" /></a></li>
+							<li><a href="login.do"><spring:message code="login.caption" /></a></li>
 						</c:otherwise>
 					</c:choose>
 				</security:authorize>
 				<!-- logout/profile -->
 				<security:authorize access="isAuthenticated()">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button"> <security:authentication
-								property="principal.username" /> <span class="caret"></span>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                        <%--<security:authentication property="principal.username" />--%>
+                        <c:out value="${sessionScope.nickname}"/>
+                        <span class="caret"></span>
 					</a>
-						<ul class="dropdown-menu multi-level" role="menu"
-							aria-labelledby="dropdownMenu">
+						<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-
-								<li><a href="admin.do"><spring:message
-											code="adminPanel.users.caption" /></a></li>
-								<li><a href="userRequests.do"><spring:message
-											code="userRequests.caption" /></a></li>
-								<li><a href="listContests.do"><spring:message
-											code="listContests.caption" /></a></li>
+								<li><a href="admin.do"><spring:message code="adminPanel.users.caption" /></a></li>
+								<li><a href="userRequests.do"><spring:message code="userRequests.caption" /></a></li>
+								<li><a href="listContests.do"><spring:message code="listContests.caption" /></a></li>
 								<li class="divider"></li>
 							</security:authorize>
-							<li><a href="profile.do"><spring:message
-										code="profile.caption" /></a></li>
+							<li><a href="profile.do"><spring:message code="profile.caption" /></a></li>
 							<li class="divider"></li>
-							<li><a href="logout.do"><spring:message
-										code="logout.caption" /></a></li>
+							<li><a href="logout.do"><spring:message code="logout.caption" /></a></li>
 						</ul></li>
 				</security:authorize>
 				<!-- localization -->
