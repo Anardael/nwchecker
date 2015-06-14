@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +65,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 			executionTime = nextExecuteContest.getStarts().getTime();
 			executionTime += nextExecuteContest.getDuration().getTime();
 			executionTime += TimeZone.getDefault().getOffset(System.currentTimeMillis());
+			if(System.getProperty("os.name").startsWith("Windows 7")){
+				executionTime -= 60*60*1000;
+			}
 			LOG.debug("Register stop contest action for contest id="
 					+ nextExecuteContest.getId());
 		}
