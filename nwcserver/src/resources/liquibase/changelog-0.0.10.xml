@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="10" author="Entro-yuhim">
+		<comment>
+            Update data in DB
+        </comment>
+		<sql>
+		INSERT INTO `taskdata` VALUES (1,'Content','Content',1,47);
+		INSERT INTO `taskdata` VALUES (2,'Content','Content',1,47);
+		INSERT INTO `taskdata` VALUES (3,'Content','Content',1,47);
+		INSERT INTO `taskdata` VALUES (4,'Content','Content',1,47);
+		INSERT INTO `taskdata` VALUES (5,'Content','Content',1,47);
+		INSERT INTO `taskdata` VALUES (6,'Content','Content',1,47);
+		                                                     
+		INSERT INTO `taskdata` VALUES (7,'Content','Content',1,48);
+		INSERT INTO `taskdata` VALUES (8,'Content','Content',1,48);
+		INSERT INTO `taskdata` VALUES (9,'Content','Content',1,48);
+		INSERT INTO `taskdata` VALUES (10,'Content','Content',1,48);
+		INSERT INTO `taskdata` VALUES (11,'Content','Content',1,48);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
