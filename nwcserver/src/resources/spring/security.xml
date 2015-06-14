@@ -23,9 +23,8 @@
         <intercept-url pattern="/getListOfContests**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/getContestStatus**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/setContestStatus**" access="hasRole('ROLE_ADMIN')" />
-        <form-login login-page="/login.do"
-                    authentication-failure-url="/login.do?error" 
-        />
+        <form-login login-page="/login.do" authentication-failure-url="/login.do?error"
+                    default-target-url="/loginSuccess.do" always-use-default-target="true"/>
         <logout logout-url="/logout.do" />
     </http>
 
@@ -35,8 +34,5 @@
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="userDetailsService"
-		class="com.nwchecker.server.service.UserDetailsServiceImpl">
-	</beans:bean>
-
+	<beans:bean id="userDetailsService" class="com.nwchecker.server.service.UserDetailsServiceImpl"/>
 </beans:beans>
