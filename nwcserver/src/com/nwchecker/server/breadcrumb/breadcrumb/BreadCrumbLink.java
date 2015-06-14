@@ -6,6 +6,10 @@ import java.util.List;
 
 public class BreadCrumbLink implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5383906276852578447L;
 	private BreadCrumbLink previous;
 	private List<BreadCrumbLink> next = new LinkedList<BreadCrumbLink>();
 	private String url;
