@@ -1,4 +1,4 @@
-function initializeCKEdior(textareaId, language) {
+function initializeCKEdior(textareaId, language) {	
 	var lang = 'en';
 	if (language == 'ua') {
 		lang = 'uk';
@@ -7,4 +7,5 @@ function initializeCKEdior(textareaId, language) {
 			{
 				language: lang
 			});
+	
 }

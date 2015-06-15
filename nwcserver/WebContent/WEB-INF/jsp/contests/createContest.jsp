@@ -16,6 +16,7 @@ label.btn-primary {
 	<script type="text/javascript">
     //variables for dynamically created Modal forms:
     //task successfully added modal:
+   	var isModified = false;
     var contestAccessDenied = "<spring:message code="contest.accessDenied" />";
     var errorLabel = "<spring:message code="error.caption" />";
     var uploadSize = "<spring:message code="task.wrongUploadSize" />";
@@ -93,7 +94,7 @@ label.btn-primary {
     jQuery(function ($) {
         // CKEditor initialization
         $('.ckEdit').each(function () {
-            initializeCKEdior($(this).attr('id'), '${pageContext.response.locale}');
+            initializeCKEdior($(this).attr('id'), '${pageContext.response.locale}');            
         });
     });
     $('body').on("click", "#showUserList", function () {
@@ -111,7 +112,7 @@ label.btn-primary {
         if ($('#id') != 0) {
             //contestLongPolling();
         }
-    });
+    });    
 </script>
 
 	<section>
@@ -154,7 +155,7 @@ label.btn-primary {
 
 					<div class="col-sm-3">
 						<div class='input-group date' id='datetimepicker1'>
-							<%-- --%>
+							<%-- Starts --%>
 							<form:input path="starts" type='text' class="form-control"
 								data-date-format="YYYY-MM-DD HH:mm" />
 							<span class="input-group-addon"><span

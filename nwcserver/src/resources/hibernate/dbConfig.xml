@@ -8,21 +8,21 @@
 
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- налаштування управління транзакцій з допомогою анотації @Transactional -->
+    <!-- Configuring transaction manager to use @Transactional annotation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
         
-    <!-- Менеджер транзакцій -->
+    <!-- Transaction manager -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <!-- Налаштування біна dataSource будем зберігати в окремому файлі -->
+    <!-- Configuring dataSource to use property file -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="classpath:\hibernate\jdbc.properties" />
     
-    <!-- Безпосередньо сам бін dataSource -->
+    <!-- DataSource bean -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="${jdbc.driverClassName}" 
@@ -30,7 +30,7 @@
           p:username="${jdbc.username}" 
           p:password="${jdbc.password}" />
     
-    <!-- Налаштування фабрики сесій Гібернейта-->
+    <!-- Hibernate's sessionfactory bean -->
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
