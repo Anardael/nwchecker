@@ -21,7 +21,7 @@ function setMask() {
     });
 }
 
-function submitContest() {
+function submitContest() {	
     sendJsonContest().success(function (data) {
         if (data['status'] == "FAIL") {
             if (data.errorMessageList[0].fieldName == "denied") {
@@ -36,6 +36,7 @@ function submitContest() {
         }
 
         if (data['status'] == "EMPTY_DATE") {
+        	CKEDITOR.instances.description.resetDirty();
             BootstrapDialog.show({
                 title: contestEmptyDateSuccess,
                 type: BootstrapDialog.TYPE_DANGER,
@@ -44,6 +45,7 @@ function submitContest() {
         }
 
         if (data['status'] == "SUCCESS") {
+        	CKEDITOR.instances.description.resetDirty();
             BootstrapDialog.show({
                 title: successCaption,
                 type: BootstrapDialog.TYPE_SUCCESS,

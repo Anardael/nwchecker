@@ -10,6 +10,7 @@ import com.nwchecker.server.utils.messages.CheckerMessageProto.CheckerMessage.Da
 import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse;
 import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse.AtomicResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,6 +23,8 @@ import java.util.Random;
 
 @Service(value = "CheckerService")
 public class CheckerServiceImpl implements CheckerService {
+	private static final Logger LOG = Logger
+			.getLogger(CheckerServiceImpl.class);
 	static final int PORT = 9999;
 
 	/*
@@ -90,14 +93,15 @@ public class CheckerServiceImpl implements CheckerService {
 	public CheckerResponse sendSolutionToChecker(CheckerMessage message) {
 		CheckerResponse checkerResponse;
 		try {
+			LOG.info("Attempting to send data to checker");
 			Socket socket = new Socket();
 			message.writeTo(socket.getOutputStream());
 			checkerResponse = CheckerResponse
 					.parseFrom(socket.getInputStream());
 			socket.close();
+			LOG.info("Data recieved successfully.");
 		} catch (IOException e) {
-			e.printStackTrace();
-
+			LOG.warn("Failed to connect to checker");
 			CheckerResponse.Builder responseBuilder = CheckerResponse
 					.newBuilder();
 			Random rd = new Random();

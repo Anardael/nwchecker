@@ -4,7 +4,7 @@ function tryToAddTask(locale) {
             if (data.status == "FAIL") {
                 contestAjaxFailed(errorCaption, emptyContest, data);
             }
-            if (data.status == "SUCCESS") {
+            if (data.status == "SUCCESS" || data.status == "EMPTY_DATE") {            	
                 $('#id').val(data.result);
                 createNewTask(locale);
                 //contestLongPolling();
