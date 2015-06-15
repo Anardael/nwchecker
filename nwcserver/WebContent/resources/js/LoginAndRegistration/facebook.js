@@ -23,8 +23,12 @@ function checkLoginState() {
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
-                console.log('Name: ' + response['name'] + '. ' + ' Email: ' + response['email']);
-                location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
+                if(response){
+                    location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
+                } else {
+                    console.log("NO RESPONSE!")
+                    checkLoginState();
+                }
             });
         }
     });
