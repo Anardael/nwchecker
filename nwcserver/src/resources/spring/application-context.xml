@@ -24,8 +24,6 @@
     <context:component-scan base-package="com.nwchecker.server.social" />
 	<beans:import resource="classpath:\hibernate\dbConfig.xml" />
 
-	<!-- schedule service refresh : <beans:bean id="ScheduleService" class="com.nwchecker.server.service.ScheduleServiceImpl" 
-		refresh-method="refresh"/> -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<beans:bean id="messageSource"

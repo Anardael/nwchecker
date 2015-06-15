@@ -17,7 +17,9 @@ import com.nwchecker.server.utils.PaginationWrapper;
 
 public interface TaskPassService {
 	PaginationWrapper<TaskPass> getPagedTaskPassJsonForTask(int taskId,
-			int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
+			int startIndex, int pageSize, String sortingColumn,
+			String sortingOrder, String filter);
+
 	/**
 	 * Get paginated solution records list for task
 	 * <p>
@@ -28,12 +30,16 @@ public interface TaskPassService {
 	 *            Start index of records for current page.
 	 * @param pageSize
 	 *            Count of maximum expected records.
-	 * @param sorting
-	 *            A string represents requested sorting.
-	 * @return List of Json-like objects ready for display
+	 * @param sortingColumn
+	 *            A string represents requested sorting column name.
+	 * @param sortingOrder
+	 *            A string that represents order in which the sorting is made
+	 *            (asc or desc)
+	 * @return List of solution records for task.
 	 */
-	public List<TaskPass> getPagedTaskPassesForTask(int taskId,
-			int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
+	public List<TaskPass> getPagedTaskPassesForTask(int taskId, int startIndex,
+			int pageSize, String sortingColumn, String sortingOrder,
+			String filter);
 
 	/**
 	 * Get number of solution for a certain task
@@ -55,11 +61,35 @@ public interface TaskPassService {
 	 * @return Number of successful TaskPasses
 	 */
 	Long getSuccessfulTaskPassEntryCount(int taskId);
-	
-	public List<TaskPassJson> getPagedTaskPassJson(int taskId,
-			int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
 
-    double getTaskSuccessRateById(int taskId);
-    
-    void delete(TaskPass taskPass);
+	/**
+	 * Get paginated solution records list for task
+	 * <p>
+	 * 
+	 * @param taskId
+	 *            Id of the task.
+	 * @param startIndex
+	 *            Start index of records for current page.
+	 * @param pageSize
+	 *            Count of maximum expected records.
+	 * @param sortingColumn
+	 *            A string represents requested sorting column name.
+	 * @param sortingOrder
+	 *            A string that represents order in which the sorting is made
+	 *            (asc or desc)
+	 * @return List of Json-like objects ready for display
+	 */
+	public List<TaskPassJson> getPagedTaskPassJson(int taskId, int startIndex,
+			int pageSize, String sortingColumn, String sortingOrder,
+			String filter);
+
+	/**
+	 * Return double value that represents success rate of user's submissions to
+	 * some task (all successful submissions divided by all submissions).
+	 * 
+	 * @param taskId
+	 *            Id of some task
+	 * @return Double value that represents success rate.
+	 */
+	double getTaskSuccessRateById(int taskId);
 }

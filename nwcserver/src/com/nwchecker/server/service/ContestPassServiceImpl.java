@@ -37,7 +37,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 	public void updateContestPass(ContestPass contestPass) {
 		contestPassDAO.updateContestPass(contestPass);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
@@ -58,7 +58,9 @@ public class ContestPassServiceImpl implements ContestPassService {
 			taskPass.setUser(user);
 			taskPass.setContestPass(contestPass);
 			taskPass.setTask(task);
-			taskPass.setPassed((boolean) checkResult.get("passed"));
+			if (contestPass.getContest().getTypeContest().isDynamic())
+				taskPass.setPassed((boolean) checkResult.get("passed"));
+			else taskPass.setPassed(true);
 			taskPass.setFile(userSolution);
 			taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
 			taskPass.setTestResults((List<TaskTestResult>) checkResult.remove("results"));		

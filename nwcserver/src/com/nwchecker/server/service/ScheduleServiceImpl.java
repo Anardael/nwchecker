@@ -88,7 +88,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public void finishContest(Contest contest) {
 		contest.setStatus(Contest.Status.ARCHIVE);
-		contest.setHidden(true);
 		contestDAO.updateContest(contest);
 		scoreCalculationService.calculateScore(contest.getId());
 		LOG.debug("Contest (id=" + contest.getId()

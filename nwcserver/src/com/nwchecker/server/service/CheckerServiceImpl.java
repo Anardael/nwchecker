@@ -11,6 +11,9 @@ import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse;
 import com.nwchecker.server.utils.messages.CheckerResponseProto.CheckerResponse.AtomicResponse;
 
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +24,13 @@ import java.util.Random;
 public class CheckerServiceImpl implements CheckerService {
 	static final int PORT = 9999;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.nwchecker.server.service.CheckerService#checkTask(com.nwchecker.server
+	 * .model.Task, int, byte[], com.nwchecker.server.model.TaskPass)
+	 */
 	@Override
 	public Map<String, Object> checkTask(Task task, int compilerId,
 			byte[] userSolution, TaskPass taskPass) {
@@ -69,17 +79,24 @@ public class CheckerServiceImpl implements CheckerService {
 		return response;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.nwchecker.server.service.CheckerService#sendSolutionToChecker(com
+	 * .nwchecker.server.utils.messages.CheckerMessageProto.CheckerMessage)
+	 */
 	@Override
 	public CheckerResponse sendSolutionToChecker(CheckerMessage message) {
 		CheckerResponse checkerResponse;
-	/*	try {
+		try {
 			Socket socket = new Socket();
 			message.writeTo(socket.getOutputStream());
 			checkerResponse = CheckerResponse
 					.parseFrom(socket.getInputStream());
 			socket.close();
 		} catch (IOException e) {
-			e.printStackTrace();*/
+			e.printStackTrace();
 
 			CheckerResponse.Builder responseBuilder = CheckerResponse
 					.newBuilder();
@@ -103,32 +120,8 @@ public class CheckerServiceImpl implements CheckerService {
 				responseBuilder.addTestData(atomicResponseBuilder.build());
 			}
 			checkerResponse = responseBuilder.build();
-		/*}*/
-
+		}
 		return checkerResponse;
 	}
 
 }
-/*
- * Message to checker: 1. Compiler(ID?) 2. User's solution file.(byte array) 3.
- * Verification script (String) 4. List of input&output data: 4.1. Input
- * data(byte array) 4.2. Output data(byte array)
- */
-
-/*
- * Message from checker: Results of user's program: list of data: 1. Data that
- * indicates user's success in passing the task(boolean, integer, double?) 2.
- * Execution time(int(long?), milliseconds) 3. Memory Used (int(long?), kb) 4.
- */
-
-/*
- * try { Socket connectionSocket = new Socket("127.0.0.1", PORT);
- * ObjectOutputStream dataOutput = new ObjectOutputStream(
- * connectionSocket.getOutputStream()); CheckerMessage message = new
- * CheckerMessage(); message.setCompilerId(1); dataOutput.writeObject(message);
- * ObjectInputStream dataInput = new ObjectInputStream(
- * connectionSocket.getInputStream()); CheckerResponse response =
- * (CheckerResponse) dataInput.readObject(); connectionSocket.close(); return
- * response.getResponse(); } catch (IOException e) { e.printStackTrace(); }
- * catch (ClassNotFoundException e) { e.printStackTrace(); }
- */

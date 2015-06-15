@@ -65,10 +65,6 @@ public class TaskPassServiceImpl implements TaskPassService {
         }
     }
 
-	@Override
-	public void delete(TaskPass taskPass) {
-		taskPassDAO.delete(taskPass);
-	}
 
 	@Override
 	public List<TaskPassJson> getPagedTaskPassJson(int taskId, int startIndex,
