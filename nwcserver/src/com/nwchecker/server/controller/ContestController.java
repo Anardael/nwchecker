@@ -72,9 +72,6 @@ public class ContestController {
     @Autowired
     private TypeContestService typeContestService;
 
-    @Autowired
-    private PageTrackingService pageTrackingService;
-
     /**
      * This mapped method used to return page with contests list
      * <p>
@@ -237,7 +234,7 @@ public class ContestController {
             return "nwcserver.contestIsEdited";
         }
 
-        contestEditWatcherService.addParameters(contestId, principal.getName());
+        contestEditWatcherService.add(contestId, principal.getName());
 
         model.addAttribute("contestModelForm", contestService.getContestByID(contestId));
         model.addAttribute("typeContestList", typeContestService.getAllTypeContest());

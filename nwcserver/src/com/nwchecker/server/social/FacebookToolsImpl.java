@@ -39,7 +39,7 @@ public class FacebookToolsImpl implements FacebookTools {
             User user = createUser(email, loginData.get("username"), loginData.get("password"), nickname);
             userDAO.addUser(user);
             addUserToSecurityContext(user.getUsername());
-            sendMessageToEmail(email, loginData.get("username"), loginData.get("password"));
+            facebookMailSender.sendMessage(email, loginData.get("username"), loginData.get("password"));
 
             return true;
         }
@@ -62,9 +62,5 @@ public class FacebookToolsImpl implements FacebookTools {
         user.addRole("ROLE_USER");
 
         return user;
-    }
-
-    private void sendMessageToEmail(String email, String username, String password){
-        facebookMailSender.sendMessageWithParameters(email, username, password);
     }
 }

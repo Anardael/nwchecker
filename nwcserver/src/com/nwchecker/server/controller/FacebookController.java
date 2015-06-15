@@ -17,10 +17,13 @@ public class FacebookController {
     FacebookTools facebookTools;
 
     @RequestMapping(value = "/loginFacebookUser", method = RequestMethod.GET)
-    public String loginFacebookUser(@RequestParam("nickname") String nickname,
-                                  @RequestParam("email") String email,
+    public String loginFacebookUser(@RequestParam(value = "nickname", required = false) String nickname,
+                                  @RequestParam(value = "email", required = false) String email,
                                   Model model,
                                   HttpServletRequest request){
+        if(email == null){
+            return "redirect:index.do";
+        }
         boolean isFirstLogin = facebookTools.loginFacebookUserByEmailAndNickname(email, nickname);
         if(isFirstLogin){
             model.addAttribute("nickname", nickname);

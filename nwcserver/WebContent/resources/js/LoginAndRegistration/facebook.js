@@ -18,16 +18,16 @@ window.fbAsyncInit = function() {
     });
 };
 
-function checkLoginState() {
+function login() {
     FB.logout();
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
-                if(response){
+                if(response['mail'] != null){
                     location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
                 } else {
-                    console.log("NO RESPONSE!")
-                    checkLoginState();
+                    console.log("NO RESPONSE!");
+                    $('connectionErrorModal').modal();
                 }
             });
         }

@@ -47,7 +47,28 @@
 
     <div style="text-align: center">
         <p>or login as facebook user</p>
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" />
+        <fb:login-button scope="public_profile,email" onlogin="login()" />
+    </div>
+
+    <div id="connectionErrorModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-danger">
+                    <span class="h4">Facebook connection error!</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="mdl-body" class="modal-body" >
+                    <div>Please, try login again.</div>
+                </div>
+                <div id="mdl-footer" class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" aria-label="Close">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

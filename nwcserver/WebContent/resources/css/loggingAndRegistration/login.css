@@ -9,3 +9,13 @@
 .error {
     color: #FF0000;
 }
+#connectionErrorModal{
+    text-align: center;
+}
+#mdl-body{
+    height: 100px;
+    width: 600px
+}
+#mdl-footer{
+    text-align: center;
+}
