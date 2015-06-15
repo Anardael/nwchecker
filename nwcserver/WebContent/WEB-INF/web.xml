@@ -62,6 +62,11 @@
     <filter-name>URLSessionFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!-- logging -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:\log4j.xml</param-value>
+    </context-param>
   <error-page>
     <error-code>404</error-code>
     <location>/pageNotFound.do</location>
