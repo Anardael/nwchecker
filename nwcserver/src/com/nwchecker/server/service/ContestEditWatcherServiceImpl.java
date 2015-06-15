@@ -1,5 +1,6 @@
 package com.nwchecker.server.service;
 
+import com.nwchecker.server.listener.HttpSessionListenerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,15 +37,11 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
         String lastUserView = pageTrackingService.getPathByUsername(lastEditorUsername);
         String userSessionId = pageTrackingService.getSessionByUsername(lastEditorUsername);
 
-        /*System.out.println("Map: ");
-        System.out.println(HttpSessionListenerImpl.getSessions());
-        System.out.println("UserSessionId: " + userSessionId);*/
-
         return (EDIT_VIEW_SET.contains(lastUserView)
+                && HttpSessionListenerImpl.sessionIsAliveById(userSessionId)
                 && lastEditedContestByUser.get(lastEditorUsername)!= null
                 && lastEditedContestByUser.get(lastEditorUsername)==contestId
                 && !lastEditorUsername.equals(currentUsername))
-                /*&& HttpSessionListenerImpl.sessionIsAliveById(userSessionId)*/
                 ? true : false;
     }
 
