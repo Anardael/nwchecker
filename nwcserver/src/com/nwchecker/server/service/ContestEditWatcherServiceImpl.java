@@ -34,7 +34,7 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     @Override
     public boolean checkContestIsEditedById(int contestId, String currentUsername){
         String lastEditorUsername = lastEditorInContest.get(contestId);
-        String lastUserView = pageTrackingService.getPathByUsername(lastEditorUsername);
+        String lastUserView = pageTrackingService.getViewByUsername(lastEditorUsername);
         String userSessionId = pageTrackingService.getSessionByUsername(lastEditorUsername);
 
         return (EDIT_VIEW_SET.contains(lastUserView)

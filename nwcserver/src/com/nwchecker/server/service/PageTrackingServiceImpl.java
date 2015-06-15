@@ -6,18 +6,18 @@ import java.util.*;
 
 @Service("PageTrackingService")
 public class PageTrackingServiceImpl implements PageTrackingService {
-    private static Map<String, String> trackerMap = new LinkedHashMap<>();
+    private static Map<String, String> viewMap = new LinkedHashMap<>();
     private static Map<String, String> sessionsMap = new HashMap<>();
 
     @Override
     public void addTrack(String username, String viewName, String sessionId) {
-        trackerMap.put(username, viewName);
+        viewMap.put(username, viewName);
         sessionsMap.put(username, sessionId);
     }
 
     @Override
-    public String getPathByUsername(String username){
-        return trackerMap.get(username);
+    public String getViewByUsername(String username){
+        return viewMap.get(username);
     }
 
     @Override

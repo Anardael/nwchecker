@@ -2,6 +2,7 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.listener.HttpSessionListenerImpl;
+import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 /**
@@ -67,11 +69,13 @@ public class LoginController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
     public String loginFacebookUser(Principal principal, HttpServletRequest request){
-        request.getSession().setAttribute("nickname",
-                userService.getUserByUsername(principal.getName()).getDisplayName());
-        System.out.println("Login session: " + request.getSession().getId());
-        HttpSessionListenerImpl.addSession(request.getSession().getId(), request.getSession());
+        User user = userService.getUserByUsername(principal.getName());
+        HttpSession session = request.getSession();
+
+        session.setAttribute("nickname", user.getDisplayName());
+        if(user.hasRole("ROLE_TEACHER")){
+            HttpSessionListenerImpl.addSession(session.getId(), session);
+        }
         return "nwcserver.static.index";
     }
-
 }
