@@ -19,26 +19,15 @@ window.fbAsyncInit = function() {
 };
 
 function checkLoginState() {
-    FB.logout(function(response) {});
+    FB.logout();
     FB.getLoginStatus(function(response) {
-        console.log(response);
-        statusChangeCallback(response);
+        if (response.status === 'connected') {
+            FB.api('/me', function(response) {
+                console.log('Name: ' + response['name'] + '. ' + ' Email: ' + response['email']);
+                location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
+            });
+        }
     });
 }
 
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback()');
-    console.log(response);
-    if (response.status === 'connected') {
-        testAPI();
-    }
-}
-
-function testAPI() {
-    console.log('testAPI()');
-    FB.api('/me', function(response) {
-        console.log('Name: ' + response.name + '. ' + ' Email: ' + response['email']);
-        location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
-    });
-}
 

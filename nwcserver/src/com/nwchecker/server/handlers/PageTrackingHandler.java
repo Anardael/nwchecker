@@ -8,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class PageTrackingHandler extends HandlerInterceptorAdapter {
     @Autowired
     private PageTrackingService pageTrackingService;
@@ -18,18 +17,8 @@ public class PageTrackingHandler extends HandlerInterceptorAdapter {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        /*System.out.println(request.getRemoteUser() + " "
-                + request.getServletPath() + " "
-                + request.getSession().getId() + " "
-                + request.getRequestedSessionId()
-                + "\n");*/
-        /*for (Cookie cookie : request.getCookies()) {
-            System.out.println(cookie.getName() + " -> " + cookie.getValue());
-        }*/
-
         if(request.isUserInRole("ROLE_TEACHER") && modelAndView != null){
-            //System.out.println(request.getRemoteUser() + " " + request.getRequestedSessionId() + " " + modelAndView.getViewName());
-            pageTrackingService.addTrack(request.getRemoteUser(), modelAndView.getViewName(), request.getRequestedSessionId());
+            pageTrackingService.addTrack(request.getRemoteUser(), modelAndView.getViewName(), request.getSession().getId());
         }
         super.postHandle(request, response, handler, modelAndView);
     }

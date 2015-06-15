@@ -95,7 +95,6 @@
 				<!-- logout/profile -->
 				<security:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                        <%--<security:authentication property="principal.username" />--%>
                         <c:out value="${sessionScope.nickname}"/>
                         <span class="caret"></span>
 					</a>
