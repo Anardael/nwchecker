@@ -44,7 +44,6 @@ public class ScheduleServiceImplTest {
     /**
      * Test of refresh method, of class ScheduleServiceImpl.
      */
-    @Ignore
     @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testRefresh() throws Exception {
