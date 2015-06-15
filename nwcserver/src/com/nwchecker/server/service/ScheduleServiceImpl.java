@@ -66,6 +66,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 			cal.setTime(nextExecuteContest.getDuration());
 			executionTime += nextExecuteContest.getDuration().getTime();
 			executionTime += cal.getTimeZone().getRawOffset(); 
+			if (System.getProperty("os.name").startsWith("Linux")){
+				executionTime += 60*60*1000;
+			}
 			LOG.debug("Register stop contest action for contest id="
 					+ nextExecuteContest.getId());
 		}
