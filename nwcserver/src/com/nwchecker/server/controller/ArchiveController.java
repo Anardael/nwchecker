@@ -50,8 +50,6 @@ public class ArchiveController {
 			@RequestParam(required = false, value = "order") String sortingOrder,
 			@RequestParam(required = false, value = "search") String filter) {
 		LOG.info("Successfully data for archive page");
-		System.out.println(taskService.getPagedTasksByContestStatus(Contest.Status.ARCHIVE, startIndex, pageSize,sortingColumn, sortingOrder, filter).size());
-		System.out.println(taskService.getRecordCount(Contest.Status.ARCHIVE, filter).intValue());
 		JTableResponseList jTableResponse = new JTableResponseList(
 				taskService.getPagedTasksByContestStatus(
 						Contest.Status.ARCHIVE, startIndex, pageSize,
