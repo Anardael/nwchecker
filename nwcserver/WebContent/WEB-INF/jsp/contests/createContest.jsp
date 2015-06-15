@@ -112,10 +112,7 @@ label.btn-primary {
         if ($('#id') != 0) {
             //contestLongPolling();
         }
-    });
-    $( window ).bind('beforeunload', function(){
-    	return "hello, world!";
-    });
+    });    
 </script>
 
 	<section>

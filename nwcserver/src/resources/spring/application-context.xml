@@ -16,7 +16,7 @@
 	<annotation-driven />
 	<task:scheduler id="scheduler" pool-size="10" />
 
-	<!-- пошук папок в яких будем шукати біни- компоненти -->
+	<!-- Declare folders where we will place our beans -->
 	<context:component-scan base-package="com.nwchecker.server.dao" />
 	<context:component-scan base-package="com.nwchecker.server.service" />
 	<context:component-scan base-package="com.nwchecker.server.validators" />
