@@ -1,19 +1,17 @@
 package com.nwchecker.server.service;
 
-import com.nwchecker.server.handlers.PageTracking;
 import com.nwchecker.server.listener.HttpSessionListenerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
+
 
 @Service(value = "ContestEditWatcher")
 public class ContestEditWatcherServiceImpl implements ContestEditWatcherService {
-    private static Map<Integer, String> lastEditorInContest = new ConcurrentHashMap<>();
-    private static Map<String, Integer> lastEditedContestByUser = new ConcurrentHashMap<>();
+    private final static long TIME_OUT_MINUTES = 2;
+    private static Map<Integer, String> lastEditorInContest = Collections.synchronizedMap(new HashMap<Integer, String>());
+    private static Map<String, Integer> lastEditedContestByUser = Collections.synchronizedMap(new HashMap<String, Integer>());
 
     private final static Set<String> EDIT_VIEW_SET = new HashSet<>();
 
@@ -24,7 +22,7 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
     }
 
     @Autowired
-    private PageTracking pageTracking;
+    private PageTrackingService pageTracking;
 
     @Override
     public void add(int contestId, String username){
@@ -42,7 +40,8 @@ public class ContestEditWatcherServiceImpl implements ContestEditWatcherService 
                 && HttpSessionListenerImpl.sessionIsAliveById(userSessionId)
                 && lastEditedContestByUser.get(lastEditorUsername)!= null
                 && lastEditedContestByUser.get(lastEditorUsername)==contestId
-                && !lastEditorUsername.equals(currentUsername))
+                && !lastEditorUsername.equals(currentUsername)
+                && HttpSessionListenerImpl.checkSessionActivityByMinutes(userSessionId, TIME_OUT_MINUTES))
                 ? true : false;
     }
 

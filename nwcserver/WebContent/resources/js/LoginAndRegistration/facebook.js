@@ -19,11 +19,11 @@ window.fbAsyncInit = function() {
 };
 
 function login() {
-    FB.logout();
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
-                if(response['mail'] != null){
+                console.log("email=" + response['email']);
+                if(response['email'] != null){
                     location.href = 'loginFacebookUser.do?email=' + response['email'] + '&nickname=' + response['name'];
                 } else {
                     console.log("NO RESPONSE!");
@@ -32,6 +32,6 @@ function login() {
             });
         }
     });
+    FB.logout();
 }
-
 

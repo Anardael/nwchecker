@@ -50,7 +50,7 @@
         <fb:login-button scope="public_profile,email" onlogin="login()" />
     </div>
 
-    <div id="connectionErrorModal" class="modal" tabindex="-1">
+    <div id="connectionErrorModal" class="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-danger">
