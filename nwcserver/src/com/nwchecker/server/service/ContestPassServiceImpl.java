@@ -37,13 +37,14 @@ public class ContestPassServiceImpl implements ContestPassService {
 	public void updateContestPass(ContestPass contestPass) {
 		contestPassDAO.updateContestPass(contestPass);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public Map<String, Object> checkTask(ContestPass contestPass,
-			Task task, int compilerId, byte[] userSolution, User user) {
-		if ((contestPass == null)&&(task.getContest().getStatus() != Contest.Status.ARCHIVE)){
+	public Map<String, Object> checkTask(ContestPass contestPass, Task task,
+			int compilerId, byte[] userSolution, User user) {
+		if ((contestPass == null)
+				&& (task.getContest().getStatus() != Contest.Status.ARCHIVE)) {
 			HashMap<String, Object> response = new HashMap<String, Object>();
 			response.put("accessDenied", true);
 			return response;
@@ -53,26 +54,25 @@ public class ContestPassServiceImpl implements ContestPassService {
 		TaskPass taskPass = new TaskPass();
 		Map<String, Object> checkResult = checkerService.checkTask(task,
 				compilerId, userSolution, taskPass);
-		
-		if (task.getContest().getStatus() == Contest.Status.GOING) {			
+
+		if (task.getContest().getStatus() == Contest.Status.GOING) {
 			taskPass.setUser(user);
 			taskPass.setContestPass(contestPass);
 			taskPass.setTask(task);
-			if (contestPass.getContest().getTypeContest().isDynamic())
-				taskPass.setPassed((boolean) checkResult.get("passed"));
-			else taskPass.setPassed(true);
+			taskPass.setPassed((boolean) checkResult.get("passed"));
 			taskPass.setFile(userSolution);
 			taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
-			taskPass.setTestResults((List<TaskTestResult>) checkResult.remove("results"));		
+			taskPass.setTestResults((List<TaskTestResult>) checkResult
+					.remove("results"));
 			// get passed minute:
 			long millis = System.currentTimeMillis()
 					- taskPass.getTask().getContest().getStarts().getTime();
 			long minute = millis / 1000 / 60;
 			taskPass.setPassedMinute((int) minute);
 			addTaskPass(contestPass, taskPass, task);
-			updateContestPass(contestPass);			
+			updateContestPass(contestPass);
 		}
-		if (task.getContest().getTypeContest().isDynamic()){
+		if (task.getContest().getTypeContest().isDynamic()) {
 			scoreCalculationService.calculateScore(task.getContest().getId());
 		}
 		return checkResult;
@@ -110,6 +110,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 	public List<ContestPass> getContestPasses(int contestId) {
 		return contestPassDAO.getContestPasses(contestId);
 	}
+
 	@Override
 	public List<ContestPass> getValidContestPasses(int contestId) {
 		return contestPassDAO.getValidContestPasses(contestId);
@@ -127,7 +128,10 @@ public class ContestPassServiceImpl implements ContestPassService {
 
 			for (TaskPass taskPass : contestPass.getTaskPassList()) {
 				int taskId = taskPass.getTask().getId();
-				boolean isPassed = taskPass.isPassed();
+				boolean isPassed = true;
+				if (contest.getTypeContest().isDynamic()) {
+					isPassed = taskPass.isPassed();
+				}
 				// if ((not contains) or (new result success))
 				if (!taskResults.containsKey(taskId)
 						|| (!taskResults.get(taskId) && isPassed)) {
@@ -157,5 +161,4 @@ public class ContestPassServiceImpl implements ContestPassService {
 		return false;
 	}
 
-	
 }

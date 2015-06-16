@@ -103,16 +103,34 @@ public interface TaskDAO {
 	 * 
 	 * @param status
 	 *            Status of the contests
-	 * @param pageSize
-	 *            Count of maximum expected records.
 	 * @param startIndex
 	 *            Start index of records for current page.
+	 * @param pageSize
+	 *            Count of maximum expected records.
+	 * @param sortingColumn
+	 *            A string represents requested sorting column name.
+	 * @param sortingOrder
+	 *            A string that represents order in which the sorting is made
+	 *            (asc or desc)
+	 * @param filter
+	 *            String that represents search/filter for Task.
 	 * @return List of tasks
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int startIndex, int pageSize, String sortingColumn,
 			String sortingOrder, String filter);
 
+	/**
+	 * Get paged list of tasks that belong to all contests with certain status
+	 * 
+	 * @param status
+	 *            Status of the contests
+	 * @param pageSize
+	 *            Count of maximum expected records.
+	 * @param startIndex
+	 *            Start index of records for current page.
+	 * @return List of tasks
+	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int pageSize, int startIndex);
 
@@ -121,6 +139,8 @@ public interface TaskDAO {
 	 * 
 	 * @param status
 	 *            Status of the contests
+	 * @param filter
+	 *            String that represents search/filter for Task.
 	 * @return Number of tasks
 	 */
 	Long getRecordCountByContestStatus(Contest.Status status, String filter);

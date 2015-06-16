@@ -5,17 +5,62 @@ import com.nwchecker.server.model.Rule;
 import java.util.List;
 
 public interface RuleDAO {
-    void createRule(Rule rule);
+	/**
+	 * Add Rule to the database.
+	 * 
+	 * @param rule
+	 *            Rule to be added to the database.
+	 */
+	void createRule(Rule rule);
 
-    Rule readRuleById(int id);
+	/**
+	 * Returns Rule form the database based on it's ID.
+	 * 
+	 * @param id
+	 *            ID of the rule
+	 * @return Rule object from database.
+	 */
+	Rule readRuleById(int id);
 
-    void updateRule(Rule rule);
+	/**
+	 * Update Rule object in database.
+	 * 
+	 * @param rule
+	 *            Rule to be updated.
+	 */
+	void updateRule(Rule rule);
 
-    void deleteRuleById(int id);
+	/**
+	 * Remove Rule entry in the database.
+	 * 
+	 * @param id
+	 *            ID of the Rule.
+	 */
+	void deleteRuleById(int id);
 
-    List<Rule> getRulesByLanguageTag(String tag);
+	/**
+	 * Returns all rules from database based on their language tag.
+	 * 
+	 * @param tag
+	 *            Language tag.
+	 * @return List of rules that have certain language.
+	 */
+	List<Rule> getRulesByLanguageTag(String tag);
 
-    void updateRuleContentById(int id, String content);
+	/**
+	 * Updates Rule's content in the database based on it's ID.
+	 * 
+	 * @param id
+	 *            ID of the rule.
+	 * @param content
+	 *            Content to be updated.
+	 */
+	void updateRuleContentById(int id, String content);
 
-    List<Rule> getAllRules();
+	/**
+	 * Return all Rule objects from database.
+	 * 
+	 * @return List of Rule objects from database.
+	 */
+	List<Rule> getAllRules();
 }

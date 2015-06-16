@@ -137,12 +137,37 @@ public interface UserDAO {
 	 * @return List of Users that have requests
 	 */
 	public List<User> getUsersWithRequests();
+	/**
+	 * Returns list of Users from database.
+	 * @param startIndex
+	 *            Start index of records for this page.
+	 * @param pageSize
+	 *            Size of the page.
+	 * @param sortingColumn
+	 *            A string represents requested sorting column name.
+	 * @param sortingOrder
+	 *            A string that represents order in which the sorting is made
+	 *            (asc or desc)
+	 * @param filter
+	 *            String that represents search/filter for User.
+	 * @return List of Users.
+	 */
 	
 	public List<User> getPagedUsers(int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter);
+	/**
+	 * Returns list of Users from database.
+	 * @param startIndex
+	 *            Start index of records for this page.
+	 * @param pageSize
+	 *            Size of the page.
+	 * @return List of Users.
+	 */
 	public List<User> getPagedUsers(int startIndex, int pageSize);
-	
+	/**
+	 * Return count of Users that fit the filter criteria.
+	 * @param filter
+	 *            String that represents search/filter for TaskPass.
+	 * @return Count of Users.
+	 */
 	public Long getRecordCount(String filter);
-
-//	public User getUserByUsernameOrEmail(String username);
-
 }

@@ -5,13 +5,45 @@ import com.nwchecker.server.model.Language;
 import java.util.List;
 
 public interface LanguageDAO {
-    void createLanguage(Language language);
+	/**
+	 * Add new Language to the database.
+	 * 
+	 * @param language
+	 *            Language to be inserted.
+	 */
+	void createLanguage(Language language);
 
-    Language readLanguageById(int id);
+	/**
+	 * Returns Language from database based on it's ID.
+	 * 
+	 * @param id
+	 *            ID of the language.
+	 * @return Language object from database.
+	 */
+	Language readLanguageById(int id);
 
-    void updateLanguage(Language language);
+	/**
+	 * Update Language entry in the database.
+	 * 
+	 * @param language
+	 *            Language that will be updated in the database.
+	 */
 
-    void deleteLanguageById(int id);
+	void updateLanguage(Language language);
 
-    List<Language> getAllLanguages();
+	/**
+	 * Removes Language entry from the database.
+	 * 
+	 * @param id
+	 *            ID of Language to be removed.
+	 */
+	void deleteLanguageById(int id);
+
+	/**
+	 * Returns all Languages from the database.
+	 * 
+	 * @return List of Languages from database.
+	 */
+
+	List<Language> getAllLanguages();
 }

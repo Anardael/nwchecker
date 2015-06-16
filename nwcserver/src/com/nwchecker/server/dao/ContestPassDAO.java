@@ -38,7 +38,12 @@ public interface ContestPassDAO {
      * @return List of passed contests for specific Contest
      */
     List<ContestPass> getContestPasses(int contestId);
-    
+    /**
+     * Returns list of ContestPasses for specific contest that have been ranked.
+     *  
+     * @param contestId ID of specific Contest
+     * @return List of ContestPasses for specific Contest
+     */
     List<ContestPass> getValidContestPasses(int contestId);
 
     ContestPass getContestPassByUserIdAndContestId(int userId, int contestId);

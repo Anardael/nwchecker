@@ -10,7 +10,7 @@ var ALL_COMPLETE_MESSAGE;
 var UPLOAD_FILE;
 
 function disableDangerousOptions() {
-    document.getElementsByClassName('ladda-button')[0].disabled = CURRENT_TASK_SUCCESS;
+    document.getElementsByClassName('ladda-button')[0].disabled = CURRENT_TASK_SUCCESS&&(DYNAMIC.toLowerCase() == 'true');
 }
 
 function allTasksComplete() {

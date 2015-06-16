@@ -85,14 +85,14 @@ function showSubmitResult(result) {
 		return;
 	}
 	var message = RESULT_SUCCESSFUL +' <b>' + result['successful'] + '</b><br/>' + RESULT_TOTAL + ' <b>'+ result['total']+'</b>';
-	if (DYNAMIC){
-	if (result['passed']) {
-		showResultSuccess(message);
-	} else {		
-		showResultFail(message);
-	}
+	if (DYNAMIC.toLowerCase() == "true"){
+		if (result['passed']) {
+			showResultSuccess(message);
+		} else {		
+			showResultFail(message);
+		}
 	} else {
-		showResultsSuccess(DYNAMIC_MESSAGE);
+		showResultSuccess(DYNAMIC_MESSAGE);
 	}
 }
 

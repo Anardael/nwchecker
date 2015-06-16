@@ -22,6 +22,12 @@ public interface CompilerDAO {
      * @return List of compilers
      */
     public List<Compiler> getAllCompilers();
+    /**
+     * Returns compiler by it's ID
+     * 
+     * @param id ID of the compiler.
+     * @return Compiler object.
+     */
     
     public Compiler getCompilerById(int id);
 
