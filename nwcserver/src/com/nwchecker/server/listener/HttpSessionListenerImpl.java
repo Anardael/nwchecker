@@ -3,7 +3,6 @@ package com.nwchecker.server.listener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.time.*;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,9 +30,9 @@ public class HttpSessionListenerImpl implements HttpSessionListener{
             return false;
         }
         HttpSession session = sessions.get(sessionId);
-        long MinutesToLastActivity = Duration.ofMillis(new Date().getTime() - session.getLastAccessedTime()).toMinutes();
+        long minutesToLastActivity = new Date().getTime() - session.getLastAccessedTime();
 
-        if(MinutesToLastActivity < timeOutMinutes){
+        if(minutesToLastActivity < timeOutMinutes * 60 * 1000){
             return true;
         } else {
             session.invalidate();
