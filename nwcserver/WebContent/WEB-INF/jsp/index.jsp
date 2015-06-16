@@ -29,18 +29,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-info">
-                    <span id="title-text" class="h4">You logged like </span>
+                    <span id="title-text" class="h4"><spring:message code="index.content.modalTitle" /> </span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div id="mdl-body" class="modal-body" >
-                    <div id="alert">, we send your login and password on </div>
-                    <div>You can login with your account or through Facebook.</div>
+                    <div id="alert"><spring:message code="index.content.modalBody1" /> </div>
+                    <div><spring:message code="index.content.modalBody2" /></div>
                 </div>
                 <div id="mdl-footer" class="modal-footer">
                     <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" aria-label="Close">
-                        OK
+                        <spring:message code="index.content.ok" />
                     </button>
                 </div>
             </div>
