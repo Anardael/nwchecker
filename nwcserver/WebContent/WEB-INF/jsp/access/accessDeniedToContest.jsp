@@ -8,13 +8,13 @@
 <html>
 <div class="text-center">
     <h1>
-        Access denied
+        <spring:message	code="contest.access.denied.message" />
     </h1>
     <h3>
-        You have not access for this contest!
+        <spring:message	code="contest.access.denied.page" />
     </h3>
     <button class="btn btn-primary back-btn" onclick="goToContests()">
-        To contests
+        <spring:message	code="contest.access.denied.backPage" />
     </button>
 </div>
 </html>
