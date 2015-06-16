@@ -4,7 +4,6 @@ import com.nwchecker.server.dao.TaskDAO;
 import com.nwchecker.server.model.Contest.Status;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,16 +79,6 @@ public class TaskServiceImpl implements TaskService {
 			String sortingOrder, String filter) {
 		return taskDao.getPagedTasksByContestStatus(status, startIndex, pageSize, sortingColumn, sortingOrder, filter);
 		
-	}
-
-	@Override
-	public PaginationWrapper<Task> getTaskWrapperForPagination(Status status,
-			int startIndex, int pageSize, String sortingColumn,
-			String sortingOrder, String filter) {
-		PaginationWrapper<Task> paginatedWrappedTasks = new PaginationWrapper<Task>();
-		paginatedWrappedTasks.setDataList(getPagedTasksByContestStatus(status, startIndex, pageSize, sortingColumn, sortingOrder, filter));
-		paginatedWrappedTasks.setRecordCount(getRecordCount(status, filter));
-		return paginatedWrappedTasks;
 	}
 
 	@Override

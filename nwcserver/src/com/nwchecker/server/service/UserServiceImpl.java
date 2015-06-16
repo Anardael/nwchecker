@@ -4,7 +4,6 @@ import com.nwchecker.server.dao.UserDAO;
 import com.nwchecker.server.model.Role;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -98,17 +97,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Long getRecordCount(String filter) {
 		return userDAO.getRecordCount(filter);
-	}
-
-	@Override
-	public PaginationWrapper<User> getUsersForPagination(int startIndex,
-			int pageSize, String sortingColumn, String sortingOrder,
-			String filter) {
-		PaginationWrapper<User> response = new PaginationWrapper<User>();
-		List<User> userList = getPagedUsers(startIndex, pageSize,
-				sortingColumn, sortingOrder, filter);
-		response.setDataList(userList);
-		response.setRecordCount(getRecordCount(filter));
-		return response;
 	}
 }

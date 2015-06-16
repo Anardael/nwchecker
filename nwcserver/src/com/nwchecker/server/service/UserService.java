@@ -2,7 +2,6 @@ package com.nwchecker.server.service;
 
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
 
@@ -117,26 +116,6 @@ public interface UserService {
 	 * @return Total number of Users that fit the criteria.
 	 */
 	public Long getRecordCount(String filter);
-
-	/**
-	 * Users wrapped for pagination.
-	 * 
-	 * @param startIndex
-	 *            Index of the first element returned.
-	 * @param pageSize
-	 *            Number of records requested.
-	 * @param sortingColumn
-	 *            Name of the column for sorting.
-	 * @param sortingOrder
-	 *            Order of sorting(asc or desc).
-	 * @param filter
-	 *            String that represents search query.
-	 * @return A wrapper that contains a list of Users and total number of
-	 *         records that fit filter criteria.
-	 */
-	public PaginationWrapper<User> getUsersForPagination(int startIndex,
-			int pageSize, String sortingColumn, String sortingOrder,
-			String filter);
 
 	/**
 	 * Return all Users that have specific Role.

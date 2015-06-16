@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.nwchecker.server.dao.TaskPassDAO;
 import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 @Service
 public class TaskPassServiceImpl implements TaskPassService {
@@ -41,18 +40,6 @@ public class TaskPassServiceImpl implements TaskPassService {
 		return taskPassDAO.getSuccessfulTaskPassEntryCount(taskId);
 	}
 
-	@Override
-	public PaginationWrapper<TaskPass> getPagedTaskPassJsonForTask(
-			int taskId, int startIndex, int pageSize, String sortingColumn, String sortingOrder, String filter) {
-		List<TaskPass> taskPasses = getPagedTaskPassesForTask(taskId,
-				startIndex, pageSize, sortingColumn, sortingOrder, filter);
-		PaginationWrapper<TaskPass> paginatedTaskPass = new PaginationWrapper<TaskPass>();
-		paginatedTaskPass.setDataList(taskPasses);
-		paginatedTaskPass.setRecordCount(getTaskPassEntryCount(taskId, filter));
-		LOG.debug("Successfully created page of task results for " + taskId
-				+ " ordered by " + sortingColumn + " " + sortingOrder);
-		return paginatedTaskPass;
-	}
 
     @Override
     public double getTaskSuccessRateById(int taskId){

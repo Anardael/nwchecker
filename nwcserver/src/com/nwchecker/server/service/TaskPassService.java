@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 /**
  * <h1>Task Pass Service</h1> Service to get task solution submits from database
@@ -16,10 +15,7 @@ import com.nwchecker.server.utils.PaginationWrapper;
  */
 
 public interface TaskPassService {
-	PaginationWrapper<TaskPass> getPagedTaskPassJsonForTask(int taskId,
-			int startIndex, int pageSize, String sortingColumn,
-			String sortingOrder, String filter);
-
+	
 	/**
 	 * Get paginated solution records list for task
 	 * <p>

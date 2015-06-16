@@ -3,7 +3,6 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.TaskData;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import java.util.List;
 
@@ -122,29 +121,6 @@ public interface TaskService {
 	 *         limited by pageSize and pageNumber
 	 */
 	List<Task> getPagedTasksByContestStatus(Contest.Status status,
-			int startIndex, int pageSize, String sortingColumn,
-			String sortingOrder, String filter);
-
-	/**
-	 * Tasks wrapped for pagination that belong to contests with certain status
-	 * <p>
-	 * 
-	 * @param status
-	 *            Status of the contest to which the tasks belong.
-	 * @param startIndex
-	 *            Index of the record first requested record.
-	 * @param pageSize
-	 *            Number of records requested.
-	 * @param sortingColumn
-	 *            Name of attribute for sorting
-	 * @param sortingOrder
-	 *            Sorting order(asc or desc)
-	 * @param filter
-	 *            String that represents search query of the results.
-	 * @return A wrapper that contains list of tasks and total number of records
-	 *         that fit the status and filter criteria.
-	 */
-	PaginationWrapper<Task> getTaskWrapperForPagination(Contest.Status status,
 			int startIndex, int pageSize, String sortingColumn,
 			String sortingOrder, String filter);
 

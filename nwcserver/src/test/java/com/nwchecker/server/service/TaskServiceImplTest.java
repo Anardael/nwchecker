@@ -5,7 +5,6 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -141,12 +140,5 @@ public class TaskServiceImplTest {
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testGetRecordCount() {
 		assertEquals(3,	taskService.getRecordCount(Contest.Status.PREPARING, null).intValue());
-	}
-	
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetTaskWrapperForPagination(){
-		PaginationWrapper<Task> paginatedTasks = taskService.getTaskWrapperForPagination(Contest.Status.PREPARING, 0, 10, null, null, "1");
-		assertEquals(paginatedTasks.getDataList().size(), paginatedTasks.getRecordCount().intValue());
 	}
 }

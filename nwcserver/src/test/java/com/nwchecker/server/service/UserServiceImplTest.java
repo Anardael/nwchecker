@@ -7,7 +7,6 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.model.UserRequest;
 import com.nwchecker.server.service.UserService;
-import com.nwchecker.server.utils.PaginationWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -190,14 +189,5 @@ public class UserServiceImplTest {
 	public void testGetUsersForPagination() {
 		assertEquals(1, userService.getRecordCount("user1").intValue());
 		assertEquals(2, userService.getRecordCount("user").intValue());
-	}
-
-	@Test
-	@DatabaseSetup("classpath:/forTests/dataset.xml")
-	public void testGetRecordCount() {
-		PaginationWrapper<User> paginatedUser = userService
-				.getUsersForPagination(0, 10, null, null, null);
-		assertEquals(4, paginatedUser.getDataList().size());
-		assertEquals(4, paginatedUser.getRecordCount().intValue());
 	}
 }
