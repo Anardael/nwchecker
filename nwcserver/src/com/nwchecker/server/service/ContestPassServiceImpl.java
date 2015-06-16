@@ -69,6 +69,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 					- taskPass.getTask().getContest().getStarts().getTime();
 			long minute = millis / 1000 / 60;
 			taskPass.setPassedMinute((int) minute);
+			taskPass.setMemoryUsed((Integer)checkResult.get("successful"));
 			addTaskPass(contestPass, taskPass, task);
 			updateContestPass(contestPass);
 		}

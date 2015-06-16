@@ -9,8 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -56,6 +58,9 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		Criteria criteria = session.createCriteria(TaskPass.class);
 		criteria.createAlias("user", "u");
 		if (StringUtils.isNotEmpty(sortingColumn)) {
+			if (StringUtils.equals(sortingColumn, "passedTests")) {
+				sortingColumn = "memoryUsed";
+			}
 			if (StringUtils.equals(sortingColumn, "Username")) {
 				sortingColumn = "u.displayName";
 			}
@@ -73,6 +78,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		criteria.add(Restrictions.eq("t.id", id));
 		criteria.setFirstResult(startIndex);
 		criteria.setMaxResults(pageSize);
+		List<Object> obj = criteria.list();
 		return criteria.list();
 	}
 
