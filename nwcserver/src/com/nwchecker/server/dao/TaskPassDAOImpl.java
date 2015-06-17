@@ -58,9 +58,6 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		Criteria criteria = session.createCriteria(TaskPass.class);
 		criteria.createAlias("user", "u");
 		if (StringUtils.isNotEmpty(sortingColumn)) {
-			if (StringUtils.equals(sortingColumn, "passedTests")) {
-				sortingColumn = "memoryUsed";
-			}
 			if (StringUtils.equals(sortingColumn, "Username")) {
 				sortingColumn = "u.displayName";
 			}
