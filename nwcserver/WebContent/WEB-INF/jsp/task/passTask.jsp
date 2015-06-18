@@ -52,7 +52,7 @@
 	var isArchive = ${isArchive};
 	</c:if>
 	$(document).ready(function() {
-		<c:if test="${not empty contest}">
+		<c:if test="${not empty contest&&contest.typeContest.dynamic||(contest.status == ARCHIVE)}">
 		if (allTasksComplete())
 			endContest();
 		disableDangerousOptions();
