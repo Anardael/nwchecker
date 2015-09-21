@@ -10,18 +10,18 @@
             Update data in DB
         </comment>
 		<sql>
-		INSERT INTO `taskdata` VALUES (1,'Content','Content',1,47);
-		INSERT INTO `taskdata` VALUES (2,'Content','Content',1,47);
-		INSERT INTO `taskdata` VALUES (3,'Content','Content',1,47);
-		INSERT INTO `taskdata` VALUES (4,'Content','Content',1,47);
-		INSERT INTO `taskdata` VALUES (5,'Content','Content',1,47);
-		INSERT INTO `taskdata` VALUES (6,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (1,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (2,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (3,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (4,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (5,'Content','Content',1,47);
+		INSERT INTO `TaskData` VALUES (6,'Content','Content',1,47);
 		                                                     
-		INSERT INTO `taskdata` VALUES (7,'Content','Content',1,48);
-		INSERT INTO `taskdata` VALUES (8,'Content','Content',1,48);
-		INSERT INTO `taskdata` VALUES (9,'Content','Content',1,48);
-		INSERT INTO `taskdata` VALUES (10,'Content','Content',1,48);
-		INSERT INTO `taskdata` VALUES (11,'Content','Content',1,48);
+		INSERT INTO `TaskData` VALUES (7,'Content','Content',1,48);
+		INSERT INTO `TaskData` VALUES (8,'Content','Content',1,48);
+		INSERT INTO `TaskData` VALUES (9,'Content','Content',1,48);
+		INSERT INTO `TaskData` VALUES (10,'Content','Content',1,48);
+		INSERT INTO `TaskData` VALUES (11,'Content','Content',1,48);
 		</sql>
 	</changeSet>
 </databaseChangeLog>

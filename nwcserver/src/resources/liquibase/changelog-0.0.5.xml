@@ -22,14 +22,14 @@
 			#Dumping data for table `contest_users`
 			INSERT INTO `contest_users` VALUES (12,9),(12,10);
 
-			#Dumping data for table `contestpass`
-			INSERT INTO `contestpass` VALUES (16,NULL,3,FALSE,1,83,9,13),(17,NULL,3,FALSE,3,147,9,14),(18,NULL,3,FALSE,2,109,9,15),(19,NULL,2,FALSE,3,81,10,15),(20,NULL,2,FALSE,2,42,10,13),(21,NULL,2,FALSE,1,2,10,14);
+			#Dumping data for table `ContestPass`
+			INSERT INTO `ContestPass` VALUES (16,NULL,3,FALSE,1,83,9,13),(17,NULL,3,FALSE,3,147,9,14),(18,NULL,3,FALSE,2,109,9,15),(19,NULL,2,FALSE,3,81,10,15),(20,NULL,2,FALSE,2,42,10,13),(21,NULL,2,FALSE,1,2,10,14);
 	
 			#Dumping data for table `roles`
 			INSERT INTO `roles` VALUES (12,'ROLE_ADMIN',12),(13,'ROLE_USER',13),(14,'ROLE_USER',14),(15,'ROLE_USER',15),(16,'ROLE_TEACHER',12);
 
-			#Dumping data for table `taskpass`
-			INSERT INTO `taskpass` VALUES (1,'Compiler error',1088,'TestData',3175,FALSE,0,1,16,44,13),
+			#Dumping data for table `TaskPass`
+			INSERT INTO `TaskPass` VALUES (1,'Compiler error',1088,'TestData',3175,FALSE,0,1,16,44,13),
 			(2,'NullPointerException',2836,'TestData',1827,FALSE,1,5,16,44,13),
 			(3,'IOException',2796,'TestData',2712,FALSE,1,4,16,44,13),
 			(4,NULL,534,'TestData',211,TRUE,1,3,16,44,13),

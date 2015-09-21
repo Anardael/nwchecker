@@ -39,107 +39,107 @@
             INSERT INTO `contest_users` (user_id, contest_id) VALUES ('3', '5');
 
             #Add 5 tasks for each contest
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('1', '1', 'Task 1', 'This is task 1.', '5', '5', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('2', '1', 'Task 2', 'This is task 2.', '3', '5', 'inputFile2', 'outputFile2',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('3', '1', 'Task 3', 'This is task 3.', '2', '4', 'inputFile3', 'outputFile3',
                            '20000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('4', '1', 'Task 4', 'This is task 4.', '1', '4', 'inputFile4', 'outputFile4',
                            '10000', '4000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('5', '1', 'Task 5', 'This is task 5.', '3', '2', 'inputFile5', 'outputFile5',
                            '20000', '4000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('6', '2', 'Task 1', 'This is task 1.', '8', '8', 'inputFile1', 'outputFile1',
                            '20000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('7', '2', 'Task 2', 'This is task 2.', '5', '9', 'inputFile2', 'outputFile2',
                            '10000', '6000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('8', '2', 'Task 3', 'This is task 3.', '3', '3', 'inputFile3', 'outputFile3',
                            '30000', '7000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('9', '2', 'Task 4', 'This is task 4.', '5', '4', 'inputFile4', 'outputFile4',
                            '40000', '8000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('10', '2', 'Task 5', 'This is task 5.', '7', '5', 'inputFile5', 'outputFile5',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('11', '3', 'Task 1', 'This is task 1.', '5', '4', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('12', '3', 'Task 2', 'This is task 2.', '4', '4', 'inputFile2', 'outputFile2',
                            '10000', '9000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('13', '3', 'Task 3', 'This is task 3.', '1', '1', 'inputFile3', 'outputFile3',
                            '1000', '50000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('14', '3', 'Task 4', 'This is task 4.', '2', '1', 'inputFile4', 'outputFile4',
                            '1000', '3000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('15', '3', 'Task 5', 'This is task 5.', '2', '3', 'inputFile5', 'outputFile5',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('16', '4', 'Task 1', 'This is task 1.', '7', '5', 'inputFile1', 'outputFile1',
                            '10000', '7000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('17', '4', 'Task 2', 'This is task 2.', '4', '6', 'inputFile2', 'outputFile2',
                            '30000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('18', '4', 'Task 3', 'This is task 3.', '8', '7', 'inputFile3', 'outputFile3',
                            '40000', '10000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('19', '4', 'Task 4', 'This is task 4.', '4', '9', 'inputFile4', 'outputFile4',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('20', '4', 'Task 5', 'This is task 5.', '4', '4', 'inputFile5', 'outputFile5',
                            '30000', '9000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('21', '5', 'Task 1', 'This is task 1.', '3', '3', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('22', '5', 'Task 2', 'This is task 2.', '2', '2', 'inputFile2', 'outputFile2',
                            '60000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('23', '5', 'Task 3', 'This is task 3.', '5', '1', 'inputFile3', 'outputFile3',
                            '10500', '6000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('24', '5', 'Task 4', 'This is task 4.', '1', '2', 'inputFile4', 'outputFile4',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('25', '5', 'Task 5', 'This is task 5.', '6', '5', 'inputFile5', 'outputFile5',
                            '10000', '3000000', '%%%% SOME VERIFICATION SCRIPT %%%');
@@ -162,114 +162,114 @@
             INSERT INTO `contest_users` (user_id, contest_id) VALUES ('3', '8');
 
             #Add 5-7 tasks for each contest
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('26', '6', 'Task 1', 'This is task 1.', '1', '2', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('27', '6', 'Task 2', 'This is task 2.', '3', '5', 'inputFile2', 'outputFile2',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('28', '6', 'Task 3', 'This is task 3.', '5', '4', 'inputFile3', 'outputFile3',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('29', '6', 'Task 4', 'This is task 4.', '5', '6', 'inputFile4', 'outputFile4',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('30', '6', 'Task 5', 'This is task 5.', '5', '6', 'inputFile5', 'outputFile5',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('31', '7', 'Task 1', 'This is task 1.', '7', '6', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('32', '7', 'Task 2', 'This is task 2.', '8', '9', 'inputFile2', 'outputFile2',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('33', '7', 'Task 3', 'This is task 3.', '3', '1', 'inputFile3', 'outputFile3',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('34', '7', 'Task 4', 'This is task 4.', '1', '4', 'inputFile4', 'outputFile4',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('35', '7', 'Task 5', 'This is task 5.', '7', '6', 'inputFile5', 'outputFile5',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('36', '7', 'Task 6', 'This is task 6.', '8', '5', 'inputFile6', 'outputFile6',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('37', '8', 'Task 1', 'This is task 1.', '5', '5', 'inputFile1', 'outputFile1',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('38', '8', 'Task 2', 'This is task 2.', '2', '6', 'inputFile2', 'outputFile2',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('39', '8', 'Task 3', 'This is task 3.', '4', '3', 'inputFile3', 'outputFile3',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('40', '8', 'Task 4', 'This is task 4.', '1', '3', 'inputFile4', 'outputFile4',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('41', '8', 'Task 5', 'This is task 5.', '1', '2', 'inputFile5', 'outputFile5',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('42', '8', 'Task 6', 'This is task 6.', '2', '3', 'inputFile6', 'outputFile6',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
-            INSERT INTO `task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
+            INSERT INTO `Task` (id, contest_id, title, description, complexity, rate, inputFileName, outputFileName,
                                 timeLimit, memoryLimit, scriptForVerification)
                    VALUES ('43', '8', 'Task 7', 'This is task 7.', '3', '5', 'inputFile7', 'outputFile7',
                            '10000', '5000000', '%%%% SOME VERIFICATION SCRIPT %%%');
 
             #Add users results for ARCHIVE contests
             #ContestPass (TaskPass - not required)
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('1', '6', '7', 0, '4', '30', '3');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('2', '6', '8', 0, '5', '40', '2');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('3', '6', '9', 0, '3', '10', '4');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('4', '6', '10', 0, '3', '60', '5');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('5', '6', '11', 0, '5', '20', '1');
 
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('6', '7', '7', 0, '5', '30', '3');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('7', '7', '8', 0, '6', '40', '1');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('8', '7', '9', 0, '3', '10', '5');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('9', '7', '10', 0, '4', '60', '4');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('10', '7', '11', 0, '5', '20', '2');
 
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('11', '8', '7', 0, '7', '30', '2');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('12', '8', '8', 0, '6', '40', '3');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('13', '8', '9', 0, '7', '10', '1');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('14', '8', '10', 0, '3', '60', '5');
-            INSERT INTO `contestpass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
+            INSERT INTO `ContestPass` (id, contest_id, user_userId, passing, passed, timePenalty, rank)
                    VALUES ('15', '8', '11', 0, '5', '20', '4');
 
             #Create Compilers list

@@ -74,11 +74,11 @@
             INSERT INTO `roles` (roleId, role, userId) VALUES ('11', 'ROLE_USER', '11');
 
             #set user request to role "Teacher"
-            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('1', 'WANT_ROLE_TEACHER', '4');
-            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('2', 'WANT_ROLE_TEACHER', '5');
-            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('3', 'WANT_ROLE_TEACHER', '6');
-            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('4', 'WANT_ROLE_TEACHER', '8');
-            INSERT INTO `userrequest` (requestId, request, userId) VALUES ('5', 'WANT_ROLE_TEACHER', '10');
+            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('1', 'WANT_ROLE_TEACHER', '4');
+            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('2', 'WANT_ROLE_TEACHER', '5');
+            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('3', 'WANT_ROLE_TEACHER', '6');
+            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('4', 'WANT_ROLE_TEACHER', '8');
+            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('5', 'WANT_ROLE_TEACHER', '10');
         </sql>
     </changeSet>
 </databaseChangeLog>
