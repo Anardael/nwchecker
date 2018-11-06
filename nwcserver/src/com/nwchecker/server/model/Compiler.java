@@ -1,10 +1,10 @@
 package com.nwchecker.server.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.nwchecker.server.json.JsonViews;
+
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import java.util.List;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * <h1>Compiler Entity</h1>
@@ -45,10 +45,14 @@ public class Compiler {
     @JsonView(JsonViews.TaskPassView.class)
     @JsonProperty("compiler")
     private String name;
-    
+
+    @Column(name = "extension")
+    @JsonProperty("extension")
+    private String extension;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "compiler")
     private List<TaskPass> taskPass;
-    
+
     public int getId() {
         return id;
     }
@@ -68,5 +72,13 @@ public class Compiler {
     @Override
     public boolean equals(Object compiler) {
         return (this.name.equals(((Compiler) compiler).getName()));
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 }

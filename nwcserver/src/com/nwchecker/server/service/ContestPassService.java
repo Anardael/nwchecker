@@ -5,6 +5,7 @@ import com.nwchecker.server.model.ContestPass;
 import com.nwchecker.server.model.Task;
 import com.nwchecker.server.model.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,7 @@ public interface ContestPassService {
 	 * @return
 	 */
 	Map<String, Object> checkTask(ContestPass contestPass, Task task,
-			int compilerId, byte[] file, User user);
+			int compilerId, byte[] file, User user)  throws ClassNotFoundException, IOException;
 
 	/**
 	 * Returns list of passed contests for specific Contest.
@@ -66,14 +67,14 @@ public interface ContestPassService {
 
 	/**
 	 * Returns list of ranked ContestPasses.
-	 * 
+	 *
 	 * @param contestId ID of specific contest
 	 * @return List of contestPasses for specific Contest.
 	 */
 	List<ContestPass> getValidContestPasses(int contestId);
-	
+
 	/**
-	 * Return map of user's contest results. 
+	 * Return map of user's contest results.
 	 * @param userName Name of a user.
 	 * @param contest Specific contest.
 	 * @return Data in pairs of <taskId, result>
@@ -84,7 +85,7 @@ public interface ContestPassService {
 
 	/**
 	 * Check if User has contestPass for this contest.
-	 * 
+	 *
 	 * @param userName
 	 *            Username of the User
 	 * @param contest

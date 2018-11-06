@@ -1,11 +1,22 @@
 package com.nwchecker.server.controller;
 
+import com.nwchecker.server.breadcrumb.annotations.Link;
+import com.nwchecker.server.dao.CompilerDAO;
+import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.ContestPass;
+import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.User;
+import com.nwchecker.server.service.ContestPassService;
+import com.nwchecker.server.service.ContestService;
+import com.nwchecker.server.service.TaskPassService;
+import com.nwchecker.server.service.TaskService;
+import com.nwchecker.server.service.UserService;
+
 import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nwchecker.server.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -15,14 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.nwchecker.server.breadcrumb.annotations.Link;
-import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.model.*;
-import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.TaskPassService;
-import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.service.UserService;
 
 /**
  * <h1>Contest Pass Controller</h1> This spring controller contains mapped
@@ -123,18 +126,19 @@ public class ContestPassController {
 	 * @return Result data
 	 * @throws IOException
 	 *             If problems occurs while file sending/receiving
+	 * @throws ClassNotFoundException
 	 */
 	@RequestMapping(value = "/submitTask", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public @ResponseBody Map<String, Object> submitTask(Principal principal,
 			@RequestParam(value = "id") int taskId,
 			@RequestParam(value = "compilerId") int compilerId,
-			@RequestParam("file") MultipartFile file) throws IOException {
+			@RequestParam("file") MultipartFile file) throws IOException, ClassNotFoundException {
 		Map<String, Object> result = new LinkedHashMap<>();
 		if (file.getSize() > MAX_FILE_SIZE_BYTE) {
 			result.put("fileTooLarge", true);
 			return result;
-		}		
+		}
 		Task task = taskService.getTaskById(taskId);
 		User user = userService.getUserByUsername(principal.getName());
 		// check access:

@@ -3,13 +3,24 @@ package com.nwchecker.server.service;
 import com.nwchecker.server.dao.CompilerDAO;
 import com.nwchecker.server.dao.ContestPassDAO;
 import com.nwchecker.server.dao.UserDAO;
-import com.nwchecker.server.model.*;
+import com.nwchecker.server.model.Compiler;
+import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.ContestPass;
+import com.nwchecker.server.model.Task;
+import com.nwchecker.server.model.TaskPass;
+import com.nwchecker.server.model.TaskTestResult;
+import com.nwchecker.server.model.User;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
 
 @Service(value = "TaskPassService")
 public class ContestPassServiceImpl implements ContestPassService {
@@ -42,18 +53,19 @@ public class ContestPassServiceImpl implements ContestPassService {
 	@Override
 	@Transactional
 	public Map<String, Object> checkTask(ContestPass contestPass, Task task,
-			int compilerId, byte[] userSolution, User user) {
+			int compilerId, byte[] userSolution, User user) throws ClassNotFoundException, IOException {
 		if ((contestPass == null)
 				&& (task.getContest().getStatus() != Contest.Status.ARCHIVE)) {
 			HashMap<String, Object> response = new HashMap<String, Object>();
 			response.put("accessDenied", true);
 			return response;
 		}
+		Compiler compiler = compilerDAO.getCompilerById(compilerId);
 
 		// send File and compiler to checker:
 		TaskPass taskPass = new TaskPass();
 		Map<String, Object> checkResult = checkerService.checkTask(task,
-				compilerId, userSolution, taskPass);
+				compiler.getExtension(), userSolution, taskPass);
 
 		if (task.getContest().getStatus() == Contest.Status.GOING) {
 			taskPass.setUser(user);
@@ -61,7 +73,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 			taskPass.setTask(task);
 			taskPass.setPassed((boolean) checkResult.get("passed"));
 			taskPass.setFile(userSolution);
-			taskPass.setCompiler(compilerDAO.getCompilerById(compilerId));
+			taskPass.setCompiler(compiler);
 			taskPass.setTestResults((List<TaskTestResult>) checkResult
 					.remove("results"));
 			// get passed minute:

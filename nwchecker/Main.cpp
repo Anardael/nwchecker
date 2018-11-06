@@ -206,21 +206,33 @@ void generateHTML()
 	g.close();
 }
 
-int main()
+int main(int argc,  char** argv)
 {
 	addLog("===========================================================");
 	addLog("NWChecker started");
 	string curdir=getCurrentDir();
-	loadResults();
-	if (parseConfig())
-		return 1;
-	checkAll();
-	SetCurrentDirectory(curdir.c_str());
-	generateHTML();
-	saveResults();
-	if(silentMode) {
-		int i;
-		cin>>i;
+	if (argc>1){
+		if (parseConfig())
+		{
+			addLog("Problem parsing config files");
+			return -1;
+		}
+		checkAll();
+		SetCurrentDirectory(curdir.c_str());
+		saveResults();
+		return 0;
+	} else {
+		loadResults();
+		if (parseConfig())
+			return 1;
+		checkAll();
+		SetCurrentDirectory(curdir.c_str());
+		generateHTML();
+		saveResults();
+		if(silentMode) {
+			int i;
+			cin>>i;
+		}
 	}
 	return 0;
 }
