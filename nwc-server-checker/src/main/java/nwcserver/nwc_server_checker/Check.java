@@ -1,7 +1,7 @@
 package nwcserver.nwc_server_checker;
 
-import com.nwchecker.server.utils.CheckerMessage;
-import com.nwchecker.server.utils.CheckerResponse;
+import com.nwchecker.server.utils.messages.CheckerMessage;
+import com.nwchecker.server.utils.messages.CheckerResponse;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -104,6 +104,11 @@ public class Check implements Runnable {
                 copyFile(new File(CHECKER), new File(runDir, "NWC.exe"));
                 copyFile(new File(COMPILERS), new File(runDir, "compilers.conf"));
                 writeConfig(new File(runDir, "config.conf"), message);
+                ProcessBuilder process = new ProcessBuilder("NWC.exe", "test");
+                process = process.directory(runDir);
+                Process exec = process.start();
+                exec.waitFor();
+
                 try (BufferedReader br = new BufferedReader(new FileReader(new File (runDir,"save.dat")))) {
                     String line;
                     line = br.readLine();//path
@@ -120,10 +125,13 @@ public class Check implements Runnable {
                      }
                     checkerResponse.setLog(log.toString());
                 }
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             } finally {
                 deleteDirectoryStream(runDir.toPath());
+                dataOutput.writeObject(checkerResponse);
             }
-            dataOutput.writeObject(checkerResponse);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

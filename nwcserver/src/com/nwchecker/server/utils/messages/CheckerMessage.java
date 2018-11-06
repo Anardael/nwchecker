@@ -1,4 +1,4 @@
-package com.nwchecker.server.utils;
+package com.nwchecker.server.utils.messages;
 
 import java.io.Serializable;
 import java.util.ArrayList;

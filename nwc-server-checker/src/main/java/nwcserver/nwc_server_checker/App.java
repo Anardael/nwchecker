@@ -12,6 +12,7 @@ import java.net.Socket;
 public class App {
 	public static void main(String[] args) {
 		try {
+		    System.out.println("Waiting for connection");
 			ServerSocket socketListener = new ServerSocket(9999);
 			while (true) {
 				Socket clientSocket = socketListener.accept();

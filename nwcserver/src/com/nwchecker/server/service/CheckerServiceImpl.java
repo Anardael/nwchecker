@@ -47,13 +47,14 @@ public class CheckerServiceImpl implements CheckerService {
 		checkerMessage.setCheckingScript(task.getScriptForVerification());
 		checkerMessage.setInputFileName(task.getInputFileName());
 		checkerMessage.setOutputFileName(task.getOutputFileName());
+		checkerMessage.setExtension(compilerExtension);
 
 		for (TaskData taskData : task.getInOutData()) {
 			// add in/out data to message
 		    checkerMessage.getInputData().add(taskData.getInputData());
 		    checkerMessage.getOutputData().add(taskData.getOutputData());
 		    checkerMessage.getMemory().add(task.getMemoryLimit());
-		    checkerMessage.getTime().add(task.getTimeLimit());
+		    checkerMessage.getTime().add(task.getTimeLimit()*1000);
 		    checkerMessage.getScore().add(1);
 		}
 
@@ -99,12 +100,12 @@ public class CheckerServiceImpl implements CheckerService {
 		CheckerResponse checkerResponse=null;
 		try {
 			LOG.info("Attempting to send data to checker");
-			Socket socket = new Socket();
+			Socket socket = new Socket( "localhost",9999);
 			ObjectOutputStream dataOutput = new ObjectOutputStream(socket.getOutputStream());
 			dataOutput.writeObject(message);
 			dataOutput.flush();
 			ObjectInputStream dataInput = new ObjectInputStream(socket.getInputStream());
-			CheckerResponse response = (CheckerResponse) dataInput.readObject();
+			checkerResponse = (CheckerResponse) dataInput.readObject();
 			socket.close();
 			LOG.info("Data recieved successfully.");
 		} catch (IOException e) {
