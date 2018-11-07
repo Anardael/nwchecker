@@ -3,10 +3,7 @@
 #include<iostream>
 #include<map>
 #include<fstream>
-///////////////////////////////
-#include<windows.h>
-#include<winbase.h>
-///////////////////////////////
+
 using namespace std;
 typedef vector<string> FileList;
 struct Test

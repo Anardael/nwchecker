@@ -1,7 +1,9 @@
 #include"Main.h"
+#include<string.h>
+
+
 #include<windows.h>
 #include<winbase.h>
-#include<string.h>
 
 void outErrorMessage()
 {

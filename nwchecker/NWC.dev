@@ -3,7 +3,7 @@ FileName=NWC.dev
 Name=NWC
 UnitCount=6
 Type=1
-Ver=1
+Ver=2
 ObjFiles=
 Includes=
 Libs=
@@ -27,17 +27,19 @@ CustomMakefile=
 IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=0000000000000000000000
+CompilerSettings=00000000g0000000000000000
+LogOutput=
+LogOutputEnabled=0
 
 [VersionInfo]
 Major=0
 Minor=2
 Release=1
-Build=46
+Build=50
 LanguageID=1033
 CharsetID=1252
 CompanyName=Dark&Anardael
-FileVersion=
+FileVersion=0.2.1.50
 FileDescription=Developed using the Dev-C++ IDE
 InternalName=NWC
 LegalCopyright=
@@ -46,6 +48,7 @@ OriginalFilename=NWC.exe
 ProductName=New Wave Checker
 ProductVersion=
 AutoIncBuildNr=1
+SyncProduct=0
 
 [Unit1]
 FileName=FindFiles.cpp

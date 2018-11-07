@@ -10,8 +10,8 @@ A ICON "NWC.ico"
 // TO CHANGE VERSION INFORMATION, EDIT PROJECT OPTIONS...
 //
 1 VERSIONINFO
-FILEVERSION 0,2,1,50
-PRODUCTVERSION 0,2,1,50
+FILEVERSION 0,2,1,51
+PRODUCTVERSION 0,2,1,51
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -19,7 +19,7 @@ FILETYPE VFT_APP
     BLOCK "040904E4"
     {
       VALUE "CompanyName", "Dark&Anardael"
-      VALUE "FileVersion", "0.2.1.50"
+      VALUE "FileVersion", "0.2.1.51"
       VALUE "FileDescription", "Developed using the Dev-C++ IDE"
       VALUE "InternalName", "NWC"
       VALUE "LegalCopyright", ""
