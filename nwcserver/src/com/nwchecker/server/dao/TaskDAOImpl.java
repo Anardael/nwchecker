@@ -7,6 +7,7 @@ import com.nwchecker.server.model.TaskData;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -15,7 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +38,14 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	@Override
 	public List<Task> getTasksByContestId(int id) {
 		@SuppressWarnings("unchecked")
-		List<Task> t = (List<Task>) getHibernateTemplate().find(
-				"From Task where contest_id=?", id);
-		return t;
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("From Task where contest_id=:id");
+		query.setParameter("id", id);
+//		List<Task> t = (List<Task>) getHibernateTemplate().find(
+//				"From Task where contest_id=:id", id);
+		return (List<Task>) query.list();
 	}
 
 	@Override
@@ -78,11 +84,14 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public List<Task> getTasksByContestStatus(Status status) {
-		List<Task> result = (List<Task>) getHibernateTemplate().find(
-				"from Task t where t.contest.status = ?", status);
-		return result;
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session
+				.createQuery("from Task t where t.contest.status =:status");
+		query.setParameter("status", status);
+		return (List<Task>) query.list();
 	}
 
 	@SuppressWarnings("unchecked")

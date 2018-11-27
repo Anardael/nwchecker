@@ -6,6 +6,7 @@ import com.nwchecker.server.model.UserRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -14,10 +15,12 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository("userDAO")
@@ -55,27 +58,42 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		getHibernateTemplate().delete(userRequest);
 	}
 
+
+
+
 	@Override
 	public User getUserById(int id) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find(
-				"from User where id=?", id);
-		return list.get(0);
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("from User where id=:id");
+		query.setParameter("id", id);
+
+		return (User)query.list().get(0);
 	}
 
 	@Override
 	public User getUserByUsername(String username) {
-		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate().find(
-				"from User where username=? or email=?", username, username);
-		return list.get(0);
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		String email = username;
+		Query query = session
+				.createQuery("from User where username=:username or email=:email");
+		query.setParameter("username", username);
+		query.setParameter("email", email);
+		return (User) query.list().get(0);
 	}
 
     @Override
     public User getUserByEmail(String email) {
         @SuppressWarnings("unchecked")
-        List<User> list = (List<User>) getHibernateTemplate().find("from User where email=?", email);
-        return list.get(0);
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("from User where email=:email");
+		query.setParameter("email", email);
+		return (User) query.list().get(0);
     }
 
     @Override
@@ -88,22 +106,32 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	@Override
 	public List<User> getUsersByRole(String role) {
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>) getHibernateTemplate()
-				.find("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =?",
-						role);
-		return list;
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("SELECT user FROM User user INNER JOIN user.roles roles WHERE roles.role =:role");
+		query.setParameter("role", role);
+		return (List<User>) query.list();
 	}
 
 	@Override
 	public boolean hasUsername(String username) {
-		return !getHibernateTemplate().find(
-				"from User user where user.username = ?", username).isEmpty();
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("from User user where user.username = :username");
+		query.setParameter("username", username);
+		return !query.list().isEmpty();
 	}
 
 	@Override
 	public boolean hasEmail(String email) {
-		return !getHibernateTemplate().find(
-				"from User user where user.email = ?", email).isEmpty();
+		Session session = getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session
+				.createQuery("from User user where user.email = :email");
+		query.setParameter("email", email);
+		return !query.list().isEmpty();
 	}
 
 	@Override
@@ -144,11 +172,13 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
+    @Transactional
 	@Override
 	public List<User> getPagedUsers(int startIndex,
 			int pageSize, String sortingColumn, String sortingOrder, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
+
 		Criteria criteria = session.createCriteria(User.class);
 		if (StringUtils.isNotEmpty(sortingColumn)) {
 			if (StringUtils.equals(sortingColumn, "roles")) {
