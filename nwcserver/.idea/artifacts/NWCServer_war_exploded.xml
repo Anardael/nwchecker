@@ -7,6 +7,7 @@
           <element id="module-output" name="NWCServer" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.1" />
@@ -89,10 +90,15 @@
           <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-8" />
           <element id="library" level="project" name="Maven: classworlds:classworlds:1.1-alpha-2" />
           <element id="library" level="project" name="Maven: org.liquibase:liquibase-core:3.3.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-support:2.0.8" />
+          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.3" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: javax.mail:mailapi:1.4.3" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/NWCServer/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="NWCServer/web/Web" />
     </root>
