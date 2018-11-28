@@ -63,6 +63,11 @@
 			tryToShowStatistic()
 		})
 	});
+	<c:if test='${not empty (cookie.get("fav_compiler").value)}'>
+	window.onload = function(){
+        resolveFavCompiler(${cookie.get("fav_compiler").value})
+	};
+	</c:if>
 </script>
 <!-- Current Task information -->
 <c:set var="displayStatistic"
