@@ -53,7 +53,7 @@ public class ContestServiceImpl implements ContestService {
         User teacher = userService.getUserByUsername(username);
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
             for (Contest c : teacher.getContest()) {
-                if (c.getId() == contestId && c.getStatus().equals(Contest.Status.PREPARING)) {
+                if (c.getId() == contestId && (c.getStatus().equals(Contest.Status.PREPARING)||(c.getStatus().equals(Contest.Status.ARCHIVE)))) {
                     return true;
                 }
             }

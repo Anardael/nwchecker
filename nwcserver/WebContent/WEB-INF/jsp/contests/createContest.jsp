@@ -125,13 +125,13 @@ label.btn-primary {
 			<div class="form-group">
 				<spring:message code="contestCreate.title" var="contestTitle" />
 				<contest:taskModalFormInput element="title" inputDivClass="col-sm-7"
-					label="${contestTitle}: *" />
+					label="${contestTitle}: *" readonly="${readonly}"/>
 				<div class="col-sm-1">
 					<label class="control-label"><spring:message
 							code="contestCreate.type" />:</label>
 				</div>
 				<div class="col-sm-2">
-					<form:select path="typeContest.id" class="form-control">
+					<form:select disabled="${readonly}" path="typeContest.id" class="form-control">
 						<c:forEach items="${typeContestList}" var="type">
 							<form:option value="${type.id}">${type.name}</form:option>
 						</c:forEach>
@@ -156,10 +156,12 @@ label.btn-primary {
 					<div class="col-sm-3">
 						<div class='input-group date' id='datetimepicker1'>
 							<%-- Starts --%>
-							<form:input path="starts" type='text' class="form-control"
+							<form:input readonly="${readonly}" path="starts" type='text' class="form-control"
 								data-date-format="YYYY-MM-DD HH:mm" />
-							<span class="input-group-addon"><span
+								<%if (!(Boolean) request.getAttribute("readonly")){%>
+								<span class="input-group-addon"><span
 								class="glyphicon glyphicon-calendar"></span> </span>
+								<%}%>
 						</div>
 						<span class="help-inline control-label"></span>
 					</div>
@@ -170,15 +172,17 @@ label.btn-primary {
 
 					<div class='col-sm-2'>
 						<div class='input-group date' id='datetimepicker4'>
-							<form:input path="duration" type='text' class="form-control" />
+							<form:input readonly="${readonly}" path="duration" type='text' class="form-control" />
+							<%if (!(Boolean) request.getAttribute("readonly")){%>
 							<span class="input-group-addon"><span
 								class="glyphicon glyphicon-time"></span> </span>
+							<%}%>
 						</div>
 						<span class="help-inline control-label"></span>
 					</div>
 				</div>
 				<div class="field col-sm-2">
-					<label class="control-label "> <form:checkbox path="hidden"
+					<label class="control-label "> <form:checkbox disabled="${readonly}" path="hidden"
 							title="Display only for accessed teachers" /> Hidden
 					</label>
 				</div>
