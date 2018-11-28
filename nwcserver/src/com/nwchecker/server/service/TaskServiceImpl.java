@@ -67,12 +67,13 @@ public class TaskServiceImpl implements TaskService {
 		taskDao.deleteTaskData(id);
 	}
 
+	@Transactional
 	@Override
 	public List<Task> getTasksByContestStatus(Status status) {
 		LOG.debug("Successfully got tasks for contests with status " + status);
 		return taskDao.getTasksByContestStatus(status);
 	}
-
+	@Transactional
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Status status,
 			int startIndex, int pageSize, String sortingColumn,
@@ -80,7 +81,7 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.getPagedTasksByContestStatus(status, startIndex, pageSize, sortingColumn, sortingOrder, filter);
 		
 	}
-
+	@Transactional
 	@Override
 	public Long getRecordCount(Status status, String filter) {
 		return taskDao.getRecordCountByContestStatus(status, filter);

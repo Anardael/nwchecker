@@ -84,7 +84,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+
 	@Override
 	public List<Task> getTasksByContestStatus(Status status) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
@@ -95,7 +95,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int startIndex, int pageSize, String sortingColumn,
@@ -125,7 +125,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+
 	@Override
 	public List<Task> getPagedTasksByContestStatus(Contest.Status status,
 			int pageSize, int startIndex) {
@@ -140,7 +140,8 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
 		return result;
 	}
 
-	@Transactional
+
+
 	@Override
 	public Long getRecordCountByContestStatus(Status status, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()

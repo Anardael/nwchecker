@@ -62,8 +62,13 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
 	@Override
     @Transactional
     public ContestPass getContestPassByUserIdAndContestId(int userId, int contestId){
-        return ((List<ContestPass>) getHibernateTemplate()
-                .find("from ContestPass where contest_id=? and user_userId=?", contestId, userId)).get(0);
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("from ContestPass where contest_id=:contestId and user_userId=:user_userId");
+        query.setParameter("contestId", contestId);
+        query.setParameter("user_userId", userId);
+        return (ContestPass)query.list().get(0);
     }
 
 	

@@ -2,7 +2,6 @@ package com.nwchecker.server.dao;
 
 import com.nwchecker.server.model.Contest;
 
-import com.nwchecker.server.model.Language;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -105,8 +104,6 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
         query.setParameter("userId", userId);
         query.setParameter("hidden", true);
         return (List<Contest>) query.list();
-//        return (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
-//                " where (cu.userId=? and hidden=?)", userId, true);
     }
 
     @SuppressWarnings("unchecked")
@@ -122,8 +119,6 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
         query.setParameter("hidden", true);
         query.setParameter("status", status);
         return (List<Contest>) query.list();
-//        return (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
-//                " where cu.userId=? and c.hidden=? and c.status=?", userId, true, status);
     }
 
     @SuppressWarnings("unchecked")
