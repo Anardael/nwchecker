@@ -12,21 +12,22 @@ CKEDITOR.editorConfig = function(config) {
 //	   config.filebrowserImageUploadUrl = 'resources/js/gpFinder/finder.html';
 //	   config.filebrowserFlashUploadUrl = 'resources/js/ckeditor/kcfinder/upload.php?type=flash';
 
-	
-	// Temporary English only
+
+    // Temporary English only
     config.language = 'en';
 
     config.uiColor = '#1772A3';
 
     // Custom toolbar
     config.toolbar_Full =
-            [
-                {name: 'fontStyles', items: ['Font', 'FontSize']},
-                {name: 'lists', items: ['NumberedList', 'BulletedList']},
-                {name: 'basicStyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']},
-                {name: 'colors', items: ['TextColor', 'BGColor']},
-                {name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-                {name: 'other', items: ['Maximize']},
-            ];
+        [
+            {name: 'fontStyles', items: ['Font', 'FontSize']},
+            {name: 'lists', items: ['NumberedList', 'BulletedList']},
+            {name: 'basicStyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']},
+            {name: 'colors', items: ['TextColor', 'BGColor']},
+            {name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+            {name: 'other', items: ['Maximize']},
+            {name: 'insert', items: ['Image']},
+        ];
     config.toolbar = 'Full';
 };
