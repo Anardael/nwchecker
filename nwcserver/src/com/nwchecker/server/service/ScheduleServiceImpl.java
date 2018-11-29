@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	private static final Logger LOG = Logger
 			.getLogger(ScheduleServiceImpl.class);
-
+	
 	@Override
 	public void refresh() {
 		// if next task registered- cancel it:

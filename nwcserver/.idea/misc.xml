@@ -5,11 +5,9 @@
     <option name="name" value="Eclipse Code Format" />
     <option name="pathToConfigFileJava" value="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" />
   </component>
-  <component name="EntryPointsManager">
-    <entry_points version="2.0" />
-  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
+    <type id="Spring" />
   </component>
   <component name="IdProvider" IDEtalkID="0C0896B8F324C8DEBECD9FEBB7F71618" />
   <component name="JavadocGenerationManager">

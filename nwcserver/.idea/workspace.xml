@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+    <option name="CUSTOM_SCOPE_NAME" value="Selected Files" />
+  </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="NWCServer:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8f10c77-fafd-4e87-b55d-591ccefdfae0" name="Default" comment="finish merge">
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <ignored path="NWCServer.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/NWCServer$All_in_NWCServer__1_.coverage" NAME="All in NWCServer (1) Coverage Results" MODIFIED="1431682683247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/NWCServer$UserServiceImplTest_testPagedUsers.ic" NAME="UserServiceImplTest.testPagedUsers Coverage Results" MODIFIED="1543316036742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.java.com.nwchecker.server.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/NWCServer$All_in_NWCServer.coverage" NAME="All in NWCServer Coverage Results" MODIFIED="1431682449515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/NWCServer$test_java_com_nwchecker_server_in_NWCServer.coverage" NAME="test.java.com.nwchecker.server in NWCServer Coverage Results" MODIFIED="1431645909323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.java.com.nwchecker.server.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1715834593">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="3" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.73" value="1" />
+          <entry key="project.opened" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="9" />
+          <entry key="classpath" value="3" />
+          <entry key="hql" value="1" />
+          <entry key="java" value="205" />
+          <entry key="js" value="3" />
+          <entry key="jsp" value="17" />
+          <entry key="project" value="3" />
+          <entry key="properties" value="8" />
+          <entry key="springBeans" value="3" />
+          <entry key="tag" value="2" />
+          <entry key="xml" value="34" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="9" />
+          <entry key="Eclipse" value="9" />
+          <entry key="Hibernate QL" value="1" />
+          <entry key="JAVA" value="205" />
+          <entry key="JSP" value="19" />
+          <entry key="JavaScript" value="3" />
+          <entry key="Properties" value="8" />
+          <entry key="XML" value="34" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="1342" />
+          <entry key="jsp" value="2" />
+          <entry key="properties" value="10" />
+          <entry key="xml" value="198" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Hibernate QL" value="2" />
+          <entry key="JAVA" value="1339" />
+          <entry key="JPA QL" value="1" />
+          <entry key="JSP" value="2" />
+          <entry key="Properties" value="10" />
+          <entry key="XML" value="198" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-831638952">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.60" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="110" />
+          <entry key="js" value="9" />
+          <entry key="jsp" value="147" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="110" />
+          <entry key="JSP" value="147" />
+          <entry key="JavaScript" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="iml" value="1" />
+          <entry key="java" value="106" />
+          <entry key="jsp" value="1" />
+          <entry key="properties" value="2" />
+          <entry key="tld" value="1" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IDEA_MODULE" value="1" />
+          <entry key="JAVA" value="106" />
+          <entry key="JSP" value="1" />
+          <entry key="Properties" value="2" />
+          <entry key="XML" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="NWCServer" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestDAOImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="536">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="196" column="98" lean-forward="true" selection-start-line="196" selection-start-column="98" selection-end-line="196" selection-end-column="98" />
+              <folding>
+                <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#5;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_en.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="190" selection-start-line="190" selection-end-line="190" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/ContestTags.tld">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskAjax.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="118" column="114" lean-forward="true" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="114" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NWCServer.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="37" column="42" lean-forward="true" selection-end-line="117" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="28" selection-end-line="1849" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Task.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2465">
+              <caret line="145" column="77" selection-start-line="145" selection-start-column="77" selection-end-line="145" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>spring</find>
+      <find>org.springframework.orm.hibernate5.LocalSessionFactoryBean</find>
+      <find>orm</find>
+      <find>org.springframework.orm.hibernate4.LocalSessionFactoryBean</find>
+      <find>hib</find>
+      <find>user</find>
+      <find>classpath</find>
+      <find>jun</find>
+      <find>getPaginatedTaskPassByTaskId</find>
+      <find>getPaginatedTaskPassByTaskIdSorted</find>
+      <find>readLanguageById</find>
+      <find>.post</find>
+      <find>login.do</find>
+      <find>sec</find>
+      <find>security_check</find>
+      <find>addCont</find>
+      <find>addContest.do</find>
+      <find>addCo</find>
+      <find>readOnly</find>
+      <find>hibernate5</find>
+      <find>jdbc</find>
+      <find>readOn</find>
+      <find>transactional</find>
+      <find>tra</find>
+      <find>deleteLanguageById</find>
+      <find>Language</find>
+      <find>`</find>
+      <find>taskvi</find>
+      <find>#taskView_</find>
+      <find>viewTitle</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>user.username = :username</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\MishaS\Desktop\SS\nwchecker\nwcserver\src\com\nwchecker\server\dao</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/Contests/contestResults.jsp" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/RatingController.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/RuleController.java" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/tiles/tiles-definitions.xml" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/Contests/getContests.jsp" />
+        <option value="$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js" />
+        <option value="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/AdminOptionsController.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/CompilerDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/resources/forTests/testDbConfig.xml" />
+        <option value="$PROJECT_DIR$/src/resources/hibernate/dbConfig.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/nwchecker/server/service/ContestServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/resources/forTests/dataset.xml" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/loggingAndRegistration/login.jsp" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/resources/spring/application-context.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/nwchecker/server/service/UserServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/RuleDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/TaskPassDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/TypeContestDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/UserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/CheckerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestEditWatcherServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestPassServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/PageTrackingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/RatingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/RuleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ScoreCalculationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskPassServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TypeContestServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/UserDetailsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/LanguageDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/TaskServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/Task.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/ContestPass.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/Compiler.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskTheoryLink.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskTestResult.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TaskData.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/TaskDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestPassDAOImpl.java" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp" />
+        <option value="$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskAjax.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="vmOptions" value="-Dmaven.multiModuleProjectDirectory=some_valid_path" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-40" />
+    <option name="y" value="301" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>Code maturityJava</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring CoreSpring</id>
+          </State>
+          <State>
+            <id>Spring MVCSpring</id>
+          </State>
+          <State>
+            <id>XMLSpring CoreSpring</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SpringXmlModelInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="DAO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="contests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="tiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="262" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="849" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="262" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="849" />
+    <property name="FullScreen" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJSP" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
+    <property name="LayoutCode.rearrangeEntriesXML" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543404441394" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/nwchecker/server/dao" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\nwchecker\nwcserver\WebContent\WEB-INF\jsp\connect" />
+      <recent name="D:\nwchecker\nwcserver\WebContent\WEB-INF\jsp\template\Contests" />
+      <recent name="D:\nwchecker\nwcserver\WebContent\WEB-INF\jsp\template" />
+      <recent name="D:\nwchecker\nwcserver\WebContent\WEB-INF\jsp\rule" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\nwchecker\nwcserver\src\resources" />
+      <recent name="D:\nwchecker\nwcserver\src\resources\facebook" />
+      <recent name="D:\nwchecker\nwcserver\src\resources\spring" />
+      <recent name="D:\nwchecker\nwcserver\src\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat9">
+    <configuration default="true" type="NodeWebKit" factoryName="Node-webkit">
+      <option name="name" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ContestServiceImplTest.testGetContestByID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NWCServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.com.nwchecker.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.com.nwchecker.server.service" />
+      <option name="MAIN_CLASS_NAME" value="test.java.com.nwchecker.server.service.ContestServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetContestByID" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ContestServiceImplTest.testGetContestForRating" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NWCServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.com.nwchecker.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.com.nwchecker.server.service" />
+      <option name="MAIN_CLASS_NAME" value="test.java.com.nwchecker.server.service.ContestServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetContestForRating" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NWCServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.com.nwchecker.server.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.com.nwchecker.server.service" />
+      <option name="MAIN_CLASS_NAME" value="test.java.com.nwchecker.server.service.UserServiceImplTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest.testPagedUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NWCServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.com.nwchecker.server.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.com.nwchecker.server.service" />
+      <option name="MAIN_CLASS_NAME" value="test.java.com.nwchecker.server.service.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="testPagedUsers" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test.java.com.nwchecker.server in NWCServer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NWCServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.com.nwchecker.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.com.nwchecker.server" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.13" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="NWCServer:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_NWCServer_2" />
+        <option name="HTTP_PORT" value="8083" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <RunnerSettings RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="49660" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="NWCServer:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="Tomcat9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.13" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="NWCServer:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_NWCServer_3" />
+        <option name="HTTP_PORT" value="8280" />
+        <option name="JNDI_PORT" value="1299" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="62538" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="NWCServer:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Tomcat Server.Tomcat" />
+      <item itemvalue="Tomcat Server.Tomcat9" />
+      <item itemvalue="JUnit.test.java.com.nwchecker.server in NWCServer" />
+      <item itemvalue="JUnit.ContestServiceImplTest.testGetContestForRating" />
+      <item itemvalue="JUnit.ContestServiceImplTest.testGetContestByID" />
+      <item itemvalue="JUnit.UserServiceImplTest.testPagedUsers" />
+      <item itemvalue="JUnit.UserServiceImplTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.test.java.com.nwchecker.server in NWCServer" />
+        <item itemvalue="JUnit.UserServiceImplTest.testPagedUsers" />
+        <item itemvalue="JUnit.UserServiceImplTest" />
+        <item itemvalue="JUnit.ContestServiceImplTest.testGetContestByID" />
+        <item itemvalue="JUnit.ContestServiceImplTest.testGetContestForRating" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpringBeansView">
+    <option name="showImplicitBeans" value="false" />
+    <option name="showInfrastructureBeans" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8f10c77-fafd-4e87-b55d-591ccefdfae0" name="Default" comment="" />
+      <created>1429434892118</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1429434892118</updated>
+      <workItem from="1429434893790" duration="10562000" />
+      <workItem from="1429466916259" duration="1838000" />
+      <workItem from="1429479045711" duration="4967000" />
+      <workItem from="1429521531742" duration="1185000" />
+      <workItem from="1429532522551" duration="2071000" />
+      <workItem from="1429548049906" duration="649000" />
+      <workItem from="1429556344027" duration="14098000" />
+      <workItem from="1429608730410" duration="4023000" />
+      <workItem from="1429615844127" duration="8181000" />
+      <workItem from="1429687444057" duration="9567000" />
+      <workItem from="1429700480079" duration="10797000" />
+      <workItem from="1429723664946" duration="4776000" />
+      <workItem from="1429773741948" duration="10765000" />
+      <workItem from="1429788180879" duration="2008000" />
+      <workItem from="1429790599477" duration="4643000" />
+      <workItem from="1429872750243" duration="4750000" />
+      <workItem from="1429879163287" duration="30000" />
+      <workItem from="1429881364293" duration="4346000" />
+      <workItem from="1429890005217" duration="3026000" />
+      <workItem from="1429953070939" duration="10171000" />
+      <workItem from="1429990611014" duration="82000" />
+      <workItem from="1430053057528" duration="8483000" />
+      <workItem from="1430073528634" duration="1094000" />
+      <workItem from="1430079137022" duration="7470000" />
+      <workItem from="1430118624070" duration="9515000" />
+      <workItem from="1430132364396" duration="6465000" />
+      <workItem from="1430205919269" duration="8010000" />
+      <workItem from="1430218416989" duration="10013000" />
+      <workItem from="1430247421729" duration="1514000" />
+      <workItem from="1430251957249" duration="461000" />
+      <workItem from="1430252461578" duration="384000" />
+      <workItem from="1430252867787" duration="828000" />
+      <workItem from="1430258056203" duration="7448000" />
+      <workItem from="1430291849490" duration="9704000" />
+      <workItem from="1430328968398" duration="5319000" />
+      <workItem from="1430338641687" duration="1976000" />
+      <workItem from="1430345552109" duration="7153000" />
+      <workItem from="1430383512082" duration="7851000" />
+      <workItem from="1430416732989" duration="66000" />
+      <workItem from="1430422103995" duration="50000" />
+      <workItem from="1430422169847" duration="26000" />
+      <workItem from="1430422327404" duration="50000" />
+      <workItem from="1430422591123" duration="96000" />
+      <workItem from="1430422827875" duration="18000" />
+      <workItem from="1430422968614" duration="73000" />
+      <workItem from="1430423679161" duration="63000" />
+      <workItem from="1430423821296" duration="106000" />
+      <workItem from="1430424969215" duration="59000" />
+      <workItem from="1430500753970" duration="78000" />
+      <workItem from="1430500914139" duration="196000" />
+      <workItem from="1430573961856" duration="453000" />
+      <workItem from="1430656527507" duration="74000" />
+      <workItem from="1430656606557" duration="3649000" />
+      <workItem from="1430660312767" duration="12803000" />
+      <workItem from="1430812379141" duration="1511000" />
+      <workItem from="1430820835303" duration="1928000" />
+      <workItem from="1430822779801" duration="884000" />
+      <workItem from="1430997017206" duration="4282000" />
+      <workItem from="1431082725765" duration="4226000" />
+      <workItem from="1431091558636" duration="786000" />
+      <workItem from="1431093075885" duration="395000" />
+      <workItem from="1431093484478" duration="16000" />
+      <workItem from="1431097625248" duration="545000" />
+      <workItem from="1431098201827" duration="1926000" />
+      <workItem from="1431156832051" duration="2983000" />
+      <workItem from="1431160216225" duration="526000" />
+      <workItem from="1431161165645" duration="636000" />
+      <workItem from="1431234652130" duration="925000" />
+      <workItem from="1431274421498" duration="303000" />
+      <workItem from="1431333305752" duration="1211000" />
+      <workItem from="1431336713546" duration="3693000" />
+      <workItem from="1431371422625" duration="1195000" />
+      <workItem from="1431376923451" duration="3039000" />
+      <workItem from="1431414428683" duration="13106000" />
+      <workItem from="1431431568484" duration="4431000" />
+      <workItem from="1431473926081" duration="3610000" />
+      <workItem from="1431510649294" duration="1333000" />
+      <workItem from="1431515585966" duration="7597000" />
+      <workItem from="1431530066589" duration="2391000" />
+      <workItem from="1431549670170" duration="1084000" />
+      <workItem from="1431588676768" duration="9604000" />
+      <workItem from="1431602610068" duration="10642000" />
+      <workItem from="1431614023115" duration="2376000" />
+      <workItem from="1431639095803" duration="6917000" />
+      <workItem from="1431678046047" duration="2486000" />
+      <workItem from="1431681043125" duration="1840000" />
+      <workItem from="1431704659869" duration="259000" />
+      <workItem from="1431770966001" duration="894000" />
+      <workItem from="1431861092520" duration="3059000" />
+      <workItem from="1431877162561" duration="601000" />
+      <workItem from="1431956813382" duration="6242000" />
+      <workItem from="1432019767622" duration="119000" />
+      <workItem from="1432042783102" duration="555000" />
+      <workItem from="1432117530568" duration="4617000" />
+      <workItem from="1432189422006" duration="9192000" />
+      <workItem from="1432282048631" duration="8824000" />
+      <workItem from="1432316182552" duration="74000" />
+      <workItem from="1432464222956" duration="438000" />
+      <workItem from="1432467596697" duration="2785000" />
+      <workItem from="1432470930486" duration="6319000" />
+      <workItem from="1432479141462" duration="369000" />
+      <workItem from="1432483488134" duration="336000" />
+      <workItem from="1432488684267" duration="209000" />
+      <workItem from="1432488909625" duration="224000" />
+      <workItem from="1432489502610" duration="106000" />
+      <workItem from="1432489647534" duration="1107000" />
+      <workItem from="1432490987607" duration="228000" />
+      <workItem from="1432491745045" duration="1628000" />
+      <workItem from="1432493636434" duration="2660000" />
+      <workItem from="1432498884849" duration="2347000" />
+      <workItem from="1432502126185" duration="452000" />
+      <workItem from="1432537625752" duration="634000" />
+      <workItem from="1432538382749" duration="5292000" />
+      <workItem from="1432543828412" duration="1942000" />
+      <workItem from="1432545984357" duration="2669000" />
+      <workItem from="1432572995206" duration="997000" />
+      <workItem from="1432627894623" duration="2079000" />
+      <workItem from="1432630376684" duration="712000" />
+      <workItem from="1432659566259" duration="659000" />
+      <workItem from="1432713132877" duration="5519000" />
+      <workItem from="1432799627633" duration="10742000" />
+      <workItem from="1542970496971" duration="1060000" />
+      <workItem from="1542971597242" duration="7701000" />
+      <workItem from="1542980273837" duration="3090000" />
+      <workItem from="1543154183120" duration="4955000" />
+      <workItem from="1543164074276" duration="4103000" />
+      <workItem from="1543227419552" duration="17264000" />
+      <workItem from="1543316233166" duration="2450000" />
+      <workItem from="1543318729272" duration="9265000" />
+      <workItem from="1543330526315" duration="154000" />
+      <workItem from="1543330834878" duration="744000" />
+      <workItem from="1543331774953" duration="4584000" />
+      <workItem from="1543411116123" duration="248000" />
+      <workItem from="1543411981630" duration="2696000" />
+    </task>
+    <task id="LOCAL-00001" summary="home test">
+      <created>1429548355793</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1429548355794</updated>
+    </task>
+    <task id="LOCAL-00002" summary="was edit rules.jsp">
+      <created>1429796077865</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1429796077865</updated>
+    </task>
+    <task id="LOCAL-00003" summary="need to do &lt;from:textarea&gt; in rules jsp">
+      <created>1429878111517</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1429878111517</updated>
+    </task>
+    <task id="LOCAL-00004" summary="was edit TEACHER function in rules.jsp">
+      <created>1429965857173</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1429965857173</updated>
+    </task>
+    <task id="LOCAL-00005" summary="was edit rules.jsp(add JQuery functions)">
+      <created>1430122521352</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1430122521352</updated>
+    </task>
+    <task id="LOCAL-00006" summary="was added modal form in rules.jsp">
+      <created>1430301427768</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1430301427768</updated>
+    </task>
+    <task id="LOCAL-00007" summary="was added type to contest">
+      <created>1430391445849</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1430391445850</updated>
+    </task>
+    <task id="LOCAL-00008" summary="begin to edit ContestPassController">
+      <created>1430823644155</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1430823644155</updated>
+    </task>
+    <task id="LOCAL-00009" summary="last">
+      <created>1431098475298</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1431098475298</updated>
+    </task>
+    <task id="LOCAL-00010" summary="merge with dynamicRating">
+      <created>1431615081520</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1431615081520</updated>
+    </task>
+    <task id="LOCAL-00011" summary="was edit taskPass &lt;-&gt; contestResult links and fix bug on rules.jsp">
+      <created>1431645820266</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1431645820266</updated>
+    </task>
+    <task id="LOCAL-00012" summary="was refactor rules.jsp and RulesController(add spring security tags)">
+      <created>1431877537496</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1431877537496</updated>
+    </task>
+    <task id="LOCAL-00013" summary="merge sort and filter">
+      <created>1432043295596</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1432043295596</updated>
+    </task>
+    <task id="LOCAL-00014" summary="refactor ContestPassController">
+      <created>1432192484470</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1432192484470</updated>
+    </task>
+    <task id="LOCAL-00015" summary="started facebook configure">
+      <created>1432290979556</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1432290979556</updated>
+    </task>
+    <task id="LOCAL-00016" summary="create SocialController">
+      <created>1432539561538</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1432539561538</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Connected to Facebook">
+      <created>1432544875996</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1432544875996</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Connect facebook">
+      <created>1432545336806</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1432545336806</updated>
+    </task>
+    <task id="LOCAL-00019" summary="add FacebookController">
+      <created>1432548652726</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1432548652726</updated>
+    </task>
+    <task id="LOCAL-00020" summary="signIn">
+      <created>1432713265454</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1432713265454</updated>
+    </task>
+    <task id="LOCAL-00021" summary="finish merge">
+      <created>1432718650619</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1432718650619</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="UserServiceImplTest - 2018.11.27 at 13h 39m 49s.xml">
+      <configuration name="UserServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 13h 40m 07s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 13h 40m 59s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 13h 41m 15s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 13h 41m 39s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 14h 08m 36s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 14h 08m 49s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 14h 09m 16s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserServiceImplTest_testPagedUsers - 2018.11.27 at 14h 09m 54s.xml">
+      <configuration name="UserServiceImplTest.testPagedUsers" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="test_java_com_nwchecker_server_in_NWCServer - 2018.11.27 at 14h 31m 56s.xml">
+      <configuration name="test.java.com.nwchecker.server in NWCServer" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="482675000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26705757" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info id="Palette&#9;" order="5" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3275488" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4952381" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4273319" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3286334" />
+      <window_info anchor="bottom" id="Changes" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50476193" side_tool="true" weight="0.37037036" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49144384" weight="0.329718" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.2462039" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.329718" />
+      <window_info anchor="bottom" id="Spring" order="15" weight="0.329718" />
+      <window_info anchor="bottom" id="Database Changes" order="16" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" sideWeight="0.49916804" weight="0.23240939" />
+      <window_info anchor="right" id="IDEtalk" order="6" />
+      <window_info anchor="right" id="Database" order="7" sideWeight="0.4989154" visible="true" weight="0.14978679" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5010846" side_tool="true" visible="true" weight="0.1444563" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19402985" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info id="Palette&#9;" order="5" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3278867" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4952381" visible="true" weight="0.46203905" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4273743" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3286334" />
+      <window_info anchor="bottom" id="Changes" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50476193" side_tool="true" weight="0.37037036" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49144384" weight="0.329718" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.2462039" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.329718" />
+      <window_info anchor="bottom" id="Spring" order="15" weight="0.329718" />
+      <window_info anchor="bottom" id="Database Changes" order="16" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" sideWeight="0.49916804" visible="true" weight="0.26545843" />
+      <window_info anchor="right" id="IDEtalk" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50083196" side_tool="true" visible="true" weight="0.14940476" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="home test" />
+    <MESSAGE value="was edit rules.jsp" />
+    <MESSAGE value="need to do &lt;from:textarea&gt; in rules jsp" />
+    <MESSAGE value="was edit TEACHER function in rules.jsp" />
+    <MESSAGE value="was edit rules.jsp(add JQuery functions)" />
+    <MESSAGE value="was added modal form in rules.jsp" />
+    <MESSAGE value="was added type to contest" />
+    <MESSAGE value="begin to edit ContestPassController" />
+    <MESSAGE value="last" />
+    <MESSAGE value="merge with dynamicRating" />
+    <MESSAGE value="was edit taskPass &lt;-&gt; contestResult links and fix bug on rules.jsp" />
+    <MESSAGE value="was refactor rules.jsp and RulesController(add spring security tags)" />
+    <MESSAGE value="merge news to master" />
+    <MESSAGE value="merge sort and filter" />
+    <MESSAGE value="refactor ContestPassController" />
+    <MESSAGE value="started facebook configure" />
+    <MESSAGE value="create SocialController" />
+    <MESSAGE value="Connected to Facebook" />
+    <MESSAGE value="Connect facebook" />
+    <MESSAGE value="add FacebookController" />
+    <MESSAGE value="signIn" />
+    <MESSAGE value="finish merge" />
+    <MESSAGE value="ajax" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajax" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="userService" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ContestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="865">
+          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ContestPassServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ApplicationListenerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/LanguageDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="40" column="87" lean-forward="true" selection-start-line="40" selection-start-column="87" selection-end-line="40" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/RuleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/RuleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ScheduleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-681">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.5.RELEASE/spring-security-core-3.2.5.RELEASE-sources.jar!/org/springframework/security/core/userdetails/UserDetailsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/UserDetailsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="98" column="46" selection-start-line="98" selection-start-column="18" selection-end-line="98" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/TaskServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Language.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/ContestPass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Compiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="37" column="54" selection-start-line="37" selection-start-column="54" selection-end-line="37" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="38" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TypeContest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskTheoryLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskTestResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskPass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="37" column="50" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/TaskData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Rule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-552">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/UserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="145" selection-start-line="145" selection-end-line="145" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/TaskDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/TaskDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/UserRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/CompilerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/CompilerDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/task/passTask.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1683" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestPassDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestPassDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="67" column="106" selection-start-line="67" selection-start-column="106" selection-end-line="67" selection-end-column="106" />
+          <folding>
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#829#830#0" expanded="true" />
+            <element signature="e#885#886#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/LanguageDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tiles/tiles-definitions.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2465">
+          <caret line="145" column="77" selection-start-line="145" selection-start-column="77" selection-end-line="145" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/dao/ContestDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/internationalization/messages_en.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="190" selection-start-line="190" selection-end-line="190" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/ContestTags.tld">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="196" column="98" lean-forward="true" selection-start-line="196" selection-start-column="98" selection-end-line="196" selection-end-column="98" />
+          <folding>
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#5;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskAjax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="118" column="114" lean-forward="true" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NWCServer.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="37" column="42" lean-forward="true" selection-end-line="117" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="28" selection-end-line="1849" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>NWCServer:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring|NWCServer</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+  <component name="mavenExecuteGoalHistory">
+    <option value="" />
+  </component>
+</project>
