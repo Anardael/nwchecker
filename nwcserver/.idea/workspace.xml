@@ -11,19 +11,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f10c77-fafd-4e87-b55d-591ccefdfae0" name="Default" comment="finish merge">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/NWCServer_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/NWCServer_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a8f10c77-fafd-4e87-b55d-591ccefdfae0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NWCServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NWCServer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nwchecker/server/social/FacebookMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nwchecker/server/social/FacebookMailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" afterDir="false" />
     </list>
     <ignored path="NWCServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,58 +71,49 @@
     <session id="-678860437">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.52" value="1" />
+          <entry key="project.open.time.80" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.local" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
           <entry key="contest" value="2" />
-          <entry key="java" value="9" />
-          <entry key="js" value="2" />
+          <entry key="contest_users" value="1" />
+          <entry key="java" value="4" />
+          <entry key="js" value="3" />
           <entry key="jsp" value="5" />
-          <entry key="properties" value="1" />
-          <entry key="sql" value="1" />
-          <entry key="tag" value="3" />
+          <entry key="tag" value="8" />
           <entry key="task" value="1" />
-          <entry key="tld" value="3" />
-          <entry key="xml" value="1" />
+          <entry key="tld" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
-          <entry key="Database Element" value="3" />
-          <entry key="JAVA" value="9" />
-          <entry key="JSP" value="8" />
-          <entry key="JavaScript" value="2" />
-          <entry key="Properties" value="1" />
-          <entry key="Scratch" value="1" />
-          <entry key="XML" value="4" />
+          <entry key="Database Element" value="4" />
+          <entry key="JAVA" value="4" />
+          <entry key="JSP" value="13" />
+          <entry key="JavaScript" value="3" />
+          <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cell" value="4" />
-          <entry key="java" value="185" />
-          <entry key="js" value="8" />
-          <entry key="jsp" value="320" />
-          <entry key="properties" value="8" />
-          <entry key="tag" value="141" />
-          <entry key="txt" value="11" />
-          <entry key="xml" value="18" />
+          <entry key="jsp" value="25" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="185" />
-          <entry key="JSP" value="461" />
-          <entry key="JavaScript" value="8" />
-          <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Properties" value="8" />
-          <entry key="Scratch" value="4" />
-          <entry key="XML" value="18" />
+          <entry key="JSP" value="25" />
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -143,40 +126,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="191" column="26" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="26" />
+            <state relative-caret-position="3502">
+              <caret line="238" column="9" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/task">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1659">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="2686">
+              <caret line="158" column="26" selection-start-line="158" selection-start-column="26" selection-end-line="158" selection-end-column="26" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestEditWatcherController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/testFiles.tag">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/contest">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
@@ -186,37 +165,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.1.2.RELEASE/spring-webmvc-4.1.2.RELEASE.jar!/META-INF/spring-form.tld">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2008">
-              <caret line="1572" column="4" selection-start-line="1572" selection-start-column="4" selection-end-line="1572" selection-end-column="4" />
+        <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/contest_users">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/ContestTags.tld">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskEditing.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/form.tag">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret column="29" selection-end-line="1" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskCreateAddLink.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag">
+        <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/contestUsersCheckList.tag">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="97" lean-forward="true" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
+            <state relative-caret-position="391">
+              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -225,25 +201,26 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>editContest.do?id=</find>
-      <find>editContes</find>
-      <find>checkIfUserHaveAccessToContest</find>
-      <find>if</find>
-      <find>addContest</find>
+      <find>archive-btn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="master" />
+        <entry key="$PROJECT_DIR$/.." value="Add_images" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/dao/LanguageDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestService.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/TypeContest.java" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/sideMenu/contestMenu.jsp" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/nwchecker/server/service/CheckerServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/nwchecker/server/service/ContestPassServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/nwchecker/server/service/ContestServiceImplTest.java" />
@@ -259,6 +236,7 @@
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/social/SocialApiConfig.java" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/facebook/registration.jsp" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/index.jsp" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/social/SimpleSignInAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/social/SingInUtils.java" />
         <option value="$PROJECT_DIR$/src/resources/spring/servlet-context.xml" />
@@ -280,20 +258,14 @@
         <option value="$PROJECT_DIR$/src/resources/internationalization/messages_en.properties" />
         <option value="$PROJECT_DIR$/src/resources/internationalization/messages_ua.properties" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/Contests/contestResults.jsp" />
+        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/RatingController.java" />
         <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/RuleController.java" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/tiles/tiles-definitions.xml" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/Contests/getContests.jsp" />
-        <option value="$PROJECT_DIR$/src/resources/hibernate/jdbc.properties" />
-        <option value="$PROJECT_DIR$/WebContent/resources/js/ckeditor/config.js" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/social/FacebookMailSender.java" />
         <option value="$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java" />
-        <option value="$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/form.tag" />
-        <option value="$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag" />
         <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp" />
-        <option value="$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java" />
+        <option value="$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp" />
       </list>
     </option>
   </component>
@@ -365,7 +337,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -408,13 +380,37 @@
             <path>
               <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
               <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="contests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="contests" type="462c0819:PsiDirectoryNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
@@ -428,14 +424,6 @@
               <item name="WebContent" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
-              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-              <item name="adminOptions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
@@ -445,15 +433,47 @@
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
               <item name="contests" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="tags" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="tags" type="462c0819:PsiDirectoryNode" />
+              <item name="contest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="tags" type="462c0819:PsiDirectoryNode" />
+              <item name="contest" type="462c0819:PsiDirectoryNode" />
+              <item name="taskCreate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NWCServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nwcserver" type="462c0819:PsiDirectoryNode" />
+              <item name="WebContent" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="tags" type="462c0819:PsiDirectoryNode" />
+              <item name="contest" type="462c0819:PsiDirectoryNode" />
+              <item name="taskView" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
@@ -485,8 +505,7 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543411625654" />
-    <property name="database.console.LAST_STATE" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -497,6 +516,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -673,6 +693,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -807,7 +828,9 @@
       <workItem from="1432659566259" duration="659000" />
       <workItem from="1432713132877" duration="5519000" />
       <workItem from="1432799627633" duration="10742000" />
-      <workItem from="1543403575697" duration="8005000" />
+      <workItem from="1543413208365" duration="132000" />
+      <workItem from="1543485521137" duration="2931000" />
+      <workItem from="1543491951561" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary="home test">
       <created>1429548355793</created>
@@ -956,63 +979,90 @@
       <option name="project" value="LOCAL" />
       <updated>1432718650619</updated>
     </task>
-    <task id="LOCAL-00022" summary="finish merge">
-      <created>1543403824513</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1543403824513</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="430063000" />
+    <option name="totallyTimeSpent" value="425442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Capture Tool" order="0" />
-      <window_info id="Image Layers" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.24307036" />
-      <window_info id="Structure" order="3" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Web" order="6" side_tool="true" />
-      <window_info id="Palette&#9;" order="7" />
-      <window_info anchor="bottom" id="Database Console" weight="0.329718" />
-      <window_info anchor="bottom" id="SonarQube" order="0" />
-      <window_info anchor="bottom" id="Database Changes" order="1" />
-      <window_info anchor="bottom" id="Message" order="2" />
-      <window_info anchor="bottom" id="Find" order="3" weight="0.3278867" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4952381" visible="true" weight="0.36984816" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.4273743" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Application Servers" order="9" weight="0.32897604" />
-      <window_info anchor="bottom" id="Changes" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50476193" side_tool="true" weight="0.37037036" />
-      <window_info anchor="bottom" id="IDEtalk Messages" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.49144384" weight="0.37960956" />
-      <window_info anchor="bottom" id="Java Enterprise" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.2472767" />
-      <window_info anchor="bottom" id="Terminal" order="16" />
-      <window_info anchor="bottom" id="Spring" order="17" />
-      <window_info anchor="right" id="Theme Preview" order="0" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
-      <window_info anchor="right" id="Designer" order="5" />
-      <window_info anchor="right" id="Palette" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" sideWeight="0.49916804" weight="0.15191898" />
-      <window_info anchor="right" id="IDEtalk" order="8" />
-      <window_info anchor="right" id="Database" order="9" visible="true" weight="0.19722815" />
-      <window_info anchor="right" id="Bean Validation" order="10" />
-      <window_info anchor="right" id="Coverage" order="11" sideWeight="0.50083196" side_tool="true" visible="true" weight="0.14940476" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18763326" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info id="Palette&#9;" order="5" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3278867" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4952381" weight="0.36984816" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4273743" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32897604" />
+      <window_info anchor="bottom" id="Changes" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50476193" side_tool="true" weight="0.37037036" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49144384" weight="0.4433551" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.2472767" />
+      <window_info anchor="bottom" id="Terminal" order="14" />
+      <window_info anchor="bottom" id="Spring" order="15" />
+      <window_info anchor="bottom" id="Database Changes" order="16" />
+      <window_info anchor="bottom" id="SonarQube" order="17" />
+      <window_info active="true" anchor="bottom" id="Database Console" order="18" visible="true" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" sideWeight="0.49916804" weight="0.15191898" />
+      <window_info anchor="right" id="IDEtalk" order="6" />
+      <window_info anchor="right" id="Database" order="7" visible="true" weight="0.32995737" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50083196" side_tool="true" visible="true" weight="0.14940476" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19404761" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Palette&#9;" order="3" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32805908" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33877996" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.30501089" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32897604" />
+      <window_info anchor="bottom" id="Application Servers" order="8" weight="0.32897604" />
+      <window_info anchor="bottom" id="Changes" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3278867" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.27109703" />
+      <window_info anchor="bottom" id="Terminal" order="13" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="14" />
+      <window_info anchor="bottom" id="Spring" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="IDEtalk" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.2125" />
+      <window_info anchor="right" id="Designer" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.27864584" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1050,15 +1100,43 @@
     <MESSAGE value="Connect facebook" />
     <MESSAGE value="add FacebookController" />
     <MESSAGE value="signIn" />
-    <MESSAGE value="ajax" />
     <MESSAGE value="finish merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish merge" />
+    <MESSAGE value="ajax" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/resources/spring/servlet-context.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/hibernate/dbConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/loggingAndRegistration/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/css/contests/contests-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/resources/css/rules/rules-style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1124,13 +1202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/templates/templateFull.jsp" />
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/sideMenu/contestMenu.jsp">
       <provider selected="true" editor-type-id="text-editor">
@@ -1188,8 +1259,8 @@
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/Contests/getContests.jsp" />
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tiles/tiles-definitions.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="198" column="112" selection-start-line="198" selection-start-column="112" selection-end-line="198" selection-end-column="112" />
+        <state relative-caret-position="680">
+          <caret line="208" column="76" lean-forward="true" selection-start-line="208" selection-start-column="76" selection-end-line="208" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -1197,154 +1268,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="24" selection-start-column="9" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/hibernate/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/ckeditor/ckeditorInit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/ckeditor/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="59" column="54" selection-start-line="59" selection-start-column="54" selection-end-line="59" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/social/FacebookMailSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskView/taskViewModal.tag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2cd74352-b900-4a3e-91ed-3d2a03ad0573/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestEditWatcherController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.1.2.RELEASE/spring-beans-4.1.2.RELEASE.jar!/org/springframework/beans/factory/annotation/Autowired.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ContestServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="51" column="83" lean-forward="true" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestPassController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="121" column="44" selection-start-line="121" selection-start-column="44" selection-end-line="121" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/service/ContestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/adminOptions/userEdit.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/form.tag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret column="29" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/ContestTags.tld">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="97" lean-forward="true" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.1.2.RELEASE/spring-webmvc-4.1.2.RELEASE.jar!/META-INF/spring-form.tld">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2008">
-          <caret line="1572" column="4" selection-start-line="1572" selection-start-column="4" selection-end-line="1572" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/contest">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1357,22 +1280,121 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/model/Contest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1659">
+        <state relative-caret-position="221">
           <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.1.2.RELEASE/spring-webmvc-4.1.2.RELEASE.jar!/META-INF/spring-form.tld">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="191" column="26" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="26" />
+        <state relative-caret-position="26724">
+          <caret line="1572" column="4" selection-start-line="1572" selection-start-column="4" selection-end-line="1572" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/ContestTags.tld">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/form.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-790">
+          <caret column="29" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/downloadTestFiles.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/inputField.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="97" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/adminOptions/users.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="10" lean-forward="true" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/createContest.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+        <state relative-caret-position="1989">
+          <caret line="246" column="25" lean-forward="true" selection-start-line="246" selection-start-column="25" selection-end-line="246" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskView/taskViewModal.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3502">
+          <caret line="238" column="9" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/contests/showContests.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="158" column="26" selection-start-line="158" selection-start-column="26" selection-end-line="158" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nwchecker/server/controller/ContestEditWatcherController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/taskCreate/testFiles.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/contest_users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskEditing.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/tasks/taskCreateAddLink.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/WEB-INF/tags/contest/contestUsersCheckList.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/resources/js/contests/showContests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2cd74352-b900-4a3e-91ed-3d2a03ad0573/schema/nwserver/table/contest">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
