@@ -30,7 +30,7 @@ public class Contest {
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("id")
 	private int id;
 

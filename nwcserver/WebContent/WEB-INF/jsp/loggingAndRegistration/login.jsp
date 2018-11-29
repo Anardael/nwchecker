@@ -7,7 +7,7 @@
 <html>
 <!--including head -->
 <body>
-	<form class="form-horizontal" action="<c:url value="/j_spring_security_check"/>" method="POST">
+	<form class="form-horizontal" action="<c:url value="/j_spring_security_check"/>" method="post">
 		<div class="form-group">
 			<label class="col-sm-4 control-label">
                 <spring:message code="login.username.caption" />:
