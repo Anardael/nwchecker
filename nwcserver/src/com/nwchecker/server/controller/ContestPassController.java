@@ -27,6 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.security.auth.Subject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <h1>Contest Pass Controller</h1> This spring controller contains mapped
  * methods, that allows users to pass contests and view contests results.
@@ -123,6 +127,9 @@ public class ContestPassController {
 	 * @param file
 	 *            File that contains user's source code that get solution of
 	 *            task problem
+	 * @param response
+	 *            HttpServletResponse, that is used to set favourite
+	 *            compiler cookie
 	 * @return Result data
 	 * @throws IOException
 	 *             If problems occurs while file sending/receiving
@@ -133,7 +140,8 @@ public class ContestPassController {
 	public @ResponseBody Map<String, Object> submitTask(Principal principal,
 			@RequestParam(value = "id") int taskId,
 			@RequestParam(value = "compilerId") int compilerId,
-			@RequestParam("file") MultipartFile file) throws IOException, ClassNotFoundException {
+			@RequestParam("file") MultipartFile file,
+			HttpServletResponse response ) throws IOException, ClassNotFoundException {
 		Map<String, Object> result = new LinkedHashMap<>();
 		if (file.getSize() > MAX_FILE_SIZE_BYTE) {
 			result.put("fileTooLarge", true);
@@ -151,7 +159,16 @@ public class ContestPassController {
 				}
 			}
 		}
+		//minus one because 'li' counting in html starts from 0
+        String favCompilerHtmlIndex = String.valueOf(compilerId - 1);
+
+		Cookie favCompilerCookie =
+				new Cookie("fav_compiler", String.valueOf(favCompilerHtmlIndex));
+		favCompilerCookie.setMaxAge(3_600);
+		response.addCookie(favCompilerCookie);
+
 		result = contestPassService.checkTask(contestPass, task, compilerId, file.getBytes(), user);
+
 		return result;
 	}
 }

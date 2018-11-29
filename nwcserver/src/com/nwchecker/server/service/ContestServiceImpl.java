@@ -8,6 +8,7 @@ import com.nwchecker.server.model.User;
 import com.nwchecker.server.utils.CheckSortType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -23,31 +24,34 @@ public class ContestServiceImpl implements ContestService {
     @Autowired
     private ContestDAO contestDAO;
 
+    @Transactional
     @Override
     public void addContest(Contest c) {
         contestDAO.addContest(c);
     }
-
+    @Transactional
     @Override
     public void updateContest(Contest c) {
         contestDAO.updateContest(c);
     }
-
+    @Transactional
     @Override
     public void mergeContest(Contest c) {
         contestDAO.mergeContest(c);
     }
-
+    @Transactional
     @Override
     public List<Contest> getContests() {
         return contestDAO.getContests();
     }
 
+    @Transactional
     @Override
     public Contest getContestByID(int id) {
         return contestDAO.getContestByID(id);
     }
 
+    @Transactional
     @Override
     public boolean checkIfUserHaveAccessToContest(String username, int contestId) {
         User teacher = userService.getUserByUsername(username);
@@ -61,11 +65,13 @@ public class ContestServiceImpl implements ContestService {
         return false;
     }
 
+    @Transactional
     @Override
     public List<Contest> getContestForRating() {
         return contestDAO.getContestsForRating();
     }
 
+    @Transactional
     @Override
     public List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username) {
         int userId = userDAO.getUserByUsername(username).getUserId();
@@ -103,6 +109,7 @@ public class ContestServiceImpl implements ContestService {
         return null;
     }
 
+    @Transactional
     @Override
     public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
         // if status notALL
@@ -113,6 +120,7 @@ public class ContestServiceImpl implements ContestService {
         }
     }
 
+    @Transactional
     @Override
     public Long getContestEndTime(Contest contest){
         Calendar endDate = Calendar.getInstance();
@@ -125,12 +133,13 @@ public class ContestServiceImpl implements ContestService {
         long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
         return gtmMillis;
     }
-
+    @Transactional
 	@Override
 	public Contest getNearestContest() {
 		return contestDAO.getNearestContest();
 	}
 
+    @Transactional
 	@Override
 	public Contest getLastArchivedContest() {
 	    return contestDAO.getLastArchivedContest();

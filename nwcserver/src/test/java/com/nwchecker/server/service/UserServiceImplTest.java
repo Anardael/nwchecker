@@ -178,10 +178,11 @@ public class UserServiceImplTest {
 	@Test
 	@DatabaseSetup("classpath:/forTests/dataset.xml")
 	public void testPagedUsers() {
+		assertEquals(1, userService.getPagedUsers(0, 1, null, null, "user1")
+				.size());
 		assertEquals(3, userService.getPagedUsers(1, 10, null, null, null)
 				.size());
-		assertEquals(1, userService.getPagedUsers(0, 0, null, null, "user1")
-				.size());
+
 	}
 
 	@Test

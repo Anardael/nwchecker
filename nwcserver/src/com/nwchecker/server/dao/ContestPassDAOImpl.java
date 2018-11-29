@@ -1,11 +1,13 @@
 package com.nwchecker.server.dao;
 
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.ContestPass;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,22 +38,37 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
 	@Override
     @Transactional
     public List<ContestPass> getContestPasses(int contestId) {
-        return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=?", contestId);
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("from ContestPass where contest_id =: contentId");
+        query.setParameter("contentId", contestId);
+        return (List<ContestPass>) query.list();
     }
     
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional
 	public List<ContestPass> getValidContestPasses(int contestId) {
-    	 return (List<ContestPass>) getHibernateTemplate().find("from ContestPass where contest_id=? and rank > 0", contestId);
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("from ContestPass where contest_id =: contentId and rank > 0");
+        query.setParameter("contentId", contestId);
+        return (List<ContestPass>) query.list();
 	}
 
     @SuppressWarnings("unchecked")
 	@Override
     @Transactional
     public ContestPass getContestPassByUserIdAndContestId(int userId, int contestId){
-        return ((List<ContestPass>) getHibernateTemplate()
-                .find("from ContestPass where contest_id=? and user_userId=?", contestId, userId)).get(0);
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("from ContestPass where contest_id=:contestId and user_userId=:user_userId");
+        query.setParameter("contestId", contestId);
+        query.setParameter("user_userId", userId);
+        return (ContestPass)query.list().get(0);
     }
 
 	
