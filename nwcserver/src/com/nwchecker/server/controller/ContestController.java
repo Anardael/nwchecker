@@ -193,6 +193,13 @@ public class ContestController {
                 contestAddForm.setUsers(exist.getUsers());
                 // set tasks:
                 contestAddForm.setTasks(exist.getTasks());
+                if (contestAddForm.getStatus() == Contest.Status.ARCHIVE){
+                    contestAddForm.setTitle(exist.getTitle());
+                    contestAddForm.setHidden(exist.isHidden());
+                    contestAddForm.setDuration(exist.getDuration());
+                    contestAddForm.setStarts(exist.getStarts());
+                    contestAddForm.setTypeId(exist.getTypeContest().getId());
+                }
                 // update contest:
                 contestService.mergeContest(contestAddForm);
             } else {
@@ -235,10 +242,11 @@ public class ContestController {
         }
 
         contestEditWatcherService.add(contestId, principal.getName());
-
-        model.addAttribute("contestModelForm", contestService.getContestByID(contestId));
+        Contest contestByID = contestService.getContestByID(contestId);
+        model.addAttribute("contestModelForm", contestByID);
         model.addAttribute("typeContestList", typeContestService.getAllTypeContest());
         model.addAttribute("pageName", "contest");
+        model.addAttribute("readonly", (contestByID.getStatus() == Contest.Status.ARCHIVE));
 
         return "nwcserver.contests.create";
     }
