@@ -235,11 +235,13 @@ label.btn-primary {
 						</a>
 					</c:forEach>
 				</ul>
+                <c:if test="${!readonly}">
 				<button id="addnewTaskButton"
 					class="col-sm-offset-6 col-sm-2
                                 btn btn-primary btn-sm">
 					<spring:message code="contestCreate.addNewTask" />
 				</button>
+                </c:if>
 			</div>
 		</div>
 		<div class="row">

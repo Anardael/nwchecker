@@ -23,7 +23,7 @@ $(document).ready(function () {
             case 'ARCHIVE': {
                 $('#archive-btn').show();
                 $('.open-btn').hide();
-                $('#edit-group').show();
+                showEditGroup(row['id']);
             } break;
             case 'PREPARING': {
                 $('#archive-btn').hide();
