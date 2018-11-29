@@ -134,10 +134,20 @@
 			</div>
 		</div>
 		<input type="submit" id="formUdpateBtn" formaction="changeUser.do"
-			hidden="true" />
-		<input type="submit" id="formDeleteBtn" formaction="deleteUser.do"
-			hidden="true" />
+			   hidden="true" />
 	</form:form>
+	<form:form id="userEditForm1" accept-charset="UTF-8"
+			   modelAttribute="userData" method="post" class="form-horizontal">
+		<div class="form-group">
+			<div class="col-sm-4">
+				<label class="control-label" hidden="true">${userData.username}</label>
+				<form:hidden path="username" />
+			</div>
+		</div>
+		<input type="submit" id="formDeleteBtn" formaction="deleteUser.do"
+			   hidden="true" />
+	</form:form>
+
 	<div class="col-sm-offset-4 ">
 		<div class="col-sm-3">
 			<button class="btn btn-info btn-block" id="updateBtn">

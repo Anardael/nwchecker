@@ -133,7 +133,34 @@ public class AdminOptionsController {
 		model.addAttribute("pageName", "admin");
 		return "nwcserver.adminOptions.userEdit";
 	}
-
+	/**
+	 * This mapped method used to delete user by username.
+	 * <p>
+	 * <b>Note:</b>Only ADMIN has rights to use this method.
+	 *
+	 * @param username
+	 *            Username of user that will be deleted from database
+	 * @param principal
+	 *            This is general information about user, who tries to call this
+	 *            method
+	 * @return Redirects to users list page
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+	public String deleteUser(@RequestParam("username") String username,
+							 Principal principal) {
+		LOG.info("\"" + principal.getName() + "\" tries to delete user \""
+				+ username + "\".");
+		if (!principal.getName().equals(username)) {
+			userService.deleteUserByName(username);
+			LOG.info("User \"" + username + "\" successfully deleted from DB.");
+			LOG.info("User \"" + username + "\" deleted by \""
+					+ principal.getName() + "\".");
+		} else {
+			LOG.warn("User can't delete them self!");
+		}
+		return "redirect:admin.do";
+	}
 	/**
 	 * This mapped method used to receive modified user's data and update this
 	 * user in database.
@@ -251,32 +278,5 @@ public class AdminOptionsController {
 		}
 	}
 
-	/**
-	 * This mapped method used to delete user by username.
-	 * <p>
-	 * <b>Note:</b>Only ADMIN has rights to use this method.
-	 *
-	 * @param username
-	 *            Username of user that will be deleted from database
-	 * @param principal
-	 *            This is general information about user, who tries to call this
-	 *            method
-	 * @return Redirects to users list page
-	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-	public String deleteUser(@RequestParam("username") String username,
-			Principal principal) {
-		LOG.info("\"" + principal.getName() + "\" tries to delete user \""
-				+ username + "\".");
-		if (!principal.getName().equals(username)) {
-			userService.deleteUserByName(username);
-			LOG.info("User \"" + username + "\" successfully deleted from DB.");
-			LOG.info("User \"" + username + "\" deleted by \""
-					+ principal.getName() + "\".");
-		} else {
-			LOG.warn("User can't delete them self!");
-		}
-		return "redirect:admin.do";
-	}
+
 }

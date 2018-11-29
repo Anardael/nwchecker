@@ -40,7 +40,7 @@ public class Task {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(JsonViews.ForArchive.class)
     @JsonProperty("id")
     private int id;
