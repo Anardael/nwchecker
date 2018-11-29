@@ -1,12 +1,14 @@
 package com.nwchecker.server.dao;
 
 
+import com.nwchecker.server.model.Contest;
 import com.nwchecker.server.model.Rule;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,20 +50,24 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
 	@Override
     @Transactional
     public List<Rule> getRulesByLanguageTag(String tag) {
-        return (List<Rule>) getHibernateTemplate().find("select r from Rule as r" +
-                " join r.language as rl" +
-                " where rl.tag=?", tag);
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("select r from Rule as r join r.language as rl where rl.tag=:tag");
+        query.setParameter("tag", tag);
+        return (List<Rule>) query.list();
     }
 
     @Override
     @Transactional
     public void updateRuleContentById(int id, String content) {
-        Session session = getHibernateTemplate().getSessionFactory().openSession();
-        //noinspection JpaQlInspection
-        session.createQuery("update Rule set content = :content where id = :id")
-                .setParameter("content", content)
-                .setParameter("id", id).executeUpdate();
-        session.close();
+        Session session = getHibernateTemplate().getSessionFactory()
+                .getCurrentSession();
+        Query query = session
+                .createQuery("update Rule set content = :content where id = :id")
+                .setParameter("id", id)
+                .setParameter("content", content);
+        query.executeUpdate();
     }
 
     @SuppressWarnings("unchecked")

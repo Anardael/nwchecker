@@ -39,7 +39,7 @@ public class ContestPass implements Comparable<ContestPass> {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int id;
 
