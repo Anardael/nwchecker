@@ -81,6 +81,10 @@ public class User {
 	@Column(name = "ban_time")
 	@JsonIgnore
 	private long banTime;
+	// Favourite locale - sets firsts when use login
+	@Column(name = "fav_locale")
+	@JsonIgnore
+	private String favLocale;
 	// Enabled user
 	@JsonIgnore
 	@Column(name = "enabled")
@@ -181,6 +185,10 @@ public class User {
 	public void setBanTime(long banTime) {
 		this.banTime = banTime;
 	}
+
+	public void setFavLocale(String favLocale){ this.favLocale = favLocale; }
+
+	public String getFavLocale(){ return favLocale; }
 
 	public boolean getEnabled() {
 		return enabled;

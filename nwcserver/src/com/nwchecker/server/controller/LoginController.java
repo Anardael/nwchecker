@@ -1,6 +1,7 @@
 package com.nwchecker.server.controller;
 
 import com.nwchecker.server.breadcrumb.annotations.Link;
+import com.nwchecker.server.configuration.ApplicationLocaleResolver;
 import com.nwchecker.server.listener.HttpSessionListenerImpl;
 import com.nwchecker.server.model.User;
 import com.nwchecker.server.service.UserService;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.Locale;
 
 /**
  * <h1>Login Controller</h1>
@@ -35,6 +38,8 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    ApplicationLocaleResolver localeResolver;
 
     /**
      * This mapped method used to login user in system.
@@ -66,9 +71,12 @@ public class LoginController {
         return "nwcserver.static.index";
     }
 
+    /**  Invokes after successful authentication */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
-    public String loginFacebookUser(Principal principal, HttpServletRequest request){
+    public String loginFacebookUser(Principal principal,
+                                    HttpServletRequest request,
+                                    HttpServletResponse response){
         User user = userService.getUserByUsername(principal.getName());
         HttpSession session = request.getSession();
 
@@ -76,6 +84,11 @@ public class LoginController {
         if(user.hasRole("ROLE_TEACHER")){
             HttpSessionListenerImpl.addSession(session.getId(), session);
         }
+        //setting locale
+        Locale localeFromCookie = localeResolver.getLocaleFromCookie(request);
+        localeResolver.setLocale(request, response,
+                                 (localeFromCookie == null) ? localeResolver.resolveLocale(request)
+                                                            : localeFromCookie);
         return "nwcserver.static.index";
     }
 }
