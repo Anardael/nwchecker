@@ -20,6 +20,27 @@ function allTasksComplete() {
     return (tasksCount == completeTasksCount);
 }
 
+function resolveFavCompiler(index) {
+    var compilerIndex = index;
+    var list = document.getElementsByClassName("dropdown-menu inner selectpicker").item(0);
+    // refreshing option statuses
+    list.childNodes.forEach(function(item){ dropAttrClass(item) });
+    //setting selected attr to already stored as cookie compiler li
+    list.childNodes.item(compilerIndex).setAttribute("class", "selected");
+    var compilerName = list.childNodes.item(compilerIndex).firstElementChild
+                                                          .firstElementChild
+                                                          .innerHTML;
+    //setting button title
+    var titleBtnClass = "btn dropdown-toggle form-control selectpicker btn-default";
+    document.getElementsByClassName(titleBtnClass).item(0)
+                                                  .firstElementChild
+                                                  .innerHTML = compilerName;
+}
+
+function dropAttrClass(entry) {
+    entry.removeAttribute("class");
+}
+
 function endContest() {
     BootstrapDialog.show({
         type:    BootstrapDialog.TYPE_INFO,
