@@ -12,7 +12,7 @@ public class Rule {
     @GeneratedValue
     private int id;
 
-    @Column(name = "content", length = 1024)
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

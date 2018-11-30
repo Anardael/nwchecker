@@ -41,9 +41,15 @@
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
                 <prop key="connection.characterEncoding">UTF-8</prop>
                 <prop key="hibernate.connection.Useunicode">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
             </props>
         </property>
     </bean>
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource" />
+        <property name="changeLog" value="classpath:liquibase/changelog-master.xml" />
+    </bean>
+
 </beans>

@@ -1,84 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="1" author="ReaktorDTR">
-        <comment>
-            Insert Users to DB
+	<changeSet id="2" author="Entro-yuhim">
+		<comment>
+            Create tables
         </comment>
-        <sql>
-            #create Admin
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('1', 'admin', 'Admin', 'admin@ua.ua',
-            '$2a$10$5uHAIiMg8TmCrsG8pLGNH.grGCujfeUK/YeMEqExkWHc//BTt7dwq', 'Administrators', 'Info about Admin', '0',
-            1);
+		<sql>
+		#create table compiler
+			CREATE TABLE `compiler` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`extension` VARCHAR(255) NULL DEFAULT NULL,
+			`name` VARCHAR(100) NOT NULL,
+			PRIMARY KEY (`id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
 
-            #create 2 teachers and 3 teachers with requests to role "Teacher"
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('2', 'teacher1', 'Teacher1', 'Teacher1@ua.ua',
-            '$2a$10$vEKi2nDhEZVthsCbZDFgN.gwYomwexzaD9hKbfjPjGthuemV2fyk6', 'Mathematics', 'Info about Teacher1', '0',
-            1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('3', 'teacher2', 'Teacher2', 'Teacher2@ua.ua',
-            '$2a$10$rlwAd/.KJcsdIT.IYhNj9OBC3p9gVmoFc61GJak8HGPKvs1vCjUf6', 'Computer science', 'Info about Teacher2',
-            '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('4', 'teacher3', 'Teacher3', 'Teacher3@ua.ua',
-            '$2a$10$xYzwYxth//WXSFxThk4p5.xNWdjLr9lv81H5dndNoErUOyZS/xi7i', 'Computer science', 'Info about Teacher3',
-            '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('5', 'teacher4', 'Teacher4', 'Teacher4@ua.ua',
-            '$2a$10$2Gjo9o1LfLzSIXsEYlD.Duau92FBarbw9WX5rAkJMPaTKpylw9wZK', 'Computer science', 'Info about Teacher4',
-            '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('6', 'teacher5', 'Teacher5', 'Teacher5@ua.ua',
-            '$2a$10$jiB0zPkSBMOtgId/SmuUweCW6j8WdxrTQxjpm.XvtOELa2SuHroty', 'Mathematics', 'Info about Teacher5', '0',
-            1);
+		#create table contest
+			CREATE TABLE `contest` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`description` TEXT NOT NULL,
+			`duration` DATETIME NULL DEFAULT NULL,
+			`hidden` BIT(1) NULL DEFAULT NULL,
+			`starts` DATETIME NULL DEFAULT NULL,
+			`status` VARCHAR(255) NULL DEFAULT NULL,
+			`title` VARCHAR(100) NOT NULL,
+			`typeContest_id` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKjflkcas42b1jrykuma7mlcw06` (`typeContest_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table contestpass
+			CREATE TABLE `contestpass` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`contestStatus` VARCHAR(255) NULL DEFAULT NULL,
+			`passed` INT(11) NULL DEFAULT NULL,
+			`passing` BIT(1) NULL DEFAULT NULL,
+			`rank` INT(11) NULL DEFAULT NULL,
+			`timePenalty` INT(11) NULL DEFAULT NULL,
+			`contest_id` INT(11) NULL DEFAULT NULL,
+			`user_userId` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKhqpvygfby8l64mwj1lk5pku7g` (`contest_id`),
+			INDEX `FKi2134etug7iirw194obhinnfj` (`user_userId`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table contest_users
+			CREATE TABLE `contest_users` (
+			`user_id` INT(11) NOT NULL,
+			`contest_id` INT(11) NOT NULL,
+			INDEX `FKs83p17nbeb4eemtel0nfrhkk3` (`contest_id`),
+			INDEX `FKswdyiqcrs9kfnx568f63ugeb` (`user_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table languages
+			CREATE TABLE `languages` (
+			`id` INT(11) NOT NULL,
+			`tag` VARCHAR(255) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table roles
+			CREATE TABLE `roles` (
+			`roleId` INT(11) NOT NULL AUTO_INCREMENT,
+			`role` VARCHAR(255) NULL DEFAULT NULL,
+			`userId` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`roleId`),
+			INDEX `FK2u9f7cdl1ykx0kh94nld86wn4` (`userId`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table rules
+			CREATE TABLE `rules` (
+			`id` INT(11) NOT NULL,
+			`content` TEXT NULL,
+			`language_id` INT(11) NULL DEFAULT NULL,
+			`typeContest_id` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKld9uwg1u8y70keb5k3jnn371y` (`language_id`),
+			INDEX `FKhv03ajdkmuksnm93193f0srl0` (`typeContest_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table task
+			CREATE TABLE `task` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`complexity` INT(11) NULL DEFAULT NULL,
+			`description` TEXT NOT NULL,
+			`forumLink` VARCHAR(500) NULL DEFAULT NULL,
+			`inputFileName` VARCHAR(60) NOT NULL,
+			`memoryLimit` INT(11) NULL DEFAULT NULL,
+			`outputFileName` VARCHAR(60) NOT NULL,
+			`rate` INT(11) NOT NULL,
+			`scriptForVerification` TEXT NULL,
+			`timeLimit` INT(11) NULL DEFAULT NULL,
+			`title` VARCHAR(100) NOT NULL,
+			`contest_id` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKnocto0uevfy66uyxk2yv1k93i` (`contest_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table taskdata
+			CREATE TABLE `taskdata` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`inputData` LONGBLOB NULL,
+			`outputData` LONGBLOB NULL,
+			`rate` INT(11) NOT NULL DEFAULT '1',
+			`task_id` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKm1c7kw0shxy7i2ewwp6v2jxc5` (`task_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table taskimages
+			CREATE TABLE `taskimages` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`image` TINYBLOB NULL,
+			`id_task` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FK3hn8a9l4yoabj2dggf6e6dswg` (`id_task`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table taskpass
+			CREATE TABLE `taskpass` (
+			`id` INT(11) NOT NULL,
+			`compilerMessage` VARCHAR(255) NULL DEFAULT NULL,
+			`executionTime` INT(11) NULL DEFAULT NULL,
+			`file` LONGBLOB NULL,
+			`memoryUsed` INT(11) NULL DEFAULT NULL,
+			`passed` BIT(1) NULL DEFAULT NULL,
+			`passedMinute` INT(11) NULL DEFAULT NULL,
+			`compiler` INT(11) NULL DEFAULT NULL,
+			`contestPass` INT(11) NULL DEFAULT NULL,
+			`task_id` INT(11) NULL DEFAULT NULL,
+			`userid` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKegpdw5bg7y4s1oo80qu6h8toa` (`compiler`),
+			INDEX `FKhtdjkis4xynnblo78ch411d2d` (`contestPass`),
+			INDEX `FKof3yhhftp9sgudsiu4jy84gqa` (`task_id`),
+			INDEX `FKr4i3hvhxjn7lussk60ct7dvaj` (`userid`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table tasktestresult
+			CREATE TABLE `tasktestresult` (
+			`id` INT(11) NOT NULL AUTO_INCREMENT,
+			`compilerMessage` VARCHAR(255) NULL DEFAULT NULL,
+			`executionTime` INT(11) NULL DEFAULT NULL,
+			`memoryUsed` INT(11) NULL DEFAULT NULL,
+			`rate` INT(11) NULL DEFAULT NULL,
+			`taskPassId` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKdy70yu3ebleeum5kwfgpt2alp` (`taskPassId`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table tasktheorylink
+			CREATE TABLE `tasktheorylink` (
+			`id` INT(11) NOT NULL,
+			`link` VARCHAR(255) NULL DEFAULT NULL,
+			`task_id` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			INDEX `FKciv1igx2h2yvyl2j1m69rpv9f` (`task_id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
 
-            #create 5 users
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('7', 'user1', 'User1', 'User1@ua.ua',
-            '$2a$10$2B8iOyGDQFupeR6UYmfC3OCyL6//u8Ce4t6fCu0DPVqthwA9VGMui', '', 'Info about User1', '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('8', 'user2', 'User2', 'User2@ua.ua',
-            '$$2a$10$nn2DKdcpyvyFmbU1jYIz0.rurMhf9GLNRVT.5DplLvYzdgKtOi9bO', '', 'Info about User2', '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('9', 'user3', 'User3', 'User3@ua.ua',
-            '$2a$10$MgXJlCSLiRRbss.UJsPd/emuJd5wkux3Jf6bkA89IpUvAhz.rdDsy', '', 'Info about User3', '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('10', 'user4', 'User4', 'User4@ua.ua',
-            '$2a$10$7Wz.kkKH9c.rQJXNVFbr6OjzedzpmfmEYJrkJWEoOQPrgGKEoyLCu', '', 'Info about User4', '0', 1);
-            INSERT INTO `users` (userId, username, display_name, email, password, department, info, ban_time, enabled)
-            VALUES ('11', 'user5', 'User5', 'User5@ua.ua',
-            '$2a$10$/Rp3skF43HIw2mjEanwV4.98yjcpEcs5La3L7q/6lrgWHmSzyyTLe', '', 'Info about User5', '0', 1);
+		#create table type_contest
+			CREATE TABLE `type_contest` (
+			`id` INT(11) NOT NULL,
+			`dynamic` BIT(1) NULL DEFAULT NULL,
+			`name` VARCHAR(255) NULL DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
+		#create table userrequest
+			CREATE TABLE `userrequest` (
+			`requestId` INT(11) NOT NULL AUTO_INCREMENT,
+			`request` VARCHAR(255) NULL DEFAULT NULL,
+			`userId` INT(11) NULL DEFAULT NULL,
+			PRIMARY KEY (`requestId`),
+			INDEX `FK2f92jvxk5wxn0lrh3dsljpwpv` (`userId`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
 
-            #set Admin rights
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('1', 'ROLE_ADMIN', '1');
+		#create table users
+			CREATE TABLE `users` (
+			`userId` INT(11) NOT NULL AUTO_INCREMENT,
+			`ban_time` BIGINT(20) NULL DEFAULT NULL,
+			`department` VARCHAR(255) NULL DEFAULT NULL,
+			`display_name` VARCHAR(255) NULL DEFAULT NULL,
+			`email` VARCHAR(255) NULL DEFAULT NULL,
+			`enabled` BIT(1) NULL DEFAULT NULL,
+			`info` VARCHAR(255) NULL DEFAULT NULL,
+			`password` VARCHAR(255) NULL DEFAULT NULL,
+			`username` VARCHAR(255) NULL DEFAULT NULL,
+			PRIMARY KEY (`userId`)
+			)
+			COLLATE='utf8_general_ci'
+			ENGINE=MyISAM
+			;
 
-            #set Teachers rights
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('2', 'ROLE_TEACHER', '2');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('3', 'ROLE_TEACHER', '3');
 
-            #set User rights
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('4', 'ROLE_USER', '4');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('5', 'ROLE_USER', '5');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('6', 'ROLE_USER', '6');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('7', 'ROLE_USER', '7');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('8', 'ROLE_USER', '8');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('9', 'ROLE_USER', '9');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('10', 'ROLE_USER', '10');
-            INSERT INTO `roles` (roleId, role, userId) VALUES ('11', 'ROLE_USER', '11');
-
-            #set user request to role "Teacher"
-            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('1', 'WANT_ROLE_TEACHER', '4');
-            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('2', 'WANT_ROLE_TEACHER', '5');
-            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('3', 'WANT_ROLE_TEACHER', '6');
-            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('4', 'WANT_ROLE_TEACHER', '8');
-            INSERT INTO `UserRequest` (requestId, request, userId) VALUES ('5', 'WANT_ROLE_TEACHER', '10');
-        </sql>
-    </changeSet>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
