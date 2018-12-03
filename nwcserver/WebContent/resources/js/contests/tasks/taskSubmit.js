@@ -1,3 +1,6 @@
+var FILE_IS_SAVED_UNCHECKED_TITLE;
+var FILE_IS_SAVED_UNCHECKED_MESSAGE;
+
 var FILE_NOT_SELECTED_TITLE;
 var FILE_NOT_SELECTED_MESSAGE;
 
@@ -81,8 +84,12 @@ function showSubmitResult(result) {
 		return;
 	}
 	if(result["fileTooLarge"]){
-		(FILE_TOO_LARGE_TITLE, FILE_TOO_LARGE_MESSAGE);
+		showErrorDialog(FILE_TOO_LARGE_TITLE, FILE_TOO_LARGE_MESSAGE);
 		return;
+	}
+	if (result["saveInfo"]) {
+        showResultSuccess(FILE_IS_SAVED_UNCHECKED_MESSAGE + result["saveInfo"]);
+        return;
 	}
 	var message = RESULT_SUCCESSFUL +' <b>' + result['successful'] + '</b><br/>' + RESULT_TOTAL + ' <b>'+ result['total']+'</b>';
 	if (DYNAMIC.toLowerCase() == "true"){
