@@ -29,10 +29,10 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-                         DbUnitTestExecutionListener.class})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:/forTests/context.xml"})
+//@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+ //                        DbUnitTestExecutionListener.class})
 public class ScheduleServiceImplTest {
 
     @Autowired
@@ -44,7 +44,7 @@ public class ScheduleServiceImplTest {
     /**
      * Test of refresh method, of class ScheduleServiceImpl.
      */
-    @Test
+   /* @Test
     @DatabaseSetup("classpath:/forTests/dataset.xml")
     public void testRefresh() throws Exception {
         Contest contest = contestService.getContestByID(1);
@@ -64,5 +64,5 @@ public class ScheduleServiceImplTest {
             Thread.currentThread().interrupt();
         }
         assertEquals(Contest.Status.ARCHIVE, contestService.getContestByID(1).getStatus());
-    }
+    }*/
 }
