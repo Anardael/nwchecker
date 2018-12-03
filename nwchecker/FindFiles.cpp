@@ -38,7 +38,7 @@ FileList findFiles(string dir, string filemask)
 	dirent*p;
 	if (!td)
 		return res;
-	while (p=readdir(td))
+	while ((p=readdir(td)))
 	{
 		string dirname=p->d_name;
 		if (!isDir(dirname)&&matchMask(dirname, filemask))
@@ -56,7 +56,7 @@ FileList findConfigs(string dir)
 	if (!td)
 		return res;
 
-	while (p=readdir(td))
+	while ((p=readdir(td)))
 	{
 		string dirname=p->d_name;
 		//file name should not be compilers.conf, not a dir and match the mask
@@ -82,7 +82,7 @@ FileList findRecursive(string dir, string filemask)
 	dirent* p;
 	if (!td)
 		return res;
-	while (p=readdir(td))
+	while ((p=readdir(td)))
 	{
 		string dirname=p->d_name;
 		if (dirname=="."||dirname==".."||dirname==".svn")
@@ -120,7 +120,7 @@ void clearDir(string dir, string exclude)
 		return;
 	for (unsigned int i=0; i<exclude.size(); i++)
 		exclude[i]=toupper(exclude[i]);
-	while (p=readdir(td))
+	while ((p=readdir(td)))
 	{
 		string tmp(p->d_name);
 		for (unsigned int i=0; i<tmp.size(); i++)

@@ -3,6 +3,7 @@
 #include<iostream>
 #include<map>
 #include<fstream>
+#include<windows.h>
 
 using namespace std;
 typedef vector<string> FileList;
