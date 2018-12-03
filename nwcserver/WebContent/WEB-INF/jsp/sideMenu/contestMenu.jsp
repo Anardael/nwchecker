@@ -12,6 +12,7 @@
     </div>
 </c:if>
 <div id="tasks">
+    <div style="margin-bottom: 20px; font-size: 16px"><c:out value="${contest.title}" /> <b> <c:out value="${contest.typeContest.name}" /></b></div>
     <ul class="nav nav-pills nav-stacked">
         <c:url var="taskURL" value="/passTask.do?id=" scope="page" />
         <c:set var="count" value="0" scope="page" />

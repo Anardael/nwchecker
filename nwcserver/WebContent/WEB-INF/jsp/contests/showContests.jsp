@@ -8,15 +8,19 @@
 <spring:url value="/resources/" var="resources"/>
 
 <html>
-<script type="text/javascript">
-    var statusCaptionArchive = "<spring:message code="listContests.status.archive" />";
-    var statusCaptionGoing = "<spring:message code="listContests.status.going" />";
-    var statusCaptionPreparing = "<spring:message code="listContests.status.preparing" />";
-    var statusCaptionRelease = "<spring:message code="listContests.status.release" />";
-    var successCaption = "<spring:message code="success.caption"/>";
-    var errorLabel = "<spring:message code="error.caption" />";
-    var contestId = 0;
-</script>
+    <script type="text/javascript">
+    	var statusCaptionArchive = "<spring:message code="listContests.status.archive" />";
+    	var statusCaptionGoing = "<spring:message code="listContests.status.going" />";
+    	var statusCaptionPreparing = "<spring:message code="listContests.status.preparing" />";
+    	var statusCaptionRelease = "<spring:message code="listContests.status.release" />";
+        var successCaption = "<spring:message code="success.caption"/>";
+        var errorLabel = "<spring:message code="error.caption" />";
+        var contestId = 0;
+
+        function typeFormatter(value, row){
+            return row.type.name;
+        }
+    </script>
 
 <div class="pull-right" style="margin-top: 10px">
     <security:authorize access="hasRole('ROLE_TEACHER')">
@@ -74,6 +78,9 @@
         <th data-field="status" data-align="center" data-sortable="true" data-width="100"
             data-formatter="statusFormatter">
             <spring:message code="listContests.contests.tableHeader.status"/>
+        </th>
+        <th data-field="type.name" data-align="center" data-formatter="typeFormatter">
+            <spring:message code="listContests.contests.tableHeader.type" />
         </th>
     </tr>
     </thead>
