@@ -26,7 +26,9 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     public void addContest(Contest c) { getHibernateTemplate().save(c);
     }
 
+
     @Override
+    @Transactional
     public void updateContest(Contest c) {
         getHibernateTemplate().saveOrUpdate(c);
     }
