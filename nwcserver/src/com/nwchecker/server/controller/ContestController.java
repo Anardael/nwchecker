@@ -112,7 +112,7 @@ public class ContestController {
 
         List<TypeContest> typeContestList= typeContestService.getAllTypeContest();
         model.addAttribute("typeContestList", typeContestList);
-
+        model.addAttribute("readonly", false);
         return "nwcserver.contests.create";
     }
 
