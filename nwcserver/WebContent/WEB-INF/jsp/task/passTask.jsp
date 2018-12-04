@@ -10,6 +10,8 @@
 <html>
 
 <script type="text/javascript">
+    FILE_IS_SAVED_UNCHECKED_MESSAGE = '<spring:message code="contest.passing.saveInfoDialog.message"/>';
+
 	FILE_NOT_SELECTED_TITLE = '<spring:message code="contest.passing.fileNotSelectedDialog.title"/>';
 	FILE_NOT_SELECTED_MESSAGE = '<spring:message code="contest.passing.fileNotSelectedDialog.message"/>';
 

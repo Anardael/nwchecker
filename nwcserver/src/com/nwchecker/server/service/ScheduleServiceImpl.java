@@ -1,15 +1,14 @@
 package com.nwchecker.server.service;
 
 import com.nwchecker.server.dao.ContestDAO;
-import com.nwchecker.server.model.Contest;
+import com.nwchecker.server.model.*;
 import com.nwchecker.server.utils.ContestComparator;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +26,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Autowired
 	private TaskScheduler taskScheduler;
+
+	@Autowired
+	private TaskSolutionService taskSolutionService;
+
+	@Autowired
+	private ContestPassService contestPassService;
 
 	private ScheduledFuture<?> nextTaskExecution;
 
@@ -88,6 +93,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public void finishContest(Contest contest) {
+		checkTaskSolutions(contest);
 		contest.setStatus(Contest.Status.ARCHIVE);
 		contestDAO.updateContest(contest);
 		scoreCalculationService.calculateScore(contest.getId());
@@ -100,5 +106,32 @@ public class ScheduleServiceImpl implements ScheduleService {
 		contestDAO.updateContest(contest);
 		LOG.debug("Contest (id=" + contest.getId()
 				+ ") changed status to GOING");
+	}
+
+	private void checkTaskSolutions(Contest contest) {
+		List <TaskSolution> taskSolutions =
+				taskSolutionService.getTaskSolutionsByContestId(contest.getId());
+
+		for (TaskSolution taskSolution: taskSolutions) {
+			ContestPass contestPass = null;
+
+			Task task = taskSolution.getTask();
+			User user = taskSolution.getUser();
+
+			if (task.getContest().getStatus() == Contest.Status.GOING) {
+				// check if user contains contestPass:
+				for (ContestPass c : user.getContestPassList()) {
+					if (c.getContest().equals(task.getContest())) {
+						contestPass = c;
+					}
+				}
+			}
+
+			try {
+				contestPassService.checkTask(contestPass, task, taskSolution.getCompiler().getId(), taskSolution.getFile(), user);
+			} catch (ClassNotFoundException | IOException e){
+				LOG.error("Check task solution failed", e);
+			}
+		}
 	}
 }

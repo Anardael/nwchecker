@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="juliaerler1993">
+        <comment>
+            preparing DB
+        </comment>
+        <sql>
+
+            CREATE TABLE IF NOT EXISTS `tasksolution` (
+            `id` INT(11) NOT NULL,
+            `file` LONGBLOB NULL,
+            `checked` BIT(1) NULL DEFAULT NULL,
+            `contest` INT(11) NULL DEFAULT NULL,
+            `compiler` INT(11) NULL DEFAULT NULL,
+            `user` INT(11) NULL DEFAULT NULL,
+            `task` INT(11) NULL DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            INDEX `fk_tasksolution_contest_idx` (`contest`),
+            INDEX `fk_tasksolution_compiler1_idx` (`compiler`),
+            INDEX `fk_tasksolution_users1_idx` (`user`),
+            INDEX `fk_tasksolution_task1_idx` (`task`),
+            )
+            COLLATE='utf8_general_ci'
+            ENGINE = MyISAM
+            ;
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

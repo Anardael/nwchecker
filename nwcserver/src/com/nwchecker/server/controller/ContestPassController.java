@@ -2,21 +2,9 @@ package com.nwchecker.server.controller;
 
 import com.nwchecker.server.breadcrumb.annotations.Link;
 import com.nwchecker.server.dao.CompilerDAO;
-import com.nwchecker.server.model.Contest;
-import com.nwchecker.server.model.ContestPass;
-import com.nwchecker.server.model.Task;
-import com.nwchecker.server.model.User;
-import com.nwchecker.server.service.ContestPassService;
-import com.nwchecker.server.service.ContestService;
-import com.nwchecker.server.service.TaskPassService;
-import com.nwchecker.server.service.TaskService;
-import com.nwchecker.server.service.UserService;
-
-import java.io.IOException;
-import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.nwchecker.server.model.Compiler;
+import com.nwchecker.server.model.*;
+import com.nwchecker.server.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * <h1>Contest Pass Controller</h1> This spring controller contains mapped
@@ -59,6 +50,8 @@ public class ContestPassController {
 	private TaskPassService taskPassService;
 	@Autowired
 	private ContestService contestService;
+	@Autowired
+    private TaskSolutionService taskSolutionService;
 
 	@Link(label = "task.caption", family = "contests", parent = "contest.caption")
 	@PreAuthorize("hasRole('ROLE_USER')")
@@ -142,33 +135,66 @@ public class ContestPassController {
 			@RequestParam(value = "compilerId") int compilerId,
 			@RequestParam("file") MultipartFile file,
 			HttpServletResponse response ) throws IOException, ClassNotFoundException {
+        saveFavCompilerCookie(response, compilerId);
 		Map<String, Object> result = new LinkedHashMap<>();
 		if (file.getSize() > MAX_FILE_SIZE_BYTE) {
 			result.put("fileTooLarge", true);
 			return result;
 		}
+
 		Task task = taskService.getTaskById(taskId);
 		User user = userService.getUserByUsername(principal.getName());
-		// check access:
-		ContestPass contestPass = null;
-		if (task.getContest().getStatus() == Contest.Status.GOING) {
-			// check if user contains contestPass:
-			for (ContestPass c : user.getContestPassList()) {
-				if (c.getContest().equals(task.getContest())) {
-					contestPass = c;
+
+		if (task.getContest().getStatus() != Contest.Status.GOING) {
+			result.put("accessDenied", true);
+
+		} else if (task.getContest().getTypeContest().getName().equals("PC-UA")){
+
+			TaskSolution taskSolution = taskSolutionService.getExistingTaskSolution(user, task);
+
+			// Solution not found in database
+			if (taskSolution == null) {
+				Compiler compiler = compilerService.getCompilerById(compilerId);
+
+				taskSolution = new TaskSolution();
+				taskSolution.setFile(file.getBytes());
+				taskSolution.setContest(task.getContest());
+				taskSolution.setCompiler(compiler);
+				taskSolution.setUser(user);
+				taskSolution.setTask(task);
+
+				taskSolutionService.addTaskSolution(taskSolution);
+				result.put("saveInfo", "NEW");
+				return result;
+			}
+
+			// Update existing solution
+			taskSolution.setFile(file.getBytes());
+			taskSolutionService.updateTaskSolution(taskSolution);
+
+			result.put("saveInfo", "UPDATE");
+		} else {
+			ContestPass contestPass = null;
+			if (task.getContest().getStatus() == Contest.Status.GOING) {
+				// check if user contains contestPass:
+				for (ContestPass c : user.getContestPassList()) {
+					if (c.getContest().equals(task.getContest())) {
+						contestPass = c;
+					}
 				}
 			}
+			result = contestPassService.checkTask(contestPass, task, compilerId, file.getBytes(), user);
 		}
-		//minus one because 'li' counting in html starts from 0
-        String favCompilerHtmlIndex = String.valueOf(compilerId - 1);
-
-		Cookie favCompilerCookie =
-				new Cookie("fav_compiler", String.valueOf(favCompilerHtmlIndex));
-		favCompilerCookie.setMaxAge(3_600);
-		response.addCookie(favCompilerCookie);
-
-		result = contestPassService.checkTask(contestPass, task, compilerId, file.getBytes(), user);
-
 		return result;
 	}
+
+	private void saveFavCompilerCookie(HttpServletResponse response, int compilerId) {
+        //minus one because 'li' counting in html starts from 0
+        String favCompilerHtmlIndex = String.valueOf(compilerId - 1);
+
+        Cookie favCompilerCookie =
+                new Cookie("fav_compiler", String.valueOf(favCompilerHtmlIndex));
+        favCompilerCookie.setMaxAge(3_600);
+        response.addCookie(favCompilerCookie);
+    }
 }
