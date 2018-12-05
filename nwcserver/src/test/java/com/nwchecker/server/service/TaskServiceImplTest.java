@@ -75,6 +75,7 @@ public class TaskServiceImplTest {
 		task.setComplexity(5);
 		task.setContest(taskService.getTaskById(3).getContest());
 		task.setDescription("this is a description.");
+		task.setDescriptionEN("this is a description in English.");
 		task.setOutputFileName("output");
 		task.setInputFileName("input");
 		taskService.addTask(task);

@@ -77,6 +77,11 @@ public class Task {
     @NotEmpty
     private String description;
 
+    @JsonView(JsonViews.SingleTask.class)
+    @JsonProperty("descriptionEN")
+    @Column(name = "descriptionEN", columnDefinition = "TEXT")
+    private String descriptionEN;
+
     @Column(name = "inputFileName")
     @NotEmpty
     @Size(max = 60)
@@ -248,4 +253,12 @@ public class Task {
 	public void setTaskPassList(List<TaskPass> taskPassList) {
 		this.taskPassList = taskPassList;
 	}
+
+    public String getDescriptionEN() {
+        return descriptionEN;
+    }
+
+    public void setDescriptionEN(String descriptionEN) {
+        this.descriptionEN = descriptionEN;
+    }
 }
