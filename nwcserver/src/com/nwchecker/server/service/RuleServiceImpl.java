@@ -6,10 +6,12 @@ import com.nwchecker.server.model.Rule;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("RuleService")
+@Transactional
 public class RuleServiceImpl implements RuleService {
     private static final Logger LOG = Logger.getLogger(RuleServiceImpl.class);
 

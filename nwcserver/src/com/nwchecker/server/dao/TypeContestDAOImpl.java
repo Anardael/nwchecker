@@ -18,31 +18,31 @@ public class TypeContestDAOImpl extends HibernateDaoSupport implements TypeConte
     }
 
     @Override
-    @Transactional
+     
     public void createType(TypeContest typeContest) {
         getHibernateTemplate().save(typeContest);
     }
 
     @Override
-    @Transactional
+     
     public TypeContest readTypeById(int id) {
         return getHibernateTemplate().load(TypeContest.class, id);
     }
 
     @Override
-    @Transactional
+     
     public void updateType(TypeContest typeContest) {
         getHibernateTemplate().update(typeContest);
     }
 
     @Override
-    @Transactional
+     
     public void deleteTypeById(int id) {
         getHibernateTemplate().delete(getHibernateTemplate().load(TypeContest.class, id));
     }
 
     @Override
-    @Transactional
+     
     public List<TypeContest> getAllTypes() {
         @SuppressWarnings("unchecked")   
                 List<TypeContest> result = (List<TypeContest>) getHibernateTemplate().find("from TypeContest");

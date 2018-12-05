@@ -6,6 +6,7 @@ import com.nwchecker.server.utils.ContestComparator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 
+import static org.springframework.context.annotation.ScopedProxyMode.INTERFACES;
+
 @Service(value = "ScheduleService")
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
 	@Autowired
@@ -95,7 +99,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 				+ ") changed status to ARCHIVE");
 	}
 
-	private void startContest(Contest contest) {
+	@Override
+	public void startContest(Contest contest) {
 		contest.setStatus(Contest.Status.GOING);
 		contestDAO.updateContest(contest);
 		LOG.debug("Contest (id=" + contest.getId()

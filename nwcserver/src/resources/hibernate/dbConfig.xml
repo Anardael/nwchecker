@@ -8,8 +8,9 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Configuring transaction manager to use @Transactional annotation -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
-        
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+
     <!-- Transaction manager -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">

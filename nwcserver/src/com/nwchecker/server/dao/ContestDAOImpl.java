@@ -26,8 +26,8 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     public void addContest(Contest c) { getHibernateTemplate().save(c);
     }
 
-    @Transactional
     @Override
+    
     public void updateContest(Contest c) {
         getHibernateTemplate().saveOrUpdate(c);
     }
@@ -44,7 +44,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
         return result;
     }
 
-    @Transactional
+    
     @Override
     public Contest getContestByID(int id) {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -58,7 +58,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+    
     public List<Contest> getContestByStatus(Contest.Status status) {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -70,7 +70,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+    
     public List<Contest> getContestsForRating() {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -83,7 +83,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getUnhiddenContests() {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -95,7 +95,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getHiddenContestsByUserId(int userId) {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -108,7 +108,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getHiddenContestsByUserIdAndStatus(int userId, Contest.Status status) {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -123,7 +123,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getUnhiddenContestsByUserId(int userId) {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -143,7 +143,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getUnhiddenContestsByUserIdAndStatus(int userId, Contest.Status status) {
         List<Contest> result = (List<Contest>) getHibernateTemplate().find("select c from Contest as c join c.users as cu" +
@@ -154,7 +154,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
     }
 
     @SuppressWarnings("unchecked")
-	@Transactional
+	
     @Override
     public List<Contest> getUnhiddenContestsByStatus(Contest.Status status) {
         Session session = getHibernateTemplate().getSessionFactory()
@@ -168,7 +168,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+    
     public Contest getNearestContest() {
         List <Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where status='RELEASE' and hidden=false order by starts asc");
         return result.isEmpty() ? null : result.get(0);
@@ -176,7 +176,7 @@ public class ContestDAOImpl extends HibernateDaoSupport implements ContestDAO {
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+    
     public Contest getLastArchivedContest(){
         List <Contest> result = (List<Contest>) getHibernateTemplate().find("from Contest where status='ARCHIVE' order by starts desc");
         return result.isEmpty() ? null : result.get(0);
