@@ -222,6 +222,7 @@
 			`info` VARCHAR(255) NULL DEFAULT NULL,
 			`password` VARCHAR(255) NULL DEFAULT NULL,
 			`username` VARCHAR(255) NULL DEFAULT NULL,
+			`fav_locale` CHAR(2) NULL DEFAULT NULL,
 			PRIMARY KEY (`userId`)
 			)
 			COLLATE='utf8_general_ci'
