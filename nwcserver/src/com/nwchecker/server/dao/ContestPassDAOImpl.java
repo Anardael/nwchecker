@@ -22,13 +22,13 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     }
 
     @Override
-    @Transactional
+     
     public void saveContestPass(ContestPass contestPass) {
         getHibernateTemplate().save(contestPass);
     }
 
     @Override
-    @Transactional
+     
     public void updateContestPass(ContestPass contestPass) {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.update(contestPass);        		
@@ -36,7 +36,7 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+     
     public List<ContestPass> getContestPasses(int contestId) {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -48,7 +48,7 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
     
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+     
 	public List<ContestPass> getValidContestPasses(int contestId) {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -60,7 +60,7 @@ public class ContestPassDAOImpl extends HibernateDaoSupport implements ContestPa
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+     
     public ContestPass getContestPassByUserIdAndContestId(int userId, int contestId){
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.nwchecker.server.dao.TaskPassDAO;
 import com.nwchecker.server.json.TaskPassJson;
 import com.nwchecker.server.model.TaskPass;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class TaskPassServiceImpl implements TaskPassService {
 
 	@Autowired

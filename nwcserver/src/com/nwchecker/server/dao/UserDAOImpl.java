@@ -24,7 +24,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository("userDAO")
-@Transactional
+ 
 public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@Autowired
@@ -143,7 +143,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	@Transactional
+	 
 	public Long getRecordCount(String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();
@@ -172,7 +172,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-    @Transactional
+     
 	@Override
 	public List<User> getPagedUsers(int startIndex,
 			int pageSize, String sortingColumn, String sortingOrder, String filter) {
@@ -203,7 +203,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
+	 
 	public List<User> getPagedUsers(int startIndex, int pageSize) {
 		Session session = getHibernateTemplate().getSessionFactory()
 				.getCurrentSession();

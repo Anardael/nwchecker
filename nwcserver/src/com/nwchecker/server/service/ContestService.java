@@ -88,7 +88,7 @@ public interface ContestService {
 	 */
 
 	Contest getLastArchivedContest();
-	
+
 	List<Contest> getContestsListByHiddenStatusUsername(String stringHidden,
 			String stringStatus, String username);
 

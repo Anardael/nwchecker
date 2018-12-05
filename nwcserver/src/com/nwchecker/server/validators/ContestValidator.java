@@ -45,7 +45,7 @@ public class ContestValidator implements Validator {
         if (errors.hasFieldErrors("starts")) {
             errors.rejectValue("starts", "Pattern.starts");
         }
-        if (c.getStarts()!= null && c.getStarts().getTime() < (System.currentTimeMillis())) {
+        if (c.getStatus() != Contest.Status.ARCHIVE && c.getStarts()!= null && c.getStarts().getTime() < (System.currentTimeMillis())) {
             errors.rejectValue("starts", "Contest.startTime.less");
         }
         

@@ -8,6 +8,7 @@ import com.nwchecker.server.model.TaskTestResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 
 @Service
+@Transactional
 public class ScoreCalculationServiceImpl implements ScoreCalculationService {
 	@Autowired
 	private ContestService contestService;

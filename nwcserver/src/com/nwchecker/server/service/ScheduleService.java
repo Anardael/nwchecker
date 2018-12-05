@@ -27,4 +27,6 @@ public interface ScheduleService {
 
 	public void finishContest(Contest contest);
 
+	void startContest(Contest contest);
+
 }

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service(value = "TaskPassService")
+@Transactional
 public class ContestPassServiceImpl implements ContestPassService {
 	@Autowired
 	private UserDAO userDAO;
@@ -51,7 +52,7 @@ public class ContestPassServiceImpl implements ContestPassService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
+	 
 	public Map<String, Object> checkTask(ContestPass contestPass, Task task,
 			int compilerId, byte[] userSolution, User user) throws ClassNotFoundException, IOException {
 		if ((contestPass == null)

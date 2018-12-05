@@ -30,7 +30,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	 
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskIdSorted(int id,
 			int startIndex, int pageSize, String sorting) {
@@ -49,7 +49,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	 
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
 			int pageSize, String sortingColumn, String sortingOrder,
@@ -81,7 +81,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	 
 	@Override
 	public List<TaskPass> getPaginatedTaskPassByTaskId(int id, int startIndex,
 			int pageSize) {
@@ -94,7 +94,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return (List<TaskPass>) query.list();
 	}
 
-	@Transactional
+	 
 	@Override
 	public Long getTaskPassEntryCount(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()
@@ -106,7 +106,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return size;
 	}
 
-	@Transactional
+	 
 	@Override
 	public Long getTaskPassEntryCount(int id, String filter) {
 		Session session = getHibernateTemplate().getSessionFactory()
@@ -124,7 +124,7 @@ public class TaskPassDAOImpl extends HibernateDaoSupport implements TaskPassDAO 
 		return size;
 	}
 
-	@Transactional
+	 
 	@Override
 	public Long getSuccessfulTaskPassEntryCount(int id) {
 		Session session = getHibernateTemplate().getSessionFactory()

@@ -23,32 +23,32 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
     }
 
     @Override
-    @Transactional
+     
     public void createRule(Rule rule) {
         getHibernateTemplate().save(rule);
     }
 
     @Override
-    @Transactional
+     
     public Rule readRuleById(int id) {
         return getHibernateTemplate().load(Rule.class, id);
     }
 
     @Override
-    @Transactional
+     
     public void updateRule(Rule rule) {
         getHibernateTemplate().update(rule);
     }
 
     @Override
-    @Transactional
+     
     public void deleteRuleById(int id) {
         getHibernateTemplate().delete(getHibernateTemplate().load(Rule.class, id));
     }
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+     
     public List<Rule> getRulesByLanguageTag(String tag) {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -59,7 +59,7 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
     }
 
     @Override
-    @Transactional
+     
     public void updateRuleContentById(int id, String content) {
         Session session = getHibernateTemplate().getSessionFactory()
                 .getCurrentSession();
@@ -72,7 +72,7 @@ public class RuleDAOImpl extends HibernateDaoSupport implements RuleDAO {
 
     @SuppressWarnings("unchecked")
 	@Override
-    @Transactional
+     
     public List<Rule> getAllRules() {
         List<Rule> result = (List<Rule>) getHibernateTemplate().find("from Rule");
         return result;

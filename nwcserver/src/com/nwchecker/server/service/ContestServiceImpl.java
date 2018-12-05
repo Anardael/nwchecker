@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class ContestServiceImpl implements ContestService {
 
     @Autowired
@@ -24,35 +25,35 @@ public class ContestServiceImpl implements ContestService {
     @Autowired
     private ContestDAO contestDAO;
 
-    @Transactional
-    @Override
+    
+    @Override 
     public void addContest(Contest c) {
         contestDAO.addContest(c);
     }
-    @Transactional
-    @Override
+    
+    @Override 
     public void updateContest(Contest c) {
         contestDAO.updateContest(c);
     }
-    @Transactional
-    @Override
+    
+    @Override 
     public void mergeContest(Contest c) {
         contestDAO.mergeContest(c);
     }
-    @Transactional
-    @Override
+    
+    @Override 
     public List<Contest> getContests() {
         return contestDAO.getContests();
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public Contest getContestByID(int id) {
         return contestDAO.getContestByID(id);
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public boolean checkIfUserHaveAccessToContest(String username, int contestId) {
         User teacher = userService.getUserByUsername(username);
         if ((teacher.getContest() != null) && (teacher.getContest().size() > 0)) {
@@ -65,14 +66,14 @@ public class ContestServiceImpl implements ContestService {
         return false;
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public List<Contest> getContestForRating() {
         return contestDAO.getContestsForRating();
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public List<Contest> getContestsListByHiddenStatusUsername(String stringHidden, String stringStatus, String username) {
         int userId = userDAO.getUserByUsername(username).getUserId();
         boolean isBooleanHidden = CheckSortType.stringIsBoolean(stringHidden);
@@ -109,8 +110,8 @@ public class ContestServiceImpl implements ContestService {
         return null;
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public List<Contest> getUnhiddenContestsListByStatus(String stringStatus) {
         // if status notALL
         if (CheckSortType.stringIsStatus(stringStatus)){
@@ -120,8 +121,8 @@ public class ContestServiceImpl implements ContestService {
         }
     }
 
-    @Transactional
-    @Override
+    
+    @Override 
     public Long getContestEndTime(Contest contest){
         Calendar endDate = Calendar.getInstance();
         Calendar duration = Calendar.getInstance();
@@ -133,14 +134,14 @@ public class ContestServiceImpl implements ContestService {
         long gtmMillis = endDate.getTimeInMillis() - endDate.getTimeZone().getRawOffset();
         return gtmMillis;
     }
-    @Transactional
-	@Override
+    
+	@Override 
 	public Contest getNearestContest() {
 		return contestDAO.getNearestContest();
 	}
 
-    @Transactional
-	@Override
+    
+	@Override 
 	public Contest getLastArchivedContest() {
 	    return contestDAO.getLastArchivedContest();
 	}
