@@ -96,7 +96,18 @@
 <c:choose>
 	<c:when test="${currentTaskResult == null}">
 		<div class="descr-default">
-			<p>${currentTask.description}</p>
+			<c:if test="${pageContext.response.locale == 'ua'}">
+				<p>${currentTask.description}</p>
+			</c:if>
+			<c:if test="${pageContext.response.locale == 'en'}">
+				<c:if test="${not empty currentTask.descriptionEN}">
+					<p>${currentTask.descriptionEN}</p>
+				</c:if>
+				<c:if test="${empty currentTask.descriptionEN}">
+					<p>${currentTask.description}</p>
+				</c:if>
+			</c:if>
+
 		</div>
 	</c:when>
 	<c:when test="${currentTaskResult == true}">

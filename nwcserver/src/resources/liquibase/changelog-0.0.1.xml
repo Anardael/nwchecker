@@ -102,6 +102,7 @@
 			`id` INT(11) NOT NULL AUTO_INCREMENT,
 			`complexity` INT(11) NULL DEFAULT NULL,
 			`description` TEXT NOT NULL,
+			`descriptionEN` TEXT,
 			`forumLink` VARCHAR(500) NULL DEFAULT NULL,
 			`inputFileName` VARCHAR(60) NOT NULL,
 			`memoryLimit` INT(11) NULL DEFAULT NULL,

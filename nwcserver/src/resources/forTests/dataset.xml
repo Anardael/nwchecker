@@ -21,9 +21,9 @@
     <Contest id="2" title="I am title 2" description="I am description 2" status="PREPARING" hidden="0" starts="2015-03-03 11:00:00" duration="1970-01-01 00:00:05" typeContest_id="1"/>
     <Contest id="3" title="I am title 3" description="I am description 3" status="PREPARING" hidden="0" starts="2015-03-03 11:00:00" duration="1970-01-01 00:00:05" typeContest_id="1"/>
 
-    <Task id="1" contest_id="1" title="Task 1" description="This is task 1." complexity="5" rate="5" inputFileName="inputFile1" outputFileName = "outputFile1" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
-    <Task id="2" contest_id="1" title="Task 2" description="This is task 2." complexity="3" rate="5" inputFileName="inputFile2" outputFileName = "outputFile2" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
-    <Task id="3" contest_id="2" title="Task 3" description="This is task 3." complexity="2" rate="4" inputFileName="inputFile3" outputFileName = "outputFile3" timeLimit="20000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
+    <Task id="1" contest_id="1" title="Task 1" description="This is task 1." descriptionEN="I am description 1" complexity="5" rate="5" inputFileName="inputFile1" outputFileName = "outputFile1" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
+    <Task id="2" contest_id="1" title="Task 2" description="This is task 2." descriptionEN="I am description 2" complexity="3" rate="5" inputFileName="inputFile2" outputFileName = "outputFile2" timeLimit="10000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
+    <Task id="3" contest_id="2" title="Task 3" description="This is task 3." descriptionEN="I am description 3" complexity="2" rate="4" inputFileName="inputFile3" outputFileName = "outputFile3" timeLimit="20000" memoryLimit="5000000" scriptForVerification="%%%% SOME VERIFICATION SCRIPT %%%" />
 
     <ContestPass id="1" passing="0" passed="0" rank="0" timepenalty="0" contest_id="1" user_userId="3"/>
     <ContestPass id="2" passing="0" passed="0" rank="0" timepenalty="0" contest_id="1" user_userId="4"/>

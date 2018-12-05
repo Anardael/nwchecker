@@ -67,6 +67,22 @@
                                 <span class="help-inline control-label"></span>
                             </div>
                         </div>
+
+                        <div class="btn btn-primary" onclick="hiddenElement(this)" style="margin-bottom: 20px; margin-left: 45%; display: block; width: 200px;">
+                            <span class="ladda-label"><spring:message code="btn.createDescriptionEN" /></span>
+                        </div>
+
+                        <div id="descriptionDiv" style="visibility: hidden; display: none;">
+                            <div class="field form-group descriptionEN">
+                                <spring:message code="taskCreate.descriptionEN" var="descriptionEN"/>
+                                <label class="col-sm-2 control-label">${descriptionEN}:</label>
+                                <div class="col-sm-10">
+                                    <form:textarea path="descriptionEN" style="resize:none"
+                                                   class="form-control ckEdit" rows="7"/>
+                                    <span class="help-inline control-label"></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group scriptForVerification">
                             <spring:message code="taskCreate.verificationScript" var="verificationScript"/>
                             <label class="col-sm-2 control-label">${verificationScript}:</label>
@@ -109,3 +125,13 @@
         </div>
     </div>
 </form:form>
+
+
+<script>
+    function hiddenElement(elem) {
+        elem.nextElementSibling.style.visibility = "visible";
+        elem.nextElementSibling.style.display = "block";
+        elem.style.visibility = "hidden";
+        elem.style.display = "none";
+    }
+</script>
